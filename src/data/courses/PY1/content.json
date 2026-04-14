@@ -1,0 +1,814 @@
+[
+  {
+    "id": "L1-1",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL1-1\nprint [print]\nV.打印，印刷，出版；\nn.印刷;\n【短语】\nout of print 绝版的；已售完；\nweight [weit]\nn.重量；分量；重物；\nv.使负重；\n【短语】\nloseweight减肥；\nheight [hart]\n50°\nn.高度；高处；高地；\nW\nR\nO"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-1\\knowledge.png",
+        "content": "知识总结\n1.print(）命令\n作用：把括号中的内容打印在输出区\n例句：print（'打印命令）\n打印命令\nprint(2*3)---+\n6\n2.变量\n作用：存储数据，随时取用\n例句: number = 7\nfruit ='apple'\nprint(fruit)---\napple\nprint(number.* 5)---\n35"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块1：print()L1-1\n模块2：变量\n\n\n--- 第2页 ---\n内容大纲\n核心要点print( )命令\n变量\n科学探索 计算机中的软件和硬件\n\n\n--- 第3页 ---\n先来熟悉一下编辑器和键盘吧~\n② 代码区：用于编写python代码。\n③ 输出区：显示代码的运行结果。① 提示区：用于提示如何解决挑战。\n④\n⑤运行代码区的程序。\n点击该按钮，可以把程序恢复到最初的样子。\n提示区 代码区 输出区\n\n\n--- 第4页 ---\n熟悉键盘后，可以更快速编写代码哦！\n常用按键介绍:\n退格键：用于删除光标前的一个字符。\n回车键：用于换行。\n\n\n--- 第5页 ---\n搭配使用Shift键，就可以打出键盘上部分的符号。比如:\n左括号 (\n如果没有使用Shift键，就会直接打出符号按键的下部分。\n比如：\n9\n符号 键盘按键\n右括号 )\n按住\n按住\n\n\n--- 第6页 ---\n需要注意，中文与英文状态下的符号有所不同。例如:\n符号 英文状态 中文状态\n小括号 () （）\n冒号 : ：\n单引号 '   ' ‘  ’\n双引号 \"  \" “  ”\n编写python代码时，大多数情况都需要使用英文状态下\n的符号。\n点击键盘的 Shift 键可以切换输入的中英文状态。\n按下一次 切换至英/中文状态\n\n\n--- 第7页 ---\n1:print()命令\nprint()命令功能：将括号中的内容打印到输出区。 \n基本格式\nprint('要打印的内容')\n  示例 代码 输出区① print()命令打印文字时，文字两侧要加上单引号。\n 编码规则\n② 如果括号中填写的是数学算式，会直接打印出计算结果。\n要打印的内容\n\n\n--- 第8页 ---\n2:变量\n变量功能：可以存储各种类型的数据。\n  用法\n变量就像一个能存储数据的盒子。\n① 使用print()命令打印变量时，不需要加单引号。\n代码基本格式\n变量名 = 变量的值\n这一行代码表示将数字7赋值给变量n。例:   n  =  7n为变量名，7为变量的值。\n编码规则\n输出区\n创建变量\n使用变量\n\n\n--- 第9页 ---\n科学探索\n科普专用框\n硬件在软件的指挥下，就可以实现各种强大的功能。软件就像是计算机的思想\n硬件就像是计算机的身体\n拆开计算机，可以看到摄像\n头、电线、芯片等，这些看\n得见的就是硬件。软件是在计算机上运行的程序，\n像我们日常使用的网页、游戏和\npython代码都属于软件。计算机中的硬件和软件\n\n\n--- 第10页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下面哪段代码能打印出 乌拉乎 ？\nA. print(乌拉乎) B. print 乌拉乎\nD. print '乌拉乎' C. print('乌拉乎')\n2.                            \n                             这段代码的打印结果是？\nA. n B. 12\nC. '12' D. n=12\n\n\n--- 第2页 ---\n3. 下面哪段代码能打印出 30 ？\nB. A. \nC. D. \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 下面哪段代码能打印出 乌拉乎 ？\nA. print(乌拉乎) B. print 乌拉乎\nD. print '乌拉乎' C. print('乌拉乎')\n答案：C\n解析：本题考查的是print()命令的格式。print()命令由单\n词print和()组成，()中是要打印的内容。print()命令打印\n文字时，文字两侧要加上单引号，C选项正确。\n2.                            \n                             这段代码的打印结果是？\nA. n B. 12\nC. '12' D. n=12\n答案：B\n解析：本题考查的是变量的创建与使用。n=12表示将数字12存\n入变量n中，print(n)打印出变量n的值，为12。B选项正确。\n\n\n--- 第2页 ---\n答案：B\n解析：本题考查的是变量的创建和使用。如果括号中\n填写的是数学算式，会直接打出计算结果。\nA选项打印结果为 13；B选项打印结果为 30；C选项打\n印结果为 n+20；D选项打印结果为 13。\nB选项正确。3. 下面哪段代码能打印出 30 ？\nB. A. \nC. D. \n\n"
+      }
+    }
+  },
+  {
+    "id": "L1-2",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL1-2\ninput ['input]\nn.输入量；输入端；\nv.把(数据)输入计算机；\ntheme [0i:m]\n中国梦\nn.主题；主旋律；\nname [neim]\nn.名称；名字；名声；\nHi\nv.命名；任命；\nmynameis\nTaozi\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-2\\knowledge.png",
+        "content": "知识总结\ninputC）命令\n作用：接收用户的输入\n示例：print（‘你今年多大了？‘）\nage = input()\n拓展：需要多次输入时，可以使用多个input（)\na1 = input（）>第一个input（）会接收第一次输入的内容\na2= input（）>第二个input（)会接收第二次输入的内容"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块3：input() L1-2\n模块4：input()应用\n\n\n--- 第2页 ---\n内容大纲\n核心要点input()\ninput() 应用\n科学探索 计算机的输入输出设备\n\n\n--- 第3页 ---\n1:input() -输入操作\ninput()命令：用于接收用户输入的内容。 \n  注意\n操作说明② 输出区出现闪烁光标，等待用户输入。\n③ 在光标处输入答案后，还要按下回车键。① 执行input()命令时，程序会启动输入功能。\n如果输出区的光标消失，只要在输出区里点击一下鼠标左键，就可以\n继续输入了。  示例\n\n\n--- 第4页 ---\n1:input() -执行顺序\n多个input()命令的执行顺序\n使用多个输入命令时，第一个input()会接收第一次输入的内容，第二个\ninput()会接收第二次输入的内容，依次类推。\n代码示例\n\n\n--- 第5页 ---\n代码示例\n我们可以将输入的内容存储\n到变量里使用。\n2:input()命令使用\ninput()获取的内容可以存储到变量里\n\n\n--- 第6页 ---\n科学探索\n计算机中的输入输出设备\n输入、输出设备是我们与计算机交流的桥梁。这里的输入、\n输出是相对于计算机来说的。\n输\n入\n设\n备输\n出\n设\n备摄像头\n鼠标\n键盘\n触摸屏\n麦克风打印机\n投影仪\n显示器\n耳机\n音响\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 关于input()命令，下列说法错误的是？\nA. input()命令是Python中的输出命令。\nB. input()命令的运行效果是在输出区弹出一个光标。\nD. 使用input()命令，可以让用户在输出区中输入文字。C. 使用input()命令时，可以使用变量存储用户输入的文字。\n2. 执行input()命令时，用户要在____输入内容。输入完成\n后，按下键盘上的____键，程序就可以接收到用户的输入。\nA. 舞台区；空格 B. 代码区；回车\nC. 输出区；空格 D. 输出区；回车\n\n\n--- 第2页 ---\n3. 运行代码，输入问题答案。以下回答顺序最合理的是       \nA.7天；24；甜味\n B.甜味；7天；24\nC.7天；辣味；24 D.7天；24\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A。\n解析：本题考查的是input()命令的基本规则。input()命令\n是Python中的输入命令；使用input()命令时，输出区会弹\n出光标等待用户输入；input()输入的信息（数据、字符等）\n可以储存在变量中。1. 关于input()命令，下列说法错误的是？\nA. input()命令是Python中的输出命令。\nB. input()命令的运行效果是在输出区弹出一个光标。\nD. 使用input()命令，可以让用户在输出区中输入文字。C. 使用input()命令时，可以使用变量存储用户输入的文字。\n\n\n--- 第2页 ---\n2. 执行input()命令时，用户要在____输入内容。输入完成\n后，按下键盘上的____键，程序就可以接收到用户的输入。\nA. 舞台区；空格 B. 代码区；回车\nC. 输出区；空格 D. 输出区；回车\n答案：D。\n解析：本题考查的是input()命令的使用操作。input()是\nPython中的输入命令，执行这行代码时，程序会启动输入\n功能。这时的输出区，会出现一个闪烁的光标，等待用户\n输入。在这里输入完成后，按下键盘上的回车键，程序就\n能接收到用户输入的内容了。\n\n\n--- 第3页 ---\n解析：本题考查的是多个input()命令的执行顺序。使用多个\n输入命令时，第一个input()接收第一次输入的内容，第二个\ninput()接收第二次输入的内容，以此类推。题目中3个input()\n命令按顺序分别接收对3个问题的回答，对应“甜味”、“7\n天”、“24”这三个答案。答案：B。3. 运行代码，输入问题答案。以下回答顺序最合理的是       \nA.7天；24；甜味\n B.甜味；7天；24\nC.7天；辣味；24 D.7天；24\n\n"
+      }
+    }
+  },
+  {
+    "id": "L1-3",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL1-3\nif [f]\nconj.如果；倘若；\nn.不确定的情况;\n【例句】\nIf you do not study hard, you will not get\ngood grades.\n如果你不努力学习，你将不会获得好成绩。\nturn [t3:rn]\nv.转向；转弯；\nn.转向；转变;\n【短语】\nturn left 向左转；turn right 向右转;\n【例句】\nYou need to turn left to avoid the stones.\n你需要左转避开石头。\nw\nOR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-3\\knowledge.png",
+        "content": "作用\n进行判断\nif\n判断相等要使用两个等于号，例如：a ==\n红色\n组成\n判断条件\n对于两个字符串，必须一模一样才相等\nif 语句\n下级代码\n注意缩进\n执行过程\n条件成立时，执行下级代码，\n条件不成立时，不执行下级代码\n记忆口诀\nif语句有条件，缩进代码写下面"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n条件判断L1 5 & 6\n\n\n--- 第2页 ---\n单词卡条件判断\nif 语句\nif 语句执行过程\n= 与 ==\nif:如果 turn:旋转\n核心要点内容大纲\n\n\n--- 第3页 ---\n1:条件判断\n条件判断：根据条件是否成立，采取不同的行动。 \n  示例 如果明天下雨，就取消出游计划。\n要是距离小于1千米，我就步行。\n假如班费达到500元，就组织才艺小竞赛。\n在python中，要让计算机能够像我们一样进行条\n件判断，需要使用 if 语句。\n\n\n--- 第4页 ---\n2:if 语句\nif 语句：Python中的条件判断语句。\n条件成立时执行的语句基本格式\n if  条件:\n      英文冒号\n缩进一次：四个空格下级代码\n  注意 ● if 与条件之间要有空格\n● if 语句结尾要有冒号（:）\n● 下级代码前面要有一次缩进\n\n\n--- 第5页 ---\n3:if 语句执行过程\n① 从上到下，逐行执行\n② if 后的条件成立，执行 if 语句的下级代码\n③ if 后的条件不成立，跳过 if 语句的下级代码\ns = 100\nif  s == 100:\n      print('A') \nprint('B')\ns = 100\nif  s == 100:\n      print('A') \nprint('B')\ns = 100\nif  s == 100:\n      print('A') \nprint('B')\ns = 100\nif  s == 100:\n      print('A') \nprint('B')成立\n执行下\n级代码s = 80\nif  s == 100:\n      print('A') \nprint('B')\ns = 80\nif  s == 100:\n      print('A') \nprint('B')\ns = 80\nif  s == 100:\n      print('A') \nprint('B')不成立\n跳过下\n级代码  示例\n执行规则\n\n\n--- 第6页 ---\nif 语句的应用\n当需要处理一种特殊情况时，使用一个 if 语句就可以解决问题。\nif a == '红色':\n     print('turn')代码解释\n如果变量a中存储的是'红色'，\n就打印出turn。\n当需要处理多种情况时，可以使用多个 if 语句来解决问题。\nif a == '红色':                                                                                                     \n     print('turn')           \n     print('turn')\nif a == '绿色':      \n     print('turn')\nif a == '蓝色':       \n     print('turn')       \n     print('turn')     \n     print('turn')代码解释\n如果变量a中存储的是'红色'，\n就打印出两行turn。\n如果变量a中存储的是'绿色'，\n就打印出一行turn。\n如果变量a中存储的是'蓝色'，\n就打印出三行turn。\n\n\n--- 第7页 ---\n4:= 与 ==\n在Python中，= 和 == 的作用是不同的。\n一个等号 = 用于设置变量，会把右侧的值存储到左侧的变量中。 \n两个等号 == 用来判断相等，我们把它写在条件中，判断左右两\n侧的值是否相等。 变量 = 值\n例：a  =  '小核桃' \n变量名 变量的值\nif a == '红色':\n     print('turn')例：\n如果变量a的值与'红色'相等，打印turn。\n\n\n--- 第8页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 以下哪段代码会在light的值是'绿色'时，打印出前进？\nB. A. \nC. D. \n2. n的值是以下哪个选项时，下方的程序不会打印出任何内容？\nA. 5 B.16 C.52 D.123\n\n\n--- 第2页 ---\n3. 执行下方代码，程序会打印出什么?\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 以下哪段代码会在light的值是'绿色'时，打印出前进？\nB. A. \nC. D. \n答案：C。\n解析：本题考查的是 if 语句的基本格式和=与==的作用。\nif 语句的下级代码需要缩进，A选项错误；判断相等应该\n使用 == 而不是 =，= 的作用是设置变量，B、D选项错误。\n\n\n--- 第2页 ---\n2. n的值是以下哪个选项时，下方的程序不会打印出任何内容？\nA. 5 B.16 C.52 D.123\n答案：B。\n解析：本题考查的是多个 if 语句的应用。该程序会依次执行\n两个 if 语句，要想让程序不打印出任何内容，两个 if 语句的\n条件都不能成立。\n如果想要让第一个 if 语句的条件不成立，n应该小于等于50；\n如果想要让第二个 if 语句的条件不成立，n应该大于等于10。\n因此n的取值应该满足n大于等于10且n小于等于50，选项中\n只有B选项16符合题意。\n\n\n--- 第3页 ---\n3. 执行下方代码，程序会打印出什么?\n答案：\n解析：本题考查的是 if 语句的应用。程序从上到下依次执行：\n①定义变量score，设置score的值为92（第一行）；\n②if 条件判断，92>90条件成立，执行下级代码，依次打印出\n“A”和“优秀”（第二行至第四行）；\n③打印“^o^”（第五行）。注意：由于第五行前没有缩进，\n所以它不是if语句的下级代码。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L1-4",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL1-4\nshow [∫ou]\nv.显示；月\n展览；给.看\nn.节目；演出；行为\nsound [saund]\nn.声音；响声；印象\nv.(使)发声；听起来\nplay [ple1]\nv.(使)播放；玩；摆弄\nn.剧本；游戏；比赛\nrecord [reko:d]\nv.记录；录音；申明\nn.记录；唱片；最佳纪录\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-4\\knowledge.png",
+        "content": "播放声音\nplaysound()\n播放对应名称的音效\nisPressed()\n检测按钮是否被按下\n检测按钮或触摸\n检测触摸传感器是否被触摸\nisTouched()\n智能门铃和语音留言\nprint()\n在屏幕左上角打印内容\n打印内容\nprintPos()\n改变打印的位置\nrecord()\n录制声音\n录制和播放声音\nplayRecord()\n播放录制好的声音"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块7：智能门铃\n模块8：语音留言\nL1-4\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡show :显示 sound :声音\nplay :播放实现门铃\n访客留言智慧核心\nrecord :录音\n\n\n--- 第3页 ---\n智慧核心\n智慧核心就是一个小型计算机，可以\n控制其他设备，按它的命令行动。在\n硬件编程课中，我们会使用智慧核心\n来进行编程。\n将智慧核心跟一台大电脑\n连接，在电脑上给智慧核\n心写入代码，再通过智慧\n核心控制其他设备。\n智慧核心\n\n\n--- 第4页 ---\n实现门铃\n播放铃声如果 A键按下playSound( '字符串 ')概念讲解\n使用isPressed() 判断按键是\n否按下，括号内填入检测 按键名\n称，名称是 字符串形式。\n使用playSound() 来播放声音，\n括号内填入 声音名称 ，名称是 字\n符串形式。 声音名称按键名称isPressed( '字符串 ')\n代码示例\nifisPressed( 'A'):\nplaySound( 'ring ')       \n\n\n--- 第5页 ---\nprint( '你好 ')        \n实现门铃\nprint() 可以在智慧核心 左上角打印文字。 print()\nprintPos ()可以在指定位置\n打印文字， 第1个参数填要打\n印的内容，第2个参数填入要\n打印的位置。 打印内容打印位置\nprintPos( ,)\n代\n码\n示\n例 printPos ('欢迎来到我家 ', '中间 ')        \n代\n码\n示\n例你好\n欢迎来到我家打印文字\n\n\n--- 第6页 ---\n实现门铃\n代\n码\n示\n例\n触摸传感器\n使用isTouched() 检测是否有人触\n碰触摸传感器，如果 有人按下 ，就表\n示条件成立 ，没人按下 就是不成立。\n按下打印\n如果按下\nifisTouched() :\nprint( '按下 ')    \n\n\n--- 第7页 ---\n访客留言\n代码示例记录声音\nplayRecord()使用record() 录制声音 。\n使用playRcord() 播放声音 。record()\n按下A键录音\n按下B键播放录音\nifisPressed( 'A'):\nrecord()   \nifisPressed( 'B'):\nplayRecord()\n\n\n--- 第8页 ---\nshowPic('欢迎 1')\nifisPressed( 'A'):\nrecord()   \nifisPressed( 'B'):\nplayRecord()\nifisTouched() :\nplaySound( 'ring ')\n访客留言\n代码示例显示图片\n使用 showPic ()显示图片 ，括号内\n填入图片名称，名称是字符串形式。\n图片名称showPic( '字符串 ')\n按下A键录音\n按下B键播放录音\n按下触摸传感器播放铃声\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nC. printPos( '欢迎', '中间')\nD. printPos( '中间', '欢迎')\nA. print('欢迎')\nB. printPos( '欢迎')1、下列哪段代码可以在智慧核心的屏幕中间打印出文字 '\n欢迎'呢？（）\n动手试一试\n\n\n--- 第2页 ---\n2、下列哪个语句可以播放录音？ （）\n动手试一试\nC. record()\nD. isPressed()\nA. playSound()\nB. playRecord()\n\n\n--- 第3页 ---\n动手试一试\n3、要实现访客按下触摸传感器后响起铃声的效果，应该\n补充什么条件呢 ？（）\nif :\nplaySound ('ring')       \nC. isPressed( 'B')\nD. isTouched()\nA. isPressed( 'A')\nB. isPressed()\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L1-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\nC. printPos( '欢迎', '中间')\nD. printPos( '中间', '欢迎')\nA. print('欢迎')\nB. printPos( '欢迎')1、下列哪段代码可以在智慧核心的屏幕中间打印出文字 '\n欢迎'呢？（）\n答案： C\n解析：本题考查的是打印命令。 print()只能在智慧核\n心的屏幕左上角打印文字。 printPos() 可以在指定位置\n打印文字，第 1个参数填打印内容，第 2个参数填写打\n印位置。正确答案选 C。\n\n\n--- 第2页 ---\n答案解密\n2、下列哪个语句用于播放录音？ （）\nC. record()\nD. isPressed()\nA. playSound()\nB. playRecord()\n答案： B\n解析：本题考查的是 playRecord() 语句。 playSound()\n用于播放铃声； playRecord() 用于播放录音； record()\n用于录制录音； isPressed() 用于检测按键是否按下 。正\n确答案选 B。\n\n\n--- 第3页 ---\n答案解密\n3、要实现访客按下触摸传感器后响起铃声的效果，应该\n补充什么条件呢 ？（）\nif :\nplaySound( 'ring ')       \nC. isPressed( 'B')\nD. isTouched()\nA. isPressed( 'A')\nB. isPressed()\n\n\n--- 第4页 ---\n答案解密\n答案： D\n解析：本题考查的是 isTouched() 语句。题目要求是\n按下触摸传感器后播放铃声， isPressed() 是用于检\n测按键是否按下， isTouched() 用于检测触摸传感器\n是否被按下。正确答案选 D。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-1",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-1\nhit [hit]\nv.打；打击；击中；\nn.打；击中；命中；\n【短语】\nhit song电\n畅销歌曲\n条件\nelse [els]\nelse\nadv.别的；其他的;\nadj.别的;\nlink [link]\nn.链接；连接；联系；\nv.联系;\nreplace [rr'pleis]\nv.取代；代替；\nW\nO\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-1\\knowledge.png",
+        "content": "if-else\nif条件：\nif条件：\n条件成立，执行if语句的下级代码\nT\n格\n下级代码\n下级代码\n式\nelse:\nelse:\n执行逻辑\n下级代码\n下级代码\nif条件\n条件不成立，跳转到else\n口一种情况if判\n执行else的下级代码\n下级代码\n诀\n其他else说了算\nlelse:\n下级代码"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块9：if-elseL2-1\n模块10：if-else应用\n\n\n--- 第2页 ---\n内容大纲\n核心要点if-else语句格式\nif-else语句应用\n科学探索if-else执行逻辑\n密码组合\n\n\n--- 第3页 ---\n1:if-else语句格式\nif-else语句：条件成立时，执行if的下级代码，否则，执行else的下级代码。\n基本格式\n下级代码 if  条件:\n      英文冒号\n else:\n      下级代码else要写在与if\n同级的位置\n● if和else下级代码前面都要有一次缩进   注意\n● else要写在与if同级的位置\n\n\n--- 第4页 ---\n2:if-else执行逻辑\n① 从上到下，逐行执行\n② if后面的条件成立，执行if语句的下级代码\n③ if后面的条件不成立，执行else语句的下级代\n码\n执行规则\n  示例\nif语句条件成立，打印字符串A。\nif语句条件不成立，执行else语句的\n下级代码，打印字符串B。\n\n\n--- 第5页 ---\n3:if-else语句应用\n如右图所示，若想找到月鸟，小核桃需\n要击碎巨石和冰锥，可以使用if-else语\n句，根据角色脚下的砖块编号，判断需\n要击打几次。\n1.程序先执行等号右边input()\n命令，获取小核桃脚下砖块的\n编号2.将编号a返回给变量n\nc\nif语句判断条件成立，执行下一级\n代码，打印hit，小核桃击碎冰锥。\nif语句判断条件不成立，执行else\n的下级代码，打印两个hit，小核\n桃击碎巨石。\n\n\n--- 第6页 ---\n科学探索\n密码组合\n密码组合是指由字母、数字、符号任意组合形成的密码。密\n码越长，组合的可能性越多，安全系数高，不易被破解。\n设置密码时，也不能只考虑密码的安全性和复杂性，复\n杂的密码可能不利于记忆，可以用自己熟悉的歌词、诗\n词来设置密码，在满足安全性的同时也方便记忆。\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 运行这段代码，程序会在输出区打印出（ ）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n动手试一试\n2. 运行下面选项的代码后，输入6，哪段代码的运行结果与另\n外三段不同？ ( )\nA. B. \nC. D. \n\n\n--- 第3页 ---\n动手试一试\n3. 将下方代码改写成 if-else的形式，实现相同的功能。\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A。\n解析：本题考查的是if-else语句的执行逻辑。条件 a > b成\n立，执行if语句的下级代码，打印’a’，故选A。\nC是易错项，程序打印的是字符串'a'，而不是变量a哦。1. 运行这段代码，程序会在输出区打印出（ ）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n答案解密\n解析：本题考查的是if语句和if-else语句的执行逻辑。分别运行每\n个选项的程序后，输入6，A、B、C选项打印出 输入的数字大于5，\nD选项没有输出内容，因此正确选项是D。答案：D。2. 运行下面选项的代码后，输入6，哪段代码的运行结果与另\n外三段不同？ ( )\nA. B. \nC. D. \n\n\n--- 第3页 ---\n答案解密\n答案：\n解析：本题考查的是if-else语句的使用。原代码是判断身高打印不\n同的信息，情况有两种：大于或等于120、小于120。使用if-else语\n句可实现相同功能。3. 将下方代码改写成 if-else的形式，实现相同的功能。\n或\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-2",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-2\nfor [fo:r]\n为了人民\nprep.对；因为;\nfor the people\nconj.因为； 由于；\nin [1n]\nprep.参与；参加;\nadv.进入；在内;\nrange [reind3]\nrange\nn.区间；射程；靶场；\nv.徘徊；变动;\n10-4=6\nshoot [∫u:t]\nn.幼苗；嫩芽；新枝；\nv.射击;\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-2\\knowledge.png",
+        "content": "知识总结\nfor循环\n降低代码复杂度\n格式：\n循环次数\nfor i in range(n):\nprint（'d'）下级代码，重复n次\nprint（'u'）非下级代码，执行1次"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块11：forL2-2\n模块12：for应用\n\n\n--- 第2页 ---\n内容大纲\n核心要点\nfor\nfor应用\n科学探索 计算机大脑——CPU\n\n\n--- 第3页 ---\n1: for\nfor语句的功能：用于简化重复的代码。\nfor i in range(重复的次数):       基本格式\n下级代码一个空格\n  注意四个空格\n下级代码前面的四个空格也可以叫一次缩进；\n打出英文冒号后，直接按下回车键，代码会自动缩进；\n没有使用for语句 使用for语句\n 相同输出代码示例重复执行的代码\n重复执行3次\n\n\n--- 第4页 ---\n2: for应用\n例：控制无人机到达目标位置勘\n察，’u’、’d’、’l’、’r’分别控制无人\n机向上、下、左、右移动一格。\n②：它不是for语句的下级代码，运行时只会执行一次，无人机到达指定地点。①：它是for语句的下级代码，运行时会重复3次，无人机根据输出指令移动。\n①\n②\n#有缩进，就是for语句的下级代码，会被重复执行；没有缩进，就不是for\n语句的下级代码，只会在循环结束以后，执行一次。\n无人机目标位置\n\n\n--- 第5页 ---\n科学探索\nCPU是中央处理器的简称，是计算机中最核心的部件。CPU也广泛\n应用于各个领域，如手机、电视、电脑、卫星、航母和载人火箭等。计算机大脑--CPU\n晶体管和电路图：\n     计算和控制\n\n\n--- 第6页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 在横线处填写               ，可以让无人机连续向右移动三格。\n2.下方代码，print(‘d’)会执行几次？\nA.0           B.1                    C.2                  D.3\n\n\n--- 第2页 ---\n3.思考一下：下列哪个选项，可以控制无人机到达指定地点。\nA.\nC.B.\nD.\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 在横线处填写               ，可以让无人机连续向右移动三格。\n答案：for i in range(3)：。\n解析：本题考查的是for语句的格式。连续向右移动三格，也\n就是把print(‘r’)重复执行三次，使用for i in range(3)：就可\n以了。\n\n\n--- 第2页 ---\n2.下方代码，print(‘d’)会执行几次？\nA.0           B.1                    C.2                  D.3\n答案：B。\n解析：本题考查的是for循环语句的应用。print(‘d’)和for的左\n侧对齐，它不是for语句的下级代码，所以不会重复执行，当\n执行完整个for循环以后，print(‘d’)会执行一次。\n\n\n--- 第3页 ---\n3.思考一下：下列哪个选项，可以控制无人机到达指定地点。\nA.\nC.B.\nD.\n答案：B。\n解析：本题考查的是for循环语句的应用。无人机的路线如虚线\n所示，需要使用for语句，先重复执行3次向右直行一格，再向下\n直行一格，最后重复执行4次向右直行一格。其中print(‘d’)不是\nfor语句的下级代码，不需要缩进。\n右3\n下1右4\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-3",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-3\ncolor ['k<ler]\nn.颜色；着色；色素;\nv.染；歪曲;\nred [red]\n川\n三\nn.红色；红葡萄酒;\nadj.红的；红色的;\n【短语】\nred wine 红酒\nblue [blu: ]\nadj.蓝色的；忧郁的;\nn.蓝色；天蓝色；\n【短语】\nblue sky 蓝天\nw\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-3\\knowledge.png",
+        "content": "作用\n重复进行多次进行判断\nfor语句\n重复执行\n组成\nfor-if嵌套\nif语句\n）判断相等要使用两个等于号，\n例如： a ==\n'red\n下级代码\n注意缩进，if语句的下级代码需要缩进2次\n执行过程\nif语句放在for语句中，\n每次循环都会进行条件判断"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块13：for-if嵌套L2-3\n模块14：for-if应用\n\n\n--- 第2页 ---\n单词卡for-if 代码格式\nfor-if 执行过程\nfor-if 应用场景\nfly:飞 color:颜色\nshow:展示 go:前进\n核心要点内容大纲\n\n\n--- 第3页 ---\n1:for-if 代码格式\nfor循环中可以嵌套if语句。每次循环时，都会执行判断条件，如果满足条\n件则执行对应语句，反之则跳过其下级代码。语法格式如下:\nfor-if 代码示例基本格式\n条件成立时执行的语句 if   条件:\n      英文冒号\n缩进一次：四个空格下级代码  for i in range(数字):\n\n\n--- 第4页 ---\n2:for-if 执行过程\nfor 语句控制循环重复执行的次数；\nif 语句进行在每轮循环中，进行条件判断，条件成立，执行下级代\n码；条件不成立，不执行下级代码。概念讲解\nfor-if 执行过程示例\n一共重复执行 3 次，每次\n循环都打印单词 fly，将能\n量板的颜色存入变量 \ncolor 中，如果变量 color \n的值是 'blue'，就打印数\n字 2 。\n\n\n--- 第5页 ---\n2:for-if 执行过程\nfor 语句控制循环重复执行的次数；\nif 语句进行在每轮循环中，进行条件判断，条件成立，执行下级代\n码；条件不成立，不执行下级代码。概念讲解\nfor-if 执行过程示例\n一共重复执行 3 次，每次循\n环都打印单词 fly，将能量板\n的颜色存入变量 color 中，如\n果变量 color 的值是 'blue'，\n就打印数字 2 ；如果变量 \ncolor 的值是 'red'，就打印\n数字 4 。\n\n\n--- 第6页 ---\n在Python中，需要进行多次循环，每次循环根据条件不同，完成不同效果\n的场景，可以使用 for-if 嵌套。3:for-if 应用场景\n例如，制作程序给班级里的同学按照性别分类。一共有 30 个学生，就需\n要重复执行 30 次，每次使用 input() 语句输入学生的性别，如果性别为男，\n就打印数字 1 ，性别为女，就打印数字 2 。\n代码示例\n\n\n--- 第7页 ---\n科学探索\n如果将球扔向桌面，球会沿着一条线路反弹。球的射入角度和射出角度关\n于桌面的垂直线对称。只需要改变球的射入角度，就可以改变球的反弹角\n度。\n我们也可以不改变球的射入角度，而是旋转桌面，此时，球和桌面的角度\n发生了改变，所以球反弹的方向也会发生改变。\n\n\n--- 第8页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1.运行以下代码，input() 依次输入的四个内容是 hetao, python, \npython, code 。最终输出区会打印几个1？（     ）\n2.在for循环中嵌套使用 if 语句,下列哪个代码格式是正确的？（    ）\nA. B.A. 1个 B. 2个 \nC. 3个 D. 4个 \n\n\n--- 第2页 ---\n动手试一试\n3.执行下方代码，输出区打印了 3 个值，分别是 2，1，2，下面选项中，是\n程序三次输入的值，可以实现输出区效果的是？（    ）\nA. w    z    w \nB.  z    w    z \nC.  z     z     z \nD.  w   w    w\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 答案 B\n2. 答案 A\n输入hetao, 条件不成立；输入python，\n条件成立。四次输入分别是hetao, \npython, python, code，所以打印出两个 \n1 。\nB选项中，if 语句后面需要写上条件和冒号，\n此处只编写了条件，缺少冒号，格式不正\n确。\n3. 答案 B\na 的值是 'w' 的时候，输出区打印出 1；a \n的值是 'z' 时，输出区打印出 2 。现在输出\n区 3 次打印的值分别是 2，1，2，那么输\n入应该是 z， w， z 。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-4",
+    "unit": "L1",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-4\nonline [.a:n'lain]\nadj.联机的；在线的;\nadv.在网上地;\n【短语】\nonline user 在线用户\n【例句】\nThis game has many online users.\n这个游戏有很多在线用户。\n100\njudge [d3∧d3]\nn.法官；裁判；内行；\nv.判断；评判;\n【例句】\nMy judge for you is 1o0 points\n我给你的评价是100分。\nw\n0\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-4\\knowledge.png",
+        "content": "onlinejudge的简称，线上测评\n定义&特点\n不需要人来批改，由系统判断对错，自动评分\n提交代码后，系统会使用多组测试数据对程序进行测试\n题目描述\n题目\n输入描述\n0题组成\n输出描述\n输入样例\n测试样例\n输出样例\n0J题答题流程\n读题-\n编写代码一—测试样例一提交代码"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块15：OJ训练营L2-4\n模块16：OJ比赛\n\n\n--- 第2页 ---\n单词卡 online:线上 judge:测评内容大纲\n核心要点认识OJ\nOJ实战\n\n\n--- 第3页 ---\n1:认识OJ\nOJ：online judge的简称，线上测评\nOJ题：不需要人来批改，由系统判断对错，自动评分\n将代码提交给系统，\n由系统进行测试。用户输入数据，\n测试代码，系\n统不评判对错。OJ系统：\n预备有多组测试数据，每组包含输\n入数据和正确输出结果。测试时，\n系统会对比全部测试数据的代码输\n出结果和正确结果，并显示最终的\n测评结果。\n  \nOJ题答题流程\n② 编写代码：获取输入；\n处理数据；得到输出结果。\n③ 测试样例：使用测试样\n例进行测试；使用自己编\n的数据进行测试。① 读题：理清题意，从题\n目中分别找出输入和输出。\n④ 提交代码。\n\n\n--- 第4页 ---\n2:OJ实战-变量\nOJ解题示例\n例1：变量的使用和数字运算\n题目\n已知猴子数量是长颈\n鹿数量的七倍，输入\n长颈鹿数量，编写程\n序计算猴子数量。变量名 = 变量的值变量基本格式\n读题\n输入描述：\n长颈鹿数量\n输出描述：\n猴子数量编写代码\n 测试样例\n输入样例：\n输出样例：\n提交代码\n系统测评int() 命令：\n把字符串转化为整数 \n\n\n--- 第5页 ---\n2:OJ实战-字符串拼接\nOJ解题示例\n例2：字符串拼接应用\n题目\n编写打招呼程序。用\n户输入一个名字，输\n出对应的欢迎语。python中使用加号可\n以将两个字符串拼接字符串拼接\n读题\n输入描述：\n名字\n输出描述：\n欢迎语编写代码 测试样例\n输入样例：\n输出样例：提交代码\n系统测评'abc' + '123' 如\n'abc123'\n\n\n--- 第6页 ---\n2:OJ实战-if-else语句\nOJ解题示例\n例3：if-else语句应用\n题目\n已知学生成绩不低于\n60分为合格。输入\n学生成绩，编写程序\n判断是否合格。\n读题\n输入描述：\n学生成绩\n输出描述：\n是否合格编写代码 测试样例\n输入样例1：\n输出样例1：提交代码\n系统测评下级代码 if   条件:\n      英文冒号\n else :\n      下级代码if-else语句基本格式\n输入样例2：\n输出样例2：\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下列选项中，哪个是正确的OJ题答题顺序？\nA. 编写代码——提交代码——测试样例\nB. 读题——编写代码——测试样例——提交代码\nD. 读题——测试样例——编写代码——提交代码C. 读题——编写代码——提交代码——测试样例\n2. 执行下方代码，先后输入鸡蛋、番茄，程序会打印出什\n么?\nA. B. \nC. D. \n\n\n--- 第2页 ---\n3. OJ题目是“已知某货车载重标准为不超过20吨，编写程\n序：输入这个货车的载重，如果符合标准，输出合格；如\n果超重，输出超重”。下列说法正确的是\nA. 这道题的输入描述是货车编号。\nB. 编写代码需要使用if-else语句。\nD. 只要用户测试一组样例是正确的，那么提交代码就\n可以拿到100分。C. “输入：20；输出：超重”可以作为一个用户测试样例。 \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L1\\L2-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 下列选项中，哪个是正确的OJ题答题顺序？\nA. 编写代码——提交代码——测试样例\nB. 读题——编写代码——测试样例——提交代码\nD. 读题——测试样例——编写代码——提交代码C. 读题——编写代码——提交代码——测试样例\n答案：B。\n解析：本题考查的是OJ题答题顺序。OJ题的答题流程是读\n题——编写代码——测试样例——提交代码。选项B正确。\n\n\n--- 第2页 ---\n2. 执行下方代码，先后输入鸡蛋、番茄，程序会打印出什\n么?\nA. B. \nC. D. \n答案：A。\n解析：本题考查的是字符串拼接。python中使用加号可以\n将两个字符串拼接。input()接收用户输入的鸡蛋、番茄，\n并赋值给变量。a = '鸡蛋'，b = '番茄'，经过字符串拼接'今\n天吃'+'番茄'+'炒'+'鸡蛋'，输出'今天吃番茄炒鸡蛋'。选项A\n正确。\n\n\n--- 第3页 ---\n3. OJ题目是“已知某货车载重标准为不超过20吨，编写程\n序：输入这个货车的载重，如果符合标准，输出合格；如\n果超重，输出超重”。下列说法正确的是\nA. 这道题的输入描述是货车编号。\nB. 编写代码需要使用if-else语句。\nD. 只要用户测试一组样例是正确的，那么提交代码就\n可以拿到100分。C. “输入：20；输出：超重”可以作为一个用户测试样例。 \n答案：B。\n解析：本题考查的是OJ题的解答和if-else语句的应用。这\n道题的输入描述是货车载重，选项A错误；编写代码判断是\n否超重需要使用if-else语句，选项B正确；输入20，应该\n输出合格，选项C错误；如果有多组测试样例，应该测试每\n一组样例提高正确率，选项D错误。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-1",
+    "unit": "L2",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-1\nhit [hit]\nv.打；打击；击中；\nn.打；击中；命中；\n【短语】\nhit song电\n畅销歌曲\n条件\nelse [els]\nelse\nadv.别的；其他的;\nadj.别的;\nlink [link]\nn.链接；连接；联系；\nv.联系;\nreplace [rr'pleis]\nv.取代；代替；\nW\nO\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-1\\knowledge.png",
+        "content": "if-else\nif条件：\nif条件：\n条件成立，执行if语句的下级代码\nT\n格\n下级代码\n下级代码\n式\nelse:\nelse:\n执行逻辑\n下级代码\n下级代码\nif条件\n条件不成立，跳转到else\n口一种情况if判\n执行else的下级代码\n下级代码\n诀\n其他else说了算\nlelse:\n下级代码"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块9：if-elseL2-1\n模块10：if-else应用\n\n\n--- 第2页 ---\n内容大纲\n核心要点if-else语句格式\nif-else语句应用\n科学探索if-else执行逻辑\n密码组合\n\n\n--- 第3页 ---\n1:if-else语句格式\nif-else语句：条件成立时，执行if的下级代码，否则，执行else的下级代码。\n基本格式\n下级代码 if  条件:\n      英文冒号\n else:\n      下级代码else要写在与if\n同级的位置\n● if和else下级代码前面都要有一次缩进   注意\n● else要写在与if同级的位置\n\n\n--- 第4页 ---\n2:if-else执行逻辑\n① 从上到下，逐行执行\n② if后面的条件成立，执行if语句的下级代码\n③ if后面的条件不成立，执行else语句的下级代\n码\n执行规则\n  示例\nif语句条件成立，打印字符串A。\nif语句条件不成立，执行else语句的\n下级代码，打印字符串B。\n\n\n--- 第5页 ---\n3:if-else语句应用\n如右图所示，若想找到月鸟，小核桃需\n要击碎巨石和冰锥，可以使用if-else语\n句，根据角色脚下的砖块编号，判断需\n要击打几次。\n1.程序先执行等号右边input()\n命令，获取小核桃脚下砖块的\n编号2.将编号a返回给变量n\nc\nif语句判断条件成立，执行下一级\n代码，打印hit，小核桃击碎冰锥。\nif语句判断条件不成立，执行else\n的下级代码，打印两个hit，小核\n桃击碎巨石。\n\n\n--- 第6页 ---\n科学探索\n密码组合\n密码组合是指由字母、数字、符号任意组合形成的密码。密\n码越长，组合的可能性越多，安全系数高，不易被破解。\n设置密码时，也不能只考虑密码的安全性和复杂性，复\n杂的密码可能不利于记忆，可以用自己熟悉的歌词、诗\n词来设置密码，在满足安全性的同时也方便记忆。\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 运行这段代码，程序会在输出区打印出（ ）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n动手试一试\n2. 运行下面选项的代码后，输入6，哪段代码的运行结果与另\n外三段不同？ ( )\nA. B. \nC. D. \n\n\n--- 第3页 ---\n动手试一试\n3. 将下方代码改写成 if-else的形式，实现相同的功能。\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A。\n解析：本题考查的是if-else语句的执行逻辑。条件 a > b成\n立，执行if语句的下级代码，打印’a’，故选A。\nC是易错项，程序打印的是字符串'a'，而不是变量a哦。1. 运行这段代码，程序会在输出区打印出（ ）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n答案解密\n解析：本题考查的是if语句和if-else语句的执行逻辑。分别运行每\n个选项的程序后，输入6，A、B、C选项打印出 输入的数字大于5，\nD选项没有输出内容，因此正确选项是D。答案：D。2. 运行下面选项的代码后，输入6，哪段代码的运行结果与另\n外三段不同？ ( )\nA. B. \nC. D. \n\n\n--- 第3页 ---\n答案解密\n答案：\n解析：本题考查的是if-else语句的使用。原代码是判断身高打印不\n同的信息，情况有两种：大于或等于120、小于120。使用if-else语\n句可实现相同功能。3. 将下方代码改写成 if-else的形式，实现相同的功能。\n或\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-2",
+    "unit": "L2",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-2\nfor [fo:r]\n为了人民\nprep.对；因为;\nfor the people\nconj.因为； 由于；\nin [1n]\nprep.参与；参加;\nadv.进入；在内;\nrange [reind3]\nrange\nn.区间；射程；靶场；\nv.徘徊；变动;\n10-4=6\nshoot [∫u:t]\nn.幼苗；嫩芽；新枝；\nv.射击;\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-2\\knowledge.png",
+        "content": "知识总结\nfor循环\n降低代码复杂度\n格式：\n循环次数\nfor i in range(n):\nprint（'d'）下级代码，重复n次\nprint（'u'）非下级代码，执行1次"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块11：forL2-2\n模块12：for应用\n\n\n--- 第2页 ---\n内容大纲\n核心要点\nfor\nfor应用\n科学探索 计算机大脑——CPU\n\n\n--- 第3页 ---\n1: for\nfor语句的功能：用于简化重复的代码。\nfor i in range(重复的次数):       基本格式\n下级代码一个空格\n  注意四个空格\n下级代码前面的四个空格也可以叫一次缩进；\n打出英文冒号后，直接按下回车键，代码会自动缩进；\n没有使用for语句 使用for语句\n 相同输出代码示例重复执行的代码\n重复执行3次\n\n\n--- 第4页 ---\n2: for应用\n例：控制无人机到达目标位置勘\n察，’u’、’d’、’l’、’r’分别控制无人\n机向上、下、左、右移动一格。\n②：它不是for语句的下级代码，运行时只会执行一次，无人机到达指定地点。①：它是for语句的下级代码，运行时会重复3次，无人机根据输出指令移动。\n①\n②\n#有缩进，就是for语句的下级代码，会被重复执行；没有缩进，就不是for\n语句的下级代码，只会在循环结束以后，执行一次。\n无人机目标位置\n\n\n--- 第5页 ---\n科学探索\nCPU是中央处理器的简称，是计算机中最核心的部件。CPU也广泛\n应用于各个领域，如手机、电视、电脑、卫星、航母和载人火箭等。计算机大脑--CPU\n晶体管和电路图：\n     计算和控制\n\n\n--- 第6页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 在横线处填写               ，可以让无人机连续向右移动三格。\n2.下方代码，print(‘d’)会执行几次？\nA.0           B.1                    C.2                  D.3\n\n\n--- 第2页 ---\n3.思考一下：下列哪个选项，可以控制无人机到达指定地点。\nA.\nC.B.\nD.\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 在横线处填写               ，可以让无人机连续向右移动三格。\n答案：for i in range(3)：。\n解析：本题考查的是for语句的格式。连续向右移动三格，也\n就是把print(‘r’)重复执行三次，使用for i in range(3)：就可\n以了。\n\n\n--- 第2页 ---\n2.下方代码，print(‘d’)会执行几次？\nA.0           B.1                    C.2                  D.3\n答案：B。\n解析：本题考查的是for循环语句的应用。print(‘d’)和for的左\n侧对齐，它不是for语句的下级代码，所以不会重复执行，当\n执行完整个for循环以后，print(‘d’)会执行一次。\n\n\n--- 第3页 ---\n3.思考一下：下列哪个选项，可以控制无人机到达指定地点。\nA.\nC.B.\nD.\n答案：B。\n解析：本题考查的是for循环语句的应用。无人机的路线如虚线\n所示，需要使用for语句，先重复执行3次向右直行一格，再向下\n直行一格，最后重复执行4次向右直行一格。其中print(‘d’)不是\nfor语句的下级代码，不需要缩进。\n右3\n下1右4\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-3",
+    "unit": "L2",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-3\ncolor ['k<ler]\nn.颜色；着色；色素;\nv.染；歪曲;\nred [red]\n川\n三\nn.红色；红葡萄酒;\nadj.红的；红色的;\n【短语】\nred wine 红酒\nblue [blu: ]\nadj.蓝色的；忧郁的;\nn.蓝色；天蓝色；\n【短语】\nblue sky 蓝天\nw\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-3\\knowledge.png",
+        "content": "作用\n重复进行多次进行判断\nfor语句\n重复执行\n组成\nfor-if嵌套\nif语句\n）判断相等要使用两个等于号，\n例如： a ==\n'red\n下级代码\n注意缩进，if语句的下级代码需要缩进2次\n执行过程\nif语句放在for语句中，\n每次循环都会进行条件判断"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块13：for-if嵌套L2-3\n模块14：for-if应用\n\n\n--- 第2页 ---\n单词卡for-if 代码格式\nfor-if 执行过程\nfor-if 应用场景\nfly:飞 color:颜色\nshow:展示 go:前进\n核心要点内容大纲\n\n\n--- 第3页 ---\n1:for-if 代码格式\nfor循环中可以嵌套if语句。每次循环时，都会执行判断条件，如果满足条\n件则执行对应语句，反之则跳过其下级代码。语法格式如下:\nfor-if 代码示例基本格式\n条件成立时执行的语句 if   条件:\n      英文冒号\n缩进一次：四个空格下级代码  for i in range(数字):\n\n\n--- 第4页 ---\n2:for-if 执行过程\nfor 语句控制循环重复执行的次数；\nif 语句进行在每轮循环中，进行条件判断，条件成立，执行下级代\n码；条件不成立，不执行下级代码。概念讲解\nfor-if 执行过程示例\n一共重复执行 3 次，每次\n循环都打印单词 fly，将能\n量板的颜色存入变量 \ncolor 中，如果变量 color \n的值是 'blue'，就打印数\n字 2 。\n\n\n--- 第5页 ---\n2:for-if 执行过程\nfor 语句控制循环重复执行的次数；\nif 语句进行在每轮循环中，进行条件判断，条件成立，执行下级代\n码；条件不成立，不执行下级代码。概念讲解\nfor-if 执行过程示例\n一共重复执行 3 次，每次循\n环都打印单词 fly，将能量板\n的颜色存入变量 color 中，如\n果变量 color 的值是 'blue'，\n就打印数字 2 ；如果变量 \ncolor 的值是 'red'，就打印\n数字 4 。\n\n\n--- 第6页 ---\n在Python中，需要进行多次循环，每次循环根据条件不同，完成不同效果\n的场景，可以使用 for-if 嵌套。3:for-if 应用场景\n例如，制作程序给班级里的同学按照性别分类。一共有 30 个学生，就需\n要重复执行 30 次，每次使用 input() 语句输入学生的性别，如果性别为男，\n就打印数字 1 ，性别为女，就打印数字 2 。\n代码示例\n\n\n--- 第7页 ---\n科学探索\n如果将球扔向桌面，球会沿着一条线路反弹。球的射入角度和射出角度关\n于桌面的垂直线对称。只需要改变球的射入角度，就可以改变球的反弹角\n度。\n我们也可以不改变球的射入角度，而是旋转桌面，此时，球和桌面的角度\n发生了改变，所以球反弹的方向也会发生改变。\n\n\n--- 第8页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1.运行以下代码，input() 依次输入的四个内容是 hetao, python, \npython, code 。最终输出区会打印几个1？（     ）\n2.在for循环中嵌套使用 if 语句,下列哪个代码格式是正确的？（    ）\nA. B.A. 1个 B. 2个 \nC. 3个 D. 4个 \n\n\n--- 第2页 ---\n动手试一试\n3.执行下方代码，输出区打印了 3 个值，分别是 2，1，2，下面选项中，是\n程序三次输入的值，可以实现输出区效果的是？（    ）\nA. w    z    w \nB.  z    w    z \nC.  z     z     z \nD.  w   w    w\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 答案 B\n2. 答案 A\n输入hetao, 条件不成立；输入python，\n条件成立。四次输入分别是hetao, \npython, python, code，所以打印出两个 \n1 。\nB选项中，if 语句后面需要写上条件和冒号，\n此处只编写了条件，缺少冒号，格式不正\n确。\n3. 答案 B\na 的值是 'w' 的时候，输出区打印出 1；a \n的值是 'z' 时，输出区打印出 2 。现在输出\n区 3 次打印的值分别是 2，1，2，那么输\n入应该是 z， w， z 。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L2-4",
+    "unit": "L2",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL2-4\nonline [.a:n'lain]\nadj.联机的；在线的;\nadv.在网上地;\n【短语】\nonline user 在线用户\n【例句】\nThis game has many online users.\n这个游戏有很多在线用户。\n100\njudge [d3∧d3]\nn.法官；裁判；内行；\nv.判断；评判;\n【例句】\nMy judge for you is 1o0 points\n我给你的评价是100分。\nw\n0\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-4\\knowledge.png",
+        "content": "onlinejudge的简称，线上测评\n定义&特点\n不需要人来批改，由系统判断对错，自动评分\n提交代码后，系统会使用多组测试数据对程序进行测试\n题目描述\n题目\n输入描述\n0题组成\n输出描述\n输入样例\n测试样例\n输出样例\n0J题答题流程\n读题-\n编写代码一—测试样例一提交代码"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块15：OJ训练营L2-4\n模块16：OJ比赛\n\n\n--- 第2页 ---\n单词卡 online:线上 judge:测评内容大纲\n核心要点认识OJ\nOJ实战\n\n\n--- 第3页 ---\n1:认识OJ\nOJ：online judge的简称，线上测评\nOJ题：不需要人来批改，由系统判断对错，自动评分\n将代码提交给系统，\n由系统进行测试。用户输入数据，\n测试代码，系\n统不评判对错。OJ系统：\n预备有多组测试数据，每组包含输\n入数据和正确输出结果。测试时，\n系统会对比全部测试数据的代码输\n出结果和正确结果，并显示最终的\n测评结果。\n  \nOJ题答题流程\n② 编写代码：获取输入；\n处理数据；得到输出结果。\n③ 测试样例：使用测试样\n例进行测试；使用自己编\n的数据进行测试。① 读题：理清题意，从题\n目中分别找出输入和输出。\n④ 提交代码。\n\n\n--- 第4页 ---\n2:OJ实战-变量\nOJ解题示例\n例1：变量的使用和数字运算\n题目\n已知猴子数量是长颈\n鹿数量的七倍，输入\n长颈鹿数量，编写程\n序计算猴子数量。变量名 = 变量的值变量基本格式\n读题\n输入描述：\n长颈鹿数量\n输出描述：\n猴子数量编写代码\n 测试样例\n输入样例：\n输出样例：\n提交代码\n系统测评int() 命令：\n把字符串转化为整数 \n\n\n--- 第5页 ---\n2:OJ实战-字符串拼接\nOJ解题示例\n例2：字符串拼接应用\n题目\n编写打招呼程序。用\n户输入一个名字，输\n出对应的欢迎语。python中使用加号可\n以将两个字符串拼接字符串拼接\n读题\n输入描述：\n名字\n输出描述：\n欢迎语编写代码 测试样例\n输入样例：\n输出样例：提交代码\n系统测评'abc' + '123' 如\n'abc123'\n\n\n--- 第6页 ---\n2:OJ实战-if-else语句\nOJ解题示例\n例3：if-else语句应用\n题目\n已知学生成绩不低于\n60分为合格。输入\n学生成绩，编写程序\n判断是否合格。\n读题\n输入描述：\n学生成绩\n输出描述：\n是否合格编写代码 测试样例\n输入样例1：\n输出样例1：提交代码\n系统测评下级代码 if   条件:\n      英文冒号\n else :\n      下级代码if-else语句基本格式\n输入样例2：\n输出样例2：\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下列选项中，哪个是正确的OJ题答题顺序？\nA. 编写代码——提交代码——测试样例\nB. 读题——编写代码——测试样例——提交代码\nD. 读题——测试样例——编写代码——提交代码C. 读题——编写代码——提交代码——测试样例\n2. 执行下方代码，先后输入鸡蛋、番茄，程序会打印出什\n么?\nA. B. \nC. D. \n\n\n--- 第2页 ---\n3. OJ题目是“已知某货车载重标准为不超过20吨，编写程\n序：输入这个货车的载重，如果符合标准，输出合格；如\n果超重，输出超重”。下列说法正确的是\nA. 这道题的输入描述是货车编号。\nB. 编写代码需要使用if-else语句。\nD. 只要用户测试一组样例是正确的，那么提交代码就\n可以拿到100分。C. “输入：20；输出：超重”可以作为一个用户测试样例。 \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L2\\L2-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 下列选项中，哪个是正确的OJ题答题顺序？\nA. 编写代码——提交代码——测试样例\nB. 读题——编写代码——测试样例——提交代码\nD. 读题——测试样例——编写代码——提交代码C. 读题——编写代码——提交代码——测试样例\n答案：B。\n解析：本题考查的是OJ题答题顺序。OJ题的答题流程是读\n题——编写代码——测试样例——提交代码。选项B正确。\n\n\n--- 第2页 ---\n2. 执行下方代码，先后输入鸡蛋、番茄，程序会打印出什\n么?\nA. B. \nC. D. \n答案：A。\n解析：本题考查的是字符串拼接。python中使用加号可以\n将两个字符串拼接。input()接收用户输入的鸡蛋、番茄，\n并赋值给变量。a = '鸡蛋'，b = '番茄'，经过字符串拼接'今\n天吃'+'番茄'+'炒'+'鸡蛋'，输出'今天吃番茄炒鸡蛋'。选项A\n正确。\n\n\n--- 第3页 ---\n3. OJ题目是“已知某货车载重标准为不超过20吨，编写程\n序：输入这个货车的载重，如果符合标准，输出合格；如\n果超重，输出超重”。下列说法正确的是\nA. 这道题的输入描述是货车编号。\nB. 编写代码需要使用if-else语句。\nD. 只要用户测试一组样例是正确的，那么提交代码就\n可以拿到100分。C. “输入：20；输出：超重”可以作为一个用户测试样例。 \n答案：B。\n解析：本题考查的是OJ题的解答和if-else语句的应用。这\n道题的输入描述是货车载重，选项A错误；编写代码判断是\n否超重需要使用if-else语句，选项B正确；输入20，应该\n输出合格，选项C错误；如果有多组测试样例，应该测试每\n一组样例提高正确率，选项D错误。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L3-1",
+    "unit": "L3",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL3-1\nmove [mu:v]\nn.移动；行动；使感动;\nv.搬家，调动;\ncat [kaet]\nn.猫，猫科动物：\n[6ap] Bop\nn.狗；公狗;\nv.困扰，纠缠；跟踪；\ntotal ['teut(e)l]\nadj.总的；彻底的;\nn.总数;\nv.计算....的总和；\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-1\\knowledge.png",
+        "content": "知识总结\n变量修改\n变量计数\ncat\n设置初始值\nfor\n i in range(4):iifor i in range(3):\nn=n\n+\nprint('move')\n根据数量变化\nm = input()\n变量的值可以被反复修改\n修改变量的值\nif m ==\n‘猫'：\n可在循环中对变量进行连续修改\ncat = cat +\nprint(cat)\n得到统计结果"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块17：变量修改L3-1\n模块18：变量计数\n\n\n--- 第2页 ---\n单词卡变量修改\n变量计数\nmove:移动 cat:猫\ndog:狗 total:总计\n核心要点内容大纲\n\n\n--- 第3页 ---\n变量修改\n示        例\n'f'\n'food'n\nn\n变量n的值并未改变\n输出区打印出 h变量n重新被赋值\n输出区打印出 ht变量的值可以使用赋值语句进行修改。\n等号 \"=\" 可以进行赋值运算。在执行代码时，程序会把右边的结果赋值\n给左边的变量。\n\n\n--- 第4页 ---\n变量修改\n使用循环可以对变量进行连续地修改。\n来看这段代码的执行过程：\nØ 第1行代码，将数字1给变量n，此时n的值为1。\nØ 第2-3行，执行for循环，range后值为4，一共\n重复4次：\n• 第1次循环，执行n=n+1，将n+1的值赋值\n给n,此时n的值为1+1=2;\n• 第2次循环，执行n=n+1，将n+1的值赋值\n给n,此时n的值为2+1=3；\n• 之后每次循环，都会将n+1的值赋值给n,每\n次n的值都会增加1。4次循环之后，n的值\n是5.\nØ 第4行代码，打印最终变量n的值，是5。第 1 行\nn = 1 \n第2-3行\n重复执行 \nn = n + 1 \n第4行\nprint( 5 )第 一 次\nn = 1 +1\n第 二 次\nn = 2 +1\n第 三 次\nn = 3 +1\n第 四 次\nn = 4 +1\nn = 1\nfor i in range(4):\nn = n + 1\nprint(n)\n\n\n--- 第5页 ---\n变量修改\n对变量进行修改前，要先判断，是要进行字符串拼接还是数学运算。\n名字+ ' 1 '\n数字+1\n数字+1 数字+1\n名字+ ' 1 ' 名字+ ' 1 '字符串拼接\n数字计算\n\n\n--- 第6页 ---\n示例\n变量计数\n使用变量进行计数的步骤：\n①在使用变量计数时，需要先在前面设定变量的初始值。\n②在循环中，根据数量的变化，修改这个变量的值。\n③当循环结束时，变量中存储的就是最终的统计结果。\n循环开始前，设置变量初始值\n在循环中，修改变量的值\n循环结束，得到统计结果\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 执行下方代码，程序会打印出（ ）？\n2. 执行下方代码，程序会打印出（ ）？\nA. home            B. work            C. homework            \nA. 3            B. 4            C. 1            D. 程序报错\n\n\n--- 第2页 ---\n动手试一试\n3. 执行下方代码，程序会打印出（ ）？\nA. 3            B. 4            C. 1            D. 1111\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 执行下方代码，程序会打印出（ C ）？\nA. home            B. work            C. homework            \n解析：\n这段代码，执行第1行代码时，变量n中存储的是字符串’home’;\n第2行代码，将变量n中存储的字符串进行了拼接，得到字符串\n‘homework’，并重新赋值给变量n；\n第3行代码，会将变量n中的值 ‘homework’ 打印出来。\n选项C正确\n\n\n--- 第2页 ---\n答案解密\n解析：\n这段代码，执行到第2行代码时，n中存储的是字符串3，不能\n与数字1进行加法运算，所以程序会报错；\n选项D正确2. 执行下方代码，程序会打印出（ D ）？\nA. 3            B. 4            C. 1            D. 程序报错\n\n\n--- 第3页 ---\n答案解密\n解析：\n这段代码，n的初始值是1\n代码第2-3行的循环中，每次给变量n增加了1\n循环结束后，n的值是4\n选项B正确3. 执行下方代码，程序会打印出（ B ）？\nA. 3            B. 4            C. 1            D. 1111\n\n"
+      }
+    }
+  },
+  {
+    "id": "L3-2",
+    "unit": "L3",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL3-2\ntime [taim]\nn.时间;\nv.为·....·安排时间；\n【短语】\nTime Machine时间机器；时光机\nsleep [sli:p]\nv.睡觉；供·...·住宿；\nn.睡眠，睡觉；\n【短语】\nsleepdisorder睡眠失常；失眠\nR\nW\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-2\\knowledge.png",
+        "content": "i就是循环变量\nfor i in range(数字):\n变量的名字可以改变\n循环变量\n起始值\n0\n变化规律\n循环变量\n结束值\n循环次数-1\n连续增加1的数字\n2、3、4、\n5.\n循环变量应用\n输出有规律的数字\n连续减少1的数字\n5、\n4、3、2、\n1"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块19：循环变量L3-2\n模块20：循环变量应用\n\n\n--- 第2页 ---\n单词卡循环变量\ntime:时间 sleep:睡觉\n核心要点内容大纲\n循环变量应用\n\n\n--- 第3页 ---\n循环变量\n循环变量名称可以更改，例如 a、n等，\n但注意使用时需要前后保持一致。\n举例子\nfor i in range()中 i 是变量，也是一个循环变量。\n知识点\n请注意定义新变量i重复执行4次\n\n\n--- 第4页 ---\n循环变量\n变化规律循环次数 循环变量 i 的值\n第一次 0\n第二次 1\n第三次 2\n第四次 3\n举例子\n\n\n--- 第5页 ---\n循环变量应用\n循环次数 循环变量 i 的值 i + 3的值\n第一次 0 3\n第二次 1 4\n第三次 2 5\n第四次 3 6\n第五次 4 7\n举例子\n连续增加的数字\n\n\n--- 第6页 ---\n循环变量应用\n循环次数 循环变量 i 的值 4 - i的值\n第一次 0 4\n第二次 1 3\n第三次 2 2\n第四次 3 1\n第五次 4 0\n举例子\n 连续减少的数字\n\n\n--- 第7页 ---\n循环变量总结\n\n\n--- 第8页 ---\n科学探索\n基因工程农牧业应用\nl培养出具有特殊用途的动、植物\nl培养优质、高产、抗性好的农作物及畜、禽新\n品种\n基因工程环境保护应用\nl制作检测环境中病毒、细菌等污染的\nDNA探针\nl制作能吞食和分解多种污染环境的物质\n的“超级细菌”\n基因工程医学应用\nl基因诊断与基因治疗\nl基因工程药品：胰岛素、干扰素等\n\n\n--- 第9页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n  练习1\n 运行下方代码，输出结果是（ ）？\nA. B. C.程序报错\n\n\n--- 第2页 ---\n动手试一试\n  练习2\n运行下方代码，输出结果不会有哪个数字（ ）？\n0 A. B. 6 C. 7\n\n\n--- 第3页 ---\n动手试一试\n  运行下方代码，输出结果是（ ）？   练习3\nA. B. C.\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n  练习1\n 运行下方代码，输出结果是（ ）？\nA. B. C.程序报错\n答案:  B\n\n\n--- 第2页 ---\n答案解密\n解析\n\n\n--- 第3页 ---\n动手试一试\n  练习2\n运行下方代码，输出结果不会有哪个数字（ ）？\n0 A. B. 6 C. 7\n答案:  A\n解析\n\n\n--- 第4页 ---\n动手试一试\n  运行下方代码，输出结果是（ ）？   练习3\nA. B. C.\n答案:  A\n\n\n--- 第5页 ---\n答案解密\n循环次数循环变量i的值7-i的值 打印结果\n第一次 0 7-0=7 7\n第二次 1 7-1=6 6\n第三次 2 7-2=5 5\n第四次 3 7-3=4 4\n第五次 4 7-4=3 3\n第六次 5 7-5=2 2\n第七次 6 7-6=1 1解析\n\n"
+      }
+    }
+  },
+  {
+    "id": "L3-3",
+    "unit": "L3",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL3-3\nshow [[eu]\nv.显示，表明；描绘；展示，展出；\nn.演出；（电视或广播）节目；展览；\n【短语】\nFashion show\n时装表演；时装秀；\ntalk show\n脱口秀；谈话类节目；\nshow off\n炫耀；卖弄；\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-3\\knowledge.png",
+        "content": "用于判断3种情况，if和elif分别判断一种情况，else负责处理剩下的情况\n格式&特点\nelif用来在i条件不成立时，继续进行判断，它的后面也要填写判断条件\nifelifelse是一个整体，它们左侧要对齐，并且都以冒号结尾\n从上到下，依次判断每一个条件\nif的条件成立，执行if的下级代码，并结束判断\nif-elif-else\n执行规则\n执行顺序\nif的条件不成立，elif的条件成立，执行elif的下级代码，并结束判断\nif和elif的条件都不成立，执行else的下级代码\n处理三种以上情况，可以在if和else之间使用多个elif\n多个elif\nif和每个elif都可以处理一种情况，else负责处理剩下的情况。\n从上到下依次判断每一个条件；如果条件成立，就会执行对应的下级代码，然后结束整个条件判断语句"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块21：if-elif-elseL3-3\n模块22：分支应用\n\n\n--- 第2页 ---\n内容大纲\n科学探索 碳十四测年法\n核心要点if-elif-else\n分支应用\n\n\n--- 第3页 ---\n1:if-elif-else语法格式\nif-elif-else：用于判断三种情况。\n基本格式\n下级代码 if  条件1:\n      判断一种情况\nelse:\n      下级代码左侧对齐\n  注意 elif：else if 的缩写，是 否则如果 的意思。\n          在if条件不成立时，继续进行判断，它的后面也要填写判断条件。\n下级代码 elif  条件2:\n      判断一种情况\n处理剩下的情况\nif elif else是一个整体，它们左侧要对齐，并且都以冒号结尾。英文冒号\n\n\n--- 第4页 ---\n1:if-elif-else执行顺序\nl从上到下，依次判断每一个条件\nlif的条件成立，执行if的下级代码，并结束判断\nlif的条件不成立，elif的条件成立，执行elif的下级代码，并结束判断\nlif和elif的条件都不成立，执行else的下级代码\n执行规则\n  示例\n打印'左'，结束判断①\n输入\n\n\n--- 第5页 ---\n1:if-elif-else执行顺序\n  示例\n打印'中'，结束判断①\n②\n打印'右'①\n②\n③\n输入\n输入\n\n\n--- 第6页 ---\n1:多个elif\n多个elif\n代码示例\n要处理三种以上情况，可以在if\n和else之间使用多个elif。\nif 和每个elif都可以处理一种情\n况，else负责处理剩下的情况。\n  示例\n\n\n--- 第7页 ---\n2:分支应用\n代码示例编写程序，帮助禾木应对怪兽，\n顺利通过这段路，追回核晶。\n禾木需要做出不同的动作，来\n对付不同的怪兽。\n分析：\n\n\n--- 第8页 ---\n科学探索\n碳十四测年法\n当动物死后，生命活动停止，不会再有新的碳十四进入体内\n了。动物体内原有的碳十四会按照规律，每5730年减少一\n半。考古学家拿到一个动物化石后，通过碳十四减少的量，\n就能计算出它的年龄。这就是碳十四测年法。\n碳十四特殊的碳元素\n每隔5730年就会数量减半\n山顶洞人\n3.3万年前三星堆\n3000多年前\n碳十四测年法的应用示例\n\n\n--- 第9页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下列代码中，格式正确的是？\nB. A. \nC. D. \n\n\n--- 第2页 ---\n2. 下面代码的运行结果是？\nA. B. C. D.\n\n\n--- 第3页 ---\n3. 在横线处补全代码，使得程序运行后会打印出     \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 下列代码中，格式正确的是？\nB. A. \nC. D. \n答案：D。\n解析：本题考查的是if-elif-else的语法格式。elif后面没有\n写判断条件，A选项错误；elif应该和if以及else是同级代\n码，不应该缩进，B选项错误；elif语句的末尾没有写冒号，\nC选项错误。\n\n\n--- 第2页 ---\n2. 下面代码的运行结果是？\nA. B. C. D.\n答案：A。\n解析：本题考查的是if-elif-else的执行顺序。从上到下依\n次判断每一个条件：if的条件和第一个elif的条件不成立，\n第二个elif条件成立，执行下级代码，打印2，结束判断。\n选项A正确。\n\n\n--- 第3页 ---\n答案：\n解析：本题考查的是if-elif-else的应用。如果想使程序运\n行后打印出草莓，就需要if的条件不成立且elif的条件成立，\n因此应该填写3. 在横线处补全代码，使得程序运行后会打印出     \n\n"
+      }
+    }
+  },
+  {
+    "id": "L3-4",
+    "unit": "L3",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL3-4\nand [aend]\nconj.和，与；而且\nor [o:(r)]\nYes\nor\nNo?\nconj.\n或者\nweather [we?a(r)]\nn．天气，气象\nage [eid3]\nn.年龄；时代\nv.变老，老化\nw\n0\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-4\\knowledge.png",
+        "content": "and、 or i\n将两个条件连接为一个整体\n需要两个条件同时满足\n并且\nif\n条件A\nand\n条件B\n需要至少一个条件满足：\n或者\nif\n条件A\nor\n条件B"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块23：and,orL3-4\n模块24：编程挑战赛\n\n\n--- 第2页 ---\n内容大纲\n核心要点and\nor\n单词卡and : 和, 并且 or : 或, 或者\n\n\n--- 第3页 ---\n1: and\n需要同时满足两个条件时，可以使用and连接两个条件。\n条件1 and 条件2\n两个条件都成立，整个条件才成立;\n有任何一个条件不成立，整个条件就不成立。\n比如： 并且\nand左右两边条件都成立,\n整个条件成立\n执行if语句的下级代码\n是\nand左右两边只有1个条件成立,\n整个条件不成立\n不执行if语句的下级代码\n否\nand左右条件都不成立,\n整个条件不成立\n不执行if语句的下级代码\n否\n\n\n--- 第4页 ---\n2: or\n仅需要满足其中一个条件时，可以使用or连接两个条件。\n条件1 or 条件2\n有任意一个条件成立，整个条件就成立;\n两个条件都不成立，整个条件才不成立。\nor左右两边条件都成立,\n整个条件成立\n执行if语句的下级代码\nor左右两边条件都不成立,\n整个条件不成立\n不执行if语句的下级代码\n不响铃\nor左右两边只有1个条件成立,\n整个条件成立\n执行if语句的下级代码\n不响铃\n响铃或者 比如：\n\n\n--- 第5页 ---\n3: 对比总结\nand 和 or 都可以用来连接两个条件，将两边合为一个整体。\nand表示“并且”，它比较“严格”，两个条件必须同时成立，\n整体条件才能成立。\n而 or 就很“宽容”了，它表示“或者”，用 or 连接的两个条\n件，只要有一个成立，整体就成立。  对比\n\n\n--- 第6页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下面代码的运行结果为? （          ）\nA.           B.                    C.                  D.\n2. 如果a = 5 , b = 7，下列哪个条件成立?   (          )\nA. a > b                                 B. a == 5 and a > b\n          \nC. b > a or b == 7                    D. a == b                          \n\n\n--- 第2页 ---\n动手试一试\n3. 下面代码的运行结果为? (         )\nA.           B.                    C.                  D.\n优秀\n 良好\n 及格\n 不及格\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L3\\L3-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：D。\n解析：本题考查的是and/or的应用。\n第一个if语句，a == 'yes' and b == 'no'成立，执行下级代码，\n打印1;\n第二个if语句，a == 'no' or c == 'no'不成立，不执行下级代码﹔\n程序继续执行打印3，故选项D正确。1. 下面代码的运行结果为? （  D  ）\nA.           B.                    C.                  D.\n\n\n--- 第2页 ---\n答案解密\n解析：本题考查的是and/or的应用。\n选项A : a = 5，b = 7 ,  a > b不成立﹔\n选项B: and两边的条件都成立时，条件才成立。a == 5成立，\na > b不成立，所以整个条件不成立﹔\n选项C: or两边有任意条件成立，整个条件就成立。\nb > a成立，所以整个条件成立;\n选项D: ==用来比较两侧的变量是否相等，a == b不成立。答案：C。2. 如果a = 5 , b = 7，下列哪个条件成立?   (  C  )\nA. a > b                                 B. a == 5 and a > b\n          \nC. b > a or b == 7                D. a == b                         \n\n\n--- 第3页 ---\n答案解密\n解析：本题考查的是if-elif-else语句的应用。if-elif-else语句\n执行时，前一个条件判断不成立，才会继续下一个条件判断。\n题中a = 56, 前三个条件判断均不成立，执行else的下级代码，\n打印'不及格'。故选项D正确。答案：D。3. 下面代码的运行结果为? (   D   )\nA.           B.                   C.                  D.\n优秀\n 良好\n 及格\n 不及格\n\n"
+      }
+    }
+  },
+  {
+    "id": "L4-1",
+    "unit": "L4",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL4-1\ntrue [tru:]\nadj.真实的；正确的\nn.真实；准确\n【例句】\nThis is not strictly true.\n这不完全正确。\nfalse [fo:ls]\nadj.错误的\n【例句】\nAre the following statements true or false?\n下列说法是对还是错？\nw\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-1\\knowledge.png",
+        "content": "True\n表示条件成立\n布尔值\nFalse\n表示条件不成立\n布尔值和while循环\nwhile 循环条件 :\n代码格式\n下级代码\nwhile循环\n如果循环条件是True\n特殊情况\n表示无限循环"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块25：布尔值L4-1\n模块26：while循环\n\n\n--- 第2页 ---\n单词卡布尔值\nand 和 or\nwhile循环\nTrue:正确 False:错误\n核心要点内容大纲\n\n\n--- 第3页 ---\n在Python中，条件成立或者不成立的结果，\n也叫做布尔值。\n条件成立就是True        ；      \n条件不成立就是False        。\n布尔值\n我们之前使用分支语句的时候：\nif后面会放入判断条件。\n条件成立，执行下级代码；\n条件不成立，不执行下级代码。\nprint(3>2）\nTrue\nprint( 2>3）\nFalse使用举例\n布尔值只有True和False两种结果，并且首字母是大写的。\n像是 Ture   'Ture'   true   都不是布尔值哦！if  判断条件：\n下级代码\n\n\n--- 第4页 ---\n在Python中，可以使用 and连接两个条件，\n只有两个条件同时成立，整体才会成立。\nand\n条件A 条件B 条件A and 条件B条件A and 条件B\n\n\n--- 第5页 ---\n在Python中，可以使用 or 连接两个条件，\n只要有一个成立，整体就会成立。\nor\n条件A 条件B 条件A or 条件B条件A or 条件B\n\n\n--- 第6页 ---\n生活中过马路时，【如果是红灯，就要等待】。\n要【在信号灯变成绿色之前】进行多次进行判断。\n像这样不知道循环的次数，只知道循环条件的情况，可以使用while循环While循环\nwhile 循环条件：\n     下级代码while\n当循环条件是True时，就是无限循环，程序会一直执行下级代码。\n输出区\nPython真好玩\nPython真好玩\nPython真好玩\nPython真好玩\nPython真好玩\nPython真好玩\nPython真好玩\n......代码区\nwhile True: \n    print('Python真好玩')\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下列单词中不能表示布尔值的是？\n2. 条件 6 > 3 and 8 < 5，成立吗？\nA.  成立               B. 不成立                        A. False B. True C. And\n3. 要打印出       那么a、 b、 c 三个变量的值可能是？\n20 \n'M' \n'sali'A. 15 \n'K' \n'hemu'B. 15 \n'H' \n'sali'C. 20 \n'Y' \n'taozi'D.a\nb\nc：\n：\n：a\nb\nc：\n：\n：a\nb\nc：\n：\n：a\nb\nc：\n：\n：\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 下列单词中不能表示布尔值的是？\n                                        \n答案：  C。\n解析：本题考查的是布尔值的概念。    \n在Python中，布尔值用来表示条件成立或者不成立的结果。\n条件成立是True；条件不成立是False。\n所以正确答案是C。A. False B. True C. And\n\n\n--- 第2页 ---\n答案解密\n2. 条件 6 > 3 and 8 < 5，成立吗？\n                                        \n答案：  B。\n解析：本题考查的是and的用法。    \n当 and 左右两边的条件都成立时，整个条件才成立。\n题干中，and 右边的8＜5 不成立，所以整个条件的结果：不成立。\n答案为B。A.  成立               B. 不成立                        \n\n\n--- 第3页 ---\n答案解密\n                                        \n答案：  C。\n解析：题干要求打印出        。\n观察代码，想要打印出1和2需要两个if语句的下级代码都会被执行， \n所以2个分支语句的判断条件都需要成立。打印出1，条件a==15 or \nb=='U’ 需要成立。or左右两边的条件任意一个成立或者两个都成立\n，那么整个条件才会成立。题目中能够使得 a==15 or b=='U' 成立\n的选项，为B、C选项。要能打印出2，c=='sali'此条件也需要成立， \n所以C是正确答案。3. 要打印出     那么a、 b、 c 三个变量的值可能是？\n20 \n'M' \n'sali'A. 15 \n'K' \n'hemu'B. 15 \n'H' \n'sali'C. 20 \n'Y' \n'taozi'D.a\nb\nc：\n：\n：a\nb\nc：\n：\n：a\nb\nc：\n：\n：a\nb\nc：\n：\n：\n\n"
+      }
+    }
+  },
+  {
+    "id": "L4-2",
+    "unit": "L4",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL4-2\nshow [ou]\nv.显示；展览；给...看\nn.节目；演出；行为\nsound [saund]\nn.声音；响声；印象\nv.(使)发声；听起来\nplay [ple1]\nV.(使）播放；玩；摆弄\nn.剧本；游戏；比赛\nrecord [reko:d]\nV.记录；录音；申明\nn.记录；唱片；最佳纪录\nW"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-2\\knowledge.png",
+        "content": "播放声音\n播放对应名称的音效\nplaysound()\nisPressed()\n按下按钮结果就是True\n检测按钮或触摸\nisTouched()\n检测到触摸结果就是True\n智能门铃和语音留言\n print()\n在屏幕左上角打印内容\n打印内容\nprintPos()\n改变打印的位置\nrecord()\n录制声音\n录音与播放录音\nplayRecord()\n播放录制好的声音"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块27：智能门铃\n模块28：语音留言\nL4-2\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡show :显示 sound :声音\nplay :播放实现门铃\n访客留言智慧核心\nrecord :录音\n\n\n--- 第3页 ---\n智慧核心\n智慧核心就是一个小型计算机，可以\n控制其他设备，按它的命令行动。在\n硬件编程课中，我们会使用智慧核心\n来进行编程。\n将智慧核心跟一台大电脑\n连接，在电脑上给智慧核\n心写入代码，再通过智慧\n核心控制其他设备。\n智慧核心\n\n\n--- 第4页 ---\n实现门铃\n重复检测\n播放铃声如果 A键按下playSound( '字符串 ')概念讲解\n使用 isPressed() 判断按键是否\n按下，括号内填入检测 按键名称 ，\n名称是字符串形式。\n使用playSound() 来播放声音，\n括号内填入 声音名称 ，名称是 字\n符串形式。 声音名称按键名称isPressed( '字符串 ')\n代码示例\nwhile True:\nifisPressed( 'A'):\nplaySound( 'ring')       \n\n\n--- 第5页 ---\nprint( '你好 ')        \n实现门铃\nprint() 可以在智慧核心 左上角打印文字。 print()\nprintPos() 可以在指定位置\n打印文字， 第1个参数填要打\n印的内容，第2个参数填入要\n打印的位置。 打印内容打印位置\nprintPos( ,)\n代\n码\n示\n例\n代\n码\n示\n例你好\n欢迎来到我家打印文字\nprintPos( '欢迎来到我家 ', '中间 ')        \n\n\n--- 第6页 ---\n实现门铃\n代\n码\n示\n例\n触摸传感器\n使用isTouched() 检测是否有人触\n碰触摸传感器，如果 有人按下 ，结果\n就是True，没人按下 就是False。\n重复检测\n按下打印\n如果按下while True:\nifisTouched() :\nprint( '按下 ')    \n\n\n--- 第7页 ---\n访客留言\n代码示例记录声音\nplayRecord()使用 record() 录制声音 。\n使用playRecord ()播放声音 。record()\n重复检测\n按下A键录音\n按下B键播放录音\nwhile True:\nifisPressed( 'A'):\nrecord()   \nifisPressed( 'B'):\nplayRecord()\n\n\n--- 第8页 ---\n访客留言\n代码示例显示图片\n使用 showPic ()显示图片 ，括号内\n填入图片名称，名称是字符串形式。\n图片名称showPic( '字符串 ')\n重复检测\n按下A键录音\n按下B键播放录音\n按下触摸传感器播放铃声showPic( '欢迎 1')\nwhile True:\nifisPressed( 'A'):\nrecord()   \nifisPressed('B'):\nplayRecord()\nifisTouched() :\nplaySound( 'ring ')\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、要让下列代码能够不断地打印出go，横线处应\n填入（   ）？ \n动手试一试\nwhile      :\nprint('go')           \nA. True B. TRUE\n                           C. FALSE D. False\n\n\n--- 第2页 ---\n2、运行下面的代码，按下B按钮，智慧核心屏幕上会显\n示什么呢？（   ） \n动手试一试\nA. 在屏幕左上角打印出禾木 B. 在屏幕中间打印出禾木                            \nC. 在屏幕左上角打印出小核桃D. 在屏幕中间打印出小核桃\n                       \n\n\n--- 第3页 ---\n动手试一试\n3、要实现访客按下触摸传感器后响起铃声的效果，应\n该补充什么条件呢？（   ） \nwhile True:\n    if               :\n        playSound('ring')       \nA. isPressed('A') B. isPressed()\n                           \nC. isPressed('B') D. isTouched()\n                       \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A\n \n解析：本题考查的是while True语句。\n在Python中，要使循环不断执行，需将 while 条件设为始\n终为真的表达式。Python 有True和False两个布尔值，区\n分大小写。选项 A 中True是布尔值'真'，符合要求；B选项\n中的TRUE和C选项中 FALSE是错误大写形式，非有效布尔值；\nD选项中False始终为假，不符合。所以选项A正确 。1、要让下列代码能够不断地打印出go,横线处应填入（   ）？ \nwhile      :\nprint('go')           \nA. True B. TRUE\n                           C. FALSE D. False\n\n\n--- 第2页 ---\n答案解密\n2、运行下面的代码，按下B按钮，智慧核心屏幕上会显\n示什么呢？（   ） \nA. 在屏幕左上角打印出禾木 B. 在屏幕中间打印出禾木                            \nC. 在屏幕左上角打印出小核桃D. 在屏幕中间打印出小核桃\n                       \n\n\n--- 第3页 ---\n答案解密\n答案：A\n \n解析：本题考查printPos()命令。\nisPressed()用于检测按键是否按下，printPos()可在\n指定位置打印文字，第一个参数填打印内容，第二个参数填\n打印位置。按下'B'按钮时，if isPressed('B') 条件成\n立，执行printPos('禾木')。第二个参数不填时默认打印\n位置为左上角，故选项 A 正确。\n\n\n--- 第4页 ---\n答案解密\n3、要实现访客按下触摸传感器后响起铃声的效果，应\n该补充什么条件呢？（   ） \nwhile True:\n    if               :\n        playSound('ring')       \nA. isPressed('A') B. isPressed()\n                           \nC. isPressed('B') D. isTouched()\n                       \n\n\n--- 第5页 ---\n答案解密\n答案：D\n \n解析：本题考查的是isTouched()语句。\n题目要求是按下触摸传感器后播放铃声，isPressed()\n是用于检测按键是否按下，isTouched()用于检测触摸\n传感器是否被按下。正确答案选D。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L4-3",
+    "unit": "L4",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-3\\flashcard.png",
+        "content": "核桃\nPython\n单词卡\nL4-3\nbreak [breik]\nv.中断；弄坏；打破\n(记录)\nn.暂停；休息；骨折\ntomato [ta'ma:teu]\nn.番茄，西红柿\nstate [stert]\nn.状态；国家；州\nv.陈述；公布\nadj.国家的\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-3\\knowledge.png",
+        "content": "break语句与while循环条件\nbreak语句\nwhile循环条件\nbreak语句需要编写在循环的下级代码中\nwhile右侧的是循环条件，每次循环时，\n它的作用是结束循环，\n会先判这个条件是否成立：\n·条件成立，执行循环的下级代码\nwhile True:\n条件成立，重复执行下级代码\n条件不成立，结束整个while循环\nprint（'欢迎来到核桃编程'）\ns = inputO\n输入停止，程序会执行\nwhile判断条件日\nif s=='停止'：\nbreak语句，停止整个\nwhile循环。\n缩进「下级代码\nbreak\nprint(\"break执行后这行不会执行\")\n程序执行到break语句时，程序会立刻结束循环\n不会再继续执行break后的下级代码。"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块29：break语句L4-3\n模块30：while循环条件\n\n\n--- 第2页 ---\n内容大纲\n核心要点break语句\n循环条件\n单词卡break：打断、中断\n\n\n--- 第3页 ---\n1: break语句\nbreak语句需要编写在循环的下级代码中，它的作用是结束循环。\n程序执行到break语句时，程序会立刻结束循环，不会再继续执\n行break后的下级代码。While True循环会不停的重复执行下级代码。\n如果用户输入了 停止 程序会执行break语句，结束\n整个while循环。\n下\n级\n代\n码\n\n\n--- 第4页 ---\n2: 循环条件\n除了使用break语句控制while循环，还可以使用循环条件控制。\nwhile右侧的是循环条件，每次循环时，会先判\n这个条件是否成立：\n• 条件成立，执行循环的下级代码；\n• 条件不成立，结束整个while循环。\na  >  0是这个while\n循环的循环条件，每\n次循环前都会检查这\n个条件是否成立，只\n有当条件成立时，才\n会执行下级代码。\n\n\n--- 第5页 ---\n 两种while循环方式\n使用break语句和循环条件都可以控制while循环，具体使用哪种方\n式，要根据场景来分析。\n使用循环条件控制while循环 使用break语句控制while循环\n机械大象的状态为站立时需要循环发动攻击 收集够9个番茄后停止循环\n\n\n--- 第6页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. (多选)下列代码，运行后能打印出yes的是? （          ）\nA.                     B.                 \nC.                             D.\n2. 下方代码运行后，s的值为？ （     ） \n\n\n--- 第2页 ---\n动手试一试\n3.如果要让代码打印出5次变量n的值，那么横线处应该填写代\n码是?__________\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：AD。\n解析：本题考查的是while循环与break语句的应用。\n选项A：a = 1，满足a < 2的条件，循环执行，打印yes，正确；\n选项B：a = 1，不满足a > 2的条件，循环不执行；\n选项C：a = 1，不满足a >= 2的条件，循环不执行；\n选项D：a = 2，满足a <= 2的条件，循环执行，打印yes，正确。1. (多选)下列代码，运行后能打印出yes的是? （   AD   ）\nA.                     B.                 \nC.                             D.\n\n\n--- 第2页 ---\n答案解密\n解析：本题考查的是while循环与break语句的应用。\n  第四次循环时，变量a的值变为10，if语句条件成立，\n执行break语句结束循环，所以s的值为20。答案：20。2. 下方代码运行后，s的值为？ （   20   ） \n\n\n--- 第3页 ---\n答案解密\n解析：本题考查的是break语句的应用。break语句的作用是\n结束循环，需要编写在循环的下级代码中。答案：break。3.如果要让代码打印出5次变量n的值，那么横线处应该填写代\n码是?_____break_____\n\n"
+      }
+    }
+  },
+  {
+    "id": "L4-4",
+    "unit": "L4",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL4-4\nrotate [routeit ]\nv.转动；轮换；轮种\nadj.辐状的\nget [get]\nv.获得；得(病)；吃(饭);\n接收；理解；搭乘\n000\nkey [ki:]\nn.按键；钥匙；要诀\nadj.重要的；关键的\nresult [rI'z^lt]\nn.结果；成果；成绩\nv.发生；导致\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-4\\knowledge.png",
+        "content": "控制舵机\nrotateTo()\n智能门\nwhile True:\n红外遥控\ngetIRKey()\n智能门和密码锁\n字符串拼接\n'12' +'ab'\n密码锁\n判断是否为数字\nkey.isdigit()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块31：智能门\n模块32：密码锁\nL4-4\n\n\n--- 第2页 ---\n红外遥控\n项目内容\n项目内容\n单词卡rotate :转动 get:获得\nkey:按键密码验证小屋开门\nresult :结果\n\n\n--- 第3页 ---\nrotateTo(   )\n小屋开门\n舵机可以通过转动白色舵臂，\n带着门旋转到特定的角度，\n实现门的开关。\n代码示例\n重复检测\n按下 B键，舵机转\n到90度，关门按下 A键，舵机转\n到180度，开门\n使用 rotateTo() 语句，括号内填入一\n个数字，舵机就能旋转到对应角度。\n舵机的转动范围是 0度到 180度。角度\nwhile True:\nifisPressed( 'A'):\nrotateTo(180)\nifisPressed( 'B'):\nrotateTo(90)舵机控制\n\n\n--- 第4页 ---\n红外遥控\n如果右键按下关门如果左键按下开门获取按键\ngetIRKey() 智慧核心支持红外遥控功能，使\n用getIRKey() 语句，可以知道\n红外遥控的哪个按键被按下。\nwhile True:\nkey = getIRKey()\nifkey == '左':\nrotateTo(180)\nifkey == '右':\nrotateTo(90)\n获得按键名称红外遥控\n代码示例灯亮代表智慧核心接收到\n了红外遥控按下的消息。\n\n\n--- 第5页 ---\n密码验证\n想要把字符串拼接，需要在\n两个字符串之间加上加号，\n这样就能按先后顺序拼接。输入密码\n代码示例 设置正确密码\n获取遥控按键\n如果是数字，记录并\n拼接在输入密码中用于记录输入的密码\n重复检测'12'+'3'\n'123'字符串拼接\nisdigit()语句可以用于判断字\n符串里面的内容是不是数字。变量 .isdigit()\n数字，返回 True\n非数字，返回 False\npassword = '123'\nresult = ''\nwhile True:\nkey = getIRKey()\nifkey.isdigit():\nresult = result +key   \n\n\n--- 第6页 ---\n错误提示 &自动关门\n密码验证\n代\n码\n示\n例\n程序会把预设的正确密码和输入的密码进行比较，如果正确，\n就开门，等待 5秒后自动关门。如果密码错误，程序会在屏幕\n中间给出提示。\n当条件不成立，也就是密码错误时\n打印提示如果按下 ok键\n如果密码正确\n开门，等待 5秒后关门while True:\nifkey == 'ok':\nifresult== password:\nrotateTo(180)\ntime.sleep(5)\nrotateTo(90)\nelse:\nprintPos ('密码错误', '中间')\n\n\n--- 第7页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、如果要实现按下红外遥控器的左键后，舵机转动到\n180度，划线处应该补充哪段代码呢 ？（）\n动手试一试\nwhile True:\nifkey == '左':\nrotateTo(180)\n   \nA. key = '左'\nC. key = getIRKeyB. key = '右'\nD. key = getIRKey()\n\n\n--- 第2页 ---\nA. isPressed()\nC. isdigit()B. isTouched()\nD. getIRKey()\n动手试一试\n2、乌拉乎编辑代码的时候，忘记怎么判断遥控器按下的\n按键是不是数字了，应该帮他补充哪段代码呢？ （）\npassword = '123'\nresult = ''\nwhile True:\nkey = getIRKey()\nifkey.        :\nresult = result +key   \n\n\n--- 第3页 ---\n3、运行如下代码 ,输出的结果为 ？（）\n动手试一试\nA. 10\nC. 8B. 9\nD. 7\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L4\\L4-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、如果要实现按下红外遥控器的左键后，舵机转动到\n180度，划线处应该补充哪段代码呢 ？（）\nwhile True:\nifkey == '左':\nrotateTo(180)\n   \nA. key = '左'\nC. key = getIRKeyB. key = '右'\nD. key = getIRKey()\n\n\n--- 第2页 ---\n答案解密\n答案： D\n解析：本题考查的是 getIRKey ()语句。\n题目要求是按下左键后转动到 180度，如果直接让 key \n= '左'，不管是否按左键，舵机都会转到 180度。\ngetIRKey ()语句可以获取红外遥控器的按键名称，正\n确格式是： key = getIRKey ()。按下左键后， key的值变\n为'左'，舵机转到 180度，所以答案选 D。\n\n\n--- 第3页 ---\n答案解密\nA. isPressed()\nC. isdigit()B. isTouched()\nD. getIRKey()\n2、乌拉乎编辑代码的时候，忘记怎么判断遥控器按下的\n按键是不是数字了，应该帮他补充哪段代码呢？ （）\npassword = '123'\nresult = ''\nwhile True:\nkey = getIRKey()\nifkey.        :\nresult = result +key   \n\n\n--- 第4页 ---\n答案解密\n答案： C\n解析：本题考查的是 isdigit()语句。\nisPressed() 语句用于检测智慧核心上的按键是否被按下；\nisTouched() 语句用于检测触摸传感器是否被按下；\ngetIRKey() 用于获取遥控按键； isdigit()用于判断字符串里\n的内容是不是数字。答案选 C。\n\n\n--- 第5页 ---\n答案解密\n3、运行如下代码 ,输出的结果为 ？（）\nA. 10\nC. 8B. 9\nD. 7\n\n\n--- 第6页 ---\n答案解密\n答案： D\n解析：本题考察的是 whil e中的 break语句。\n上述代码中 ：\n初始时， s= 10，进入 while True 循环，这是一个无限循环\n，只有当 if s*2< 15条件成立时，执行 break语句时，会跳出\nwhile循环。\n第一次循环时 ，s = 10，s*2 为20，不满足  s*2 < 15；然后执\n行s-= 1，此时 s变为9。\n第二次循环， s= 9，s*2 为 18，不满足  s*2< 15；然后执行 s \n-= 1，此时 s变为8。\n第三次循环， s= 8，s*2 为 16，不满足  s*2< 15；然后执行 s \n-= 1，此时 s变为7。\n第四次循环， s= 7，s*2为14，满足 s*2< 15，执行 break\n跳出循环 。\n因此，最终输出的结果是 7，正确答案是 D选项。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L5-1",
+    "unit": "L5",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL5-1\ninfo ['infeu]\nn.信息\nindex ['indeks]\n报警110\n安短信报警12110\n火警119\nn.索引\n交警122\n急救120\nvt.给.·编索引l\nlength [len0]\nn.长度\n强\n秀\n尚木拜莓\n行售酒\nidiom ['rdiem]\n法\nn.成语;方言\nw\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-1\\knowledge.png",
+        "content": "知识总结\n字符串索引\n字符串由字符组成，索引1是字符的编号，从0开始，依次增大。\n我在学习Python\n索引\n0123456789\n最大索引l：比字符串长度少1，len（字符串）-1\nlen0：得到字符串长度\ns='我在学习Python\ns[0]→'我\ns[len(s) -1] →'n"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块33：字符串索引L5-1\n模块34：字符串拼接\n\n\n--- 第2页 ---\n内容大纲\n核心要点字符串索引\n字符串拼接\n单词卡\n idiom：成语 index：索引\n length：长度 info：信息、消息\n\n\n--- 第3页 ---\n字符串索引\n  注意字符串由字符组成，索引是字符的编号，从0开始，逐步增大。\n索引\n通过索引就可以得到字符串中某一位字符。'我  0n'\n 9学 2习 3P\n 4y\n 5t\n 6h\n 7o\n 8在    \n  1\n示例\n示例\n  s = '我在学习Python'\n  s[0] → '我'\n  s[5] → 'y'\n当字符串中没有任何字符时，就是空字符串\n但空格也算一个字符，只包含空格的字符串并不是空字符\n串\n\n\n--- 第4页 ---\n字符串索引\n字符的索引比实际位置少1\n索引位置第\n7\n个\n字\n符\n↓第\n4\n个\n字\n符\n↓第\n1\n个\n字\n符\n↓第\n10\n个\n字\n符\n↓  示例\n作用：可以获取字符串的长度，即字符个数。\n格式：len(字符串)最大索引'我  0n'\n 9学 2习 3P\n 4y\n 5t\n 6h\n 7o\n 8在    \n  1\ns = '你好，我是小核桃'\nlen(s) → 8如：len()命令\n\n\n--- 第5页 ---\n字符串拼接\n运行下列代码，依次输入：千山鸟飞绝、万径人踪灭、\n孤舟蓑笠翁、独钓寒江雪，会打印出：千万孤独。\n第1行\ninfo = ''\n第2-4行\n重复执行\ns =input()\ninfo = info + s[0]\n第5行\nprint(info)第一次\ninfo = '千'\n第二次\ninfo = '千万'\n第三次\ninfo = '千万孤'\n第四次\ninfo = '千万孤独'第2-4行代码，循环执行了4次：\n每次循环都将输入的诗句首字\n符存到变量info中\n第5行代码，打印变量info的值，\n即'千万孤独'。\n第1行代码，初始化变量info\n\n\n--- 第6页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 字符串’Hi,I am Hemu'中字符'a'的索引是（）\nA. B. \nC. D. \n2. 执行下方代码，程序会打印出（）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n动手试一试\n3. 执行下方代码，依次输入《早发白帝城》中的4句诗\n程序会打印出（）。\nA. '间还住山' B. '云日不重' \nC. '彩一啼万'   D. '辞里岸舟'   \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A。\n解析：本题考查的是字符串索引，字符的索引比它所在位置少1。\n从左往右数，不要漏了空格字符哦，会发现字符'a'是第6个字符，\n因此它的索引是5。A. B. \nC. D. \n1.字符串’Hi,I am Hemu'中字符'a'的索引是（）\n\n\n--- 第2页 ---\n答案解密\n答案：B。\n解析：本题考查的是字符串索引。\n变量s中存储了字符串 'cellphone' ，索引是4的字符是'p'。2.执行下方代码，程序会打印出（）\nA. B. \nC. D. \n\n\n--- 第3页 ---\n答案解密\n解析：本题考查len()命令。\nlen()能得到字符串长度，长度减1得到末尾字符的索引，减2得到倒\n数第二个字符的索引。\n所以，最后打印出来是'云日不重' 。答案：B。3. 执行下方代码，依次输入《早发白帝城》中的4句诗\n程序会打印出（）。\nA. '间还住山' B. '云日不重' C. '彩一啼万'   D. '辞里岸舟'   \n\n"
+      }
+    }
+  },
+  {
+    "id": "L5-2",
+    "unit": "L5",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL5-2\nlight [lait]\nn.光；光源；交通信号灯\nv.照亮；点燃\nmusic ['mju:zik]\nn.音乐；乐谱；音乐创作\nvolume ['vα:ljam]\nn.音量；响度；体积\nv.成团卷起\nW\nO\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-2\\knowledge.png",
+        "content": "initLight()\n控制灯光\nlightOn()\nlightoff()\n感应灯\n检测周围光线强度\ngetLightO\n感应灯与氛围灯\n检测周围音量大小\ngetVolume()\n氛围灯\n播放音乐\nplayMusic()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块35：智能感应灯\n模块36：氛围灯\nL5-2\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡light :光 music :音乐\nvolume :音量\n点亮灯板\n智能节能灯\n改变灯光效果\n氛围灯\n\n\n--- 第3页 ---\ninitLight(10)\nlightOn()\ntime.sleep(3)\nlightOff()\n点亮灯板\n代码示例\n初始化灯板点亮灯板\n熄灭灯板\n使用initLight() 语句初始化灯板，\n告诉智慧核心我们接入了一个灯板，\n括号内填入一个 数字，代表灯珠数量 。灯珠数量初始化\n使用lightOn() 语句点亮灯板；\n使用lightOff() 语句熄灭灯板。开灯&关灯\n等待3秒initLight(10)\n\n\n--- 第4页 ---\n智能节能灯\n获取光线强度\n如果环境比较暗，开灯\n如果环境比较亮，关灯\ngetLight() 光线传感器可以检测周围的 光\n线强度。getLight() 语句会\n根据光线强度返回一个 数字。 光线强度光线检测\n如果光线数值 小于150，代表周围环境比较 暗。\n如果光线数值大于或等于 150，代表周围环境\n比较亮。\n代码示例\nwhile True:\nlight = getLight()\niflight < 150:\nlightOn()\nelse:\nlightOff()\n\n\n--- 第5页 ---\n改变灯光效果\n灯光效果\n点亮1到5号灯珠，\n颜色设置为蓝色\n熄灭2到5号灯珠\nlightOn(  ,  ,  )lightOn() 语句可以设置灯光\n颜色，控制指定的灯珠亮起。\n依次填入 1个字符串代表颜色，\n2个数字代表灯珠 亮起范围 。 颜色\n亮起范围\nlightOff(  ,  ) lightOff() 语句可以控制指定\n的灯珠熄灭。依次填入 2个数\n字代表灯珠 熄灭范围 。熄灭范围\n代码示例\nlightOn( '蓝', 1, 5)\nlightOff(2, 5)   \n\n\n--- 第6页 ---\n声控氛围灯\n氛围灯原理\n氛围灯就是不停地检测周围的音量，然后再根据音量控制灯\n的数量。 getVolume() 语句可以 检测周围环境的 音量，这个\n语句获得的音量数值是 1到10，数字越大，音量越大。\n))))))声音较大时，灯板\n上灯亮起来的较多。声音较小时，灯板\n上灯亮起来的较少。\n\n\n--- 第7页 ---\n智能氛围灯\n代\n码\n示\n例熄灭多余灯珠检测周围环境音量重复执行\n点亮音量数值对应的灯珠\n按下A键播放音乐\nplayMusic() 可以用于 播\n放音乐，使用这个语句后，\n智慧核心会从歌曲列表中\n随机选取音乐播放。播放音乐\nwhile True:\nv = getVolume()\nlightOn( '蓝', 1, v)\nlightOff(v+1, 10)\nifisPressed( 'A'):\nplayMusic()\n\n\n--- 第8页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、下列代码输出结果是（   ）？ \n动手试一试\nB. aaaa                           \n A. nnnn\n C. name\n D. nana\n\n\n--- 第2页 ---\n2、如果要实现光线强度小于300开灯，光线强度大于400\n关灯的效果，划线处应该补充哪段代码呢？（   ） \n动手试一试\nwhile True:\n    \n    if light < 300:\n        lightOn()\n    if light > 400:\n        lightOff()\nA. light = getLight  ()           \nC. light = getVolume()                            B. light = getIRKey()  \nD.light = lightOn()                       \n\n\n--- 第3页 ---\n动手试一试\nA. getVolume()                  \nC. getIRkey()                           B. getLight()\nD. input()                     \n3、星河想制作一个音量大于5时才会亮起的声控灯，但是\n代码少写了一部分，应该帮他补充哪个语句呢？（   ） \nwhile True:\n    v = \n    if v > 5:\n        lightOn()\n        time.sleep(5)\n   lightOff()\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nD. nana\n答案解密\n1、下列代码输出结果是（   ）？ \nB. aaaa                           \n A. nnnn\n C. name\n答案：B\n \n解析：本题考察的是字符串索引与拼接。\nfor i in range(4)表明循环会执行4次，每次循环执行 \nnew_s = new_s + s[1]语句；s[1]表示字符串s的第2\n个字符，即'a'，'+' 在字符串中代表连接。new_s 初始为\n''，添加s[1]后，new_s变成'a'，在后续循环中逐次变\n为 'aa'、'aaa'、'aaaa'。因此正确答案为 B。\n\n\n--- 第2页 ---\n答案解密\n2、如果要实现光线强度小于300开灯，光线强度大于400\n关灯的效果，划线处应该补充哪段代码呢？（   ） \nwhile True:\n    \n    if light < 300:\n        lightOn()\n    if light > 400:\n        lightOff()\nA. light = getLight()          \nC. light = getVolume()                            B. light = getIRKey()  \nD.light = lightOn()                       \n\n\n--- 第3页 ---\n答案解密\n答案：A\n \n解析：本题考查的是getLight()语句。\ngetIRKey()语句能获取红外遥控器的信息；getVolume()\n语句用于获取环境的音量；lightOn()语句用于点亮灯板；\n获取光线强度需要使用getLight()语句。A选项正确。\n\n\n--- 第4页 ---\n答案解密\nA. getVolume()                  \nC. getIRkey()                           B. getLight()\nD. input()                     \n3、星河想制作一个音量大于5时才会亮起的声控灯，但是\n代码少写了一部分，应该帮他补充哪个语句呢？（   ） \nwhile True:\n    v = \n    if v > 5:\n        lightOn()\n        time.sleep(5)\n   lightOff()\n\n\n--- 第5页 ---\n答案解密\n答案：A\n \n解析：本题考查的是getVolume()语句。\n题目要求音量大于5时灯亮起，获取环境音量的语句是\ngetVolume()，getLight()语句是用于获取光线强度，\ngetIRKey()语句是用于获取红外遥控信息，input()\n语句是用于获取输入。A选项正确。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L5-3",
+    "unit": "L5",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL5-3\naddress [e'dres]\nn.地址,住址；电子邮\n箱地址\n10\nXX省XX市XX区\nv.演说,演讲；处理\nage [e1d3]\nn.年龄;寿命;时代\n时期；年龄段\nv.变老;(使)苍老\ngender ['d3enda(r)]\nn.性别;(总称)男性\n女性\n【例句】\nIt's not just a gender thing.\n这不仅仅是性别问题。\nw\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-3\\knowledge.png",
+        "content": "字符串切片\n示例\n字符串[起始索引：结束索引］\ns='二月春风似剪刀\ns[2:4] → 春风\n>>>\n字符串切片的结果，包含起始索引的字符，不包\n含结束索引的字符。"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块37：字符串切片L5-3\n模块38：字符串切片应用\n\n\n--- 第2页 ---\n单词卡字符串切片\n字符串切片应用\naddress:地址 age:年龄\nyear:年 gender:性别\n核心要点内容大纲\n\n\n--- 第3页 ---\n字符串切片\n字符串[起始索引:结束索引]如果把字符串想成是一个面包，字符串切片就是在面包上切一\n刀，把字符串拆开！\n字符串切片的结果，会包含起始索引的字符，不包含结束索引的\n字符。s = '我 爱 唱 跳 打 篮 球' 0      1      2      3     4      5      6\ns[2:4] → 唱跳\n\n\n--- 第4页 ---\n字符串切片\n示\n例\n说\n明           0     1    2     3     4     5\ns = '我 爱 核 桃 编 程'\n代码示例\ns = '我爱核桃编程'\nprint(s[:2])\nprint(s[2:])获取字符串切片处左边或者右边的字符。\n>>> 我爱\n>>> 核桃编程\n\n\n--- 第5页 ---\n字符串切片\n获取字符串中间的某段指定字符。\n示\n例\n说\n明          0    1     2    3    4    5\ns = '我 爱 核 桃 编 程'\n代码示例\ns = '我爱核桃编程'\nprint(s[2:4])\n>>> 核桃\n\n\n--- 第6页 ---\n隐藏在身份证号里的信息\n科学探索\n510603 20001230 23 2 4\n出生地信息\n（分别为省、市、县）出生年月日\n出生户籍\n公安局代码性别\n（奇数为男，偶数为女）\n校验码\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、字符串的切片结果是 '向前冲' 的选项是（）\n                             s = '小创客向前冲'\n动手试一试\nA. s[3:]       B. s[:3]       C. s[4:]       D. s[:4]                                    \n2、执行下方代码，程序会打印出（）\nA. 低       B. 低头       C. 低头思       D. 思故乡                                    \n\n\n--- 第2页 ---\n3、将代码和其对应的切片结果进行连线：\n                   s = '多吃蔬菜可以补充维生素'\n动手试一试\ns[2:4] \ns[8:] \ns[:4] 多吃蔬菜 \n蔬菜 \n维生素 \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、字符串的切片结果是 '向前冲' 的选项是（）\n                             s = '小创客向前冲'\nA. s[3:]       B. s[:3]       C. s[4:]       D. s[:4]                                    \n答案解密\n答案：A。\n解析：本题考查的是字符串的切片。\n            0    1     2    3    4    5\n    s = '小 创 客 向 前 冲'\n      \n记录切片的索引为3，因为我们要获取切片位置右边的字符，\n所以冒号要放在3的右边。\n正确答案是A。\n\n\n--- 第2页 ---\n答案解密\n答案：B。\n解析：本题考查的是字符串的切片。\n            0    1     2    3    4    \n    s = '低 头 思 故 乡'\n      \n因为s[:2]的切片索引为2，所以切片结果是索引为2的字符左边的\n所有字符（不包含索引为2的字符），也就是'低头'。\n正确答案是B。2、执行下方代码，程序会打印出（）\nA. 低       B. 低头       C. 低头思       D. 思故乡                                    \n\n\n--- 第3页 ---\n3、将代码和其对应的切片结果进行连线：\n                   s = '多吃蔬菜可以补充维生素'\ns[2:4] \ns[8:] \ns[:4] 多吃蔬菜 \n蔬菜 \n维生素 答案：\n答案解密\n\n\n--- 第4页 ---\n            0    1     2    3    4    5    6     7    8    9   10\n    s = '多 吃 蔬 菜 可 以 补 充 维 生 素'\n      \n找出切片的索引2和4，因为2和4在冒号的两边，所以\ns[2:4]的切片结果为'蔬菜'。\n            0    1     2    3    4    5    6     7    8    9   10\n    s = '多 吃 蔬 菜 可 以 补 充 维 生 素'\n      \n            0    1     2    3    4    5    6     7    8    9   10\n    s = '多 吃 蔬 菜 可 以 补 充 维 生 素'\n      找出切片的索引8，因为冒号在8的右边，所以s[8:]的切\n片结果为'维生素'。\n找出切片的索引4，因为冒号在4的左边，所以s[:4]的切\n片结果为'多吃蔬菜'。\n解析：本题考查的是字符串的切片。\n答案解密\n\n"
+      }
+    }
+  },
+  {
+    "id": "L5-4",
+    "unit": "L5",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL5-4\nrain [rein]\nn.雨；雨水\nv.下雨；(使)大量降落，\n雨点般落下\nshow [[ou]\nv.给...展示；显示；\nn.表现；演出；节目\nlock [lα:k]\nV.锁：(使）固定：被锁住\nn.锁定;锁;闸，船闸;\nmode [moud]\n我不在家，有事请团言\nQA悠访客团言\n择放给访客的留音\nOA给我留言\n播放你的留言\nC据放访客的面言\n口c输入密码\nn.模式；方式；形式，\n娱国灯\n2彩灯\n“切换到在家\n风格\n4穿灯\nM\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-4\\knowledge.png",
+        "content": "门铃功能\n遥控开门\nrotateTo()\n在家模式\n灯光效果\nlight()\n智慧小屋\n信息显示\ngetRain()\n留言功能\nlock()\n不在家模式\n密码开门\nexitLock()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块39：升级门铃\n模块40：智慧小屋\nL5-4\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡rain:雨 show :展示\nlock :锁，锁住 mode :模式\n模式切换\n升级门铃\n雨滴传感器的使用\n小屋的功能\n\n\n--- 第3页 ---\n模式切换\n我们把小屋分成了\n两个模式：在家模\n式和不在家模式 ，\n在不同模式下 ，小\n屋具备的功能也不\n一样。\n按下*键切换到 在家模式\n按下#键切换到 不在家模式代\n码\n示\n例在家模式功能\n1、门铃功能\n2、遥控开门\n3、灯光效果\n4、信息显示不在家模式功能\n1、留言功能\n2、密码开门\nmode = ''\nwhile True:\n    key = getIRKey()\n   if key == '*':\n        mode = '在家'\n   if key == '#':\n        mode = '不在家'    \n\n\n--- 第4页 ---\nif mode == '在家'：\nifisTouched ():\nplaySound ('ring')\nif isPressed ('A'):\nplayRecord ()\n升级门铃\n按下 A按钮播放访客录音门铃功能\n不在家模式下，访客录制和播放留言，在家模式下，小屋\n主人播放访客留言，访客按下触摸传感器播放门铃声。\n代\n码\n示\n例按下触摸传感器播放门铃\nif mode == '不在家':\nifisPressed( 'A'):\nrecord()\nif isPressed ('B'):\nplayRecord ()按下 B按钮播放录音按下 A按钮录制录音\n\n\n--- 第5页 ---\n雨滴传感器的使用\n雨滴传感器原理\n雨滴传感器上有许多金属导线 ，这些导线之间是 不连通的 。\n当有水滴落在传感器上 ，因为水是导电的 ，这时候，导线\n就可以互相连通 。通过导线有没有连通 ，就知道有没有下\n雨。\n没有雨的时候，数据在 0附近有雨的时候，数据在 700左右\n代码示例\nwhile True:\nr = getRain()\nprintPos(r, '中间')\ntime.sleep (0.1)\nclear()获取雨滴传感器数据\n\n\n--- 第6页 ---\n小屋的功能\n使用遥控器  *键切换到在家\n模式。使用遥控器  #键切换\n到不在家模式 。\n小屋功能在家模式功能\n不在家模式功能门铃与留言功能\n遥控开门\n信息显示\n灯光效果按下 A按钮播放访客留言\n按下触摸传感器播放门铃声\n按下遥控器 ok键智慧小屋\n开门 5秒后关门\n获取雨水信息并显示在屏幕上\n2键彩虹灯\n3键流水灯1键氛围灯\n0键退出氛围灯\n4键呼吸灯\n密码锁功能留言功能\n按下 C按钮进入密码锁\n按下 D按钮退出密码锁按下 A按钮访客留言\n按下 B按钮播放访客留言光线充足不亮灯\n光线不足自动亮灯氛围灯\n智能灯\n\n\n--- 第7页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、运行下图代码,输出结果是?（       ） \n动手试一试\nD. 未来可B. 未来                           A. 苍穹，未来\nC. ，未来\n\n\n--- 第2页 ---\n动手试一试\n2、若要实现下雨时显示'雨天'图片，不下雨时显示'晴天'\n图片，横线处应填什么？（      ） \nD. playRecord()B. getRain()                           A. getVolume() \nC. isPressed()\n\n\n--- 第3页 ---\n动手试一试\n3、如果要实现按下 A 按钮录制录音，按下 B 按钮播放\n录音，横线处应该添加什么代码?（   ） \nA. record()                       \nB. playRecord()                      \nC. playSound()                      \nD. playMusic()                      \nwhile True:\n    if isPressed('A'):\n        record()\n    if isPressed('B'):\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L5\\L5-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：D\n \n解析：本题考查字符串切片操作。\n代码中首先设定s = 5，然后计算得出e = s + 3 = 8，最后对\n字符串a进行切片操作并输出，即输出a[5:8]。切片a[5:8] \n中，起始索引5对应'未'，结束索引8对应 '期'，提取从'未'到\n'可'（不含'期'）的部分，结果是'未来可'，答案为 D。\n1、运行下图代码,输出结果是?（       ） \nD. 未来可 B. 未来                           A. 苍穹，未来 C. ，未来\n\n\n--- 第2页 ---\n答案解密\n2、若要实现下雨时显示'雨天'图片，不下雨时显示'晴天'\n图片，横线处应填什么？（      ） \nD. playRecord()B. getRain()                           A. getVolume() \nC. isPressed()\n\n\n--- 第3页 ---\n答案解密\n答案：B。\n解析：本题考查的是雨滴传感器检测。\nA选项getVolume()是获取周围环境的声音大小，C选项\nisPressed()用于检测按键是否按下，D选项是播放录音\n的命令，故选项B正确。\n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是录制和播放声音。\nA 选项填入record() 后按下 B 按钮会再次录制录音，B选\n项的playRecord() 语句是播放录音，B选项正确。C选项\n是播放声音，但是括号内没有填入声音名字，C 错误，D \n选项是播放音乐，不符合题意。所以选 B。3、如果要实现按下 A 按钮录制录音，按下 B 按钮播放\n录音，横线处应该添加什么代码?（   ） \nA. record()                       \nB. playRecord()                      \nC. playSound()                      \nD. playMusic()                      \nwhile True:\n    if isPressed('A'):\n        record()\n    if isPressed('B'):\n\n"
+      }
+    }
+  },
+  {
+    "id": "L6-1",
+    "unit": "L6",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL6-1\ngiraffe [d3e'raef]\nn.长颈鹿\nappend [a'pend]\nv.附加，增补\n【短语】\nappend to 添加到\nremove [ri mu:v]\nvt.去掉；废除；摘下\nn.距离，间距\nanimal ['anim(e)]\nn.动物；兽类\nadj.动物的；肉体的;\n取自动物的\nw\n R\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-1\\knowledge.png",
+        "content": "使用场景\n需要同时存储多个数据\n格式\n[元素1'，‘元素2'，‘元素3'，'元素4'，‘\n元素5\n例：fruit =[苹果'，‘香蕉'，'西瓜'，‘山竹'，‘橙子]\n命令\nappend()\n用法：列表名.append（要添加的元素）\n列表\n例：fruit.append（\"火龙果')\nremove()\n用法：列表名.remove（要删除的元素）\n例：fruit.remove ('山竹')\n遍历列表\n-----依次取出列表中每一个元素\n用法：for变量名in列表\n例：for\nin fruit:\nprint(x)\n列表fruit中每一个元素"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块41：列表L6-1\n模块42：列表应用\n\n\n--- 第2页 ---\n单词卡列表创建\n列表添加元素\n遍历列表\nin\ngiraffe:长颈鹿 append:附加\nremove:去除 animal:动物\n核心要点内容大纲\n列表删除元素\n\n\n--- 第3页 ---\n列表创建\n列表是可以同时存储多个数据的一种容器。列表里存储的每\n一个数据叫列表的元素。\n列表名 = [ '元素1' , '元素2' , '元素3' , '元素4' , '元素5' ]格式\n一对中括号，\n把数据包起来每一个数据之间都由逗号隔开列表\n一对中括号，\n把数据包起来\n\n\n--- 第4页 ---\n列表创建\nlfruit = ['苹果'，'香蕉'，'西瓜',  '山竹'，'橙子']\nlanimals = ['老虎'，'奶牛'，'狮子',  '斑马'，'鹦鹉']\nlnumber = [1，2，3,  4，5]\nla = [1，'abc'，'d',  2，'ef']  示例\n\n\n--- 第5页 ---\n列表添加元素\n格式\n列表名.append(要添加的元素)向列表里添加元素。\nappend()\n添加的新元素在列表的末尾。\n  示例\n运行前：\n运行后：\n\n\n--- 第6页 ---\n列表删除元素\n格式\n列表名.remove(要删除的元素)删除列表中的元素。\nremove()\n只能删除列表里存在的元素，否则就会报错。\n  示例\n运行前：\n运行后：\n\n\n--- 第7页 ---\n把列表中的元素从头到尾一个一个取出来使用。遍历列表\n格式\nfor 变量 in 列表：\n在循环时，变量的值依次是列表中的每一个元素\n  示例\n遍历列表\n在循环时，x的值依次是列表\nanimals中的每一个元素\n遍历结束\n\n\n--- 第8页 ---\n判断元素是否在列表中。in\n格式\n元素 in 列表：\n  示例\nin\n判断荔枝是否在列表fruit中\n执行结束\n\n\n--- 第9页 ---\n科学探索\n反刍动物\n•反刍：动物进食后，过一段时间，会将没有消化的食物从胃里吐\n回到嘴里，再重新吃一遍。\n•反刍原因：更彻底地消化食物；更好地适应环境。\n反刍动物一般都有4个胃\n反刍动物\n马 骆驼 绵羊 奶牛 长颈鹿\n拿牛来举例：\n平时吃火锅时，\n毛肚，就是牛的第1个胃；\n金钱肚是牛的第2个胃；\n而百叶则是牛的第3个胃~\n\n\n--- 第10页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 下列创建列表正确的写法是（          ）\nA.number = [1, 2, 3] B.number = (1, 2, 3)                 \nC.number = [1; 2; 3] D.number = {1, 2, 3}\n2. 下方代码运行后，结果正确的是（          ）\nA. B.\nC. D.\n\n\n--- 第2页 ---\n动手试一试\n3. 下方代码运行后，结果正确的是（          ）\nA.\nB.\nC.\nD.\n\n\n--- 第3页 ---\n动手试一试\n4. 遍历列表animals的代码如下，运行结果是（          ）\nA. B. C. D.\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：A。\n解析：本题考查的是列表创建。\n选项B和D错误：没有用方括号[]来表示列表；\n选项C错误：列表元素之间没有用逗号分隔；\n选项A正确。1. 下列创建列表正确的写法是（    A    ）\nA.number = [1, 2, 3] B.number = (1, 2, 3)                 \nC.number = [1; 2; 3] D.number = {1, 2, 3}\n\n\n--- 第2页 ---\n答案解密\n2. 下方代码运行后，结果正确的是（     B     ）\n答案：B。\n解析：本题考查的是列表增加元素。使用append()方法，会在\n列表末尾添加一个元素，题目中第一次使用append()在fruit列\n表末尾增加了'西瓜'，此时列表fruit为['苹果'，'香蕉'，'西瓜'],\n第二次使用append()，在第一次之后又在末尾增加了'草莓'，\n此时列表就变成了 ['苹果'，'香蕉'，'西瓜'，'草莓']。C.A. B.\nD.\n\n\n--- 第3页 ---\n答案解密\n3. 下方代码运行后，结果正确的是（     D     ）\n答案：D。\n解析：本题考查的是列表删除元素。使用remove()方法，会删除列\n表中对应的元素，题目中第一次使用remove()在列表中删除了'鸡\n肉'，此时列表parrot 为 ['苹果', '谷物', '胡萝卜', '鱼', '青草'],\n第二次使用remove()，在第一次之后又在列表中删除了'鱼'，此时\n列表就变成了 ['苹果', '谷物', '胡萝卜', '青草']。\nA.\nB.\nC.\nD.\n\n\n--- 第4页 ---\n答案解密\n答案：C。\n解析：本题考查的是遍历列表。题目中的代码是将列表animals\n中的元素从头到尾一个一个取出来，所以它会依次取出老虎、奶\n牛、狮子、斑马，并一行一行打印出来。4. 遍历列表animals的代码如下，运行结果是（    C      ）\nA. B. C. D.\n\n"
+      }
+    }
+  },
+  {
+    "id": "L6-2",
+    "unit": "L6",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL6-2\ndefend [dr'fend]\nv.防御；防守\nheight [hart]\nn.高度；身高；高\n处\nrandom ['rendam]\nadj.任意的，随机的\n27\n22\nn.任意，随机\n404\n303\n45\n72\n5723\n398\n33\n【短语】\n18\n14\n27\nrandom numbers 随机数\nfamily ['faemali]\nn.家庭；家属\nadj.家庭的\nWOR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-2\\knowledge.png",
+        "content": "规律：从0开始，依次增大1\n列表索引\n元素修改：列表[索引1=新的值\n列表遍历：for i in range(n):\n列表[i]"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块43：列表索引L6-2\n模块44：列表遍历\n\n\n--- 第2页 ---\n单词卡列表索引\n列表遍历\ndefend:防御 height:高度\nrandom:随机 family:家庭\n核心要点内容大纲\n\n\n--- 第3页 ---\n1:列表索引\nl列表元素的编号，表示元素在列表中的位置。\nl规律：从0开始，依次增大1。\n举例说明\n'''''''' ''''\n列表索引\n\n\n--- 第4页 ---\n1:列表索引\n索引可以取出列表中的元素\n格式\n列表名[索引]\n举例说明\nnums = [1, 2, 3]\nprint(nums[2])\n取出列表中索引为2的元素：3\n3\n\n\n--- 第5页 ---\n1:列表索引\n结合索引可以修改指定元素\n格式\n列表名[索引] = 新的值\n举例说明\n运行前：\n运行后：\n\n\n--- 第6页 ---\n2:列表遍历\nl利用for循环的循环变量 i 作为索引，取出列表元素。\n举例说明\n对比\n相同点：都可以依次取出所有列表元素\n不同点：for i in range():方法可以使用索引获取元素，\n能够在遍历时修改列表元素。\nfor i in range()遍历列表\n\n\n--- 第7页 ---\n2:列表遍历\nlfor i in range()遍历列表过程中可以通过索引来完成修\n改元素的操作。\n举例说明\n遍历修改列表\n将列表中的每个元素都修\n改为：'鹦鹉'\n运行前：\n运行后：\n科学探索\n大数据\n大数据指的是数量繁多，规模庞大的数据集。\n人们每天的网页浏览记录、手机使用时长、外卖购买记录、出行的轨\n迹等等，都是大数据的一部分。\n大数据的用途\n预测疾病\n减少拥堵\n个性化推荐\n健康数据\n车辆行驶数据\n外卖数据\n\n\n--- 第8页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 列表color = ['红', '黄', '蓝', '绿']中，要取出元素'绿'的代码正\n确的是（          ）\n2. （多选）列表nums = [2, 3, 5, 7, 8]，要依次打印列表nums\n中所有的元素的操作为（          ）\nA. for i in range(5):      B. for x in nums:\n           print(nums[i])                           print(nums)\n       \nC. for x in nums:      D. for i in range(5):\n           print(x)                            print(i) A. print(color[4]) B. print(color[3])\nC. print(color(4)) D. print(color(3))\n\n\n--- 第2页 ---\n动手试一试\n3. 列表fruit = ['香蕉', '西瓜', '山竹', '橙子']，要修改fruit中所有\n的元素为'苹果'，正确的代码为（          ）\nA. B. \nC. D. \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 列表color = ['红', '黄', '蓝', '绿']中，要取出元素'绿'的代码正\n确的是（     B     ）\n答案：B。\n解析：本题考查的是列表索引。\n列表的索引从0开始，依次增大1，所以元素'绿'对应的索引为3。\n使用索引取出列表中指定元素的格式为：列表名[索引]。所以应该\n选择B.print(color[3])。A. print(color[4]) B. print(color[3])\nC. print(color(4)) D. print(color(3))\n\n\n--- 第2页 ---\n答案解密\n2. （多选）列表nums = [2, 3, 5, 7, 8]，要依次打印列表nums\n中所有的元素的操作为（     AC     ）\n答案：AC。\n解析：本题考查的是遍历列表。\n  for i in range():遍历格式                 for x in list:遍历格式\n  for i in range(5)：         for x in 列表名：\n     print(列表名[i])     print(x)A. for i in range(5):      B. for x in nums:\n           print(nums[i])                           print(nums)\n       \nC. for x in nums:      D. for i in range(5):\n           print(x)                            print(i) \n\n\n--- 第3页 ---\n答案解密\n3. 列表fruit = ['香蕉', '西瓜', '山竹', '橙子']，要修改fruit中所有\n的元素为'苹果'，正确的代码为（     A     ）\nA. B. \nC. D. \n答案：A。\n解析：本题考查的是遍历修改列表。\n   正确格式应该为：\n   for i in range(4):\n      列表名[i] = '苹果'\n\n"
+      }
+    }
+  },
+  {
+    "id": "L6-3",
+    "unit": "L6",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL6-3\ninsert [1n's3:t]\nv.插入；添加;\nn.插入物；插页\npop [pop]\nv.突然出现\nadj.流行音乐的；大众的\nn.流行音乐；砰的响声；\ntask [ta:sk]\nTo Do Lisl\nn.工作，任务；活动\n1z3\nv.派给·..…·任务；考\n验\nW\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-3\\knowledge.png",
+        "content": "列表的切片操作\n使用切片，可以截取列表中部分元素。\nfruits=【香蕉’，'苹果’，菠萝’，'哈密瓜’，'芒果】\n示例\n0\n2\n3\nr=列表名[开始位置：结束位置】\n4\nprint(fruit[3:5])\n输出\n>【'哈密瓜，芒果】\n切片结果包含开始位置对应的元素，\n不包含结束位置对应的元素。\ninsert(）方法\ninsert（）方法的作用是将元素插入到列表中指定位置\nlist=[早餐’，'晚餐】\n列表名.insert（索引l值，元素）\n示例\nlist.insert（1，'午餐）\n个\nprint(list)\n输出\n插入的位置\n要插入的元素\n［早餐，午餐，‘晚餐】\npop()方法\npop(）方法的作用是移除列表中指定索引的元素。\nlist=[早餐’，'晚餐】\n示例\n列表名.pop（索引值）\nlist.pop(1)\n输出→『早餐】\nprint(list)"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块45：列表切⽚L6-3模块46：insert()、pop()\n\n\n--- 第2页 ---\n单词卡列表的切⽚操作列表的insert()⽅法列表的pop()⽅法insert:插⼊pop:突然出现task:任务fruit:⽔果\n核⼼要点内容⼤纲\n\n\n--- 第3页 ---\n列表的切⽚操作列表中，元素的索引从0开始依次增⼤。\n举例说明\nlist = ['\np'\n, '\ny'\n, '\nt'\n, '\nh’\n, '\no'\n, '\nn'\n]0使⽤切⽚，可以截取列表中部分元素。切⽚时，需要通过索引设置切⽚位置。12345\n\n\n--- 第4页 ---\n列表的切⽚操作\nr = \n列表名\n[\n开始位置\n:\n结束位置\n]\n语法开始位置和结束位置为索引，填写时需要⽤冒号隔开。切⽚结果包含开始位置对应的元素，不包含结束位置对应的元素。\n\n\n--- 第5页 ---\n列表的切⽚操作\n举例说明fruit = ['⾹蕉', '苹果', '菠萝', '哈密⽠', '芒果']  索引           0          1         2           3            4f1 = fruit[3: 5]  ['哈密⽠', '芒果']取索引为3，4的元素，不包含5f2 = fruit[: 3] ['⾹蕉', '苹果', '菠萝']取索引为0，1，2的元素f3 = fruit[2: ]  ['菠萝', '哈密⽠', '芒果']取索引为2，3，4的元素\n\n\n--- 第6页 ---\nlist = ['早餐', '晚餐']list.insert(1, '午餐')print(list)\ninsert()的作⽤是将元素插⼊到列表中指定位置。列表的insert()⽅法语法列表名.insert(索引, 元素)       插⼊的位置                   要插⼊的元素示例说明在 '早餐' 和 '晚餐‘ 中间插⼊'午餐' 。\n\n\n--- 第7页 ---\nlist = ['早餐', '晚餐']list.pop(1)print(list)\npop()的作⽤是移除列表中指定索引的元素（不填写参数时，移除最后⼀个元素）。列表的pop()⽅法语法列表名.pop(索引)列表元素的索引必须⼩于列表总⻓度示例说明删除list列表中索引为1的'晚餐'\n输出结果为：     ['早餐']\n\n\n--- 第8页 ---\n思考笔记\n\n\n--- 第9页 ---\n动⼿试⼀试1. list = ['⾹蕉', '苹果', '菠萝', '哈密⽠', '芒果']，取出 ['苹果', '菠萝']，下列正确的写法是（          ）A.                B.                 C.                        D.2. fruit = ['⾹蕉', '苹果', '菠萝']，如果要在列表fruit中'苹果'的后⾯插⼊'草莓'，那么横线处应该填写的代码是\n\n\n--- 第10页 ---\n动⼿试⼀试3. 运⾏下⾯代码结果正确的是（          ）A.                  B.                 C.                          D.\n\n\n--- 第11页 ---\n答案解密1. list =['⾹蕉', '苹果', '菠萝', '哈密⽠', '芒果']，取出 ['苹果', '菠萝']，下列正确的是（    C      ）A.                B.                 C.                        D.答案：C。解析：本题考查的是列表切⽚操作。切⽚结果包含开始位置对应的元素，不包含结束位置对应的元素。选项A：res = list[0:3] ，取出索引为0，1，2的元素，结果为['⾹蕉', '苹果', '菠萝']。选项B：res = list[0:2]，取出索引为0，1的元素，结果为['⾹蕉', '苹果']。选项C：res = list[1:3]，取出索引为1，2的元素，结果为[ '苹果', '菠萝']。选项D：res = list[1:2]，取出索引为1的元素，结果为['苹果']。\n\n\n--- 第12页 ---\n答案解密2. fruit = ['⾹蕉', '苹果', '菠萝']，如果要在列表fruit中'苹果'的后⾯插⼊'草莓'，那么横线处应该填写的代码是\n答案：fruit.insert(___2___,___'草莓'___)。解析：本题考查的是列表的insert()⽅法。insert()的作⽤是将元素插⼊到列表中指定位置。题⽬中'苹果'的索引为1，将'草莓'插⼊在'苹果'的后⾯，那么'草莓'的索引值应该为2。\n\n\n--- 第13页 ---\n答案解密3. 运⾏下⾯代码结果正确的是（  B  ）A.                  B.                 C.                          D.\n答案：B。解析：本题考查的是列表的pop()⽅法和元素修改。pop()的作⽤是移除列表中指定索引的元素。题⽬中移除了索引为2的‘打⽻⽑球’，然后将索引为1的'慢跑'改为'踢⾜球'。\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. list = ['香蕉', '苹果', '菠萝', '哈密瓜', '芒果']，取出 ['苹果', '\n菠萝']，下列正确的写法是（          ）\nA.                 B.                 \nC.                         D.\n2. fruit = ['香蕉', '苹果', '菠萝']，如果要在列表fruit中'苹果'的\n后面插入'草莓'，那么横线处应该填写的代码是\n\n\n--- 第2页 ---\n动手试一试\n3. 运行下面代码结果正确的是（          ）\nA.                   \nB.                 \nC.                           \nD.\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. list =['香蕉', '苹果', '菠萝', '哈密瓜', '芒果']，取出 ['苹果', '\n菠萝']，下列正确的是（    C      ）\nA.                 B.                 \nC.                         D.\n答案：C。\n解析：本题考查的是列表切片操作。切片结果包含开始位置对\n应的元素，不包含结束位置对应的元素。\n选项A：res = list[0:3] ，取出索引为0，1，2的元素，结果为['\n香蕉', '苹果', '菠萝']。\n选项B：res = list[0:2]，取出索引为0，1的元素，结果为['香蕉', \n'苹果']。\n选项C：res = list[1:3]，取出索引为1，2的元素，结果为[ '苹果\n', '菠萝']。\n选项D：res = list[1:2]，取出索引为1的元素，结果为['苹果']。\n\n\n--- 第2页 ---\n答案解密\n2. fruit = ['香蕉', '苹果', '菠萝']，如果要在列表fruit中'苹果'的\n后面插入'草莓'，那么横线处应该填写的代码是\n答案：fruit.insert(___2___,___'草莓'___)。\n解析：本题考查的是列表的insert()方法。insert()的作用是将\n元素插入到列表中指定位置。题目中'苹果'的索引为1，将'草莓'\n插入在'苹果'的后面，那么'草莓'的索引值应该为2。\n\n\n--- 第3页 ---\n答案解密\n3. 运行下面代码结果正确的是（  B  ）\nA.                   \nB.                 \nC.                           \nD.\n答案：B。\n解析：本题考查的是列表的pop()方法和元素修改。pop()的作\n用是移除列表中指定索引的元素。题目中移除了索引为2的‘打\n羽毛球’，然后将索引为1的'慢跑'改为'踢足球'。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L6-4",
+    "unit": "L6",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL6-4\nimport ['1mpo:t]\nn.进口商品；重要性\nv.进口；导入\nrandom ['rendam]\n17\n21\n83\n27\n34\n303\nadj.任意的，随机的\n404\n845\n72\nn.任意，随机\n57\n23\n398\n33\n18\n27\nadv.随机的，胡乱的\n14\n【例句】\nIt's just a random series of numbers.\n这就是一系列随机的数字。\nchoice [tjois]\n口\nyes\n口\nno\nn.选择；选择权\n口\nmaybe\nadj.精选的；优质的;\n刻薄的\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-4\\knowledge.png",
+        "content": "import random\nvegetable=［'西红柿炒鸡蛋'，‘清炒土豆丝\"，‘香菇油菜'，‘地三鲜'，‘醋溜白菜‘\n项目制作\n步骤\nmeat=['西红柿炖牛腩'，‘糖醋排骨'，‘盐焗鸡'，‘小鸡炖蘑菇'，‘孜然羊肉'，\n随机选择菜品\nprint（'素菜数量：‘）\n使用两个列表分别存储肉菜和素菜\n自定义菜品数量\nn1 =input()\n再分别从两个列表中随机选取菜品\n第一步：分析功能\nnl =int（nl)\nprint('肉菜数量：\n使用input()命令，让用户输入菜品数量，\nn2 = input()\n3\n荤素搭配\n并把这个数量作为循环次数\nn2 = int(n2)\n第二步：编写代码，实现功能\nprint（'今日菜谱：‘)\nfor i in range(ni) ..........\n使用random.choice()方法\n\"d\"=random.choice(vegetable)\n实现从列表中进行随机选择的功能\nprint(d)\nvegetable.remove(d)\n第三步：优化程序，美化效果\nfor i in range(n2):\nd = random.choice(meat)\nprint(d)"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块47：今天吃什么L6-4\n模块48：创意大改造\n\n\n--- 第2页 ---\n单词卡import: 导入\nchoice: 选择  choose: 选择\n核心要点内容大纲\n  random: 随机的今天吃什么 （项目制作）\n创意大改造（项目改编）\n\n\n--- 第3页 ---\n今天吃什么（项目制作）\n项目制作\n步骤\n第一步：分析功能\n第二步：编写代码，实现功能\n第三步：优化程序，美化效果随机选择菜品\n自定义菜品数量\n荤素搭配\n\n\n--- 第4页 ---\n格式：random.choice( 列表名）作用：随机选择列表元素\n# 这段代码实现了从列表dish中随机选择一个元素的功能random.choice()方法今天吃什么（项目制作）\n注意：使用该方法，需要先导入random工具箱。\n代码示例\n\n\n--- 第5页 ---\n代\n码\n示\n例作用：判断元素是否不在列表中元素 not in 列表\n格式：元素 not in 列表名\n in 和 not in\n元素 in 列表 判断元素是否在列表中\n元素 not in 列\n表判断元素是否不在列表中\n# 这段代码的作用是：判断可乐鸡翅是否不在列表中\n今天吃什么（项目制作）\n\n\n--- 第6页 ---\n创意大改造（项目改编）\n功能：\n随机选择菜品\n自定义菜品数量\n荤素搭配功能：\n随机选择\n数量可定制\n特质/本领搭配\n功能接近\n可用点菜程序的代码\n进行改造\n\n\n--- 第7页 ---\n思考笔记\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1. 要从列表fruits中随机选取一种水果，下方代码的横线\n处应该填写（          ）\nA.                 B.                 \nC.                         D.\n\n\n--- 第2页 ---\n动手试一试\n2. 执行下方代码，输入 '白菜'，程序会打印出（          ）\nA.                B.                   \n     \n\n\n--- 第3页 ---\n动手试一试\n3. 乌拉乎要过生日了，他想要生日礼物。但他喜欢的礼物实在\n有点多——航模、自行车、遥控车、乐高、羽毛球拍、足球、篮\n球、显微镜、地球仪、绘本……。\n妈妈说，最多选择两个，她和爸爸可以各送一个。\n请你根据本节课所学的知识，编写代码，做一个【生日礼物大\n冒险】的小程序，帮他解决选择困难症吧！\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY1\\L6\\L6-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1. 要从列表fruits中随机选取一种水果，下方代码的横线处应\n该填写（          ）\nA.                 B.                 \nC.                         D.\n答案：D\n解析：本题考查random.choice()方法。该方法可以从列表中\n随机选择一个元素。\n在使用这个方法时，需要注意它来自工具箱random，因此别忘\n了前面的工具箱名字哦。\n\n\n--- 第2页 ---\n答案解密\n2. 执行下方代码，输入 '白菜'，程序会打印出（          ）\nA.                B.                   \n     \n答案：A\n解析：本题考查not in。用法是“元素 not in 列表”，用来判断\n元素是否不在列表中。输入的是'白菜'，不在列表中，因此if的\n条件“a not in fruits”成立，会执行它的下级代码print('不属于\n列表fruits')，A选项正确。\n\n\n--- 第3页 ---\n答案解密\n3. 乌拉乎要过生日了，他想要生日礼物。但他喜欢的礼物实在有点多——航模、\n自行车、遥控车、乐高、羽毛球拍、足球、篮球、显微镜、地球仪、绘\n本……。\n妈妈说，最多选择两个，她和爸爸可以各送一个。\n请你根据本节课所学的知识，编写代码，做一个【生日礼物大冒险】的小程序，\n帮他解决选择困难症吧！\n代码仅供参考\n望你多多动脑\n\n"
+      }
+    }
+  }
+]

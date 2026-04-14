@@ -1,0 +1,18 @@
+# PY2课程内容提取脚本依赖
+
+# 图片OCR（中文识别）
+paddleocr>=2.7.0
+paddlepaddle>=2.5.0
+
+# PDF文字提取
+PyPDF2>=3.0.0
+pdfplumber>=0.10.0
+
+# PDF处理（用于扫描版PDF的OCR）
+pymupdf>=1.23.0
+
+# 图像处理
+Pillow>=10.0.0
+
+# 其他工具
+numpy>=1.24.0

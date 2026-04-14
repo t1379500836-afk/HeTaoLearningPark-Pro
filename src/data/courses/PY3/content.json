@@ -1,0 +1,646 @@
+[
+  {
+    "id": "L13-1",
+    "unit": "L13",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL13-1\nclothes [klouoz]\nn.衣服；服装\n【短语】\nput on clothes 穿衣服\nupdate [^p'dert]\nvt.更新，升级；提供最\n新消息\nn.更新，升级；最新消息\nkeyboard[' ki:bo:rd]\nn.键盘；琴键\nv.录入信息\ncollide [ka'laid]\nV.碰撞；互撞；抵触；\n争执；冲突\nW\nR"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块1：猴赛雷的新衣末日地下城 L13-1\n模块2：扫地机器人\n\n\n--- 第2页 ---\n项目内容\n单词卡clothes:衣服 update:更新\nkeyboard:键盘 collide:碰撞\n项目内容Pygame框架\n键盘监听\n\n\n--- 第3页 ---\nimport pgzrun\nWIDTH = 宽度\nHEIGHT = 高度\n角色名 = Actor('角色图片的名称')\n角色名.x = x坐标值\n角色名.y = y坐标值\ndef draw():\n    screen.blit('背景图片', [0, 0])\n    角色名.draw()\ndef update():\n    角色名.x += 5\n    角色名.y += 5\npgzrun.go()知\n识\n复\n习\nPygame框架\n在程序运行时不断重复执行绘制背景\n和角色初始化角色\n图片和位置导入工具箱\n设置窗口的宽度和高度\n启动程序\n窗口左上角的坐标是(0,0）。\n\n\n--- 第4页 ---\n键盘监听-按下键盘\n    如何能实现按下右\n键时，机器人向右移？\n使用下面代码就能实现：检测按下的按键，如果按\n下右键，机器人就向右移动一次！\n键盘被按下时，\n程序会调用on_key_down()，\n并把按键名称传递给参数key\n判断参数key的值是否和\nkeys.RlGHT相同,就知道右键\n是否被按下啦!\nrobot\n向右移动\n收取垃圾\n垃圾\n代码示例\n\n\n--- 第5页 ---\n键盘监听-按住键盘\n怎样才能实现：只要按\n住右键不放，机器人就\n能一直不停向右移动呢？\n使用下面代码就能实现：一直按住右键不松开，机\n器人就一直向右移动。\n把它放在update()函数里面,就可以一直判断右键是否被按住啦!当按住右键的时候,\nkeyboard.right的值\n是True\nrobot\n向右移动\n收取垃圾\n垃圾\n代\n码\n示\n例\n\n\n--- 第6页 ---\n键盘监听\n按键\n update()\nkeyboard.spacekeyboard.left\nkeyboard.rightkeyboard.downkeyboard.up\n在on_key_down()\n函数中使用，能实现\n按一次按键，角色移\n动一次的效果。在update()函数中\n使用，可以实现按\n住按键不放，角色\n一直移动的效果。on_key_down()\nkeys.SPACEkeys.LEFT\nkeys.RIGHTkeys.DOWNkeys.UP\n让我们来看看这2种按键控制方法的区别吧！\n\n\n--- 第7页 ---\n键盘监听\n如果需要为飞机大战编写射击部分的代码。思考一\n下，下面两种方式，有什么区别呢?\n每次按下空格键时，\n可以发射一个子弹。按住空格键不放，可以\n连续发射多个子弹。\ndef on_key_down(key):\n    if key == keys.SPACE:\n        发射一个子弹def update():\n    if keyboard.space:\n        发射一个子弹\n\n\n--- 第8页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、运行下端的代码，小鱼在背景中的位置应该如下哪\n个选项所示？（   ）\nA. \nB.      \nC.  \n\n\n--- 第2页 ---\n动手试一试\nA. keyboard.left\nC. keys. RIGHT        2、程序的部分代码如下，想要实现按下键盘右键不松开，\n猴赛雷就能一直往右移动，if语句后应该填写什么呢？（   ）\nB. keyboard.right \nD. key == keys. RIGHT \n向右移动\n\n\n--- 第3页 ---\n3、冷雪丰制作了一个换装的程序，按下空格可以换装，部\n分代码如下。开始时，猴赛雷穿的是粉色衣服，最少需要\n按下几次空格，猴赛雷才能换上橙色衣服呢？（   ）\nA. 1                    B. 2                    C. 3                    \n动手试一试\n...\ndef on_key_down(key):\n    if key == keys.SPACE:\n        if clothes.image == '橙色衣服':\n            clothes.image = '粉色衣服'\n        elif clothes.image == '粉色衣服':\n            clothes.image = '黑色衣服'\n        elif clothes.image == '黑色衣服':\n            clothes.image = '橙色衣服'...\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、运行下端的代码，小鱼在背景中的位置应该如下哪\n个选项所示？（   ）\nA. \nB.      \nC.  \n\n\n--- 第2页 ---\n答案解密\n答案：A。\n解析：本题考查的是Pygame中的坐标与角色的初始位置。 \n给定的代码设置了小鱼的x坐标为450，y坐标为250。由于\n屏幕的宽度是900，屏幕宽度的一半是450，正好是小鱼的\nx坐标，因此小鱼不会靠在屏幕的左侧或右侧，而是位于屏\n幕的中央区域；同时，小鱼的y坐标250，也是正好屏幕高\n度的一半，所以小鱼也不会位于屏幕的底部。\n综上所述，小鱼位于屏幕中央，正确答案为A选项。\n\n\n--- 第3页 ---\n答案解密\nA. keyboard.left\nC. keys. RIGHT        2、程序的部分代码如下，想要实现按下键盘右键不松开，\n猴赛雷就能一直往右移动，if语句后应该填写什么呢？（   ）\nB. keyboard.right \nD. key == keys. RIGHT \n向右移动\n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是Pygame中的键盘监听。 \n在Pygame中，想要持续判断特定的按键是否被按住，需要\n使用update()函数中的keyboard模块。如keyboard.right、\nkeyboard.left、keyboard.up和keyboard.down，当对应\n的键被按住时，它们的值为True，否则为False。\n选项A的名称错误,keyboard.left检测的是左键是否被按下；\nkeys.RIGHT是on_key_down()函数中的按键名称，不能在\nupdate()函数中使用，所以C选项错误；D选项与题目要求不\n符,在on_key_down()函数中才需要通过判断参数key是否和\nkeys.RIGHT相等，来判断右键是否被按下。正确答案为B选\n项。\n\n\n--- 第5页 ---\n答案解密\n...\ndef on_key_down(key):\n    if key == keys.SPACE:\n        if clothes.image == '橙色衣服':\n            clothes.image = '粉色衣服'\n        elif clothes.image == '粉色衣服':\n            clothes.image = '黑色衣服'\n        elif clothes.image == '黑色衣服':\n            clothes.image = '橙色衣服'...3、冷雪丰制作了一个换装的程序，按下空格可以换装，部\n分代码如下。开始时，猴赛雷穿的是粉色衣服，最少需要\n按下几次空格，猴赛雷才能换上橙色衣服呢？（   ）\nA. 1                    B. 2                    C. 3                    \n\n\n--- 第6页 ---\n答案解密\n答案：B。\n解析：本题考查的是逻辑思维与造型切换。\n观察代码，实现了通过按下空格让衣服造型在橙色衣服、粉\n色衣服和黑色衣服间循环切换的功能。\n初始状态下猴赛雷穿粉色衣服。\n按下空格键第一次，由于造型是粉色衣服，根据代码，会换\n成黑色衣服。\n按下空格键第二次，由于造型是黑色衣服，根据代码，会换\n成橙色衣服。因此，猴赛雷需要按下空格键2次才能换上橙\n色衣服，正确答案为B选项。\n在Pygame中，可以通过on_key_down()函数实现。每次\n按下空格键，都会触发一次换装的逻辑判断，并根据当前的\n衣服颜色切换到下一个颜色。这种类型的题目有助于培养学\n生的逻辑思维和程序理解能力。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L13-2",
+    "unit": "L13",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL13-2\nship [1p]\nn.船，舰；飞船\nv.装运，用船运送；上\n船，乘船\n【例句】\nA terrible storm forced the ship to put back.\n可怕的风暴迫使这条船返航了。\nX\nweapon ['wepan]\nn.武器，兵器；工具，\n手段\n【短语】\nnuclearweapon核武器\n【例句】\nThe fisher used a spear as his weapon.\n渔夫用矛作为武器。\nW"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-2\\knowledge.png",
+        "content": "《飞机大战》\n飞行控制\n飞机\n上下左右移动\n敌机撞毁飞机\n游戏结束\n不断出现\n敌机列表\n角色重复利用\n子弹击中敌机\n敌机消失\n按键射击\n子弹列表\n按住按键扫射"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块3：飞机大战(上)奇怪的病患 L13-2\n模块4：飞机大战(下)\n\n\n--- 第2页 ---\n项目内容\n单词卡 ship:船 weapon:武器\n项目内容项目概览\n列表存储多个角色\n列表中角色的绘制&移动\n碰撞检测按键控制&角色创建\n\n\n--- 第3页 ---\n碰撞\n项目概览\n本节课学习使用Pygame制作飞机大战游戏。\n操作 效果\n移动\n发射\n撞毁\n\n\n--- 第4页 ---\n列表存储多个角色\n使用for循环可以创建多个相同类型的角色，并将角\n色存放在列表中。\n        怎么在窗口最上方\n随机创建多个飞船?\n创建角色ship\n设置初始位置创建列表ships\n将角色ship添加到列表ships中代码示例\n\n\n--- 第5页 ---\ndef draw():\n    screen.blit('背景', [0, 0])\n    player.draw()\n    for s in ships:\n        s.draw()\n列表中角色的绘制&移动\n使用列表遍历的方式，可以将列表中的飞船绘制出来。\n使用列表遍历的方式，可以让列表中的飞船向下移动。\ndef update():\n    for s in ships:\n        s.y += 5代\n码\n示\n例\n代\n码\n示\n例\n[    ,    ,    ]\n[    ,    ,    ]\n\n\n--- 第6页 ---\n按住空格\n如何实现按住空格键创建多个子弹?\n按键控制&角色创建\n代码示例\n...\n子弹列表\nweaponsdef update():\n    if keyboard.space:\n        weapon = Actor('子弹')\n        weapon.x = player.x\n        weapon.y = player.y\n        weapons.append(weapon)如果空格键处于被按下的状态\n创建角色weapon\n添加子弹角色到\nweapons列表中\n\n\n--- 第7页 ---\n代码示例\n想要判断飞船是否被子弹击中,需要遍历两个列表。碰撞检测\n...子弹\n列表\n...\n敌机\n列表\ndef update():\n    for s in ships:\n        for w in weapons:\n            if s.colliderect(w):\n                print('碰到啦')遍历列表ships\n检测碰撞遍历列表weapons\n\n\n--- 第8页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、在横线上填写哪一条语句，能实现飞船ship和子弹w发\n生碰撞后，飞船回到窗口最顶端？（   ）\nWIDTH\nHEIGHT(0,0)\nyxA. ship.x = 0 \nB. ship.x = WIDTH               \nC. ship.y = 0\nD. ship.y = HEIGHT              if ship.colliderect(w):\n    ________________\n部分\n代码\n\n\n--- 第2页 ---\n动手试一试\nA. \nC.        2、下面哪个选项能正确补全横线部分的代码，绘制出子弹\n列表weapons中的子弹？（   ）\nB.  \nD. \n\n\n--- 第3页 ---\n动手试一试\n3、在飞机大战游戏中，冷雪丰设计了两种敌机，不同类型\n敌机的数量和分值不同，类型一有2架，类型二有3架，击\n中类型一可以得5分，击中类型二可以得10分，现在一共\n有4颗子弹，请问猴赛雷最高可以得多少分？（   ）\nA. 30 \nB. 35             \nC. 40敌机类型 类型一 类型二\n个数 2 3\n分值 5 10\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、在横线上填写哪一条语句，能实现飞船ship和子弹w发\n生碰撞后，飞船回到窗口最顶端？（   ）\nWIDTH\nHEIGHT(0,0)\nyx\nA. ship.x = 0 \nB. ship.x = WIDTH               \nC. ship.y = 0\nD. ship.y = HEIGHT              if ship.colliderect(w):\n    ________________\n部分\n代码\n\n\n--- 第2页 ---\n答案解密\n答案：C。\n解析：本题考查的是坐标。\n在Pygame中，左上角的坐标是(0,0)，x坐标表示左右位置，\ny坐标表示上下位置。窗口最上方的y坐标值为0，最下方的\ny坐标值为HEIGHT；窗口最左边的x坐标值为0，最右边的x\n坐标值为WIDTH。要想让飞船回到窗口最顶端，需要设置\n飞船的y坐标值为0。所以正确答案为C选项。\n\n\n--- 第3页 ---\n答案解密\nA. \nC.        2、下面哪个选项能正确补全横线部分的代码，绘制出子弹\n列表weapons中的子弹？（   ）\nB.  \nD. \n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是Pygame中的列表遍历和角色绘制。\n绘制存储在列表中的多个角色（如子弹），需要循环遍历列\n表中的每个元素，并分别使用 角色名.draw() 进行绘制。\n遍历列表的正确格式是 for 变量 in 列表，循环变量w依次是\n每一个子弹角色，使用 w.draw() 就可以把子弹角色绘制出\n来了。A选项绘制语句错误,绘制命令的正确用法是角色\n名.draw()，在循环过程中角色名是w；C选项使用的是if语\n句，需要使用for语句遍历列表；D选项写反了列表和变量的\n位置。因此，正确答案是B选项。\n\n\n--- 第5页 ---\n答案解密\n3、在飞机大战游戏中，冷雪丰设计了两种敌机，不同类型\n敌机的数量和分值不同，类型一有2架，类型二有3架，击\n中类型一可以得5分，击中类型二可以得10分，现在一共\n有4颗子弹，请问猴赛雷最高可以得多少分？（   ）\nA. 30 \nB. 35             \nC. 40敌机类型 类型一 类型二\n个数 2 3\n分值 5 10\n\n\n--- 第6页 ---\n答案解密\n答案：B。\n解析：本题考查的是逻辑思维。\n敌机有一共有5架，子弹只有4颗，所以要想得到的分数最高，\n需要优先射击分值高的敌机。\n先用三枚子弹，用来攻击类型二，获得3×10=30分；\n还剩一枚子弹，用来攻击类型一，再获得1×5=5分；\n所以最高得分是30+5=35分，正确答案是B选项。\n在Pygame中，在碰撞检测中判断敌机的造型，如果被击中\n的敌机是类型一，变量num的值就加5；被击中的是类型二，\nnum的值就加10，游戏结束后变量num的值就是最终得分。敌机类型 类型一 类型二\n个数 2 3\n分值 5 10\n\n"
+      }
+    }
+  },
+  {
+    "id": "L13-3",
+    "unit": "L13",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL13-3\nbegin[bi'gin]\nv.开始，着手\npoint [point]\nn.点；要点；观点；得\n分；尖端\nv.指向；瞄准\nstate[steit]\nUNITED STATES OF AMERICA\nn.状态；国家；州\nv.说明，陈述\nadj.国家的，州的\nglobal ['gloubl]\nadj.全球的；全面的\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-3\\knowledge.png",
+        "content": "碰撞检测\n使用变量控制游戏状态\ncollidepoint（）角色与点的碰撞\nstate=初始状态全局变量\nhsl.collidepoint(pos)\ndef on_mouse_down(pos) :\nglobal state\nif begin.collidepoint(pos) :\nstate='运行状态\n在函数中，使用\ncolliderect（）角色与角色的碰撞\n全局变量需要\ndef update() :\n加global\nhsl.colliderect(dj)\nglobal state\nif hsl.colliderect(end) :\nstate='结束状态'"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块5：疯狂躲猫猫（上）变成猫啦？ L13-3\n模块6：疯狂躲猫猫（下）\n\n\n--- 第2页 ---\n项目内容\n单词卡\n项目内容角色与坐标的碰撞检测\n游戏状态两种碰撞函数\nbegin:开始 point:点\nstate:状态 global:全球的全局变量\n\n\n--- 第3页 ---\n格式总结： 角色名.collidepoint(pos) #点到开始按钮（角色名为begin）后打印出'开始游戏'\ndef on_mouse_down(pos):\n    if begin.collidepoint(pos):\n        print('开始游戏')\n角色与坐标的碰撞检测\n         按下鼠标时，如何判\n断是否点到了开始按钮？\n使用collidepoint()函数，可以判断鼠标指针和\n角色是否发生碰撞！\n代码示例\npos参数表示鼠标指针当前的坐标如果鼠标指针和角色碰撞定义出函数，按下鼠标函数就会执行\n\n\n--- 第4页 ---\n格式： 角色名.collidepoint(点的坐标) \n注意： 使用时，角色名和坐标的位置不能交换collidepoint()函数\n两种碰撞函数\ncolliderect()函数作用：判断点和角色碰撞\n使用场景：判断鼠标是否\n点击按钮/角色\n作用：判断角色和角色碰撞\n使用场景：判断石头是否碰击\n到雕像\n碰撞\n格式： 角色1.colliderect(角色2) \n注意： 使用时，角色1和角色2的位置能交换\n\n\n--- 第5页 ---\n游戏状态\n一个有趣的游戏通常会有多种状态，我们会用变量\n来存储游戏状态，比如变量state。\nstate = '初始状态'\n state = '运行状态'游戏案例\n在一定条件下修改变量的值，可以切换游戏状态。\n通过判断变量的值，可以绘制不同状态下的内容。\nstate = '结束状态'\n\n\n--- 第6页 ---\non_mouse_down()函数：\n修改state的值\n切换游戏状态\n全局变量\n每个函数就像一个小房子，只能使用自己家中的东西。\nstate变量需要在多个函数中使用，得定义在函数外面。\nimport pgzrun\n......    \nstate = '初始状态'\ndef on_mouse_down(pos):\n    state = '初始状态'\n    if begin.collidepoint(pos):\n        state = '运行状态'\npgzrun.go（）\ndraw()函数：\n判断state的值\n绘制对应状态下的内容点击按钮切换游戏状态\n代码示例\n\n\n--- 第7页 ---\nglobal 空格 变量名\nimport pgzrun\n...\nstate = '初始状态'\ndef on_mouse_down(pos):\n    global state\n    if begin.collidepoint(pos):\n        state = '运行状态'\n...\npgzrun.go()\n全局变量\n定义全局变量state，用于存储游戏状态定义在函数外面的变量 全局变量1概念详解\n在函数中使用全局变量1全局变量可以在所有函数中使用。\n使用全局变量state\n实现游戏状态的改变代码示例\n\n\n--- 第8页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、想要在on_mouse_down()函数下面使用全局变量\nstate，在横线处我们应该写上什么？（   ） \nA. state global                  \nB. global state                      \nC. state = global                     \nD. global = state                     \n\n\n--- 第2页 ---\n2、在躲猫猫游戏中，我们需要点击猴赛雷控制他蹲下，\n在猴赛雷碰到终点旗帜后，游戏成功，这两个效果分别\n应该使用什么语句检测碰撞？（   ） \n动手试一试\nA. colliderect() ，colliderect()\nB. collidepoint() ，collidepoint()\nC. colliderect() ，collidepoint()\nD. collidepoint() ，colliderect()\n\n\n--- 第3页 ---\n动手试一试\n3、猴赛雷和冷雪丰约定比赛跑步，但是猴赛雷睡过头，\n到达比赛场地的时候冷雪丰已经跑了400米了，猴赛雷每\n分钟跑300米，冷雪丰每分钟跑200米，猴赛雷追上冷雪\n丰需要几分钟呢？（    ）\nA. 1                       B. 2                      C. 3                      D. 4                       \n400米                     \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案：B。\n解析：本题考查的是全局变量。\n要想在函数中使用公共区域的变量，我们需要先在函数中编\n写代码：global 空格 变量名。然后才能在函数内使用公共区\n域的变量。所以正确的是B选项。1、想要在on_mouse_down函数下面使用全局变量\nstate，在横线处我们应该写上什么？（   ） \nA. state global                  \nB. global state                      \nC. state = global                     \nD. global = state                     \n答案解密\n\n\n--- 第2页 ---\n答案：D。\n解析：本题考查的是碰撞检测语句的使用。点击猴赛雷蹲下，\n是检测角色和鼠标的碰撞，用collidepoint()，猴赛雷碰到旗\n帜游戏成功，是检测两个角色间的碰撞，用colliderect()。2、在躲猫猫游戏中，我们需要点击猴赛雷控制他蹲下，\n在猴赛雷碰到终点旗帜后，游戏成功，这两个效果分别\n应该使用什么语句检测碰撞？（   ） \nA. colliderect() ，colliderect()\nB. collidepoint() ，collidepoint()\nC. colliderect() ，collidepoint()\nD. collidepoint() ，colliderect()\n答案解密\n\n\n--- 第3页 ---\n答案解密\n答案：D。\n解析：本题考查的是数学中的追及问题。\n猴赛雷每分钟比冷雪丰多跑100米，可以缩短100米的差距，400米的差距，\n每100米需要1分钟，所以4分钟后猴赛雷可以追上冷雪丰。\n在Pygame中，我们可以创建猴赛雷和冷雪丰2个角色，判断猴赛雷的坐标\n是否等于冷雪丰，如果等于或者大于，说明猴赛雷追上了冷雪丰。3、猴赛雷和冷雪丰约定比赛跑步，但是猴赛雷睡过头，\n到达比赛场地的时候冷雪丰已经跑了400米了，猴赛雷每\n分钟跑300米，冷雪丰每分钟跑200米，猴赛雷追上冷雪\n丰需要几分钟呢？（    ）\nA. 1                       B. 2                      C. 3                      D. 4                       \n400米                     \n\n"
+      }
+    }
+  },
+  {
+    "id": "L13-4",
+    "unit": "L13",
+    "resources": {
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-4\\knowledge.png",
+        "content": "如何确定使用哪个碰撞检测函数？\n木槌跟随鼠标移动，敲击琴键时，可能会碰到多个琴键。\n所以，colliderect()不能满足这个场景的碰撞检测。\n但鼠标只会落在一个点，用coLLidepoint（)更合适。\ncollidepoint( pos)\n借助全局变量控制角色显示\n初始状态\nstate=·隐藏歌名\nglobal state\non_mouse_down(pos):\nscreen.clear()\nglobal state\nchui.image =‘落下'\nfor q in qin\nchui.pos = pos\nfor q in qin:\nq.draw()\npuzi.draw()\nif q.collidepoint(pos):\nmusic.play_once(q.image)\n根据状态，显示歌名\n点击改变状态\nif state 显示歌名'：\n:(sod)surodap1osson6 T\ndraw_names()\nstate=“显示歌名\"\n点击按钮前－隐藏歌名\n点击按钮后－显示歌名\nchui.draw()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块7：木琴敲敲敲L13-4  \n模块8：我爱猜歌名 \n全民音乐家\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡多角色创建\n全局变量\nguess:猜测\nright:正确的碰撞检测\nchoose:选择\nstate:状态\n\n\n--- 第3页 ---\n多角色创建\n想把8个琴键角色依次放在木琴上，可以使用for\n循环简化代码。\n创建空列表存放所有琴键角色\ni的值是0, 1, 2....7\n8个琴键角色名称\n分别是1, 2, 3....8，\n循环中i+1刚好对\n应8个琴键名称\n根据名称创建角色\n并设置初始位置\n添加琴键角色到列表中\n代\n码\n示\n例\n\n\n--- 第4页 ---\n碰撞检测\n奇怪，我只敲了4号键，为什么还听到了5号键的声音\n呢，我写的碰撞检测colliderect()没写错呀？\ncolliderect()\n槌柄碰到5号键，5\n号键也会响起\ncollidepoint()\n只检测琴键是否碰\n到槌头的鼠标，精\n准检测\n\n\n--- 第5页 ---\n全局变量\n使用global声明全\n局变量state，就\n能在函数的小房子\n内使用公共区域的\n变量啦。函数里面怎么使用\n不了外面的state\n呀，怎样才能在函\n数里使用外面的变\n量呢？\n代码示例\n\n\n--- 第6页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、要在输出区中依次打印出0、3、6这几个数字，横线\n上应该填写（   ）？ \nA. i                       B. i+3                      C. i*3                      D. 0，3，6                       \nfor i in range(3):\n    print(___)\n0\n3\n6\n\n\n--- 第2页 ---\n2、木槌的槌头跟随鼠标移动，当木槌敲击时，我们只要\n槌头位置的琴键响起，要用什么语句检测碰撞？（   ） \n动手试一试\nA. colliderect()        \nB. collidepoint()           \nC. Actor()          \nD. update()          \n\n\n--- 第3页 ---\n动手试一试\n3、鸡蛋是优质的蛋白质来源，猴赛雷每天早上都要吃鸡\n蛋，周一，猴赛雷吃掉了家里一半的鸡蛋，周二，猴赛雷\n又吃掉了剩下一半的一半，到周三猴赛雷发现只剩1颗鸡\n蛋了，周一本来有多少颗鸡蛋呢？（    ）\nA. 2                       B. 4                       C. 6                      D. 8                       \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L13\\L13-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：C。\n解析：本题考查的是循环变量。\n输出区打印出的3个数字的规律是0*3，1*3，2*3，循环变量 i \n的值从0开始，每次增大1，每次循环i的值依次是0，1，2  ，\n每次输出的数字是每次循环中i的3倍，我们在横线处填入i*3\n就能依次打印0，3，6。1、要在输出区中依次打印出0、3、6这几个数字，横线\n上应该填写？（   ）\nA. i                       B. i+3                      C. i*3                      D. 0，3，6                       \nfor i in range(3):\n    print(___)\n0\n3\n6\n\n\n--- 第2页 ---\n答案：B。\n解析：本题考查的是碰撞检测语句的使用。\ncolliderect()在中用于检测两个角色是否碰到，任何一部分都\n会返回True。collidepoint()是检测鼠标和角色间是否碰到，\n只有鼠标碰到角色，才会返回True。C选项Actor()是创建角色，\nD选项draw()是绘制角色。2、木槌的槌头跟随鼠标移动，当木槌敲击时，我们只要\n槌头位置的琴键响起，要用什么语句检测碰撞？（   ） 动手试一试\nA. colliderect()        \nB. collidepoint()           \nC. Actor()          \nD. draw()          \n\n\n--- 第3页 ---\n答案解密\n答案：B。\n解析：本题考查的是数学中的逻辑推理。\n每天都吃掉家里一半的鸡蛋，那么前一天的鸡蛋是第二天的2倍，周二是周\n三的2倍，周一是周二的2倍。因此周一的时候有4颗鸡蛋，答案选B选项。3、鸡蛋是优质的蛋白质来源，猴赛雷每天早上都要吃鸡\n蛋，周一的时候猴赛雷吃掉了家里一半的鸡蛋，周二的时\n候猴赛雷又吃掉了剩下一半的一半，到周三的时候猴赛雷\n发现只有1颗鸡蛋了，周一本来有多少颗鸡蛋呢？（    ）\nA. 2                       B. 4                       C. 6                      D. 8                       \n在Python中，我们可以创建一个2次的for循环，计算前2天的鸡蛋数量，\n每次循环在第周三鸡蛋的数量上乘以2，就能得到周一的数量。日期 周一 周二 周三\n鸡蛋数量 4 2 12倍 2倍\n\n"
+      }
+    }
+  },
+  {
+    "id": "L14-1",
+    "unit": "L14",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL14-1\nclock [kla:k]\nn.钟表；仪表；计时器\nv.计数\nschedule ['sked3u:l]\nv.安排，预定\nn.时间表，计划表；清单，\n节目表；日程安排\nring [rin]\nn.戒指；环；铃声；团伙\nv.套上环；打电话；敲钟；\n发出铃声，响起铃声\nsound [saund]\nn.声音，声响\nv.听起来；发声；发出声音\nadj.完好的；合理的\nadv.酣 (睡)\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-1\\knowledge.png",
+        "content": "定时器\n功能：\n?\n让某个函数在一段时间之后执行\n格式：\nclock.schedule（函数名，时间）\n举例：\nclock.schedule(run,3)\n程序会在3秒后调用1次run0函数。"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块9：火柴人的对决 不速之客 L14-1\n模块10：双人竞技场\n\n\n--- 第2页 ---\n项目内容\n单词卡clock:钟表 schedule:安排\nring:铃声 sound:声音\n项目内容定时器\n全局变量的应用全局变量\n\n\n--- 第3页 ---\ndef run():\n    print('猴赛雷去跑步了')\nclock.schedule(run, 3)\n定时器\n定时器可以提前安排好一段时间后要做的事情。\nPython中，使用clock.schedule()能设置一个定时器。\n格式详解\nclock.schedule(函数名，数字)\n代码示例表示要做的事\n表示定时的时间\n程序运行3秒后自定义跑步函数\n\n\n--- 第4页 ---\nglobal 空格 变量名\nimport pgzrun\n...\nstate = '初始状态'\ndef on_mouse_down():\n    global state\n    state = '运行状态'\n...\npgzrun.go()\n全局变量\n定义全局变量state，用于存储游戏状态定义在函数外面的变量 全局变量1概念详解\n在函数中修改全局变量1全局变量可以在所有函数中使用。\n特定条件下修改state的值，\n实现游戏状态的改变代码示例\n\n\n--- 第5页 ---\nstate = '初始状态'\ndef draw():\n    global state\n    screen.clear()\n    if state == '初始状态':\n        screen.blit('初始背景', [0, 0])\n    elif state == '运行状态':\n        screen.blit('运行背景', [0, 0])\n        player.draw()\n    elif state == '玩家1赢':\n        screen.blit('结束背景1', [0, 0])\n    elif state == '玩家2赢':\n        screen.blit('结束背景2', [0, 0])\n全局变量的应用\n代码示例在draw()函数中，根据游戏状态，绘制不同的背景和角色。游戏页面切换\n通过判断\nstate的值，\n绘制不同状\n态下的内容。\n定义全局变量state，\n用于存储游戏状态\n\n\n--- 第6页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、猴赛雷打篮球的函数play和跳绳的函数jump已经创建\n好了，添加下面哪条代码，能实现让猴赛雷在程序运行2秒\n后开始打篮球？（    ）\nA. clock.schedule(play, 2)                  \nC. clock.schedule(2, play)                      B. clock.schedule(jump, 2)                     \nD. clock.schedule(2, jump)                       \n\n\n--- 第2页 ---\n动手试一试\n2、想要在on_mouse_down()函数中修改全局变量 state\n的值，下面哪段代码能正确地修改？（    ） \nA.                   \n B.                       \nC.                     D.                      \n\n\n--- 第3页 ---\n动手试一试\n3、冷雪丰制作了一个海底模拟游戏，运行程序后窗口\n中有一条鱼。接着，每隔5秒会出现一条鱼。请问需要\n多久的时间，窗口中才能有5条鱼？（    ）\nA. 15秒                       B. 20秒                     C. 25秒                    D. 30秒                       时间轴\n0秒 5秒 10秒 15秒\n...\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、猴赛雷打篮球的函数play和跳绳的函数jump已经创建\n好了，添加下面哪条代码，能实现让猴赛雷在程序运行2秒\n后开始打篮球？（    ）\nA. clock.schedule(play, 2)                  \nC. clock.schedule(2, play)                      B. clock.schedule(jump, 2)                     \nD. clock.schedule(2, jump)                       \n\n\n--- 第2页 ---\n答案解密\n答案：A。\n解析：本题考查的是Python中的定时器。\nPython中的clock.schedule()能设置一个定时器，它括号\n中有两个参数：第一个参数是函数名，表示要做的事；第\n二个参数是一个数字，表示定时的时间。想要让猴赛雷在\n程序运行2秒后开始打篮球，第一个参数就应该是打篮球的\n函数 play，第二个参数是定时的时间 2。所以A选项正确。\n\n\n--- 第3页 ---\n答案解密\n2、想要在on_mouse_down()函数中修改全局变量 state\n的值，下面哪段代码能正确地修改？（    ） \nA.                   \n B.                       \nC.                     D.                      \n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是全局变量。\nstate是一个全局变量，要在函数里面使用它，需要先用\nglobal声明，声明全局变量的格式：global 空格 变量名。\n想要修改state的值，需要把声明代码写在修改代码的前面。\n所以正确答案为B选项。\n\n\n--- 第5页 ---\n答案解密\n3、冷雪丰制作了一个海底模拟游戏，运行程序后窗口\n中有一条鱼。接着，每隔5秒会出现一条鱼。请问需要\n多久的时间，窗口中才能有5条鱼？（    ）\nA. 15秒                       B. 20秒                     C. 25秒                    D. 30秒                       时间轴\n0秒 5秒 10秒 15秒\n...\n\n\n--- 第6页 ---\n答案解密\n答案：B。\n解析：本题考查的是数学中的逻辑推理。\n一共需要有5条鱼，去掉最开始已有的1条鱼，就还需要出现\n4条鱼。每隔5秒出现1条，那么出现4条鱼的总时间就为：\n4×5=20秒。所以B选项正确。\n这个题目也可以帮我们更好地理解clock.schedule()工具箱。\n将创建鱼的代码设置为一个自定义函数creat()，依次编写如\n下：clock.schedule(creat，5)，clock.schedule(creat，\n10)，clock.schedule(creat，15)和clock.schedule(creat，\n20)四行代码，就可以实现每隔5秒创建1条鱼的功能。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L14-2",
+    "unit": "L14",
+    "resources": {
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-2\\knowledge.png",
+        "content": "定时器\nclock.schedule()\n让某个函数在一段时间之后执行一次\n格式：clock.schedule(函数名，数字)\n表示定时的时间\nclock.schedule（create，1）在1秒后调用一次create(）函数\nclock.schedule interval0\n让某个函数每间隔一段时间执行一次\n格式：clock.schedule_interval（函数名，数字）\n表示间隔的时间\nclock.schedule_interval（create，1）每间隔1秒调用一次create()函数"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块11：滚蛋吧病毒怪（上）L14-2  \n模块12：滚蛋吧病毒怪（下）\n盖世“武”侠\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡多角色创建\n两种定时器\ngerm:病菌 interval:间隔clock.schedule_interval()\n\n\n--- 第3页 ---\n#创建并绘制出3个xl角色\nxls = []\nfor i in range(3):\n    xl = Actor('小绿')\n    xl.x = 300\n    xl.y = 600\n    xls.append(xl)\ndef draw():\n    for x in xls:\n        x.draw()\n多角色创建\n知识详解\n正确步骤\n 代码示例\n让我们一起来回顾多角色创建的正确步骤吧！\n#创建并绘制出多个角色\n创建空列表\nfor i in range(循环次数):\n创建角色并初始化位置\n把角色添加到列表中\ndef draw():\n遍历列表绘制角色\n\n\n--- 第4页 ---\n代码示例clock.schedule_interval()的功能：\n让某个函数每间隔一段时间执行一次。\nclock.schedule_interval()\ndef create():\n    print('函数被调用') \nclock.schedule_interval(create, 1) 概念详解\n格式：clock.schedule_interval(函数名，数字)\n程序运行后，每间隔1秒\n输出一句'函数被调用'\n表示间隔的时间\n\n\n--- 第5页 ---\n函数create()可以生成一个病毒怪。那么在两个定\n时器中都填上函数名create和数字1，会发现：\nclock.schedule(create，1)\nclock.schedule_interval(create，1)\n两种定时器\nclock.schedule(函数名，数字)\nclock.schedule_interval(函数名，数字)表示定时的时间\n表示间隔的时间\n...在1秒后生成一个病毒怪\n每间隔1秒生成一个病毒怪，\n出现了源源不断的病毒怪定时器\n\n\n--- 第6页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、函数create()能生成一条小鱼。程序运行6秒后，窗\n口中会出现几条小鱼？（   ）\nA. 3     C. 5     B. 4 D. 6       \n\n\n--- 第2页 ---\n动手试一试\n2. 列表fishes中存储了4个小鱼角色，将哪段代码写在\ndraw()函数中可以绘制出这4个角色？（ ）\nA. B.\nC. D.\nfishes\n\n\n--- 第3页 ---\n动手试一试\n3、冷雪丰制作了一个电子农场程序，农场中的土豆1分钟成\n熟1个，南瓜2分钟成熟1个，大白菜5分钟成熟1个。那么7\n分钟后，会得到几个土豆、几个南瓜和几个大白菜？（    ）\n蔬菜种类 成熟时间\n土豆 1分钟1个\n南瓜 2分钟1个\n大白菜 5分钟1个\nA. 1个土豆，2个南瓜和5个大白菜                  \nB. 7个土豆，3个南瓜和1个大白菜                       \nC. 1个土豆，1个南瓜和1个大白菜                      \nD. 7个土豆，4个南瓜和2个大白菜                      \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、函数create()能生成一条小鱼。程序运行6秒后，窗\n口中会出现几条小鱼？（   ）\nA. 3     C. 5     B. 4 D. 6       \n\n\n--- 第2页 ---\n答案解密\n答案：A。\n解析：本题考查的是定时器。\nclock.schedule_interval()工具能实现每隔一段时间执行\n一次某个函数的功能。代码schedule_interval(create,2) \n会在程序运行后，每隔2秒执行一次create()函数，执行一\n次create()函数可以生成一条小鱼。所以当程序运行6秒后\n会生成：6÷2=3条小鱼，正确答案为A选项。\n\n\n--- 第3页 ---\n答案解密\n2. 列表fishes中存储了4个小鱼角色，将哪段代码写在\ndraw()函数中可以绘制出这4个角色？（ ）\nA. B.\nC. D.\nfishes\n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是列表角色绘制。\n想要绘制存储在列表中的每一个角色，需要遍历列表，选项\nA错误；\n遍历列表的格式为：for 变量 in 列表，选项D错误；\n每次循环，循环变量f就是每一个小鱼角色，使用f.draw()可\n以把角色绘制出来，选项C错误，所以正确答案为B选项。\n\n\n--- 第5页 ---\n答案解密\n3、冷雪丰制作了一个电子农场程序，农场中的土豆1分钟成\n熟1个，南瓜2分钟成熟1个，大白菜5分钟成熟1个。那么7\n分钟后，会得到几个土豆、几个南瓜和几个大白菜？（    ）\n蔬菜种类 成熟时间\n土豆 1分钟1个\n南瓜 2分钟1个\n大白菜 5分钟1个\nA. 1个土豆，2个南瓜和5个大白菜                  \nB. 7个土豆，3个南瓜和1个大白菜                       \nC. 1个土豆，1个南瓜和1个大白菜                      \nD. 7个土豆，4个南瓜和2个大白菜                      \n\n\n--- 第6页 ---\n答案解密\n答案：B。\n解析：本题考查的是数学中的逻辑推理。\n土豆1分钟成熟1个，那么7分钟可以成熟7÷1=7个土豆；南\n瓜2分钟成熟1个，那么成熟3个南瓜需要2×3=6分钟，4个南\n瓜就需要8分钟，所以7分钟只能成熟3个南瓜；大白菜5分钟\n成熟1个，只有7分钟，所以只能成熟1个，B选项正确。\n在Python中，可以使用定时器clock.schedule_interval()\n来设置每种蔬菜成熟一个所需要的时间。蔬菜种类 成熟时间 7分钟成熟的个数\n土豆 1分钟1个 7个\n南瓜 2分钟1个 3个\n大白菜 5分钟1个 1个\n\n"
+      }
+    }
+  },
+  {
+    "id": "L14-3",
+    "unit": "L14",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL14-3\nbrick[brik]\nn.砖，砖块；积木；砖\n状物\nv.用砖砌\ntop [ta:p]\nn.顶部；上面；最高的级\n别\nadi.最高的；头等的；居\n首位的\nV.达到顶端；高于，胜过\nbottom ['ba:tam]\nn.底部；底面；尽头;\n末端；臀部；水底\nadj.底部的；尽头的\nv.触底\n【固定搭配】\nfromthebottomofone'sheart打心底里，衷心地\nw\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-3\\knowledge.png",
+        "content": "dudu.left\ndudu.x\ndudu.right\n角色的坐标是它中心点的位置\ndudu.top\n角色.left：左边缘x坐标\ndudu.y\n角色.right：右边缘x坐标\n角色.top：上边缘y坐标\ndudu.bottom\n角色.bottom：下边缘y坐标"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块13：云端探险家(1)师祖降临 L14-3\n模块14：云端探险家(2)\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡角色的上下左右\nrandom的应用\nbrick:砖块 top:顶部\nbottom:底部\n\n\n--- 第3页 ---\n角色的上下左右\n•角色.x和角色.y表示角色的中心点坐标\n•角色的中心点，就是角色图片的中心角色的中心点\n格式：角色.x  =  x坐标值  角色.y  =  y坐标值\n角色的上下左右\n 角色.top 角色顶部的y坐标\n角色.bottom 角色底部的y坐标角色.left\n角色左侧的x坐标角色.right\n角色右侧的x坐标\n角色的上下左右\n\n\n--- 第4页 ---\n角色的上下左右\n应该如何设置坐标才能让角色嘟嘟(dudu)站\n在踏板(b)上呢？\ndudu.x = b.x \ndudu.y = b.ydudu.x = b.x \ndudu.bottom = b.top\n将嘟嘟的底部坐标设为踏板的顶部坐标，嘟嘟才能\n站在踏板上！\n代\n码\n一\n代\n码\n二\n\n\n--- 第5页 ---\n random的应用\nrandom.choice()可以从列表中随机选择一个元素。\nrandom.randint()可以在一定范围内生成一个随机数。#获得随机造型\nnames = ['造型1', '造型2', '造型3']\nname = random.choice(names)\nb = Actor(name)从列表随机选出一个造型名，存放到变量中代\n码\n示\n例\n#设置随机坐标\nX = random.randint(0, 500)\nY = random.randint(0, 700)\ndudu.x = X\ndudu.y = Y代\n码\n示\n例随机生成一个在0到\n500范围内的数字\n将角色dudu的x坐标和\ny坐标设置为随机数\n\n\n--- 第6页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、现在有一个角色player被放置在窗口中，那么\nplayer.x的值是多少？（   ）\nA. 200                      B. 250                   C. 300                   D. 400                    \n0 600\nx\nplayer\ny200300400\n250\n\n\n--- 第2页 ---\n动手试一试\n2、现在想要通过修改角色的坐标，使角色player平移到图\n中虚线所示的位置，哪个代码正确？（   ）\nA. player.x = 0\n     \nC. player.left = 0  B. player.x = 600\nD. player.left = 600    \n0 600\nyx\nplayer player\n\n\n--- 第3页 ---\n动手试一试\n3、冷雪丰制作了一个体力补充器，每次使用能获得1到3个\n随机体力。1个体力值能向前1米。现在，体力值为0，距离\n终点还有10米，那么最少需要使用几次体力补充器？（    ）\nA. 1                      B. 2                   C. 3                   D. 4                    \nTili = random.randint(1,3)体力补充器\n10米体力：0\n终点\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、现在有一个角色player被放置在窗口中，那么\nplayer.x的值是多少？（   ）\nA. 200                      B. 250                   C. 300                   D. 400                    \n0 600\nx\nplayer\ny200300400\n250\n\n\n--- 第2页 ---\n答案解密\n答案：C。\n解析：本题考查的是角色的中心点坐标。\n角色.x和角色.y表示角色的中心点坐标，角色的中心点就\n是角色图片的中心。正确答案为C选项。\n\n\n--- 第3页 ---\n答案解密\n2、现在想要通过修改角色的坐标，使角色player平移到图\n中虚线所示的位置，哪个代码正确？（   ）\nA. player.x = 0\n     \nC. player.left = 0  B. player.x = 600\nD. player.left = 600    \n0 600\nyx\nplayer player\n\n\n--- 第4页 ---\n答案解密\n答案：C。\n解析：本题考查的是角色的上下左右。\n想要让角色的左侧紧贴窗口的左边缘，需要将角色的左侧的\nx坐标等于窗口左边界。在Pygame中 角色.left 表示角色左\n侧的x坐标，窗口左边界的x坐标为0，所以C选项正确。\n\n\n--- 第5页 ---\n答案解密\n3、冷雪丰制作了一个体力补充器，每次使用能获得1到3个\n随机体力。1个体力值能向前1米。现在，体力值为0，距离\n终点还有10米，那么最少需要使用几次体力补充器？（    ）\nA. 1                      B. 2                   C. 3                   D. 4                    \nTili = random.randint(1,3)体力补充器\n10米体力：0\n终点\n\n\n--- 第6页 ---\n答案解密\n答案：D。\n解析：本题考查的是数学中的逻辑推理。\n每次使用体力补充器能获得1到3个随机体力，每次最多只能\n获得3个体力；如果每次都是最多的3个体力，那么到达终点\n时体力补充器的使用次数就是最少的。因为3×3=9，9是小\n于10的，所以最少需要3+1=4次，才能到达终点，D选项正\n确。\n这个题目也可以帮我们更好地理解random工具箱。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L14-4",
+    "unit": "L14",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL14-4\ndirection [da'rek[n]\nn.方向，方位；说明；指\n导，管理；趋势；方向\n【例句】\nThere are two different directions,left and\nright.\n这里有左和右两个不同的方向。\nspeed [spi:d]\nn.速度，速率；迅速\nv.加速；迅速前进，急行；\n身前快速运球；快速前行\n【例句】\nYou travel at the speed of light?\n你用光的速度旅行？\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-4\\knowledge.png",
+        "content": "尖刺踏板随机出现\n尖刺踏板\n嘟嘟碰到尖刺踏板，变成嘟嘟哭\n嘟嘟碰到尖刺踏板\n完善游戏\n游戏结束\n嘟嘟掉落窗口底部\n云端探险家\n计分功能\n每坚持1s，计60分\n踏板左右移动\n活动踏板\n嘟嘟左右移动\n升级游戏\n踏板速度越来越快\n——增加游戏难度"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块15：云端探险家(3) \n模块16：云端探险家(4) \nL14-4 至上荣耀\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡尖刺踏板\n结束游戏\n活动踏板\n速度变化\ndirection:方向 speed:速度\n\n\n--- 第3页 ---\n云端探险家\n完\n善\n游\n戏嘟嘟碰到尖刺踏切换造型尖刺踏板尖刺踏板随机出现\n游戏结束嘟嘟碰到尖刺踏板\n嘟嘟掉落窗口底部\n计分功能 每坚持1秒，加60分\n升\n级\n游\n戏活动踏板\n踏板速度越来越快踏板左右移动\n嘟嘟左右移动\n增加游戏难度\n\n\n--- 第4页 ---\n尖刺踏板\nbricks = []\nnames = ['踏板1', '踏板2', '踏板3', '踏板4', '尖刺踏板']\nfor i in range(5):\n    name = random.choice(names)\n    b = Actor(name)\n    b.x = random.randint(0, 500)\n    b.y = (i + 1) * 140\n    bricks.append(b)\n    if i == 2:\nb.image = '踏板1'尖刺踏板和普通踏板一样，随机出现。\n代码示例\n将尖刺踏板造型名添加到列表names中\n创建角色，初始化每\n个踏板的位置和造型\n保证嘟嘟在游戏开始时，\n不站在尖刺踏板上\n\n\n--- 第5页 ---\n尖刺踏板\n嘟嘟踩到尖刺踏板后变成哭泣的样子，可以让游\n戏更加生动，通过切换造型就可以实现啦！\n如果嘟嘟碰撞到的是尖刺踏板\n嘟嘟的造型就切换为'嘟嘟哭'遍历踏板列表代码示例\n如果嘟嘟和踏板发生碰撞\ndef update():\n    dudu.y += 7\n...\n    for b in bricks:\n        if dudu.colliderect(b):\n            dudu.bottom = b.top\n            if b.image == '尖刺踏板':\n                dudu.image = '嘟嘟哭'\n\n\n--- 第6页 ---\ndef update():\n    if dudu.image == '嘟嘟':\n        dudu.y += 7\n        for b in bricks:\n            b.y -= 2\n            if b.y < 0:\n b.x = random.randint(0, 500)\n ...        \n        \n结束游戏\n通过嘟嘟的造型，可以控制update()的代码是否执行。\n游戏正常进行,update()中的代码执行\n游戏停止,update()中的代码不再执行\n当造型为'嘟嘟'时，\n才会执行后续代码\n代\n码\n示\n例\n若嘟嘟切换为造型'嘟嘟哭'，这些代码就不再执行\n\n\n--- 第7页 ---\ndef update():\n    if dudu.image == '嘟嘟':\n        dudu.y += 7\n        for b in bricks:\n            b.y -= 2\n        ...\n        if dudu.buttom > 700:\n dudu.imgae = '嘟嘟哭'      \n        \n结束游戏\n嘟嘟掉到窗口底部后游戏结束，也可以通过造型控制。\n游戏正常进行,update()中的代码执行\n游戏停止,update()中的代码不再执行\n当造型为'嘟嘟'时，\n才会执行后续代码\n代\n码\n示\n例\n嘟嘟掉到底部切换为造型'嘟嘟哭'，游戏结束\n\n\n--- 第8页 ---\nx坐标减小 b.x += 一个负数b.x += 一个正数 x坐标增大\n活动踏板\n踏板b向右移动\ndef update():\n    ...\nfor b in bricks:\nb.y -= 2\nif b.image == '踏板2':\ndirection = random.randint(-3, 3)\nb.x += direction代码示例\n生成一个-3到3范围内的随机数\n改变x坐标值实现左右移动实现方式\n踏板b向左移动\n踏板b的x坐标加上一个随机数，设计出活动踏板活动踏板在向上移动的同时，还可以随机左右移动。\n\n\n--- 第9页 ---\n速度变化\nspeed = 1\ndef update():\n    global speed\n    if dudu.image == '嘟嘟':\n        dudu.y += 7\n        speed += 0.001\n        for b in bricks:\n            b.y -= speed设置一个变量speed\n存储踏板上升的速度\n踏板每次上升\nspeed长的距离update()每执行一次，\nspeed就增加0.001\n代码示例想要让踏板上升得越来越快，可以把踏板每次上\n升的距离设置为变化的值，并且让它不断变大！\n\n\n--- 第10页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、保持其它踏板的造型随机，想让第3块踏板变成猴赛\n雷最喜欢的火烧云踏板，切换造型的代码应该写在哪个\n位置？（   ） \nA. 1                  \nB. 2                      \nC. 3                     \nD. 4                     for i in range(5):\n    name = random.choice(names)\n    b = Actor(name)\n    b.x = random.randint(0, 500)\n    b.y = (i + 1) * 140\n    bricks.append(b)\n    if i == 2:\n\n\n--- 第2页 ---\n动手试一试\n2、角色dudu有'嘟嘟'和'嘟嘟哭'两个造型，如果想要在\ndudu的造型为'嘟嘟'的时候，绘制bricks列表中的踏板角\n色，横线处应该填什么？（   ） \n  A. if dudu.image == '嘟嘟'def draw():\n    \n    for b in bricks：\nb.draw()\nB. if dudu.image == '嘟嘟':\nC. if dudu.image == '嘟嘟哭'\nD. if dudu.image == '嘟嘟哭':\n\n\n--- 第3页 ---\n动手试一试\n3、（多选题）冷雪丰给'云端探险家'添加了新功能。每按\n下一次空格，嘟嘟的x坐标可能会发生随机改变。观察代码，\n按一次空格后，嘟嘟可能出现的位置有哪些？（    ）\nA. 1号位置                      B. 2号位置                   C. 原地不动                   def on_key_down(key):\nd = random.randint(-1,1)\n    if key == keys.SPACE:\n    dudu.x += d1 2 3 4\n210\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L14\\L14-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、保持其它踏板的造型随机，想让第3块踏板变成猴赛\n雷最喜欢的火烧云踏板，切换造型的代码应该写在哪个\n位置？（   ） \nA. 1                  \nB. 2                      \nC. 3                     \nD. 4                     for i in range(5):\n    name = random.choice(names)\n    b = Actor(name)\n    b.x = random.randint(0, 500)\n    b.y = (i + 1) * 140\n    bricks.append(b)\n    if i == 2:\n\n\n--- 第2页 ---\n答案解密\n答案：D。\n解析：本题考查的是列表遍历和角色造型的切换。1号位置和2号\n位置处还没有创建角色b，程序会报错。如果写在3号位置，\nbricks列表中的所有踏板都会变成'火烧云踏板'，不符合其它踏板\n造型随机的效果，3号位置错误。4号位置是循环变量i为2时，只\n改变第3块踏板的造型，4号位置正确。所以正确答案选D。\n\n\n--- 第3页 ---\n答案解密\n2、角色dudu有'嘟嘟'和'嘟嘟哭'两个造型，如果想要在\ndudu的造型为'嘟嘟'的时候，绘制bricks列表中的踏板角\n色，横线处应该填什么？（   ） \n  A. if dudu.image == '嘟嘟'def draw():\n    \n    for b in bricks：\nb.draw()\nB. if dudu.image == '嘟嘟':\nC. if dudu.image = '嘟嘟哭':\nD. if dudu.image == '嘟嘟哭':\n\n\n--- 第4页 ---\n答案解密\n答案：B。\n解析：本题考查的是根据角色造型控制游戏状态。角色造型是'嘟\n嘟'的时候，条件成立，绘制踏板，角色造型切换到'嘟嘟哭'的时候\n条件不成立，不再绘制，A选项和C选项最后少了冒号，D选项是在\n嘟嘟哭时绘制踏板，不符合题目效果，B选项正确。\n\n\n--- 第5页 ---\n答案解密\n3、（多选题）冷雪丰给'云端探险家'添加了新功能。每按\n下一次空格，嘟嘟的x坐标可能会发生随机改变。观察代码，\n按一次空格后，嘟嘟可能出现的位置有哪些？（    ）\nA. 1号位置                      B. 2号位置                   C. 原地不动                   def on_key_down(key):\nd = random.randint(-1,1)\n    if key == keys.SPACE:\n    dudu.x += d1 2 3 4\n210\n\n\n--- 第6页 ---\n答案解密\n答案：ABC。\n解析：本题考查的是的逻辑推理。\nd是随机数，可能的取值有[-1, 0, 1]，嘟嘟可以向左或者向右移动1\n格，或者不移动。\n所以嘟嘟有可能不移动，或者移动到图中的1号和2号位置，答案选\nABC。1 2 3 4\n210\n\n"
+      }
+    }
+  },
+  {
+    "id": "L15-1",
+    "unit": "L15",
+    "resources": {
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-1\\knowledge.png",
+        "content": "递推\n递推式\n根据数列的变化规律，从第一个数\n表示数列变化规律的式子就是递推式\n一步一步推算出后面每一个数的过\n程。\n例：第n项=第n-1项*2\n列表的负数索引\n免子数列\n12358132134...0\n列表\n［“我\"，“爱”，“Python\"\n索引\n-3\n-2\n-1\n递推式：第n项=第n-1顶+第n-2项\n又叫“斐波那契数列”"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-1\\lecture.pdf",
+        "method": "ocr",
+        "content": "\n--- 第1页 ---\n核桃编程\n有条理\n爱动脑\n会创造\nL15-1|\n神奇的递推\n模块17：\n游戏世界喂宠记\n模块18：\n免子多到爆\n#\nKI>\nANALYTICAL\nINTELLECTUALLYCURIOUS\nCREATIVE\n\n--- 第2页 ---\n核桃编程\n有条理·爱动脑·会创造\n项目内容\n递推\n项目内容\n列表的负数索引\n兔子数列\nfood：食物\nnumber:数字\n单词卡\ncard:卡牌\n\n--- 第3页 ---\n核桃编程\n有条理·爱动脑·会创造\n递推一概念\n递推是什么啊？\n根据数列的变化规律，从已知的数一步一步推算出后\n面每一个数的过程，就叫做递推\n可以用递推式来表\n示数列的变化规律\n递推式怎么表示呢？\n递推式示例\n5\n15\n25\n喂养量：\n加10\n加10\n加10\n第n项=第\nn-1项+10\n代表要求的那一项\n代表前一项\n\n--- 第4页 ---\n核桃编程\n有条理·爱动脑·会创造\n递推一算法\n一、\n找递推式\n例子\n二阶云狸，须循三、九、二十七\n>十一\n之数，以植果每日饲之。\n十日满， 云狸易。\n3\n9\n27\n81.\n3*3\n9*3\n27*3\n递推式：\n第n项=第n-1项*3\n找递推式是递推算法的核心\n\n--- 第5页 ---\n核桃编程\n有条理·爱动脑·会创造\n递推一算法\n确定递推起点和循环次数\n要预测鹦鹉第十次叼的卡牌，应该如何确定递推起\n点和循环次数呢？\n示例\n99\n90\n81\n72\n1第10次\n递推起点\n循环次数：7\n递推起点－·\n循环次数：8\n递推起点\n循环次数：9\n注意：设置的递推起点不同，循环次数也不同哦\n\n--- 第6页 ---\n核桃编程\n有条理·爱动脑·会创造\n列表的负数索引\n负数索引|是从序列的末尾开始计数。-1表示最后一\n个元素，-2表示倒数第二个元素，以次类推。\n代码示例\nf = [1,1]\nfor i in\n取出例表中的倒数第二项\nrange(10):\nf[-1]\nf[-2]\nnum\n+\nf.append (num)\n取出例表中的最后一项\nprint(f)\n\n--- 第7页 ---\n核桃编程\n有条理·爱动脑·会创造\n兔子数列\n兔子问题：假定一对小兔子一小时后会长成大兔子，再过\n一小时会生下一对小兔子，从此以后大兔子每小时都会生\n下一对小兔。12个小时后会有多少对兔子呢？\n兔子数列\n235813\n21\n34\n递推式：\n第n项=第n-1项+第n-2项\n“兔子数列”也叫\n“斐波那契数列”\n。这个数列\n是由意大利数学家斐波那契提出的，而且他用的\n例子就是兔子的繁殖。\n\n--- 第8页 ---\n核桃编程\n有条理·爱动脑·会创造\n项目日志\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-1\\exercise.pdf",
+        "method": "ocr",
+        "content": "\n--- 第1页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n1、\n数列2、7、17、37、77、157......的递推式应该\n是哪个？（）\nA.第n项=第n-1项*3+1\nB.第n项=第n-1项*3\nC.第n项=第n-1项*4-1\nD.第n项=第n-1项*2+3\n\n--- 第2页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n2、要计算数列3、6、12、24、48......中的第8项，使\n用下方的代码进行递推，横线处应该填什么呢？（）\nstart = 3\nfor i in \nn range(__) :\nstart = start * 2\nA.7\nB.8\nc.9\nD. 10\n\n--- 第3页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n3、请补充下方斐波那契数列的空白处\n358\n144\n21 34 55\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-1\\solution.pdf",
+        "method": "ocr",
+        "content": "\n--- 第1页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n1、数列2、7、17、37、77、157...的递推式应该\n是哪个？（）\nA.第n项=第n-1项*3+1\nB.第n项=第n-1项*3\nC.第n项=第n-1项*4-1\nD.第n项=第n-1项*2+3\n答案：D。\n解析：本题考查的是找递推式\n按照A选项的递推式，2*3+1=7，但7*3+1=22，与题意不符\n故除。按照B选项的递推式，2*3=6，与题意不符故排除。\n按照C选项的递推式，2*4-1=7，但7*4-1=27与题意不符故\n排除。D选项，2*2+3=7，7*2+3=17，17*2+3=37，以此比\n类推，后续的数也符合这个递推规律，故选D。\n\n--- 第2页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n2、要计算数列3、6、12、24、48......中的第8项，使\n用下方的代码进行递推，横线处应该填什么呢？（）\nstart = 3\nA.7\nB. 8\nfor i in range(__):\nc. 9\nD. 10\nstart = start * 2\n答案：A。\n解析：本题考查的是找循环次数\n通过读代码，可以发现递推起点是3，要算出第8项，还要推\n算7次。所以循环次数是7。\n\n--- 第3页 ---\n核桃编程\n有条理·爱动脑·会创造\n动手试一试\n3、请补充下方斐波那契数列的空白处\n358\n144\n213455\n答案：13；89\n解析：本题考查的是根据递推式求项\n斐波那契的递推式为：第n项=第n-1项+第n-2项。第一个\n空的数字等于5+8=13，故填13；第二个空的数字等于\n34+55=89，故填89。\n"
+      }
+    }
+  },
+  {
+    "id": "L15-2",
+    "unit": "L15",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL15-2\nposition [ pa'zi[n\nn.位置，方位；处境\nv.安置；使处于\nframe[freim]\nn.框架；边框；支架\nv.装框架；勾勒；制定\nface [feis]\nn.脸，面部，面貌\nv.面对，面向\ndraw[dro:]\nv.绘画；拖动；吸弓l;\n拔出；得出；支取\nn.抽彩，抽签；平局\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-2\\knowledge.png",
+        "content": "初始化视觉模块\ninitAIO\n视觉模块的基本使用\n设置视觉模块模式\nsetMode()\nisFace()\n检测是否有人脸\n画框语句\ndrawFrame()\n框出人脸\n获取人脸坐标\ngetFacePos()\n人脸门禁系统\n清除框\nclearDraw()\ntime.time()\n获取系统运行时间\n获取人停留时间\n计算停留时间一 stay= check－start\n显示图片\nshowPic()\n停留太久报警\n播放声音\nplaySound()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块19：AI视觉模块\n模块20：人脸门禁系统\nL15-2 城主遭贼\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡position:位置 frame:框架\nface:脸人脸检测\n停留警告AI视觉识别模块\ndraw:绘制人脸画框\n\n\n--- 第3页 ---\nAI视觉识别模块\nAI视觉识别模块，可\n以进行人脸检测、人\n脸识别、路牌识别、\n颜色识别。\n概念讲解\ninitAI()用于初始化AI视觉识别模块。 initAI()\nsetMode()语句可以设置AI视觉识别\n模块的模式，括号内填入模式名称，名\n称要是字符串。 视觉模块的模式setMode('字符串')\n\n\n--- 第4页 ---\nisFace()\n人脸检测\n初始化视觉模块\n一直检测\n检测到人脸，显示有人\n没检测到人脸，显示没人将AI视觉识别模块设置为\n人脸检测模式之后，我们\n可以使用isFace()语句\n检测人脸。\n代\n码\n示\n例识别到人脸返回 True\n设置为人脸检测模式未识别到人脸返回 False\n人脸检测\ninitAI()\nsetMode('人脸检测')\nwhile True:\n    if isFace():\n        printPos('有人'，'中间')       \n    else:\n        printPos('没人'，'中间')\n\n\n--- 第5页 ---\n人脸画框\nwhile True:\n    if isFace():\n        pos = [110,70,210,170] \n        drawFrame(pos,'绿')   \n    else:\n        printPos('没人'，'中间')\n    代码示例使用drawFrame()命令可\n以在视觉模块屏幕上画框。\ndrawFrame(列表, 字符串)\n框的坐标框的颜色\n左上角的坐标人脸画框\n[110,70]\n[210,170]\n右下角的坐标\n\n\n--- 第6页 ---\n人脸画框\nwhile True:\n    if isFace():\n        pos = getFacePos() \n        drawFrame(pos,'绿')   \n    else:\n        printPos('没人'，'中间')\n    代码示例 返回一个列表，\n列表中有4个数字\n[  ,  ,  ,  ]\n前2个数字代表\n人脸左上角的\nx坐标和y坐标后2个数字代表\n人脸右下角的\nx坐标和y坐标\n使用getFacePos()可以获取人脸的坐标，将获取\n到的坐标填入drawFrame()，就能让绘制出来的框\n跟随人脸移动。人脸画框\n\n\n--- 第7页 ---\n检测到有人停留太久，发出警告。\nwhile True:\n    if isFace():\n        start = time.time()\n        while isFace():\n            check = time.time()  \n            stay = check - start\n            if stay > 5:\n                playSound('ring')        \n停留警告\n检测到人脸，变量start\n记录人脸刚出现的时间\n如果不离开，继续检测\ncheck记录新的时间\ncheck - start就是停留时间\n停留超过5秒\n播放警告铃声代码示例\ntime.time()可以获取系统运行时间。记录时间\n\n\n--- 第8页 ---\n科学探索\n人类和其它动物都有眼睛、鼻子和嘴巴，但是人脸和动物\n脸上的器官形状和位置都不一样，给机器看大量的人脸图\n片，控制机器不断分析和学习每张人脸的特征，获取大量\n数据后，它就可以分清人脸啦！\n......\n检测成功√\n人脸检测原理\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nC. initAI()\nsetMode('人脸检测')D. setMode( '人脸检测') \ninitAI()A. initAI()\nsetMode()   B. setMode() \ninitAI()1、粗心的猴赛雷编写代码的时候忘记初始化和设置模式了，\n小创客，他应该补充下面哪段代码呢？（ ）\n动手试一试\nwhile True:\nifisFace():\nprintPos( '有人 '，'中间 ')       \nelse:\nprintPos( '没人 '，'中间 ')\n\n\n--- 第2页 ---\n2、猴赛雷脸部左上角的坐标是 (110, 50) ，右下角的坐\n标是 (210,150) ，下面哪段代码可以正确在猴赛雷的脸\n上画框？（）\n动手试一试\nA. p = [110, 50, 210, 150]\ndrawFrame(p, '绿')B. p = [110, 50, 210, 150]\ndrawFrame( '绿', p)\nC. p = [210,150,110,50]\ndrawFrame (p, '绿')D. p = [ 210,150,110,50 ]\ndrawFrame ('绿', p)\n\n\n--- 第3页 ---\n动手试一试\n3、如果检测到有人停留时间超过 5秒，需要提醒他离开，\n观察这段代码，哪个变量是记录的停留时间呢 ？（）\nA. start B. check C. staywhile True:\nifisFace():\nstart = time.time()\nwhile isFace():\ncheck = time.time()  \nstay = check -start\nifstay > 5:\nplaySound( 'ring')        \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nB. setMode() \ninitAI()\n答案解密\nC. initAI()\nsetMode('人脸检测')D. setMode( '人脸检测') \ninitAI()\n1、粗心的猴赛雷编写代码的时候忘记初始化和设置模式了，\n小创客，他应该补充下面哪段代码呢？（ ）\nA. initAI()\nsetMode()   while True:\nifisFace():\nprintPos( '有人 '，'中间 ')       \nelse:\nprintPos( '没人 '，'中间 ')\n\n\n--- 第2页 ---\n答案解密\n答案： C\n解析：本题考查的是视觉模块的初始化命令和视觉模块\n的模式设置。我们要先使用 initAI() 初始化视觉模块，\n再使用 setMode( '人脸检测 ')设置为人脸检测模式，\n然后才能开始检测人脸。正确答案选 C。\n\n\n--- 第3页 ---\n答案解密\n2、猴赛雷脸部左上角的坐标是 (110, 50) ，右下角的坐\n标是 (210,150) ，下面哪段代码可以正确在猴赛雷的脸\n上画框？（）\nA. p = [110, 50, 210, 150]\ndrawFrame(p, '绿')B. p = [110, 50, 210, 150]\ndrawFrame( '绿', p)\nC. p = [210,150,110,50]\ndrawFrame(p, '绿')\nD. p = [ 210,150,110,50 ]\ndrawFrame ('绿', p)\n\n\n--- 第4页 ---\n答案解密\n答案： A\n解析：本题考查的是 drawFrame() 命令。\ndrawFrame() 括号内需要填 2个参数，第一个参数是列\n表，代表框的坐标，第 2个参数是一个字符串，代表框\n的颜色。\n列表的前 2位是左上角的坐标，列表的后两位是右下角\n的坐标，所以坐标应该是 [110, 50, 210, 150] ；框的\n颜色是绿色，所以第 2个字符串应该填入 '绿'。\n正确答案选 A。\n\n\n--- 第5页 ---\n答案解密\n3、如果检测到有人停留时间超过 5秒，需要提醒他离开，\n观察这段代码，哪个变量是储存的停留时间呢 ？（）\nA. start B. check C. staywhile True:\nifisFace():\nstart = time.time()\nwhile isFace():\ncheck = time.time()  \nstay = check -start\nifstay > 5:\nplaySound( 'ring')        \n\n\n--- 第6页 ---\n答案解密\n答案： C\n解析：本题考查的是 time.time() 命令的使用。\nstart储存的是人脸最开始出现时候的系统时间，\ncheck储存的是检测到人脸的最新系统时间，停留时间\n是检测到人脸的最新系统时间减去人脸最开始出现的时\n间，也就是 check减去start，正确答案选 C。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L15-3",
+    "unit": "L15",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL15-3\nbattery ['baeteri]\nn.电池，电池组\ncharge [tja:rd3]\nv.充电；收费\nn.费用；电荷；掌管\n【短语】\ncharge a phone 给手机充电\nheight [hart]\nn.高度；身高；高处\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-3\\knowledge.png",
+        "content": "用模拟法解决实际问题\n模拟算法：\n用代码模拟实际问题，在不进行实际操作的情况下，预测会发生的事情\nheight = 0\n模拟算法步骤：\nbattery = \n设置变量\n单次模拟\n循环控制\nwhile True:\nbattery += 1\n分析场景，找出会\n照着规则玩一次游戏，\n使用循环结构让模拟持续\nprint(battery)\n产生变化的数据\n根据实际场景\n进行下去，设置合适的条件\nheight += 5\n并用变量存储\n更新变量存储的值\n来停止整个模拟过程\nif height >= 28:\nbreak\nheight-\n实时空气质量：\n24优\n模拟法\n1 (时)\n应用场景\n-10 ~-1°℃\n晴\n西北风4-5级\n天气预报\n台风预测\n模拟驾驶"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块21：模拟算法初探\n模块22：小七打怪兽\nL15-3 天雷滚滚\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡battery:电池 charge:充电\nheight:高度模拟算法实现模拟算法基础\n\n\n--- 第3页 ---\n模拟算法基础\n模拟算法就像是在计算机中建立一个“虚拟世界”，用代码\n模拟现实世界中的现象，在不进行实际操作的情况下，可以\n预测将会发生的事情。模拟算法在各个领域都有应用。\n气象学家通过收集到\n的天气数据，在虚拟\n实验室中预测天气。\n飞行员模拟驾驶，模\n拟各种实际飞行中可\n能会出现的情况。模拟算法\n......\n\n\n--- 第4页 ---\n模拟算法基础\n接下来我们以小七登山为例，看看模拟算法怎么实现吧。\n模拟算法三大步：①设置变量；②单次模拟；③循环控制。\n设置变量\n单次模拟\n循环控制观察场景，找到变化的\n数据，并用变量存储。\n根据实际场景模拟一次，\n找到变量变化的规律。\n用循环控制模拟进行，\n设置合适的停止条件。\n\n\n--- 第5页 ---\n模拟算法实现\n冰山高28米，机器人小七使用一节电池可以上升5米，但\n是更换电池的时候会下降2米，小七最少使用多少节电池\n可以到达山顶？\n充电中~\n5679\n567\n4\n48\n3\n2\n\n\n--- 第6页 ---\n模拟算法实现\nheight = 0\nbattery = 0代码示例第一步，设置变量，对需\n要模拟的场景进行分析，\n找出可能会产生变化的数\n据，并用变量储存。\n小七上升高度，初始是0\n小七使用电池数量，初始是0\n变化的数据有小七\n的上升高度和小七\n使用电池的数量。\n\n\n--- 第7页 ---\n模拟算法实现\nheight = 0\nbattery = 0\nbattery += 1\nheight += 5\nheight -= 2代码示例第二步，单次模拟。\n可以理解为照着规则\n玩一次游戏，更新变\n量的值。\n使用一节电池\n上升5米\n换电池的时候下降2米\n\n\n--- 第8页 ---\n小七上升28米后到达山顶，\n不用再更换电池和下降。\n模拟算法实现\n最后一步，循环控制。用循\n环结构控制模拟进行，并且\n设置合适的条件结束循环。\nheight = 0\nbattery = 0\nwhile True:\n    battery += 1\n    height += 5\n    if height >= 28:\n        break\n    height -= 2      代码示例\n不知道具体循环次数，使用while循环\n到达山顶后就结束循环使用一节电池后上升5米\n更换电池时下降2米\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、下列哪个选项不属于模拟算法的基本步骤？（   ） \n动手试一试\nA. 设置变量                    B. 单次模拟\nC. 循环控制                        D. 实际操作\n\n\n--- 第2页 ---\n动手试一试\n2、在怪兽大战游戏中，只要小七的战斗力大于怪兽的战\n斗力，就能打败怪兽，并且吸收敌人的战力，空白处应\n该补充什么条件？（   ） \nA. f > enemy[i]                           B. f < enmey[i]       \nC. f == enemy[i]enemy = [   ,   ,   ,   ,   ] \nf = 7 \nfor i in range(5):\n    if            :\n        f += enemy[i]\n       \nD. f = enemy[i]\n小七战斗力敌人战斗力\n\n\n--- 第3页 ---\n3、苹果成熟后，蜗牛想吃树上的苹果，离蜗牛最近的苹\n果高9米，它白天可以往上爬3米，但是夜晚休息的时候\n会下降1米，蜗牛第几天能吃到苹果呢？（   ） \n动手试一试\nA. 第3天                          B. 第4天                           C. 第5天                        \n D. 第6天                        \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：D\n \n解析：本题考查的是模拟算法的基本步骤。模拟算法基\n本步骤是：①设置变量；②单次模拟；③循环控制。不\n包括实际操作，答案选D。1、下列哪个选项不属于模拟算法的基本步骤？（   ） \nA. 设置变量                    B. 单次模拟\nC. 循环控制                        D. 实际操作\n\n\n--- 第2页 ---\n答案解密\n2、在怪兽大战游戏中，只要小七的战斗力大于怪兽的战\n斗力，就能打败怪兽，并且吸收敌人的战力，空白处应\n该补充什么条件？（   ） \nA. f > enemy[i]                           B. f < enmey[i]       \nC. f == enemy[i]enemy = [   ,   ,   ,   ,   ] \nf = 7 \nfor i in range(5):\n    if            :\n        f += enemy[i]\n       \nD. f = enemy[i]\n小七战斗力敌人战斗力\n\n\n--- 第3页 ---\n答案解密\n答案：A\n \n解析：本题考查的是模拟算法的循环控制。我们需要设\n置合适的条件控制整个模拟过程继续或者停止，if语句\n后要填写小七击败敌人的条件，小七的战力要大于敌人\n才能击败它，所以旁边应该填f > enemy[i]。正确答案\n选A。\n\n\n--- 第4页 ---\n答案解密\n3、苹果成熟后，蜗牛想吃树上的苹果，离蜗牛最近的苹\n果高9米，它白天可以往上爬3米，但是夜晚休息的时候\n会下降1米，蜗牛第几天能吃到苹果呢？（   ） \nA. 第3天                          B. 第4天                           C. 第5天                        \n D. 第6天                        \n\n\n--- 第5页 ---\n答案解密\n答案：B\n \n解析：本题考查的是逻辑思维。\n蜗牛每天向上爬3米，晚上下滑1米，第1天结束蜗牛总\n共上升2米，第2天结束总共上升4米，第3天结束总共\n上升6米，在第4天的时候，蜗牛上升3米后到达苹果位\n置，能够吃到苹果。所以正确答案选B。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L15-4",
+    "unit": "L15",
+    "resources": {
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-4\\knowledge.png",
+        "content": "记录下人脸信息\nrecordFace()\n记录人脸信息\n框出画面中的人脸\nmarkFace()\nisFace()\n检测是否有人脸\n检测人脸信息\ngetFaceList()\n检测是否有权限\n判断列表长度\n— len0\n升级门禁系统\n拍摄照片\ntakePhoto()\n查看照片\nshowPhoto()\n照相机模式\n切换照片\nnextPhoto()\nexitPhoto()\n退出查看照片\n显示图片\nshowPic()\n图片与声音提示\n播放声音\nplaySound()"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块23：升级门禁系统\n模块24：自动拍照门禁\nL15-4门前大乌龙\n\n\n--- 第2页 ---\n判断权限\n丰富提示\n项目内容\n项目内容\n单词卡mark :标记 record :记录\nlist:列表自动拍照记录人脸\nphoto:照片\n\n\n--- 第3页 ---\n记录人脸\n概念讲解\ninitAI()用于初始化AI 视觉识别模块。\n括号内如果什么都不填，默认使用前面的\n屏幕，如果填' 后'会使用后面的屏幕。initAI()\nsetMode()用于设置AI视觉识别模块\n的模式，括号内填入模式名称。本节课\n新增了人脸识别模式和照相机模式。 视觉模块的模式setMode( '字符串')\nAI视觉识别模块两面的屏幕都能使用！\n\n\n--- 第4页 ---\nrecordFace(' 字符串')\n记录人脸\n一直检测\n如果按下A 键\n录入小创客的人脸信息代\n码示例概念讲解\nmarkFace()用于框出画面中的人脸。 markFace()\nrecordFace()语句可以记录人\n脸信息，括号内填入名字，名字\n是字符串格式。 名字\n初始化视觉模块\n设置为人脸识别模式\n框出识别到的人脸initAI()\nsetMode(' 人脸识别')\nmarkFace()while True:\nifisPressed(' A'):\nrecordFace(' 小创客 ')       \n\n\n--- 第5页 ---\n判断权限\n用getFaceList() 识别人\n脸，如果画面中的人有\n权限，会把对应信息存\n入一个列表。最多可以同时识别3 个人。getFaceList()\n返回一个列表，储存\n识别到的人脸信息判断权限\n代码示例\n一直检测\n如果列表不为空，说明画面中的人有权限\n如果列表为空，说明\n画面中的人没有权限如果检测到人脸\n识别结果存入变量facewhile True:\nifisFace():\nface = getFaceList()\nif len(face) > 0:\nprintPos(' 有权限', '中间')\nelse:\nprintPos(' 没权限', '中间')\n    \n\n\n--- 第6页 ---\nwhile True:\nifisFace():\nface = getFaceList()\nif len(face) > 0:\nshowPic(' 通过')\nplaySound(' right ')\nelse:\nshowPic(' 离开')\nplaySound(' wrong ')\n    \n丰富提示\n代码示例使用showPic() 语\n句和playSound()\n语句，用声音和图\n像进行提醒。\n有权限提\n醒通过\n没权限提\n醒离开\n\n\n--- 第7页 ---\n自动拍照\n初始化，使用后面的屏幕\n设置为照相机模式\n按下A键拍照\n按下B键查看照片代码示例\n按下C键查看下一张照片\n按下D键退出查看照片状态概念讲解\ninitAI(' 后')\nsetMode(' 照相机 ')\nwhile True:\nifisPressed(' A'):\ntakePhoto()\nifisPressed(' B'):\nshowPhoto()\nifisPressed(' C'):\nnextPhoto()\nifisPressed(' D'):\nexitPhoto()takePhoto()  拍照 showPhoto()  查看照片\nnextPhoto()  下一张照片 exitPhoto()  退出查看\n\n\n--- 第8页 ---\n自动拍照\n完成提醒陌生人离开和自动拍照的功能。\n代码示例\n如果有画面中的人有权限，\n用图片和声音提示通过\n如果没有权限\n图片和声音提醒离开\n设为照相机模式，并给陌生人拍照\n等待5秒\n切回人脸识别模式while True:\nifisFace():\nface = getFaceList()\niflen(face) > 0:\nshowPic(' 通过')\nplaySound('right')\nelse:\nshowPic(' 离开')\nplaySound('wrong')\nsetMode(' 照相机')\ntakePhoto()\ntime.sleep(5)\nsetMode(' 人脸识别')\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、猴赛雷想使用视觉模块后面的屏幕拍照，但是忘记初\n始化和设置照相机模式，应该帮他补充哪段代码呢？（ ）\n动手试一试\nA. initAI()\nsetMode(' 照相机')   \nC. initAI('后')\nsetMode( '照相机')B. setMode( '照相机') \ninitAI()\nD. setMode(' 照相机') \ninitAI('后')while True:\nifisPressed(' A'):\ntakePhoto()\n\n\n--- 第2页 ---\n2、下列哪个语句用于录入人脸信息？（ ）\n动手试一试\nA. isFace()\nB. markFace()C. recordFace()D. getFaceList()\n\n\n--- 第3页 ---\nA. len(face) > 0\n动手试一试\n3、人脸信息已经录入，补充下列哪个条件，可以在检测\n到画面中的人有权限时，提醒通过？（ ）\nwhile True:\nifisFace():\nface = getFaceList()\nif               :\nshowPic(' 通过 ')\nplaySound(' right ')    \nC. len(face) == 0B. len(face) < 0\nD. len(face) <= 0\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L15\\L15-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、猴赛雷想使用视觉模块后面的屏幕拍照，但是忘记初\n始化和设置照相机模式，应该帮他补充哪段代码呢？（ ）\nA. initAI()\nsetMode(' 照相机')   \nC. initAI('后')\nsetMode( '照相机')B. setMode( '照相机') \ninitAI()\nD. setMode(' 照相机') \ninitAI('后')while True:\nifisPressed(' A'):\ntakePhoto()\n\n\n--- 第2页 ---\n答案解密\n答案：C\n解析：本题考查的是initAI()语句和setMode() 语\n句。initAI()用于初始化AI 视觉识别模块，这里我\n们要使用后面的屏幕，所以应该使用initAI ('后')。\nsetMode()用于设置AI 视觉识别模块的模式，括号内\n填入模式名称，这里需要使用照相机模式，要使用\nsetMode( '照相机') 。并且视觉模块需要先初始化\n才能使用，所以正确答案选C 。\n\n\n--- 第3页 ---\n答案解密\n2、下列哪个语句用于录入人脸信息？（ ）\nA. isFace()\nB. markFace()\nC. recordFace()D. getFaceList()\n答案：C\n解析：本题考查的是recordFace() 语句。isFace()\n用于判断画面中是否有人脸；markFace()用于给画\n面中的人脸画框；recordFace() 用于录入人脸信息；\ngetFaceList()用于检测画面中的人脸是否有权限。所以正确答案选C 。\n\n\n--- 第4页 ---\n答案解密\nA. len(face) > 0\n3、人脸信息已经录入，补充下列哪个条件，可以在检测\n到画面中的人有权限时，提醒通过？（ ）\nwhile True:\nifisFace():\nface = getFaceList()\nif               :\nshowPic(' 通过 ')\nplaySound(' right ')    \nC. len(face) == 0B. len(face) < 0\nD. len(face) <= 0\n\n\n--- 第5页 ---\n答案解密\n答案：A\n解析：本题考查的是getFaceList()语句的使用。\ngetFaceList() 语句用于识别画面中的人是否有权限，\n并且把画面中有权限的人脸信息存储进列表中，如果列\n表不为空，也就是列表的长度大于0 的话，说明画面中\n的人有权限。所以答案选A 。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L16-1",
+    "unit": "L16",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL16-1\nand [aend]\nconj.和，与；加；接着\n【例句】\nLeng Xuefeng and Hou Sailei are both\nconfused.\n冷雪丰和猴赛雷都很疑惑。\nor [o:r]\nNo\nYes\nconj.或；否则；要不然\n【短语】\nyes or no\n是或否\nice[ais]\nn.冰；冰淇淋；溜冰场\nv.冰镇；冰冻，结冰\ncandy [' kaendi]\nn.糖果\nv.用糖煮\nadj.甜言蜜语的\nM\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-1\\knowledge.png",
+        "content": "用枚举法解决组合数问题\n筛选符合要求的两位数\n更多示例\nnums=[1，2，3，4]\nnums = [2, 3, 6, 7]\nfor nl in nums:\nfor n2in nums:\nfor nl in nums:\nfor n3 in nums:\n①for循环嵌套\nn=n1*100+n2*10+n3\nfor n2 in nums:\n枚举所有组合\nif n1 == n3:\nprint(n)\nn = n1*10 + n2\n②组合成两位数\n组合三位数并筛选\nif n%3 == 0:\n③使用if语句\n进行筛选并打印\ncandy=【'果味软糖'，巧克力'，跳跳糖']\nprint(n)\nforiinice:\nfor c in candy:\n循环遍历加判断\nifi！='芒果冰淇淋'：\n枚举三步就这么办\nprint(i，c)\n字符串组合"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块25：拿捏虫虫打倒鼠鼠\n模块26：冰淇淋之王 \nL16-1 雪丰冰城\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡组合两位数\n筛选符合要求的两位数\n组合三位数\n字符串组合\nand:和 or:或\nice:冰 candy:糖\n\n\n--- 第3页 ---\n组合两位数\n如何才能得到1、2、3\n组成的所有两位数\n像这种组合问题，可以用for循环嵌套来枚举解决。\n虫子编号是由1、2、3中\n的数字组成的两位数。\n把数字1、2、3 存储在列表nums中\n外层for循环遍历得到 十位上的数\n内层for循环遍历得到 个位上的数\n这两个数字组合起来，组成 两位数部\n分\n代\n码\n示\n例\n\n\n--- 第4页 ---\n组合两位数\n外层for循环遍历得到 十位上的数\n内层for循环遍历得到 个位上的数\n组合得到两位数并赋值给变量n代\n码\n示\n例十\nn1正确组合\n计算式：n1 * 10 + n2  \n如果n1表示枚举得到的十位数，n2表示个位数。\n个\nn2两位数\n两位数\n\n\n--- 第5页 ---\n筛选符合要求的两位数\n用if语句对数字 n 进行判断，筛选出符合要求的两位数。\n判断条件\n循环遍历加判断，枚举三步就这么办！\n①  for循环嵌套，枚举所有组合\n②  组合成两位数\n③ 使用if语句进行筛选并打印代码示例\n偶数 除以2的余数为0\n  n % 2 == 0\n\n\n--- 第6页 ---\n组合三位数\n概念详解\n组成三位数，需要三层for循环，第一层for循环取出百\n位，第二层for循环取出十位，第三层for循环取出个位。\n每层for循环作为上个for循环的下级代码,都需要再缩进一次。\n格式：三位数 =  百位*100 + 十位*10 + 个位数\n循环遍历取出 百位\n循环遍历取出 十位\n循环遍历取出 个位\n组合得到三位数\n代码示例\n\n\n--- 第7页 ---\n字符串组合\n使用双层for循环嵌套，\n分别遍历糖果列表和冰淇\n淋列表，就能找出所有的\n搭配组合。\n代码示例\n双层for循环嵌套，\n枚举所有组合\n打印输出所有组合\n\n\n--- 第8页 ---\n字符串组合\n添加if语句，可以筛选\n出不含某种配料的组合。\n代码示例\n双层for循环嵌套，\n枚举所有组合\n筛选并打印\n\n\n--- 第9页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、想要找出用列表nums中的数字，组合成的所有两位\n数，方框中应该填写什么？（   ） \nA. n = n1 + n2                      B. n = n1 * n2                  C.  n = n1*10 + n2                   \n\n\n--- 第2页 ---\n动手试一试\n2、想在由数字1、2、3组合成的所有两位数中，找出所\n有的偶数，判断条件正确的是？（   ） \nA. n%2 == 0    B. n%2 != 0                 C.  n/2 == 0                     \n\n\n--- 第3页 ---\n动手试一试\n3、猴赛雷和冷雪丰在点早餐！他们需要根据点餐程序的输\n出内容点餐。那么他们能得到哪些早餐组合？（   ）\nA.                       \n B.                    \n C.             \n点\n餐\n程\n序\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、想要找出用列表nums中的数字，组合成的所有两位\n数，方框中应该填写什么？（   ） \nA. n = n1 + n2                      B. n = n1 * n2                  C.  n = n1*10 + n2                   \n答案：C。\n解析：本题考查的是组合两位数。n1表示枚举得到的十位上的数，\nn2表示个位数。由n1和n2组合成的两位数，应该用n1乘10，再加\n上个位数n2。计算式为：n1*10 + n2，所以正确答案为C选项。\n\n\n--- 第2页 ---\n答案解密\n2、想在由数字1、2、3组合成的所有两位数中，找出所\n有的偶数，判断条件正确的是？（   ） \nA. n%2 == 0    B. n%2 != 0                 C.  n/2 == 0                     \n\n\n--- 第3页 ---\n答案解密\n答案：A。\n解析：本题考查的是筛选偶数。能被2整除的数是偶数，所以偶数\n除以2的余数为0。Python中取余数的符号为%，想要判断数字n除\n以2的余数是否为零，代码可以编写为n%2 == 0，所以正确答案为\nA选项。\n\n\n--- 第4页 ---\n答案解密\n3、猴赛雷和冷雪丰在点早餐！他们需要根据点餐程序的输\n出内容点餐。那么他们能得到哪些早餐组合？（   ）\nA.                       \n B.                    \n C.             \n点\n餐\n程\n序\n\n\n--- 第5页 ---\n答案解密\n答案：A。\n解析：本题考查的是的逻辑推理。\n根据点餐程序第5行的内容，程序不会输出含有汉堡和可乐的早餐\n组合；那么经过筛选后，程序只会输出：果汁搭配饭团的组合，酸\n奶搭配饭团的组合。所以正确答案为A选项。果汁 可乐 酸奶\n汉堡 果汁 汉堡 可乐 汉堡 酸奶 汉堡\n饭团 果汁 饭团 可乐 饭团 酸奶 饭团\n\n"
+      }
+    }
+  },
+  {
+    "id": "L16-2",
+    "unit": "L16",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL16-2\nsign [sain]\nn.标志；征兆；记号\nv.签名；示意；打手语\nfollow['fα:lou]\nv.跟随；追随；理解\nn.跟随；追随\nplay [ple1]\nv.(使)播放；玩；摆弄\nn.剧本；游戏；比赛\nanimation\n[enI'meifen]\nn.动画；活力；动画制作\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-2\\knowledge.png",
+        "content": "recordsign()\n记录路牌\nissign()\n识别路牌\n视觉智能车\n播放动画\nplayAnim()\n识别左右转路牌\n智能车左右转运动\n控制智能车运动\n识别矿场或红灯路牌\n智能车播放动画"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块27：路牌识别\n模块28：视觉智能车\nL16-2能源危机\n\n\n--- 第2页 ---\n识别路牌\n播放动画\n项目内容\n项目内容\n单词卡sign :标志 follow :跟随\nplay :播放无人驾驶记录路牌\nanimation :动画\n\n\n--- 第3页 ---\n记录路牌\n按下 D键记录禁止通行路牌按下 C键记录红灯路牌代\n码\n示\n例recordSign() 语句可以 记录路\n牌信息，括号内填入 路牌名称 ，\n名称是字符串格式。字符串\n按下 A键记录左转路牌\n按下 B键记录右转路牌标记路牌\nwhile True:\nifisPressed( 'A'):\nrecordSign( '左转 ')\nifisPressed( 'B'):\nrecordSign( '右转 ')\nifisPressed( 'C'):\nrecordSign( '红灯 ')\nifisPressed( 'D'):\nrecordSign( '禁止通行 ')       \nrecordSign( '路牌名称 ')\n\n\n--- 第4页 ---\nisSign( '路牌名称 ')\n识别路牌\nisSign()语句用于 识别路牌 。\n括号内填入 路牌名称 ，它可\n以检测是不是对应路牌。\n代码示例\n一直检测\n检测是否有左转路牌\n智能车左转如果到达路口\n停车字符串\nwhile True:\nifisAllblack() :\nsetPower(0,0)\nif isSign( '左转 '):\nmove(7)\nturnLeft(90)\nsetPower(80,80)\n    \n识别路牌\n\n\n--- 第5页 ---\n播放动画\n代码示例playAnim() 语句用于 播放动画 。\n括号内填入 动画名称 ，智慧核心\n会播放对应动画。播放动画\n字符串\n检测到红灯路\n牌，播放提醒\n动画检测到禁止\n通行路牌，\n播放挖矿动\n画while True:\nifisAllblack() :\nsetPower(0,0)\nif isSign( '禁止通行 '):\nplayAnim( '挖矿 ')\nif isSign( '红灯 '):\nplayAnim( '提醒 ')\n    \nplayAnim( '动画名称 ')\n\n\n--- 第6页 ---\n无人驾驶\n无人驾驶\n现实中也有无人驾驶汽车，和我们的智能车类似，通过摄\n像头来检测周围的汽车、行人以及道路上的标志和路线等，\n再通过汽车上的 AI算法实现无人驾驶。但是目前技术还不\n够成熟，无人驾驶车辆还没办法完全做到独立驾驶。\n汽车各个位置\n有摄像头，检\n测周围的情况。用AI算法实\n现无人驾驶。\n\n\n--- 第7页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nA. 10\nC. 5B. 20\nD. 15\n动手试一试\n1、运行下方代码，当我们输入数字 10，程序会输出什\n么？（）\na = input()\na = int(a)\nifa < 5:\nprint(a*2)\nelse:\nprint(a-5)\n\n\n--- 第2页 ---\n2、下列哪个语句可以让视觉模块记录红灯路牌？ （）\n动手试一试\nA. recordSign ('红灯 ')\nC. isSign( '红灯 ')B. recordSign (红灯)\nD. isSign(红灯)\n\n\n--- 第3页 ---\nA. recordSign ('红灯 ')\nC. recordSign( '禁止通行 ')B. isSign( '红灯 ')\nD. isSign( '禁止通行 ')\n动手试一试\n3、下列哪个条件可以让智能车识别到禁止通行路牌时，\n智慧核心播放提醒动画？ （）\nwhile True:\nifisSign( '红灯 '):\nplayAim( '挖矿 ')\nif :\nplayAim( '提醒 ')   \n\n"
+      }
+    }
+  },
+  {
+    "id": "L16-3",
+    "unit": "L16",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL16-3\ngold[gould]\nn.金；金子；金币\nadj.金色的\ndiamond['daramand]\nn.钻石;金刚石\nadj.钻石(一样)的\nvine [vain]\nn.藤;藤蔓\nvi.形成藤蔓\ncloud [klaud]\nn.云，云朵\nv.模糊不清，（使）起雾;\n布满云;\nw\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-3\\knowledge.png",
+        "content": "遍历字符串\n关注字符内容\n关注字符位置\nbdbdbddbdbdb\n计数\n拼接\n找指定位置的字符\n'dggdggggdd\n'bdbbdddbbd\n‘防攻守修御打守击防攻\n=\nn\n0\nfor\ni in s:\nfor i in s:\nif i ==\nif i ==\n\"b\"\nfor :\ni in range(len(s)):\nn += 15\ns2 +=\nif i % 2 == 0:\nif i == 'd':\nelif i ==\n'd'\nr += s[i]\nn += 20\ns2 +=\nprint(r)\nprint(n)\nprint(s2)"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块29：营救大祭司L16-3  模块30：细胞救援队\n拯救大祭司\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡遍历字符串的方式一\ngold:金币vine:藤蔓遍历字符串的方式二\ndiamond:钻石cloud:云朵\n\n\n--- 第3页 ---\n遍历字符串的方式一\ns ='ddrtdddrttdd'n =0foriin s:ifi =='d':n +=1print(n)代码示例只关注字符的内容，可以用这种方式遍历字符串：    fori in 字符串：要统计路线信息中字母'd'的个数，应该怎么做呢？\ni会依次得到s中的每个字符\n路线信息\n根据内容筛选字符统计个数得到最终结果\n循环变量i代表每个字符\n\n\n--- 第4页 ---\n遍历字符串的方式二\n代码示例i会依次得到s中每个字符的位置\n关注字符位置(索引)，可以用这种方式遍历字符串：for i in range(len(字符串))：\n筛选位置根据位置取对应字符每个都有自己的名字，如何输出的名字呢？\n索引print(s[i])s ='防进守攻修打'if i % 2 == 1:        for i in range(len(s)):循环变量i代表每个字符的索引\n\n\n--- 第5页 ---\n两种方式使用场景的对比\n\n\n--- 第6页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、变量 s中存储了一串由数字组成的字符串。要统计出\n该字符串中 所有数字的和 ，横线上应该填写（  ）？\nA.for i in s: \nB.for i in range(len(s)):  \n\n\n--- 第2页 ---\n动手试一试\n2、变量 s中存储了一串由汉字和数字组成的字符串。要想把\n该字符串中所有的 汉字拼接在一起 ，横线上应该填写 ( )？\nA. for i in s: \nB. for i in range(len(s)):  \n\n\n--- 第3页 ---\n动手试一试\n3、凯撒密码 是古时候欧洲常用的一种加密方式，它的加密方式是将\n26个字母分别 往右平移 3位。问明文 \"ACWZY \"经过1次这样的加密方\n式,对应的密文为 (    ) ?\n说明：结尾的字符会再次从头开始\n例如： A=>D    B=>E    X=>A    Y=>B    Z=>C\nA.'DFJZH '                     B.'DFZCB '                     C.'DFZDB '                      D.'DCWZH '\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、变量 s中存储了一串由数字组成的字符串。要计算出\n该字符串中 所有数字的和 ，横线上应该填写（  ）？\nA. for i in s: \nB.for i in range(len(s)):  答案解密\n答案：  A。\n解析：这道题目中要计算出字符串中所有数字的和，所以\n重点关注的是字符的内容，因此要用  for i in s 的方式进行\n遍历，循环变量 i 代表的是每一个具体的字符，所以选项 A\n正确。\n\n\n--- 第2页 ---\n答案解密\nA. for i in s: \nB. for i in range(len(s)):  \n答案： B。\n解析：这道题目中的汉字的索引都是偶数，要把它们拼接起来，\n就要根据字符的位置 找到它们。所以要用  for i in range() 的方\n式进行遍历。\n所以，选项 B 正确。\n2、变量 s中存储了一串由汉字和数字组成的字符串。要想把\n该字符串中所有的 汉字拼接在一起 ，横线上应该填写 ( )？\n\n\n--- 第3页 ---\n3、凯撒密码 是古时候欧洲常用的一种加密方式，它的加密方式是将\n26个字母分别 往右平移 3位。问明文 \"ACWZY \"经过1次这样的加密方\n式,对应的密文为 (    ) ?\n说明：结尾的字符会再次从头开始\n例如： A=>D    B=>E    X=>A    Y=>B    Z=>C\n答案解密\n答案： B。\n解析：每个字母按顺序推后 3位A=>D,C=>F,W=>Z,Z=>C,Y=>B ,\n所以选 B。\nA.'DFJZH '                     B.'DFZCB '                     \nC.'DFZDB '                      D.'DCWZH '\n\n"
+      }
+    }
+  },
+  {
+    "id": "L16-4",
+    "unit": "L16",
+    "resources": {
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-4\\knowledge.png",
+        "content": "智能车循线\nfollowLine(\n移动一段距离\nmove()\n识别地图颜色\nturnLeft(\n旋转特定角度\nturnRightO\n设置舵机动力\nsetPower)\n颜色识别物流车\n设置模式\nsetMode（颜色识别\"）\nrecordColor()\n颜色识别功能\n记录颜色\n识别颜色\ndetectColor()\n识别地图颜色\n检测地图上的颜色区域一getColor("
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块31：颜色识别\n模块32：智能物流车\nL16-4超人厂长\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡color :颜色 record :记录\ndetect :检测\n颜色识别\n按需取货\n放下货物\n\n\n--- 第3页 ---\ninitAI(' 后')\nsetMode(' 颜色识别')\nwhile True:\nifisPressed('A'):\nrecordColor(' 红')\ngoods = detectColor()\nprintPos(goods, '中间')recordColor(' 字符串')\n颜色识别\n初始化视觉模块，\n设置颜色识别模式\n重复执行\n检测并打印识别结果\nrecordColor ()语句用于记录货\n物颜色，括号内填入颜色名称，是字符串格式。\n颜色名称颜色识别\ndetectColor() 语句会检测画面中是\n否有记录过的颜色，如果有，结果是颜色名称，如果没有，结果是' 无'。\n按下A键记\n录红色货物detectColor()\n颜色名称或者' 无'\n代\n码\n示\n例\n红\n\n\n--- 第4页 ---\nwhile True:\nfollowLine()\nifisAllBlack():\nenter()goods = detectColor()\nifgoods == '红'or goods == ' 蓝':\nsetClaw(1)\nmove(-7)\nturnRight(90)\nsetPower(80,80)\n按需取货\n检测货物颜色\n夹起红色或\n蓝色的货物\n循线行驶记录好需要的货物颜色后，控制小车循线，碰到黑线进入取货点，如果是需要的货物，夹起后退出取货点。\n检测到黑线后进入取货点\n取到货物后退出取货点代码示例\n\n\n--- 第5页 ---\n放下货物\n状态变量\n智能车取到货物后，不用进入取货点，不然会撞到其他货\n物。可以设置状态变量，记录智能车是否取到货物，取货成功则不再进入取货点。\n未取货时，状态设为' 空'\n状态为'空'时进入取货点\n取货成功后状态变为' 满'检测到黑线后进入取货点循线行驶\n夹起红色或蓝色的货物state = ' 空'\nwhile True:\nfollowLine()\nifstate == '空':\nifisAllBlack():\nenter()\ngoods = detectColor()\nifgoods == ' 红'or goods == ' 蓝':\nsetClaw(1)\nstate = '满'代码示例\n\n\n--- 第6页 ---\n放下货物\n到达红色或蓝色区域后，用getColor() 语句识别地图颜色是\n否和货物颜色相同，如果相同，进入放货点，放下货物。\n代码示例\n循线行驶\n识别地\n图颜色\n地图颜色和货物颜色相同，进入放货点卸货放下货物\nwhile True:\nfollowLine()\n...\ncolor = getColor()\nifcolor == goods:\nenter()setClaw(0)\n\n\n--- 第7页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n1、哪个语句可以让视觉模块记录货物颜色？（ ）\n动手试一试\nA. getColor()\nC. detectColor()\nB. recordColor()\nD. setClaw()\n\n\n--- 第2页 ---\n动手试一试\n2、视觉模块已经记录过红色货物和蓝色货物的颜色，运\n行下方代码，此时智慧核心会打印什么内容 ？（）\ninitAI(' 后')\nsetMode(' 颜色识别 ')\nwhileTrue:\ng = detectColor()\nprintPos(g, '中间 ')\nA. 红 C. 无 B. 蓝\n\n\n--- 第3页 ---\n3、观察下列代码，最后程序会输出哪个数字？（ ）\n动手试一试\nstate = ' 开始运算 '\na = 0\nwhile state == ' 开始运算 ':\na += 2ifa > 5:\nstate = '结束运算 '\nprint(a)\nA. 0 C. 5 B. 4 D.6\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L16\\L16-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案： B\n解析：本题考查的是 recordColor ()语句。getColor()\n语句用于识别智能车底部的颜色。 recordColor() 语句\n可以让视觉模块记录货物颜色。 detectColor() 语句可\n以使用视觉模块 识别货物颜色。setClaw() 语句可以控\n制夹爪合上或打开 。答案选 B。1、哪个语句可以让视觉模块记录货物颜色 ？（）\nA. getColor()\nC. detectColor()\nB. recordColor()\nD. setClaw()\n\n\n--- 第2页 ---\n答案解密\n2、视觉模块已经记录过红色货物和蓝色货物的颜色，运\n行下方代码，此时智慧核心会打印什么内容 ？（）\ninitAI( '后')\nsetMode( '颜色识别 ')\nwhileTrue:\ng = detectColor()\nprintPos(g, '中间 ')\nA. 红 C. 无 B. 蓝\n\n\n--- 第3页 ---\n答案解密\n答案： B\n解析：本题考查的是 detectColor() 语句。智能车前\n方的货物是蓝色， detectColor() 语句检测的结果应\n该是蓝，打印内容是蓝 。答案选B。\n\n\n--- 第4页 ---\n答案解密\n3、观察下列代码，最后程序会输出哪个数字 ？（）\nstate = '开始运算 '\na = 0\nwhile state == '开始运算 ':\na += 2\nifa > 5:\nstate = '结束运算 '\nprint(a)\nA. 0 C. 5 B. 4 D.6\n\n\n--- 第5页 ---\n答案解密\n答案： D\n解析：本题考查的是状态变量。只有在状态变量 state\n的值是 '开始运算 '的时候，while语句的下级代码 才会执\n行。循环执行到第 3次，a的值是6时，state变为 '结束\n运算 '，循环不再执行，最终 a的值是 6。答案选D。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L17-1",
+    "unit": "L17",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL17-1\nvolume ['va:ljam]\nn.音量；响度；体积\nv.成团卷起\nblock [bla:k]\nn.一块；街区；障碍物\nv.阻塞；遮住；封锁\nhide [haid]\nv.躲藏；遮住；隐瞒\nn.隐匿处；兽皮\nW\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-1\\knowledge.png",
+        "content": "猴赛雷的\ngetVolume()\n笔记本\n升级软硬件步骤\n获取环境中的音量\n使用软硬件~一共分三步～\n先要梳理规则，弄清楚套路\n100\n然后设计玩法，把硬件加入\n最后替换代码，游戏超级酷\n（音量大小范围）"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块33：律动音响\n模块34：天空疾跑\nL17-1 豪华晚宴\n\n\n--- 第2页 ---\n声控躲猫猫\n项目内容\n项目内容\n单词卡volume:音量 block:一块天空疾跑律动音响\nhide:躲藏 run:奔跑\n\n\n--- 第3页 ---\n律动音响\n代\n码\n示\n例\ngetVolume()语句可以检\n测周围环境的音量，这个\n语句获得的音量数值是0\n到100，音量越大，数字\n越大。音量超过100时，\n这个语句的结果也是100。\n音量45\n音量9音量检测\n去掉个位数后，十位数\n就是音量块的亮起个数,\n可以使用//计算十位数。\n获取音量值\n计算音量值的十位数\n绘制对应数量的音量块import pgzrun\n...\ndef draw():\n    ...\n    volume = getVolume()\n    n = volume // 10\n    for i in range(n):\n        blocks[i].draw()\n\n\n--- 第4页 ---\n声控躲猫猫\n升级《躲猫猫》小游戏，用声音控制猴赛雷躲避和奔跑。\nimport pgzrun\n...\ndef update():\n    ...\n    volume = getVolume()\n    if volume > 50:\n        hsl_run()\n    else:\n        hsl_hide()代码示例\n大音量控制\n角色奔跑\n小音量控制\n角色躲藏\n游戏升级\n机械猫不在时，使用大音量\n给角色加油，让角色快跑！\n机械猫出现时，我们和角色\n一起保持安静，蹲下躲避！升级思路\n\n\n--- 第5页 ---\n天空疾跑\n使用软硬件～一共分三步：\n先要梳理规则，弄清楚套路；\n然后设计玩法，把硬件加入；\n最后替换代码，游戏超级酷。猴的小课堂\n用猴赛雷总结的思路，\n把《天空疾跑》也升\n级为声控游戏。\n代码示例 小音量控制角色奔跑\n音量小于20时静止\n大音量控制角\n色奔跑并跳跃import pgzrun\n...\ndef update():\n    ...\n    volume = getVolume()\n    if 20 < volume  < 50:\n        run()\n    if volume >= 50:\n        run()\n        jump()\n\n\n--- 第6页 ---\n项目日志\n\n\n--- 第7页 ---\nA. -50                 C. 150                           B. 50 D. 200                      \n动手试一试\n1、运行下方代码，程序可能会输出哪个数字？（   ） \nwhile True:\n    volume = getVolume() \n    print(volume)\n\n\n--- 第8页 ---\n动手试一试\nA. 大音量                 C. 49                           B. 小音量 D. 4                      \n2、观察下方代码，外界的音量为49时，程序会输出什\n么内容？（   ） \nwhile True:\n    volume = getVolume()\n    n = volume // 10 \n    if n > 5:\n        print('大音量')\n    else:\n        print('小音量')\n\n\n--- 第9页 ---\n动手试一试\n3、【多选题】假设音量值每增加10，猴赛雷就能往前\n跳1米，下列哪些音量值可以帮助猴赛雷跳到下一块踏\n板上呢？（   ） \nA. 16                 C. 59                          B. 69 D. 75                     6米\n\n\n--- 第10页 ---\n答案解密\nA. -50                 C. 150                           B. 50 D. 200                      \n1、运行下方代码，程序可能会输出哪个数字？（   ） \nwhile True:\n    volume = getVolume() \n    print(volume)\n答案：B\n \n解析：本题考查的是getVolume()语句。\ngetVolume()语句可以检测周围环境的音量，这个语\n句获得的音量数值是0到100，音量越大，数字越大。\n音量超过100时，这个语句的结果也是100。所以选B。\n\n\n--- 第11页 ---\n答案解密\nA. 大音量                 C. 49                           B. 小音量 D. 4                      \n2、观察下方代码，外界的音量为49时，程序会输出什\n么内容？（   ） \nwhile True:\n    volume = getVolume()\n    n = volume // 10 \n    if n > 5:\n        print('大音量')\n    else:\n        print('小音量')\n\n\n--- 第12页 ---\n答案解密\n答案：B\n \n解析：本题考查的是if-else条件判断。n代表音量\n值的十位数，49的十位数是4，小于5，不满足if语句\n的条件，会执行else的下级代码。所以答案选B。\n\n\n--- 第13页 ---\n答案解密\n3、【多选题】假设音量值每增加10，猴赛雷就能往前\n跳1米，下列哪些音量值可以帮助猴赛雷跳到下一块踏\n板上呢？（   ） \nA. 7                C. 59                          B. 69 D. 75                     6米\n\n\n--- 第14页 ---\n答案解密\n答案：BD\n \n解析：本题考查的是逻辑思维。两块踏板之间的距离\n是6米，音量值每增加10，猴赛雷就能往前跳1米，所\n以音量值至少要大于或者等于60，猴赛雷才能跳到下\n一块踏板上。B和D的音量值大于60，所以答案选B和D。\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nA. -50                 C. 150                           B. 50 D. 200                      \n动手试一试\n1、运行下方代码，程序可能会输出哪个数字？（   ） \nwhile True:\n    volume = getVolume() \n    print(volume)\n\n\n--- 第2页 ---\n动手试一试\nA. 大音量                 C. 49                           B. 小音量 D. 4                      \n2、观察下方代码，外界的音量为49时，程序会输出什\n么内容？（   ） \nwhile True:\n    volume = getVolume()\n    n = volume // 10 \n    if n > 5:\n        print('大音量')\n    else:\n        print('小音量')\n\n\n--- 第3页 ---\n动手试一试\n3、【多选题】假设音量值每增加10，猴赛雷就能往前\n跳1米，下列哪些音量值可以帮助猴赛雷跳到下一块踏\n板上呢？（   ） \nA. 16                 C. 59                          B. 69 D. 75                     6米\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\nA. -50                 C. 150                           B. 50 D. 200                      \n1、运行下方代码，程序可能会输出哪个数字？（   ） \nwhile True:\n    volume = getVolume() \n    print(volume)\n答案：B\n \n解析：本题考查的是getVolume()语句。\ngetVolume()语句可以检测周围环境的音量，这个语\n句获得的音量数值是0到100，音量越大，数字越大。\n音量超过100时，这个语句的结果也是100。所以选B。\n\n\n--- 第2页 ---\n答案解密\nA. 大音量                 C. 49                           B. 小音量 D. 4                      \n2、观察下方代码，外界的音量为49时，程序会输出什\n么内容？（   ） \nwhile True:\n    volume = getVolume()\n    n = volume // 10 \n    if n > 5:\n        print('大音量')\n    else:\n        print('小音量')\n\n\n--- 第3页 ---\n答案解密\n答案：B\n \n解析：本题考查的是if-else条件判断。n代表音量\n值的十位数，49的十位数是4，小于5，不满足if语句\n的条件，会执行else的下级代码。所以答案选B。\n\n\n--- 第4页 ---\n答案解密\n3、【多选题】假设音量值每增加10，猴赛雷就能往前\n跳1米，下列哪些音量值可以帮助猴赛雷跳到下一块踏\n板上呢？（   ） \nA. 7                C. 59                          B. 69 D. 75                     6米\n\n\n--- 第5页 ---\n答案解密\n答案：BD\n \n解析：本题考查的是逻辑思维。两块踏板之间的距离\n是6米，音量值每增加10，猴赛雷就能往前跳1米，所\n以音量值至少要大于或者等于60，猴赛雷才能跳到下\n一块踏板上。B和D的音量值大于60，所以答案选B和D。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L17-2",
+    "unit": "L17",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL17-2\nattitude ['etrtu:d]\nn.姿态；态度；看法；姿\n势；个人风格\npose [pouz]\nn.(为拍照等摆的)姿势\nv.造成；提出；摆好姿势\nbeat [bi:t]\nv.击打；搅拌；避开\nn.敲击；强音拍\nangle['eng(e)]\n30°\n45°\nn.角度；视角；立场\nv.斜移；定位于；博取\n90°\n120°\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-2\\knowledge.png",
+        "content": "getVolume()\n获取音量大小\n音量范围\n0-100\n智慧核心的功能\ngetAttitude()\n获取姿态名称\n智慧核心的七种姿态\n震动、箭头朝上、箭头朝下、向左倾\n斜、向右倾斜、屏幕朝上、屏幕朝下"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块35：消灭bug虫\n模块36：核桃农场物语\nL17-2 他是谁\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡attitude:姿态 pose:姿势角色旋转姿态传感器\nbeat:击打 angle:角度\n\n\n--- 第3页 ---\n姿态传感器\ngetAttitude()语句可以检测智慧核心的姿势和状态，一\n共有七种姿态：向左倾斜、向右倾斜、屏幕朝上、屏幕\n朝下、箭头朝上、箭头朝下、震动。姿态检测\n屏幕朝上 向右倾斜 向左倾斜 屏幕朝下\n箭头朝上 箭头朝下 震动\n\n\n--- 第4页 ---\n姿态传感器\n代码示例\n向下移动\n向上移动\n向左移动\n向右移动def update():\n    pose = getAttitude()\n    if pose == '箭头朝上':\n        hand.y += 10\n    if pose == '箭头朝下':\n        hand.y -= 10\n    if pose == '向左倾斜':\n        hand.x -= 10\n    if pose == '向右倾斜':\n        hand.x += 10《消灭bug虫》游戏中，我们通过检测姿态传感器的不同姿\n态，控制小手向不同方向移动。升级游戏\n\n\n--- 第5页 ---\n角色旋转\n使用角色.angle可以设置角色的角度。角色旋转\n角度增加，向左旋转。\n角度减少，向右旋转。\nplayer.angle += 10\nplayer.angle -= 10\n\n\n--- 第6页 ---\n项目日志\n\n\n--- 第7页 ---\nA. 左                 C. 右                           B. 向左倾斜 D. 向右倾斜                      \n动手试一试\n1、运行下方代码，智慧核心向右倾斜时程序会输出什\n么内容？（   ） \nwhile True:\n    pose = getAttitude()\n    if pose == '向左倾斜':\n        print('左')\n    else:\n        print('右')\n\n\n--- 第8页 ---\n动手试一试\nA. player.x += 10\n2、补充下列哪段代码，可以让稻草人从位置①转动到\n位置②？（   ） \nD. player.angle -= 10 C. player.angle += 10B. player.x -= 10import pgzrun\n...\ndef update():\n             \n①\n②\n\n\n--- 第9页 ---\n动手试一试\n3、《撒网捞鱼》游戏中，不同的鱼分数不一样，如图\n所示，第1网鱼加了55分，第2网鱼加了50分，第3网鱼\n应该加多少分呢？（   ） \nA. 40                 C. 50                          B. 45 D. 55                     \n\n\n--- 第10页 ---\n答案解密\nA. 左                 C. 右                           B. 向左倾斜 D. 向右倾斜                      \n1、运行下方代码，智慧核心向右倾斜时程序会输出什\n么内容？（   ） \nwhile True:\n    pose = getAttitude()\n    if pose == '向左倾斜':\n        print('左')\n    else:\n        print('右')\n\n\n--- 第11页 ---\n答案解密\n答案：C\n \n解析：本题考查的是if-else语句。当智慧核心向右\n倾斜的时候，不满足if语句的条件，会执行else的下\n级代码，打印右。所以答案选C。\n\n\n--- 第12页 ---\n答案解密\nA. player.x += 10\n2、补充下列哪段代码，可以让稻草人从位置①转动到\n位置②？（   ） \nD. player.angle -= 10 C. player.angle += 10B. player.x -= 10import pgzrun\n...\ndef update():\n             \n①\n②\n\n\n--- 第13页 ---\n答案解密\n答案：C\n \n解析：本题考查的是角色旋转。角色.angle可以设置角\n色的角度。如果角色.angle增加一个数值，会向左旋转；\n如果角色.angle减少一个数值，会向右旋转。从位置①\n转动到位置②是向左旋转，需要增加角色的角度，所以\n答案选C。\n\n\n--- 第14页 ---\n答案解密\n3、《撒网捞鱼》游戏中，不同的鱼分数不一样，如图\n所示，第1网鱼加了55分，第2网鱼加了50分，第3网鱼\n应该加多少分呢？（   ） \nA. 40                 C. 50                          B. 45 D. 55                     \n\n\n--- 第15页 ---\n答案解密\n答案：B\n \n解析：本题考查的是逻辑思维。第1网鱼\n的分数是55分，第2网鱼        的分数是50分，\n说明   的分数比   低5分。那么第3网鱼                  \n也比第2网鱼                    低5分，所以第3网鱼的分数\n是45分。答案选B。\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nA. 左                 C. 右                           B. 向左倾斜 D. 向右倾斜                      \n动手试一试\n1、运行下方代码，智慧核心向右倾斜时程序会输出什\n么内容？（   ） \nwhile True:\n    pose = getAttitude()\n    if pose == '向左倾斜':\n        print('左')\n    else:\n        print('右')\n\n\n--- 第2页 ---\n动手试一试\nA. player.x += 10\n2、补充下列哪段代码，可以让稻草人从位置①转动到\n位置②？（   ） \nD. player.angle -= 10 C. player.angle += 10B. player.x -= 10import pgzrun\n...\ndef update():\n             \n①\n②\n\n\n--- 第3页 ---\n动手试一试\n3、《撒网捞鱼》游戏中，不同的鱼分数不一样，如图\n所示，第1网鱼加了55分，第2网鱼加了50分，第3网鱼\n应该加多少分呢？（   ） \nA. 40                 C. 50                          B. 45 D. 55                     \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\nA. 左                 C. 右                           B. 向左倾斜 D. 向右倾斜                      \n1、运行下方代码，智慧核心向右倾斜时程序会输出什\n么内容？（   ） \nwhile True:\n    pose = getAttitude()\n    if pose == '向左倾斜':\n        print('左')\n    else:\n        print('右')\n\n\n--- 第2页 ---\n答案解密\n答案：C\n \n解析：本题考查的是if-else语句。当智慧核心向右\n倾斜的时候，不满足if语句的条件，会执行else的下\n级代码，打印右。所以答案选C。\n\n\n--- 第3页 ---\n答案解密\nA. player.x += 10\n2、补充下列哪段代码，可以让稻草人从位置①转动到\n位置②？（   ） \nD. player.angle -= 10 C. player.angle += 10B. player.x -= 10import pgzrun\n...\ndef update():\n             \n①\n②\n\n\n--- 第4页 ---\n答案解密\n答案：C\n \n解析：本题考查的是角色旋转。角色.angle可以设置角\n色的角度。如果角色.angle增加一个数值，会向左旋转；\n如果角色.angle减少一个数值，会向右旋转。从位置①\n转动到位置②是向左旋转，需要增加角色的角度，所以\n答案选C。\n\n\n--- 第5页 ---\n答案解密\n3、《撒网捞鱼》游戏中，不同的鱼分数不一样，如图\n所示，第1网鱼加了55分，第2网鱼加了50分，第3网鱼\n应该加多少分呢？（   ） \nA. 40                 C. 50                          B. 45 D. 55                     \n\n\n--- 第6页 ---\n答案解密\n答案：B\n \n解析：本题考查的是逻辑思维。第1网鱼\n的分数是55分，第2网鱼        的分数是50分，\n说明   的分数比   低5分。那么第3网鱼                  \n也比第2网鱼                    低5分，所以第3网鱼的分数\n是45分。答案选B。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L17-3",
+    "unit": "L17",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-3\\flashcard.png",
+        "content": "核桃\nPython\n单词卡\nL17-3\nboard [bo:rd]\nn.板，木板；董事\n会；膳食\nv.上船；登机；寄\n宿\n【短语】\na boarding school 寄宿学校\nbubble ['b<bl]\nn.气泡；肥皂泡；妄想\nv.吐泡泡；起泡；沸腾；\n充满...感情\n【短语】\nblowbubbles吹泡泡\nbubble up 起泡，冒泡\nW\nO\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-3\\knowledge.png",
+        "content": "随机出在窗口底部\n平板\n智慧核心控制平板左右移动\n站在平板上\n咪噜\n随机左上或者右上弹起\n碰到窗口边界或者平板会反弹\n咪噜打泡泡\n泡泡\n泡泡的排布形状可以不同\n咪噜打泡泡\n咪噜碰到泡泡，泡泡消失\n游戏失败\n咪噜碰到窗口底部\n游戏成功\n打完所有泡泡，显示成功画面"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-3\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、用代码 milu.top = 0 设置milu的坐标，窗口中milu的\n位置可能是？（   ） \nA. 位置1                      B. 位置2                 C. 位置3                   D. 位置4                    \n位置1\n位置2位置3位置4x\ny700\n01000\n\n\n--- 第2页 ---\n动手试一试\n2、下列哪个选项，可以让milu向左上方移动呢？\nB.                    A.                       \n C.                    \n\n\n--- 第3页 ---\n动手试一试\n3、戳破不同的泡泡获得的分数如下，猴赛雷上一把游戏获\n得了17分，戳破下列哪个组合可以超过猴赛雷的分数？（   ）\nA.                       B.                    \nC.             \n D.             \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-3\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、用代码 milu.top = 0 设置milu的坐标，窗口中milu的位\n置可能是？（   ） \nA. 位置1                      B. 位置2                 \nC. 位置3                   D. 位置4                    \n答案：D。\n解析：本题考查的是角色的坐标。在Pygame中, milu.top表示角\n色milu顶部的y坐标。当milu设置为0,代表角色图片的顶部在y = 0\n的位置上,所以选项D符合要求。\n\n\n--- 第2页 ---\n答案解密\n2、下列哪个选项，可以让milu向左上方移动呢？\nB.                    A.                       \n C.                    \n\n\n--- 第3页 ---\n答案解密\n答案：C。\n解析：本题考查的是角色的移动。在Pygame中，角色.x 和 角\n色.y 代表角色的中心点在窗口中的位置。当x坐标减小,角色向左\n移动；当y坐标减小，角色向上移动。如果想让milu向左上移动，\n要同时让x坐标减小，y坐标减小，所以选项C符合要求。\n\n\n--- 第4页 ---\n答案解密\n3、戳破不同的泡泡获得的分数如下，猴赛雷上一把游戏获\n得了17分，戳破下列哪个组合可以超过猴赛雷的分数？（   ）\nA.                       B.                    \nC.             \n D.             \n\n\n--- 第5页 ---\n答案解密\n答案：D。\n解析：本题考查的是的逻辑推理。\n根据题目给到的泡泡分数，我们可以算出：选项A的总分为16分，\n选项B的总分为9分，选项C的总分为14分，选项D的总分为18分。\n只有D选项的分值超过了猴赛雷，所以正确答案为D选项。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L17-4",
+    "unit": "L17",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-4\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL17-4\nboat [bout]\nn.船；小船；轮船\nv.划船\ncoin [koin]\n$\nn.硬币；金属货币\nv.创造新词；铸币，造币\nfish [fi[]\nn.鱼；鱼肉；双鱼座\nv.钓鱼；搜寻；打听消息\nW\nR\nD"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-4\\knowledge.png",
+        "content": "创建两个背景角色\n无限背景\n背景角色向下移动\n循环拼接背景角色\n快艇看起来向前进\n快艇\n智慧核心控制快艇左右移动\n激流勇进\n障碍物、鱼儿\n重复随机出现\n捕鱼效果\n捕鱼\n捕鱼收获对应金币\n快艇碰到障碍物，游戏结束，\n结算画面\n显示获取金币数量"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块39：激流勇进(上)\n模块40：激流勇进(下)\nL17-4 激流勇进\n\n\n--- 第2页 ---\n快艇移动\n项目内容\n项目内容\n单词卡boat:船 flash:闪电障碍物&鱼无限背景\ncoin:硬币 ice:冰游戏结束\n\n\n--- 第3页 ---\n无限背景\n将两张背景图上下拼接，一起向下移动，一张背景图完全移出窗\n口后立刻拼接到另一张的上方，然后继续一起移动，不断重复。无限背景原理\ndef update():\n    bg1.y += 10\n    bg2.y += 10\n    \n    if bg1.top > 600:\n        bg1.bottom = bg2.top\n    if bg2.top > 600:\n        bg2.bottom = bg1.top代码示例\n控制两张背景向下移动\n背景1完全移出\n窗口后，拼接\n到背景2上方\n背景2完全移出\n窗口后，拼接\n到背景1上方\nbg1bg2\n\n\n--- 第4页 ---\n快艇移动\nif pose == '向左倾斜':\n    boat.x -= 12\nif pose == '向右倾斜':\n    boat.x += 12\nif boat.left < 75:\n    boat.left = 75\nif boat.right > 425:\n    boat.right = 425控制快艇左右移动\n设置边界，不让\n快艇游到岸上\n玩家移动\n用姿态传感器控制快\n艇左右移动，并且快\n艇不能游到岸上。\n代\n码\n示\n例\n75 425\n\n\n--- 第5页 ---\n障碍物&鱼\n每次出现一个障碍物，障碍\n物的造型随机，不同障碍物\n出现在不同区域。障碍物\n每次出现一条鱼，鱼的造型\n随机，位置随机，不同的鱼\n对应的金币数量不一样。鱼\n障碍物和鱼移出窗口下方时，随机一个新的造\n型，回到窗口上方，继续向下移动。重复出现原理\n\n\n--- 第6页 ---\n障碍物&鱼\n快艇碰到障碍物时，快艇切\n换为'快艇坏'造型。碰到障碍物\n快艇碰到鱼时，鱼移出窗口\n消失，不同的鱼增加不同数\n量的金币。碰到鱼\n'快艇坏'\n\n\n--- 第7页 ---\n游戏结束\n通过角色造型来控制游戏是否继续。如果快艇\n的造型是'快艇'，游戏正常进行；如果快艇碰\n到障碍物，变成'快艇坏'的造型，游戏结束。结束条件\n代码示例\ndef update():\n    if boat.image == '快艇':\n        #游戏运行\n        ...\n        if block.colliderect(boat):         \n            boat.image = '快艇坏'正常快艇，\n游戏进行\n快艇损坏，\n游戏结束\n\n\n--- 第8页 ---\n项目日志\n\n\n--- 第9页 ---\nA. bg2.bottom = bg1.left\nC. bg2.bottom = bg1.rightB. bg2.bottom = bg1.top \nD. bg2.bottom = bg1.bottom\n动手试一试\n1、bg2完全移出窗口后，哪段代码，可以让bg2拼接\n到bg1的上方，实现无限背景的效果？（   ） \nbg1bg2\nleft right\nbottomtop\n\n\n--- 第10页 ---\n动手试一试\nA. fish.x = 0                \nC. fish.bottom = 0                           B. fish.x = 600\nD. fish.bottom = 6002、下列哪段代码，可以让游出游戏窗口的鱼重新回到\n窗口的最上方呢？（   ） \n0\n\n\n--- 第11页 ---\n动手试一试\n3、抓到不同的鱼可以获得的金币如图所示，下列哪个组\n合的鱼价值最高？（   ） \nA.                  \nC.                          B.  \nD.                      \n\n\n--- 第12页 ---\n答案解密\nA. bg2.bottom = bg1.left\nC. bg2.bottom = bg1.rightB. bg2.bottom = bg1.top \nD. bg2.bottom = bg1.bottom1、bg2完全移出窗口后，哪段代码，可以让bg2拼接\n到bg1的上方，实现无限背景的效果？（   ） \nbg1bg2\nleft right\nbottomtop\n\n\n--- 第13页 ---\n答案解密\n答案：B\n \n解析：本题考查的是无限背景的原理。当背景2完全移\n出窗口时，要将背景2的底部拼接到背景1的顶部，代\n码表示为：bg2.bottom = bg1.top。所以答案选B。\n\n\n--- 第14页 ---\n答案解密\nA. fish.x = 0                \nC. fish.bottom = 0                           B. fish.x = 600\nD. fish.bottom = 6002、下列哪段代码，可以让游出游戏窗口的鱼重新回到\n窗口的最上方呢？（   ） \n0\n\n\n--- 第15页 ---\n答案解密\n答案：C\n \n解析：本题考查的是重复出现的原理。窗口顶部的y坐\n标为0，fish移出窗口范围后，需要重新出现在窗口\n顶部，要将fish的底部坐标设置为0，代码表示为：\nfish.bottom = 0。所以答案选C。\n\n\n--- 第16页 ---\n答案解密\n3、抓到不同的鱼可以获得的金币如图所示，下列哪个组\n合的鱼价值最高？（   ） \nA.                  \nC.                          B.  \nD.                      \n\n\n--- 第17页 ---\n答案解密\n答案：C\n \n解析：本题考查的是逻辑思维。不同的鱼对应的金币已\n经给出，通过计算，可以算出，A选项的鱼价值17金币，\nB选项的鱼价值16金币，C选项的鱼价值19金币，D选\n项的鱼价值16金币，C选项的组合价值最高。答案选C。\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\nA. bg2.bottom = bg1.left\nC. bg2.bottom = bg1.rightB. bg2.bottom = bg1.top \nD. bg2.bottom = bg1.bottom\n动手试一试\n1、bg2完全移出窗口后，哪段代码，可以让bg2拼接\n到bg1的上方，实现无限背景的效果？（   ） \nbg1bg2\nleft right\nbottomtop\n\n\n--- 第2页 ---\n动手试一试\nA. fish.x = 0                \nC. fish.bottom = 0                           B. fish.x = 600\nD. fish.bottom = 6002、下列哪段代码，可以让游出游戏窗口的鱼重新回到\n窗口的最上方呢？（   ） \n0\n\n\n--- 第3页 ---\n动手试一试\n3、抓到不同的鱼可以获得的金币如图所示，下列哪个组\n合的鱼价值最高？（   ） \nA.                  \nC.                          B.  \nD.                      \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L17\\L17-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\nA. bg2.bottom = bg1.left\nC. bg2.bottom = bg1.rightB. bg2.bottom = bg1.top \nD. bg2.bottom = bg1.bottom1、bg2完全移出窗口后，哪段代码，可以让bg2拼接\n到bg1的上方，实现无限背景的效果？（   ） \nbg1bg2\nleft right\nbottomtop\n\n\n--- 第2页 ---\n答案解密\n答案：B\n \n解析：本题考查的是无限背景的原理。当背景2完全移\n出窗口时，要将背景2的底部拼接到背景1的顶部，代\n码表示为：bg2.bottom = bg1.top。所以答案选B。\n\n\n--- 第3页 ---\n答案解密\nA. fish.x = 0                \nC. fish.bottom = 0                           B. fish.x = 600\nD. fish.bottom = 6002、下列哪段代码，可以让游出游戏窗口的鱼重新回到\n窗口的最上方呢？（   ） \n0\n\n\n--- 第4页 ---\n答案解密\n答案：C\n \n解析：本题考查的是重复出现的原理。窗口顶部的y坐\n标为0，fish移出窗口范围后，需要重新出现在窗口\n顶部，要将fish的底部坐标设置为0，代码表示为：\nfish.bottom = 0。所以答案选C。\n\n\n--- 第5页 ---\n答案解密\n3、抓到不同的鱼可以获得的金币如图所示，下列哪个组\n合的鱼价值最高？（   ） \nA.                  \nC.                          B.  \nD.                      \n\n\n--- 第6页 ---\n答案解密\n答案：C\n \n解析：本题考查的是逻辑思维。不同的鱼对应的金币已\n经给出，通过计算，可以算出，A选项的鱼价值17金币，\nB选项的鱼价值16金币，C选项的鱼价值19金币，D选\n项的鱼价值16金币，C选项的组合价值最高。答案选C。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L18-1",
+    "unit": "L18",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-1\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL18-1\nraft [raeft]\nn.木筏；橡皮艇；漂浮物\nv.乘坐筏子；用筏子运送\nwater ['wo:ter]\nn.水；水域；水位\nv.给...浇水；给...水喝\nhammer ['haemar]\nn.锤子；木槌；音槌\nv.用(锤子)敲；反复强调\nlevel ['lev()l]\nn.等级；水平；水平仪\nv.使平整；推倒，夷平\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-1\\knowledge.png",
+        "content": "获取智慧核心姿态--getAtitude()\n使用智慧核心姿态\n木筏向下移动\n控制角色\npose = getAttitude( )\nifpose=='箭头朝下'：\nraft.y += 8\n箭头朝下\n快乐星球\n获取智慧核心按键 -- getKey()\n使用智慧核心按键\n控制角色\nk = getKey()\nifk=='D按下'\nhammer.image='锤子击打\nD按下\n锤子击打\n使用全局变量进行游戏关卡间的切换\n串联闯关游戏关卡\n使用全局变量前需要用global声明"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-1\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块41：快乐星球(上)模块42：快乐星球(下)\nL18-1失踪的快乐\n\n\n--- 第2页 ---\n项⽬内容\n单词卡raft:⽊筏water:⽔\nhammer:锤⼦level:等级⽕⻰你缺点⽔\n项⽬内容决战章⻥海盗卡⽪巴拉过河啦\n\n\n--- 第3页 ---\n卡⽪巴拉过河啦\n箭头朝上，⽊筏上移箭头朝下，⽊筏下移\n游戏思路\n⽤姿态传感器控制⽊筏上下移动，帮助卡⽪巴拉过河。def update(): pose = getAttitude()     if pose == '箭头朝上':         raft.y -= 8     if pose == '箭头朝下':             raft.y += 8代码示例\n\n\n--- 第4页 ---\n⽕⻰你缺点⽔\n向左倾斜控制我接⽔，向右倾斜控制我泼⽔。接⽔灭⽕\n接⽔泼⽔\n代码示例\ndef update(): pose = getAttitude()     if pose == '向左倾斜':         getwater()     if pose == '向右倾斜':             pour()\n\n\n--- 第5页 ---\n决战章⻥海盗\ngetKey()函数可以监测智慧核⼼上的按钮D是否被按下，并且根据按钮D的状态返回不同字符串。获取按键\ndef update():     ...     k = getKey()       if k == 'D按下':         hammer.image = '锤⼦击打'代码示例\nD键按下getKey()getKey()'D抬起''D按下'\n按钮D按钮D\n\n\n--- 第6页 ---\n项⽬⽇志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-1\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试1、下列哪个函数可以监测智慧核心的按钮D是否按下？（） A. getAttitude()                      B. getKey()                      C. getVolume()D. getColor()                      \n\n\n--- 第2页 ---\n动手试一试2、要将锤子角色hammer的造型切换为'锤子击打'造型，应该在红框内补充哪段代码？（）\nA. leftB. topC. xD. imagedef update():...k = getKey()if k == 'D按下':hammer. = '锤子击打'\n\n\n--- 第3页 ---\n动手试一试3、一桶水可以浇灭2格，全部被浇灭后火龙的火才会灭掉。桶内一开始没有水，猴赛雷至少需要接几次水才能把火龙的火灭掉呢？（）\nA. 2次 B. 3次C. 4次D. 5次\n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-1\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：B。解析：本题考查的是getKey()函数。getAttitude()函数用于获取姿态；getKey()函数用于监测按键是否按下；getVolume()函数用于获取外界声音大小；getColor()函数用于检测颜色。所以答案选B。1、下列哪个函数可以监测智慧核心的按钮D是否按下？（） A. getAttitude()                      B. getKey()                      C. getVolume()D. getColor()                      \n\n\n--- 第2页 ---\n答案解密2、要将锤子角色hammer的造型切换为'锤子击打'造型，应该在红框内补充哪段代码？（）\nA. leftB. topC. xD. imagedef update():...k = getKey()if k == 'D按下':hammer. = '锤子击打'\n答案：D。解析：本题考查的是角色造型的修改。要修改角色造型，应该修改角色的image属性，left、top、x都是角色的坐标。所以答案选D。\n\n\n--- 第3页 ---\n答案解密3、一桶水可以浇灭2格，全部被浇灭后火龙的火才会灭掉。桶内一开始没有水，猴赛雷至少需要接几次水才能把火龙的火灭掉呢？（）\nA. 2次 B. 3次C. 4次D. 5次\n\n\n--- 第4页 ---\n答案解密答案：B。解析：本题考查的是逻辑思维。想帮火龙灭火的话，需要浇灭所有，观察图片，我们发现初始总共有5格，2桶水最多可以浇灭4格，无法完全浇灭。3桶水最多可以浇灭6格，可以浇灭所有。答案选B。\n\n"
+      }
+    }
+  },
+  {
+    "id": "L18-2",
+    "unit": "L18",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-2\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL18-2\nfire['farer]\nn.火；火灾；射击\nv.射击；解雇；开火\nice[ais]\nn.冰；冰淇淋；溜冰场\nv.冰镇；冰冻，结冰\nstone[stoun]\nn.石头；石块\nv.向···扔石块；用石头砸\nadj.石制的\nswitch [swit]\nn.开关，闸，转换器\nv.转换；交换；对调；\n调班\nW\nR"
+      },
+      "knowledge": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-2\\knowledge.png",
+        "content": "双人合作游戏\n智慧核心\n键盘方向键\n控制角色冰冰\n控制角色火火\n通关策略：\n分析谁按开关，谁先进大门\n编写角色和开关的碰撞检测代码\n用不同设备控制不同角色移动"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-2\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块43：冰火好搭档L18-2  \n模块44：勇闯冰火谷 \n默契大作战\n\n\n--- 第2页 ---\n项目内容\n项目内容键盘控制火火移动\n变色“坑”智慧核心控制冰冰移动\n单词卡fire:火\nstone:石头ice:冰\nswitch:开关碰撞复习\n\n\n--- 第3页 ---\n键盘控制火火移动\ndef update():\n    if keyboard.left:\n        fire.image = '火火向左'\n        fire.x -= 8\n    \nif keyboard.right:\n        fire.image = '火火向右'\n        fire.x += 8\n火火(fire)\n向上跳跃控制方式\n代码示例\n向左移动\n向右移动\n向右移动并切换造型\n向左移动并切换造型\n\n\n--- 第4页 ---\n智慧核心控制冰冰移动\ndef update():\n    if isPressed(\"A\"):\n        ice.image = '冰冰向左'\n        ice.x -= 8\n    if isPressed(\"D\"):\n        ice.image = '冰冰向右'\n        ice.x += 8\nisPressed()函数可以检测智慧核心上的按键是否被按下：\n向左移动\n向右移动\n向上跳跃\n向左移动并切换造型\nD键 向右移动并切换造型A键B键或C键\n\n\n--- 第5页 ---\nclock.schedule_interval(change_colour, 1)\n变色“坑”\n角色切换1次造型1秒 1秒\n每隔1秒，执行1次change_colour()函数，代\n码\n示\n例想实现每隔1秒调用1次change_colour()函数，让\n角色切换1次造型，应该使用哪个定时器呢\n让某个函数在一段\n时间之后执行一次。\n让某个函数每间隔\n一段时间执行一次。\nclock.schedule_interval() clock.schedule()\n\n\n--- 第6页 ---\n碰撞复习\n格式： 角色名.collidepoint(点的坐标) \n注意： 使用时，角色名和坐标的位置不能交换collidepoint()函数\ncolliderect()函数作用：判断点和角色碰撞\n使用场景：判断鼠标是否\n点击按钮/角色\n作用：判断角色和角色碰撞\n使用场景：判断冰冰是否碰到\n开关按钮碰撞\n格式： 角色1.colliderect(角色2) \n注意： 使用时，角色1和角色2的位置能交换\n\n\n--- 第7页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-2\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、运行下面代码，当按下一次左键后，猴赛雷(hsl)可能会\n在几号位置？（   ） \nhsl = Actor('奔跑')\ndef update():\n    if keyboard.left:\nhsl.x -= 8\n    if keyboard.right:\nhsl.x += 8\nA. ①                      B. ②                      C. ③                      D. ④                      \n\n\n--- 第2页 ---\n动手试一试\n2、猴赛雷(hsl)最开始是'奔跑'造型，想要在按下智慧核心\n的A键后，切换成'打球'造型，横线处应该填写什么？（   ） \n奔跑\n 打球\nA. hsl = '打球'                       B. hsl.image = '打球'                     \nC. hsl.x = '打球'                  D. hsl.y = '打球'\n\n\n--- 第3页 ---\n动手试一试\n3、在编程游戏中，猴赛雷需要收集糖果。如果每4分钟收\n集1次糖果，每次收集4颗糖果，那么第17分钟时猴赛雷\n收集了多少颗糖果？（    ）\nA. 15                       B. 16                       C. 17                      D. 18                       \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-2\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n1、运行下面代码，当按下一次左键后，猴赛雷(hsl)可能\n会在几号位置？（   ） \nhsl = Actor('奔跑')\ndef update():\n    if keyboard.left:\nhsl.x -= 8\n    if keyboard.right:\nhsl.x += 8\nA. ①                      B. ②                      C. ③                      D. ④                      \n答案：A。\n解析：本题考查的是键盘控制角色移动。\n在Pygame中，x坐标是从左向右增大的；根据代码，当按下左\n方向键，x坐标减小，角色向左移动；所以按下一次左方向键后，\n猴赛雷(hsl)可能会在①号位置，正确答案为A选项。\n\n\n--- 第2页 ---\n答案解密\n2、猴赛雷(hsl)最开始是'奔跑'造型，想要在按下智慧核心\n的A键后，切换成'打球'造型，横线处应该填写什么？（   ） \nA. hsl = '打球'                       \nB. hsl.image = '打球'                     \nD. hsl.y = '打球'\nhsl = Actor('奔跑')\ndef update():\n    if isPressed(\"A\"):\n答案：B。\n解析：本题考查的是智慧核心控制角色切换造型。\n切换角色的造型，只需要更换角色的图片，格式:角色名.image = \n图片名；想要在按下智慧核心的A键后，将角色hsl切换成'打球'造\n型，应该编写代码 hsl.image = '打球'，所以正确答案为B选项。C. hsl.x = '打球'                  \n\n\n--- 第3页 ---\n答案解密\nA. 15                       B. 16                       C. 17                      D. 18                       3、在编程游戏中，猴赛雷需要收集糖果。如果每4分钟收\n集1次糖果，每次收集4颗糖果，那么第17分钟时猴赛雷\n收集了多少颗糖果？（    ）\n答案：B。\n解析：本题考查的是数学中的逻辑推理。\n根据表格：第17分钟时只收集了4次，每次收集4颗糖果，所以\n第17分钟时，一共收集到了4×4=16颗糖果，正确答案为B选项。\n在Python中，可以使用定时器clock.schedule_interval()，每\n4分钟自动收集糖果并记录总数，即可得到答案。收集次数 第1次 第2次 第3次 第4次 第5次\n时间 第4分钟 第8分钟 第12分钟 第16分钟 第20分钟\n糖果数 4颗 8颗 12颗 16颗 20颗\n\n"
+      }
+    }
+  },
+  {
+    "id": "L18-3",
+    "unit": "L18",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-3\\flashcard.png",
+        "content": "核桃编程\nPython\n单词卡\nL18-3\ndoor[do:r]\nn.门；门口；门边；出\n入口\ngear[gir]\nn.齿轮；器械，装置\nv.换挡\nshoot[u:t]\nn.射击；拍摄；打猎\nv.狩猎；拍摄；狩猎场\nball [bo:l]\nn.球；球状物\nv.做成球状；使成团块\nW\nR"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-3\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块45：势如破竹L18-3  \n模块46：狡猾的守卫\n勇闯通天塔\n\n\n--- 第2页 ---\n项目内容\n项目内容\n单词卡door:门\nshoot:射击gear:齿轮\nball:球设定坐标破解石门机关\n碰撞检测击落拦路飞虫\n造型检测避开我方友军\n造型切换发现透明水母\n代码外挂击败狡猾守卫键盘控制指挥大海捞珍\n\n\n--- 第3页 ---\n合影小程序\n今天是小创客第一次\n学习pygame的日子，\n他在《合影小程序》的项\n目中，利用pygame的绘\n制能力，把大祭司和牛顿\n绘制在了一起！完成了跨\n越世纪的合影！\n程\n序\n框\n架设置窗口大小\n合影小程序 创建角色创建牛顿\n创建大祭司\n绘制牛顿\n绘制大祭司绘制角色界面控制\n\n\n--- 第4页 ---\n合影小程序\n创建牛顿\n创建大祭司\n绘制牛顿和大祭司import pgzrun\nWIDTH = 960\nHEIGHT = 720\nnd = Actor('牛顿')\nnd.x = 300\nnd.y = 400\ndjs = Actor('大祭司')\ndjs.x = 500\ndjs.y = 400\ndef draw():\n    screen.clear() \n    screen.blit('相框', [0, 0])\n    nd.draw()\n    djs.draw()\npgzrun.go()核\n心\n代\n码\n\n\n--- 第5页 ---\n一石二十鸟\n今天是小创客第一次\n学习pygame的日子，他\n在《一石二十鸟》项目中，\n创建了一个石头角色。而\n且还在update()函数中修\n改了石头的坐标，打破了\n所有的乌鸦雕像，成功通\n过了试炼，进入了银科山！\n一石二十鸟\n界面绘制\n实现石头移\n动的功能向上移动\n向右移动\n向右上方移动\n程\n序\n框\n架\n 修改y坐标\n修改x坐标\n同时修改x、y坐标设置窗口大小\n石头角色绘制\n\n\n--- 第6页 ---\nimport pgzrun\n# 设置窗口大小\nWIDTH = 800\nHEIGHT = 600\n...\n# 创建石头角色\nrock = Actor('石头')\nrock.x = 125\nrock.y = 544\n...\ndef update():\n    #编写代码,让石头向右上方45度方向移动,打破所有雕像\n    rock.x += 3\n    rock.y -= 3\npgzrun.go()\n一石二十鸟\n创建石头角色\nx坐标增大，y坐标减小，角色向右上方移动核\n心\n代\n码\n\n\n--- 第7页 ---\n如果碰到蛋仔就充能成功\n钥匙和蛋仔都重置\n捕蛋达人\n今天小创客利用\n鼠标事件和碰撞检\n测完成了《捕蛋达\n人》项目，这个项\n目成功帮助他们完\n成了钥匙的充能，\n打开了神秘大门！\n程\n序\n框\n架\n捕蛋达人\n界面绘制\n实现钥匙移\n动的功能设置窗口大小\n蛋仔角色绘制钥匙角色绘制\n按下鼠标\n松开鼠标\n\n\n--- 第8页 ---\n捕蛋达人\n核\n心\n代\n码\n界面绘制\n按下鼠标\n松开鼠标import pgzrun\n...\ndef draw():\n    screen.clear()\n    screen.blit('背景', [0, 0])\n    key.draw()\n    egg.draw()\ndef on_mouse_down():\n    key.y = 100\n    if key.colliderect(egg):\n        key.image = '充能'\n        egg.image = '无能量'\ndef on_mouse_up():\n    key.y = 80\n    key.image = '正常'\npgzrun.go()\n\n\n--- 第9页 ---\n模拟射击\n今天小创客利用\n鼠标事件和碰撞检测\n完成了《模拟射击》\n项目，帮助猴赛雷成\n功消灭了虚拟世界中\n的bug虫，修复了银\n科山的系统！\n模拟射击\n界面绘制\n 鼠标控制准星射击\n准星击中bug虫\n射击结束\n重置bug虫和准星实现\n射击功能设置窗口大小\n设置背景\n绘制准星角色\n绘制bug虫程序框架\n\n\n--- 第10页 ---\n模拟射击\n松开鼠标，射击结束准星(aim)和遮罩(mask)\n跟随鼠标移动\n准星击中bug虫按下鼠标，开始射击\n重置bug虫与准\n星的造型与位置...\ndef on_mouse_move(pos):\n    aim.pos = pos\n    mask.pos = pos\ndef on_mouse_down(pos):\n    aim.image = '射击'\n    if aim.colliderect(bug):\n        bug.image = '击中'\n        music.play_once('shoot')\n    else:\n        music.play_once('no')\ndef on_mouse_up():\n    aim.image = '瞄准'\n    bug.image = '正常'\n    bug.x = random.randint(0, 800)\n    bug.y = random.randint(0, 600)\n  \n核\n心\n代\n码\n\n\n--- 第11页 ---\n激光舞者\n今天小创客利用按键\n事件完成了《激光舞者》\n项目，帮助猴赛雷成功\n躲过了激光机关！\n激光舞者\n界面绘制设置窗口大小\n绘制猴赛雷设置背景\n按左键切换向左造型， 并让x坐标减小\n按右键切换向右造型， 并让x坐标增大\n程\n序\n框\n架\n实现功能\n\n\n--- 第12页 ---\n激光舞者\n按左键切换向左造型， \n并让x坐标减小\n当猴赛雷移出窗口时,\n将他移动到合适的位置按右键切换向右造型， \n并让x坐标增大import pgzrun\n...\ndef on_key_down(key):\n    if key == keys.LEFT:\n        hsl.x -= 70\n        hsl.image = '面向左'\n    if key == keys.RIGHT:\n        hsl.x += 70\n        hsl.image = '面向右'\ndef update():\n    if hsl.x < 0:\n        hsl.x = 0\n    if hsl.x > WIDTH:\n        hsl.x = 800\npgzrun.go()核\n心\n代\n码\n\n\n--- 第13页 ---\n星舰小医生\n今天小创客利用\n按键事件实现了飞行\n器的上下左右移动，\n完成了《星舰医生》\n项目，帮助搜集零件，\n成功修复了星舰！\n程序框架\n星舰小医生\n界面绘制设置窗口大小\n绘制飞行器、零件设置背景\n按上下左右键，飞行器进行对应移动\n收集零件的功能实现功能\n\n\n--- 第14页 ---\n星舰小医生\n按上下左右键，飞行器\n(player)进行对应移动\n收集零件(part)核心代码\n...\ndef on_key_down(key):\n    if key == keys.LEFT:\n        player.x -= 30\n    if key == keys.RIGHT:\n        player.x += 30   \n    if key == keys.UP:\n        player.y -= 30\n    if key == keys.DOWN:\n        player.y += 30\ndef update():\n    #游戏胜利条件\n    if partnum.image == '数量5':\n        game_win()\n    \n    if player.colliderect(part):\n        if partnum.image=='数量0':\n            partnum.image = '数量1'\n        elif partnum.image=='数量1':\n            partnum.image = '数量2'\n...\n\n\n--- 第15页 ---\n寻找猴赛雷\n寻找猴赛雷界面绘制\n实现功能今天冷雪丰和夏小满\n要离开部落回到地球了，\n小创客做了一个《寻找猴\n赛雷》的项目，帮助猴赛\n雷成功混上了飞船，跟着\n冷雪丰一起来到了地球！\n按键播放音乐，切换造型设置窗口大小\n绘制猴赛雷、冷雪\n丰、大祭司、门设置背景程序框架\n\n\n--- 第16页 ---\nimport pgzrun\n...\ndef draw():\n...\n    lxf.draw()\ndef on_mouse_down():\n    music.play_once('一条大河')\n    djs.image = '大祭司唱歌'\n    lxf.image = '冷雪丰回头'\ndef on_mouse_up():\n    music.stop()\n    djs.image = '大祭司'\n    lxf.image = '冷雪丰'\n    \ndef update():\n    if lxf.colliderect(door):\n        door.image = '门打开'\n        \npgzrun.go()\n寻找猴赛雷\n绘制猴赛雷、冷雪丰、大祭司、门\n停止音乐，切换造型播放音乐，切换造型核\n心\n代\n码\n冷雪丰撞到门，角色\n门切换为'门打开'造型\n\n\n--- 第17页 ---\ndebug大挑战\n今天小创客在\n《debug大挑战》项\n目中成功修复了各种\nbug，助猴赛雷完成\n了师傅的考验，拿到\n了星星勋章！\ndebug大挑战界面绘制\n实现功能 找到bug，修复bug设置窗口大小\n绘制猴赛雷、桥、\n按钮、星星设置背景程序框架\n\n\n--- 第18页 ---\ndebug大挑战\n按下按钮，桥断\n开；否则桥闭合\n绘制猴赛雷、桥、\n按钮和星星\n核\n心\n代\n码import pgzrun\n...\ndef update():\n    if hsl.colliderect(button):\n        button.image = '按下'\n        bridge.image = '断开'\n    else:\n        button.image = '抬起'\n        bridge.image = '闭合'\ndef draw():\n    screen.clear() \n    screen.blit('背景', [0, 0])\n    hsl.draw()\n    bridge.draw()\n    button.draw()\n    star.draw()\n...\npgzrun.go()\n\n\n--- 第19页 ---\n猴赛雷的新衣\n寻找猴赛雷界面绘制\n实现功能猴赛雷刚来到地球，还没有合适\n的衣服，小创客用《猴赛雷的新衣》\n这个项目，帮助猴赛雷挑选了自己\n喜欢的衣服，欢迎他来到地球！\n按空格键换衣服设置窗口大小\n绘制衣服设置背景程序框架\n\n\n--- 第20页 ---\n猴赛雷的新衣\n创建衣服角色clothes\n按空格键切换\n衣服角色造型绘制背景和角色核\n心\n代\n码\n...\nclothes = Actor('服装1')\nclothes.x = 250\nclothes.y = 350\ndef draw():\n    screen.blit('帅照背景', [0, 0])\n    clothes.draw()\ndef on_key_down(key):\n    if key == keys.SPACE:\n        if clothes.image == '服装1':\n            clothes.image = '服装2'\n        elif clothes.image == '服装2':\n            clothes.image = '服装3'\n        elif clothes.image == '服装3':\n            clothes.image = '服装4'\n        elif clothes.image == '服装4':\n            clothes.image = '服装1'\npgzrun.go()\n\n\n--- 第21页 ---\n电子鱼缸\n十二区的孩子们\n在地下生活感觉到\n很枯燥，小创客利\n用《电子鱼缸》项\n目，给孩子们带来\n了欢乐！\n程序框架\n电子鱼缸\n界面绘制设置窗口大小\n绘制鱼儿设置背景\n鱼儿自动移动\n鱼儿移动到左右边缘切换反向造型，反向移动实现功能\n\n\n--- 第22页 ---\n电子鱼缸\nimport pgzrun\n...\ndef draw():\n    screen.blit('背景', [0, 0])\n    fish.draw()\ndef update():\n    if fish.x > WIDTH:\n        fish.image = '鱼左'\n    elif fish.x < 0:\n        fish.image = '鱼右'\n    if fish.image == '鱼右':\n        fish.x += 5\n    elif fish.image == '鱼左':\n        fish.x -= 5\n    \npgzrun.go()绘制背景和角色\n鱼儿移动到左右边缘,切\n换反向造型,反向移动核心代码\n\n\n--- 第23页 ---\n扫地机器人\n扫地机器人\n界面绘制设置窗口大小\n绘制扫地机器人、垃圾设置背景\n用上下左右键控制扫地机器人移动\n利用碰撞检测扫除垃圾实现功能程序框架\n今天是学习pygame的一天，\n小创客使用了按键控制和碰撞检\n测的能力，在《扫地机器人》项\n目中帮助猴赛雷打扫干净了实验\n室！\n\n\n--- 第24页 ---\nrobot = Actor('机器人')\nrobot.x = 550\nrobot.y = 50\ntrash1 = Actor('垃圾1')\n...\ndef draw():\n...\ndef update():\n    if keyboard.right:\n        robot.x += 10\n    if keyboard.left:\n        robot.x -= 10\n    if keyboard.up:\n        robot.y -= 10\n    if keyboard.down:\n        robot.y += 10   \n    if robot.colliderect(trash1):\n        trash1.x = 630\n        trash1.y = 0\n扫地机器人\n创建和绘制扫地\n机器人、垃圾\n用上下左右键控制\n扫地机器人移动核\n心\n代\n码\n利用碰撞检\n测扫除垃圾\n\n\n--- 第25页 ---\n飞机大战\n今天是大核桃游戏工作室成立的\n日子，小创客和猴赛雷一起完成了工\n作室的第一个大作《飞机大战》，靠\n这个项目他们在地下城的游戏市场站\n稳了脚跟！\n飞机大战\n界面绘制功能实现设置窗口大小\n设置背景\n绘制飞机、\n敌机、子弹按键控制飞机移动\n按键控制子弹发射\n子弹击中敌机的效果\n敌机撞到飞机的效果程序框架\n\n\n--- 第26页 ---\nplayer = Actor('飞机')\nships = []\nweapons = []\n            \ndef update():\n    if keyboard.space:\n        weapon = Actor('子弹')\n        weapon.x = player.x\n        weapon.y = player.y\n        weapons.append(weapon)\n    for w in weapons:\n        w.y -= 5\n    for s in ships:\n        for w in weapons:\n            if s.colliderect(w):\n                s.x = random.randint(0, 500)\n                s.y = 0\n    for s in ships:\n        if s.colliderect(player):\n            player.image = '失败'\n飞机大战\n按下空格发射子弹\n子弹击\n中敌机\n的效果核心代码\n敌机撞到飞机的效果\n\n\n--- 第27页 ---\n疯狂躲猫猫\n疯\n狂\n躲\n猫\n猫界面绘制设置窗口大小\n绘制猴赛雷、猫咪、终点旗子、时钟、道具设置背景\n利用全局变量state切换初始、运行、结束状态\n鼠标控制猴赛雷蹲下和移动实现功能程序框架\n城主想到做一个躲猫猫的项目\n来筛查出感染者，由于小创客的帮\n助，这个项目也顺利完成，并且真\n的筛查出了感染者！\n\n\n--- 第28页 ---\nstate = '初始状态'\ndef draw():\n    global state\n    screen.clear()\n    if state == '初始状态':\n        screen.blit('初始背景', [0, 0])\n        begin.draw()\n    elif state == '运行状态':\n        screen.blit('运行背景', [0, 0])\n        ...\n    elif state == '结束状态':\n        if lose:\n            screen.blit('失败', [0, 0])\ndef on_mouse_down(pos):\n    global state\n    if state == '初始状态' and begin.collidepoint(pos):\n        state = '运行状态'\n        hsl_run()\n    elif hsl.collidepoint(pos):\n        hsl_hide()\n疯狂躲猫猫\n利用全局变量state切换\n初始、运行、结束状态\n鼠标控制猴赛雷蹲下和移动核心代码\n\n\n--- 第29页 ---\n木琴敲敲敲\n地下城的居民们最近\n心绪不宁，小创客做了\n一个《木琴敲敲敲》的项\n目，用音乐安抚了人们！\n程序框架\n 木琴敲敲敲\n界面绘制设置窗口大小\n绘制木琴、锤子、乐谱设置背景\n鼠标控制锤子击打琴键\n琴键演奏音符实现功能\n\n\n--- 第30页 ---\nimport pgzrun\n...\nqin = []\nfor i in range(13):\n    q = Actor(str(i-2))\n    q.x = 150 + 60 * i\n    q.y = 475\n    qin.append(q)\ndef on_mouse_down(pos):\n    chui.image = '落下'\n    chui.pos = pos\n    for q in qin:\n        if q.collidepoint(pos):\n            music.play_once(q.image)\ndef on_mouse_up():\n    chui.image = '抬起'\n    \npgzrun.go()\n木琴敲敲敲\n创建13个琴键角\n色存放到列表中\n角色和点的\n碰撞检测核心代码\n鼠标控制锤子击打琴键\n\n\n--- 第31页 ---\n推水球\n今天小创客协助猴赛雷\n做出了大核桃游戏工作室\n的第一款双人游戏《推水\n球》，这个项目促进了地\n下城中人们的社交，改善\n了人们的心理状况！\n推\n水\n球界面绘制设置窗口大小\n绘制玩家1、玩家2、水球设置背景\n按空格键让水球右移\n按UP键让水球左移实现功能程\n序\n框\n架\n\n\n--- 第32页 ---\nimport pgzrun\nstate = '初始状态'\ndef on_key_down(key):\n    global ring\n    if ring == '铃声响':\n        if key == keys.SPACE:\n            player1.image = '玩家1发力'\n            water.x += 20\n        if key == keys.UP:\n            player2.image = '玩家2发力'\n            water.x -= 20\nring = '铃声没响'\ndef sound():\n    ...\ndef on_mouse_down():\n    global state\n    state = '运行状态'\n    t = random.randint(1, 3)\n    clock.schedule(sound, t)\n推水球\n按UP键让\n水球左移\n随机时间，播放铃声按空格键让\n水球右移核心代码\n\n\n--- 第33页 ---\n滚蛋吧病毒怪\n今天我们和猴赛雷一\n起，制作了一款《滚蛋吧 \n病毒怪》的游戏，对抗哆\n来咪新推出的游戏，同时\n通过这个游戏，给地下城\n的人们带去希望。\n滚蛋吧病毒怪\n界面绘制功能实现设置窗口大小\n设置背景\n绘制玩家、病\n毒怪、回旋镖控制玩家移动\n病毒怪移动\n回旋镖攻击\n程序框架\n\n\n--- 第34页 ---\nplayer = Actor('玩家')\narrow = Actor('回旋镖')\ngerms = []\ndef create():\n...\nclock.schedule_interval(create, 1)\ndef update():\n    if keyboard.up:\n        player.y -= 4\n        arrow.y -= 4\n    if keyboard.down:\n        player.y += 4\n        arrow.y += 4\n    if keyboard.space:\n        arrow.x += 10\n    else:\n        arrow.x -= 100\n滚蛋吧病毒怪\n按键控制玩家移动\n回旋镖攻击每间隔1秒生\n成一个病毒怪\n核\n心\n代\n码\n\n\n--- 第35页 ---\n云端探险家1 & 2\n今天，为了得到师祖的帮助，我\n们和猴赛雷一起，制作了一款和NS-\nSHAFT类似的游戏《云端探险家》。\n云端探险家\n嘟嘟批量创建踏板\n批量绘制踏板\n让踏板向上移动\n程序框架\n绘制嘟嘟\n跟随踏板移动\n按键控制移动\n踏空时自动下落踏板\n\n\n--- 第36页 ---\ndudu = Actor('嘟嘟')\nbricks = []\nnames = ['踏板1', '踏板2', '踏板3', '踏板4']\ndef update():\n    dudu.y += 7\n    for b in bricks:\n        b.y -= 2\n        if b.y < 0:\n            ...\n    for b in bricks:\n        if dudu.colliderect(b):\n            dudu.bottom = b.top\n    if keyboard.left:\n        if dudu.left > 0:\n            dudu.x -= 5\n    if keyboard.right:\n        if dudu.right < WIDTH:\n            dudu.x += 5\n云端探险家1 & 2\n嘟嘟踏空时自动下落\n嘟嘟跟随踏板移动踏板往上走，移出窗口后切换随\n机造型，重新出现在随机位置\n按键控制嘟嘟左右移动核心代码\n\n\n--- 第37页 ---\n云端探险家3 & 4\n上一次完成的《云端探险家》被\n卡拉米抄袭，于是这一次，我们将\n完善《云端探险家》的游戏。给游\n戏添加尖刺踏板，并增加计分功能。\n尖刺踏板增加尖刺踏板的造型\n尖刺踏板与嘟嘟的碰撞检测\n活动踏板让踏板随机移动\n让嘟嘟跟随踏板移动\n结束游戏嘟嘟碰到尖刺踏板\n嘟嘟掉落窗口底部计分功能计时并计算得分\n增加难度\n增加踏板移动的速度云\n端\n探\n险\n家程序框架\n\n\n--- 第38页 ---\ndef update():\n    if dudu.image == '嘟嘟':\n        score += 1\n        dudu.y += 7\n        speed += 1\n        \n        for b in bricks:\n            b.y -= speed\n            if b.image == '踏板2':\n                direction = random.randint(-3, 3)\n                b.x += direction\n        \n        for b in bricks:\n            if dudu.colliderect(b):\n                dudu.bottom = b.top\n                if b.image == '尖刺踏板':\n                    dudu.image = '嘟嘟哭'\n        if dudu.bottom > 700:\n            dudu.image = '嘟嘟哭'\n云端探险家3 & 4\n活动踏板，会随机左右移动\n嘟嘟碰到\n尖刺踏板，\n切换造型\n结束游戏核心代码\n嘟嘟掉落窗口底部，\n切换造型结束游戏\n\n\n--- 第39页 ---\n天空疾跑\n为了应对卡拉米家族\n的猛攻，我们需要结合\n硬件，制作一款新的游\n戏！\n获取麦克风音量小音量\n大音量\n碰到障碍物\n从平台上掉下判断游戏结束跑\n向前跳跑程\n序\n框\n架\n天\n空\n疾\n跑\n\n\n--- 第40页 ---\nimport pgzrun\nhsl = Actor(\"猴赛雷待机\")\ndef update():\n    volume = getVolume()\n    if 20 < volume  < 50:\n        run()\n    if volume >= 50:\n        run()\n        jump()\n    # 生成踏板\n    generate_boards()\n    \ndef draw():\n    screen.clear()\n    screen.blit(\"背景\",[0,0])\n    hsl.draw()\n    # 绘制踏板\n    draw_boards()\n...\n天空疾跑\n音量值大于20且小于\n50时，让猴赛雷奔跑获取麦克风音量核\n心\n代\n码\n音量值大于50时，让\n猴赛雷奔跑和向前跳\n\n\n--- 第41页 ---\n农场物语系列游戏\n声控游戏市场反应\n不错，这次我们要结\n合体感操作，制作一\n款《农场物语》系列\n游戏，乘胜追击！\n守护庄稼\n向右倾斜\n撒网捞鱼\n开饭啦农\n场\n物\n语\n系\n列\n游\n戏\n大丰收 震动向左倾斜\n稻草人顺时针转动稻草人逆时针转动\n箭头朝下箭头朝上\n放下渔网抬起渔网\n屏幕朝下屏幕朝上\n投喂动物获取食物\n摇晃树木程\n序\n框\n架\n\n\n--- 第42页 ---\nimport pgzrun\n...\ndef update():\n    pose = getAttitude()\n    if pose == '屏幕朝上':\n        pick()\n    if pose == '屏幕朝下':\n        feed()\n     \n    # 控制小动物\n    animals_controller()\n    # 控制食物生成\n    food_controller()\n    \ndef draw():\n    screen.clear()\n    screen.blit(\"背景\", [0,0])\n...\npgzrun.go()\n农场物语系列游戏\n核心代码\n屏幕朝上时，农场主获得食物获取姿态\n屏幕朝下时，农场主投喂食物\n\n\n--- 第43页 ---\n咪噜打泡泡\n和猴赛雷一起完成了\n咪噜打泡泡的游戏，使用\n智慧核心控制平板左右移\n动，反弹咪噜，打完所有\n泡泡。\n咪噜打泡泡程序框架\n平板\n智慧核心控制平板左右移动站在平板上\n咪噜\n碰到窗口边界或者反弹随机出现在窗口底部\n随机左上或者右上弹起\n泡泡 泡泡的形状排布可以不同游戏\n成功\n咪噜打\n泡泡打完所有泡泡，\n显示成功画面\n咪噜碰到泡泡，\n泡泡消失咪噜碰到窗口底部游戏\n失败\n\n\n--- 第44页 ---\ndef draw():\n    global count\n    if  count == len(bubbles):\n        screen.blit('成功背景', [0, 0])\ndef update():\n    global x1, y1, count\n    if milu.image == '咪噜':\n        pose = getAttitude()\n        if pose == '向左倾斜':\n            board.x -= 15\n        if pose == '向右倾斜':\n            board.x += 15\n            \n        milu.x += x1\n        if milu.left <= 0:\n            x1 = 12\n        if milu.right >= 1000:\n            x1 = -12         \n        \n        if milu.bottom >= 700:\n            milu.image = '咪噜哭'\n咪噜打泡泡\n智慧核心控制平板左右移动打完所有泡泡，\n显示成功画面\n当造型为'咪噜'时，\n才会执行后续代码\n碰到窗口边界反弹\n咪噜碰到窗口底部切换为\n'咪噜哭'造型，游戏结束核心代码\n\n\n--- 第45页 ---\n激流勇进\n参加游戏比赛，我们一起制作了\n《激流勇进》的游戏，打败哈基米，\n最终获得了冠军！！！\n激流勇进\n快艇\n智慧核心控制快艇左右移动快艇向前移动\n无限\n背景\n循环拼接背景角色创建2个背景角色\n背景角色向下移动\n结算\n页面游戏结束时显示金币总数捕鱼鱼重复出现障碍物重复出现\n障碍物\n程序框架\n碰到障碍物时结\n束游戏\n捕鱼获得金币\n\n\n--- 第46页 ---\ncoin = 0\ndef draw():\n     if boat.image == '快艇坏':\n        screen.blit('结算背景', [0, 0])\n        ...\ndef update():\n    global coin\n    if boat.image == '快艇':\n        bg1.y += 10\n        bg2.y += 10\n        if bg1.top > 600:\n            bg1.bottom = bg2.top\n        if bg2.top > 600:\n            bg2.bottom = bg1.top\n        if fish.colliderect(boat):\n            if fish.image == '胖头鱼':\n                coin += 3\n激流勇进\n核心代码\n2个背景角色，同时\n向下移动，循环拼接快艇撞坏时\n进入结算界面\n捕鱼获得金币\n\n\n--- 第47页 ---\n快乐星球\n今天是小创客集\n中性地学习修复代码\n的bug，并且还学会\n用全局变量将多个游\n戏关卡串联成一个完\n整的大游戏！\n使用智慧核心姿态控制角色\n根据姿态值控制角色移动\n使用智慧核心按键控制角色快\n乐\n星\n球\n串联闯关游戏关卡获取智慧核心的姿态\n根据按键的状态切换角色造型获取智慧核心按键\n使用全局变量进行游戏关卡间的切换程序框架\n\n\n--- 第48页 ---\ndef update():\n    global l3_statem, waitTime\n    if l3_state == 'begin':\n        hammer.image = '锤子默认'\n        pose = getAttitude()\n        if pose == '向左倾斜':\n            hammer.x -= 10\n        if pose == '向右倾斜':\n            hammer.x += 10\n        k = getKey()\n        if k == 'D按下':\n            hammer.image = '锤子击打'\n    elif l3_state == 'win':\n        if win.bottom <= 0:\n            zhangyu.image = '章鱼海盗熟'\n            ...\n    elif l3_state == 'lost':\n        waitTime -= 1\n快乐星球\n使用全局变量实现\n游戏界面切换根据按键的状态\n切换角色造型根据姿态值控制角色移动核心代码\n\n\n--- 第49页 ---\n默契大作战\n这是一个双人\n合作的游戏，需要\n两个人配合，控制\n两个角色移动走到\n各自的大门处，非\n常考验默契度哦。\n用键盘控制火火移动\n上方向键-跳跃\n智慧核心控制冰冰移动\n碰撞检测复习默\n契\n大\n作\n战\n定时器控制调整定时器参数，控制坑的造型\n切换，匹配自己的操作速度左右方向键-左右移动\nB键或C键-跳跃A键-向左\n根据关卡地形，判断哪个角色按住开关D键-向右程\n序\n框\n架\n\n\n--- 第50页 ---\n...\nfire = Actor('火火', (600, 272))\nice = Actor('冰冰', (300, 272))\npuddle = Actor('绿色毒液', (450, 303))\nstone = Actor('石板', (211, 290))\nswitch = Actor('松开', (88, 291))\ndef change_colour():\n...\nclock.schedule_interval(change_colour, 1)\ndef update():\n    if fire.colliderect(switch):\n        switch.image = '按住'\n        up()\n    else:\n        switch.image = '松开'\n        down()\n...\n默契大作战\n调整定时器参数，控制坑的造\n型切换，匹配自己的操作速度\n碰到开关，开关切换为'\n按住'造型，石板上升核心代码\n\n\n--- 第51页 ---\n项目日志\n\n"
+      }
+    }
+  },
+  {
+    "id": "L18-4",
+    "unit": "L18",
+    "resources": {
+      "flashcard": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-4\\flashcard.png",
+        "content": "核桃\nPython\n单词卡\nL18-4\nin [1n]\nprep.在...当中；：\n参与\nadv.进入；在内\ntrue [tru:]\nadj.真；真实的；正确的\nn.真实；准确\n【例句】\nThis is not strictly true.\n这不完全正确。\nfalse [fo:ls]\nadj.假；假的；错误的\n【例句】\nAre the following statements true or false?\n下列说法是对还是错？\nw\nR\nD"
+      },
+      "lecture": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-4\\lecture.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n模块47：Python修复\n模块48：最终决战\nL18-4 究极决战\n\n\n--- 第2页 ---\n项目内容\n单词卡\n项目内容三大基础\n数据类型\n运算\n程序结构\nin :在......当中 true :真\nfalse:假\n\n\n--- 第3页 ---\n三大基础\n我们用的 Python 语言，其实是由数据类型、运算、程序\n结构这三个基础模块组成的。\n数字、字符串、列表等数据类型，\n用于存储不同特征的数据。\n['春', '夏', '秋', '冬']\n数据类型\n算术运算\n比较运算\n逻辑运算'春 夏 秋 冬'\n-+ */\n>  <==\nandor\n顺序\n分支\n循环运算...\nif-else if ...\nforwhile程序结构...\n...\n\n\n--- 第4页 ---\n数据类型\n格式 使用场景\n'abc'  存储纯文本内容类型名\n字符串类型                \n数字类型                          \n列表\n字典123存储数字，能进行运\n算和数值处理\n[1, 2, 'a']存储序列化数据，能\n包含不同类型的元素\n{'key': 'value'}存储键值对数据，能\n通过键访问对应的值存储不同特征的数据，需要选择不同的数据类型。\n\n\n--- 第5页 ---\n数据类型\nl负责存储数字、字母、中文和符号等文本内容。\n'a' + 'b' 字符串拼接\n'ab'得到使用加号，将两个字符串拼接到一起:\n代码示例\n#在字符串'abc'的左右两边，各添加一个括号\ns = 'abc'\nresult = '(' + s + ')'      \nprint(result)\n拼接\n输出拼接后的字符串字符串类型\n\n\n--- 第6页 ---\n数据类型\n代码示例\ns = '#123'\nresult = s[1:]\nresult = int(result)\nprint(result)从起始索引开始，截取到字符串末尾。\nl能结合 加减乘除 等运算符做运算。 数字类型\nint()       字符串切片\n得到数字部分从字符串中得到数字类型：\n类型转换将字符串转换为能做运算的整数。\n\n\n--- 第7页 ---\n数据类型\n代码示例\ns = '春 夏 秋 冬'\nresult = s.split()\nprint(result)\nsplit()进行分割\n'春 夏 秋 冬' ['春', '夏', '秋', '冬']列表 l存储序列化数据，能包含不同类型的元素。\n从字符串转换为列表：\n结果存储在列表中\n以空白部分进行分割\n\n\n--- 第8页 ---\n数据类型\n字典l用来存储成对的数据。\nl通过键能获取字典中的值。{ '键':'值', '键':'值'}\n图书管理系统里，书籍的名称与是\n否被借阅的信息组成一个键值对。格式\n字典使用场景\n考试成绩表里，学生的名字与\n他的成绩组成一个键值对。\n\n\n--- 第9页 ---\n运算\n算数运算符\n加法符号\n 减法符号\n 乘法符号\n 除法符号\n大于符号\n左边数字大于右边数字时，运算结果为真。\n小于符号\n左边数字小于右边数字时，运算结果为真。\n双等号\n判断两边是否相等，相等时运算结果为真。比较运算符\n\n\n--- 第10页 ---\n程序结构\n条件成立时，执行if的下级代码，否则，执行else的下级代码。\n下级代码 if  条件:\n      \n else:\n      下级代码\nif-else语句：能对数据进行判断。\ns = 'spyfkahajimisafd'\nif 'hajimi' in s:\n    print('感染')\nelse:\n    print('未感染')\n判断是否被'感染'打印 '感染' if  包含'hajimi':\n      \n else:\n      打印 '未感染'\n基本格式居民\nin：在......当中\n判断 'hajimi' 是否在居民数据 s 当中\n代码示例:\n\n\n--- 第11页 ---\n程序结构\nfor i in range(9):\n    s = input()\n    if 'hajimi' in s:\n        print('感染')\n    else:\n        print('未感染')\n代码示例\n这里还有9位居民需要检测，\n需要重复判断9次。\n循环9次\n重复执行:\n①输入居民的数据\n②判断数据中是否包含'hajimi'\n③包含打印感染,否则打印未感\n染循环结构能重复执行某段代码,\n比如：for语句，while语句。待检测的居民\n\n\n--- 第12页 ---\n代码示例\n程序结构\ns = input().split()\nnums = [int(i) for i in s]\nfor n in nums:\n    if n >= 21 and n <= 30:\n        print(n)枚举法能列举所有情况，\n找出真正的弱点。\n8\n1126\n3347\n     哈基米的5个弱点中，只有\n在21到30范围内的才是真弱点!\n依次判断列表中的\n数，找出真弱点将输入的字符串，转换为\n数字列表,比如:\n[8,11,26,33,47]\n\n\n--- 第13页 ---\n项目日志\n\n"
+      },
+      "exercise": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-4\\exercise.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n动手试一试\n1、运行这段代码，程序会在输出区打印出什么？（ ）\nA. B. C. D. \n\n\n--- 第2页 ---\n动手试一试\n2、字符串 s 中存放了猴赛雷想去的城市，执行下方代\n码，输出结果是？（）\nA.                    B.       \nC. D.       \n['成都','北京','西安']\n [成都,北京,西安]\n成都,北京,西安\n '成都','北京','西安'\n\n\n--- 第3页 ---\n动手试一试\n加\n密\n程\n序\nA. B. C. D. \n3、哈基米给病毒系统设置了访问密码，密码显示在加密程\n序的输出结果中。那么，程序输出的密码是什么？（   ） \n\n"
+      },
+      "solution": {
+        "file": "src\\data\\courses\\PY3\\L18\\L18-4\\solution.pdf",
+        "method": "direct",
+        "content": "\n--- 第1页 ---\n答案解密\n答案：C。\n解析：本题考查的是if-else语句的执行逻辑。条件 a > b成立，执\n行if语句的下级代码，打印出变量a中存放的值，即数字8，故选C。\nA是易错项，程序打印的是变量a，而不是字符'a'。1、运行这段代码，程序会在输出区打印出什么？（ ）\nA. B. \nC. D. \n\n\n--- 第2页 ---\n答案解密\n答案：A。\n解析：本题考查的是split()命令。split()命令能分割字符串，并把结\n果存储在列表中。split()的括号中没有内容 ，字符串 s 就会按照空白\n部分进行分割，所以输出结果是 ['成都', '北京', '西安']，故选A。2、字符串 s 中存放了猴赛雷想去的城市，执行下方代码，\n输出结果是？（）\nA.                    B.       \nC. D.       \n['成都','北京','西安']\n [成都,北京,西安]\n成都,北京,西安\n '成都','北京','西安'\n\n\n--- 第3页 ---\n答案解密\n3、哈基米给病毒系统设置了访问密码，密码显示在加密程\n序的输出结果中。那么，程序输出的密码是什么？（   ） \n加\n密\n程\n序\nA. B. C. D. \n\n\n--- 第4页 ---\n答案解密\n答案：A。\n解析：本题考查的是的逻辑推理。\n加密程序中定义了一个字符串列表 nums，包含五个元素：'1', '4', \n'6', '2', '3'。for循环枚举列表里的每一个元素，同时转换为整数n；\nif语句判断：整数n加上2后的值如果大于5，就用print()输出n。由\n表可以看出：只有数字4和数字6加上2以后，符合大于5的条件，所\n以，程序输出的密码是：4和6，故选A。第1次 第2次 第3次 第4次 第5次\nn 1 4 6 2 3\nn+2 3 6 8 4 5\n\n"
+      }
+    }
+  }
+]

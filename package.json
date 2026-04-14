@@ -1,0 +1,21 @@
+{
+  "name": "hetao-learning-park",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "核桃编程学习平台 - 学生课后学习巩固网站",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.0",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "pdf-parse": "^1.1.1",
+    "tesseract.js": "^7.0.0",
+    "vite": "^5.0.0"
+  }
+}

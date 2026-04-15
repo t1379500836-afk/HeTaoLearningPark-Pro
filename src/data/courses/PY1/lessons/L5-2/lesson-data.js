@@ -416,7 +416,7 @@ export const lessonMeta = {
 
 // 打字练习单词
 export const typingWords = {
-  easy: ['light', 'lamp', 'on', 'off'],
+  easy: ['light', 'lamp', 'on', 'off', 'music', 'dark'],
   medium: ['volume', 'sensor', 'bright', 'detect'],
   hard: ['intelligent', 'automatic', 'atmosphere', 'threshold']
 }

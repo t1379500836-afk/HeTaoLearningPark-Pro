@@ -108,8 +108,8 @@ export const lessonMeta = {
 
 export const typingWords = {
   easy: ['board', 'jump', 'bubble', 'bounce'],
-  medium: ['platform', 'collide', 'remove', 'score'],
-  hard: ['velocity', 'gravity', 'restart', 'state']
+  medium: ['platform', 'collide', 'remove', 'score', 'win'],
+  hard: ['velocity', 'gravity', 'restart', 'state', 'lose']
 }
 
 export const typingTemplates = {

@@ -348,9 +348,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['continue', 'break', 'loop', 'skip'],
-  medium: ['control', 'condition', 'iterate', 'search'],
-  hard: ['terminate', 'iteration', 'condition', 'statement']
+  easy: ['continue', 'break', 'loop', 'skip', 'road'],
+  medium: ['control', 'condition', 'iterate', 'search', 'select'],
+  hard: ['terminate', 'iteration', 'condition', 'statement', 'bomb']
 }
 
 // 代码模板练习（按难度分组）

@@ -107,7 +107,7 @@ export const lessonMeta = {
 }
 
 export const typingWords = {
-  easy: ['true', 'false', 'bool', 'if'],
+  easy: ['true', 'false', 'bool', 'if', 'in'],
   medium: ['check', 'equal', 'compare', 'return'],
   hard: ['boolean', 'condition', 'expression', 'operator']
 }

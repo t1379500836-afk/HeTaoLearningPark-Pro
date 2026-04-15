@@ -425,8 +425,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['while', 'loop', 'true', 'break'],
-  medium: ['repeat', 'condition', 'forever', 'count'],
+  easy: ['while', 'loop', 'true', 'break', 'hit', 'else'],
+  medium: ['repeat', 'condition', 'forever', 'count', 'link', 'replace'],
   hard: ['infinite', 'continue', 'statement', 'execution']
 }
 

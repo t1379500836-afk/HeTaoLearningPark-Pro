@@ -426,7 +426,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组，纯英文）
 export const typingWords = {
   easy: ['photo', 'record', 'take', 'mark'],
-  medium: ['camera', 'register', 'access', 'check'],
+  medium: ['camera', 'register', 'access', 'check', 'list'],
   hard: ['permission', 'captured', 'identity', 'verified']
 }
 

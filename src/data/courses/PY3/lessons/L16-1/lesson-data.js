@@ -428,7 +428,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组，纯英文）
 export const typingWords = {
   easy: ['and', 'or', 'true', 'false'],
-  medium: ['candy', 'logic', 'check', 'valid'],
+  medium: ['candy', 'logic', 'check', 'valid', 'ice'],
   hard: ['condition', 'operator', 'boolean', 'priority']
 }
 

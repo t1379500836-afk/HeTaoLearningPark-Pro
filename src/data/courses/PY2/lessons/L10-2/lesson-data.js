@@ -432,9 +432,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['loop', 'range', 'row', 'col'],
-  medium: ['nested', 'traverse', 'matrix', 'column'],
-  hard: ['iteration', 'coordinate', 'transpose', 'optimize']
+  easy: ['loop', 'range', 'row', 'col', 'good', 'shop'],
+  medium: ['nested', 'traverse', 'matrix', 'column', 'medicine'],
+  hard: ['iteration', 'coordinate', 'transpose', 'optimize', 'logo']
 }
 
 // 代码模板（打字练习用）

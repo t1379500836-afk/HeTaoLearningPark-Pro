@@ -84,7 +84,7 @@ export const lessonMeta = {
 
 export const typingWords = {
   easy: ['pose', 'tilt', 'left', 'right'],
-  medium: ['attitude', 'screen', 'shake', 'arrow'],
+  medium: ['attitude', 'screen', 'shake', 'arrow', 'beat', 'angle'],
   hard: ['orientation', 'detect', 'stable', 'change']
 }
 

@@ -589,8 +589,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['return', 'choice', 'random', 'if'],
-  medium: ['boolean', 'condition', 'import', 'module'],
+  easy: ['return', 'choice', 'random', 'if', 'enemy'],
+  medium: ['boolean', 'condition', 'import', 'module', 'animal'],
   hard: ['predicate', 'function', 'calculate', 'operator']
 }
 

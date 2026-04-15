@@ -590,7 +590,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组）
 export const typingWords = {
   easy: ['car', 'move', 'turn', 'left', 'right'],
-  medium: ['power', 'claw', 'init', 'motor', 'sensor'],
+  medium: ['power', 'claw', 'init', 'motor', 'sensor', 'initial', 'detect'],
   hard: ['initialize', 'direction', 'rotation', 'automated', 'obstacle']
 }
 

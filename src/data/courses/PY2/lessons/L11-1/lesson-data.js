@@ -537,7 +537,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组）
 export const typingWords = {
   easy: ['def', 'return', 'func', 'call'],
-  medium: ['define', 'python', 'syntax', 'value'],
+  medium: ['define', 'python', 'syntax', 'value', 'attack', 'pay'],
   hard: ['parameter', 'function', 'argument', 'variable']
 }
 

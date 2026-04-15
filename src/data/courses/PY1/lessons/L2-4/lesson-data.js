@@ -427,8 +427,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['turtle', 'move', 'turn', 'draw'],
-  medium: ['forward', 'backward', 'direction', 'corner'],
+  easy: ['turtle', 'move', 'turn', 'draw', 'online'],
+  medium: ['forward', 'backward', 'direction', 'corner', 'judge', 'submit'],
   hard: ['polygon', 'triangle', 'rectangle', 'geometry']
 }
 

@@ -380,8 +380,8 @@ export const lessonMeta = {
 }
 
 export const typingWords = {
-  easy: ['volume', 'sound', 'loud', 'quiet'],
-  medium: ['microphone', 'control', 'trigger', 'level'],
+  easy: ['volume', 'sound', 'loud', 'quiet', 'block'],
+  medium: ['microphone', 'control', 'trigger', 'level', 'hide'],
   hard: ['threshold', 'average', 'smooth', 'detect']
 }
 

@@ -445,7 +445,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组）
 export const typingWords = {
   easy: ['lucky', 'dice', 'pick', 'select'],
-  medium: ['import', 'random', 'choice'],
+  medium: ['import', 'random', 'choice', 'range'],
   hard: ['module', 'probability', 'generate']
 }
 

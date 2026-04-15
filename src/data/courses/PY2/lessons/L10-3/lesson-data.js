@@ -432,9 +432,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['modify', 'change', 'multiply', 'game'],
-  medium: ['element', 'position', 'matrix', 'random'],
-  hard: ['initialize', 'transformation', 'coordinate', 'algorithm']
+  easy: ['modify', 'change', 'multiply', 'game', 'animal'],
+  medium: ['element', 'position', 'matrix', 'random', 'import', 'maze'],
+  hard: ['initialize', 'transformation', 'coordinate', 'algorithm', 'score']
 }
 
 // 代码模板（打字练习用）

@@ -338,8 +338,8 @@ export const lessonMeta = {
 
 // 打字练习单词
 export const typingWords = {
-  easy: ['info', 'len', 'index', 'string'],
-  medium: ['length', 'python', 'character', 'position'],
+  easy: ['info', 'len', 'index', 'string', 'word'],
+  medium: ['length', 'python', 'character', 'position', 'idiom'],
   hard: ['concatenation', 'programming', 'extraction', 'algorithm']
 }
 

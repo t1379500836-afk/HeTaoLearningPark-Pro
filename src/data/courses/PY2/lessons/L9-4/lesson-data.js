@@ -348,9 +348,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['count', 'range', 'total', 'solve'],
-  medium: ['chicken', 'rabbit', 'puzzle', 'answer'],
-  hard: ['enumeration', 'equation', 'algorithm', 'optimize']
+  easy: ['count', 'range', 'total', 'solve', 'head', 'foot'],
+  medium: ['chicken', 'rabbit', 'puzzle', 'answer', 'bee', 'cage'],
+  hard: ['enumeration', 'equation', 'algorithm', 'optimize', 'honey']
 }
 
 // 代码模板练习（按难度分组）

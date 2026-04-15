@@ -379,7 +379,7 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['width', 'image', 'actor', 'draw'],
+  easy: ['width', 'image', 'actor', 'draw', 'height'],
   medium: ['update', 'import', 'screen', 'clear'],
   hard: ['pgzrun', 'colliderect', 'coordinate', 'animation']
 }

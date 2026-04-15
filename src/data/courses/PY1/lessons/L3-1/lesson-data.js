@@ -348,7 +348,7 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['move', 'cat', 'stop', 'count'],
+  easy: ['move', 'cat', 'stop', 'count', 'dog'],
   medium: ['total', 'change', 'number', 'value'],
   hard: ['variable', 'modify', 'increase', 'counter']
 }

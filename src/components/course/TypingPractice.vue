@@ -239,6 +239,11 @@ const props = defineProps({
     type: Number,
     default: 8
   },
+  // 必须优先出现的单词（单词卡内容，按原顺序排在最前面）
+  vocabWords: {
+    type: Array,
+    default: () => []
+  },
   // 外部管理的排行榜数据（用于持久化）
   scoreHistory: {
     type: Array,
@@ -464,7 +469,16 @@ const currentLevel = computed(() => {
   }
   // 然后检查自定义单词
   if (props.customWords.length > 0) {
-    const selectedWords = shuffleAndPick(props.customWords, props.wordCount)
+    let selectedWords
+    if (props.vocabWords.length > 0) {
+      // 单词卡优先：vocabWords 在前，剩余从 customWords 中随机抽取补齐
+      const remaining = props.customWords.filter(w => !props.vocabWords.includes(w))
+      const fillCount = Math.max(0, props.wordCount - props.vocabWords.length)
+      const fillWords = shuffleAndPick(remaining, fillCount)
+      selectedWords = [...props.vocabWords, ...fillWords]
+    } else {
+      selectedWords = shuffleAndPick(props.customWords, props.wordCount)
+    }
     return { type: 'word', words: selectedWords, title: '单词练习' }
   }
   // 最后使用内置关卡
@@ -914,7 +928,7 @@ const goBack = () => {
 }
 
 // 监听自定义内容变化，重置练习状态（保留排行榜数据）
-watch(() => [props.customWords, props.customTemplates], () => {
+watch(() => [props.customWords, props.vocabWords, props.customTemplates], () => {
   // 当父组件更新内容时，重置练习状态
   resetPractice()
 }, { deep: true })

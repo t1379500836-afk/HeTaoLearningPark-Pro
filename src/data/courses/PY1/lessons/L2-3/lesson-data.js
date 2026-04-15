@@ -427,7 +427,7 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['index', 'list', 'first', 'last'],
+  easy: ['index', 'list', 'first', 'last', 'color', 'red', 'blue'],
   medium: ['element', 'access', 'position', 'range'],
   hard: ['negative', 'boundary', 'iteration', 'subscript']
 }

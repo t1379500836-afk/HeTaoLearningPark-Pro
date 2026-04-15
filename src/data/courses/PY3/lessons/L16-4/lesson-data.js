@@ -427,7 +427,7 @@ export const lessonMeta = {
 export const typingWords = {
   easy: ['line', 'move', 'turn', 'color'],
   medium: ['follow', 'detect', 'record', 'deliver'],
-  hard: ['navigation', 'priority', 'destination', 'sorting']
+  hard: ['navigation', 'priority', 'destination', 'sorting', 'delivery']
 }
 
 // 代码模板练习（按难度分组）

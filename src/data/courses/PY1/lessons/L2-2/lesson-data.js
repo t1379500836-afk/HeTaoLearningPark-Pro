@@ -425,8 +425,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['split', 'list', 'index', 'comma'],
-  medium: ['separator', 'divide', 'piece', 'result'],
+  easy: ['split', 'list', 'index', 'comma', 'for', 'in'],
+  medium: ['separator', 'divide', 'piece', 'result', 'range', 'shoot'],
   hard: ['delimiter', 'partition', 'aggregate', 'iterate']
 }
 

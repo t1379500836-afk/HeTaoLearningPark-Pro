@@ -100,6 +100,8 @@
         <TypingPractice
           v-if="typingMode === 'word'"
           :custom-words="allTypingWords"
+          :vocab-words="vocabWords"
+          :word-count="allTypingWords.length"
           :auto-focus="false"
           embedded
         />
@@ -241,6 +243,12 @@ const getExerciseCount = (level) => {
   }
   return getExercisesByLevel(level).length
 }
+
+// 单词卡单词（用于打字练习优先出现）
+const vocabWords = computed(() => {
+  if (!vocab.value || vocab.value.length === 0) return []
+  return vocab.value.map(v => v.word)
+})
 
 // 所有打字单词
 const allTypingWords = computed(() => {
@@ -423,6 +431,7 @@ watch(isLoading, (newVal) => {
 }
 
 .lesson-view {
+  width: 100%;
   min-height: 100vh;
   padding: 40px 20px;
   max-width: 1200px;

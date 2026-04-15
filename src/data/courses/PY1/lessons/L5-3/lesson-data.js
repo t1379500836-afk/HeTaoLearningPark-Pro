@@ -333,8 +333,8 @@ export const lessonMeta = {
 
 // 打字练习单词
 export const typingWords = {
-  easy: ['slice', 'cut', 'part', 'piece'],
-  medium: ['extract', 'portion', 'segment', 'substring'],
+  easy: ['slice', 'cut', 'part', 'piece', 'address', 'age'],
+  medium: ['extract', 'portion', 'segment', 'substring', 'gender'],
   hard: ['information', 'extraction', 'processing', 'identifier']
 }
 

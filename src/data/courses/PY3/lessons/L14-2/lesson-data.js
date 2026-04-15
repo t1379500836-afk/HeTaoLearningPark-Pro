@@ -428,7 +428,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组，纯英文）
 export const typingWords = {
   easy: ['interval', 'repeat', 'loop', 'stop'],
-  medium: ['schedule', 'timer', 'paused', 'spawn'],
+  medium: ['schedule', 'timer', 'paused', 'spawn', 'period'],
   hard: ['unschedule', 'continuous', 'control', 'trigger']
 }
 

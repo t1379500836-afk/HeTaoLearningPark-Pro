@@ -349,8 +349,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['list', 'loop', 'check', 'find'],
-  medium: ['enumerate', 'filter', 'search', 'pair'],
+  easy: ['list', 'loop', 'check', 'find', 'mask', 'top'],
+  medium: ['enumerate', 'filter', 'search', 'pair', 'nature', 'park'],
   hard: ['combination', 'iteration', 'condition', 'brute-force']
 }
 

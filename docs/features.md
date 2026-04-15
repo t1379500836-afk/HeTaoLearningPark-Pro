@@ -18,6 +18,8 @@
 - 中文打字：古诗和成语输入
 - 快捷键：键盘快捷键记忆
 
+正课页（LessonView）内嵌打字练习，优先展示本课单词卡词汇，再随机补充其他单词。
+
 ## 在线编程
 
 页面 `/python`，基于 CodeMirror 的 Python 编辑器，支持代码执行。
@@ -58,9 +60,8 @@
 | Navigation | 顶部导航栏，移动端汉堡菜单 |
 | Footer | 底部信息栏 |
 | AuthModal | 全屏身份验证弹窗 |
-| LoadingOverlay | 全局加载遮罩 |
 | CelebrationEffect | 认证成功撒花动画 |
-| FlashcardDisplay | 词汇翻转卡片 |
+| FlashcardDisplay | 词汇翻转卡片（3列网格布局） |
 | KnowledgeCard | 知识点展示（三级难度切换） |
 | ExerciseCard | 练习题卡片（选择、判对错、解析） |
 | DifficultyBadge | 难度标签 |

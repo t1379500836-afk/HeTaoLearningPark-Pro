@@ -380,7 +380,7 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['play', 'stop', 'button', 'switch'],
+  easy: ['play', 'stop', 'button', 'switch', 'game'],
   medium: ['debug', 'global', 'state', 'control'],
   hard: ['collision', 'coordinate', 'management', 'interactive']
 }

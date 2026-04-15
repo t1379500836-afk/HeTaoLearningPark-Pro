@@ -509,9 +509,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['list', 'index', 'row', 'col'],
-  medium: ['nested', 'matrix', 'append', 'modify'],
-  hard: ['multidimensional', 'sublist', 'element', 'structure']
+  easy: ['list', 'index', 'row', 'col', 'tool', 'clothes'],
+  medium: ['nested', 'matrix', 'append', 'modify', 'design', 'grid'],
+  hard: ['multidimensional', 'sublist', 'element', 'structure', 'board']
 }
 
 // 代码模板（打字练习用）

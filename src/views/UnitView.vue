@@ -40,11 +40,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getStageName, getUnitInfo } from '@/config/courses.config.js'
+import { getStageName, getUnitInfo, lessonConfig } from '@/config/courses.config.js'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
-import { notifyPageReady } from '@/composables/useLoading.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -54,50 +53,17 @@ const level = computed(() => route.params.unit)
 // 获取当前路由前缀
 const prefix = computed(() => getCurrentPrefix(route))
 
-// 加载单元内的课程数据
-const lessons = ref([])
-const isLoading = ref(true)
-
-async function loadLessons() {
-  const unitId = level.value
-  const lessonIds = ['1', '2', '3', '4'].map(num => `${unitId}-${num}`)
-
-  // 并行加载四个课时的元数据
-  const loadPromises = lessonIds.map(async (lessonId) => {
-    try {
-      const module = await import(
-        `../data/courses/${stage.value}/lessons/${lessonId}/lesson-data.js`
-      )
-      const meta = module.lessonMeta
-      return {
-        id: lessonId,
-        title: meta.title,
-        description: meta.subtitle
-      }
-    } catch (error) {
-      // 如果 lesson-data.js 不存在，使用默认值
-      return {
-        id: lessonId,
-        title: `课时 ${lessonId.split('-')[1]}`,
-        description: '知识点讲解、打字练习与课后习题'
-      }
+// 直接从静态配置获取课程卡片数据，无需动态 import
+const lessons = computed(() => {
+  return ['1', '2', '3', '4'].map(num => {
+    const id = `${level.value}-${num}`
+    const config = lessonConfig[id]
+    return {
+      id,
+      title: config?.title || `课时 ${num}`,
+      description: config?.subtitle || '知识点讲解、打字练习与课后习题'
     }
   })
-
-  // 并行执行所有加载请求
-  const loadedLessons = await Promise.all(loadPromises)
-
-  lessons.value = loadedLessons
-  isLoading.value = false
-
-  // 通知全局 loading 可以隐藏了
-  nextTick(() => {
-    notifyPageReady()
-  })
-}
-
-onMounted(() => {
-  loadLessons()
 })
 
 const stageInfo = computed(() => ({ name: getStageName(stage.value) }))

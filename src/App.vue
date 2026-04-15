@@ -10,8 +10,6 @@
     <template v-if="!is404Page">
       <Footer />
     </template>
-    <!-- 全局 Loading 动画覆盖层 -->
-    <LoadingOverlay :is-loading="isLoading" :text="loadingText" />
     <!-- 口令验证弹窗（404 页面不需要验证） -->
     <AuthModal :show="needAuth && !is404Page" @success="onAuthSuccess" />
     <!-- 彩带庆祝动画（独立于弹窗） -->
@@ -22,10 +20,8 @@
 <script setup>
 import Navigation from './components/shared/Navigation.vue'
 import Footer from './components/shared/Footer.vue'
-import LoadingOverlay from './components/shared/LoadingOverlay.vue'
 import AuthModal from './components/shared/AuthModal.vue'
 import CelebrationEffect from './components/shared/CelebrationEffect.vue'
-import { useLoading } from './composables/useLoading.js'
 import { useAuth } from './composables/useAuth.js'
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -35,7 +31,6 @@ const route = useRoute()
 // 检测是否是 404 页面（通过路由名称或 meta 判断）
 const is404Page = computed(() => route.name === 'not-found' || route.meta?.is404 === true)
 
-const { isLoading, loadingText } = useLoading()
 const { needAuth, teacherName } = useAuth()
 
 const showCelebration = ref(false)

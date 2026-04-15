@@ -12,7 +12,7 @@ server/                     # 后端服务（Node.js + Express）
     └── teachers.js         # 教师 CRUD + 静态文件再生
 
 src/
-├── main.js                 # 应用入口，挂载路由和全局样式
+├── main.js                 # 应用入口，挂载路由
 ├── App.vue                 # 根组件：导航栏 + 页面内容 + 底部栏
 ├── router/index.js         # 路由定义，含多前缀生成逻辑
 ├── config/                 # 配置文件（课程、阶段、教师）
@@ -60,7 +60,6 @@ URL（含前缀）
 | Composable | 作用 | 存储位置 |
 |------------|------|----------|
 | useAuth | 教师身份验证 | sessionStorage |
-| useLoading | 全局加载状态 | 内存 |
 | useLessonData | 课程数据加载 | 动态 import |
 | useRoutePrefix | URL前缀与阶段权限 | 路由参数 |
 

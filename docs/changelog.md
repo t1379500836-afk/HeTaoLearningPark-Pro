@@ -2,6 +2,17 @@
 
 ## 2026-04-16
 
+- 优化课程卡片加载体验：将 UnitView 从动态 import 改为静态配置读取，课程卡片即时渲染
+- 补全 courses.config.js 中全部 72 个课次元数据（lessonConfig）
+- 移除全局 LoadingOverlay（全屏遮罩），改为页面级 inline loading
+  - 静态页面（StageView、UnitView）零 loading，瞬间渲染
+  - 异步页面（LessonView、YCLExamView、YCLPracticeView）各自管理 inline 转圈
+  - 删除 useLoading.js 和 LoadingOverlay.vue
+- 修复生产环境 teachers 接口 ENOENT 报错：检测 src/ 目录是否存在，不存在则跳过配置生成和构建
+- 改造构建调度：10 分钟轮询替代即时构建（脏标记机制），避免连续操作触发多次构建
+- regenerateConfig 改为非阻塞调用，构建失败不影响 API 响应
+- 更新部署方案：生产服务器需包含完整源码（src/、vite.config.js 等）以支持在线构建
+
 - 修复生产环境 teachers 接口 ENOENT 报错：检测 src/ 目录是否存在，不存在则跳过配置生成和构建
 - 改造构建调度：10 分钟轮询替代即时构建（脏标记机制），避免连续操作触发多次构建
 - regenerateConfig 改为非阻塞调用，构建失败不影响 API 响应

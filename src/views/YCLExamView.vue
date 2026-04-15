@@ -1,7 +1,13 @@
 <template>
   <div class="ycl-exam-view">
+    <!-- 加载状态 -->
+    <div v-if="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>正在加载试卷...</p>
+    </div>
+
     <!-- 复习模式：查看解析（优先显示） -->
-    <div v-if="isReviewMode" class="review-mode">
+    <div v-else-if="isReviewMode" class="review-mode">
       <!-- 悬浮返回按钮 -->
       <button class="floating-back-btn" @click="goBack" aria-label="返回列表">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -827,6 +833,25 @@ onUnmounted(() => {
 .ycl-exam-view {
   min-height: 100vh;
   background: #f5f7fa;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* 悬浮返回按钮 */

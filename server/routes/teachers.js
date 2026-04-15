@@ -17,6 +17,14 @@ const CONFIG_PATH = resolve(PROJECT_ROOT, 'src/config/teachers.config.js')
 // ==================== 工具函数 ====================
 
 async function regenerateConfig() {
+  const { existsSync, mkdirSync } = await import('fs')
+  const configDir = dirname(CONFIG_PATH)
+
+  if (!existsSync(configDir)) {
+    console.log('未检测到源码目录，跳过配置文件生成')
+    return
+  }
+
   const [rows] = await pool.execute(
     'SELECT display_name, `key` FROM teachers ORDER BY id'
   )

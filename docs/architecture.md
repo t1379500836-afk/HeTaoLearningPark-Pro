@@ -35,7 +35,13 @@ src/
 ## 数据流
 
 ```
-管理后台操作 → Express 写 MySQL → 重新生成 teachers.config.js → npm run build → Nginx 提供新 dist/
+管理后台操作（增/删/改教师）
+  → Express 写 MySQL（立即生效）
+  → 立即重新生成 src/config/teachers.config.js
+  → 标记 needsBuild = true
+  → 每 10 分钟定时器检查：
+      有标记 → npm run build → 新 dist/ → Nginx 提供新文件
+      无标记 → 跳过
 ```
 
 ```

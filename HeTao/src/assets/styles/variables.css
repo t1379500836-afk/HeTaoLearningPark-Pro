@@ -1,0 +1,85 @@
+/* 核桃编程学习平台 - CSS变量系统 */
+:root {
+    /* 主题色彩 */
+    --primary-color: #ff9f00;      /* 核桃橙 - 主色调 */
+    --secondary-color: #4facfe;    /* 天空蓝 - 次要色 */
+    --accent-color: #00f2fe;       /* 强调色 */
+    --text-color: #333;            /* 文字颜色 */
+    --bg-color: #f9f9f9;           /* 背景色 */
+    --card-bg: #ffffff;            /* 卡片背景 */
+
+    /* 状态色彩 */
+    --success-color: #2ecc71;      /* 成功绿 */
+    --warning-color: #f1c40f;      /* 警告黄 */
+    --danger-color: #e74c3c;       /* 危险红 */
+
+    /* 编辑器色彩 */
+    --editor-bg: #282c34;          /* 编辑器背景 */
+    --editor-sidebar: #f1f1f1;     /* 编辑器侧边栏 */
+
+    /* 打字练习色彩 */
+    --typing-bg: #2d3436;          /* 打字练习背景 */
+    --typing-text: #fff;           /* 打字练习文字 */
+    --typing-key: #555;            /* 按键边框 */
+    --typing-key-normal: #333;     /* 按键默认背景 */
+    --typing-key-active: #ff9f00;  /* 按下状态（核桃橙） */
+    --typing-key-correct: #2ecc71; /* 正确输入（绿色） */
+    --typing-key-error: #e74c3c;   /* 错误输入（红色） */
+
+    /* YCL专区色彩 */
+    --ycl-primary: #6c5ce7;        /* YCL紫色 */
+    --ycl-secondary: #a29bfe;      /* YCL浅紫 */
+    --ycl-badge: #fdcb6e;          /* YCL徽章 */
+
+    /* 字体 */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-code: 'Consolas', 'Courier New', monospace;
+
+    /* 间距 */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 40px;
+    --spacing-xl: 60px;
+
+    /* 响应式断点 */
+    --bp-mobile: 480px;
+    --bp-tablet: 768px;
+    --bp-desktop: 1024px;
+    --bp-wide: 1280px;
+
+    /* 布局相关 */
+    --max-width-container: 1200px;
+    --max-width-text: 800px;
+    --header-height: 60px;
+    --footer-height: 80px;
+
+    /* 触控目标最小尺寸（移动端） */
+    --touch-target-min: 44px;
+
+    /* 圆角 */
+    --radius-sm: 5px;
+    --radius-md: 10px;
+    --radius-lg: 15px;
+    --radius-pill: 50px;
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.1);
+    --shadow-md: 0 5px 15px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    --shadow-editor: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 全局重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}

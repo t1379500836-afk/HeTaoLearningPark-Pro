@@ -35,7 +35,7 @@
 ## 身份验证
 
 - 全局弹窗，必须输入教师口令才能访问
-- 口令明文存储，后端自动生成 `teachers.config.js`
+- 口令明文存储在 `teachers.config.js`（由后端自动生成，构建时嵌入前端）
 - 验证后个性化显示教师名称
 - 认证状态保存在 sessionStorage（关标签页失效）
 
@@ -49,7 +49,7 @@
 | PUT | /api/teachers/:id | 修改教师 | JWT |
 | DELETE | /api/teachers/:id | 删除教师 | JWT |
 
-数据库表：teachers（id, username, password_hash, display_name, key, created_at）。教师增删改后自动重新生成前端配置并构建。
+数据库表：teachers（id, username, password_hash, role, display_name, key, created_at）。教师增删改后立即重新生成前端配置文件，每 10 分钟定时检查并构建前端。
 
 ## 通用组件
 

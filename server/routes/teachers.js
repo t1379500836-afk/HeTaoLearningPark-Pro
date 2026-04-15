@@ -16,12 +16,22 @@ const CONFIG_PATH = resolve(PROJECT_ROOT, 'src/config/teachers.config.js')
 
 // ==================== 工具函数 ====================
 
-async function regenerateConfig() {
-  const { existsSync, mkdirSync } = await import('fs')
-  const configDir = dirname(CONFIG_PATH)
+// 每 10 分钟检查一次，有变更才构建
+let needsBuild = false
+setInterval(() => {
+  if (!needsBuild) return
+  needsBuild = false
+  runBuild()
+}, 10 * 60 * 1000)
+function scheduleBuild() {
+  needsBuild = true
+}
 
-  if (!existsSync(configDir)) {
-    console.log('未检测到源码目录，跳过配置文件生成')
+async function regenerateConfig() {
+  const { existsSync } = await import('fs')
+
+  // 生产环境没有 src 目录，跳过配置生成
+  if (!existsSync(resolve(PROJECT_ROOT, 'src'))) {
     return
   }
 
@@ -66,7 +76,7 @@ async function runBuild() {
   try {
     // 生产环境如果没有完整源码就跳过构建
     const { existsSync } = await import('fs')
-    if (!existsSync(resolve(PROJECT_ROOT, 'package.json'))) {
+    if (!existsSync(resolve(PROJECT_ROOT, 'src'))) {
       console.log('未检测到项目源码，跳过前端构建')
       return
     }
@@ -133,9 +143,6 @@ router.post('/', async (req, res) => {
       [username, hash, teacherRole, displayName, key]
     )
 
-    await regenerateConfig()
-    runBuild()
-
     res.status(201).json({
       id: result.insertId,
       username,
@@ -143,6 +150,10 @@ router.post('/', async (req, res) => {
       displayName,
       key,
     })
+
+    // 非关键：配置更新和构建失败不影响 API 响应
+    regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    scheduleBuild()
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({ error: '用户名已存在' })
@@ -196,10 +207,10 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ error: '教师不存在' })
     }
 
-    await regenerateConfig()
-    runBuild()
-
     res.json({ message: '更新成功' })
+
+    regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    scheduleBuild()
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({ error: '用户名已存在' })
@@ -225,10 +236,10 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: '教师不存在' })
     }
 
-    await regenerateConfig()
-    runBuild()
-
     res.json({ message: '删除成功' })
+
+    regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    scheduleBuild()
   } catch (err) {
     console.error('删除教师失败:', err)
     res.status(500).json({ error: '服务器错误' })

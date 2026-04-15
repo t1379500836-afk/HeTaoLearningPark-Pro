@@ -2,6 +2,6 @@
 
 ## 2026-04-15
 
-- 初始化项目文档体系：README.md、architecture.md、features.md、changelog.md
-- 创建 CLAUDE.md 项目行为准则
-- 创建 /dev Skill 开发工作流
+- 搭建后端服务骨架：server/（Express + MySQL + JWT），教师登录和 CRUD 接口
+- 简化教师口令配置，去掉 Base64 编码改为明文
+- 初始化项目文档体系

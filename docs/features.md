@@ -35,9 +35,21 @@
 ## 身份验证
 
 - 全局弹窗，必须输入教师口令才能访问
-- 口令 Base64 编码，目前 18 位教师
+- 口令明文存储，后端自动生成 `teachers.config.js`
 - 验证后个性化显示教师名称
 - 认证状态保存在 sessionStorage（关标签页失效）
+
+## 后端服务
+
+| 方法 | 路径 | 说明 | 认证 |
+|------|------|------|------|
+| POST | /api/auth/login | 教师登录 | 无 |
+| GET | /api/teachers | 获取教师列表 | JWT |
+| POST | /api/teachers | 新增教师 | JWT |
+| PUT | /api/teachers/:id | 修改教师 | JWT |
+| DELETE | /api/teachers/:id | 删除教师 | JWT |
+
+数据库表：teachers（id, username, password_hash, display_name, key, created_at）。教师增删改后自动重新生成前端配置并构建。
 
 ## 通用组件
 

@@ -30,3 +30,6 @@ dist-ssr
 .env.local
 .env.*.local
 源文件/
+
+# Claude local settings (may contain credentials)
+.claude/settings.local.json

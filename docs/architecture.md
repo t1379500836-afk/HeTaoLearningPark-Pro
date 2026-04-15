@@ -3,6 +3,14 @@
 ## 目录结构
 
 ```
+server/                     # 后端服务（Node.js + Express）
+├── index.js                # Express 入口
+├── db.js                   # MySQL 连接池 + 建表
+├── middleware/auth.js       # JWT 验证中间件
+└── routes/
+    ├── auth.js             # 教师登录接口
+    └── teachers.js         # 教师 CRUD + 静态文件再生
+
 src/
 ├── main.js                 # 应用入口，挂载路由和全局样式
 ├── App.vue                 # 根组件：导航栏 + 页面内容 + 底部栏
@@ -25,6 +33,10 @@ src/
 ```
 
 ## 数据流
+
+```
+管理后台操作 → Express 写 MySQL → 重新生成 teachers.config.js → npm run build → Nginx 提供新 dist/
+```
 
 ```
 URL（含前缀）

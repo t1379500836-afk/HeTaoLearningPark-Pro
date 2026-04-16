@@ -36,7 +36,8 @@ async function regenerateConfig() {
   }
 
   const [rows] = await pool.execute(
-    'SELECT display_name, `key` FROM teachers ORDER BY id'
+    'SELECT display_name, `key` FROM teachers WHERE status = ? ORDER BY id',
+    ['active']
   )
 
   const escape = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
@@ -103,15 +104,16 @@ router.get('/', async (req, res) => {
   try {
     if (isAdmin(req)) {
       const [rows] = await pool.execute(
-        'SELECT id, username, role, display_name, `key`, created_at FROM teachers ORDER BY id'
+        'SELECT id, username, role, display_name, `key`, created_at, updated_at FROM teachers WHERE status = ? ORDER BY id',
+        ['active']
       )
       return res.json(rows)
     }
 
     // 普通教师只返回自己
     const [rows] = await pool.execute(
-      'SELECT id, username, role, display_name, `key`, created_at FROM teachers WHERE id = ?',
-      [req.teacher.id]
+      'SELECT id, username, role, display_name, `key`, created_at FROM teachers WHERE id = ? AND status = ?',
+      [req.teacher.id, 'active']
     )
     res.json(rows)
   } catch (err) {
@@ -197,9 +199,9 @@ router.put('/:id', async (req, res) => {
       return res.status(400).json({ error: '没有需要更新的字段' })
     }
 
-    params.push(id)
+    params.push(id, 'active')
     const [result] = await pool.execute(
-      `UPDATE teachers SET ${updates.join(', ')} WHERE id = ?`,
+      `UPDATE teachers SET ${updates.join(', ')} WHERE id = ? AND status = ?`,
       params
     )
 
@@ -230,10 +232,13 @@ router.delete('/:id', async (req, res) => {
   }
 
   try {
-    const [result] = await pool.execute('DELETE FROM teachers WHERE id = ?', [req.params.id])
+    const [result] = await pool.execute(
+      'UPDATE teachers SET status = ? WHERE id = ? AND status = ?',
+      ['disabled', req.params.id, 'active']
+    )
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: '教师不存在' })
+      return res.status(404).json({ error: '教师不存在或已禁用' })
     }
 
     res.json({ message: '删除成功' })

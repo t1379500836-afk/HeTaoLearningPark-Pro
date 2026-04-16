@@ -19,13 +19,13 @@ router.post('/login', async (req, res) => {
 
   try {
     const [rows] = await pool.execute(
-      'SELECT id, username, password_hash, role, display_name, `key` FROM teachers WHERE username = ?',
+      'SELECT id, username, password_hash, role, display_name, `key`, status FROM teachers WHERE username = ?',
       [username]
     )
 
     const teacher = rows[0]
-    if (!teacher) {
-      return res.status(401).json({ error: '用户名或密码错误' })
+    if (!teacher || teacher.status === 'disabled') {
+      return res.status(401).json({ error: '账号不存在' })
     }
 
     const valid = await bcrypt.compare(password, teacher.password_hash)
@@ -38,6 +38,9 @@ router.post('/login', async (req, res) => {
       JWT_SECRET,
       { expiresIn: '7d' }
     )
+
+    // 更新登录时间
+    pool.execute('UPDATE teachers SET updated_at = CURRENT_TIMESTAMP WHERE id = ?', [teacher.id]).catch(() => {})
 
     res.json({
       token,
@@ -70,13 +73,13 @@ router.get('/me', async (req, res) => {
     const decoded = jwt.verify(token, JWT_SECRET)
 
     const [rows] = await pool.execute(
-      'SELECT id, username, role, display_name, `key` FROM teachers WHERE id = ?',
-      [decoded.id]
+      'SELECT id, username, role, display_name, `key`, updated_at FROM teachers WHERE id = ? AND status = ?',
+      [decoded.id, 'active']
     )
 
     const teacher = rows[0]
     if (!teacher) {
-      return res.status(401).json({ error: '用户不存在' })
+      return res.status(401).json({ error: '账号已被禁用' })
     }
 
     res.json({
@@ -85,6 +88,7 @@ router.get('/me', async (req, res) => {
       role: teacher.role,
       displayName: teacher.display_name,
       key: teacher.key,
+      updated_at: teacher.updated_at,
     })
   } catch {
     res.status(401).json({ error: '登录已过期' })

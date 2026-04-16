@@ -26,9 +26,25 @@ export async function initDatabase() {
         role ENUM('admin','teacher') NOT NULL DEFAULT 'teacher',
         display_name VARCHAR(50) NOT NULL,
         \`key\` VARCHAR(100) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        status ENUM('active','disabled') NOT NULL DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `)
+
+    // 兼容已有表：补加 status 列
+    try {
+      await conn.execute("ALTER TABLE teachers ADD COLUMN status ENUM('active','disabled') NOT NULL DEFAULT 'active'")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
+
+    // 兼容已有表：补加 updated_at 列
+    try {
+      await conn.execute("ALTER TABLE teachers ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
 
     // 表为空时插入默认管理员
     const [rows] = await conn.execute('SELECT COUNT(*) AS count FROM teachers')

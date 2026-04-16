@@ -10,10 +10,10 @@
     <div class="login-card">
       <div class="card-header">
         <div class="logo-icon">
-          <svg viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="rgba(255,255,255,0.2)"/><path d="M16 18h16v2H16zm0 6h12v2H16zm0 6h14v2H16z" fill="#fff"/><circle cx="34" cy="28" r="6" fill="rgba(255,255,255,0.3)"/></svg>
+          <svg viewBox="0 0 48 48" fill="none" width="56" height="56"><rect width="48" height="48" rx="12" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#667eea"/><stop offset="1" stop-color="#764ba2"/></linearGradient></defs><text x="24" y="32" text-anchor="middle" fill="#fff" font-size="20" font-weight="700" font-family="sans-serif">Py</text></svg>
         </div>
-        <h1>核桃学习平台</h1>
-        <p>管理后台</p>
+        <h1>核桃Python <span class="title-accent">学习平台</span></h1>
+        <p class="subtitle">教师管理后台</p>
       </div>
 
       <el-form :model="form" @submit.prevent="handleLogin" class="login-form">
@@ -50,6 +50,8 @@ async function handleLogin() {
     const { data } = await api.post('/auth/login', form)
     ElMessage.success(`欢迎，${data.teacher.displayName}`)
     emit('login', data)
+  } catch (err) {
+    ElMessage.error(err.response?.data?.error || '登录失败')
   } finally {
     loading.value = false
   }
@@ -118,12 +120,17 @@ async function handleLogin() {
   font-size: 22px;
   font-weight: 700;
   color: #1a1a2e;
+  line-height: 1.4;
 }
-.card-header p {
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: #888;
-  letter-spacing: 4px;
+.title-accent {
+  font-weight: 400;
+  color: #667eea;
+}
+.card-header .subtitle {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #999;
+  letter-spacing: 3px;
 }
 
 .login-form :deep(.el-input__wrapper) {
@@ -143,5 +150,25 @@ async function handleLogin() {
 }
 .login-btn:hover {
   opacity: 0.92;
+}
+
+/* ============ 移动端适配 ============ */
+@media (max-width: 480px) {
+  .login-card {
+    width: auto;
+    margin: 0 16px;
+    padding: 36px 24px 32px;
+  }
+  .card-header h1 { font-size: 19px; }
+  .card-header { margin-bottom: 28px; }
+}
+
+@media (max-width: 360px) {
+  .login-card {
+    margin: 0 12px;
+    padding: 28px 18px 24px;
+    border-radius: 16px;
+  }
+  .logo-icon { width: 44px; height: 44px; }
 }
 </style>

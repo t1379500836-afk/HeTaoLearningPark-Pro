@@ -19,11 +19,15 @@ api.interceptors.response.use(
   (res) => res,
   (err) => {
     const msg = err.response?.data?.error || '请求失败'
-    if (err.response?.status === 401) {
+    const status = err.response?.status
+    const isLoginReq = err.config?.url?.includes('/auth/login')
+    if (status === 401 && !isLoginReq) {
       localStorage.removeItem('admin_token')
       localStorage.removeItem('admin_user')
       window.location.reload()
-    } else {
+    }
+    // 登录请求的错误由 Login 组件自己处理，不在此弹消息
+    if (!isLoginReq) {
       ElMessage.error(msg)
     }
     return Promise.reject(err)

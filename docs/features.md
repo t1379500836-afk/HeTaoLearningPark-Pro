@@ -51,7 +51,20 @@
 | PUT | /api/teachers/:id | 修改教师 | JWT |
 | DELETE | /api/teachers/:id | 删除教师 | JWT |
 
-数据库表：teachers（id, username, password_hash, role, display_name, key, created_at）。教师增删改后立即重新生成前端配置文件，每 10 分钟定时检查并构建前端。
+数据库表：teachers（id, username, password_hash, role, display_name, key, status, created_at, updated_at）。status 为 active/disabled，删除操作改为软删除（置 disabled）。所有查询自动过滤已禁用账号。教师增删改后立即重新生成前端配置文件（仅含 active），每 10 分钟定时检查并构建前端。
+
+## 管理后台（admin/）
+
+独立 Vue 3 + Element Plus 应用，与主项目分离部署。
+
+| 页面 | 说明 |
+|------|------|
+| Login | 登录页，渐变背景，移动端适配 |
+| Dashboard | 侧边栏（可折叠）+ 顶栏 + 内容区 |
+
+- Admin 视图：统计卡片、搜索过滤、教师表格（头像、口令复制、角色标签、更新时间）、新增/编辑/软删除
+- Teacher 视图：个人资料卡片（渐变横幅、头像、信息网格）
+- 响应式：768px 以下侧边栏抽屉化 + 汉堡按钮，表格横向滚动，弹窗自适应宽度
 
 ## 通用组件
 

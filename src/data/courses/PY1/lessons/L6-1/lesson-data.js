@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please append your signature.',
     exampleTranslation: '请签上你的名字。',
-    note: 'append to 添加到'
+    note: 'append to 添加到',
+    source: 'ocr'
   },
   {
     word: 'remove',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please remove your shoes.',
     exampleTranslation: '请脱掉你的鞋子。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'giraffe',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The giraffe has a long neck.',
     exampleTranslation: '长颈鹿有长长的脖子。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'animal',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The lion is a wild animal.',
     exampleTranslation: '狮子是野生动物。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'list',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Make a list of animals.',
     exampleTranslation: '列一个动物清单。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'add',
@@ -67,7 +72,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Add sugar to the tea.',
     exampleTranslation: '给茶加糖。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

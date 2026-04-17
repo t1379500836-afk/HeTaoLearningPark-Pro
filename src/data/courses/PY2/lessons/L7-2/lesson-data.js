@@ -18,7 +18,8 @@ export const vocabData = [
     meaning: '天气；气象；气象预报',
     level: 'easy',
     example: 'The weather forecast says it is going to be sunny.',
-    exampleTranslation: '天气预报说会出太阳。'
+    exampleTranslation: '天气预报说会出太阳。',
+    source: 'ocr'
   },
   {
     word: 'float',
@@ -27,7 +28,8 @@ export const vocabData = [
     meaning: '漂浮；浮动；浮板',
     level: 'medium',
     example: 'They will neither sink nor float.',
-    exampleTranslation: '他们既不会下沉也不会浮上来。'
+    exampleTranslation: '他们既不会下沉也不会浮上来。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -37,7 +39,8 @@ export const vocabData = [
     meaning: '最大量；最大的',
     level: 'medium',
     example: 'The maximum speed of this car is 200 km/h.',
-    exampleTranslation: '这辆车的最高时速是200公里/小时。'
+    exampleTranslation: '这辆车的最高时速是200公里/小时。',
+    source: 'extended'
   },
   {
     word: 'minimum',
@@ -46,7 +49,8 @@ export const vocabData = [
     meaning: '最小量；最小的',
     level: 'medium',
     example: 'The minimum age for this job is 18.',
-    exampleTranslation: '这份工作的最低年龄要求是18岁。'
+    exampleTranslation: '这份工作的最低年龄要求是18岁。',
+    source: 'extended'
   },
   {
     word: 'index',
@@ -55,7 +59,8 @@ export const vocabData = [
     meaning: '索引；指数；指标',
     level: 'hard',
     example: 'The index of this list starts from 0.',
-    exampleTranslation: '这个列表的索引从0开始。'
+    exampleTranslation: '这个列表的索引从0开始。',
+    source: 'extended'
   }
 ]
 

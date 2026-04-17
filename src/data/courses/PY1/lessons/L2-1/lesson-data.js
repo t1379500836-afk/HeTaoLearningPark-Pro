@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'hit song 畅销歌曲',
     exampleTranslation: '畅销歌曲',
-    note: 'hit 击打'
+    note: 'hit 击打',
+    source: 'ocr'
   },
   {
     word: 'else',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'If you are ready, go. Else wait.',
     exampleTranslation: '如果你准备好了就走，否则等待。',
-    note: 'else 否则（if-else语句）'
+    note: 'else 否则（if-else语句）',
+    source: 'ocr'
   },
   {
     word: 'link',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Click the link to open the page.',
     exampleTranslation: '点击链接打开页面。',
-    note: 'link 链接'
+    note: 'link 链接',
+    source: 'ocr'
   },
   {
     word: 'replace',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Replace the old with the new.',
     exampleTranslation: '用新的取代旧的。',
-    note: 'replace 替换'
+    note: 'replace 替换',
+    source: 'ocr'
   }
 ]
 

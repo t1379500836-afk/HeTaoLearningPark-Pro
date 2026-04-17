@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'If you do not study hard, you will not get good grades.',
     exampleTranslation: '如果你不努力学习，你将不会获得好成绩。',
-    note: '条件判断关键字'
+    note: '条件判断关键字',
+    source: 'ocr'
   },
   {
     word: 'turn',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'You need to turn left to avoid the stones.',
     exampleTranslation: '你需要左转避开石头。',
-    note: 'turn left 向左转；turn right 向右转'
+    note: 'turn left 向左转；turn right 向右转',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'easy',
     example: 'If you are ready, go. Else wait.',
     exampleTranslation: '如果你准备好了就走，否则等待。',
-    note: 'else 否则（if-else语句）'
+    note: 'else 否则（if-else语句）',
+    source: 'extended'
   },
   {
     word: 'condition',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Check the condition first.',
     exampleTranslation: '先检查条件。',
-    note: 'if 后面跟的就是条件'
+    note: 'if 后面跟的就是条件',
+    source: 'extended'
   }
 ]
 

@@ -7,47 +7,53 @@
  * 3. 列表的负数索引
  */
 
-// 单词卡数据 - 拓展词汇（无OCR单词）
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
+  {
+    word: 'food',
+    pronunciation: '[fu:d]',
+    partOfSpeech: 'n.',
+    meaning: '食物；食品',
+    level: 'easy',
+    example: 'Feed the pet some food.',
+    exampleTranslation: '给宠物喂一些食物。',
+    note: '喂宠记游戏中的食物',
+    source: 'ocr'
+  },
+  {
+    word: 'number',
+    pronunciation: "['nΛmbər]",
+    partOfSpeech: 'n./v.',
+    meaning: '数字；数量；编号',
+    level: 'easy',
+    example: 'Find the next number in the sequence.',
+    exampleTranslation: '找出数列中的下一个数字。',
+    note: '数列中的数字',
+    source: 'ocr'
+  },
+  {
+    word: 'card',
+    pronunciation: '[ka:rd]',
+    partOfSpeech: 'n.',
+    meaning: '卡片；纸牌；贺卡',
+    level: 'medium',
+    example: 'Draw a card from the deck.',
+    exampleTranslation: '从牌堆中抽一张牌。',
+    note: '',
+    source: 'ocr'
+  },
+  // 拓展单词
   {
     word: 'sequence',
     pronunciation: "['si:kwans]",
     partOfSpeech: 'n.',
     meaning: '数列；序列；顺序',
-    level: 'easy',
+    level: 'medium',
     example: 'A number sequence.',
     exampleTranslation: '一个数字数列。',
-    note: ''
-  },
-  {
-    word: 'index',
-    pronunciation: "['indeks]",
-    partOfSpeech: 'n./v.',
-    meaning: '索引；指标；指数',
-    level: 'easy',
-    example: 'The index starts from 0.',
-    exampleTranslation: '索引从0开始。',
-    note: 'Python列表索引'
-  },
-  {
-    word: 'recursion',
-    pronunciation: "[ri'ka:3an]",
-    partOfSpeech: 'n.',
-    meaning: '递归；循环',
-    level: 'medium',
-    example: 'Recursion is a powerful technique.',
-    exampleTranslation: '递归是一种强大的技术。',
-    note: ''
-  },
-  {
-    word: 'pattern',
-    pronunciation: "['paetarn]",
-    partOfSpeech: 'n.',
-    meaning: '模式；规律；图案',
-    level: 'medium',
-    example: 'Find the pattern in the sequence.',
-    exampleTranslation: '找出数列中的规律。',
-    note: ''
+    note: '递推数列',
+    source: 'extended'
   },
   {
     word: 'fibonacci',
@@ -57,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'The Fibonacci sequence is famous.',
     exampleTranslation: '斐波那契数列很著名。',
-    note: '兔子数列'
+    note: '兔子数列',
+    source: 'extended'
   }
 ]
 
@@ -425,9 +432,9 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组，纯英文）
 export const typingWords = {
-  easy: ['index', 'list', 'next', 'first'],
-  medium: ['sequence', 'pattern', 'fibonacci', 'number'],
-  hard: ['recursion', 'formula', 'iteration', 'calculate']
+  easy: ['food', 'card', 'next', 'feed'],
+  medium: ['number', 'sequence', 'index', 'start'],
+  hard: ['fibonacci', 'negative', 'recursion', 'pattern']
 }
 
 // 代码模板练习（按难度分组）

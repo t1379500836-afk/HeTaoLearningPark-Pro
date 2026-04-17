@@ -16,7 +16,8 @@ export const vocabData = [
     meaning: '边；侧面；边缘',
     level: 'easy',
     example: 'Sit side by side.',
-    exampleTranslation: '并排坐。'
+    exampleTranslation: '并排坐。',
+    source: 'ocr'
   },
   {
     word: 'draw',
@@ -25,7 +26,8 @@ export const vocabData = [
     meaning: '画；绘画；拖动',
     level: 'medium',
     example: 'I can draw a cat.',
-    exampleTranslation: '我会画一只猫。'
+    exampleTranslation: '我会画一只猫。',
+    source: 'ocr'
   },
   {
     word: 'end',
@@ -34,7 +36,8 @@ export const vocabData = [
     meaning: '结束；结局；结尾',
     level: 'medium',
     example: 'Good luck and happy end.',
-    exampleTranslation: '祝好运，结局美满。'
+    exampleTranslation: '祝好运，结局美满。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -44,7 +47,8 @@ export const vocabData = [
     meaning: '循环；环；圈',
     level: 'hard',
     example: 'Use a loop to repeat.',
-    exampleTranslation: '用循环来重复执行。'
+    exampleTranslation: '用循环来重复执行。',
+    source: 'extended'
   }
 ]
 

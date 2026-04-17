@@ -19,7 +19,8 @@ export const vocabData = [
     level: 'easy',
     example: 'It is raining outside.',
     exampleTranslation: '外面正在下雨。',
-    note: '最基本的天气词汇'
+    note: '最基本的天气词汇',
+    source: 'ocr'
   },
   {
     word: 'show',
@@ -29,7 +30,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Show me your drawing.',
     exampleTranslation: '给我看看你的画。',
-    note: '常用动词词汇'
+    note: '常用动词词汇',
+    source: 'ocr'
   },
   {
     word: 'lock',
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please lock the door.',
     exampleTranslation: '请锁好门。',
-    note: '家庭安全常用词'
+    note: '家庭安全常用词',
+    source: 'ocr'
   },
   {
     word: 'mode',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Game mode is fun.',
     exampleTranslation: '游戏模式很好玩。',
-    note: '电子设备常用词'
+    note: '电子设备常用词',
+    source: 'ocr'
   },
   // 拓展单词 - 与智慧小屋相关的常用词
   {
@@ -60,7 +64,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I left a message for you.',
     exampleTranslation: '我给你留了一条消息。',
-    note: '日常生活中很常用'
+    note: '日常生活中很常用',
+    source: 'extended'
   },
   {
     word: 'home',
@@ -70,7 +75,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I am going home.',
     exampleTranslation: '我要回家了。',
-    note: '最基础的词汇之一'
+    note: '最基础的词汇之一',
+    source: 'extended'
   }
 ]
 

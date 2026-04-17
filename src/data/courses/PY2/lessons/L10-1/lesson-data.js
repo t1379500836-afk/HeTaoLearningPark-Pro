@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '工具；手段；被操控的人',
     level: 'easy',
     example: 'Use the right tool for the job.',
-    exampleTranslation: '用合适的工具做这项工作。'
+    exampleTranslation: '用合适的工具做这项工作。',
+    source: 'ocr'
   },
   {
     word: 'clothes',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '衣服；服装',
     level: 'easy',
     example: 'Put on your warm clothes.',
-    exampleTranslation: '穿上你的暖和衣服。'
+    exampleTranslation: '穿上你的暖和衣服。',
+    source: 'ocr'
   },
   {
     word: 'design',
@@ -35,7 +37,8 @@ export const vocabData = [
     meaning: '设计；设计方案；花纹；意图',
     level: 'medium',
     example: 'The design of this building is amazing.',
-    exampleTranslation: '这个建筑的设计很令人惊叹。'
+    exampleTranslation: '这个建筑的设计很令人惊叹。',
+    source: 'ocr'
   },
   {
     word: 'board',
@@ -44,7 +47,8 @@ export const vocabData = [
     meaning: '木板，板；董事会；膳食',
     level: 'hard',
     example: 'Please write on the board.',
-    exampleTranslation: '请在板上写字。'
+    exampleTranslation: '请在板上写字。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '网格；格栅',
     level: 'medium',
     example: 'Draw a grid on the paper.',
-    exampleTranslation: '在纸上画一个网格。'
+    exampleTranslation: '在纸上画一个网格。',
+    source: 'extended'
   }
 ]
 

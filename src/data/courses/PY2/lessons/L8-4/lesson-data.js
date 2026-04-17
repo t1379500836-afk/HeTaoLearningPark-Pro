@@ -19,7 +19,8 @@ export const vocabData = [
     meaning: '反转；颠倒；相反',
     level: 'medium',
     example: 'Reverse the list.',
-    exampleTranslation: '把列表反转。'
+    exampleTranslation: '把列表反转。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -29,7 +30,8 @@ export const vocabData = [
     meaning: '计数；统计',
     level: 'easy',
     example: 'Count the apples.',
-    exampleTranslation: '数一数苹果。'
+    exampleTranslation: '数一数苹果。',
+    source: 'ocr'
   },
   {
     word: 'slice',
@@ -38,7 +40,8 @@ export const vocabData = [
     meaning: '切片；切片',
     level: 'easy',
     example: 'Slice the string.',
-    exampleTranslation: '对字符串进行切片。'
+    exampleTranslation: '对字符串进行切片。',
+    source: 'extended'
   },
   {
     word: 'join',
@@ -47,7 +50,8 @@ export const vocabData = [
     meaning: '连接；加入',
     level: 'medium',
     example: 'Join the words together.',
-    exampleTranslation: '把单词连接起来。'
+    exampleTranslation: '把单词连接起来。',
+    source: 'extended'
   },
   {
     word: 'comprehension',
@@ -56,7 +60,8 @@ export const vocabData = [
     meaning: '理解；推导式',
     level: 'hard',
     example: 'List comprehension is powerful.',
-    exampleTranslation: '列表推导式很强大。'
+    exampleTranslation: '列表推导式很强大。',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Charge the battery.',
     exampleTranslation: '给电池充电。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'charge',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Charge a phone.',
     exampleTranslation: '给手机充电。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'height',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'What is your height?',
     exampleTranslation: '你的身高是多少？',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Access denied.',
     exampleTranslation: '访问被拒绝。',
-    note: '门禁系统'
+    note: '门禁系统',
+    source: 'extended'
   },
   {
     word: 'security',
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Security system is active.',
     exampleTranslation: '安全系统已激活。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

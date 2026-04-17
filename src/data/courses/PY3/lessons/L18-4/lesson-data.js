@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'in', pronunciation: '[in]', partOfSpeech: 'prep./adv.', meaning: '在...里面；进入', level: 'easy', example: 'Is it in the box?', exampleTranslation: '它在盒子里吗？', note: '' },
-  { word: 'true', pronunciation: '[tru:]', partOfSpeech: 'adj./n.', meaning: '真；真实的', level: 'easy', example: 'Is it true?', exampleTranslation: '是真的吗？', note: '布尔值True' },
-  { word: 'false', pronunciation: '[fo:ls]', partOfSpeech: 'adj.', meaning: '假；错误的', level: 'medium', example: 'The answer is false.', exampleTranslation: '答案是错的。', note: '布尔值False' },
-  { word: 'check', pronunciation: '[tfek]', partOfSpeech: 'v./n.', meaning: '检查；核对', level: 'medium', example: 'Check the answer.', exampleTranslation: '检查答案。', note: '' },
-  { word: 'boolean', pronunciation: "['bu:lian]", partOfSpeech: 'n./adj.', meaning: '布尔值；布尔的', level: 'hard', example: 'Boolean type.', exampleTranslation: '布尔类型。', note: '' }
+  { word: 'in', pronunciation: '[in]', partOfSpeech: 'prep./adv.', meaning: '在...里面；进入', level: 'easy', example: 'Is it in the box?', exampleTranslation: '它在盒子里吗？', note: '', source: 'ocr' },
+  { word: 'true', pronunciation: '[tru:]', partOfSpeech: 'adj./n.', meaning: '真；真实的', level: 'easy', example: 'Is it true?', exampleTranslation: '是真的吗？', note: '布尔值True', source: 'ocr' },
+  { word: 'false', pronunciation: '[fo:ls]', partOfSpeech: 'adj.', meaning: '假；错误的', level: 'medium', example: 'The answer is false.', exampleTranslation: '答案是错的。', note: '布尔值False', source: 'ocr' },
+  { word: 'check', pronunciation: '[tfek]', partOfSpeech: 'v./n.', meaning: '检查；核对', level: 'medium', example: 'Check the answer.', exampleTranslation: '检查答案。', note: '', source: 'extended' },
+  { word: 'boolean', pronunciation: "['bu:lian]", partOfSpeech: 'n./adj.', meaning: '布尔值；布尔的', level: 'hard', example: 'Boolean type.', exampleTranslation: '布尔类型。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

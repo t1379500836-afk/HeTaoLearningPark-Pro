@@ -16,7 +16,8 @@ export const vocabData = [
     meaning: '面具；面罩；伪装',
     level: 'easy',
     example: 'He wears a mask.',
-    exampleTranslation: '他戴着面具。'
+    exampleTranslation: '他戴着面具。',
+    source: 'ocr'
   },
   {
     word: 'top',
@@ -25,7 +26,8 @@ export const vocabData = [
     meaning: '顶端；最高级别；盖',
     level: 'easy',
     example: 'The cat is on top of the box.',
-    exampleTranslation: '猫在盒子顶上。'
+    exampleTranslation: '猫在盒子顶上。',
+    source: 'ocr'
   },
   {
     word: 'nature',
@@ -34,7 +36,8 @@ export const vocabData = [
     meaning: '自然；天性；本质',
     level: 'medium',
     example: 'Nature is beautiful.',
-    exampleTranslation: '大自然很美。'
+    exampleTranslation: '大自然很美。',
+    source: 'ocr'
   },
   {
     word: 'park',
@@ -43,7 +46,8 @@ export const vocabData = [
     meaning: '公园；园区；运动场',
     level: 'medium',
     example: 'We play in the park.',
-    exampleTranslation: '我们在公园里玩。'
+    exampleTranslation: '我们在公园里玩。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -53,7 +57,8 @@ export const vocabData = [
     meaning: '搜索；搜寻；查找',
     level: 'medium',
     example: 'Search for the answer.',
-    exampleTranslation: '搜寻答案。'
+    exampleTranslation: '搜寻答案。',
+    source: 'extended'
   }
 ]
 

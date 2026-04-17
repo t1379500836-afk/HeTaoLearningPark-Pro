@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '好的；擅长的；愉快的；合适的',
     level: 'easy',
     example: 'She is very good at math.',
-    exampleTranslation: '她很擅长数学。'
+    exampleTranslation: '她很擅长数学。',
+    source: 'ocr'
   },
   {
     word: 'shop',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '商店；工厂，车间；购物',
     level: 'easy',
     example: 'I go to the shop every day.',
-    exampleTranslation: '我每天都去商店。'
+    exampleTranslation: '我每天都去商店。',
+    source: 'ocr'
   },
   {
     word: 'medicine',
@@ -35,7 +37,8 @@ export const vocabData = [
     meaning: '医药；药，(尤指)药剂',
     level: 'medium',
     example: 'Take this medicine twice a day.',
-    exampleTranslation: '这药每天吃两次。'
+    exampleTranslation: '这药每天吃两次。',
+    source: 'ocr'
   },
   {
     word: 'logo',
@@ -44,7 +47,8 @@ export const vocabData = [
     meaning: '标志，标识，徽标',
     level: 'hard',
     example: 'The company has a new logo.',
-    exampleTranslation: '公司有了一个新标志。'
+    exampleTranslation: '公司有了一个新标志。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '矩阵；母体',
     level: 'hard',
     example: 'The matrix has many rows and columns.',
-    exampleTranslation: '矩阵有很多行和列。'
+    exampleTranslation: '矩阵有很多行和列。',
+    source: 'extended'
   }
 ]
 

@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '分割；分裂',
     level: 'easy',
     example: 'The big apple was split in half.',
-    exampleTranslation: '这个大苹果被切成两半。'
+    exampleTranslation: '这个大苹果被切成两半。',
+    source: 'ocr'
   },
   {
     word: 'encode',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '编码；译成密码',
     level: 'medium',
     example: 'I encoded my secret message.',
-    exampleTranslation: '我对我的秘密信息进行了编码。'
+    exampleTranslation: '我对我的秘密信息进行了编码。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '解码；破译',
     level: 'medium',
     example: 'Can you decode this message?',
-    exampleTranslation: '你能破译这条信息吗？'
+    exampleTranslation: '你能破译这条信息吗？',
+    source: 'extended'
   },
   {
     word: 'string',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '字符串；线',
     level: 'easy',
     example: 'This is a string.',
-    exampleTranslation: '这是一个字符串。'
+    exampleTranslation: '这是一个字符串。',
+    source: 'extended'
   },
   {
     word: 'traverse',
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '遍历；横过',
     level: 'hard',
     example: 'We need to traverse the list.',
-    exampleTranslation: '我们需要遍历这个列表。'
+    exampleTranslation: '我们需要遍历这个列表。',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What color do you like?',
     exampleTranslation: '你喜欢什么颜色？',
-    note: 'color 颜色'
+    note: 'color 颜色',
+    source: 'ocr'
   },
   {
     word: 'red',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'red wine 红酒',
     exampleTranslation: '红酒',
-    note: 'red 红色'
+    note: 'red 红色',
+    source: 'ocr'
   },
   {
     word: 'blue',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'blue sky 蓝天',
     exampleTranslation: '蓝天',
-    note: 'blue 蓝色'
+    note: 'blue 蓝色',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Use index to get the element.',
     exampleTranslation: '用索引获取元素。',
-    note: '列表索引从0开始'
+    note: '列表索引从0开始',
+    source: 'extended'
   }
 ]
 

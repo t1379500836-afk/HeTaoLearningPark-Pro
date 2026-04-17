@@ -16,7 +16,8 @@ export const vocabData = [
     meaning: '头；头脑；负责人',
     level: 'easy',
     example: 'Shake your head.',
-    exampleTranslation: '摇摇头。'
+    exampleTranslation: '摇摇头。',
+    source: 'ocr'
   },
   {
     word: 'foot',
@@ -25,7 +26,8 @@ export const vocabData = [
     meaning: '脚；足；底部；英尺',
     level: 'easy',
     example: 'I have two feet.',
-    exampleTranslation: '我有两只脚。'
+    exampleTranslation: '我有两只脚。',
+    source: 'ocr'
   },
   {
     word: 'bee',
@@ -34,7 +36,8 @@ export const vocabData = [
     meaning: '蜜蜂；（比赛或活动的）聚会',
     level: 'medium',
     example: 'The bee makes honey.',
-    exampleTranslation: '蜜蜂酿蜜。'
+    exampleTranslation: '蜜蜂酿蜜。',
+    source: 'ocr'
   },
   {
     word: 'honey',
@@ -43,7 +46,8 @@ export const vocabData = [
     meaning: '蜂蜜；亲爱的；宝贝',
     level: 'hard',
     example: 'Honey is sweet.',
-    exampleTranslation: '蜂蜜是甜的。'
+    exampleTranslation: '蜂蜜是甜的。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -53,7 +57,8 @@ export const vocabData = [
     meaning: '笼子；牢笼',
     level: 'medium',
     example: 'The bird is in the cage.',
-    exampleTranslation: '鸟在笼子里。'
+    exampleTranslation: '鸟在笼子里。',
+    source: 'extended'
   }
 ]
 

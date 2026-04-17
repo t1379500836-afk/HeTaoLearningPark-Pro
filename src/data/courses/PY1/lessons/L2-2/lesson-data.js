@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'for the people 为人民服务',
     exampleTranslation: '为人民服务',
-    note: 'for 循环关键字'
+    note: 'for 循环关键字',
+    source: 'ocr'
   },
   {
     word: 'in',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'for i in range(5):',
     exampleTranslation: '循环5次',
-    note: 'in 在...里面'
+    note: 'in 在...里面',
+    source: 'ocr'
   },
   {
     word: 'range',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The range is from 1 to 10.',
     exampleTranslation: '范围是1到10。',
-    note: 'range() 生成数字范围'
+    note: 'range() 生成数字范围',
+    source: 'ocr'
   },
   {
     word: 'shoot',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Shoot the target!',
     exampleTranslation: '射击目标！',
-    note: 'shoot 射击'
+    note: 'shoot 射击',
+    source: 'ocr'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The clock shows the time.',
     exampleTranslation: '时钟显示时间。',
-    note: 'Pygame Zero中的定时器模块'
+    note: 'Pygame Zero中的定时器模块',
+    source: 'ocr'
   },
   {
     word: 'schedule',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Schedule the task for later.',
     exampleTranslation: '把任务安排到稍后。',
-    note: 'clock.schedule() 定时执行函数'
+    note: 'clock.schedule() 定时执行函数',
+    source: 'ocr'
   },
   {
     word: 'ring',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The alarm will ring.',
     exampleTranslation: '闹钟会响。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'sound',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Play a sound effect.',
     exampleTranslation: '播放音效。',
-    note: 'Pygame Zero中sounds对象播放声音'
+    note: 'Pygame Zero中sounds对象播放声音',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Set a timer for 5 seconds.',
     exampleTranslation: '设置一个5秒的计时器。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'You and I are friends.',
     exampleTranslation: '你和我是朋友。',
-    note: 'Python中的逻辑与运算符'
+    note: 'Python中的逻辑与运算符',
+    source: 'ocr'
   },
   {
     word: 'or',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Yes or no?',
     exampleTranslation: '是或否？',
-    note: 'Python中的逻辑或运算符'
+    note: 'Python中的逻辑或运算符',
+    source: 'ocr'
   },
   {
     word: 'ice',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The ice is cold.',
     exampleTranslation: '冰是冷的。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'candy',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'I love candy.',
     exampleTranslation: '我喜欢糖果。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Check the condition.',
     exampleTranslation: '检查条件。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

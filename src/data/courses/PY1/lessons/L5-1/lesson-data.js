@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I need some info about the game.',
     exampleTranslation: '我需要一些关于这个游戏的信息。',
-    note: 'info 是 information 的缩写，口语常用'
+    note: 'info 是 information 的缩写，口语常用',
+    source: 'ocr'
   },
   {
     word: 'index',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The index of a book is on page 1.',
     exampleTranslation: '书的目录在第一页。',
-    note: '在编程中表示位置编号'
+    note: '在编程中表示位置编号',
+    source: 'ocr'
   },
   {
     word: 'length',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is the length of this rope?',
     exampleTranslation: '这根绳子有多长？',
-    note: '常用基础词汇'
+    note: '常用基础词汇',
+    source: 'ocr'
   },
   {
     word: 'idiom',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: '"Break a leg" is an English idiom.',
     exampleTranslation: '"Break a leg" 是一个英语习语。',
-    note: '有趣的英语表达方式'
+    note: '有趣的英语表达方式',
+    source: 'ocr'
   },
   // 拓展单词 - 更适合小朋友的常用词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I have a string of text.',
     exampleTranslation: '我有一串文字。',
-    note: '在编程中表示文字数据'
+    note: '在编程中表示文字数据',
+    source: 'extended'
   },
   {
     word: 'word',
@@ -69,7 +74,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your favorite English word?',
     exampleTranslation: '你最喜欢的英语单词是什么？',
-    note: '最基础的词汇之一，孩子很早就学会'
+    note: '最基础的词汇之一，孩子很早就学会',
+    source: 'extended'
   }
 ]
 

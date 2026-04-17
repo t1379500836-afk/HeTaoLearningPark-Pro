@@ -19,7 +19,8 @@ export const vocabData = [
     meaning: '宽度；广度',
     level: 'easy',
     example: 'The width of the window is 800 pixels.',
-    exampleTranslation: '窗口的宽度是800像素。'
+    exampleTranslation: '窗口的宽度是800像素。',
+    source: 'ocr'
   },
   {
     word: 'image',
@@ -28,7 +29,8 @@ export const vocabData = [
     meaning: '图像；画像',
     level: 'easy',
     example: 'This image shows a beautiful sunset.',
-    exampleTranslation: '这张图片展示了一个美丽的日落。'
+    exampleTranslation: '这张图片展示了一个美丽的日落。',
+    source: 'ocr'
   },
   {
     word: 'update',
@@ -37,7 +39,8 @@ export const vocabData = [
     meaning: '更新；升级',
     level: 'medium',
     example: 'Please update your software to the latest version.',
-    exampleTranslation: '请将你的软件更新到最新版本。'
+    exampleTranslation: '请将你的软件更新到最新版本。',
+    source: 'ocr'
   },
   {
     word: 'actor',
@@ -46,7 +49,8 @@ export const vocabData = [
     meaning: '演员；参与者；执行者',
     level: 'medium',
     example: 'The actor performed very well in the movie.',
-    exampleTranslation: '这位演员在电影中表现得非常好。'
+    exampleTranslation: '这位演员在电影中表现得非常好。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -56,7 +60,8 @@ export const vocabData = [
     meaning: '高度；身高',
     level: 'easy',
     example: 'The height of the window is 600 pixels.',
-    exampleTranslation: '窗口的高度是600像素。'
+    exampleTranslation: '窗口的高度是600像素。',
+    source: 'extended'
   }
 ]
 

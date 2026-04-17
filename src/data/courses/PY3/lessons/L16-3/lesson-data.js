@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Find the gold.',
     exampleTranslation: '找到金子。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'diamond',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'A diamond ring.',
     exampleTranslation: '钻戒。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'vine',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The vine grows fast.',
     exampleTranslation: '藤蔓长得很快。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'cloud',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Look at the cloud.',
     exampleTranslation: '看那朵云。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Each character in the string.',
     exampleTranslation: '字符串中的每个字符。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

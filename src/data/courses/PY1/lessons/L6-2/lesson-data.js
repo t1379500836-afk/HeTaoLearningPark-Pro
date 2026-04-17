@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'We must defend our castle.',
     exampleTranslation: '我们必须保卫我们的城堡。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'height',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your height?',
     exampleTranslation: '你的身高是多少？',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'random',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'It is a random number.',
     exampleTranslation: '这是一个随机数。',
-    note: 'random numbers 随机数'
+    note: 'random numbers 随机数',
+    source: 'ocr'
   },
   {
     word: 'family',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I love my family.',
     exampleTranslation: '我爱我的家人。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'index',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The index of the first item is 0.',
     exampleTranslation: '第一个项目的索引是0。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'loop',
@@ -67,7 +72,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Use a loop to repeat.',
     exampleTranslation: '使用循环来重复。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please input your name.',
     exampleTranslation: '请输入你的名字。',
-    note: 'input() 输入命令'
+    note: 'input() 输入命令',
+    source: 'ocr'
   },
   {
     word: 'theme',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The theme of the party is music.',
     exampleTranslation: '派对的主题是音乐。',
-    note: 'for the people 为人民服务'
+    note: 'for the people 为人民服务',
+    source: 'ocr'
   },
   {
     word: 'name',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'My name is Taozi.',
     exampleTranslation: '我的名字是桃子。',
-    note: 'Hi, my name is... 你好，我叫...'
+    note: 'Hi, my name is... 你好，我叫...',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Convert the string to a number.',
     exampleTranslation: '把字符串转换成数字。',
-    note: 'int() 和 float() 用于类型转换'
+    note: 'int() 和 float() 用于类型转换',
+    source: 'extended'
   }
 ]
 

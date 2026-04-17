@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'fire', pronunciation: "['faiar]", partOfSpeech: 'n./v.', meaning: '火；开火', level: 'easy', example: 'Fire!', exampleTranslation: '开火！', note: '' },
-  { word: 'ice', pronunciation: '[ais]', partOfSpeech: 'n./v.', meaning: '冰；冰冻', level: 'easy', example: 'Ice is cold.', exampleTranslation: '冰是冷的。', note: '' },
-  { word: 'stone', pronunciation: '[stoun]', partOfSpeech: 'n./v.', meaning: '石头；石块', level: 'medium', example: 'Throw the stone.', exampleTranslation: '扔石头。', note: '' },
-  { word: 'switch', pronunciation: '[switj]', partOfSpeech: 'n./v.', meaning: '开关；转换', level: 'medium', example: 'Turn on the switch.', exampleTranslation: '打开开关。', note: '' },
-  { word: 'cooperate', pronunciation: "[kou'apareit]", partOfSpeech: 'v.', meaning: '合作；协作', level: 'hard', example: 'Cooperate with each other.', exampleTranslation: '互相合作。', note: '' }
+  { word: 'fire', pronunciation: "['faiar]", partOfSpeech: 'n./v.', meaning: '火；开火', level: 'easy', example: 'Fire!', exampleTranslation: '开火！', note: '', source: 'ocr' },
+  { word: 'ice', pronunciation: '[ais]', partOfSpeech: 'n./v.', meaning: '冰；冰冻', level: 'easy', example: 'Ice is cold.', exampleTranslation: '冰是冷的。', note: '', source: 'ocr' },
+  { word: 'stone', pronunciation: '[stoun]', partOfSpeech: 'n./v.', meaning: '石头；石块', level: 'medium', example: 'Throw the stone.', exampleTranslation: '扔石头。', note: '', source: 'ocr' },
+  { word: 'switch', pronunciation: '[switj]', partOfSpeech: 'n./v.', meaning: '开关；转换', level: 'medium', example: 'Turn on the switch.', exampleTranslation: '打开开关。', note: '', source: 'ocr' },
+  { word: 'cooperate', pronunciation: "[kou'apareit]", partOfSpeech: 'v.', meaning: '合作；协作', level: 'hard', example: 'Cooperate with each other.', exampleTranslation: '互相合作。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

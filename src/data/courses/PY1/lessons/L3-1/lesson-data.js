@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The cat moves slowly.',
     exampleTranslation: '猫慢慢移动。',
-    note: 'on the move 在活动中'
+    note: 'on the move 在活动中',
+    source: 'ocr'
   },
   {
     word: 'cat',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The cat is sleeping.',
     exampleTranslation: '猫在睡觉。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'dog',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The dog is running.',
     exampleTranslation: '狗在跑。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'total',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The total is 100.',
     exampleTranslation: '总数是100。',
-    note: 'in total 总共'
+    note: 'in total 总共',
+    source: 'ocr'
   }
 ]
 

@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'attitude', pronunciation: "['aetitu:d]", partOfSpeech: 'n.', meaning: '姿态；态度', level: 'easy', example: 'Get the device attitude.', exampleTranslation: '获取设备姿态。', note: 'getAttitude()' },
-  { word: 'pose', pronunciation: '[pouz]', partOfSpeech: 'n./v.', meaning: '姿势；摆姿势', level: 'easy', example: 'Hold the pose.', exampleTranslation: '保持姿势。', note: '' },
-  { word: 'beat', pronunciation: '[bi:t]', partOfSpeech: 'v./n.', meaning: '击打；节拍', level: 'medium', example: 'Follow the beat.', exampleTranslation: '跟上节拍。', note: '' },
-  { word: 'angle', pronunciation: "['aengl]", partOfSpeech: 'n.', meaning: '角度；视角', level: 'medium', example: 'The angle is 30 degrees.', exampleTranslation: '角度是30度。', note: '' },
-  { word: 'orientation', pronunciation: "[,o:rian'teijan]", partOfSpeech: 'n.', meaning: '方向；取向', level: 'hard', example: 'Check the orientation.', exampleTranslation: '检查方向。', note: '' }
+  { word: 'attitude', pronunciation: "['aetitu:d]", partOfSpeech: 'n.', meaning: '姿态；态度', level: 'easy', example: 'Get the device attitude.', exampleTranslation: '获取设备姿态。', note: 'getAttitude()', source: 'ocr' },
+  { word: 'pose', pronunciation: '[pouz]', partOfSpeech: 'n./v.', meaning: '姿势；摆姿势', level: 'easy', example: 'Hold the pose.', exampleTranslation: '保持姿势。', note: '', source: 'ocr' },
+  { word: 'beat', pronunciation: '[bi:t]', partOfSpeech: 'v./n.', meaning: '击打；节拍', level: 'medium', example: 'Follow the beat.', exampleTranslation: '跟上节拍。', note: '', source: 'ocr' },
+  { word: 'angle', pronunciation: "['aengl]", partOfSpeech: 'n.', meaning: '角度；视角', level: 'medium', example: 'The angle is 30 degrees.', exampleTranslation: '角度是30度。', note: '', source: 'ocr' },
+  { word: 'orientation', pronunciation: "[,o:rian'teijan]", partOfSpeech: 'n.', meaning: '方向；取向', level: 'hard', example: 'Check the orientation.', exampleTranslation: '检查方向。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

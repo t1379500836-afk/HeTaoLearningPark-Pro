@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '声呐；声波定位仪',
     level: 'medium',
     example: 'Sonar is like eyes in total darkness.',
-    exampleTranslation: '声呐就像是黑暗中的眼睛。'
+    exampleTranslation: '声呐就像是黑暗中的眼睛。',
+    source: 'ocr'
   },
   {
     word: 'goods',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '商品；货物',
     level: 'easy',
     example: 'The railroads made transporting goods easier.',
-    exampleTranslation: '铁路使货物运输更加容易。'
+    exampleTranslation: '铁路使货物运输更加容易。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '跟随；沿着',
     level: 'easy',
     example: 'Follow the line to the end.',
-    exampleTranslation: '沿着线走到尽头。'
+    exampleTranslation: '沿着线走到尽头。',
+    source: 'extended'
   },
   {
     word: 'avoid',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '避开；避免',
     level: 'medium',
     example: 'The car can avoid obstacles.',
-    exampleTranslation: '智能车可以避开障碍物。'
+    exampleTranslation: '智能车可以避开障碍物。',
+    source: 'extended'
   },
   {
     word: 'distance',
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '距离；远处',
     level: 'hard',
     example: 'Check the distance to the wall.',
-    exampleTranslation: '检查到墙壁的距离。'
+    exampleTranslation: '检查到墙壁的距离。',
+    source: 'extended'
   },
   {
     word: 'detect',
@@ -63,7 +68,8 @@ export const vocabData = [
     meaning: '检测；发现',
     level: 'hard',
     example: 'The sensor can detect colors.',
-    exampleTranslation: '传感器可以检测颜色。'
+    exampleTranslation: '传感器可以检测颜色。',
+    source: 'extended'
   }
 ]
 

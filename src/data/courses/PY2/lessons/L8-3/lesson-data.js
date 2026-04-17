@@ -17,11 +17,12 @@ export const vocabData = [
   {
     word: 'line',
     pronunciation: '[lain]',
-    partOfSpeech: 'n.',
-    meaning: '线；分界线；路线',
+    partOfSpeech: 'n./v.',
+    meaning: '线；分界线；路线；排队',
     level: 'easy',
     example: 'Follow the white line.',
-    exampleTranslation: '沿着白线走。'
+    exampleTranslation: '沿着白线走。',
+    source: 'ocr'
   },
   {
     word: 'sensor',
@@ -30,16 +31,28 @@ export const vocabData = [
     meaning: '传感器；探测设备',
     level: 'medium',
     example: 'The sensor detects light.',
-    exampleTranslation: '传感器检测光线。'
+    exampleTranslation: '传感器检测光线。',
+    source: 'ocr'
   },
   {
     word: 'wait',
     pronunciation: '[weit]',
-    partOfSpeech: 'v.',
-    meaning: '等待；等候',
+    partOfSpeech: 'n./v.',
+    meaning: '等待；等候；盼望',
     level: 'easy',
     example: 'Please wait a moment.',
-    exampleTranslation: '请稍等一下。'
+    exampleTranslation: '请稍等一下。',
+    source: 'ocr'
+  },
+  {
+    word: 'time',
+    pronunciation: '[taim]',
+    partOfSpeech: 'n./v.',
+    meaning: '时间；时刻；次；计时',
+    level: 'medium',
+    example: 'What time is it now?',
+    exampleTranslation: '现在几点了？',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -49,7 +62,8 @@ export const vocabData = [
     meaning: '功率；动力；能量',
     level: 'easy',
     example: 'Set the power to 80.',
-    exampleTranslation: '把功率设为80。'
+    exampleTranslation: '把功率设为80。',
+    source: 'extended'
   },
   {
     word: 'infrared',
@@ -58,7 +72,8 @@ export const vocabData = [
     meaning: '红外线；红外线的',
     level: 'hard',
     example: 'The sensor uses infrared light.',
-    exampleTranslation: '传感器使用红外线。'
+    exampleTranslation: '传感器使用红外线。',
+    source: 'extended'
   }
 ]
 
@@ -593,8 +608,8 @@ export const lessonMeta = {
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['line', 'sensor', 'power', 'wait'],
-  medium: ['infrared', 'button', 'crossing', 'detect'],
+  easy: ['line', 'sensor', 'wait', 'time'],
+  medium: ['power', 'infrared', 'button', 'crossing'],
   hard: ['getLineSensor', 'setPower', 'waitButton', 'isAllBlack']
 }
 

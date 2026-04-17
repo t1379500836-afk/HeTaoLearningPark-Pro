@@ -19,7 +19,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Turn on the light, please.',
     exampleTranslation: '请把灯打开。',
-    note: '最常用的生活词汇之一'
+    note: '最常用的生活词汇之一',
+    source: 'ocr'
   },
   {
     word: 'music',
@@ -29,7 +30,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I like listening to music.',
     exampleTranslation: '我喜欢听音乐。',
-    note: '孩子们都喜欢的词汇'
+    note: '孩子们都喜欢的词汇',
+    source: 'ocr'
   },
   {
     word: 'volume',
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please turn down the volume.',
     exampleTranslation: '请把音量调小一点。',
-    note: '控制声音大小的词汇'
+    note: '控制声音大小的词汇',
+    source: 'ocr'
   },
   // 拓展单词 - 与智能灯相关的常用词
   {
@@ -50,7 +53,8 @@ export const vocabData = [
     level: 'easy',
     example: 'This lamp is very cute.',
     exampleTranslation: '这盏台灯很可爱。',
-    note: '比 light 更具体，指灯具'
+    note: '比 light 更具体，指灯具',
+    source: 'extended'
   },
   {
     word: 'bright',
@@ -60,7 +64,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The sun is very bright.',
     exampleTranslation: '太阳非常明亮。',
-    note: '描述光线的常用形容词'
+    note: '描述光线的常用形容词',
+    source: 'extended'
   },
   {
     word: 'dark',
@@ -70,7 +75,8 @@ export const vocabData = [
     level: 'easy',
     example: 'It is too dark in the room.',
     exampleTranslation: '房间里太暗了。',
-    note: '与 bright 相对的常用词'
+    note: '与 bright 相对的常用词',
+    source: 'extended'
   }
 ]
 

@@ -16,7 +16,8 @@ export const vocabData = [
     meaning: '继续；持续；延伸',
     level: 'easy',
     example: 'Please continue with your work.',
-    exampleTranslation: '请继续你的工作。'
+    exampleTranslation: '请继续你的工作。',
+    source: 'ocr'
   },
   {
     word: 'road',
@@ -25,7 +26,8 @@ export const vocabData = [
     meaning: '道路；公路；途径',
     level: 'easy',
     example: 'There is a long road ahead.',
-    exampleTranslation: '前方的路还很长。'
+    exampleTranslation: '前方的路还很长。',
+    source: 'ocr'
   },
   {
     word: 'select',
@@ -34,7 +36,8 @@ export const vocabData = [
     meaning: '选择；挑选',
     level: 'medium',
     example: 'Please select your favorite color.',
-    exampleTranslation: '请选择你最喜欢的颜色。'
+    exampleTranslation: '请选择你最喜欢的颜色。',
+    source: 'ocr'
   },
   {
     word: 'bomb',
@@ -43,7 +46,8 @@ export const vocabData = [
     meaning: '炸弹；彻底的失败',
     level: 'hard',
     example: 'The bomb exploded with a loud noise.',
-    exampleTranslation: '炸弹发出巨响爆炸了。'
+    exampleTranslation: '炸弹发出巨响爆炸了。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -53,7 +57,8 @@ export const vocabData = [
     meaning: '跳过；略过；蹦跳',
     level: 'easy',
     example: 'Skip the ones you do not need.',
-    exampleTranslation: '跳过你不需要的那些。'
+    exampleTranslation: '跳过你不需要的那些。',
+    source: 'extended'
   }
 ]
 

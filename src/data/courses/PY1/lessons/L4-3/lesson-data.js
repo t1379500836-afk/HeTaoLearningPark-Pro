@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Press break to stop.',
     exampleTranslation: '按break键停止。',
-    note: 'coffee break 休息时间'
+    note: 'coffee break 休息时间',
+    source: 'ocr'
   },
   {
     word: 'tomato',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I like tomatoes.',
     exampleTranslation: '我喜欢西红柿。',
-    note: '复数形式是tomatoes'
+    note: '复数形式是tomatoes',
+    source: 'ocr'
   },
   {
     word: 'state',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'What state is it in?',
     exampleTranslation: '它处于什么状态？',
-    note: 'United States 美国'
+    note: 'United States 美国',
+    source: 'ocr'
   },
   {
     word: 'exit',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Press exit to quit.',
     exampleTranslation: '按exit键退出。',
-    note: 'exit sign 出口标志'
+    note: 'exit sign 出口标志',
+    source: 'extended'
   },
   {
     word: 'condition',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Check the condition.',
     exampleTranslation: '检查条件。',
-    note: 'conditional 条件的'
+    note: 'conditional 条件的',
+    source: 'extended'
   },
   {
     word: 'control',
@@ -67,7 +72,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Control the loop.',
     exampleTranslation: '控制循环。',
-    note: 'remote control 遥控器'
+    note: 'remote control 遥控器',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The ship is flying.',
     exampleTranslation: '飞船正在飞行。',
-    note: 'A terrible storm forced the ship to put back. 可怕的风暴迫使这条船返航了。'
+    note: 'A terrible storm forced the ship to put back. 可怕的风暴迫使这条船返航了。',
+    source: 'ocr'
   },
   {
     word: 'weapon',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Use your weapon wisely.',
     exampleTranslation: '明智地使用你的武器。',
-    note: 'nuclear weapon 核武器'
+    note: 'nuclear weapon 核武器',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Fire the bullet!',
     exampleTranslation: '发射子弹！',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'enemy',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The enemy is coming.',
     exampleTranslation: '敌人来了。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'list',
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Create a list of items.',
     exampleTranslation: '创建一个物品列表。',
-    note: 'Python中的重要数据结构'
+    note: 'Python中的重要数据结构',
+    source: 'extended'
   }
 ]
 

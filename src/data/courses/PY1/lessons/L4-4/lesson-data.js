@@ -19,7 +19,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Rotate the motor.',
     exampleTranslation: '转动电机。',
-    note: 'rotation 旋转'
+    note: 'rotation 旋转',
+    source: 'ocr'
   },
   {
     word: 'get',
@@ -29,7 +30,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Get the key value.',
     exampleTranslation: '获取按键值。',
-    note: 'get up 起床'
+    note: 'get up 起床',
+    source: 'ocr'
   },
   {
     word: 'key',
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Press the key.',
     exampleTranslation: '按按键。',
-    note: 'keyboard 键盘'
+    note: 'keyboard 键盘',
+    source: 'ocr'
   },
   {
     word: 'result',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Check the result.',
     exampleTranslation: '检查结果。',
-    note: 'as a result 结果'
+    note: 'as a result 结果',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -60,7 +64,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Enter your password.',
     exampleTranslation: '输入你的密码。',
-    note: 'pass word 通过的文字'
+    note: 'pass word 通过的文字',
+    source: 'extended'
   },
   {
     word: 'remote',
@@ -70,7 +75,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Use the remote control.',
     exampleTranslation: '使用遥控器。',
-    note: 'remote control 遥控器'
+    note: 'remote control 遥控器',
+    source: 'extended'
   }
 ]
 

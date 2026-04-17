@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'raft', pronunciation: '[raeft]', partOfSpeech: 'n./v.', meaning: '木筏；橡皮艇', level: 'easy', example: 'Ride the raft.', exampleTranslation: '乘坐木筏。', note: '' },
-  { word: 'water', pronunciation: "['wo:tar]", partOfSpeech: 'n./v.', meaning: '水；浇水', level: 'easy', example: 'Drink water.', exampleTranslation: '喝水。', note: '' },
-  { word: 'hammer', pronunciation: "['haemar]", partOfSpeech: 'n./v.', meaning: '锤子；敲打', level: 'medium', example: 'Use the hammer.', exampleTranslation: '使用锤子。', note: '' },
-  { word: 'level', pronunciation: "['levl]", partOfSpeech: 'n./v.', meaning: '等级；水平', level: 'medium', example: 'Next level!', exampleTranslation: '下一关！', note: '' },
-  { word: 'stage', pronunciation: "[steid3]", partOfSpeech: 'n.', meaning: '舞台；阶段', level: 'hard', example: 'Final stage.', exampleTranslation: '最后阶段。', note: '' }
+  { word: 'raft', pronunciation: '[raeft]', partOfSpeech: 'n./v.', meaning: '木筏；橡皮艇', level: 'easy', example: 'Ride the raft.', exampleTranslation: '乘坐木筏。', note: '', source: 'ocr' },
+  { word: 'water', pronunciation: "['wo:tar]", partOfSpeech: 'n./v.', meaning: '水；浇水', level: 'easy', example: 'Drink water.', exampleTranslation: '喝水。', note: '', source: 'ocr' },
+  { word: 'hammer', pronunciation: "['haemar]", partOfSpeech: 'n./v.', meaning: '锤子；敲打', level: 'medium', example: 'Use the hammer.', exampleTranslation: '使用锤子。', note: '', source: 'ocr' },
+  { word: 'level', pronunciation: "['levl]", partOfSpeech: 'n./v.', meaning: '等级；水平', level: 'medium', example: 'Next level!', exampleTranslation: '下一关！', note: '', source: 'ocr' },
+  { word: 'stage', pronunciation: "[steid3]", partOfSpeech: 'n.', meaning: '舞台；阶段', level: 'hard', example: 'Final stage.', exampleTranslation: '最后阶段。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

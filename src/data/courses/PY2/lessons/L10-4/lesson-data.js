@@ -18,7 +18,8 @@ export const vocabData = [
     meaning: '跟随；沿着；遵循',
     level: 'easy',
     example: 'The dog will follow you.',
-    exampleTranslation: '这只狗会跟着你。'
+    exampleTranslation: '这只狗会跟着你。',
+    source: 'ocr'
   },
   {
     word: 'light',
@@ -27,7 +28,8 @@ export const vocabData = [
     meaning: '光；电灯',
     level: 'easy',
     example: 'Turn on the light, please.',
-    exampleTranslation: '请把灯打开。'
+    exampleTranslation: '请把灯打开。',
+    source: 'ocr'
   },
   {
     word: 'on',
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '在...之上；打开',
     level: 'easy',
     example: 'The book is on the desk.',
-    exampleTranslation: '书在桌子上。'
+    exampleTranslation: '书在桌子上。',
+    source: 'ocr'
   },
   {
     word: 'off',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '离开；关闭',
     level: 'easy',
     example: 'Turn off the light.',
-    exampleTranslation: '把灯关掉。'
+    exampleTranslation: '把灯关掉。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -55,7 +59,8 @@ export const vocabData = [
     meaning: '传感器；探测设备',
     level: 'medium',
     example: 'The sensor detects the color.',
-    exampleTranslation: '传感器检测颜色。'
+    exampleTranslation: '传感器检测颜色。',
+    source: 'extended'
   }
 ]
 

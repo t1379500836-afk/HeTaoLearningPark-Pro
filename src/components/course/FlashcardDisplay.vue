@@ -25,6 +25,8 @@
       >
         <!-- 卡片内容 -->
         <div class="card-front">
+          <span v-if="word.source === 'ocr'" class="source-tag source-ocr">本节课新单词</span>
+          <span v-else-if="word.source === 'extended'" class="source-tag source-extended">拓展了解</span>
           <button
             @click="playPronunciation(word.word, $event)"
             class="speaker-btn"
@@ -221,10 +223,34 @@ const scrollToTyping = () => {
 
 .card-front {
   padding: 20px;
+  padding-top: 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
+}
+
+.source-tag {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.source-ocr {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.source-extended {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1565c0;
+  border: 1px solid #90caf9;
 }
 
 .word-main {

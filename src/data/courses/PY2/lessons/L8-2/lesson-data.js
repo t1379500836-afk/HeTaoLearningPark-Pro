@@ -14,20 +14,42 @@ export const vocabData = [
   {
     word: 'set',
     pronunciation: '[set]',
-    partOfSpeech: 'n.',
-    meaning: '集合；设置',
+    partOfSpeech: 'n./v./adj.',
+    meaning: '集合；一套；设置；安排好的',
     level: 'easy',
     example: 'I have a set of cards.',
-    exampleTranslation: '我有一套卡片。'
+    exampleTranslation: '我有一套卡片。',
+    source: 'ocr'
   },
   {
     word: 'add',
     pronunciation: '[æd]',
     partOfSpeech: 'v.',
-    meaning: '添加；增加',
+    meaning: '添加；增加；补充说',
     level: 'easy',
     example: 'Please add some sugar.',
-    exampleTranslation: '请加一些糖。'
+    exampleTranslation: '请加一些糖。',
+    source: 'ocr'
+  },
+  {
+    word: 'in',
+    pronunciation: '[ɪn]',
+    partOfSpeech: 'prep./adv.',
+    meaning: '在...之中；参与；进入',
+    level: 'medium',
+    example: 'Is this item in the set?',
+    exampleTranslation: '这个元素在集合里吗？',
+    source: 'ocr'
+  },
+  {
+    word: 'score',
+    pronunciation: '[skɔːr]',
+    partOfSpeech: 'n./v.',
+    meaning: '成绩；比分；评分；记分',
+    level: 'medium',
+    example: 'What is your score?',
+    exampleTranslation: '你的得分是多少？',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -37,16 +59,8 @@ export const vocabData = [
     meaning: '类型；打字',
     level: 'easy',
     example: 'What type of data is it?',
-    exampleTranslation: '这是什么类型的数据？'
-  },
-  {
-    word: 'convert',
-    pronunciation: "[kən'vɜːt]",
-    partOfSpeech: 'v.',
-    meaning: '转换；变换',
-    level: 'medium',
-    example: 'Can you convert this to text?',
-    exampleTranslation: '你能把这个转换成文本吗？'
+    exampleTranslation: '这是什么类型的数据？',
+    source: 'extended'
   },
   {
     word: 'unique',
@@ -55,7 +69,8 @@ export const vocabData = [
     meaning: '唯一的；独特的',
     level: 'hard',
     example: 'Each person has a unique fingerprint.',
-    exampleTranslation: '每个人都有独特的指纹。'
+    exampleTranslation: '每个人都有独特的指纹。',
+    source: 'extended'
   }
 ]
 
@@ -511,7 +526,7 @@ export const lessonMeta = {
 // 打字练习单词（按难度分组）
 export const typingWords = {
   easy: ['set', 'add', 'int', 'str'],
-  medium: ['float', 'type', 'convert', 'unique'],
+  medium: ['in', 'score', 'type', 'unique'],
   hard: ['intersection', 'union', 'duplicate', 'bracket']
 }
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please show me your ticket.',
     exampleTranslation: '请把你的票给我看看。',
-    note: 'show 的过去式是 showed'
+    note: 'show 的过去式是 showed',
+    source: 'ocr'
   },
   {
     word: 'sound',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The sound of the music is very nice.',
     exampleTranslation: '音乐的声音很好听。',
-    note: '可以作名词或动词使用'
+    note: '可以作名词或动词使用',
+    source: 'ocr'
   },
   {
     word: 'play',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: "Let's play a game.",
     exampleTranslation: '我们来玩个游戏吧。',
-    note: 'playSound() 用于播放音效'
+    note: 'playSound() 用于播放音效',
+    source: 'ocr'
   },
   {
     word: 'record',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'I like to record my voice.',
     exampleTranslation: '我喜欢录制我的声音。',
-    note: 'record() 用于录制声音'
+    note: 'record() 用于录制声音',
+    source: 'ocr'
   }
 ]
 

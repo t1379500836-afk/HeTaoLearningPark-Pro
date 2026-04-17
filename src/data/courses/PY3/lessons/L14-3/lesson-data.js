@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The brick wall is strong.',
     exampleTranslation: '砖墙很坚固。',
-    note: '游戏中常用作踏板或障碍物'
+    note: '游戏中常用作踏板或障碍物',
+    source: 'ocr'
   },
   {
     word: 'top',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Jump to the top.',
     exampleTranslation: '跳到顶部。',
-    note: '角色.top表示上边缘y坐标'
+    note: '角色.top表示上边缘y坐标',
+    source: 'ocr'
   },
   {
     word: 'bottom',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Fall to the bottom.',
     exampleTranslation: '掉到底部。',
-    note: '角色.bottom表示下边缘y坐标'
+    note: '角色.bottom表示下边缘y坐标',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Stay on the edge.',
     exampleTranslation: '保持在边缘。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'align',
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Align the blocks.',
     exampleTranslation: '对齐方块。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

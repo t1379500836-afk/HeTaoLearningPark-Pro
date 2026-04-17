@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Get the position of the face.',
     exampleTranslation: '获取人脸的位置。',
-    note: 'getFacePos()获取人脸坐标'
+    note: 'getFacePos()获取人脸坐标',
+    source: 'ocr'
   },
   {
     word: 'frame',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Draw a frame around the face.',
     exampleTranslation: '在人脸周围画框。',
-    note: 'drawFrame()绘制人脸框'
+    note: 'drawFrame()绘制人脸框',
+    source: 'ocr'
   },
   {
     word: 'face',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Detect a face in the image.',
     exampleTranslation: '检测图像中的人脸。',
-    note: 'isFace()检测人脸'
+    note: 'isFace()检测人脸',
+    source: 'ocr'
   },
   {
     word: 'draw',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Draw the detection result.',
     exampleTranslation: '绘制检测结果。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'The camera detects faces.',
     exampleTranslation: '摄像头检测人脸。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

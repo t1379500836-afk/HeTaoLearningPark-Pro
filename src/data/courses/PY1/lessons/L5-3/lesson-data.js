@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your home address?',
     exampleTranslation: '你的家庭地址是什么？',
-    note: '常用的个人信息词汇'
+    note: '常用的个人信息词汇',
+    source: 'ocr'
   },
   {
     word: 'age',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your age?',
     exampleTranslation: '你多大了？',
-    note: '最基础的自我介绍词汇'
+    note: '最基础的自我介绍词汇',
+    source: 'ocr'
   },
   {
     word: 'gender',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Please select your gender.',
     exampleTranslation: '请选择你的性别。',
-    note: '常用表单词汇'
+    note: '常用表单词汇',
+    source: 'ocr'
   },
   // 拓展单词 - 更适合小朋友的常用词
   {
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Would you like a slice of pizza?',
     exampleTranslation: '你想要一片披萨吗？',
-    note: 'slice 就像切披萨一样简单，孩子们很熟悉'
+    note: 'slice 就像切披萨一样简单，孩子们很熟悉',
+    source: 'extended'
   },
   {
     word: 'part',
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'easy',
     example: 'This is part of the story.',
     exampleTranslation: '这是故事的一部分。',
-    note: '最基础的词汇之一'
+    note: '最基础的词汇之一',
+    source: 'extended'
   }
 ]
 

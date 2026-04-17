@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'There are two directions, left and right.',
     exampleTranslation: '有两个方向，左和右。',
-    note: '游戏中的移动方向'
+    note: '游戏中的移动方向',
+    source: 'ocr'
   },
   {
     word: 'speed',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'You travel at the speed of light?',
     exampleTranslation: '你用光的速度旅行？',
-    note: '游戏难度可通过速度控制'
+    note: '游戏难度可通过速度控制',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Watch out for the spikes!',
     exampleTranslation: '小心尖刺！',
-    note: '尖刺踏板'
+    note: '尖刺踏板',
+    source: 'extended'
   },
   {
     word: 'score',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'What is your score?',
     exampleTranslation: '你的分数是多少？',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'difficulty',
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'The difficulty increases over time.',
     exampleTranslation: '难度随时间增加。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

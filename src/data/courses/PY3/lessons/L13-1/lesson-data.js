@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Put on your clothes.',
     exampleTranslation: '穿上你的衣服。',
-    note: 'put on clothes 穿衣服'
+    note: 'put on clothes 穿衣服',
+    source: 'ocr'
   },
   {
     word: 'update',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please update the game.',
     exampleTranslation: '请更新游戏。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'keyboard',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Press the keyboard.',
     exampleTranslation: '按下键盘。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'collide',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The two balls collide.',
     exampleTranslation: '两个球碰撞了。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Create a new actor.',
     exampleTranslation: '创建一个新角色。',
-    note: 'Pygame Zero中的角色对象'
+    note: 'Pygame Zero中的角色对象',
+    source: 'extended'
   }
 ]
 

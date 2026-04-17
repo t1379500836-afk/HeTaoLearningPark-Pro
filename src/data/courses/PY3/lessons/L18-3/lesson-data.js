@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'door', pronunciation: '[do:r]', partOfSpeech: 'n.', meaning: '门；门口', level: 'easy', example: 'Open the door.', exampleTranslation: '开门。', note: '' },
-  { word: 'gear', pronunciation: '[gir]', partOfSpeech: 'n./v.', meaning: '齿轮；换挡', level: 'easy', example: 'The gear is turning.', exampleTranslation: '齿轮在转动。', note: '' },
-  { word: 'shoot', pronunciation: '[ju:t]', partOfSpeech: 'v./n.', meaning: '射击；拍摄', level: 'medium', example: 'Shoot the ball.', exampleTranslation: '射球。', note: '' },
-  { word: 'ball', pronunciation: '[bo:l]', partOfSpeech: 'n./v.', meaning: '球；球状物', level: 'medium', example: 'Throw the ball.', exampleTranslation: '扔球。', note: '' },
-  { word: 'target', pronunciation: "['ta:rgit]", partOfSpeech: 'n./v.', meaning: '目标；靶子', level: 'hard', example: 'Hit the target.', exampleTranslation: '击中目标。', note: '' }
+  { word: 'door', pronunciation: '[do:r]', partOfSpeech: 'n.', meaning: '门；门口', level: 'easy', example: 'Open the door.', exampleTranslation: '开门。', note: '', source: 'ocr' },
+  { word: 'gear', pronunciation: '[gir]', partOfSpeech: 'n./v.', meaning: '齿轮；换挡', level: 'easy', example: 'The gear is turning.', exampleTranslation: '齿轮在转动。', note: '', source: 'ocr' },
+  { word: 'shoot', pronunciation: '[ju:t]', partOfSpeech: 'v./n.', meaning: '射击；拍摄', level: 'medium', example: 'Shoot the ball.', exampleTranslation: '射球。', note: '', source: 'ocr' },
+  { word: 'ball', pronunciation: '[bo:l]', partOfSpeech: 'n./v.', meaning: '球；球状物', level: 'medium', example: 'Throw the ball.', exampleTranslation: '扔球。', note: '', source: 'ocr' },
+  { word: 'target', pronunciation: "['ta:rgit]", partOfSpeech: 'n./v.', meaning: '目标；靶子', level: 'hard', example: 'Hit the target.', exampleTranslation: '击中目标。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

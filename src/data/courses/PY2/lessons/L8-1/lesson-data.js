@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '力量；能量；权力',
     level: 'easy',
     example: 'He has great power.',
-    exampleTranslation: '他有强大的力量。'
+    exampleTranslation: '他有强大的力量。',
+    source: 'ocr'
   },
   {
     word: 'note',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '笔记；便条；记录',
     level: 'easy',
     example: 'I took notes carefully in the class.',
-    exampleTranslation: '我上课认真地做了笔记。'
+    exampleTranslation: '我上课认真地做了笔记。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '字典；词典',
     level: 'medium',
     example: 'Look up the word in the dictionary.',
-    exampleTranslation: '在字典里查这个单词。'
+    exampleTranslation: '在字典里查这个单词。',
+    source: 'extended'
   },
   {
     word: 'key',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '键；关键；钥匙',
     level: 'easy',
     example: 'The key opens the door.',
-    exampleTranslation: '钥匙打开了门。'
+    exampleTranslation: '钥匙打开了门。',
+    source: 'extended'
   },
   {
     word: 'value',
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '值；数值；价值',
     level: 'medium',
     example: 'The value of x is 5.',
-    exampleTranslation: 'x 的值是 5。'
+    exampleTranslation: 'x 的值是 5。',
+    source: 'extended'
   }
 ]
 

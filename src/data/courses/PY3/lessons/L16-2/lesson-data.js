@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Follow the traffic sign.',
     exampleTranslation: '遵守交通标志。',
-    note: 'isSign()识别路牌'
+    note: 'isSign()识别路牌',
+    source: 'ocr'
   },
   {
     word: 'follow',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Follow the line.',
     exampleTranslation: '沿着线走。',
-    note: 'followLine()循线'
+    note: 'followLine()循线',
+    source: 'ocr'
   },
   {
     word: 'play',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Play the animation.',
     exampleTranslation: '播放动画。',
-    note: 'playAnim()播放动画'
+    note: 'playAnim()播放动画',
+    source: 'ocr'
   },
   {
     word: 'animation',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Watch the animation.',
     exampleTranslation: '观看动画。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Control the car.',
     exampleTranslation: '控制小车。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

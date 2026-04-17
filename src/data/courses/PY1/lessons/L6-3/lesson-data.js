@@ -16,7 +16,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please insert the key.',
     exampleTranslation: '请插入钥匙。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'pop',
@@ -26,7 +27,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The balloon popped.',
     exampleTranslation: '气球砰的一声破了。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'task',
@@ -36,7 +38,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I have many tasks today.',
     exampleTranslation: '我今天有很多任务。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'position',
@@ -46,7 +49,8 @@ export const vocabData = [
     level: 'medium',
     example: 'What is your position?',
     exampleTranslation: '你的位置在哪里？',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'schedule',
@@ -56,7 +60,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Check your schedule.',
     exampleTranslation: '查看你的日程表。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'between',
@@ -66,7 +71,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Sit between them.',
     exampleTranslation: '坐在他们之间。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

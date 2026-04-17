@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please show me your homework.',
     exampleTranslation: '请给我看看你的作业。',
-    note: 'show off 炫耀'
+    note: 'show off 炫耀',
+    source: 'ocr'
   },
   // 拓展编程词汇（条件判断相关）
   {
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Use elif for another condition.',
     exampleTranslation: '用elif检查另一个条件。',
-    note: 'elif = else if'
+    note: 'elif = else if',
+    source: 'extended'
   },
   {
     word: 'branch',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The program has three branches.',
     exampleTranslation: '这个程序有三个分支。',
-    note: 'if-elif-else 分支结构'
+    note: 'if-elif-else 分支结构',
+    source: 'extended'
   },
   {
     word: 'condition',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Check the condition first.',
     exampleTranslation: '先检查条件。',
-    note: 'if condition 条件判断'
+    note: 'if condition 条件判断',
+    source: 'extended'
   }
 ]
 

@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'This game has many online users.',
     exampleTranslation: '这个游戏有很多在线用户。',
-    note: 'online user 在线用户'
+    note: 'online user 在线用户',
+    source: 'ocr'
   },
   {
     word: 'judge',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'medium',
     example: 'My judge for you is 100 points.',
     exampleTranslation: '我给你的评价是100分。',
-    note: 'online judge 线上测评（OJ）'
+    note: 'online judge 线上测评（OJ）',
+    source: 'ocr'
   },
   // 拓展单词 - OJ 相关
   {
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Submit your code to the OJ system.',
     exampleTranslation: '把你的代码提交到OJ系统。',
-    note: 'submit code 提交代码'
+    note: 'submit code 提交代码',
+    source: 'extended'
   },
   {
     word: 'turtle',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The turtle can draw shapes.',
     exampleTranslation: '海龟能画出各种形状。',
-    note: 'turtle 海龟绘图模块'
+    note: 'turtle 海龟绘图模块',
+    source: 'extended'
   }
 ]
 

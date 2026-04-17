@@ -13,40 +13,44 @@ export const vocabData = [
   {
     word: 'sum',
     pronunciation: '[sʌm]',
-    partOfSpeech: 'n.',
+    partOfSpeech: 'n./v.',
     meaning: '总和；全部；求和',
     level: 'easy',
     example: 'The sum of 5 and 3 is 8.',
-    exampleTranslation: '5 和 3 的和是 8。'
+    exampleTranslation: '5 和 3 的和是 8。',
+    source: 'ocr'
   },
-  // 拓展单词
   {
     word: 'sort',
     pronunciation: '[sɔːrt]',
-    partOfSpeech: 'v.',
-    meaning: '分类；排序；整理',
+    partOfSpeech: 'n./v.',
+    meaning: '种类；分类；排序；整理',
     level: 'easy',
     example: 'Please sort these cards by number.',
-    exampleTranslation: '请按数字整理这些卡片。'
+    exampleTranslation: '请按数字整理这些卡片。',
+    source: 'ocr'
   },
   {
     word: 'player',
     pronunciation: "['pleɪər]",
     partOfSpeech: 'n.',
-    meaning: '运动员；玩家；播放器',
+    meaning: '运动员；玩家；播放器；演员',
     level: 'medium',
     example: 'He is the best player on the team.',
-    exampleTranslation: '他是队里最好的选手。'
+    exampleTranslation: '他是队里最好的选手。',
+    source: 'ocr'
   },
   {
     word: 'record',
     pronunciation: "['rekərd]",
-    partOfSpeech: 'n.',
-    meaning: '记录；唱片；记载',
+    partOfSpeech: 'n./v.',
+    meaning: '记录；唱片；经历；录制',
     level: 'medium',
     example: 'She holds the world record.',
-    exampleTranslation: '她保持着世界纪录。'
+    exampleTranslation: '她保持着世界纪录。',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'algorithm',
     pronunciation: "['ælɡərɪðəm]",
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '算法；运算法则',
     level: 'hard',
     example: 'Sorting is a common algorithm in programming.',
-    exampleTranslation: '排序是编程中常见的算法。'
+    exampleTranslation: '排序是编程中常见的算法。',
+    source: 'extended'
   }
 ]
 

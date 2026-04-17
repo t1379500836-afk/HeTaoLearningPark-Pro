@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What time is it?',
     exampleTranslation: '现在几点了？',
-    note: 'on time 准时'
+    note: 'on time 准时',
+    source: 'ocr'
   },
   {
     word: 'sleep',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'I sleep at 9 PM.',
     exampleTranslation: '我晚上9点睡觉。',
-    note: 'go to sleep 去睡觉'
+    note: 'go to sleep 去睡觉',
+    source: 'ocr'
   },
   // 拓展编程词汇（循环变量相关）
   {
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The program runs in a loop.',
     exampleTranslation: '程序循环运行。',
-    note: 'for loop for循环'
+    note: 'for loop for循环',
+    source: 'extended'
   },
   {
     word: 'range',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'for i in range(5):',
     exampleTranslation: '循环5次',
-    note: 'range() 生成数字序列'
+    note: 'range() 生成数字序列',
+    source: 'extended'
   }
 ]
 

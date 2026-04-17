@@ -18,7 +18,8 @@ export const vocabData = [
     meaning: '返回；归还；回报',
     level: 'easy',
     example: 'Please return my book tomorrow.',
-    exampleTranslation: '请明天把我的书还回来。'
+    exampleTranslation: '请明天把我的书还回来。',
+    source: 'ocr'
   },
   {
     word: 'enemy',
@@ -27,7 +28,8 @@ export const vocabData = [
     meaning: '敌人；敌军',
     level: 'easy',
     example: 'They used to be enemies.',
-    exampleTranslation: '他们曾经是敌人。'
+    exampleTranslation: '他们曾经是敌人。',
+    source: 'ocr'
   },
   {
     word: 'animal',
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '动物；牲畜',
     level: 'medium',
     example: 'The elephant is a large animal.',
-    exampleTranslation: '大象是一种大型动物。'
+    exampleTranslation: '大象是一种大型动物。',
+    source: 'ocr'
   },
   {
     word: 'choice',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '选择；挑选',
     level: 'medium',
     example: 'Make a wise choice.',
-    exampleTranslation: '做出明智的选择。'
+    exampleTranslation: '做出明智的选择。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -55,7 +59,8 @@ export const vocabData = [
     meaning: '随机的；随意的',
     level: 'medium',
     example: 'Pick a random card.',
-    exampleTranslation: '随机抽一张卡片。'
+    exampleTranslation: '随机抽一张卡片。',
+    source: 'extended'
   }
 ]
 

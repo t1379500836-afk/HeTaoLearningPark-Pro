@@ -20,6 +20,48 @@
 
 正课页（LessonView）内嵌打字练习，优先展示本课单词卡词汇，再随机补充其他单词。
 
+## 单词卡（Flashcard）
+
+### 数据规范
+
+每节课的 `lesson-data.js` 中 `vocabData` 数组存放单词卡数据，遵循以下规则：
+
+1. **必须包含** content.json flashcard OCR 提取的所有单词（标记为 `source: 'ocr'`）
+2. 在 OCR 单词基础上可做拓展（标记为 `source: 'extended'`），每课最多 **6 个**单词
+3. 难度尽量保持 easy/medium/hard 平衡
+
+### 数据结构
+
+```javascript
+export const vocabData = [
+  // OCR 提取的单词
+  {
+    word: 'example',           // 英文单词
+    pronunciation: '[ɪɡzæmpəl]', // 音标
+    partOfSpeech: 'n.',        // 词性
+    meaning: '例子；榜样',      // 中文释义
+    level: 'easy',             // 难度: easy / medium / hard
+    example: 'This is an example.',  // 英文例句
+    exampleTranslation: '这是一个例子。', // 例句翻译
+    note: '',                  // 备注（可选，不显示在 UI）
+    source: 'ocr'              // 来源: 'ocr' 或 'extended'
+  },
+  // 拓展单词
+  {
+    word: 'extra',
+    // ...
+    source: 'extended'
+  }
+]
+```
+
+### UI 展示
+
+- `source: 'ocr'` 的单词卡显示标签：**本节课新单词，必须掌握**
+- `source: 'extended'` 的单词卡显示标签：**拓展了解**
+- 无 `source` 字段的单词卡不显示来源标签（向后兼容）
+
+
 ## 在线编程
 
 页面 `/python`，基于 CodeMirror 的 Python 编辑器，支持代码执行。
@@ -74,7 +116,7 @@
 | Footer | 底部信息栏 |
 | AuthModal | 全屏身份验证弹窗 |
 | CelebrationEffect | 认证成功撒花动画 |
-| FlashcardDisplay | 词汇翻转卡片（3列网格布局） |
+| FlashcardDisplay | 词汇翻转卡片（3列网格布局，区分 OCR/拓展标签） |
 | KnowledgeCard | 知识点展示（三级难度切换） |
 | ExerciseCard | 练习题卡片（选择、判对错、解析） |
 | DifficultyBadge | 难度标签 |

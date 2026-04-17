@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '行动；行为；措施',
     level: 'easy',
     example: 'We need to take action now.',
-    exampleTranslation: '我们现在需要采取行动。'
+    exampleTranslation: '我们现在需要采取行动。',
+    source: 'ocr'
   },
   {
     word: 'jump',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '跳；跳跃',
     level: 'easy',
     example: 'The rabbit can jump very high.',
-    exampleTranslation: '兔子能跳得很高。'
+    exampleTranslation: '兔子能跳得很高。',
+    source: 'ocr'
   },
   {
     word: 'push',
@@ -35,7 +37,8 @@ export const vocabData = [
     meaning: '推动；按；挤',
     level: 'medium',
     example: 'Push the button to start.',
-    exampleTranslation: '按下按钮开始。'
+    exampleTranslation: '按下按钮开始。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '格式；格式化',
     level: 'hard',
     example: 'Please check the file format.',
-    exampleTranslation: '请检查文件格式。'
+    exampleTranslation: '请检查文件格式。',
+    source: 'extended'
   }
 ]
 

@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'boat', pronunciation: '[bout]', partOfSpeech: 'n./v.', meaning: '船；小船', level: 'easy', example: 'Drive the boat.', exampleTranslation: '驾驶小船。', note: '' },
-  { word: 'coin', pronunciation: '[koin]', partOfSpeech: 'n./v.', meaning: '硬币；金币', level: 'easy', example: 'Collect coins.', exampleTranslation: '收集金币。', note: '' },
-  { word: 'fish', pronunciation: '[fij]', partOfSpeech: 'n./v.', meaning: '鱼；钓鱼', level: 'medium', example: 'Catch the fish.', exampleTranslation: '抓鱼。', note: '' },
-  { word: 'obstacle', pronunciation: "['abstakl]", partOfSpeech: 'n.', meaning: '障碍物；障碍', level: 'medium', example: 'Avoid obstacles.', exampleTranslation: '避开障碍物。', note: '' },
-  { word: 'scroll', pronunciation: '[skroul]', partOfSpeech: 'v./n.', meaning: '滚动；卷轴', level: 'hard', example: 'Background scroll.', exampleTranslation: '背景滚动。', note: '' }
+  { word: 'boat', pronunciation: '[bout]', partOfSpeech: 'n./v.', meaning: '船；小船', level: 'easy', example: 'Drive the boat.', exampleTranslation: '驾驶小船。', note: '', source: 'ocr' },
+  { word: 'coin', pronunciation: '[koin]', partOfSpeech: 'n./v.', meaning: '硬币；金币', level: 'easy', example: 'Collect coins.', exampleTranslation: '收集金币。', note: '', source: 'ocr' },
+  { word: 'fish', pronunciation: '[fij]', partOfSpeech: 'n./v.', meaning: '鱼；钓鱼', level: 'medium', example: 'Catch the fish.', exampleTranslation: '抓鱼。', note: '', source: 'ocr' },
+  { word: 'obstacle', pronunciation: "['abstakl]", partOfSpeech: 'n.', meaning: '障碍物；障碍', level: 'medium', example: 'Avoid obstacles.', exampleTranslation: '避开障碍物。', note: '', source: 'extended' },
+  { word: 'scroll', pronunciation: '[skroul]', partOfSpeech: 'v./n.', meaning: '滚动；卷轴', level: 'hard', example: 'Background scroll.', exampleTranslation: '背景滚动。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

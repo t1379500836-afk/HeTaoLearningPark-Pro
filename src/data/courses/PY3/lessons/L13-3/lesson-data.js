@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Let us begin the game.',
     exampleTranslation: '让我们开始游戏吧。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'point',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Point to the target.',
     exampleTranslation: '指向目标。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'state',
@@ -38,7 +40,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The game state is running.',
     exampleTranslation: '游戏状态是运行中。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'global',
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'This is a global variable.',
     exampleTranslation: '这是一个全局变量。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Detect the collision.',
     exampleTranslation: '检测碰撞。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

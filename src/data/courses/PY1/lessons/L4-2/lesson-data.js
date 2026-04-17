@@ -19,7 +19,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Show me your homework.',
     exampleTranslation: '给我看你的作业。',
-    note: 'show and tell 展示与分享'
+    note: 'show and tell 展示与分享',
+    source: 'ocr'
   },
   {
     word: 'sound',
@@ -29,7 +30,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The bell sounds nice.',
     exampleTranslation: '这个铃声听起来很好听。',
-    note: 'sound effect 音效'
+    note: 'sound effect 音效',
+    source: 'ocr'
   },
   {
     word: 'play',
@@ -39,7 +41,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Play the music.',
     exampleTranslation: '播放音乐。',
-    note: 'play button 播放按钮'
+    note: 'play button 播放按钮',
+    source: 'ocr'
   },
   {
     word: 'record',
@@ -49,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Press the button to record.',
     exampleTranslation: '按下按钮来录制。',
-    note: '作动词时读[rɪˈkɔːd]，作名词时读[ˈrekɔːd]'
+    note: '作动词时读[rɪˈkɔːd]，作名词时读[ˈrekɔːd]',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -60,7 +64,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Press the button.',
     exampleTranslation: '按下按钮。',
-    note: 'press conference 新闻发布会'
+    note: 'press conference 新闻发布会',
+    source: 'extended'
   },
   {
     word: 'button',
@@ -70,7 +75,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Click the button.',
     exampleTranslation: '点击按钮。',
-    note: 'push button 按钮开关'
+    note: 'push button 按钮开关',
+    source: 'extended'
   }
 ]
 

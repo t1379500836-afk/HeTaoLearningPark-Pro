@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Import random module.',
     exampleTranslation: '导入随机模块。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'random',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Pick a random number.',
     exampleTranslation: '选一个随机数。',
-    note: 'random numbers 随机数'
+    note: 'random numbers 随机数',
+    source: 'ocr'
   },
   {
     word: 'choice',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Make your choice.',
     exampleTranslation: '做出你的选择。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'module',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Import a module.',
     exampleTranslation: '导入一个模块。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'lucky',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Good luck!',
     exampleTranslation: '祝你好运！',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'range',
@@ -67,7 +72,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Choose a number in range.',
     exampleTranslation: '在这个范围内选一个数。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

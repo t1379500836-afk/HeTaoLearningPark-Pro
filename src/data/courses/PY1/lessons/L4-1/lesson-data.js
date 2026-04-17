@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The answer is true.',
     exampleTranslation: '答案是正确的。',
-    note: 'Python中写作True（首字母大写）'
+    note: 'Python中写作True（首字母大写）',
+    source: 'ocr'
   },
   {
     word: 'false',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The statement is false.',
     exampleTranslation: '这个陈述是错误的。',
-    note: 'Python中写作False（首字母大写）'
+    note: 'Python中写作False（首字母大写）',
+    source: 'ocr'
   },
   {
     word: 'boolean',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'This is a boolean value.',
     exampleTranslation: '这是一个布尔值。',
-    note: '以数学家George Boole命名'
+    note: '以数学家George Boole命名',
+    source: 'extended'
   },
   {
     word: 'condition',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Check the condition first.',
     exampleTranslation: '先检查条件。',
-    note: 'while循环需要条件'
+    note: 'while循环需要条件',
+    source: 'extended'
   },
   {
     word: 'loop',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The while loop repeats the code.',
     exampleTranslation: 'while循环重复执行代码。',
-    note: 'for loop是for循环，while loop是while循环'
+    note: 'for loop是for循环，while loop是while循环',
+    source: 'extended'
   },
   {
     word: 'infinite',
@@ -67,7 +72,8 @@ export const vocabData = [
     level: 'hard',
     example: 'while True creates an infinite loop.',
     exampleTranslation: 'while True创建一个无限循环。',
-    note: 'in-表示"不"，fin表示"结束"'
+    note: 'in-表示"不"，fin表示"结束"',
+    source: 'extended'
   }
 ]
 

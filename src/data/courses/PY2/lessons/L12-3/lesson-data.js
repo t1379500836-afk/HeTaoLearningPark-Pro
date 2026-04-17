@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '钥匙；关键；按键',
     level: 'easy',
     example: 'Press any key to start.',
-    exampleTranslation: '按任意键开始。'
+    exampleTranslation: '按任意键开始。',
+    source: 'ocr'
   },
   {
     word: 'space',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '空间；太空；空格键',
     level: 'easy',
     example: 'Press the space bar to jump.',
-    exampleTranslation: '按空格键跳跃。'
+    exampleTranslation: '按空格键跳跃。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '键盘',
     level: 'medium',
     example: 'The keyboard has many keys.',
-    exampleTranslation: '键盘有很多按键。'
+    exampleTranslation: '键盘有很多按键。',
+    source: 'extended'
   },
   {
     word: 'control',
@@ -45,7 +48,8 @@ export const vocabData = [
     meaning: '控制；操纵',
     level: 'medium',
     example: 'Use the keyboard to control the character.',
-    exampleTranslation: '用键盘控制角色。'
+    exampleTranslation: '用键盘控制角色。',
+    source: 'extended'
   }
 ]
 

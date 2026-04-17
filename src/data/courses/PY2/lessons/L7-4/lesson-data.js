@@ -15,40 +15,44 @@ export const vocabData = [
   {
     word: 'initial',
     pronunciation: "[ɪ'nɪʃl]",
-    partOfSpeech: 'adj.',
-    meaning: '最初的；开始的；首字母',
-    level: 'medium',
+    partOfSpeech: 'n./adj.',
+    meaning: '首字母；最初的；开始的',
+    level: 'easy',
     example: 'The initial step is to turn on the device.',
-    exampleTranslation: '第一步是打开设备。'
+    exampleTranslation: '第一步是打开设备。',
+    source: 'ocr'
   },
-  // 拓展单词
   {
     word: 'power',
     pronunciation: "['paʊər]",
-    partOfSpeech: 'n.',
-    meaning: '力量；能量；电力；动力',
-    level: 'easy',
+    partOfSpeech: 'n./v.',
+    meaning: '力量；电力；动力；驱动',
+    level: 'medium',
     example: 'The car has a powerful engine.',
-    exampleTranslation: '这辆车有一个强大的引擎。'
+    exampleTranslation: '这辆车有一个强大的引擎。',
+    source: 'ocr'
   },
   {
     word: 'claw',
     pronunciation: '[klɔː]',
-    partOfSpeech: 'n.',
-    meaning: '爪；螯；钳',
+    partOfSpeech: 'n./v.',
+    meaning: '爪；螯；钳；抓',
     level: 'easy',
     example: 'The crab has big claws.',
-    exampleTranslation: '螃蟹有大钳子。'
+    exampleTranslation: '螃蟹有大钳子。',
+    source: 'ocr'
   },
   {
     word: 'detect',
     pronunciation: "[dɪ'tekt]",
     partOfSpeech: 'v.',
-    meaning: '检测；识别；发现；察觉',
+    meaning: '检测；识别；查明；发现',
     level: 'medium',
     example: 'Sensors can detect obstacles.',
-    exampleTranslation: '传感器可以检测障碍物。'
+    exampleTranslation: '传感器可以检测障碍物。',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'initialize',
     pronunciation: "[ɪ'nɪʃəlaɪz]",
@@ -56,7 +60,8 @@ export const vocabData = [
     meaning: '初始化；设定初始值',
     level: 'hard',
     example: 'Please initialize the system before use.',
-    exampleTranslation: '使用前请初始化系统。'
+    exampleTranslation: '使用前请初始化系统。',
+    source: 'extended'
   }
 ]
 

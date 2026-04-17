@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '动物；牲畜',
     level: 'easy',
     example: 'The elephant is a large animal.',
-    exampleTranslation: '大象是一种大型动物。'
+    exampleTranslation: '大象是一种大型动物。',
+    source: 'ocr'
   },
   {
     word: 'import',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '进口；导入',
     level: 'medium',
     example: 'We import tea from China.',
-    exampleTranslation: '我们从中国进口茶叶。'
+    exampleTranslation: '我们从中国进口茶叶。',
+    source: 'ocr'
   },
   {
     word: 'random',
@@ -35,7 +37,8 @@ export const vocabData = [
     meaning: '随机的，随意的',
     level: 'medium',
     example: 'Pick a random number from 1 to 10.',
-    exampleTranslation: '从1到10中随机选一个数字。'
+    exampleTranslation: '从1到10中随机选一个数字。',
+    source: 'ocr'
   },
   {
     word: 'score',
@@ -44,7 +47,8 @@ export const vocabData = [
     meaning: '成绩；比分；总谱',
     level: 'hard',
     example: 'What was your score in the test?',
-    exampleTranslation: '你考试得了多少分？'
+    exampleTranslation: '你考试得了多少分？',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '迷宫；迷惑',
     level: 'medium',
     example: 'Find your way out of the maze.',
-    exampleTranslation: '找到走出迷宫的路。'
+    exampleTranslation: '找到走出迷宫的路。',
+    source: 'extended'
   }
 ]
 

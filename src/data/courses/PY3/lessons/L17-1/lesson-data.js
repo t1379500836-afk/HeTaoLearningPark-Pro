@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Turn up the volume.',
     exampleTranslation: '调高音量。',
-    note: 'getVolume()获取音量'
+    note: 'getVolume()获取音量',
+    source: 'ocr'
   },
   {
     word: 'block',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Move the block.',
     exampleTranslation: '移动方块。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'hide',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Hide the object.',
     exampleTranslation: '隐藏物体。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'sound',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Make a sound.',
     exampleTranslation: '发出声音。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'microphone',
@@ -57,7 +61,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Speak into the microphone.',
     exampleTranslation: '对着麦克风说话。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

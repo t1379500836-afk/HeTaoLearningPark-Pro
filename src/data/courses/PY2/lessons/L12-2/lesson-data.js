@@ -18,7 +18,8 @@ export const vocabData = [
     meaning: '老鼠；鼠标',
     level: 'easy',
     example: 'Click the mouse button to start.',
-    exampleTranslation: '点击鼠标按钮开始。'
+    exampleTranslation: '点击鼠标按钮开始。',
+    source: 'ocr'
   },
   {
     word: 'down',
@@ -27,7 +28,8 @@ export const vocabData = [
     meaning: '向下；下降',
     level: 'easy',
     example: 'The mouse went down.',
-    exampleTranslation: '鼠标按下了。'
+    exampleTranslation: '鼠标按下了。',
+    source: 'ocr'
   },
   {
     word: 'up',
@@ -36,7 +38,8 @@ export const vocabData = [
     meaning: '向上；升高',
     level: 'easy',
     example: 'The mouse went up.',
-    exampleTranslation: '鼠标松开了。'
+    exampleTranslation: '鼠标松开了。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -46,7 +49,8 @@ export const vocabData = [
     meaning: '碰撞；冲突',
     level: 'hard',
     example: 'Check if two objects have a collision.',
-    exampleTranslation: '检查两个物体是否碰撞。'
+    exampleTranslation: '检查两个物体是否碰撞。',
+    source: 'extended'
   }
 ]
 

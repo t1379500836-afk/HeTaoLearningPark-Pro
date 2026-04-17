@@ -8,11 +8,11 @@
  */
 
 export const vocabData = [
-  { word: 'board', pronunciation: '[bo:rd]', partOfSpeech: 'n./v.', meaning: '板；木板；上船', level: 'easy', example: 'Jump on the board.', exampleTranslation: '跳到板上。', note: '' },
-  { word: 'bubble', pronunciation: "['b<bl]", partOfSpeech: 'n./v.', meaning: '气泡；泡泡', level: 'easy', example: 'Blow bubbles.', exampleTranslation: '吹泡泡。', note: '' },
-  { word: 'bounce', pronunciation: '[bauns]', partOfSpeech: 'v./n.', meaning: '弹跳；反弹', level: 'medium', example: 'The ball bounces.', exampleTranslation: '球弹起来了。', note: '' },
-  { word: 'win', pronunciation: '[win]', partOfSpeech: 'v./n.', meaning: '赢；获胜', level: 'medium', example: 'You win!', exampleTranslation: '你赢了！', note: '' },
-  { word: 'lose', pronunciation: '[lu:z]', partOfSpeech: 'v.', meaning: '输；失败', level: 'hard', example: 'Do not lose hope.', exampleTranslation: '不要失去希望。', note: '' }
+  { word: 'board', pronunciation: '[bo:rd]', partOfSpeech: 'n./v.', meaning: '板；木板；上船', level: 'easy', example: 'Jump on the board.', exampleTranslation: '跳到板上。', note: '', source: 'ocr' },
+  { word: 'bubble', pronunciation: "['b<bl]", partOfSpeech: 'n./v.', meaning: '气泡；泡泡', level: 'easy', example: 'Blow bubbles.', exampleTranslation: '吹泡泡。', note: '', source: 'ocr' },
+  { word: 'bounce', pronunciation: '[bauns]', partOfSpeech: 'v./n.', meaning: '弹跳；反弹', level: 'medium', example: 'The ball bounces.', exampleTranslation: '球弹起来了。', note: '', source: 'extended' },
+  { word: 'win', pronunciation: '[win]', partOfSpeech: 'v./n.', meaning: '赢；获胜', level: 'medium', example: 'You win!', exampleTranslation: '你赢了！', note: '', source: 'extended' },
+  { word: 'lose', pronunciation: '[lu:z]', partOfSpeech: 'v.', meaning: '输；失败', level: 'hard', example: 'Do not lose hope.', exampleTranslation: '不要失去希望。', note: '', source: 'extended' }
 ]
 
 export const knowledgePoints = [

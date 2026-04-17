@@ -17,7 +17,8 @@ export const vocabData = [
     meaning: '定义；解释；界定',
     level: 'easy',
     example: 'We need to define the rules first.',
-    exampleTranslation: '我们需要先定义规则。'
+    exampleTranslation: '我们需要先定义规则。',
+    source: 'ocr'
   },
   {
     word: 'return',
@@ -26,7 +27,8 @@ export const vocabData = [
     meaning: '返回；归还；回报',
     level: 'easy',
     example: 'Please return the book to the library.',
-    exampleTranslation: '请把书还给图书馆。'
+    exampleTranslation: '请把书还给图书馆。',
+    source: 'ocr'
   },
   {
     word: 'attack',
@@ -35,7 +37,8 @@ export const vocabData = [
     meaning: '攻击；进攻',
     level: 'medium',
     example: 'The player decided to attack the monster.',
-    exampleTranslation: '玩家决定攻击怪物。'
+    exampleTranslation: '玩家决定攻击怪物。',
+    source: 'ocr'
   },
   {
     word: 'pay',
@@ -44,7 +47,8 @@ export const vocabData = [
     meaning: '支付；偿还',
     level: 'medium',
     example: 'How much should I pay for this?',
-    exampleTranslation: '这个我该付多少钱？'
+    exampleTranslation: '这个我该付多少钱？',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -54,7 +58,8 @@ export const vocabData = [
     meaning: '函数；功能；作用',
     level: 'medium',
     example: 'This function calculates the sum.',
-    exampleTranslation: '这个函数计算总和。'
+    exampleTranslation: '这个函数计算总和。',
+    source: 'extended'
   }
 ]
 

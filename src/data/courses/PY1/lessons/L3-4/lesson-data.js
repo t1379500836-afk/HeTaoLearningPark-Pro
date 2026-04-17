@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'You and I are friends.',
     exampleTranslation: '你和我是朋友。',
-    note: 'and表示"并且"'
+    note: 'and表示"并且"',
+    source: 'ocr'
   },
   {
     word: 'or',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Yes or No?',
     exampleTranslation: '是或否？',
-    note: 'or表示"或者"'
+    note: 'or表示"或者"',
+    source: 'ocr'
   },
   {
     word: 'weather',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The weather is nice today.',
     exampleTranslation: '今天天气很好。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'age',
@@ -47,7 +50,8 @@ export const vocabData = [
     level: 'medium',
     example: 'What is your age?',
     exampleTranslation: '你几岁？',
-    note: ''
+    note: '',
+    source: 'ocr'
   }
 ]
 

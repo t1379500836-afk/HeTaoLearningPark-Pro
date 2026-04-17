@@ -19,7 +19,8 @@ export const vocabData = [
     meaning: '玩；播放；扮演',
     level: 'easy',
     example: 'Press play to start the music.',
-    exampleTranslation: '按播放键开始音乐。'
+    exampleTranslation: '按播放键开始音乐。',
+    source: 'ocr'
   },
   {
     word: 'stop',
@@ -28,7 +29,8 @@ export const vocabData = [
     meaning: '停止；阻止',
     level: 'easy',
     example: 'Click stop to end the music.',
-    exampleTranslation: '点击停止结束音乐。'
+    exampleTranslation: '点击停止结束音乐。',
+    source: 'ocr'
   },
   {
     word: 'debug',
@@ -37,7 +39,8 @@ export const vocabData = [
     meaning: '调试（程序）；排除错误',
     level: 'hard',
     example: 'I need to debug my code.',
-    exampleTranslation: '我需要调试我的代码。'
+    exampleTranslation: '我需要调试我的代码。',
+    source: 'ocr'
   },
   {
     word: 'button',
@@ -46,7 +49,8 @@ export const vocabData = [
     meaning: '纽扣；按钮，开关',
     level: 'medium',
     example: 'Click the button to start.',
-    exampleTranslation: '点击按钮开始。'
+    exampleTranslation: '点击按钮开始。',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -56,7 +60,8 @@ export const vocabData = [
     meaning: '游戏；比赛',
     level: 'easy',
     example: 'This is a fun game.',
-    exampleTranslation: '这是一个有趣的游戏。'
+    exampleTranslation: '这是一个有趣的游戏。',
+    source: 'extended'
   }
 ]
 

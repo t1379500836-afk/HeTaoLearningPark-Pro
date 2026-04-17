@@ -17,7 +17,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Please print your name.',
     exampleTranslation: '请打印你的名字。',
-    note: 'out of print 绝版的；已售完'
+    note: 'out of print 绝版的；已售完',
+    source: 'ocr'
   },
   {
     word: 'weight',
@@ -27,7 +28,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your weight?',
     exampleTranslation: '你的体重是多少？',
-    note: 'lose weight 减肥'
+    note: 'lose weight 减肥',
+    source: 'ocr'
   },
   {
     word: 'height',
@@ -37,7 +39,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What is your height?',
     exampleTranslation: '你的身高是多少？',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   // 拓展单词
   {
@@ -48,7 +51,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Create a variable to store the value.',
     exampleTranslation: '创建一个变量来存储这个值。',
-    note: 'variable 变量'
+    note: 'variable 变量',
+    source: 'extended'
   }
 ]
 

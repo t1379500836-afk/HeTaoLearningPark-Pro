@@ -29,48 +29,49 @@
       </div>
     </div>
 
-    <!-- 概览卡片 -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-card__shine"></div>
-        <div class="stat-card__body">
-          <div class="stat-card__icon">
-            <el-icon :size="26"><UserFilled /></el-icon>
+    <!-- 概览卡片 + 排行榜 -->
+    <div class="stats-middle">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card__shine"></div>
+          <div class="stat-card__body">
+            <div class="stat-card__icon">
+              <el-icon :size="26"><UserFilled /></el-icon>
+            </div>
+            <div>
+              <div class="stat-card__num">{{ dauSummary.todayTotal }}</div>
+              <div class="stat-card__label">今日日活</div>
+            </div>
           </div>
-          <div>
-            <div class="stat-card__num">{{ dauSummary.todayTotal }}</div>
-            <div class="stat-card__label">今日日活</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__shine"></div>
+          <div class="stat-card__body">
+            <div class="stat-card__icon">
+              <el-icon :size="26"><TrendCharts /></el-icon>
+            </div>
+            <div>
+              <div class="stat-card__num">{{ dauSummary.sevenDayAvg }}</div>
+              <div class="stat-card__label">7 日均值</div>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__shine"></div>
+          <div class="stat-card__body">
+            <div class="stat-card__icon">
+              <el-icon :size="26"><Calendar /></el-icon>
+            </div>
+            <div>
+              <div class="stat-card__num">{{ dauSummary.thirtyDayTotal }}</div>
+              <div class="stat-card__label">30 日总活</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-card__shine"></div>
-        <div class="stat-card__body">
-          <div class="stat-card__icon">
-            <el-icon :size="26"><TrendCharts /></el-icon>
-          </div>
-          <div>
-            <div class="stat-card__num">{{ dauSummary.sevenDayAvg }}</div>
-            <div class="stat-card__label">7 日均值</div>
-          </div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card__shine"></div>
-        <div class="stat-card__body">
-          <div class="stat-card__icon">
-            <el-icon :size="26"><Calendar /></el-icon>
-          </div>
-          <div>
-            <div class="stat-card__num">{{ dauSummary.thirtyDayTotal }}</div>
-            <div class="stat-card__label">30 日总活</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- 活跃排行榜 -->
-    <div v-if="leaderboardData.length" class="leaderboard">
+      <!-- 活跃排行榜 -->
+      <div v-if="leaderboardData.length" class="leaderboard">
       <h3 class="leaderboard__title">活跃排行榜</h3>
       <div class="leaderboard__list">
         <div
@@ -116,6 +117,7 @@
         <button class="lb-pager__btn" :disabled="lbPage <= 1" @click="lbPage--">&lt;</button>
         <span class="lb-pager__info">{{ lbPage }} / {{ lbTotalPages }}</span>
         <button class="lb-pager__btn" :disabled="lbPage >= lbTotalPages" @click="lbPage++">&gt;</button>
+      </div>
       </div>
     </div>
 
@@ -295,6 +297,14 @@ onMounted(() => loadStats())
 </script>
 
 <style scoped>
+/* 概览卡片 + 排行榜并排布局 */
+.stats-middle { display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start; }
+.stats-middle .stats-row { display: flex; flex-direction: column; gap: 14px; margin-bottom: 0; width: 260px; flex-shrink: 0; }
+.stats-middle .stat-card { padding: 16px 18px; }
+.stats-middle .stat-card__num { font-size: 24px; }
+.stats-middle .stat-card__icon { width: 42px; height: 42px; border-radius: 12px; }
+.stats-middle .leaderboard { flex: 1; min-width: 0; margin-bottom: 0; }
+
 /* 统计工具栏 */
 .stats-toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .stats-toolbar__dates { display: flex; align-items: center; gap: 8px; }
@@ -336,7 +346,9 @@ onMounted(() => loadStats())
 .lb-item__count small { font-size: 12px; font-weight: 400; color: #999; }
 
 /* 响应式 */
-@media (max-width: 768px) {
+@media (max-width: 580px) {
+  .stats-middle { flex-direction: column; align-items: stretch; }
+  .stats-middle .stats-row { width: 100%; flex-direction: column; }
   .stats-toolbar { gap: 10px; }
   .stats-toolbar__dates { width: 100%; }
   .stats-toolbar__dates :deep(.el-date-editor) { flex: 1; }

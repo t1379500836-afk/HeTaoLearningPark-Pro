@@ -71,6 +71,37 @@ export async function initDatabase() {
       )
     `)
 
+    // 匿名悄悄话表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS whispers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        teacher_key VARCHAR(100) NOT NULL,
+        content VARCHAR(500) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_teacher_created (teacher_key, created_at DESC)
+      )
+    `)
+
+    // 教师寄语表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS teacher_messages (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        teacher_key VARCHAR(100) NOT NULL,
+        title VARCHAR(100) NOT NULL DEFAULT '',
+        content VARCHAR(500) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_teacher_created (teacher_key, created_at DESC)
+      )
+    `)
+
+    // 兼容已有表：补加 title 列
+    try {
+      await conn.execute("ALTER TABLE teacher_messages ADD COLUMN title VARCHAR(100) NOT NULL DEFAULT '' AFTER teacher_key")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
+
     console.log('数据库初始化完成')
   } finally {
     conn.release()

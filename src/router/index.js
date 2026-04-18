@@ -74,6 +74,11 @@ const baseRoutes = [
     path: '/contact',
     name: 'contact',
     component: () => import('@/views/ContactView.vue')
+  },
+  {
+    path: '/messages',
+    name: 'messages',
+    component: () => import('@/views/MessagesView.vue')
   }
 ]
 
@@ -157,6 +162,12 @@ function createPrefixedRoutes(prefix) {
       name: `${prefix}-contact`,
       component: () => import('@/views/ContactView.vue'),
       props: { prefix }
+    },
+    {
+      path: `/${prefix}/messages`,
+      name: `${prefix}-messages`,
+      component: () => import('@/views/MessagesView.vue'),
+      props: { prefix }
     }
   ]
 }
@@ -208,7 +219,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 有效的基础路由路径（不带前缀）
-  const baseRoutePaths = ['levels', 'lesson', 'practice', 'typing', 'python', 'ycl', 'locked', 'contact']
+  const baseRoutePaths = ['levels', 'lesson', 'practice', 'typing', 'python', 'ycl', 'locked', 'contact', 'messages']
 
   // 如果第一个段是基础路由路径，放行
   if (baseRoutePaths.includes(firstSegment)) {

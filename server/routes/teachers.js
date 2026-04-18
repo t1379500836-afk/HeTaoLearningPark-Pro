@@ -1,31 +1,19 @@
 import { Router } from 'express'
 import bcrypt from 'bcryptjs'
-import { execSync } from 'child_process'
 import { writeFile } from 'fs/promises'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import pool from '../db.js'
 import { authMiddleware } from '../middleware/auth.js'
+import { scheduleBuild, PROJECT_ROOT } from '../build.js'
 
 const router = Router()
 router.use(authMiddleware)
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const PROJECT_ROOT = resolve(__dirname, '../..')
 const CONFIG_PATH = resolve(PROJECT_ROOT, 'src/config/teachers.config.js')
 
 // ==================== 工具函数 ====================
-
-// 每 10 分钟检查一次，有变更才构建
-let needsBuild = false
-setInterval(() => {
-  if (!needsBuild) return
-  needsBuild = false
-  runBuild()
-}, 10 * 60 * 1000)
-function scheduleBuild() {
-  needsBuild = true
-}
 
 async function regenerateConfig() {
   const { existsSync } = await import('fs')
@@ -71,22 +59,6 @@ export default { validateKey }
 
   await writeFile(CONFIG_PATH, content, 'utf-8')
   console.log('已重新生成 teachers.config.js')
-}
-
-async function runBuild() {
-  try {
-    // 生产环境如果没有完整源码就跳过构建
-    const { existsSync } = await import('fs')
-    if (!existsSync(resolve(PROJECT_ROOT, 'src'))) {
-      console.log('未检测到项目源码，跳过前端构建')
-      return
-    }
-    console.log('开始构建前端...')
-    execSync('npm run build', { cwd: PROJECT_ROOT, stdio: 'inherit' })
-    console.log('前端构建完成')
-  } catch (err) {
-    console.error('前端构建失败:', err.message)
-  }
 }
 
 /** 判断当前用户是否为管理员 */

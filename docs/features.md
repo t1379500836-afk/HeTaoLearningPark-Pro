@@ -83,6 +83,59 @@ export const vocabData = [
 - 验证后个性化显示教师名称
 - 认证状态保存在 sessionStorage（关标签页失效）
 
+## 消息系统（教师寄语 + 匿名悄悄话）
+
+### 学生端
+
+页面 `/messages`，两个板块：
+
+- **教师寄语**：左侧标题列表 + 右侧内容区，选择标题查看详情。数据先从静态配置即时渲染，再异步拉取 API 刷新。
+- **匿名悄悄话**：输入框 + EmojiPicker + 发送按钮。IP 限流 30 秒/次，内容限 500 字符，HTML 标签自动过滤。提交友好提示引导文明发言。
+- 首页 HeroSection 下方横幅显示最新寄语标题，点击跳转寄语页。
+
+### 管理后台
+
+| 页面 | 路由 | 说明 |
+|------|------|------|
+| 消息管理 | `/admin/messages` | Admin：教师选择卡片网格(4列, 20/页) + 寄语/悄悄话管理；Teacher：直接管理自己的 |
+
+- **Admin 模式**：教师选择面板（4列卡片网格、搜索、分页），选中后进入该教师的寄语/悄悄话管理
+- **Teacher 模式**：直接管理自己的数据，双标签页切换
+- **寄语标签页**：el-table 列表（标题、内容预览、时间、操作），新增/编辑弹窗含标题+内容+EmojiPicker
+- **悄悄话标签页**：卡片列表，仅支持删除
+- 横向滚动适配移动端，弹窗 `min(500px, 92vw)` 自适应
+
+### API
+
+| 方法 | 路径 | 说明 | 认证 |
+|------|------|------|------|
+| POST | /api/messages/whisper | 提交匿名悄悄话 | 无（IP限流30s） |
+| GET | /api/messages/teacher-messages | 获取教师寄语列表 | 无 |
+| GET | /api/messages/manage/messages | 管理端获取寄语 | JWT |
+| POST | /api/messages/manage/message | 新增寄语 | JWT |
+| PUT | /api/messages/manage/message/:id | 编辑寄语 | JWT |
+| DELETE | /api/messages/manage/message/:id | 删除寄语 | JWT |
+| GET | /api/messages/manage/whispers | 管理端获取悄悄话 | JWT |
+| DELETE | /api/messages/manage/whisper/:id | 删除悄悄话 | JWT |
+
+数据库表：
+- `teacher_messages`（id, teacher_key, title, content, created_at, updated_at）。用 teacher_key(VARCHAR) 关联教师。
+- `whispers`（id, teacher_key, content, created_at）。匿名，无发送者信息。
+
+管理端 CUD 操作后触发 `regenerateMessagesConfig()` + `scheduleBuild()`，静态文件每10分钟构建刷新。学生提交悄悄话实时写入，无需构建。
+
+### 关键文件
+
+| 文件 | 作用 |
+|------|------|
+| server/routes/messages.js | 后端 API（8个端点 + IP限流 + HTML过滤 + 配置再生） |
+| server/build.js | 共享构建调度（scheduleBuild + 10分钟定时器） |
+| src/config/messages.config.js | 静态寄语数据（后端自动生成，含 getMessages/getLatestTeacherMessage） |
+| src/composables/useMessages.js | 数据层（loadStatic 即时 + fetchFresh 异步 + submitWhisper） |
+| src/components/shared/EmojiPicker.vue | 轻量表情选择器（56个emoji，7分类，响应式网格） |
+| src/views/MessagesView.vue | 学生端消息页面 |
+| admin/src/views/MessagesView.vue | 管理后台消息页面 |
+
 ## 后端服务
 
 | 方法 | 路径 | 说明 | 认证 |
@@ -112,6 +165,7 @@ export const vocabData = [
 | Login | `/admin/`（未登录时） | 登录页，渐变背景，移动端适配 |
 | 数据统计 | `/admin/stats` | DAU 趋势图、活跃排行榜、概览卡片（默认首页） |
 | 教师管理 | `/admin/teachers` | Admin：教师表格；Teacher：个人资料卡片 |
+| 消息管理 | `/admin/messages` | Admin：教师选择+寄语/悄悄话管理；Teacher：自己数据管理 |
 
 ### 数据统计功能
 
@@ -140,6 +194,7 @@ export const vocabData = [
 | AuthModal | 全屏身份验证弹窗 |
 | CelebrationEffect | 认证成功撒花动画 |
 | FlashcardDisplay | 词汇翻转卡片（3列网格布局，区分 OCR/拓展标签） |
+| EmojiPicker | 轻量表情选择器（56个emoji，响应式网格，点击外部关闭） |
 | KnowledgeCard | 知识点展示（三级难度切换） |
 | ExerciseCard | 练习题卡片（选择、判对错、解析） |
 | DifficultyBadge | 难度标签 |

@@ -48,7 +48,8 @@ const navLinks = [
   { to: '/practice', text: '练习题库' },
   { to: '/typing', text: '打字练习' },
   { to: '/python', text: 'Python IDE' },
-  { to: '/ycl', text: 'YCL专区' }
+  { to: '/ycl', text: 'YCL专区' },
+  { to: '/messages', text: '悄悄话' }
 ]
 
 // 状态管理

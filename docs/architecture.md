@@ -6,24 +6,28 @@
 server/                     # 后端服务（Node.js + Express）
 ├── index.js                # Express 入口
 ├── db.js                   # MySQL 连接池 + 建表
+├── build.js                # 共享构建调度（scheduleBuild + 10分钟定时器 + PROJECT_ROOT）
 ├── middleware/auth.js       # JWT 验证中间件
 └── routes/
     ├── auth.js             # 教师登录接口
     ├── teachers.js         # 教师 CRUD + 静态文件再生
-    └── stats.js            # DAU 统计接口（日活、排行榜、趋势）
+    ├── stats.js            # DAU 统计接口（日活、排行榜、趋势）
+    └── messages.js         # 教师寄语 + 匿名悄悄话 CRUD + messages.config.js 再生
 
 admin/                      # 管理后台（独立 Vue 3 + Element Plus 应用）
 ├── src/
 │   ├── main.js             # 应用入口，挂载 router + ElementPlus
 │   ├── App.vue             # 根组件：登录/后台条件渲染 + provide/inject
-│   ├── router/index.js     # 路由配置（/stats 默认、/teachers）
+│   ├── router/index.js     # 路由配置（/stats 默认、/teachers、/messages）
 │   ├── views/
 │   │   ├── Login.vue       # 登录页
 │   │   ├── Dashboard.vue   # 布局壳（侧边栏 + 顶栏 + router-view）
 │   │   ├── StatsView.vue   # 数据统计页（DAU 趋势、排行榜）
-│   │   └── TeachersView.vue# 教师管理页（表格/个人资料）
+│   │   ├── TeachersView.vue# 教师管理页（表格/个人资料）
+│   │   └── MessagesView.vue# 消息管理页（教师选择/寄语CRUD/悄悄话管理）
 │   ├── components/
-│   │   └── DauChart.vue    # ECharts 图表封装
+│   │   ├── DauChart.vue    # ECharts 图表封装
+│   │   └── EmojiPicker.vue # 轻量表情选择器（管理后台独立副本）
 │   ├── styles/
 │   │   ├── main.css        # 全局样式入口
 │   │   └── shared.css      # 共用样式（stat-card、btn-primary 等）
@@ -33,10 +37,12 @@ src/                        # 学生端前端（Vue 3 + Vite）
 ├── main.js                 # 应用入口，挂载路由
 ├── App.vue                 # 根组件：导航栏 + 页面内容 + 底部栏
 ├── router/index.js         # 路由定义，含多前缀生成逻辑
-├── config/                 # 配置文件（课程、阶段、教师）
+├── config/                 # 配置文件（课程、阶段、教师、消息）
+│   └── messages.config.js  # 教师寄语静态数据（后端自动生成）
 ├── composables/            # Vue 组合式函数
 │   ├── useAuth.js          # 教师身份验证
 │   ├── useDauTracker.js    # DAU 心跳上报
+│   ├── useMessages.js      # 教师寄语 + 悄悄话数据操作
 │   └── ...
 ├── components/
 │   ├── shared/             # 通用组件
@@ -84,8 +90,37 @@ URL（含前缀）
 | useLessonData | 课程数据加载 | 动态 import |
 | useRoutePrefix | URL前缀与阶段权限 | 路由参数 |
 | useDauTracker | DAU 心跳上报 | sessionStorage |
+| useMessages | 教师寄语加载、悄悄话提交 | API + 静态配置 |
 
 **管理后台**通过 provide/inject 跨组件共享登录状态（user、logout），各页面独立管理自身数据。
+
+## 消息系统数据流
+
+```
+管理后台操作（新增/编辑/删除寄语）
+  → Express 写 MySQL
+  → 立即重新生成 src/config/messages.config.js
+  → 标记 needsBuild = true
+  → 每 10 分钟定时器检查：
+      有标记 → npm run build → 新 dist/ → Nginx 提供新文件
+      无标记 → 跳过
+```
+
+```
+学生端访问 /messages
+ → loadStatic() 从 messages.config.js 即时渲染（零 loading）
+ → fetchFresh() 异步从 API 拉取最新数据覆盖
+ → 提交悄悄话 → POST /api/messages/whisper（实时写入，无需构建）
+```
+
+## 数据库
+
+| 表名 | 关键字段 | 说明 |
+|------|----------|------|
+| teachers | id, username, password_hash, role, display_name, key, status | status 为 active/disabled，删除为软删除 |
+| daily_active_users | user_uuid, teacher_id, date | 唯一约束 (user_uuid, teacher_id, date) |
+| teacher_messages | teacher_key, title, content, created_at, updated_at | 教师寄语，用 teacher_key 关联 |
+| whispers | teacher_key, content, created_at | 匿名悄悄话，用 teacher_key 关联 |
 
 ## 多租户机制
 

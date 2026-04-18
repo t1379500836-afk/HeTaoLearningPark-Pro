@@ -5,6 +5,7 @@ import { initDatabase } from './db.js'
 import authRoutes from './routes/auth.js'
 import teacherRoutes from './routes/teachers.js'
 import statsRoutes from './routes/stats.js'
+import messageRoutes from './routes/messages.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/teachers', teacherRoutes)
 app.use('/api/stats', statsRoutes)
+app.use('/api/messages', messageRoutes)
 
 // 启动
 async function start() {

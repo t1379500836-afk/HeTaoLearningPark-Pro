@@ -2,6 +2,18 @@
   <div class="home-view">
     <HeroSection />
 
+    <!-- 最新教师寄语横幅 -->
+    <section v-if="latestMessage" class="message-banner" @click="goMessages">
+      <div class="banner-content">
+        <span class="banner-icon">💌</span>
+        <div class="banner-text">
+          <p class="banner-label">教师寄语</p>
+          <p class="banner-message">{{ latestMessage.title || '无标题' }}</p>
+          <p class="banner-hint">点击查看详情 ›</p>
+        </div>
+      </div>
+    </section>
+
     <!-- 快速入口卡片 -->
     <section class="quick-access">
       <h2>开始学习</h2>
@@ -33,22 +45,89 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import HeroSection from '@/components/shared/HeroSection.vue'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
+import { getLatestTeacherMessage } from '@/config/messages.config.js'
+import { useAuth } from '@/composables/useAuth.js'
 
 const route = useRoute()
+const router = useRouter()
 const prefix = computed(() => getCurrentPrefix(route))
+const { teacherKey } = useAuth()
 
-// 生成带前缀的路径
+const latestMessage = computed(() => getLatestTeacherMessage(teacherKey.value))
+
 function prefixedPath(path) {
   return buildPrefixedPath(prefix.value, path)
+}
+
+function goMessages() {
+  router.push(prefixedPath('/messages'))
 }
 </script>
 
 <style scoped>
 .home-view {
   min-height: 100vh;
+}
+
+/* 最新寄语横幅 */
+.message-banner {
+  max-width: 800px;
+  margin: -20px auto 0;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #fff8ed 0%, #fff 100%);
+  border-left: 4px solid var(--primary-color);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.message-banner:hover .banner-content {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.banner-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.banner-label {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.banner-message {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.banner-hint {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin: 4px 0 0;
 }
 
 .quick-access {
@@ -104,6 +183,10 @@ function prefixedPath(path) {
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .message-banner {
+    margin-top: -10px;
+  }
+
   .cards {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
@@ -115,6 +198,20 @@ function prefixedPath(path) {
 }
 
 @media (max-width: 768px) {
+  .message-banner {
+    margin-top: -5px;
+    padding: 0 15px;
+  }
+
+  .banner-content {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .banner-icon {
+    font-size: 1.4rem;
+  }
+
   .quick-access {
     padding: 40px 20px;
   }

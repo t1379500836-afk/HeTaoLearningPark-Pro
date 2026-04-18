@@ -1,5 +1,33 @@
 # 变更记录
 
+## 2026-04-19
+
+- **消息系统（教师寄语 + 匿名悄悄话）**
+  - 新增 `server/routes/messages.js`：8 个 API 端点（学生端 2 个无认证 + 管理端 6 个 JWT 认证）
+  - 新增 `server/build.js`：从 teachers.js 提取共享构建调度（scheduleBuild + 10 分钟定时器）
+  - 新增 `whispers` 和 `teacher_messages` 两张数据表（teacher_key VARCHAR 关联）
+  - 管理端 CUD 操作后自动触发 `regenerateMessagesConfig()` + `scheduleBuild()`
+  - IP 限流：悄悄话提交 30 秒/次，HTML 标签自动过滤
+  - teacher_messages 表通过 ALTER TABLE 迁移补加 title 列
+- **学生端前端**
+  - 新增 `src/views/MessagesView.vue`：双板块页面（教师寄语 + 匿名悄悄话）
+  - 新增 `src/composables/useMessages.js`：静态加载即时渲染 + API 异步刷新
+  - 新增 `src/components/shared/EmojiPicker.vue`：56 个精选 emoji，7 分类，响应式网格
+  - 新增 `src/config/messages.config.js`：后端自动生成的静态寄语数据
+  - 路由注册 `/messages`（含所有前缀变体），导航栏添加「悄悄话」链接
+  - 首页 HeroSection 下方新增最新寄语横幅（显示标题 + 点击查看详情）
+  - 寄语内容区限高 500px 超出滚动，页面宽度 1100px，悄悄话提交友好提示
+- **管理后台**
+  - 新增 `admin/src/views/MessagesView.vue`：消息管理页
+  - Admin 模式：教师选择卡片网格（4 列，20/页，搜索过滤），选中后管理该教师数据
+  - Teacher 模式：直接管理自己的寄语（CRUD）和悄悄话（查看/删除）
+  - 双标签页切换、新增/编辑弹窗含标题+内容+EmojiPicker
+  - 横向滚动适配移动端，弹窗 `min(500px, 92vw)` 自适应
+  - 全局圆角增至 14-16px，新增按钮渐变样式
+- **文档更新**
+  - `server/routes/messages.js` 路由注册于 `server/index.js`（`/api/messages`）
+  - `server/routes/teachers.js` 改用共享 `build.js` 模块
+
 ## 2026-04-18
 
 - **DAU 日活统计系统**

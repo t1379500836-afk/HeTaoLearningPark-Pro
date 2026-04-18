@@ -10,13 +10,18 @@ import { validateKey } from '@/config/teachers.config.js'
 
 // 响应式状态
 const teacherName = ref(null)
+const teacherKey = ref(null)
 const showAuthModal = ref(false)
 const authError = ref('')
 
 // 初始化：从 sessionStorage 读取
 const storedName = sessionStorage.getItem('auth_teacher_name')
+const storedKey = sessionStorage.getItem('auth_teacher_key')
 if (storedName) {
   teacherName.value = storedName
+}
+if (storedKey) {
+  teacherKey.value = storedKey
 }
 
 export function useAuth() {
@@ -36,7 +41,9 @@ export function useAuth() {
 
     if (result.valid) {
       teacherName.value = result.teacherName
+      teacherKey.value = inputKey.trim()
       sessionStorage.setItem('auth_teacher_name', result.teacherName)
+      sessionStorage.setItem('auth_teacher_key', inputKey.trim())
       showAuthModal.value = false
       authError.value = ''
       return true
@@ -51,7 +58,9 @@ export function useAuth() {
    */
   const logout = () => {
     teacherName.value = null
+    teacherKey.value = null
     sessionStorage.removeItem('auth_teacher_name')
+    sessionStorage.removeItem('auth_teacher_key')
     showAuthModal.value = true
   }
 
@@ -71,6 +80,7 @@ export function useAuth() {
 
   return {
     teacherName,
+    teacherKey,
     showAuthModal,
     authError,
     isAuthenticated,
@@ -85,6 +95,7 @@ export function useAuth() {
 // 导出单例状态（供路由守卫使用）
 export const getAuthState = () => ({
   teacherName,
+  teacherKey,
   showAuthModal,
   isAuthenticated: computed(() => !!teacherName.value)
 })

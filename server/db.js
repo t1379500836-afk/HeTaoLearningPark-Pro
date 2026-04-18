@@ -57,6 +57,20 @@ export async function initDatabase() {
       console.log('已创建默认管理员账号: admin / admin123')
     }
 
+    // 日活统计表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS daily_active_users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_uuid VARCHAR(36) NOT NULL,
+        teacher_id INT NOT NULL,
+        date DATE NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY uk_user_date (user_uuid, teacher_id, date),
+        INDEX idx_date (date),
+        INDEX idx_teacher_date (teacher_id, date)
+      )
+    `)
+
     console.log('数据库初始化完成')
   } finally {
     conn.release()

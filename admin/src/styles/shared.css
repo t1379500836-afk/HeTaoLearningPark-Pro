@@ -1,0 +1,97 @@
+/* 共用：统计卡片行 */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 22px 24px;
+  color: #fff;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+.stat-card__shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 15%, rgba(255,255,255,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+.stat-card__body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.stat-card__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stat-card__num { font-size: 30px; font-weight: 700; line-height: 1; }
+.stat-card__label { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+
+/* 共用：主按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  font-weight: 500;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* 共用：口令、徽章、图标按钮 */
+.key-code {
+  background: #f5f7fa;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #667eea;
+  font-family: 'SF Mono', Consolas, monospace;
+}
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border: none; border-radius: 6px;
+  background: transparent;
+  color: #bbb;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.icon-btn:hover { background: #f0f2ff; color: #667eea; }
+.role-badge {
+  display: inline-block;
+  padding: 3px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+.role-badge--admin { background: #764ba2; }
+.role-badge--teacher { background: #667eea; }
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .stats-row { grid-template-columns: 1fr; gap: 12px; }
+  .stat-card { padding: 16px 18px; }
+  .stat-card__num { font-size: 24px; }
+  .stat-card__icon { width: 42px; height: 42px; border-radius: 12px; }
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  .stats-row { gap: 12px; }
+  .stat-card { padding: 18px 20px; }
+}

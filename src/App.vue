@@ -23,6 +23,7 @@ import Footer from './components/shared/Footer.vue'
 import AuthModal from './components/shared/AuthModal.vue'
 import CelebrationEffect from './components/shared/CelebrationEffect.vue'
 import { useAuth } from './composables/useAuth.js'
+import { useDauTracker } from './composables/useDauTracker.js'
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -32,6 +33,8 @@ const route = useRoute()
 const is404Page = computed(() => route.name === 'not-found' || route.meta?.is404 === true)
 
 const { needAuth, teacherName } = useAuth()
+
+useDauTracker()
 
 const showCelebration = ref(false)
 

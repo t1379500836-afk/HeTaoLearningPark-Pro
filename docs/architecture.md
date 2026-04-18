@@ -9,26 +9,47 @@ server/                     # 后端服务（Node.js + Express）
 ├── middleware/auth.js       # JWT 验证中间件
 └── routes/
     ├── auth.js             # 教师登录接口
-    └── teachers.js         # 教师 CRUD + 静态文件再生
+    ├── teachers.js         # 教师 CRUD + 静态文件再生
+    └── stats.js            # DAU 统计接口（日活、排行榜、趋势）
 
-src/
+admin/                      # 管理后台（独立 Vue 3 + Element Plus 应用）
+├── src/
+│   ├── main.js             # 应用入口，挂载 router + ElementPlus
+│   ├── App.vue             # 根组件：登录/后台条件渲染 + provide/inject
+│   ├── router/index.js     # 路由配置（/stats 默认、/teachers）
+│   ├── views/
+│   │   ├── Login.vue       # 登录页
+│   │   ├── Dashboard.vue   # 布局壳（侧边栏 + 顶栏 + router-view）
+│   │   ├── StatsView.vue   # 数据统计页（DAU 趋势、排行榜）
+│   │   └── TeachersView.vue# 教师管理页（表格/个人资料）
+│   ├── components/
+│   │   └── DauChart.vue    # ECharts 图表封装
+│   ├── styles/
+│   │   ├── main.css        # 全局样式入口
+│   │   └── shared.css      # 共用样式（stat-card、btn-primary 等）
+│   └── api.js              # Axios 实例 + JWT 拦截器
+
+src/                        # 学生端前端（Vue 3 + Vite）
 ├── main.js                 # 应用入口，挂载路由
 ├── App.vue                 # 根组件：导航栏 + 页面内容 + 底部栏
 ├── router/index.js         # 路由定义，含多前缀生成逻辑
 ├── config/                 # 配置文件（课程、阶段、教师）
-├── composables/            # Vue 组合式函数（状态管理）
+├── composables/            # Vue 组合式函数
+│   ├── useAuth.js          # 教师身份验证
+│   ├── useDauTracker.js    # DAU 心跳上报
+│   └── ...
 ├── components/
-│   ├── shared/             # 通用组件（导航、底部、弹窗等）
-│   └── course/             # 课程相关组件（编辑器、练习卡片等）
-├── views/                  # 页面组件（每个路由对应一个）
+│   ├── shared/             # 通用组件
+│   └── course/             # 课程相关组件
+├── views/                  # 页面组件
 ├── data/                   # 静态课程数据
 │   ├── courses/PY1/        # PY1 的 24 课数据
 │   ├── courses/PY2/        # PY2 的 24 课数据
-│   ├── courses/PY3/        # PY3 的课程数据（部分）
+│   ├── courses/PY3/        # PY3 的课程数据
 │   ├── courses/YCL/        # YCL 考试数据和题库
 │   └── chinese-typing-pool.js
 └── assets/
-    ├── styles/variables.css # CSS 变量（主题色、间距、断点）
+    ├── styles/variables.css # CSS 变量
     └── images/
 ```
 
@@ -55,13 +76,16 @@ URL（含前缀）
 
 ## 状态管理
 
-没有使用 Pinia/Vuex，通过 composable 的模块级变量实现单例状态：
+**学生端**没有使用 Pinia/Vuex，通过 composable 的模块级变量实现单例状态：
 
 | Composable | 作用 | 存储位置 |
 |------------|------|----------|
 | useAuth | 教师身份验证 | sessionStorage |
 | useLessonData | 课程数据加载 | 动态 import |
 | useRoutePrefix | URL前缀与阶段权限 | 路由参数 |
+| useDauTracker | DAU 心跳上报 | sessionStorage |
+
+**管理后台**通过 provide/inject 跨组件共享登录状态（user、logout），各页面独立管理自身数据。
 
 ## 多租户机制
 

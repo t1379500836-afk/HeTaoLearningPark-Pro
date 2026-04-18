@@ -4,6 +4,7 @@ import cors from 'cors'
 import { initDatabase } from './db.js'
 import authRoutes from './routes/auth.js'
 import teacherRoutes from './routes/teachers.js'
+import statsRoutes from './routes/stats.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -15,6 +16,7 @@ app.use(express.json())
 // 路由
 app.use('/api/auth', authRoutes)
 app.use('/api/teachers', teacherRoutes)
+app.use('/api/stats', statsRoutes)
 
 // 启动
 async function start() {

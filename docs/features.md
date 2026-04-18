@@ -92,20 +92,43 @@ export const vocabData = [
 | POST | /api/teachers | 新增教师 | JWT |
 | PUT | /api/teachers/:id | 修改教师 | JWT |
 | DELETE | /api/teachers/:id | 删除教师 | JWT |
+| POST | /api/stats/heartbeat | 学生端 DAU 心跳上报 | 无 |
+| GET | /api/stats/dau | 日活详细数据（按日/老师/小时分组） | JWT |
+| GET | /api/stats/dau/summary | 日活概览（今日/7日均值/30日总活） | JWT |
+| GET | /api/stats/dau/leaderboard | 活跃排行榜（所有角色可见全部老师） | JWT |
 
-数据库表：teachers（id, username, password_hash, role, display_name, key, status, created_at, updated_at）。status 为 active/disabled，删除操作改为软删除（置 disabled）。所有查询自动过滤已禁用账号。教师增删改后立即重新生成前端配置文件（仅含 active），每 10 分钟定时检查并构建前端。
+数据库表：
+- `teachers`（id, username, password_hash, role, display_name, key, status, created_at, updated_at）。status 为 active/disabled，删除为软删除。
+- `daily_active_users`（id, user_uuid, teacher_id, date, created_at）。唯一约束 (user_uuid, teacher_id, date)，同一用户每天对同一老师只计一次。
+
+学生端通过 `useDauTracker.js` 每次访问时发送匿名心跳（UUID + teacherKey），服务端 INSERT IGNORE 去重。管理后台所有角色均能查看全部老师的 DAU 数据。
 
 ## 管理后台（admin/）
 
-独立 Vue 3 + Element Plus 应用，与主项目分离部署。
+独立 Vue 3 + Element Plus 应用，使用 vue-router 分路由，与主项目分离部署。
 
-| 页面 | 说明 |
-|------|------|
-| Login | 登录页，渐变背景，移动端适配 |
-| Dashboard | 侧边栏（可折叠）+ 顶栏 + 内容区 |
+| 页面 | 路由 | 说明 |
+|------|------|------|
+| Login | `/admin/`（未登录时） | 登录页，渐变背景，移动端适配 |
+| 数据统计 | `/admin/stats` | DAU 趋势图、活跃排行榜、概览卡片（默认首页） |
+| 教师管理 | `/admin/teachers` | Admin：教师表格；Teacher：个人资料卡片 |
 
-- Admin 视图：统计卡片、搜索过滤、教师表格（头像、口令复制、角色标签、更新时间）、新增/编辑/软删除
-- Teacher 视图：个人资料卡片（渐变横幅、头像、信息网格）
+### 数据统计功能
+
+- **概览卡片**：今日日活、7日均值、30日总活（所有角色看全量数据）
+- **日期筛选**：今天 / 近7天 / 近30天 / 自定义范围
+- **活跃排行榜**：显示全部老师，点击老师名切换趋势图数据，支持分页
+  - "全部老师"行：显示汇总数据，点击恢复总览
+  - 教师端有"我的数据"按钮，一键切换到自己的数据
+  - 教师端默认选中自己，管理端默认显示全部
+- **趋势图**：单天显示 24 小时折线图，多天显示按日折线图
+  - 选中老师后，多天视图切换为该老师的独立数据
+  - 单天视图因服务端无按老师分小时数据，始终显示汇总
+
+### 教师管理功能
+
+- Admin 视图：统计卡片（账号总数/管理员/课导老师）、搜索过滤、教师表格（头像、口令复制、角色标签）、新增/编辑/软删除
+- Teacher 视图：个人资料卡片（渐变横幅、头像、2x2 信息网格）
 - 响应式：768px 以下侧边栏抽屉化 + 汉堡按钮，表格横向滚动，弹窗自适应宽度
 
 ## 通用组件

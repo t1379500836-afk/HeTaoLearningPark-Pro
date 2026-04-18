@@ -5,7 +5,8 @@
 
 const teachers = [
   { key: 'admin', name: '管理员' },
-  { key: '小陶老师', name: '小陶老师' }
+  { key: '小陶老师', name: '小陶老师' },
+  { key: '测试1', name: '测试1老师' }
 ]
 
 const teachersMap = {}

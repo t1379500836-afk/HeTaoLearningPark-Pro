@@ -1,5 +1,31 @@
 # 变更记录
 
+## 2026-04-18
+
+- **DAU 日活统计系统**
+  - 新增 `server/routes/stats.js`：心跳上报、日活查询、概览、排行榜四个接口
+  - 新增 `daily_active_users` 数据表（唯一约束防重复上报）
+  - 学生端新增 `useDauTracker.js` composable，访问时自动匿名上报心跳
+  - 管理后台新增 ECharts 图表组件 `DauChart.vue`
+- **管理后台路由重构**
+  - 引入 vue-router，添加分路由（`/admin/stats`、`/admin/teachers`）
+  - Dashboard.vue 精简为布局壳（侧边栏 + 顶栏 + router-view）
+  - 新建 `StatsView.vue`（数据统计页）和 `TeachersView.vue`（教师管理页）
+  - 菜单顺序调整为：数据统计（默认首页）→ 教师管理
+  - App.vue 使用 provide/inject 共享登录状态，替代 props 传递
+  - 抽取共用样式到 `styles/shared.css`
+- **数据统计交互**
+  - 排行榜可点击选中老师，趋势图切换为该老师的日活数据
+  - "全部老师"行恢复总览，教师端"我的数据"按钮快速切换
+  - 教师端默认选中自己，管理端默认显示全部
+  - 所有角色均可查看全部老师的统计数据（服务端去掉角色过滤）
+- **修复日期时区 bug**
+  - MySQL DATE 列被 mysql2 读为本地时区 Date 对象，`toISOString()` 在 UTC+8 下日期少一天
+  - 改为 `getFullYear()/getMonth()/getDate()` 本地方法格式化
+- **管理后台 API 扩展**
+  - 新增 POST `/api/stats/heartbeat`、GET `/api/stats/dau`、GET `/api/stats/dau/summary`、GET `/api/stats/dau/leaderboard`
+  - 所有统计接口取消角色过滤，admin 和 teacher 均返回全量数据
+
 ## 2026-04-17
 
 - **管理后台 UI 重构与功能增强**

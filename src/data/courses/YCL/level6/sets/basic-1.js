@@ -136,7 +136,7 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-4',
       score: 2,
       difficulty: 'medium',
-      question: '斐波那契数列：1, 1, 2, 3, 5, 8, 13, 21...，请问第7个数是多少？',
+      question: '斐波那契数列：1, 1, 2, 3, 5, 8, ?, 21...，请问第7个数是多少？',
       code: null,
       options: [
         '8',
@@ -145,7 +145,7 @@ export const practiceSet = {
         '34'
       ],
       answer: 1,
-      explanation: '斐波那契数列的规律是：每个数等于前两个数之和。1, 1, 2, 3, 5, 8, 13，第7个数是13。'
+      explanation: '斐波那契数列的规律是：每个数等于前两个数之和。1, 1, 2, 3, 5, 8, 13, 21，第7个数是13。'
     },
     {
       id: 'q-6-1-single-8',

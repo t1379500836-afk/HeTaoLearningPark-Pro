@@ -11,15 +11,28 @@ const router = Router()
 router.use(authMiddleware)
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const CONFIG_PATH = resolve(PROJECT_ROOT, 'src/config/teachers.config.js')
+
+// 获取配置路径：优先 user/src（服务器），否则 src（本地）
+async function getConfigPaths() {
+  const { existsSync } = await import('fs')
+  const userSrcPath = resolve(PROJECT_ROOT, 'user/src')
+  const srcPath = resolve(PROJECT_ROOT, 'src')
+  const basePath = existsSync(userSrcPath) ? userSrcPath : srcPath
+  return {
+    configPath: resolve(basePath, 'config/teachers.config.js'),
+    userSrcPath: basePath
+  }
+}
 
 // ==================== 工具函数 ====================
 
 async function regenerateConfig() {
   const { existsSync } = await import('fs')
+  const { configPath, userSrcPath } = await getConfigPaths()
 
-  // 生产环境没有 src 目录，跳过配置生成
-  if (!existsSync(resolve(PROJECT_ROOT, 'src'))) {
+  // 检查源码目录是否存在
+  if (!existsSync(userSrcPath)) {
+    console.log('未检测到项目源码，跳过配置生成')
     return
   }
 
@@ -57,7 +70,7 @@ export const validateKey = (inputKey) => {
 export default { validateKey }
 `
 
-  await writeFile(CONFIG_PATH, content, 'utf-8')
+  await writeFile(configPath, content, 'utf-8')
   console.log('已重新生成 teachers.config.js')
 }
 

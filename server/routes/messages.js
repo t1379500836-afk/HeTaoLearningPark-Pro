@@ -7,7 +7,17 @@ import { scheduleBuild, PROJECT_ROOT } from '../build.js'
 
 const router = Router()
 
-const MESSAGES_CONFIG_PATH = resolve(PROJECT_ROOT, 'src/config/messages.config.js')
+// 获取配置路径：优先 user/src（服务器），否则 src（本地）
+async function getConfigPaths() {
+  const { existsSync } = await import('fs')
+  const userSrcPath = resolve(PROJECT_ROOT, 'user/src')
+  const srcPath = resolve(PROJECT_ROOT, 'src')
+  const basePath = existsSync(userSrcPath) ? userSrcPath : srcPath
+  return {
+    messagesConfigPath: resolve(basePath, 'config/messages.config.js'),
+    userSrcPath: basePath
+  }
+}
 
 // ==================== 工具函数 ====================
 
@@ -57,7 +67,12 @@ async function getTeacherKeyById(teacherId) {
 
 async function regenerateMessagesConfig() {
   const { existsSync } = await import('fs')
-  if (!existsSync(resolve(PROJECT_ROOT, 'src'))) return
+  const { userSrcPath } = await getConfigPaths()
+  // 检查源码目录是否存在
+  if (!existsSync(userSrcPath)) {
+    console.log('未检测到项目源码，跳过配置生成')
+    return
+  }
 
   const [teachers] = await pool.execute(
     'SELECT `key`, display_name FROM teachers WHERE status = ? ORDER BY id',
@@ -110,7 +125,8 @@ export const getLatestTeacherMessage = (teacherKey) => {
 export default { getMessages, getLatestTeacherMessage }
 `
 
-  await writeFile(MESSAGES_CONFIG_PATH, content, 'utf-8')
+  const { messagesConfigPath } = await getConfigPaths()
+  await writeFile(messagesConfigPath, content, 'utf-8')
   console.log('已重新生成 messages.config.js')
 }
 

@@ -292,10 +292,38 @@ function formatDate(d) {
 }
 
 async function copyKey(key) {
+  // 优先使用现代 Clipboard API（HTTPS 环境）
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(key)
+      ElMessage.success('口令已复制到剪贴板')
+      return
+    } catch (err) {
+      console.error('Clipboard API failed:', err)
+    }
+  }
+
+  // 降级方案：使用 execCommand（兼容 HTTP）
   try {
-    await navigator.clipboard.writeText(key)
-    ElMessage.success('口令已复制到剪贴板')
-  } catch {
+    const textarea = document.createElement('textarea')
+    textarea.value = key
+    textarea.style.position = 'fixed'
+    textarea.style.left = '-9999px'
+    textarea.style.top = '0'
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
+
+    const successful = document.execCommand('copy')
+    document.body.removeChild(textarea)
+
+    if (successful) {
+      ElMessage.success('口令已复制到剪贴板')
+    } else {
+      throw new Error('execCommand copy failed')
+    }
+  } catch (err) {
+    console.error('Copy failed:', err)
     ElMessage.error('复制失败，请手动复制')
   }
 }

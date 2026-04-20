@@ -4,12 +4,13 @@
 
 ```
 /www/wwwroot/hetao/
-├── user/                        # 学生端前端（Vue 3 + Vite）
+├── user/                        # 学生端前端（Vue 3 + Vite）- 服务器部署结构
 │   ├── src/
 │   │   ├── main.js             # 应用入口，挂载路由
 │   │   ├── App.vue             # 根组件：导航栏 + 页面内容 + 底部栏
 │   │   ├── router/index.js     # 路由定义，含多前缀生成逻辑
 │   │   ├── config/             # 配置文件（课程、阶段、教师、消息）
+│   │   │   ├── teachers.config.js  # 教师口令配置（后端自动生成）
 │   │   │   └── messages.config.js  # 教师寄语静态数据（后端自动生成）
 │   │   ├── composables/        # Vue 组合式函数
 │   │   ├── components/
@@ -52,6 +53,23 @@
 ├── user/dist/                  # 学生端构建产物（npm run build 生成）
 ├── admin/dist/                 # 管理后台构建产物（npm run build 生成）
 └── ecosystem.config.cjs        # PM2 配置，cwd 指向 ./server
+```
+
+**本地开发目录结构**（与服务器略有不同）：
+
+```
+项目根目录/
+├── src/                        # 学生端源码（本地开发时直接在根目录）
+│   ├── config/                 # 配置文件
+│   │   ├── teachers.config.js
+│   │   └── messages.config.js
+│   └── ...
+├── admin/                      # 管理后台（与服务器相同）
+├── server/                     # 后端服务（与服务器相同）
+└── ...
+```
+
+> 后端代码通过检测 `user/src` 目录是否存在自动适配两种结构，详见 [deployment.md](deployment.md) 的"本地开发与服务器部署路径适配"章节。
 ├── data/                   # 静态课程数据
 │   ├── courses/PY1/        # PY1 的 24 课数据
 │   ├── courses/PY2/        # PY2 的 24 课数据

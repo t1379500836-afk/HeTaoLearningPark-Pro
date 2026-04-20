@@ -1,5 +1,16 @@
 # 变更记录
 
+## 2026-04-20
+
+- **修复：服务器部署路径适配问题**
+  - 问题：新增教师口令在学生端无法匹配，因后端代码硬编码检查 `src/` 目录，而服务器部署结构为 `user/src/`
+  - 修复文件：
+    - `server/build.js`：添加 `getUserSrcPath()` 函数，优先检查 `user/src`，回退到 `src`
+    - `server/routes/teachers.js`：添加 `getConfigPaths()` 异步函数，动态选择 `teachers.config.js` 路径
+    - `server/routes/messages.js`：添加 `getConfigPaths()` 异步函数，动态选择 `messages.config.js` 路径
+  - 适配逻辑：后端自动检测 `user/src` 是否存在，存在则使用服务器路径，否则使用本地开发路径
+  - 文档更新：`docs/deployment.md` 新增"本地开发与服务器部署路径适配"章节，`docs/architecture.md` 补充两种目录结构对比
+
 ## 2026-04-19
 
 - **消息系统（教师寄语 + 匿名悄悄话）**

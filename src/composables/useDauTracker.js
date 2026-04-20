@@ -9,7 +9,14 @@ function getOrCreateUUID() {
   // 测试：用 sessionStorage，关闭浏览器即清除。正式改回 localStorage
   let uuid = sessionStorage.getItem(STORAGE_KEY)
   if (!uuid) {
-    uuid = crypto.randomUUID()
+    // 兼容非 HTTPS 环境（crypto.randomUUID 需要安全上下文）
+    uuid = typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0
+          const v = c === 'x' ? r : (r & 0x3 | 0x8)
+          return v.toString(16)
+        })
     sessionStorage.setItem(STORAGE_KEY, uuid)
   }
   return uuid

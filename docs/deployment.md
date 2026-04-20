@@ -458,7 +458,7 @@ CDN 控制台 → **域名管理** → **HTTPS配置** → **免费证书** 或 
 
 管理后台增删改教师时，后端自动处理：
 
-1. 立即写入 MySQL 并在 `server/` 目录生成 `src/config/teachers.config.js`（由 `build.js` 生成）
+1. 立即写入 MySQL 并在 `user/src/config/` 目录生成 `teachers.config.js` 和 `messages.config.js`（由 `build.js` 生成）
 2. 标记 `needsBuild = true`
 3. 每 10 分钟定时器检查，有变更则重新构建 `user/dist/` 和 `admin/dist/`
 4. 构建完成后 Nginx 自动提供新文件
@@ -471,6 +471,43 @@ CDN 控制台 → **域名管理** → **HTTPS配置** → **免费证书** 或 
 # 手动构建学生端
 cd /www/wwwroot/hetao/user && npm run build
 ```
+
+---
+
+## 本地开发与服务器部署路径适配
+
+项目支持两种目录结构，代码会自动检测并适配：
+
+| 环境 | 学生端源码路径 | 配置文件路径 |
+|------|---------------|-------------|
+| **本地开发** | `src/` | `src/config/*.config.js` |
+| **服务器部署** | `user/src/` | `user/src/config/*.config.js` |
+
+### 自动适配机制
+
+后端代码通过检测 `user/src` 目录是否存在来自动选择路径：
+
+```javascript
+// 优先 user/src（服务器），否则 src（本地）
+const userSrcPath = resolve(PROJECT_ROOT, 'user/src')
+const srcPath = resolve(PROJECT_ROOT, 'src')
+const basePath = existsSync(userSrcPath) ? userSrcPath : srcPath
+```
+
+涉及的文件：
+- `server/build.js` - 构建调度
+- `server/routes/teachers.js` - 教师配置生成
+- `server/routes/messages.js` - 消息配置生成
+
+### 常见问题排查
+
+**问题：新增教师口令在学生端无法匹配**
+
+检查步骤：
+1. 确认 `user/src/config/teachers.config.js` 是否已更新
+2. 查看后端日志是否有 "已重新生成 teachers.config.js"
+3. 确认是否已触发构建（等待10分钟或手动执行 `npm run build`）
+4. 检查 Nginx 是否指向正确的 `user/dist/` 目录
 
 ---
 

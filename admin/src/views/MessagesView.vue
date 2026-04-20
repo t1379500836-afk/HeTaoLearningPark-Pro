@@ -123,7 +123,7 @@
       <el-tabs v-model="activeTab" class="main-tabs">
         <el-tab-pane label="教师寄语" name="messages">
           <div class="tab-header">
-            <el-button type="primary" @click="openAddDialog">
+            <el-button type="primary" @click="openAddDialog" class="add-btn">
               <el-icon><Plus /></el-icon> 新增寄语
             </el-button>
           </div>
@@ -394,6 +394,10 @@ async function handleSave() {
   submitting.value = true
   try {
     const payload = { title: dialogTitle.value, content: dialogContent.value }
+    // 管理员添加寄语时，需要指定当前选中的教师
+    if (isAdmin.value && selectedTeacherKey.value) {
+      payload.teacherKey = selectedTeacherKey.value
+    }
     if (isEditing.value) {
       await api.put(`/messages/manage/message/${editingId.value}`, payload)
       ElMessage.success('寄语已更新')

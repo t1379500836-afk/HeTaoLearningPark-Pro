@@ -75,7 +75,7 @@ export async function initDatabase() {
     await conn.execute(`
       CREATE TABLE IF NOT EXISTS whispers (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        teacher_key VARCHAR(100) NOT NULL,
+        teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
         content VARCHAR(500) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         INDEX idx_teacher_created (teacher_key, created_at DESC)
@@ -86,7 +86,7 @@ export async function initDatabase() {
     await conn.execute(`
       CREATE TABLE IF NOT EXISTS teacher_messages (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        teacher_key VARCHAR(100) NOT NULL,
+        teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
         title VARCHAR(100) NOT NULL DEFAULT '',
         content VARCHAR(500) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -100,6 +100,20 @@ export async function initDatabase() {
       await conn.execute("ALTER TABLE teacher_messages ADD COLUMN title VARCHAR(100) NOT NULL DEFAULT '' AFTER teacher_key")
     } catch (e) {
       if (!e.message.includes('Duplicate column')) throw e
+    }
+
+    // 兼容已有表：统一 whispers 表字符集排序规则
+    try {
+      await conn.execute("ALTER TABLE whispers MODIFY teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL")
+    } catch (e) {
+      if (!e.message.includes('Duplicate')) console.log('whispers 表字符集修改:', e.message)
+    }
+
+    // 兼容已有表：统一 teacher_messages 表字符集排序规则
+    try {
+      await conn.execute("ALTER TABLE teacher_messages MODIFY teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL")
+    } catch (e) {
+      if (!e.message.includes('Duplicate')) console.log('teacher_messages 表字符集修改:', e.message)
     }
 
     console.log('数据库初始化完成')

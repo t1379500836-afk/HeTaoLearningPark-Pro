@@ -106,13 +106,13 @@ URL（含前缀）
 
 **学生端**没有使用 Pinia/Vuex，通过 composable 的模块级变量实现单例状态：
 
-| Composable | 作用 | 存储位置 |
-|------------|------|----------|
-| useAuth | 教师身份验证 | sessionStorage |
-| useLessonData | 课程数据加载 | 动态 import |
-| useRoutePrefix | URL前缀与阶段权限 | 路由参数 |
-| useDauTracker | DAU 心跳上报 | sessionStorage |
-| useMessages | 教师寄语加载、悄悄话提交 | API + 静态配置 |
+| Composable | 作用 | 存储位置 | 说明 |
+|------------|------|----------|------|
+| useAuth | 教师身份验证 | sessionStorage | 关闭浏览器清除 |
+| useLessonData | 课程数据加载 | 动态 import | - |
+| useRoutePrefix | URL前缀与阶段权限 | 路由参数 | - |
+| useDauTracker | DAU 心跳上报 | sessionStorage | 关闭浏览器重置UUID，刷新保留 |
+| useMessages | 教师寄语加载、悄悄话提交 | API + 静态配置 | - |
 
 **管理后台**通过 provide/inject 跨组件共享登录状态（user、logout），各页面独立管理自身数据。
 
@@ -137,12 +137,19 @@ URL（含前缀）
 
 ## 数据库
 
+**自动迁移机制**：`server/db.js` 的 `initDatabase()` 在服务器启动时自动执行，完成以下操作：
+
+1. **建表**：`CREATE TABLE IF NOT EXISTS` 自动创建新表
+2. **补列**：`ALTER TABLE ... ADD COLUMN` 兼容已有表结构升级
+3. **字符集统一**：`whispers` 和 `teacher_messages` 表的 `teacher_key` 字段统一使用 `utf8mb4_general_ci` 排序规则，避免编码不一致导致查询失败
+4. **默认数据**：`teachers` 表为空时自动插入默认管理员账号
+
 | 表名 | 关键字段 | 说明 |
 |------|----------|------|
 | teachers | id, username, password_hash, role, display_name, key, status | status 为 active/disabled，删除为软删除 |
 | daily_active_users | user_uuid, teacher_id, date | 唯一约束 (user_uuid, teacher_id, date) |
-| teacher_messages | teacher_key, title, content, created_at, updated_at | 教师寄语，用 teacher_key 关联 |
-| whispers | teacher_key, content, created_at | 匿名悄悄话，用 teacher_key 关联 |
+| teacher_messages | teacher_key, title, content, created_at, updated_at | 教师寄语，teacher_key 统一 utf8mb4_general_ci |
+| whispers | teacher_key, content, created_at | 匿名悄悄话，teacher_key 统一 utf8mb4_general_ci |
 
 ## 多租户机制
 

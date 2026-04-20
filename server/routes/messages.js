@@ -226,7 +226,7 @@ router.get('/manage/messages', async (req, res) => {
 
 // 管理端：新增寄语
 router.post('/manage/message', async (req, res) => {
-  const { title, content } = req.body
+  const { title, content, teacherKey } = req.body
   const cleanTitle = sanitizeContent(title) || '无标题'
   const cleanContent = sanitizeContent(content)
   if (!cleanContent || cleanContent.length > 500) {
@@ -234,12 +234,19 @@ router.post('/manage/message', async (req, res) => {
   }
 
   try {
-    const teacherKey = await getTeacherKeyById(req.teacher.id)
-    if (!teacherKey) return res.status(400).json({ error: '教师信息异常' })
+    let targetTeacherKey
+    if (req.teacher.role === 'admin' && teacherKey) {
+      // admin 可以指定为某个教师添加寄语
+      targetTeacherKey = await validateTeacherKey(teacherKey)
+      if (!targetTeacherKey) return res.status(400).json({ error: '无效的教师口令' })
+    } else {
+      targetTeacherKey = await getTeacherKeyById(req.teacher.id)
+    }
+    if (!targetTeacherKey) return res.status(400).json({ error: '教师信息异常' })
 
     const [result] = await pool.execute(
       'INSERT INTO teacher_messages (teacher_key, title, content) VALUES (?, ?, ?)',
-      [teacherKey, cleanTitle.slice(0, 100), cleanContent]
+      [targetTeacherKey, cleanTitle.slice(0, 100), cleanContent]
     )
     res.status(201).json({ ok: true, id: result.insertId })
     regenerateMessagesConfig().catch(e => console.error('配置更新失败:', e.message))

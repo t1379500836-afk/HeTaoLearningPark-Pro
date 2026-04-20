@@ -10,27 +10,6 @@ router.use((req, res, next) => {
   next()
 })
 
-// 简易内存级 IP 频率限制
-const ipLimiter = new Map()
-const RATE_LIMIT_MS = 60_000
-
-function checkRateLimit(req, res, next) {
-  const ip = req.ip
-  const now = Date.now()
-  const last = ipLimiter.get(ip)
-  if (last && now - last < RATE_LIMIT_MS) {
-    return res.json({ ok: true })
-  }
-  ipLimiter.set(ip, now)
-  // 定期清理过期记录
-  if (ipLimiter.size > 10_000) {
-    for (const [k, v] of ipLimiter) {
-      if (now - v > RATE_LIMIT_MS) ipLimiter.delete(k)
-    }
-  }
-  next()
-}
-
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 // MySQL DATE 列被 mysql2 读为本地时区 Date 对象，用本地方法格式化避免 toISOString() 的 UTC 偏移
@@ -39,7 +18,7 @@ function fmtDate(d) {
 }
 
 // POST /api/stats/heartbeat — 学生端匿名上报
-// POST /api/stats/heartbeat — 学生端匿名上报（测试阶段暂时关闭频率限制）
+// POST /api/stats/heartbeat — 学生端匿名上报（已取消IP频率限制）
 router.post('/heartbeat', async (req, res) => {
   try {
     const { teacherKey, uuid } = req.body || {}
@@ -77,9 +56,9 @@ router.get('/dau', authMiddleware, async (req, res) => {
     let start = startDate || new Date().toISOString().slice(0, 10)
     let end = endDate || start
 
-    // 按日期 + 老师分组统计
+    // 按日期 + 老师分组统计（不去重，统计所有心跳记录）
     const sql = `
-      SELECT d.date, d.teacher_id, t.display_name AS teacherName, COUNT(DISTINCT d.user_uuid) AS dauCount
+      SELECT d.date, d.teacher_id, t.display_name AS teacherName, COUNT(*) AS dauCount
       FROM daily_active_users d
       JOIN teachers t ON t.id = d.teacher_id
       WHERE d.date BETWEEN ? AND ?
@@ -87,15 +66,15 @@ router.get('/dau', authMiddleware, async (req, res) => {
     `
     const [dailyStats] = await pool.execute(sql, [start, end])
 
-    // 每日汇总
+    // 每日汇总（不去重）
     const [totalsByDate] = await pool.execute(
-      'SELECT date, COUNT(DISTINCT user_uuid) AS totalDau FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date ORDER BY date ASC',
+      'SELECT date, COUNT(*) AS totalDau FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date ORDER BY date ASC',
       [start, end]
     )
 
-    // 按小时分组（用于"今天"视图）
+    // 按小时分组（用于"今天"视图，不去重）
     const [hourlyStats] = await pool.execute(
-      'SELECT HOUR(created_at) AS hour, COUNT(DISTINCT user_uuid) AS count FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY HOUR(created_at) ORDER BY hour',
+      'SELECT HOUR(created_at) AS hour, COUNT(*) AS count FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY HOUR(created_at) ORDER BY hour',
       [start, end]
     )
 
@@ -132,33 +111,33 @@ router.get('/dau/summary', authMiddleware, async (req, res) => {
     const d30 = new Date(Date.now() - 29 * 86400000)
     const thirtyDaysAgo = `${d30.getFullYear()}-${String(d30.getMonth() + 1).padStart(2, '0')}-${String(d30.getDate()).padStart(2, '0')}`
 
-    // 今日总数
+    // 今日总数（不去重，统计所有心跳记录）
     const [todayRows] = await pool.execute(
-      'SELECT COUNT(DISTINCT user_uuid) AS cnt FROM daily_active_users WHERE date = ?',
+      'SELECT COUNT(*) AS cnt FROM daily_active_users WHERE date = ?',
       [today]
     )
     const todayTotal = todayRows[0]?.cnt || 0
 
-    // 7 天数据（用于计算均值）
+    // 7 天数据（用于计算均值，不去重）
     const [sevenRows] = await pool.execute(
-      'SELECT date, COUNT(DISTINCT user_uuid) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date',
+      'SELECT date, COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date',
       [sevenDaysAgo, today]
     )
     const sevenDayAvg = sevenRows.length > 0
       ? Number((sevenRows.reduce((s, r) => s + r.cnt, 0) / 7).toFixed(1))
       : 0
 
-    // 30 天总数
+    // 30 天总数（不去重）
     const [thirtyRows] = await pool.execute(
-      'SELECT COUNT(DISTINCT user_uuid, date) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ?',
+      'SELECT COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ?',
       [thirtyDaysAgo, today]
     )
     const thirtyDayTotal = thirtyRows[0]?.cnt || 0
 
-    // 按老师分栏
+    // 按老师分栏（不去重）
     const [bdRows] = await pool.execute(`
       SELECT t.id AS teacherId, t.display_name AS teacherName,
-             COUNT(DISTINCT CASE WHEN d.date = ? THEN d.user_uuid END) AS todayCount
+             COUNT(CASE WHEN d.date = ? THEN d.id END) AS todayCount
       FROM teachers t
       LEFT JOIN daily_active_users d ON d.teacher_id = t.id AND d.date BETWEEN ? AND ?
       WHERE t.status = 'active'

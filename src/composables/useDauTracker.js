@@ -3,7 +3,7 @@ import { getAuthState } from './useAuth.js'
 
 const STORAGE_KEY = 'hetao_user_uuid'
 const HEARTBEAT_SENT_KEY = 'hetao_heartbeat_sent'
-const THREE_MINUTES = 1 * 1000 // 测试：1秒，正式改为 3 * 60 * 1000
+const THREE_MINUTES = 60 * 1000 // 1分钟
 
 function getOrCreateUUID() {
   // 测试：用 sessionStorage，关闭浏览器即清除。正式改回 localStorage

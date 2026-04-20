@@ -1,5 +1,18 @@
 # 变更记录
 
+## 2026-04-21
+
+- **DAU 统计系统调整**
+  - 心跳间隔：1秒 → 1分钟（`src/composables/useDauTracker.js`）
+  - 取消 IP 频率限制功能（`server/routes/stats.js`）
+  - UUID 存储方案确认：使用 `sessionStorage`，关闭浏览器即清除，刷新页面保留
+  - 统计口径统一：所有接口使用 `COUNT(*)` 不去重，显示总访问次数
+
+- **数据库修复与自动迁移增强**
+  - 修复 `teacher_key` 编码不一致问题：`whispers` 和 `teacher_messages` 表统一使用 `utf8mb4_general_ci` 排序规则
+  - `server/db.js` 启动时自动检测并修复字符集，避免查询报错
+  - 自动迁移机制：建表、补列、字符集统一、默认数据插入，服务器启动时自动完成
+
 ## 2026-04-20
 
 - **修复：服务器部署路径适配问题**

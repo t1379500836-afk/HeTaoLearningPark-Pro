@@ -79,7 +79,7 @@ export const vocabData = [
 ## 身份验证
 
 - 全局弹窗，必须输入教师口令才能访问
-- 口令明文存储在 `teachers.config.js`（由后端自动生成，构建时嵌入前端）
+- 口令明文存储在 `user/src/config/teachers.config.js`（由后端自动生成，构建时嵌入前端）
 - 验证后个性化显示教师名称
 - 认证状态保存在 sessionStorage（关标签页失效）
 

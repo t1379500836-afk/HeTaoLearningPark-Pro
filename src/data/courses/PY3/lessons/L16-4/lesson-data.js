@@ -7,8 +7,9 @@
  * 3. 物流分拣逻辑
  */
 
-// 单词卡数据 - 拓展词汇（无OCR单词）
+// 单词卡数据 - 包含OCR单词 + 拓展词汇
 export const vocabData = [
+  // OCR单词（来自单词卡图片）
   {
     word: 'color',
     pronunciation: "['kalar]",
@@ -17,18 +18,32 @@ export const vocabData = [
     level: 'easy',
     example: 'Detect the color.',
     exampleTranslation: '检测颜色。',
-    note: 'detectColor()识别颜色'
+    note: 'detectColor()识别颜色',
+    source: 'ocr'
   },
   {
-    word: 'line',
-    pronunciation: '[lain]',
-    partOfSpeech: 'n./v.',
-    meaning: '线；线条；沿...排列',
+    word: 'record',
+    pronunciation: "[ri'ko:rd]",
+    partOfSpeech: 'v./n.',
+    meaning: '记录；录音；录制',
     level: 'easy',
-    example: 'Follow the line.',
-    exampleTranslation: '沿着线走。',
-    note: 'followLine()循线'
+    example: 'Record the color information.',
+    exampleTranslation: '记录颜色信息。',
+    note: 'recordColor()记录颜色',
+    source: 'ocr'
   },
+  {
+    word: 'detect',
+    pronunciation: "[di'tekt]",
+    partOfSpeech: 'v.',
+    meaning: '检测；发现；察觉',
+    level: 'medium',
+    example: 'Detect the color.',
+    exampleTranslation: '检测颜色。',
+    note: 'detectColor()检测颜色',
+    source: 'ocr'
+  },
+  // 拓展单词
   {
     word: 'move',
     pronunciation: '[mu:v]',
@@ -37,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Move forward.',
     exampleTranslation: '向前移动。',
-    note: 'move()移动一段距离'
+    note: 'move()移动一段距离',
+    source: 'extended'
   },
   {
     word: 'turn',
@@ -47,7 +63,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Turn left.',
     exampleTranslation: '左转。',
-    note: 'turnLeft() turnRight()'
+    note: 'turnLeft() turnRight()',
+    source: 'extended'
   },
   {
     word: 'delivery',
@@ -57,7 +74,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Complete the delivery.',
     exampleTranslation: '完成配送。',
-    note: '物流配送'
+    note: '物流配送',
+    source: 'extended'
   }
 ]
 

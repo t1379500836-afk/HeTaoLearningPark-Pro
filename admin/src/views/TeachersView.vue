@@ -49,7 +49,7 @@
       </div>
 
       <div class="table-wrap">
-        <el-table :data="filteredTeachers" style="width:100%">
+        <el-table :data="paginatedTeachers" style="width:100%">
           <el-table-column label="教师" min-width="200">
             <template #default="{ row }">
               <div class="teacher-cell">
@@ -104,6 +104,15 @@
             </template>
           </el-table-column>
         </el-table>
+      </div>
+      <div class="pagination-wrap" v-if="filteredTeachers.length > pageSize">
+        <el-pagination
+          v-model:current-page="currentPage"
+          :page-size="pageSize"
+          :total="filteredTeachers.length"
+          layout="prev, pager, next"
+          background
+        />
       </div>
     </template>
 
@@ -207,7 +216,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, inject } from 'vue'
+import { ref, reactive, computed, onMounted, inject, watch } from 'vue'
 import { ElMessage } from 'element-plus'
 import api from '../api.js'
 
@@ -220,6 +229,8 @@ const isEdit = ref(false)
 const isSelfEdit = ref(false)
 const saving = ref(false)
 const searchQuery = ref('')
+const currentPage = ref(1)
+const pageSize = 10
 const editForm = reactive({
   id: null,
   username: '',
@@ -245,6 +256,13 @@ const filteredTeachers = computed(() => {
     t.key?.toLowerCase().includes(q)
   )
 })
+
+const paginatedTeachers = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  return filteredTeachers.value.slice(start, start + pageSize)
+})
+
+watch(searchQuery, () => { currentPage.value = 1 })
 
 const PALETTE = [
   ['#667eea', '#764ba2'],
@@ -395,6 +413,11 @@ async function handleDelete(id) {
 :deep(.el-table th.el-table__cell) { background: transparent !important; font-weight: 600; color: #888; font-size: 13px; }
 :deep(.el-table td.el-table__cell) { border-bottom: 1px solid #f5f5f5; }
 :deep(.el-table .el-table__row:hover > td) { background: #f8f9ff !important; }
+
+/* 分页 */
+.pagination-wrap { display: flex; justify-content: center; margin-top: 20px; }
+:deep(.el-pagination) { --el-pagination-button-bg-color: #fff; --el-pagination-hover-color: #667eea; }
+:deep(.el-pagination .el-pager li.is-active) { background: #667eea !important; color: #fff; }
 
 /* 教师单元格 */
 .teacher-cell { display: flex; align-items: center; gap: 12px; }

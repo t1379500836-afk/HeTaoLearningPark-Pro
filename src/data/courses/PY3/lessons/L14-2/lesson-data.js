@@ -7,18 +7,19 @@
  * 3. 定时器的停止与控制
  */
 
-// 单词卡数据 - 复用L14-1 + 拓展词汇
+// 单词卡数据 - 包含OCR单词 + 拓展词汇
 export const vocabData = [
-  // 复用L14-1单词
+  // OCR单词（来自单词卡图片）
   {
-    word: 'schedule',
-    pronunciation: "['sked3u:l]",
-    partOfSpeech: 'v./n.',
-    meaning: '安排；预定；时间表',
-    level: 'easy',
-    example: 'Schedule the task.',
-    exampleTranslation: '安排任务。',
-    note: 'clock.schedule() 单次定时'
+    word: 'germ',
+    pronunciation: '[dʒɜːrm]',
+    partOfSpeech: 'n.',
+    meaning: '细菌；病菌；萌芽',
+    level: 'medium',
+    example: 'The germ can make you sick.',
+    exampleTranslation: '细菌会让你生病。',
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'interval',
@@ -28,7 +29,20 @@ export const vocabData = [
     level: 'easy',
     example: 'Set an interval of 2 seconds.',
     exampleTranslation: '设置2秒的间隔。',
-    note: 'schedule_interval() 间隔定时'
+    note: 'schedule_interval() 间隔定时',
+    source: 'ocr'
+  },
+  // 复用L14-1单词
+  {
+    word: 'schedule',
+    pronunciation: "['sked3u:l]",
+    partOfSpeech: 'v./n.',
+    meaning: '安排；预定；时间表',
+    level: 'easy',
+    example: 'Schedule the task.',
+    exampleTranslation: '安排任务。',
+    note: 'clock.schedule() 单次定时',
+    source: 'extended'
   },
   {
     word: 'repeat',
@@ -38,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Repeat the action every second.',
     exampleTranslation: '每秒重复一次动作。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   // 拓展单词
   {
@@ -49,7 +64,8 @@ export const vocabData = [
     level: 'medium',
     example: 'A period of 5 seconds.',
     exampleTranslation: '5秒的周期。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
   {
     word: 'continuous',
@@ -59,7 +75,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Continuous spawning of enemies.',
     exampleTranslation: '持续生成敌人。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

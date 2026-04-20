@@ -7,8 +7,20 @@
  * 3. 权限判断与门禁升级
  */
 
-// 单词卡数据 - 拓展词汇（无OCR单词）
+// 单词卡数据 - 包含OCR单词 + 拓展词汇
 export const vocabData = [
+  // OCR单词（来自单词卡图片）
+  {
+    word: 'mark',
+    pronunciation: '[ma:rk]',
+    partOfSpeech: 'v./n.',
+    meaning: '标记；做记号；分数',
+    level: 'medium',
+    example: 'Mark the face with a frame.',
+    exampleTranslation: '用框标记人脸。',
+    note: 'markFace()标记人脸',
+    source: 'ocr'
+  },
   {
     word: 'record',
     pronunciation: "[ri'ko:rd]",
@@ -17,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Record the face information.',
     exampleTranslation: '记录人脸信息。',
-    note: 'recordFace()记录人脸'
+    note: 'recordFace()记录人脸',
+    source: 'ocr'
   },
   {
     word: 'photo',
@@ -27,17 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Take a photo.',
     exampleTranslation: '拍一张照片。',
-    note: 'takePhoto()拍照'
-  },
-  {
-    word: 'mark',
-    pronunciation: '[ma:rk]',
-    partOfSpeech: 'v./n.',
-    meaning: '标记；做记号；分数',
-    level: 'medium',
-    example: 'Mark the face with a frame.',
-    exampleTranslation: '用框标记人脸。',
-    note: 'markFace()标记人脸'
+    note: 'takePhoto()拍照',
+    source: 'ocr'
   },
   {
     word: 'list',
@@ -47,8 +51,10 @@ export const vocabData = [
     level: 'medium',
     example: 'Get the face list.',
     exampleTranslation: '获取人脸列表。',
-    note: 'getFaceList()获取人脸信息'
+    note: 'getFaceList()获取人脸信息',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'permission',
     pronunciation: "[par'mijan]",
@@ -57,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Check the permission.',
     exampleTranslation: '检查权限。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

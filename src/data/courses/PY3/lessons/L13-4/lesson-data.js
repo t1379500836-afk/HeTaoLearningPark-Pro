@@ -7,9 +7,9 @@
  * 3. 全局变量控制状态
  */
 
-// 单词卡数据 - 根据课程内容 + 拓展词汇
+// 单词卡数据 - 包含OCR单词 + 拓展词汇
 export const vocabData = [
-  // OCR提取的单词（讲义中提到）
+  // OCR单词（来自单词卡图片）
   {
     word: 'guess',
     pronunciation: '[ges]',
@@ -18,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Can you guess the answer?',
     exampleTranslation: '你能猜出答案吗？',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'right',
@@ -28,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Your answer is right!',
     exampleTranslation: '你的答案是正确的！',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
   {
     word: 'choose',
@@ -38,8 +40,10 @@ export const vocabData = [
     level: 'medium',
     example: 'Choose your favorite color.',
     exampleTranslation: '选择你最喜欢的颜色。',
-    note: ''
+    note: '',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'state',
     pronunciation: '[steit]',
@@ -48,9 +52,9 @@ export const vocabData = [
     level: 'medium',
     example: 'The game state changed.',
     exampleTranslation: '游戏状态改变了。',
-    note: ''
+    note: '',
+    source: 'extended'
   },
-  // 拓展单词
   {
     word: 'xylophone',
     pronunciation: "['zailafoun]",
@@ -59,7 +63,8 @@ export const vocabData = [
     level: 'hard',
     example: 'Play the xylophone.',
     exampleTranslation: '弹奏木琴。',
-    note: ''
+    note: '',
+    source: 'extended'
   }
 ]
 

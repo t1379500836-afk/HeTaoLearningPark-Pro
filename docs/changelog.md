@@ -1,5 +1,20 @@
 # 变更记录
 
+## 2026-04-22
+
+- **修复：更新教师口令后首页寄语消失**
+  - 问题：修改教师口令后，`messages.config.js` 未同步刷新，导致首页按新口令查不到寄语
+  - 修复：教师增/改/删操作同时调用 `regenerateMessagesConfig()`，确保 `messages.config.js` 与 `teachers.config.js` 保持同步
+  - 涉及文件：`server/routes/teachers.js`、`server/routes/messages.js`（导出 `regenerateMessagesConfig`）
+
+- **数据库字段重构：teacher_key → teacher_id**
+  - `whispers` 和 `teacher_messages` 表的 `teacher_key` 列改为 `teacher_id`（INT）
+  - 业务逻辑调整：通过 `teacher_id`（数字 ID）匹配，而非 `teacher_key`（口令字符串）
+  - JWT token 中的 `id` 直接作为 `teacher_id` 使用，无需额外查询
+  - 新增 `getTeacherIdByKey()` 函数桥接 teacherKey → teacher_id
+  - 保留 `teacherKey` 作为前端/API 层的查询参数（学生端无法持有 JWT）
+  - 修正 db.js 注释，简化 `getTeacherIdById` 为同步函数
+
 ## 2026-04-21
 
 - **DAU 统计系统调整**

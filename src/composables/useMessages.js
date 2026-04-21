@@ -3,7 +3,7 @@ import { useAuth } from './useAuth.js'
 import { getMessages } from '@/config/messages.config.js'
 
 export function useMessages() {
-  const { teacherKey } = useAuth()
+  const { teacherId } = useAuth()
 
   const teacherMessages = ref([])
   const isLoading = ref(false)
@@ -11,17 +11,17 @@ export function useMessages() {
 
   // 从静态文件加载（即时渲染）
   function loadStatic() {
-    if (!teacherKey.value) return
-    const data = getMessages(teacherKey.value)
+    if (!teacherId.value) return
+    const data = getMessages(teacherId.value)
     teacherMessages.value = data.teacherMessages || []
   }
 
   // 从 API 获取最新数据
   async function fetchFresh() {
-    if (!teacherKey.value) return
+    if (!teacherId.value) return
     isLoading.value = true
     try {
-      const res = await fetch(`/api/messages/teacher-messages?teacherKey=${encodeURIComponent(teacherKey.value)}`)
+      const res = await fetch(`/api/messages/teacher-messages?teacherId=${teacherId.value}`)
       if (res.ok) {
         const data = await res.json()
         teacherMessages.value = data.data || []
@@ -35,13 +35,13 @@ export function useMessages() {
 
   // 提交匿名悄悄话
   async function submitWhisper(content) {
-    if (!teacherKey.value || !content.trim()) return false
+    if (!teacherId.value || !content.trim()) return false
     submitStatus.value = 'submitting'
     try {
       const res = await fetch('/api/messages/whisper', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ teacherKey: teacherKey.value, content: content.trim() })
+        body: JSON.stringify({ teacherId: teacherId.value, content: content.trim() })
       })
       const data = await res.json()
       if (res.ok) {

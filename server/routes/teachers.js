@@ -5,6 +5,7 @@ import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import pool from '../db.js'
 import { authMiddleware } from '../middleware/auth.js'
+import { regenerateMessagesConfig } from './messages.js'
 import { scheduleBuild, PROJECT_ROOT } from '../build.js'
 
 const router = Router()
@@ -37,13 +38,13 @@ async function regenerateConfig() {
   }
 
   const [rows] = await pool.execute(
-    'SELECT display_name, `key` FROM teachers WHERE status = ? ORDER BY id',
+    'SELECT id, display_name, `key` FROM teachers WHERE status = ? ORDER BY id',
     ['active']
   )
 
   const escape = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
   const entries = rows.map(r =>
-    `  { key: '${escape(r.key)}', name: '${escape(r.display_name)}' }`
+    `  { id: ${r.id}, key: '${escape(r.key)}', name: '${escape(r.display_name)}' }`
   )
 
   const content = `/**
@@ -57,14 +58,14 @@ ${entries.join(',\n')}
 
 const teachersMap = {}
 teachers.forEach(teacher => {
-  teachersMap[teacher.key] = teacher.name
+  teachersMap[teacher.key] = teacher
 })
 
 export const validateKey = (inputKey) => {
-  const teacherName = teachersMap[inputKey]
-  return teacherName
-    ? { valid: true, teacherName }
-    : { valid: false, teacherName: null }
+  const teacher = teachersMap[inputKey]
+  return teacher
+    ? { valid: true, teacherId: teacher.id, teacherName: teacher.name }
+    : { valid: false, teacherId: null, teacherName: null }
 }
 
 export default { validateKey }
@@ -140,6 +141,7 @@ router.post('/', async (req, res) => {
 
     // 非关键：配置更新和构建失败不影响 API 响应
     regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    regenerateMessagesConfig().catch(e => console.error('消息配置更新失败:', e.message))
     scheduleBuild()
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
@@ -197,6 +199,7 @@ router.put('/:id', async (req, res) => {
     res.json({ message: '更新成功' })
 
     regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    regenerateMessagesConfig().catch(e => console.error('消息配置更新失败:', e.message))
     scheduleBuild()
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
@@ -229,6 +232,7 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: '删除成功' })
 
     regenerateConfig().catch(e => console.error('配置更新失败:', e.message))
+    regenerateMessagesConfig().catch(e => console.error('消息配置更新失败:', e.message))
     scheduleBuild()
   } catch (err) {
     console.error('删除教师失败:', err)

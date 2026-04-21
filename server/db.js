@@ -7,6 +7,8 @@ const pool = mysql.createPool({
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'hetao_learning',
+  charset: 'utf8mb4',
+  collation: 'utf8mb4_general_ci',
   waitForConnections: true,
   connectionLimit: 10,
 })
@@ -75,10 +77,10 @@ export async function initDatabase() {
     await conn.execute(`
       CREATE TABLE IF NOT EXISTS whispers (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+        teacher_id INT NOT NULL,
         content VARCHAR(500) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        INDEX idx_teacher_created (teacher_key, created_at DESC)
+        INDEX idx_teacher_created (teacher_id, created_at DESC)
       )
     `)
 
@@ -86,34 +88,39 @@ export async function initDatabase() {
     await conn.execute(`
       CREATE TABLE IF NOT EXISTS teacher_messages (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+        teacher_id INT NOT NULL,
         title VARCHAR(100) NOT NULL DEFAULT '',
         content VARCHAR(500) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        INDEX idx_teacher_created (teacher_key, created_at DESC)
+        INDEX idx_teacher_created (teacher_id, created_at DESC)
       )
     `)
 
-    // 兼容已有表：补加 title 列
+    // 兼容旧表：添加 teacher_id 列（如果还没有）
     try {
-      await conn.execute("ALTER TABLE teacher_messages ADD COLUMN title VARCHAR(100) NOT NULL DEFAULT '' AFTER teacher_key")
+      await conn.execute("ALTER TABLE whispers ADD COLUMN teacher_id INT NOT NULL DEFAULT 0")
     } catch (e) {
       if (!e.message.includes('Duplicate column')) throw e
     }
 
-    // 兼容已有表：统一 whispers 表字符集排序规则
     try {
-      await conn.execute("ALTER TABLE whispers MODIFY teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL")
+      await conn.execute("ALTER TABLE teacher_messages ADD COLUMN teacher_id INT NOT NULL DEFAULT 0")
     } catch (e) {
-      if (!e.message.includes('Duplicate')) console.log('whispers 表字符集修改:', e.message)
+      if (!e.message.includes('Duplicate column')) throw e
     }
 
-    // 兼容已有表：统一 teacher_messages 表字符集排序规则
+    // 删除旧表中的 teacher_key 列
     try {
-      await conn.execute("ALTER TABLE teacher_messages MODIFY teacher_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL")
+      await conn.execute("ALTER TABLE whispers DROP COLUMN teacher_key")
     } catch (e) {
-      if (!e.message.includes('Duplicate')) console.log('teacher_messages 表字符集修改:', e.message)
+      if (!e.message.includes('check') && !e.message.includes('Unknown column')) console.log('whispers 表 teacher_key 删除:', e.message)
+    }
+
+    try {
+      await conn.execute("ALTER TABLE teacher_messages DROP COLUMN teacher_key")
+    } catch (e) {
+      if (!e.message.includes('check') && !e.message.includes('Unknown column')) console.log('teacher_messages 表 teacher_key 删除:', e.message)
     }
 
     console.log('数据库初始化完成')

@@ -95,9 +95,9 @@ const {
   formatTime
 } = useMessages()
 
-const { teacherKey } = useAuth()
+const { teacherId } = useAuth()
 const teacherName = computed(() => {
-  const info = getTeacherInfo(teacherKey.value)
+  const info = getTeacherInfo(teacherId.value)
   return info.teacherName || ''
 })
 

@@ -27,7 +27,7 @@ function todayKey() {
 }
 
 export function useDauTracker() {
-  const { isAuthenticated, teacherKey } = getAuthState()
+  const { isAuthenticated, teacherId } = getAuthState()
 
   // 当天是否已发送过
   function hasSentToday() {
@@ -42,20 +42,20 @@ export function useDauTracker() {
   let timer = null
 
   function startTracking() {
-    console.log('[DAU] startTracking called, timer:', !!timer, 'hasSentToday:', hasSentToday(), 'teacherKey:', teacherKey.value)
+    console.log('[DAU] startTracking called, timer:', !!timer, 'hasSentToday:', hasSentToday(), 'teacherId:', teacherId.value)
     if (timer || hasSentToday()) return
 
     timer = setTimeout(async () => {
       timer = null
-      const key = teacherKey.value
-      if (!key) return
+      const id = teacherId.value
+      if (!id) return
 
       try {
-        console.log('[DAU] sending heartbeat:', { teacherKey: key, uuid: getOrCreateUUID() })
+        console.log('[DAU] sending heartbeat:', { teacherId: id, uuid: getOrCreateUUID() })
         const res = await fetch('/api/stats/heartbeat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ teacherKey: key, uuid: getOrCreateUUID() })
+          body: JSON.stringify({ teacherId: id, uuid: getOrCreateUUID() })
         })
         console.log('[DAU] response:', res.status, await res.text())
         markSent()

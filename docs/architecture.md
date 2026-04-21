@@ -184,10 +184,10 @@ URL（含前缀）
 
 | 表名 | 关键字段 | 说明 |
 |------|----------|------|
-| teachers | id, username, password_hash, role, display_name, key, status | status 为 active/disabled，删除为软删除 |
+| teachers | id, username, password_hash, role, display_name, key, status | status 为 active/disabled，删除为软删除；key 为教师口令字符串 |
 | daily_active_users | user_uuid, teacher_id, date | 唯一约束 (user_uuid, teacher_id, date) |
-| teacher_messages | teacher_key, title, content, created_at, updated_at | 教师寄语，teacher_key 统一 utf8mb4_general_ci |
-| whispers | teacher_key, content, created_at | 匿名悄悄话，teacher_key 统一 utf8mb4_general_ci |
+| teacher_messages | teacher_id, title, content, created_at, updated_at | 教师寄语，teacher_id(INT) 外键关联 teachers.id |
+| whispers | teacher_id, content, created_at | 匿名悄悄话，teacher_id(INT) 外键关联 teachers.id |
 
 ## 多租户机制
 
@@ -228,7 +228,7 @@ typingTemplates # 打字练习代码模板
 | 文件 | 作用 |
 |------|------|
 | `server/build.js` | 构建调度核心：脏标记机制 + 10分钟定时器 + CDN 刷新 |
-| `server/routes/teachers.js` | 教师 CRUD 后触发 `regenerateConfig()` + `scheduleBuild()` |
+| `server/routes/teachers.js` | 教师 CRUD 后触发 `regenerateConfig()` + `regenerateMessagesConfig()` + `scheduleBuild()` |
 | `server/routes/messages.js` | 寄语 CRUD 后触发 `regenerateMessagesConfig()` + `scheduleBuild()` |
 | `src/config/teachers.config.js` | 后端自动生成的教师口令映射 |
 | `src/config/messages.config.js` | 后端自动生成的教师寄语静态数据 |

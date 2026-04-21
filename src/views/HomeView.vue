@@ -54,9 +54,9 @@ import { useAuth } from '@/composables/useAuth.js'
 const route = useRoute()
 const router = useRouter()
 const prefix = computed(() => getCurrentPrefix(route))
-const { teacherKey } = useAuth()
+const { teacherId } = useAuth()
 
-const latestMessage = computed(() => getLatestTeacherMessage(teacherKey.value))
+const latestMessage = computed(() => getLatestTeacherMessage(teacherId.value))
 
 function prefixedPath(path) {
   return buildPrefixedPath(prefix.value, path)

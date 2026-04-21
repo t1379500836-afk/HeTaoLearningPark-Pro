@@ -10,15 +10,20 @@ import { validateKey } from '@/config/teachers.config.js'
 
 // 响应式状态
 const teacherName = ref(null)
+const teacherId = ref(null)
 const teacherKey = ref(null)
 const showAuthModal = ref(false)
 const authError = ref('')
 
 // 初始化：从 sessionStorage 读取
 const storedName = sessionStorage.getItem('auth_teacher_name')
+const storedId = sessionStorage.getItem('auth_teacher_id')
 const storedKey = sessionStorage.getItem('auth_teacher_key')
 if (storedName) {
   teacherName.value = storedName
+}
+if (storedId) {
+  teacherId.value = Number(storedId)
 }
 if (storedKey) {
   teacherKey.value = storedKey
@@ -26,7 +31,7 @@ if (storedKey) {
 
 export function useAuth() {
   // 是否已验证
-  const isAuthenticated = computed(() => !!teacherName.value)
+  const isAuthenticated = computed(() => !!teacherId.value)
 
   // 需要显示验证弹窗
   const needAuth = computed(() => !isAuthenticated.value)
@@ -41,8 +46,10 @@ export function useAuth() {
 
     if (result.valid) {
       teacherName.value = result.teacherName
+      teacherId.value = result.teacherId
       teacherKey.value = inputKey.trim()
       sessionStorage.setItem('auth_teacher_name', result.teacherName)
+      sessionStorage.setItem('auth_teacher_id', String(result.teacherId))
       sessionStorage.setItem('auth_teacher_key', inputKey.trim())
       showAuthModal.value = false
       authError.value = ''
@@ -58,8 +65,10 @@ export function useAuth() {
    */
   const logout = () => {
     teacherName.value = null
+    teacherId.value = null
     teacherKey.value = null
     sessionStorage.removeItem('auth_teacher_name')
+    sessionStorage.removeItem('auth_teacher_id')
     sessionStorage.removeItem('auth_teacher_key')
     showAuthModal.value = true
   }
@@ -80,6 +89,7 @@ export function useAuth() {
 
   return {
     teacherName,
+    teacherId,
     teacherKey,
     showAuthModal,
     authError,
@@ -95,7 +105,8 @@ export function useAuth() {
 // 导出单例状态（供路由守卫使用）
 export const getAuthState = () => ({
   teacherName,
+  teacherId,
   teacherKey,
   showAuthModal,
-  isAuthenticated: computed(() => !!teacherName.value)
+  isAuthenticated: computed(() => !!teacherId.value)
 })

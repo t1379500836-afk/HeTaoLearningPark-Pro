@@ -17,26 +17,24 @@ function fmtDate(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
-// POST /api/stats/heartbeat — 学生端匿名上报
-// POST /api/stats/heartbeat — 学生端匿名上报（已取消IP频率限制）
+// POST /api/stats/heartbeat — 学生端匿名上报（使用 teacherId）
 router.post('/heartbeat', async (req, res) => {
   try {
-    const { teacherKey, uuid } = req.body || {}
+    const { teacherId, uuid } = req.body || {}
 
-    if (!teacherKey || !uuid || !UUID_RE.test(uuid)) {
+    if (!teacherId || !uuid || !UUID_RE.test(uuid)) {
       return res.json({ ok: true })
     }
 
-    // 查找有效老师
+    // 验证教师存在且活跃
     const [teachers] = await pool.execute(
-      "SELECT id FROM teachers WHERE `key` = ? AND status = 'active'",
-      [teacherKey]
+      "SELECT id FROM teachers WHERE id = ? AND status = 'active'",
+      [teacherId]
     )
     if (teachers.length === 0) {
       return res.json({ ok: true })
     }
 
-    const teacherId = teachers[0].id
     await pool.execute(
       'INSERT IGNORE INTO daily_active_users (user_uuid, teacher_id, date) VALUES (?, ?, CURDATE())',
       [uuid, teacherId]

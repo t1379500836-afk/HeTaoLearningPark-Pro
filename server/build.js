@@ -70,7 +70,7 @@ async function purgeCDN() {
 
     const client = new Cdn20180510.default(config)
     const request = new Cdn20180510.RefreshObjectCachesRequest({
-      objectPath: `${cdnDomain}/index.html`,
+      objectPath: `${cdnDomain}/index.html\n${cdnDomain}/admin/index.html`,
       objectType: 'File'
     })
 

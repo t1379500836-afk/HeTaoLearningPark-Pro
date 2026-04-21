@@ -119,8 +119,13 @@ export const vocabData = [
 | DELETE | /api/messages/manage/whisper/:id | 删除悄悄话 | JWT |
 
 数据库表：
-- `teacher_messages`（id, teacher_key, title, content, created_at, updated_at）。用 teacher_key(VARCHAR) 关联教师。
-- `whispers`（id, teacher_key, content, created_at）。匿名，无发送者信息。
+- `teacher_messages`（id, teacher_id, title, content, created_at, updated_at）。teacher_id(INT) 外键关联 teachers.id。
+- `whispers`（id, teacher_id, content, created_at）。匿名，无发送者信息，teacher_id(INT) 外键关联 teachers.id。
+
+**双层标识设计**：
+- `teacherKey`（字符串）：教师口令，用于前端身份验证和 API 查询参数
+- `teacher_id`（INT）：数据库内部主键，用于表关联
+- 后端通过 `getTeacherIdByKey()` 函数桥接两者
 
 管理端 CUD 操作后触发 `regenerateMessagesConfig()` + `scheduleBuild()`，静态文件每10分钟构建刷新。学生提交悄悄话实时写入，无需构建。
 

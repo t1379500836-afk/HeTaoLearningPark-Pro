@@ -104,53 +104,72 @@ router.get('/dau', authMiddleware, async (req, res) => {
 // GET /api/stats/dau/summary — 概览数据（所有角色返回全部汇总）
 router.get('/dau/summary', authMiddleware, async (req, res) => {
   try {
+    const { startDate, endDate } = req.query
+
     const d = new Date()
     const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const d7 = new Date(Date.now() - 6 * 86400000)
-    const sevenDaysAgo = `${d7.getFullYear()}-${String(d7.getMonth() + 1).padStart(2, '0')}-${String(d7.getDate()).padStart(2, '0')}`
-    const d30 = new Date(Date.now() - 29 * 86400000)
-    const thirtyDaysAgo = `${d30.getFullYear()}-${String(d30.getMonth() + 1).padStart(2, '0')}-${String(d30.getDate()).padStart(2, '0')}`
+    const start = startDate || today
+    const end = endDate || today
+    const isSingleDay = start === end
 
-    // 今日总数（不去重，统计所有心跳记录）
-    const [todayRows] = await pool.execute(
-      'SELECT COUNT(*) AS cnt FROM daily_active_users WHERE date = ?',
-      [today]
+    // 计算日期范围的天数
+    const startTime = new Date(start).getTime()
+    const endTime = new Date(end).getTime()
+    const dayCount = Math.max(1, Math.round((endTime - startTime) / 86400000) + 1)
+
+    // 当前选中范围的总数（不去重）
+    const [rangeRows] = await pool.execute(
+      'SELECT COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ?',
+      [start, end]
     )
-    const todayTotal = todayRows[0]?.cnt || 0
+    const rangeTotal = rangeRows[0]?.cnt || 0
 
-    // 7 天数据（用于计算均值，不去重）
-    const [sevenRows] = await pool.execute(
+    // 日均值（不去重）
+    const [dailyRows] = await pool.execute(
       'SELECT date, COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date',
-      [sevenDaysAgo, today]
+      [start, end]
     )
-    const sevenDayAvg = sevenRows.length > 0
-      ? Number((sevenRows.reduce((s, r) => s + r.cnt, 0) / 7).toFixed(1))
+    const avgDaily = dailyRows.length > 0
+      ? Number((dailyRows.reduce((s, r) => s + r.cnt, 0) / dayCount).toFixed(1))
       : 0
 
-    // 30 天总数（不去重）
-    const [thirtyRows] = await pool.execute(
-      'SELECT COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ?',
-      [thirtyDaysAgo, today]
-    )
-    const thirtyDayTotal = thirtyRows[0]?.cnt || 0
+    // 单日最高（范围内）
+    const dailyCounts = dailyRows.map(r => r.cnt)
+    const maxDaily = dailyCounts.length > 0 ? Math.max(...dailyCounts) : 0
 
-    // 按老师分栏（不去重）
+    // 历史最高（整个数据库）
+    const [historyRows] = await pool.execute(
+      'SELECT date, COUNT(*) AS cnt FROM daily_active_users GROUP BY date ORDER BY cnt DESC LIMIT 1'
+    )
+    const historyMaxDaily = historyRows[0]?.cnt || 0
+
+    // 按老师分栏（不去重，返回当前范围每个老师的统计数据）
     const [bdRows] = await pool.execute(`
       SELECT t.id AS teacherId, t.display_name AS teacherName,
-             COUNT(CASE WHEN d.date = ? THEN d.id END) AS todayCount
+             COUNT(d.id) AS totalCount
       FROM teachers t
       LEFT JOIN daily_active_users d ON d.teacher_id = t.id AND d.date BETWEEN ? AND ?
       WHERE t.status = 'active'
       GROUP BY t.id, t.display_name
       ORDER BY t.id
-    `, [today, sevenDaysAgo, today])
+    `, [start, end])
     const breakdown = bdRows.map(r => ({
       teacherId: r.teacherId,
       teacherName: r.teacherName,
-      todayCount: r.todayCount
+      totalCount: r.totalCount
     }))
 
-    res.json({ todayTotal, sevenDayAvg, thirtyDayTotal, breakdown })
+    res.json({
+      rangeTotal,
+      avgDaily,
+      maxDaily,
+      historyMaxDaily,
+      dayCount,
+      isSingleDay,
+      breakdown,
+      startDate: start,
+      endDate: end
+    })
   } catch (err) {
     console.error('DAU summary error:', err)
     res.status(500).json({ error: '查询失败' })
@@ -160,10 +179,12 @@ router.get('/dau/summary', authMiddleware, async (req, res) => {
 // GET /api/stats/dau/leaderboard — 活跃排行榜（所有角色可见全部老师）
 router.get('/dau/leaderboard', authMiddleware, async (req, res) => {
   try {
+    const { startDate, endDate } = req.query
+
     const d = new Date()
     const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const startDate = req.query.startDate || today
-    const endDate = req.query.endDate || today
+    const start = startDate || today
+    const end = endDate || today
 
     const [rows] = await pool.execute(`
       SELECT t.display_name AS teacherName,
@@ -171,10 +192,10 @@ router.get('/dau/leaderboard', authMiddleware, async (req, res) => {
       FROM teachers t
       LEFT JOIN daily_active_users d ON d.teacher_id = t.id
         AND d.date BETWEEN ? AND ?
-      WHERE t.role = 'teacher' AND t.status = 'active'
+      WHERE t.status = 'active'
       GROUP BY t.id, t.display_name
       ORDER BY totalDau DESC
-    `, [startDate, endDate])
+    `, [start, end])
 
     res.json(rows.map(r => ({ teacherName: r.teacherName, totalDau: Number(r.totalDau) })))
   } catch (err) {

@@ -39,8 +39,8 @@
               <el-icon :size="26"><UserFilled /></el-icon>
             </div>
             <div>
-              <div class="stat-card__num">{{ dauSummary.todayTotal }}</div>
-              <div class="stat-card__label">今日日活</div>
+              <div class="stat-card__num">{{ selectedTeacherName ? selectedTeacherTotal : dauSummary.rangeTotal }}</div>
+              <div class="stat-card__label">{{ selectedTeacherName ? selectedTeacherName + ' 总活' : (dauSummary.isSingleDay ? '今日日活' : '总活') }}</div>
             </div>
           </div>
         </div>
@@ -51,8 +51,8 @@
               <el-icon :size="26"><TrendCharts /></el-icon>
             </div>
             <div>
-              <div class="stat-card__num">{{ dauSummary.sevenDayAvg }}</div>
-              <div class="stat-card__label">7 日均值</div>
+              <div class="stat-card__num">{{ selectedTeacherName ? selectedTeacherAvg : dauSummary.avgDaily }}</div>
+              <div class="stat-card__label">{{ selectedTeacherName ? '日均活跃' : (dauSummary.isSingleDay ? '今日均值' : dauSummary.dayCount + ' 日均值') }}</div>
             </div>
           </div>
         </div>
@@ -63,8 +63,8 @@
               <el-icon :size="26"><Calendar /></el-icon>
             </div>
             <div>
-              <div class="stat-card__num">{{ dauSummary.thirtyDayTotal }}</div>
-              <div class="stat-card__label">30 日总活</div>
+              <div class="stat-card__num">{{ selectedTeacherName ? selectedTeacherDaily : (dauSummary.isSingleDay ? dauSummary.historyMaxDaily : dauSummary.maxDaily) }}</div>
+              <div class="stat-card__label">{{ selectedTeacherName ? '单日最高' : (dauSummary.isSingleDay ? '历史最高' : '单日最高') }}</div>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
         <div
           class="lb-item"
           :class="{ 'lb-item--selected': !selectedTeacherName }"
-          @click="selectedTeacherName = null"
+          @click="selectTeacher(null)"
         >
           <div class="lb-item__rank" style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; font-size: 11px;">
             ALL
@@ -151,7 +151,7 @@ const user = inject('user')
 const statsRange = ref('today')
 const customStartDate = ref(null)
 const customEndDate = ref(null)
-const dauSummary = ref({ todayTotal: 0, sevenDayAvg: 0, thirtyDayTotal: 0, breakdown: [] })
+const dauSummary = ref({ rangeTotal: 0, avgDaily: 0, maxDaily: 0, historyMaxDaily: 0, dayCount: 1, isSingleDay: true, breakdown: [], startDate: '', endDate: '' })
 const dauDaily = ref([])
 const dauTotals = ref([])
 const dauHourly = ref([])
@@ -176,6 +176,28 @@ function selectTeacher(name) {
 }
 
 const totalAllDau = computed(() => leaderboardData.value.reduce((sum, t) => sum + t.totalDau, 0))
+
+// 选中老师的统计数据
+const selectedTeacherStats = computed(() => {
+  if (!selectedTeacherName.value) return null
+  const teacher = dauSummary.value.breakdown.find(t => t.teacherName === selectedTeacherName.value)
+  if (!teacher) return null
+  // 从 dailyStats 计算该老师的单日最高
+  const teacherDaily = dauDaily.value
+    .filter(r => r.teacherName === selectedTeacherName.value)
+    .map(r => r.dauCount)
+  const maxDaily = teacherDaily.length > 0 ? Math.max(...teacherDaily) : 0
+  const dayCount = dauSummary.value.dayCount || 1
+  return {
+    total: teacher.totalCount,
+    avg: Number((teacher.totalCount / dayCount).toFixed(1)),
+    maxDaily
+  }
+})
+
+const selectedTeacherTotal = computed(() => selectedTeacherStats.value?.total ?? 0)
+const selectedTeacherAvg = computed(() => selectedTeacherStats.value?.avg ?? 0)
+const selectedTeacherDaily = computed(() => selectedTeacherStats.value?.maxDaily ?? 0)
 
 function onStatsRangeChange() {
   if (statsRange.value === 'custom' && (!customStartDate.value || !customEndDate.value)) return
@@ -222,6 +244,11 @@ async function loadStats() {
 const maxLeaderboardDau = computed(() => {
   if (!leaderboardData.value.length) return 1
   return Math.max(...leaderboardData.value.map(t => t.totalDau), 1)
+})
+
+const maxDailyTotal = computed(() => {
+  if (!dauTotals.value.length) return 0
+  return Math.max(...dauTotals.value.map(t => t.totalDau))
 })
 
 const RANK_STYLES = [

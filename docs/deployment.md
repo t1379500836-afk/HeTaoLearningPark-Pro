@@ -194,10 +194,24 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
+    # 学生端静态资源（带 hash，可长期缓存）
+    location ~* \.(js|css|woff2?|png|jpg|jpeg|gif|svg|ico)$ {
+        root /www/wwwroot/hetao/user/dist;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
     location /admin {
         alias /www/wwwroot/hetao/admin/dist;
         index index.html;
         try_files $uri $uri/ /admin/index.html;
+    }
+
+    # 管理端静态资源（带 hash，可长期缓存）
+    location ~* /admin/.*\.(js|css|woff2?|png|jpg|jpeg|gif|svg|ico)$ {
+        alias /www/wwwroot/hetao/admin/dist;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
     }
 
     location /api/ {

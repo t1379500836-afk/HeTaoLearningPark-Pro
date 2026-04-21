@@ -83,15 +83,49 @@
 
 ## 数据流
 
+### 教师管理后台 → 学生端更新流程
+
 ```
-管理后台操作（增/删/改教师）
+教师后台操作（增/删/改教师或寄语）
   → Express 写 MySQL（立即生效）
-  → 立即重新生成 user/src/config/teachers.config.js（由 server/build.js 生成）
-  → 标记 needsBuild = true
+  → 立即重新生成配置文件：
+      - user/src/config/teachers.config.js（教师口令映射）
+      - user/src/config/messages.config.js（教师寄语数据）
+  → scheduleBuild() 设置脏标记 needsBuild = true
   → 每 10 分钟定时器检查：
-      有标记 → cd user && npm run build → 新 user/dist/ → Nginx 提供新文件
+      有标记 → needsBuild = false → npm run build
       无标记 → 跳过
+  → Vite 构建：
+      - 配置文件打包进 assets/index-xxxxx.js（hash 变化）
+      - 生成新的 user/dist/index.html（引用新 hash）
+  → purgeCDN() 刷新阿里云 CDN：
+      - 仅刷新 /index.html（学生端入口）
+      - 静态资源（JS/CSS）因 hash 变化自动回源
+  → 用户访问：
+      - CDN 返回新 index.html
+      - 新 JS 文件不在缓存 → 回源拉取
+      - 学生端显示最新数据
 ```
+
+### CDN 缓存策略
+
+| 资源类型 | CDN 缓存 | 刷新机制 | 说明 |
+|---------|---------|---------|------|
+| `/index.html` | ✅ 缓存 | ✅ 自动刷新 | 学生端入口，构建后自动刷新 CDN |
+| `/assets/*.js` | ✅ 长期缓存 | ❌ 无需刷新 | 文件名含 hash，变化自动回源 |
+| `/admin/index.html` | ✅ 缓存 | ❌ 不刷新 | 教师后台入口，需手动刷新 CDN |
+| `/api/*` | ❌ 不缓存 | - | Nginx 反向代理，实时请求 |
+
+### 教师后台 CDN 注意事项
+
+教师后台（`/admin/*`）的静态文件会被 CDN 缓存，但构建流程**不会自动刷新** `/admin/index.html`。
+
+| 场景 | 影响 | 处理方式 |
+|------|------|---------|
+| 修改数据库数据（增删改教师/寄语） | ✅ 无影响 | API 实时获取，无需操作 |
+| 修改教师后台前端代码 | ⚠️ 用户看到旧版本 | 需手动刷新 CDN 或等缓存过期 |
+
+### 路由数据流
 
 ```
 URL（含前缀）
@@ -118,15 +152,19 @@ URL（含前缀）
 
 ## 消息系统数据流
 
+### 教师寄语更新流程
+
 ```
 管理后台操作（新增/编辑/删除寄语）
   → Express 写 MySQL
-  → 立即重新生成 user/src/config/messages.config.js（由 server/build.js 生成）
-  → 标记 needsBuild = true
+  → 立即重新生成 user/src/config/messages.config.js
+  → scheduleBuild() 设置脏标记
   → 每 10 分钟定时器检查：
-      有标记 → cd user && npm run build → 新 user/dist/ → Nginx 提供新文件
+      有标记 → npm run build → purgeCDN() 刷新学生端入口
       无标记 → 跳过
 ```
+
+### 学生端消息加载
 
 ```
 学生端访问 /messages
@@ -184,3 +222,54 @@ typingTemplates # 打字练习代码模板
 - 间距：xs(5px) ~ xl(60px)
 - 响应断点：480px / 768px / 1024px / 1280px
 - 最大宽度：1200px
+
+## 自动构建与 CDN 刷新关键文件
+
+| 文件 | 作用 |
+|------|------|
+| `server/build.js` | 构建调度核心：脏标记机制 + 10分钟定时器 + CDN 刷新 |
+| `server/routes/teachers.js` | 教师 CRUD 后触发 `regenerateConfig()` + `scheduleBuild()` |
+| `server/routes/messages.js` | 寄语 CRUD 后触发 `regenerateMessagesConfig()` + `scheduleBuild()` |
+| `src/config/teachers.config.js` | 后端自动生成的教师口令映射 |
+| `src/config/messages.config.js` | 后端自动生成的教师寄语静态数据 |
+
+### 触发自动构建的操作
+
+以下操作会设置脏标记，在下一个 10 分钟定时器检查时触发构建：
+
+#### 教师管理（3 个操作）
+
+| 操作 | API | 影响字段 | 说明 |
+|------|-----|---------|------|
+| 新增教师 | `POST /api/teachers` | key, display_name | 新口令加入配置 |
+| 修改教师 | `PUT /api/teachers/:id` | key, display_name | 仅口令和花名变更触发 |
+| 删除教师 | `DELETE /api/teachers/:id` | - | 软删除，从配置移除 |
+
+> 修改 username、password、role 不会触发构建（不在静态配置中）
+
+#### 教师寄语（3 个操作）
+
+| 操作 | API | 说明 |
+|------|-----|------|
+| 新增寄语 | `POST /api/messages/manage/message` | 加入 messages.config.js |
+| 编辑寄语 | `PUT /api/messages/manage/message/:id` | 更新 messages.config.js |
+| 删除寄语 | `DELETE /api/messages/manage/message/:id` | 从 messages.config.js 移除 |
+
+#### 不触发构建的操作
+
+| 操作 | API | 原因 |
+|------|-----|------|
+| 学生提交悄悄话 | `POST /api/messages/whisper` | 数据通过 API 实时获取 |
+| 管理端删除悄悄话 | `DELETE /api/messages/manage/whisper/:id` | 不在静态配置中 |
+
+### 环境变量
+
+CDN 刷新依赖以下环境变量（配置在 `server/.env`）：
+
+```env
+ALIBABA_CLOUD_ACCESS_KEY_ID=xxx
+ALIBABA_CLOUD_ACCESS_KEY_SECRET=xxx
+CDN_DOMAIN=https://your-domain.com
+```
+
+未配置时自动跳过 CDN 刷新，不影响构建流程。

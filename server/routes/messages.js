@@ -178,8 +178,7 @@ router.post('/whisper', async (req, res) => {
       [validKey, cleanContent]
     )
     res.status(201).json({ ok: true, id: result.insertId })
-    regenerateMessagesConfig().catch(e => console.error('配置更新失败:', e.message))
-    scheduleBuild()
+    // 悄悄话不在静态配置文件中，无需重新构建
   } catch (err) {
     console.error('提交悄悄话失败:', err)
     res.status(500).json({ error: '服务器错误' })
@@ -344,8 +343,7 @@ router.delete('/manage/whisper/:id', async (req, res) => {
 
     if (result.affectedRows === 0) return res.status(404).json({ error: '悄悄话不存在' })
     res.json({ ok: true })
-    regenerateMessagesConfig().catch(e => console.error('配置更新失败:', e.message))
-    scheduleBuild()
+    // 悄悄话不在静态配置文件中，无需重新构建
   } catch (err) {
     console.error('删除悄悄话失败:', err)
     res.status(500).json({ error: '服务器错误' })

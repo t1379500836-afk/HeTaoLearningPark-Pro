@@ -78,6 +78,12 @@ router.get('/dau', authMiddleware, async (req, res) => {
       [start, end]
     )
 
+    // 按老师+小时分组（用于计算单个老师的峰值时段）
+    const [teacherHourlyStats] = await pool.execute(
+      'SELECT d.teacher_id, t.display_name AS teacherName, HOUR(d.created_at) AS hour, COUNT(*) AS count FROM daily_active_users d JOIN teachers t ON t.id = d.teacher_id WHERE d.date BETWEEN ? AND ? GROUP BY d.teacher_id, HOUR(d.created_at) ORDER BY d.teacher_id, hour',
+      [start, end]
+    )
+
     // 序列化
     const daily = dailyStats.map(r => ({
       date: fmtDate(r.date),
@@ -93,8 +99,14 @@ router.get('/dau', authMiddleware, async (req, res) => {
       hour: r.hour,
       count: r.count
     }))
+    const teacherHourly = teacherHourlyStats.map(r => ({
+      teacherId: r.teacher_id,
+      teacherName: r.teacherName,
+      hour: r.hour,
+      count: r.count
+    }))
 
-    res.json({ dailyStats: daily, totalsByDate: totals, hourlyStats: hourly })
+    res.json({ dailyStats: daily, totalsByDate: totals, hourlyStats: hourly, teacherHourlyStats: teacherHourly })
   } catch (err) {
     console.error('DAU query error:', err)
     res.status(500).json({ error: '查询失败' })
@@ -129,9 +141,40 @@ router.get('/dau/summary', authMiddleware, async (req, res) => {
       'SELECT date, COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY date',
       [start, end]
     )
-    const avgDaily = dailyRows.length > 0
-      ? Number((dailyRows.reduce((s, r) => s + r.cnt, 0) / dayCount).toFixed(1))
-      : 0
+
+    // 峰值时段（单日模式下取最高的连续3小时总和）
+    let peakHourlySum = 0
+    let peakHourRange = ''
+    if (isSingleDay) {
+      const [hourlyRows] = await pool.execute(
+        'SELECT HOUR(created_at) AS hour, COUNT(*) AS cnt FROM daily_active_users WHERE date BETWEEN ? AND ? GROUP BY HOUR(created_at) ORDER BY hour',
+        [start, end]
+      )
+      if (hourlyRows.length >= 3) {
+        // 计算连续3小时的最高总和
+        for (let i = 0; i <= hourlyRows.length - 3; i++) {
+          const sum3 = hourlyRows[i].cnt + hourlyRows[i+1].cnt + hourlyRows[i+2].cnt
+          if (sum3 > peakHourlySum) {
+            peakHourlySum = sum3
+            const startHour = hourlyRows[i].hour
+            const endHour = hourlyRows[i+2].hour
+            peakHourRange = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`
+          }
+        }
+      } else if (hourlyRows.length > 0) {
+        // 不足3小时，取所有小时总和
+        peakHourlySum = hourlyRows.reduce((s, r) => s + r.cnt, 0)
+        const startHour = hourlyRows[0].hour
+        const endHour = hourlyRows[hourlyRows.length - 1].hour
+        peakHourRange = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`
+      }
+    }
+
+    const avgDaily = isSingleDay
+      ? peakHourlySum
+      : (dailyRows.length > 0
+          ? Number((dailyRows.reduce((s, r) => s + r.cnt, 0) / dayCount).toFixed(1))
+          : 0)
 
     // 单日最高（范围内）
     const dailyCounts = dailyRows.map(r => r.cnt)
@@ -164,6 +207,8 @@ router.get('/dau/summary', authMiddleware, async (req, res) => {
       avgDaily,
       maxDaily,
       historyMaxDaily,
+      peakHourlySum,
+      peakHourRange,
       dayCount,
       isSingleDay,
       breakdown,

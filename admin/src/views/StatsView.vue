@@ -52,7 +52,7 @@
             </div>
             <div>
               <div class="stat-card__num">{{ selectedTeacherName ? selectedTeacherAvg : dauSummary.avgDaily }}</div>
-              <div class="stat-card__label">{{ selectedTeacherName ? '日均活跃' : (dauSummary.isSingleDay ? '今日均值' : dauSummary.dayCount + ' 日均值') }}</div>
+              <div class="stat-card__label">{{ selectedTeacherName ? selectedTeacherAvgLabel : (dauSummary.isSingleDay ? dauSummary.peakHourRange + ' 峰值' : dauSummary.dayCount + ' 日均值') }}</div>
             </div>
           </div>
         </div>
@@ -151,10 +151,11 @@ const user = inject('user')
 const statsRange = ref('today')
 const customStartDate = ref(null)
 const customEndDate = ref(null)
-const dauSummary = ref({ rangeTotal: 0, avgDaily: 0, maxDaily: 0, historyMaxDaily: 0, dayCount: 1, isSingleDay: true, breakdown: [], startDate: '', endDate: '' })
+const dauSummary = ref({ rangeTotal: 0, avgDaily: 0, maxDaily: 0, historyMaxDaily: 0, peakHourlySum: 0, peakHourRange: '', dayCount: 1, isSingleDay: true, breakdown: [], startDate: '', endDate: '' })
 const dauDaily = ref([])
 const dauTotals = ref([])
 const dauHourly = ref([])
+const teacherHourlyStats = ref([])
 const leaderboardData = ref([])
 const lbPage = ref(1)
 const LB_PAGE_SIZE = 5
@@ -182,21 +183,53 @@ const selectedTeacherStats = computed(() => {
   if (!selectedTeacherName.value) return null
   const teacher = dauSummary.value.breakdown.find(t => t.teacherName === selectedTeacherName.value)
   if (!teacher) return null
+
+  const isSingleDay = dauSummary.value.isSingleDay
+  const dayCount = dauSummary.value.dayCount || 1
+
   // 从 dailyStats 计算该老师的单日最高
   const teacherDaily = dauDaily.value
     .filter(r => r.teacherName === selectedTeacherName.value)
     .map(r => r.dauCount)
   const maxDaily = teacherDaily.length > 0 ? Math.max(...teacherDaily) : 0
-  const dayCount = dauSummary.value.dayCount || 1
+
+  // 单日模式：计算该老师的峰值时段（连续3小时最高）
+  let peakSum = 0
+  let peakRange = ''
+  if (isSingleDay) {
+    const teacherHours = teacherHourlyStats.value
+      .filter(r => r.teacherName === selectedTeacherName.value)
+      .sort((a, b) => a.hour - b.hour)
+
+    if (teacherHours.length >= 3) {
+      for (let i = 0; i <= teacherHours.length - 3; i++) {
+        const sum3 = teacherHours[i].count + teacherHours[i+1].count + teacherHours[i+2].count
+        if (sum3 > peakSum) {
+          peakSum = sum3
+          const startHour = teacherHours[i].hour
+          const endHour = teacherHours[i+2].hour
+          peakRange = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`
+        }
+      }
+    } else if (teacherHours.length > 0) {
+      peakSum = teacherHours.reduce((s, r) => s + r.count, 0)
+      const startHour = teacherHours[0].hour
+      const endHour = teacherHours[teacherHours.length - 1].hour
+      peakRange = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`
+    }
+  }
+
   return {
     total: teacher.totalCount,
-    avg: Number((teacher.totalCount / dayCount).toFixed(1)),
+    avg: isSingleDay ? peakSum : Number((teacher.totalCount / dayCount).toFixed(1)),
+    avgLabel: isSingleDay ? peakRange + ' 峰值' : '日均活跃',
     maxDaily
   }
 })
 
 const selectedTeacherTotal = computed(() => selectedTeacherStats.value?.total ?? 0)
 const selectedTeacherAvg = computed(() => selectedTeacherStats.value?.avg ?? 0)
+const selectedTeacherAvgLabel = computed(() => selectedTeacherStats.value?.avgLabel ?? '日均活跃')
 const selectedTeacherDaily = computed(() => selectedTeacherStats.value?.maxDaily ?? 0)
 
 function onStatsRangeChange() {
@@ -232,6 +265,7 @@ async function loadStats() {
   dauDaily.value = dauRes.data.dailyStats
   dauTotals.value = dauRes.data.totalsByDate
   dauHourly.value = dauRes.data.hourlyStats
+  teacherHourlyStats.value = dauRes.data.teacherHourlyStats || []
 
   try {
     const lbRes = await api.get('/stats/dau/leaderboard', { params: { startDate: start, endDate: end } })

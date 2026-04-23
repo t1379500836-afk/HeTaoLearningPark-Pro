@@ -46,6 +46,17 @@ export async function runBuild() {
 
     // 构建成功后刷新 CDN
     await purgeCDN()
+
+    // 清理超过1天的旧构建产物
+    const assetsDir = resolve(buildCwd, 'dist/assets')
+    if (existsSync(assetsDir)) {
+      try {
+        execSync(`find ${assetsDir} -type f -mtime +1 -delete`)
+        console.log('旧构建产物清理完成')
+      } catch (cleanupErr) {
+        console.error('清理旧构建产物失败:', cleanupErr.message)
+      }
+    }
   } catch (err) {
     console.error('前端构建失败:', err.message)
   }

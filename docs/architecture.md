@@ -262,6 +262,46 @@ typingTemplates # 打字练习代码模板
 | 学生提交悄悄话 | `POST /api/messages/whisper` | 数据通过 API 实时获取 |
 | 管理端删除悄悄话 | `DELETE /api/messages/manage/whisper/:id` | 不在静态配置中 |
 
+### 构建产物保留与清理机制
+
+#### 为什么保留旧构建产物
+
+Vite 构建配置 `emptyOutDir: false`，使每次构建后**旧 hash 文件继续保留在 `dist/assets/` 中**。
+
+**根因**：CDN 边缘节点存在多层缓存，构建完成后旧 `index.html` 可能在内存缓存中存活数秒到数分钟（`TCP_MEM_HIT`）。在此期间：
+
+```
+用户请求 → CDN 内存缓存（旧 index.html）→ 浏览器解析 → 请求旧 hash chunk
+                                                              ↓
+                                                    源站已删除（Vite 默认清空 dist）
+                                                              ↓
+                                                    404：Failed to fetch dynamically imported module
+```
+
+保留旧文件后，窗口期内用户仍能正常加载旧 chunk，体验无损。
+
+#### 自动清理机制
+
+旧文件无限累积会占用磁盘空间，因此构建流程内置自动清理：
+
+| 项目 | 配置 |
+|------|------|
+| 清理路径 | `user/dist/assets/` |
+| 清理条件 | 文件修改时间超过 **1 天**（`-mtime +1`） |
+| 触发时机 | 每次构建完成后、CDN 刷新之后 |
+| 执行位置 | `server/build.js` 的 `runBuild()` 末尾 |
+| 部署脚本 | `deploy.sh` 同步包含相同命令 |
+
+**为什么 1 天是安全的**：
+
+- 未变更的文件（如 vue.js、router.js）每次构建都会被 Vite 重写，mtime 刷新为最新，永远不会被清理
+- 只有因内容变更而产生的**旧 hash 文件**（如 `index-abc123.js` 被 `index-def456.js` 替代）mtime 才会停留在旧时间戳
+- CDN 缓存窗口期通常只有秒级到分钟级，保留 1 天远超安全余量
+
+#### 前端兜底：路由错误捕获
+
+即使上述机制失效，前端仍通过 `router.onError` 捕获 chunk 加载失败，弹窗引导用户刷新页面，避免用户卡死在白屏状态。
+
 ### 环境变量
 
 CDN 刷新依赖以下环境变量（配置在 `server/.env`）：

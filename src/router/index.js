@@ -230,5 +230,21 @@ router.beforeEach((to, from, next) => {
   return next({ name: 'not-found', replace: true })
 })
 
+router.onError((error) => {
+  const msg = error.message || ''
+  const isChunkLoadError =
+    msg.includes('Failed to fetch dynamically imported module') ||
+    msg.includes('Loading chunk') ||
+    msg.includes('Loading CSS chunk') ||
+    msg.includes('dynamically imported module')
+
+  if (isChunkLoadError) {
+    console.error('[Router] Chunk load failed, prompting reload.', error)
+    if (window.confirm('页面版本已更新，点击确定立即刷新以继续访问')) {
+      window.location.reload()
+    }
+  }
+})
+
 export { validPrefixes }
 export default router

@@ -1,6 +1,12 @@
 # 变更记录
 
-## 2026-04-22
+## 2026-04-27
+
+- **修复：CDN 刷新不完整导致 CSS/JS 加载失败**
+  - 问题：构建后 CDN 仅刷新 HTML，未刷新 assets 目录，导致用户偶发 CSS/JS 加载失败或点击无反应
+  - 原因：新 HTML 引用新 CSS hash，但 CDN 边缘节点尚未同步新资源，出现短暂窗口期
+  - 修复：`server/build.js` 刷新 CDN 时同时刷新 `index.html`、`admin/index.html` 和 `assets/` 目录
+  - 涉及文件：`server/build.js`（CDN objectType 从 File 改为 Directory，刷新范围扩大）
 
 - **修复：更新教师口令后首页寄语消失**
   - 问题：修改教师口令后，`messages.config.js` 未同步刷新，导致首页按新口令查不到寄语

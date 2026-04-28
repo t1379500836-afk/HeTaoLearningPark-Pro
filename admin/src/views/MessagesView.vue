@@ -95,14 +95,40 @@
           </el-tab-pane>
 
           <el-tab-pane label="匿名悄悄话" name="whispers">
-            <div class="tab-header">
-              <el-tag type="info" size="large">共 {{ whispers.length }} 条悄悄话</el-tag>
+            <div class="tab-header whispers-toolbar">
+              <el-tag type="info" size="large">共 {{ whispersTotal }} 条悄悄话</el-tag>
+              <el-radio-group v-model="whisperRange" @change="onWhisperRangeChange" style="margin-left:12px">
+                <el-radio-button value="all">全部</el-radio-button>
+                <el-radio-button value="today">今天</el-radio-button>
+                <el-radio-button value="7d">近 7 天</el-radio-button>
+                <el-radio-button value="30d">近 30 天</el-radio-button>
+                <el-radio-button value="custom">自定义</el-radio-button>
+              </el-radio-group>
+              <div v-if="whisperRange === 'custom'" class="whispers-toolbar__dates">
+                <el-date-picker
+                  v-model="whisperStartDate"
+                  type="date"
+                  placeholder="开始日期"
+                  :disabled-date="d => d > new Date()"
+                  value-format="YYYY-MM-DD"
+                  @change="onWhisperDateChange"
+                />
+                <span class="whispers-toolbar__sep">至</span>
+                <el-date-picker
+                  v-model="whisperEndDate"
+                  type="date"
+                  placeholder="结束日期"
+                  :disabled-date="d => whisperStartDate ? d < new Date(whisperStartDate) : d > new Date()"
+                  value-format="YYYY-MM-DD"
+                  @change="onWhisperDateChange"
+                />
+              </div>
             </div>
             <div v-loading="loadingWhispers" class="whisper-list">
-              <div v-if="!whispers.length && !loadingWhispers" class="empty-state">
+              <div v-if="!paginatedWhispers.length && !loadingWhispers" class="empty-state">
                 <el-empty description="还没有悄悄话~" />
               </div>
-              <div v-for="w in whispers" :key="w.id" class="whisper-card">
+              <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card">
                 <div class="whisper-body">
                   <span class="whisper-icon">🤫</span>
                   <p class="whisper-text">{{ w.content }}</p>
@@ -112,6 +138,16 @@
                   <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
                 </div>
               </div>
+            </div>
+            <div v-if="whispersTotal > whisperPageSize" class="pagination-wrap">
+              <el-pagination
+                v-model:current-page="whisperPage"
+                :page-size="whisperPageSize"
+                :total="whispersTotal"
+                layout="prev, pager, next"
+                background
+                small
+              />
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -163,14 +199,40 @@
         </el-tab-pane>
 
         <el-tab-pane label="匿名悄悄话" name="whispers">
-          <div class="tab-header">
-            <el-tag type="info" size="large">共 {{ whispers.length }} 条悄悄话</el-tag>
+          <div class="tab-header whispers-toolbar">
+            <el-tag type="info" size="large">共 {{ whispersTotal }} 条悄悄话</el-tag>
+            <el-radio-group v-model="whisperRange" @change="onWhisperRangeChange" style="margin-left:12px">
+              <el-radio-button value="all">全部</el-radio-button>
+              <el-radio-button value="today">今天</el-radio-button>
+              <el-radio-button value="7d">近 7 天</el-radio-button>
+              <el-radio-button value="30d">近 30 天</el-radio-button>
+              <el-radio-button value="custom">自定义</el-radio-button>
+            </el-radio-group>
+            <div v-if="whisperRange === 'custom'" class="whispers-toolbar__dates">
+              <el-date-picker
+                v-model="whisperStartDate"
+                type="date"
+                placeholder="开始日期"
+                :disabled-date="d => d > new Date()"
+                value-format="YYYY-MM-DD"
+                @change="onWhisperDateChange"
+              />
+              <span class="whispers-toolbar__sep">至</span>
+              <el-date-picker
+                v-model="whisperEndDate"
+                type="date"
+                placeholder="结束日期"
+                :disabled-date="d => whisperStartDate ? d < new Date(whisperStartDate) : d > new Date()"
+                value-format="YYYY-MM-DD"
+                @change="onWhisperDateChange"
+              />
+            </div>
           </div>
           <div v-loading="loadingWhispers" class="whisper-list">
-            <div v-if="!whispers.length && !loadingWhispers" class="empty-state">
+            <div v-if="!paginatedWhispers.length && !loadingWhispers" class="empty-state">
               <el-empty description="还没有悄悄话~" />
             </div>
-            <div v-for="w in whispers" :key="w.id" class="whisper-card">
+            <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card">
               <div class="whisper-body">
                 <span class="whisper-icon">🤫</span>
                 <p class="whisper-text">{{ w.content }}</p>
@@ -180,6 +242,16 @@
                 <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
               </div>
             </div>
+          </div>
+          <div v-if="whispersTotal > whisperPageSize" class="pagination-wrap">
+            <el-pagination
+              v-model:current-page="whisperPage"
+              :page-size="whisperPageSize"
+              :total="whispersTotal"
+              layout="prev, pager, next"
+              background
+              small
+            />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -306,6 +378,13 @@ const paginatedMessages = computed(() => {
 // 悄悄话
 const whispers = ref([])
 const loadingWhispers = ref(false)
+const whisperPage = ref(1)
+const whisperPageSize = 10
+const whispersTotal = ref(0)
+const whisperRange = ref('all')
+const whisperStartDate = ref(null)
+const whisperEndDate = ref(null)
+const paginatedWhispers = computed(() => whispers.value)
 
 // 对话框
 const dialogVisible = ref(false)
@@ -342,6 +421,7 @@ async function loadTeachers() {
 }
 
 async function loadData() {
+  whisperPage.value = 1
   const params = {}
   if (isAdmin.value && selectedTeacherKey.value) {
     params.teacherKey = selectedTeacherKey.value
@@ -364,12 +444,61 @@ async function loadMessages(params = {}) {
 async function loadWhispers(params = {}) {
   loadingWhispers.value = true
   try {
-    const { data } = await api.get('/messages/manage/whispers', { params })
+    const { start, end } = getWhisperDateRange()
+    const queryParams = {
+      ...params,
+      page: whisperPage.value,
+      pageSize: whisperPageSize,
+      ...(start && { startDate: start }),
+      ...(end && { endDate: end })
+    }
+    const { data } = await api.get('/messages/manage/whispers', { params: queryParams })
     whispers.value = data.data || []
+    whispersTotal.value = data.total || 0
+    const maxPage = Math.max(1, Math.ceil(whispersTotal.value / whisperPageSize))
+    if (whisperPage.value > maxPage) whisperPage.value = maxPage
   } finally {
     loadingWhispers.value = false
   }
 }
+
+function getWhisperDateRange() {
+  const d = new Date()
+  const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  if (whisperRange.value === 'custom' && whisperStartDate.value && whisperEndDate.value) {
+    return { start: whisperStartDate.value, end: whisperEndDate.value }
+  }
+  if (whisperRange.value === 'today') return { start: today, end: today }
+  if (whisperRange.value === '7d') {
+    const ds = new Date(Date.now() - 6 * 86400000)
+    const start = `${ds.getFullYear()}-${String(ds.getMonth() + 1).padStart(2, '0')}-${String(ds.getDate()).padStart(2, '0')}`
+    return { start, end: today }
+  }
+  if (whisperRange.value === '30d') {
+    const ds = new Date(Date.now() - 29 * 86400000)
+    const start = `${ds.getFullYear()}-${String(ds.getMonth() + 1).padStart(2, '0')}-${String(ds.getDate()).padStart(2, '0')}`
+    return { start, end: today }
+  }
+  return { start: null, end: null }
+}
+
+function onWhisperRangeChange() {
+  whisperPage.value = 1
+  loadWhispers(isAdmin.value && selectedTeacherKey.value ? { teacherKey: selectedTeacherKey.value } : {})
+}
+
+function onWhisperDateChange() {
+  if (whisperStartDate.value && whisperEndDate.value) {
+    whisperPage.value = 1
+    loadWhispers(isAdmin.value && selectedTeacherKey.value ? { teacherKey: selectedTeacherKey.value } : {})
+  }
+}
+
+watch(whisperPage, () => {
+  if (activeTab.value === 'whispers') {
+    loadWhispers(isAdmin.value && selectedTeacherKey.value ? { teacherKey: selectedTeacherKey.value } : {})
+  }
+})
 
 function openAddDialog() {
   isEditing.value = false
@@ -566,7 +695,16 @@ function formatDate(isoString) {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
+
+.whispers-toolbar {
+  justify-content: flex-start;
+}
+
+.whispers-toolbar__dates { display: flex; align-items: center; gap: 8px; }
+.whispers-toolbar__sep { color: #999; font-size: 14px; }
 
 .table-scroll {
   overflow-x: auto;
@@ -748,5 +886,12 @@ function formatDate(isoString) {
   .teacher-card {
     padding: 12px;
   }
+}
+
+@media (max-width: 580px) {
+  .whispers-toolbar { flex-direction: column; align-items: flex-start; }
+  .whispers-toolbar__dates { width: 100%; flex-wrap: wrap; }
+  .whispers-toolbar__dates :deep(.el-date-editor) { flex: 1; min-width: 120px; }
+  .whispers-toolbar :deep(.el-radio-button__inner) { padding: 6px 10px; font-size: 13px; }
 }
 </style>

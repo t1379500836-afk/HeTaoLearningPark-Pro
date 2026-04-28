@@ -23,7 +23,8 @@ const teachers = [
   { id: 17, key: '千千老师我来啦', name: '张千老师' },
   { id: 18, key: '按时完课', name: '燕子老师' },
   { id: 19, key: '咕咕嘎嘎', name: '悦悦老师' },
-  { id: 20, key: '苏苏老师我来啦', name: '苏苏老师' }
+  { id: 20, key: '苏苏老师我来啦', name: '苏苏老师' },
+  { id: 21, key: '测试', name: '测试老师' }
 ]
 
 const teachersMap = {}

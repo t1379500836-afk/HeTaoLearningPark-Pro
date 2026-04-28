@@ -80,13 +80,19 @@ async function purgeCDN() {
     })
 
     const client = new Cdn20180510.default(config)
-    const request = new Cdn20180510.RefreshObjectCachesRequest({
-      objectPath: `${cdnDomain}/index.html\n${cdnDomain}/admin/index.html\n${cdnDomain}/assets/`,
-      objectType: 'Directory'
-    })
-
-    const response = await client.refreshObjectCaches(request)
-    console.log('CDN 刷新成功:', response.body.requestId)
+    const refreshPaths = [
+      `/${cdnDomain}/index.html`,
+      `/${cdnDomain}/admin/index.html`,
+      `/${cdnDomain}/assets/`
+    ]
+    for (const path of refreshPaths) {
+      const request = new Cdn20180510.RefreshObjectCachesRequest({
+        objectPath: path,
+        objectType: 'File'
+      })
+      const response = await client.refreshObjectCaches(request)
+      console.log(`CDN 刷新成功 [${path}]:`, response.body.requestId)
+    }
   } catch (err) {
     console.error('CDN 刷新失败:', err.message)
   }

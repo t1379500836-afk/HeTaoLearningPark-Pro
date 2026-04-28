@@ -336,20 +336,44 @@ router.get('/manage/whispers', async (req, res) => {
     }
 
     if (!teacherId) {
-      return res.json({ data: [] })
+      return res.json({ data: [], total: 0 })
     }
 
-    const [rows] = await pool.execute(
-      'SELECT w.id, w.content, w.created_at, t.display_name FROM whispers w JOIN teachers t ON w.teacher_id = t.id WHERE w.teacher_id = ? ORDER BY w.created_at DESC LIMIT 200',
-      [teacherId]
-    )
+    const page = Math.max(1, parseInt(req.query.page) || 1)
+    const pageSize = Math.min(100, Math.max(1, parseInt(req.query.pageSize) || 10))
+    const offset = (page - 1) * pageSize
 
-    res.json({ data: rows.map(r => ({
-      id: r.id,
-      content: r.content,
-      teacherName: r.display_name,
-      createdAt: toLocalISO(r.created_at)
-    })) })
+    let countSql = 'SELECT COUNT(*) as total FROM whispers WHERE teacher_id = ?'
+    let dataSql = `SELECT w.id, w.content, w.created_at, t.display_name FROM whispers w JOIN teachers t ON w.teacher_id = t.id WHERE w.teacher_id = ?`
+    const bindParams = [teacherId]
+
+    if (req.query.startDate) {
+      countSql += ' AND created_at >= ?'
+      dataSql += ' AND w.created_at >= ?'
+      bindParams.push(req.query.startDate)
+    }
+    if (req.query.endDate) {
+      countSql += ' AND created_at < DATE_ADD(?, INTERVAL 1 DAY)'
+      dataSql += ' AND w.created_at < DATE_ADD(?, INTERVAL 1 DAY)'
+      bindParams.push(req.query.endDate)
+    }
+
+    dataSql += ' ORDER BY w.created_at DESC LIMIT ' + pageSize + ' OFFSET ' + offset
+
+    const [countResult] = await pool.execute(countSql, bindParams)
+    const total = countResult[0].total
+
+    const [rows] = await pool.execute(dataSql, bindParams)
+
+    res.json({
+      data: rows.map(r => ({
+        id: r.id,
+        content: r.content,
+        teacherName: r.display_name,
+        createdAt: toLocalISO(r.created_at)
+      })),
+      total
+    })
   } catch (err) {
     console.error('查询悄悄话失败:', err)
     res.status(500).json({ error: '服务器错误' })

@@ -6,6 +6,9 @@ import authRoutes from './routes/auth.js'
 import teacherRoutes from './routes/teachers.js'
 import statsRoutes from './routes/stats.js'
 import messageRoutes from './routes/messages.js'
+import tagRoutes from './routes/tags.js'
+import questionRoutes from './routes/questions.js'
+import libraryRoutes from './routes/library.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -19,6 +22,9 @@ app.use('/api/auth', authRoutes)
 app.use('/api/teachers', teacherRoutes)
 app.use('/api/stats', statsRoutes)
 app.use('/api/messages', messageRoutes)
+app.use('/api/questions/tags', tagRoutes)
+app.use('/api/questions', questionRoutes)
+app.use('/api/library', libraryRoutes)
 
 // 启动
 async function start() {

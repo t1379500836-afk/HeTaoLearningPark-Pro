@@ -34,11 +34,6 @@ const baseRoutes = [
     props: true
   },
   {
-    path: '/practice',
-    name: 'practice',
-    component: () => import('@/views/PracticeView.vue')
-  },
-  {
     path: '/typing',
     name: 'typing',
     component: () => import('@/views/TypingView.vue')
@@ -79,6 +74,17 @@ const baseRoutes = [
     path: '/messages',
     name: 'messages',
     component: () => import('@/views/MessagesView.vue')
+  },
+  {
+    path: '/library',
+    name: 'library',
+    component: () => import('@/views/LibraryView.vue')
+  },
+  {
+    path: '/library/:id',
+    name: 'question',
+    component: () => import('@/views/QuestionView.vue'),
+    props: true
   }
 ]
 
@@ -114,12 +120,6 @@ function createPrefixedRoutes(prefix) {
       name: `${prefix}-lesson`,
       component: () => import('@/views/LessonView.vue'),
       props: true
-    },
-    {
-      path: `/${prefix}/practice`,
-      name: `${prefix}-practice`,
-      component: () => import('@/views/PracticeView.vue'),
-      props: { prefix }
     },
     {
       path: `/${prefix}/typing`,
@@ -168,6 +168,18 @@ function createPrefixedRoutes(prefix) {
       name: `${prefix}-messages`,
       component: () => import('@/views/MessagesView.vue'),
       props: { prefix }
+    },
+    {
+      path: `/${prefix}/library`,
+      name: `${prefix}-library`,
+      component: () => import('@/views/LibraryView.vue'),
+      props: { prefix }
+    },
+    {
+      path: `/${prefix}/library/:id`,
+      name: `${prefix}-question`,
+      component: () => import('@/views/QuestionView.vue'),
+      props: true
     }
   ]
 }
@@ -219,7 +231,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 有效的基础路由路径（不带前缀）
-  const baseRoutePaths = ['levels', 'lesson', 'practice', 'typing', 'python', 'ycl', 'locked', 'contact', 'messages']
+  const baseRoutePaths = ['levels', 'lesson', 'typing', 'python', 'ycl', 'locked', 'contact', 'messages', 'library']
 
   // 如果第一个段是基础路由路径，放行
   if (baseRoutePaths.includes(firstSegment)) {

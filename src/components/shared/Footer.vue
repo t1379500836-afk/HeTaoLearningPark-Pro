@@ -9,7 +9,7 @@
       <div class="footer-links">
         <a href="#">关于我们</a>
         <a href="#levels">课程介绍</a>
-        <a href="#practice">练习题库</a>
+        <router-link :to="prefixedPath('/library')">练习题库</router-link>
         <router-link :to="prefixedPath('/contact')">联系作者</router-link>
       </div>
       <p class="copyright">@核桃编程成都基地Python10组版权所有，禁止转发使用</p>

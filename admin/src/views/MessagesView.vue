@@ -39,7 +39,7 @@
             :total="filteredTeachers.length"
             layout="prev, pager, next"
             background
-            small
+            size="small"
           />
         </div>
       </div>
@@ -89,7 +89,7 @@
                 :total="messages.length"
                 layout="prev, pager, next"
                 background
-                small
+                size="small"
               />
             </div>
           </el-tab-pane>
@@ -146,7 +146,7 @@
                 :total="whispersTotal"
                 layout="prev, pager, next"
                 background
-                small
+                size="small"
               />
             </div>
           </el-tab-pane>
@@ -193,7 +193,7 @@
               :total="messages.length"
               layout="prev, pager, next"
               background
-              small
+              size="small"
             />
           </div>
         </el-tab-pane>
@@ -250,7 +250,7 @@
               :total="whispersTotal"
               layout="prev, pager, next"
               background
-              small
+              size="small"
             />
           </div>
         </el-tab-pane>

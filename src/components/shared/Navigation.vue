@@ -45,7 +45,7 @@ const prefix = computed(() => getCurrentPrefix(route))
 const navLinks = [
   { to: '/', text: '首页' },
   { to: '/levels', text: '课程体系' },
-  { to: '/practice', text: '练习题库' },
+  { to: '/library', text: '练习题库' },
   { to: '/typing', text: '打字练习' },
   { to: '/python', text: 'Python IDE' },
   { to: '/ycl', text: 'YCL专区' },

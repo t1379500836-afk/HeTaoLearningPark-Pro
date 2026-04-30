@@ -123,6 +123,98 @@ export async function initDatabase() {
       if (!e.message.includes('check') && !e.message.includes('Unknown column')) console.log('teacher_messages 表 teacher_key 删除:', e.message)
     }
 
+    // 题库标签表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS question_tags (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL UNIQUE,
+        color VARCHAR(20) DEFAULT '#4facfe',
+        parent_id INT DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_parent (parent_id)
+      )
+    `)
+
+    // 兼容已有表：补加 parent_id 列
+    try {
+      await conn.execute("ALTER TABLE question_tags ADD COLUMN parent_id INT DEFAULT NULL")
+      await conn.execute("ALTER TABLE question_tags ADD INDEX idx_parent (parent_id)")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column') && !e.message.includes('Duplicate key')) throw e
+    }
+
+    // 题库题目表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS questions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(200) NOT NULL,
+        content TEXT NOT NULL,
+        type ENUM('choice', 'program') NOT NULL,
+        difficulty ENUM('easy', 'medium', 'hard') DEFAULT 'medium',
+        tags JSON,
+        choices JSON,
+        test_cases JSON,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_type (type),
+        INDEX idx_difficulty (difficulty)
+      )
+    `)
+
+    // 题库提交记录表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS submissions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        question_id INT NOT NULL,
+        code TEXT,
+        status ENUM('pending', 'running', 'passed', 'failed', 'error') DEFAULT 'pending',
+        result JSON,
+        score INT DEFAULT 0,
+        earned_score INT DEFAULT 0,
+        total_score INT DEFAULT 0,
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_question (question_id),
+        INDEX idx_question_status (question_id, status),
+        INDEX idx_submitted_at (submitted_at)
+      )
+    `)
+
+    // 兼容旧表：补加 earned_score 和 total_score 列
+    try {
+      await conn.execute("ALTER TABLE submissions ADD COLUMN earned_score INT DEFAULT 0")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
+    try {
+      await conn.execute("ALTER TABLE submissions ADD COLUMN total_score INT DEFAULT 0")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
+
+    // 兼容旧表：删除 user_uuid 列（如果存在）
+    try {
+      await conn.execute('ALTER TABLE submissions DROP COLUMN user_uuid')
+    } catch (e) {
+      if (!e.message.includes('check') && !e.message.includes('Unknown column')) throw e
+    }
+
+    // 兼容旧表：删除旧索引并添加新索引
+    try {
+      await conn.execute('ALTER TABLE submissions DROP INDEX idx_question_user')
+    } catch (e) {
+      if (!e.message.includes('check') && !e.message.includes('doesn\'t exist')) throw e
+    }
+    try {
+      await conn.execute('ALTER TABLE submissions ADD INDEX idx_question (question_id)')
+    } catch (e) {
+      if (!e.message.includes('Duplicate key')) throw e
+    }
+    try {
+      await conn.execute('ALTER TABLE submissions ADD INDEX idx_question_status (question_id, status)')
+    } catch (e) {
+      if (!e.message.includes('Duplicate key')) throw e
+    }
+
     console.log('数据库初始化完成')
   } finally {
     conn.release()

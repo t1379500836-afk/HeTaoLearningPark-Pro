@@ -10,24 +10,28 @@
         <span class="sidebar-title">管理后台</span>
       </div>
       <el-menu
-        :default-active="$route.name"
+        :default-active="$route.path"
         class="sidebar-menu"
         background-color="#1a1a2e"
         text-color="rgba(255,255,255,0.65)"
         active-text-color="#fff"
         router
       >
-        <el-menu-item index="stats">
+        <el-menu-item index="/stats">
           <el-icon><DataAnalysis /></el-icon>
           <span>数据统计</span>
         </el-menu-item>
-        <el-menu-item index="teachers">
+        <el-menu-item index="/teachers">
           <el-icon><User /></el-icon>
           <span>教师管理</span>
         </el-menu-item>
-        <el-menu-item index="messages">
+        <el-menu-item index="/messages">
           <el-icon><ChatDotRound /></el-icon>
           <span>消息管理</span>
+        </el-menu-item>
+        <el-menu-item index="/library">
+          <el-icon><Document /></el-icon>
+          <span>题库管理</span>
         </el-menu-item>
       </el-menu>
       <div class="sidebar-footer">
@@ -77,7 +81,7 @@ const logout = inject('logout')
 const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
 
-const PAGE_TITLES = { stats: '数据统计', teachers: '教师管理', messages: '消息管理' }
+const PAGE_TITLES = { stats: '数据统计', teachers: '教师管理', messages: '消息管理', library: '题库管理' }
 const pageTitle = computed(() => PAGE_TITLES[route.name] || '数据统计')
 
 function handleLogout() {

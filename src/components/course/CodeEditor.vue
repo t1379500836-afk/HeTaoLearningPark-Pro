@@ -1,11 +1,11 @@
 <template>
-  <section class="editor-section">
+  <section class="editor-section" :class="{ 'minimal-mode': !showHeader }">
     <div class="container">
-      <h2 class="section-title">Python 在线编辑器</h2>
-      <p class="editor-note">支持 Python 标准库（print, input, math, random, json, turtle 等）</p>
+      <h2 v-if="showHeader" class="section-title">Python 在线编辑器</h2>
+      <p v-if="showHeader" class="editor-note">支持 Python 标准库（print, input, math, random, json, turtle 等）</p>
       <div class="editor-wrapper">
-        <div class="editor-container">
-          <div class="sidebar">
+        <div class="editor-container" :style="{ height }">
+          <div v-if="showTemplates" class="sidebar">
             <h4>代码模板</h4>
             <ul class="file-list">
               <li
@@ -19,14 +19,17 @@
             </ul>
           </div>
           <div class="code-area">
-            <button @click="runCode" class="run-btn" :disabled="isRunning">
-              {{ isRunning ? '运行中...' : '▶ 运行' }}
+            <button v-if="!isRunning" @click="runCode" class="run-btn">
+              ▶ 运行
+            </button>
+            <button v-else @click="stopCode" class="stop-btn">
+              ■ 停止
             </button>
             <button @click="clearCode" class="clear-btn">清空</button>
             <textarea ref="codeTextarea">{{ currentTemplate.content }}</textarea>
           </div>
         </div>
-        <div class="output-container">
+        <div class="output-container" :style="{ height }">
           <div class="output-header">
             <h4>输出结果</h4>
             <button @click="clearOutput" class="clear-output-btn">清空</button>
@@ -37,7 +40,20 @@
           <div v-else-if="skulptLoadError" class="error-state">
             {{ skulptLoadError }}
           </div>
-          <pre v-else :class="{ 'error': hasError }">{{ output || '运行代码后查看输出结果...' }}</pre>
+          <pre v-else ref="outputPreRef" :class="{ 'error': hasError }">{{ output || '运行代码后查看输出结果...' }}</pre>
+
+          <!-- 终端输入行 -->
+          <div v-if="waitingForInput" class="terminal-input-line">
+            <span class="terminal-prompt">{{ inputPrompt }}</span>
+            <input
+              ref="terminalInputRef"
+              v-model="terminalInput"
+              type="text"
+              class="terminal-input"
+              @keydown.enter.prevent="submitTerminalInput"
+            />
+          </div>
+          <div v-else-if="isRunning" class="terminal-status">程序运行中...</div>
         </div>
       </div>
     </div>
@@ -45,36 +61,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
-// Props
 const props = defineProps({
-  id: String
+  id: String,
+  initialCode: String,
+  showTemplates: { type: Boolean, default: true },
+  showHeader: { type: Boolean, default: true },
+  height: { type: String, default: '500px' }
 })
 
-// Skulpt 实例
+// Worker
+let worker = null
+let workerReady = false
+let forceStopTimer = null
+let stoppingByUser = false
+
+// 加载状态
 const skulptLoading = ref(true)
 const skulptLoadError = ref('')
 
-// CodeMirror 编辑器实例
+// CodeMirror
 let cmEditor = null
 const codeTextarea = ref(null)
 
-// CDN 源列表（按优先级排序，国内优先）
-const SKULPT_CDNS = [
-  {
-    core: 'https://unpkg.com/skulpt@1.2.0/dist/skulpt.min.js',
-    stdlib: 'https://unpkg.com/skulpt@1.2.0/dist/skulpt-stdlib.js'
-  },
-  {
-    core: 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js',
-    stdlib: 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js'
-  },
-  {
-    core: 'https://cdnjs.cloudflare.com/ajax/libs/skulpt/1.2.0/skulpt.min.js',
-    stdlib: 'https://cdnjs.cloudflare.com/ajax/libs/skulpt/1.2.0/skulpt-stdlib.js'
-  }
-]
+// 终端输入
+const waitingForInput = ref(false)
+const inputPrompt = ref('> ')
+const terminalInput = ref('')
+const terminalInputRef = ref(null)
+const outputPreRef = ref(null)
+
+// 执行状态
+const isRunning = ref(false)
+const output = ref('')
+const hasError = ref(false)
 
 // 代码模板
 const templates = [
@@ -101,96 +122,76 @@ const templates = [
 ]
 const currentTemplate = ref(templates[0])
 
-// 执行状态
-const isRunning = ref(false)
-const output = ref('')
-const hasError = ref(false)
+// 创建 Worker
+function createWorker() {
+  if (worker) worker.terminate()
+  worker = new Worker('/skulpt.worker.js')
+  workerReady = false
+  skulptLoading.value = true
+  skulptLoadError.value = ''
 
-// 加载单个脚本（带超时）
-const loadScript = (src, timeout = 5000) => {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = src
+  worker.onmessage = (e) => {
+    const { type, text, prompt, message } = e.data
 
-    const timer = setTimeout(() => {
-      script.remove()
-      reject(new Error(`加载超时 (${timeout}ms)`))
-    }, timeout)
+    switch (type) {
+      case 'ready':
+        workerReady = true
+        skulptLoading.value = false
+        break
 
-    script.onload = () => {
-      clearTimeout(timer)
-      resolve()
+      case 'output':
+        output.value += text
+        scrollOutputToBottom()
+        break
+
+      case 'input':
+        waitingForInput.value = true
+        inputPrompt.value = prompt || '> '
+        nextTick(() => {
+          terminalInputRef.value?.focus()
+          scrollOutputToBottom()
+        })
+        break
+
+      case 'done':
+        if (!output.value) {
+          output.value = '代码执行成功，无输出。'
+        }
+        finishRun()
+        break
+
+      case 'error':
+        hasError.value = true
+        if (output.value) {
+          output.value += '\n' + message
+        } else {
+          output.value = message
+        }
+        finishRun()
+        break
     }
+  }
 
-    script.onerror = () => {
-      clearTimeout(timer)
-      script.remove()
-      reject(new Error('加载失败'))
-    }
-
-    document.head.appendChild(script)
-  })
+  worker.onerror = (e) => {
+    skulptLoadError.value = 'Python 环境加载失败，请刷新页面重试'
+    skulptLoading.value = false
+  }
 }
 
-// 加载 Skulpt（支持 CDN 降级）
-const loadSkulpt = async () => {
-  // 如果已加载，直接返回
-  if (typeof window.Sk !== 'undefined' && typeof window.Sk.builtinFiles !== 'undefined') {
-    skulptLoading.value = false
-    return
+function finishRun() {
+  isRunning.value = false
+  waitingForInput.value = false
+  // 用户点停止时，不取消 force timer，让它兜底终止 Worker
+  if (forceStopTimer && !stoppingByUser) {
+    clearTimeout(forceStopTimer)
+    forceStopTimer = null
   }
-
-  let lastError = null
-
-  // 依次尝试各个 CDN 源
-  for (let i = 0; i < SKULPT_CDNS.length; i++) {
-    const cdn = SKULPT_CDNS[i]
-    try {
-      console.log(`正在尝试加载 Skulpt (CDN ${i + 1}/${SKULPT_CDNS.length})...`)
-
-      // 加载核心库
-      if (typeof window.Sk === 'undefined') {
-        await loadScript(cdn.core)
-      }
-
-      // 加载标准库
-      if (typeof window.Sk.builtinFiles === 'undefined') {
-        await loadScript(cdn.stdlib)
-
-        // 等待 builtinFiles 初始化
-        let retries = 0
-        while (typeof window.Sk.builtinFiles === 'undefined' && retries < 30) {
-          await new Promise(r => setTimeout(r, 100))
-          retries++
-        }
-
-        if (typeof window.Sk.builtinFiles === 'undefined') {
-          throw new Error('标准库初始化失败')
-        }
-      }
-
-      console.log('Skulpt 加载成功')
-      skulptLoading.value = false
-      return
-    } catch (error) {
-      console.warn(`CDN ${i + 1} 加载失败:`, error.message)
-      lastError = error
-      // 继续尝试下一个 CDN
-    }
-  }
-
-  // 所有 CDN 都失败
-  skulptLoadError.value = `Python 环境加载失败，请检查网络连接后刷新页面重试`
-  skulptLoading.value = false
-  console.error('所有 CDN 源均加载失败:', lastError)
+  stoppingByUser = false
 }
 
 // 初始化 CodeMirror
 const initCodeMirror = () => {
-  if (typeof CodeMirror === 'undefined') {
-    console.error('CodeMirror 未加载')
-    return
-  }
+  if (typeof CodeMirror === 'undefined') return
 
   cmEditor = CodeMirror.fromTextArea(codeTextarea.value, {
     mode: 'python',
@@ -202,9 +203,12 @@ const initCodeMirror = () => {
     autoCloseBrackets: true,
     matchBrackets: true,
     styleActiveLine: true,
-    lineHeight: 1.5,
-    viewportMargin: Infinity  // 确保长代码正确渲染
+    viewportMargin: Infinity
   })
+
+  if (props.initialCode !== undefined) {
+    cmEditor.setValue(props.initialCode)
+  }
 }
 
 // 选择模板
@@ -223,58 +227,53 @@ const clearCode = () => {
   }
 }
 
-// 运行代码（使用 Skulpt）
-const runCode = async () => {
-  if (!cmEditor || isRunning.value || skulptLoading.value) return
+// 滚动输出到底部
+function scrollOutputToBottom() {
+  nextTick(() => {
+    const el = outputPreRef.value
+    if (el) el.scrollTop = el.scrollHeight
+  })
+}
+
+// 运行代码
+const runCode = () => {
+  if (!cmEditor || isRunning.value || skulptLoading.value || !workerReady) return
 
   const code = cmEditor.getValue()
   if (!code.trim()) return
 
-  isRunning.value = true
+  // 重置状态
   output.value = ''
   hasError.value = false
+  waitingForInput.value = false
+  isRunning.value = true
 
-  try {
-    // 配置 Skulpt 输出函数 - 直接更新 ref
-    function outf(text) {
-      output.value += text
-    }
+  worker.postMessage({ type: 'run', code })
+}
 
-    // 配置 Skulpt 读取函数（用于 import）
-    function builtinRead(x) {
-      if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
-        throw "File not found: '" + x + "'"
-      }
-      return Sk.builtinFiles["files"][x]
-    }
+// 停止运行
+function stopCode() {
+  if (!worker) return
+  stoppingByUser = true
+  worker.postMessage({ type: 'stop' })
+  // 兜底：500ms 后强制终止并重建 Worker
+  forceStopTimer = setTimeout(() => {
+    forceStopTimer = null
+    stoppingByUser = false
+    createWorker()
+    finishRun()
+  }, 500)
+}
 
-    // 配置 Skulpt
-    Sk.configure({
-      output: outf,
-      read: builtinRead,
-      inputfun: (prompt) => {
-        // 使用浏览器原生 prompt 进行输入
-        // 支持 Skulpt 的同步输入机制
-        const result = window.prompt(prompt || '> ')
-        return result !== null ? result : ''
-      },
-      inputfunTakesPrompt: true,
-    })
-
-    // 运行代码
-    await Sk.misceval.asyncToPromise(function() {
-      return Sk.importMainWithBody("<stdin>", false, code, true)
-    })
-
-    if (!output.value) {
-      output.value = '代码执行成功，无输出。'
-    }
-
-  } catch (error) {
-    hasError.value = true
-    output.value = error.toString() || String(error)
-  } finally {
-    isRunning.value = false
+// 提交终端输入
+function submitTerminalInput() {
+  const text = terminalInput.value
+  output.value += (inputPrompt.value || '> ') + text + '\n'
+  terminalInput.value = ''
+  waitingForInput.value = false
+  scrollOutputToBottom()
+  if (worker) {
+    worker.postMessage({ type: 'input', input: text })
   }
 }
 
@@ -284,24 +283,38 @@ const clearOutput = () => {
   hasError.value = false
 }
 
-// 组件挂载
-onMounted(() => {
-  // 加载 Skulpt
-  loadSkulpt()
+// 获取代码（供父组件调用）
+function getCode() {
+  return cmEditor ? cmEditor.getValue() : ''
+}
 
-  // 等待 CodeMirror 加载
+defineExpose({ getCode })
+
+onMounted(() => {
+  createWorker()
+
   const checkCodeMirror = setInterval(() => {
     if (typeof CodeMirror !== 'undefined') {
       clearInterval(checkCodeMirror)
       initCodeMirror()
     }
   }, 100)
+
+  // CodeMirror 加载超时保护
+  setTimeout(() => {
+    if (!cmEditor) clearInterval(checkCodeMirror)
+  }, 10000)
+})
+
+onUnmounted(() => {
+  if (forceStopTimer) clearTimeout(forceStopTimer)
+  if (worker) worker.terminate()
+  worker = null
 })
 </script>
 
 <style scoped>
-@import url('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/monokai.min.css');
+/* CodeMirror CSS 由 index.html 全局加载 */
 
 .editor-section {
   padding: var(--spacing-xl) 0;
@@ -734,5 +747,112 @@ onMounted(() => {
 
 .error-state {
   color: #e74c3c;
+}
+
+/* 停止按钮 */
+.stop-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 25;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.stop-btn:hover {
+  opacity: 0.9;
+}
+
+/* 终端输入行 */
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: #1a1d21;
+  border-top: 1px solid #444;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.terminal-prompt {
+  color: #888;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #abb2bf;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.9rem;
+  outline: none;
+  min-height: 24px;
+}
+
+.terminal-input:focus {
+  background: #25282e;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* 运行状态提示 */
+.terminal-status {
+  padding: 10px 15px;
+  color: #666;
+  font-size: 0.85rem;
+  border-top: 1px solid #444;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+/* minimal 模式（无标题） */
+.editor-section.minimal-mode {
+  padding: 0;
+}
+
+.editor-section.minimal-mode .container {
+  max-width: none;
+  padding: 0;
+}
+
+/* 响应式补充 */
+@media (max-width: 768px) {
+  .stop-btn {
+    top: 5px;
+    right: 5px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stop-btn {
+    padding: 10px 14px;
+    min-height: var(--touch-target-min);
+  }
+
+  .terminal-input-line {
+    padding: 12px;
+    min-height: var(--touch-target-min);
+  }
+
+  .terminal-input {
+    font-size: 0.85rem;
+  }
 }
 </style>

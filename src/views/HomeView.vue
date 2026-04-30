@@ -38,6 +38,11 @@
           <h3>YCL 专区</h3>
           <p>考级冲刺练习</p>
         </router-link>
+        <router-link :to="prefixedPath('/library')" class="card">
+          <div class="card-icon">📝</div>
+          <h3>题库练习</h3>
+          <p>编程挑战，检验学习成果</p>
+        </router-link>
       </div>
     </section>
   </div>
@@ -145,7 +150,7 @@ function goMessages() {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 30px;
 }
 
@@ -188,8 +193,8 @@ function goMessages() {
   }
 
   .cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
   .card {

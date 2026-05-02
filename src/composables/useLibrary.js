@@ -176,88 +176,72 @@ export function useLibrary() {
     }
   }
 
-  // 编程题本地判分（前端 Skulpt 运行）
-  async function judgeProgram(question, code) {
-    const testCases = question.testCases || []
-    if (!testCases.length || !code.trim()) {
-      return { status: 'error', score: 0, results: [] }
-    }
+  // 编程题 OJ 判题（前端 Worker 运行）
+  function judgeProgram(question, code) {
+    return new Promise((resolve) => {
+      const testCases = question.testCases || []
+      if (!testCases.length || !code.trim()) {
+        resolve({ status: 'error', score: 0, results: [], earnedScore: 0, totalScore: 0 })
+        return
+      }
 
-    // 等待 Skulpt 加载
-    if (typeof window.Sk === 'undefined' || typeof window.Sk.builtinFiles === 'undefined') {
-      return { status: 'error', score: 0, results: [], error: 'Python 环境尚未加载完成，请稍后再试' }
-    }
+      const worker = new Worker('/skulpt-oj.worker.js')
+      const results = []
+      let earnedScore = 0
+      let totalScore = 0
 
-    const results = []
-    let passedCount = 0
-    let earnedScore = 0
-    let totalScore = 0
+      const cleanup = () => {
+        worker.terminate()
+      }
 
-    for (const tc of testCases) {
-      let actualOutput = ''
-      let error = ''
+      worker.onmessage = (e) => {
+        const { type, index, passed, actualOutput, error, earnedScore: tcEarned, totalScore: tcTotal, status, score, message } = e.data
 
-      try {
-        function outf(text) {
-          actualOutput += text
+        if (type === 'ready') {
+          worker.postMessage({ type: 'run', code, testCases: JSON.parse(JSON.stringify(testCases)) })
+          return
         }
 
-        function builtinRead(x) {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles['files'][x] === undefined) {
-            throw "File not found: '" + x + "'"
+        if (type === 'result') {
+          const tc = testCases[index]
+          const tcScore = Number(tc?.score) || 0
+          totalScore += tcScore
+
+          if (passed) earnedScore += tcScore
+
+          results[index] = {
+            input: tc?.input || '',
+            expectedOutput: tc?.expectedOutput || '',
+            actualOutput,
+            passed,
+            error: error || ''
           }
-          return Sk.builtinFiles['files'][x]
+          return
         }
 
-        // 重定向输入（按行分割，每次 input() 取下一行）
-        const inputLines = (tc.input || '').split('\n')
-        let lineIndex = 0
-        Sk.configure({
-          output: outf,
-          read: builtinRead,
-          inputfun: () => {
-            const line = inputLines[lineIndex] || ''
-            lineIndex++
-            return line
-          },
-          inputfunTakesPrompt: false,
-          execLimit: 500
-        })
+        if (type === 'done') {
+          cleanup()
+          resolve({ status, score, results, earnedScore, totalScore })
+          return
+        }
 
-        // 运行学生代码
-        await Sk.misceval.asyncToPromise(function() {
-          return Sk.importMainWithBody('<stdin>', false, code, true)
-        })
-
-      } catch (err) {
-        error = err.toString() || String(err)
+        if (type === 'error') {
+          cleanup()
+          resolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore, error: message })
+        }
       }
 
-      const tcScore = Number(tc.score) || 0
-      totalScore += tcScore
-
-      const passed = !error && actualOutput.trim() === (tc.expectedOutput || '').trim()
-      if (passed) {
-        passedCount++
-        earnedScore += tcScore
+      worker.onerror = () => {
+        cleanup()
+        resolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore })
       }
 
-      results.push({
-        input: tc.input,
-        expectedOutput: tc.expectedOutput,
-        actualOutput: actualOutput.trim(),
-        passed,
-        error
-      })
-    }
-
-    // 如果设置了分值，按累加分值计算；否则按通过比例
-    const score = totalScore > 0 ? Math.round((earnedScore / totalScore) * 100) : Math.round((passedCount / testCases.length) * 100)
-    const status = passedCount === testCases.length ? 'passed' : 'failed'
-
-    console.log('[judgeProgram]', { totalScore, earnedScore, score, status, testCaseScores: testCases.map(tc => tc.score) })
-
-    return { status, score, results, earnedScore, totalScore }
+      // 超时保护：60秒强制终止
+      setTimeout(() => {
+        worker.terminate()
+        resolve({ status: 'timeout', score: 0, results, earnedScore, totalScore, error: '判题超时' })
+      }, 60000)
+    })
   }
 
   return {

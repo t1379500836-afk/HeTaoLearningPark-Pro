@@ -266,12 +266,13 @@ async function runTests() {
 
     // 记录全局统计
     try {
+      const submitStatus = result.status === 'timeout' ? 'error' : result.status
       await fetch('/api/library/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           questionId: question.value.id,
-          status: result.status,
+          status: submitStatus,
           score: result.score,
           earnedScore: result.earnedScore,
           totalScore: result.totalScore,
@@ -693,6 +694,7 @@ async function runTests() {
   font-family: 'Consolas', monospace;
   white-space: pre-wrap;
   word-break: break-all;
+  display: inline;
 }
 
 .error-msg {

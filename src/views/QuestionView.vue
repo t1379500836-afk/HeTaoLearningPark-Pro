@@ -502,6 +502,8 @@ async function runTests() {
   font-size: 0.95rem;
   color: #444;
   line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 /* 提交区域 */
@@ -609,8 +611,16 @@ async function runTests() {
 .testcases-table th,
 .testcases-table td {
   padding: 10px 14px;
-  text-align: left;
   border: 1px solid #eee;
+  vertical-align: top;
+}
+
+.testcases-table td:first-child {
+  text-align: left;
+}
+
+.testcases-table td:last-child {
+  text-align: left;
 }
 
 .testcases-table th {
@@ -625,6 +635,11 @@ async function runTests() {
   border-radius: 4px;
   font-family: 'Consolas', monospace;
   font-size: 0.85em;
+  white-space: pre-wrap;
+  word-break: break-all;
+  display: inline-block;
+  text-align: center;
+  max-width: 100%;
 }
 
 /* 编辑器 */
@@ -676,6 +691,8 @@ async function runTests() {
   padding: 2px 6px;
   border-radius: 4px;
   font-family: 'Consolas', monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .error-msg {

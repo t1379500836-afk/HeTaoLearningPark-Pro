@@ -33,7 +33,7 @@ export const questionsConfig = {
       difficulty: 'easy',
       tags: [6, 8],
       content: '编程题测试',
-      testCases: [{ input: '1', expectedOutput: '1', score: 10 }, { input: '2', expectedOutput: '2', score: 10 }]
+      testCases: [{ input: '1\n2\n3', expectedOutput: '1\n2\n3', score: 10 }]
     },
     {
       id: 6,
@@ -42,7 +42,7 @@ export const questionsConfig = {
       difficulty: 'easy',
       tags: [],
       content: '1',
-      choices: [{ content: '1', isCorrect: true }, { content: '2', isCorrect: false }]
+      choices: [{ content: '1111111111111111111111111111111111111111111111111111111111111111111111111111111111\n    2222\n333', isCorrect: true }, { content: '2', isCorrect: false }]
     }
   ]
 }

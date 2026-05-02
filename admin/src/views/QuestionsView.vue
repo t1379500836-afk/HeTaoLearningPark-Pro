@@ -135,7 +135,7 @@
             <div class="choices-list">
               <div v-for="(choice, idx) in form.choices" :key="idx" class="choice-item">
                 <el-radio v-model="choice.isCorrect" :value="true" @change="onCorrectChange(idx)">正确</el-radio>
-                <el-input v-model="choice.content" placeholder="选项内容..." style="flex: 1" />
+                <el-input v-model="choice.content" type="textarea" :rows="1" placeholder="选项内容，支持多行..." autosize class="multi-line-input" />
                 <el-button type="danger" link @click="removeChoice(idx)" :disabled="form.choices.length <= 2">
                   <el-icon><Delete /></el-icon>
                 </el-button>
@@ -152,8 +152,8 @@
           <el-form-item label="测试用例（输入/期望输出/分值）">
             <div class="testcases-list">
               <div v-for="(tc, idx) in form.test_cases" :key="idx" class="testcase-item">
-                <el-input v-model="tc.input" placeholder="输入" style="width: 200px" />
-                <el-input v-model="tc.expectedOutput" placeholder="期望输出" style="flex: 1" />
+                <el-input v-model="tc.input" type="textarea" :rows="1" placeholder="输入" autosize class="multi-line-input" />
+                <el-input v-model="tc.expectedOutput" type="textarea" :rows="1" placeholder="期望输出" autosize class="multi-line-input" />
                 <div class="score-stepper">
                   <button type="button" class="stepper-btn" @click="tc.score = Math.max(0, (Number(tc.score) || 0) - 1)">-</button>
                   <input
@@ -536,9 +536,14 @@ async function handleDelete(id) {
 .choice-item,
 .testcase-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.choice-item .multi-line-input {
+  flex: 1;
+  min-width: 0;
 }
 
 .score-stepper {
@@ -567,6 +572,20 @@ async function handleDelete(id) {
 
 .stepper-btn:active {
   background: #e4e7ed;
+}
+
+.multi-line-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.multi-line-input :deep(.el-textarea__inner) {
+  resize: vertical;
+  min-height: 32px !important;
+  max-height: 200px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .stepper-input {

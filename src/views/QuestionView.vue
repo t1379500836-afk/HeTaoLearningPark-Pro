@@ -171,6 +171,7 @@
                   </div>
                 </div>
                 <textarea
+                  ref="codeTextareaRef"
                   v-model="codeInput"
                   class="code-input"
                   placeholder="在此编写 Python 代码..."
@@ -232,6 +233,15 @@ const { tagMap, getQuestionById, judgeChoice, judgeProgram, reload, questionStat
 
 onMounted(() => {
   reload()
+  const checkCodeMirror = setInterval(() => {
+    if (typeof CodeMirror !== 'undefined') {
+      clearInterval(checkCodeMirror)
+      initCodeMirror()
+    }
+  }, 100)
+  setTimeout(() => {
+    if (!cmEditor) clearInterval(checkCodeMirror)
+  }, 10000)
 })
 
 const question = computed(() => getQuestionById(props.id))
@@ -323,6 +333,10 @@ const inputPrompt = ref('> ')
 const terminalInput = ref('')
 let pendingInputResolve = null
 
+// CodeMirror
+const codeTextareaRef = ref(null)
+let cmEditor = null
+
 
 function clearOutput() {
   runOutput.value = ''
@@ -330,7 +344,33 @@ function clearOutput() {
 }
 
 function clearCode() {
-  codeInput.value = '# 在此编写代码\n'
+  if (cmEditor) {
+    cmEditor.setValue('# 在此编写代码\n')
+    cmEditor.clearHistory()
+  } else {
+    codeInput.value = '# 在此编写代码\n'
+  }
+}
+
+function initCodeMirror() {
+  if (typeof CodeMirror === 'undefined' || !codeTextareaRef.value) return
+
+  cmEditor = CodeMirror.fromTextArea(codeTextareaRef.value, {
+    mode: 'python',
+    theme: 'monokai',
+    lineNumbers: true,
+    indentUnit: 4,
+    tabSize: 4,
+    indentWithTabs: false,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    styleActiveLine: true,
+    viewportMargin: Infinity
+  })
+
+  cmEditor.on('change', () => {
+    codeInput.value = cmEditor.getValue()
+  })
 }
 
 function submitTerminalInput() {
@@ -872,6 +912,9 @@ async function submitCode() {
   background: #1a1d21;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
 }
 
 .input-header {
@@ -881,6 +924,7 @@ async function submitCode() {
   padding: 8px 12px;
   background: #2d3436;
   border-bottom: 1px solid #444;
+  flex-shrink: 0;
 }
 
 .input-header span {
@@ -894,28 +938,78 @@ async function submitCode() {
 }
 
 .code-input {
-  width: 100%;
-  min-height: 200px;
-  padding: 12px;
-  background: #1a1d21;
-  color: #abb2bf;
-  border: none;
-  font-family: 'Consolas', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  resize: vertical;
-  outline: none;
-  box-sizing: border-box;
+  display: none;
 }
 
-.code-input::placeholder {
-  color: #666;
+:deep(.CodeMirror) {
+  flex: 1;
+  height: 100% !important;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  direction: ltr;
+  background: #282c34;
+}
+
+:deep(.CodeMirror-gutters) {
+  background: #282c34;
+  border-right: 1px solid #3e4451;
+}
+
+:deep(.CodeMirror-linenumber) {
+  color: #5c6370;
+  padding: 0 8px;
+}
+
+:deep(.CodeMirror-cursor) {
+  border-left: 2px solid #528bff;
+}
+
+:deep(.CodeMirror-selected) {
+  background: #3e4451 !important;
+}
+
+:deep(.cm-s-monokai .cm-keyword) { color: #c678dd; }
+:deep(.cm-s-monokai .cm-string) { color: #98c379; }
+:deep(.cm-s-monokai .cm-number) { color: #d19a66; }
+:deep(.cm-s-monokai .cm-comment) { color: #5c6370; font-style: italic; }
+:deep(.cm-s-monokai .cm-def) { color: #61afef; }
+:deep(.cm-s-monokai .cm-variable) { color: #e06c75; }
+:deep(.cm-s-monokai .cm-operator) { color: #56b6c2; }
+
+:deep(.CodeMirror-vscrollbar),
+:deep(.CodeMirror-hscrollbar) {
+  outline: none;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar) {
+  width: 8px;
+  height: 8px;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-track),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-track) {
+  background: #282c34;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-thumb),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-thumb) {
+  background: #4a4e57;
+  border-radius: 4px;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-thumb:hover),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-thumb:hover) {
+  background: #5c6370;
 }
 
 .output-area {
   background: #1a1d21;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
 }
 
 .output-header {
@@ -926,6 +1020,7 @@ async function submitCode() {
   background: #2d3436;
   color: #ccc;
   font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 .tool-btn {
@@ -984,6 +1079,24 @@ async function submitCode() {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-y: auto;
+  min-height: 0;
+}
+
+.output-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-content::-webkit-scrollbar-track {
+  background: #1a1d21;
+}
+
+.output-content::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.output-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .output-content.error {
@@ -1139,6 +1252,7 @@ async function submitCode() {
   border-top: 1px solid #444;
   gap: 8px;
   min-height: 44px;
+  flex-shrink: 0;
 }
 
 .terminal-prompt {
@@ -1174,6 +1288,7 @@ async function submitCode() {
   min-height: 44px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 /* 响应式 */

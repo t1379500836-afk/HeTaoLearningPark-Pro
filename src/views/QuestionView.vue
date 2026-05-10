@@ -53,6 +53,34 @@
 
           <!-- 题目描述 -->
           <div class="content-card" v-html="renderedContent"></div>
+
+          <!-- 提交后的测试结果（编程题） -->
+          <div v-if="programResult" class="test-results-submit">
+            <div class="result-badge" :class="programResult.status">
+              {{ programResult.status === 'passed' ? '✅ 全部通过！' : '❌ 未全部通过' }}
+              <span v-if="programResult.totalScore > 0" class="result-score">
+                {{ programResult.earnedScore }}/{{ programResult.totalScore }} 分
+              </span>
+            </div>
+            <div class="test-results">
+              <div
+                v-for="(r, idx) in programResult.results"
+                :key="idx"
+                class="test-result-item"
+                :class="r.passed ? 'pass' : 'fail'"
+              >
+                <div class="result-header">
+                  <span>{{ r.passed ? '✅' : '❌' }} 测试用例 {{ idx + 1 }}</span>
+                </div>
+                <div class="result-detail">
+                  <div><strong>输入：</strong><code>{{ r.input }}</code></div>
+                  <div><strong>期望输出：</strong><code>{{ r.expectedOutput }}</code></div>
+                  <div><strong>实际输出：</strong><code>{{ r.actualOutput || '(无输出)' }}</code></div>
+                  <div v-if="r.error" class="error-msg"><strong>错误：</strong>{{ r.error }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </template>
       </div>
 
@@ -131,48 +159,50 @@
             </div>
 
             <!-- 代码编辑器 -->
-            <div class="editor-box">
-              <CodeEditor
-                ref="editorRef"
-                :initial-code="starterCode"
-                :show-header="false"
-                :show-templates="false"
-                height="350px"
-              />
+            <div class="editor-section">
+              <div class="input-area">
+                <div class="input-header">
+                  <span>代码输入</span>
+                  <div class="header-btns">
+                    <button class="tool-btn run-btn" @click="runCode" :disabled="isRunning">
+                      {{ isRunning ? '■ 运行中' : '▶ 运行' }}
+                    </button>
+                    <button class="tool-btn clear-btn" @click="clearCode">清空</button>
+                  </div>
+                </div>
+                <textarea
+                  v-model="codeInput"
+                  class="code-input"
+                  placeholder="在此编写 Python 代码..."
+                  spellcheck="false"
+                ></textarea>
+              </div>
+              <div class="output-area">
+                <div class="output-header">
+                  <span>输出结果</span>
+                  <button class="tool-btn-small" @click="clearOutput">清空</button>
+                </div>
+                <div v-if="skulptLoading" class="loading-state">正在初始化 Python 环境，请稍等...</div>
+                <pre v-else class="output-content" :class="{ error: hasError }">{{ runOutput || '运行代码后查看输出结果...' }}</pre>
+
+                <!-- 终端输入行 -->
+                <div v-if="waitingForInput" class="terminal-input-line">
+                  <span class="terminal-prompt">{{ inputPrompt }}</span>
+                  <input
+                    v-model="terminalInput"
+                    type="text"
+                    class="terminal-input"
+                    @keydown.enter.prevent="submitTerminalInput"
+                  />
+                </div>
+                <div v-else-if="isRunning" class="terminal-status">程序运行中...</div>
+              </div>
             </div>
 
             <div class="submit-area">
-              <button class="submit-btn" :disabled="isJudging" @click="runTests">
-                {{ isJudging ? '判题中...' : '运行测试' }}
+              <button class="submit-btn" :disabled="isJudging" @click="submitCode">
+                {{ isJudging ? '提交中...' : '提交' }}
               </button>
-            </div>
-
-            <!-- 运行结果 -->
-            <div v-if="programResult" class="result-area">
-              <div class="result-badge" :class="programResult.status">
-                {{ programResult.status === 'passed' ? '✅ 全部通过！' : '❌ 未全部通过' }}
-                <span v-if="programResult.totalScore > 0" class="result-score">
-                  {{ programResult.earnedScore }}/{{ programResult.totalScore }} 分
-                </span>
-              </div>
-              <div class="test-results">
-                <div
-                  v-for="(r, idx) in programResult.results"
-                  :key="idx"
-                  class="test-result-item"
-                  :class="r.passed ? 'pass' : 'fail'"
-                >
-                  <div class="result-header">
-                    <span>{{ r.passed ? '✅' : '❌' }} 测试用例 {{ idx + 1 }}</span>
-                  </div>
-                  <div class="result-detail">
-                    <div><strong>输入：</strong><code>{{ r.input }}</code></div>
-                    <div><strong>期望输出：</strong><code>{{ r.expectedOutput }}</code></div>
-                    <div><strong>实际输出：</strong><code>{{ r.actualOutput || '(无输出)' }}</code></div>
-                    <div v-if="r.error" class="error-msg"><strong>错误：</strong>{{ r.error }}</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
         </template>
@@ -184,7 +214,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import CodeEditor from '@/components/course/CodeEditor.vue'
 import { useLibrary } from '@/composables/useLibrary.js'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 
@@ -264,6 +293,8 @@ async function submitChoice() {
         totalScore: choiceResult.value.totalScore
       })
     })
+    // 提交成功后刷新统计数据
+    await reload()
   } catch (e) {
     console.log('提交记录失败', e)
   }
@@ -276,17 +307,121 @@ function resetChoice() {
 }
 
 // 编程题逻辑
-const editorRef = ref(null)
+const isRunning = ref(false)
 const isJudging = ref(false)
 const programResult = ref(null)
+const runOutput = ref('')
+const hasError = ref(false)
+const skulptLoading = ref(false)
+const codeInput = ref('# 在此编写代码\nprint("Hello, World!")')
+let runWorker = null
+let workerReady = false
 
-async function runTests() {
-  if (!editorRef.value || !question.value) return
-  const code = editorRef.value.getCode()
+// 终端输入相关
+const waitingForInput = ref(false)
+const inputPrompt = ref('> ')
+const terminalInput = ref('')
+let pendingInputResolve = null
+
+
+function clearOutput() {
+  runOutput.value = ''
+  hasError.value = false
+}
+
+function clearCode() {
+  codeInput.value = '# 在此编写代码\n'
+}
+
+function submitTerminalInput() {
+  const text = terminalInput.value
+  runOutput.value += (inputPrompt.value || '> ') + text + '\n'
+  terminalInput.value = ''
+  if (pendingInputResolve) {
+    pendingInputResolve(text)
+    pendingInputResolve = null
+  }
+}
+
+function stopRun() {
+  if (runWorker) {
+    runWorker.terminate()
+    runWorker = null
+  }
+  workerReady = false
+  isRunning.value = false
+  waitingForInput.value = false
+  if (pendingInputResolve) {
+    pendingInputResolve('')
+    pendingInputResolve = null
+  }
+}
+
+function initRunWorker() {
+  if (runWorker) runWorker.terminate()
+  runWorker = new Worker('/skulpt.worker.js')
+  workerReady = false
+  skulptLoading.value = true
+
+  runWorker.onmessage = (e) => {
+    const { type, text, prompt, message } = e.data
+    if (type === 'ready') {
+      workerReady = true
+      skulptLoading.value = false
+    } else if (type === 'output') {
+      runOutput.value += text
+    } else if (type === 'input') {
+      waitingForInput.value = true
+      inputPrompt.value = prompt || '> '
+      pendingInputResolve = (val) => {
+        waitingForInput.value = false
+        runWorker.postMessage({ type: 'input', input: val })
+      }
+    } else if (type === 'done') {
+      if (!runOutput.value) runOutput.value = '代码执行成功，无输出。'
+      isRunning.value = false
+      waitingForInput.value = false
+    } else if (type === 'error') {
+      hasError.value = true
+      runOutput.value = message
+      isRunning.value = false
+      waitingForInput.value = false
+    }
+  }
+
+  runWorker.onerror = () => {
+    skulptLoading.value = false
+    workerReady = false
+    hasError.value = true
+    runOutput.value = 'Python 环境加载失败，请刷新页面重试'
+    isRunning.value = false
+  }
+}
+
+// 初始化 worker
+initRunWorker()
+
+// 运行代码（纯执行，显示输出到下方）
+async function runCode() {
+  if (!codeInput.value.trim()) return
+  if (!workerReady || skulptLoading.value) return
+
+  isRunning.value = true
+  runOutput.value = ''
+  hasError.value = false
+  runWorker.postMessage({ type: 'run', code: codeInput.value })
+}
+
+// 提交判题
+async function submitCode() {
+  if (!question.value) return
+  const code = codeInput.value
   if (!code.trim()) return
 
   isJudging.value = true
   programResult.value = null
+  runOutput.value = ''
+  hasError.value = false
 
   try {
     const result = await judgeProgram(question.value, code)
@@ -306,6 +441,8 @@ async function runTests() {
           code
         })
       })
+      // 提交成功后刷新统计数据
+      await reload()
     } catch (e) {
       console.log('提交记录失败', e)
     }
@@ -331,18 +468,22 @@ async function runTests() {
 
 .question-container {
   display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 24px;
+  grid-template-columns: 40% 60%;
+  gap: 20px;
   align-items: start;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* 左侧信息区 */
+/* 左侧信息区 - 整体一个面板 */
 .info-left {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .nav-header {
@@ -353,7 +494,7 @@ async function runTests() {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: opacity 0.2s;
 }
 
@@ -365,8 +506,6 @@ async function runTests() {
   text-align: center;
   padding: 60px 20px;
   color: #999;
-  background: #fff;
-  border-radius: 16px;
 }
 
 .empty-state a {
@@ -378,10 +517,6 @@ async function runTests() {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .question-id {
@@ -404,10 +539,6 @@ async function runTests() {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px 18px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .info-difficulty {
@@ -442,10 +573,8 @@ async function runTests() {
 
 /* 进度条 */
 .stats-progress {
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px 18px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 14px 0;
+  border-top: 1px solid #f0f0f0;
 }
 
 .stats-row {
@@ -476,13 +605,96 @@ async function runTests() {
 
 /* 题目描述 */
 .content-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   font-size: 0.95rem;
   line-height: 1.7;
   color: #444;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 18px;
+}
+
+/* 提交后的测试结果（左侧） */
+.test-results-submit {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.test-results-submit .result-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.test-results-submit .result-badge.pass,
+.test-results-submit .result-badge.passed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.test-results-submit .result-badge.fail,
+.test-results-submit .result-badge.failed {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.test-results-submit .result-score {
+  margin-left: 8px;
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+.test-results-submit .test-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.test-results-submit .test-result-item {
+  border-radius: 10px;
+  padding: 12px;
+  border: 2px solid #eee;
+}
+
+.test-results-submit .test-result-item.pass {
+  border-color: #2ecc71;
+  background: #f0fff4;
+}
+
+.test-results-submit .test-result-item.fail {
+  border-color: #e74c3c;
+  background: #fff5f5;
+}
+
+.test-results-submit .result-header {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.test-results-submit .result-detail {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.test-results-submit .result-detail code {
+  background: #f4f4f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  display: inline;
+}
+
+.test-results-submit .error-msg {
+  color: #e74c3c;
+  margin-top: 4px;
 }
 
 .content-card :deep(code) {
@@ -508,24 +720,34 @@ async function runTests() {
   color: #333;
 }
 
-/* 右侧答题区 */
+/* 右侧答题区 - 整体一个面板 */
 .answer-right {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .answer-section {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.answer-section > * {
+  margin-bottom: 14px;
+}
+
+.answer-section > *:last-child {
+  margin-bottom: 0;
 }
 
 .answer-section h3 {
   font-size: 1rem;
   color: #333;
-  margin-bottom: 16px;
+  margin: 0;
   font-weight: 600;
 }
 
@@ -638,11 +860,134 @@ async function runTests() {
   display: inline;
 }
 
-/* 编辑器 */
-.editor-box {
+/* 编辑器区域 - 上下布局 */
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 16px;
+}
+
+.input-area {
+  background: #1a1d21;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #2d3436;
+  border-bottom: 1px solid #444;
+}
+
+.input-header span {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.header-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.code-input {
+  width: 100%;
+  min-height: 200px;
+  padding: 12px;
+  background: #1a1d21;
+  color: #abb2bf;
+  border: none;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.code-input::placeholder {
+  color: #666;
+}
+
+.output-area {
+  background: #1a1d21;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background: #2d3436;
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.tool-btn {
+  padding: 5px 14px;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.tool-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.tool-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.run-btn {
+  background: #27ae60;
+  color: #fff;
+}
+
+.tool-btn.clear-btn,
+.tool-btn-small {
+  background: #555;
+  color: #ddd;
+  border: 1px solid #666;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tool-btn-small {
+  padding: 3px 10px;
+  font-size: 0.78rem;
+}
+
+.tool-btn.clear-btn:hover,
+.tool-btn-small:hover {
+  background: #666;
+  color: #fff;
+}
+
+.output-content {
+  flex: 1;
+  margin: 0;
+  padding: 10px 15px;
+  color: #abb2bf;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+}
+
+.output-content.error {
+  color: #e74c3c;
 }
 
 /* 提交区域 */
@@ -779,8 +1124,60 @@ async function runTests() {
   margin-top: 4px;
 }
 
+.loading-state {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: #1a1d21;
+  border-top: 1px solid #444;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.terminal-prompt {
+  color: #888;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #abb2bf;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  min-height: 24px;
+}
+
+.terminal-input:focus {
+  background: #25282e;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.terminal-status {
+  padding: 10px 15px;
+  color: #666;
+  font-size: 0.85rem;
+  border-top: 1px solid #444;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
 /* 响应式 */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .question-container {
     grid-template-columns: 1fr;
   }
@@ -788,11 +1185,16 @@ async function runTests() {
   .question-view {
     padding: 20px 15px;
   }
+
+  .info-left,
+  .answer-right {
+    padding: 18px;
+  }
 }
 
 @media (max-width: 480px) {
   .question-id-title {
-    padding: 14px 16px;
+    padding: 0;
   }
 
   .question-title {
@@ -803,7 +1205,7 @@ async function runTests() {
   .stats-progress,
   .content-card,
   .answer-section {
-    padding: 14px 16px;
+    padding: 0;
   }
 
   .submit-btn {

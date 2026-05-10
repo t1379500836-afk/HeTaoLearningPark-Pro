@@ -3,6 +3,10 @@ import { ref, computed } from 'vue'
 // 使用 ref 存储配置，支持热更新
 const configRef = ref({ tags: [], questions: [] })
 
+// 当前 OJ 判题 Worker，可被终止
+let currentWorker = null
+let currentResolve = null
+
 async function loadStaticConfig() {
   try {
     // 使用绝对路径 + 时间戳绕过 Vite 模块缓存
@@ -185,17 +189,30 @@ export function useLibrary() {
         return
       }
 
+      // 终止之前的 worker
+      if (currentWorker) currentWorker.terminate()
       const worker = new Worker('/skulpt-oj.worker.js')
+      currentWorker = worker
+
       const results = []
       let earnedScore = 0
       let totalScore = 0
+      let done = false
 
       const cleanup = () => {
         worker.terminate()
+        if (currentWorker === worker) currentWorker = null
       }
 
+      const safeResolve = (data) => {
+        if (!done) { done = true; cleanup(); resolve(data) }
+      }
+
+      currentResolve = safeResolve
+
       worker.onmessage = (e) => {
-        const { type, index, passed, actualOutput, error, earnedScore: tcEarned, totalScore: tcTotal, status, score, message } = e.data
+        if (done) return
+        const { type, index, passed, actualOutput, error, status, score, message } = e.data
 
         if (type === 'ready') {
           worker.postMessage({ type: 'run', code, testCases: JSON.parse(JSON.stringify(testCases)) })
@@ -206,9 +223,7 @@ export function useLibrary() {
           const tc = testCases[index]
           const tcScore = Number(tc?.score) || 0
           totalScore += tcScore
-
           if (passed) earnedScore += tcScore
-
           results[index] = {
             input: tc?.input || '',
             expectedOutput: tc?.expectedOutput || '',
@@ -220,28 +235,37 @@ export function useLibrary() {
         }
 
         if (type === 'done') {
-          cleanup()
-          resolve({ status, score, results, earnedScore, totalScore })
+          safeResolve({ status, score, results, earnedScore, totalScore })
           return
         }
 
         if (type === 'error') {
-          cleanup()
-          resolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore, error: message })
+          safeResolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore, error: message })
         }
       }
 
       worker.onerror = () => {
-        cleanup()
-        resolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore })
+        if (done) return
+        safeResolve({ status: 'error', score: 0, results, earnedScore: 0, totalScore })
       }
 
       // 超时保护：60秒强制终止
       setTimeout(() => {
-        worker.terminate()
-        resolve({ status: 'timeout', score: 0, results, earnedScore, totalScore, error: '判题超时' })
+        if (!done) { done = true; cleanup(); resolve({ status: 'timeout', score: 0, results, earnedScore, totalScore, error: '判题超时' }) }
       }, 60000)
     })
+  }
+
+  // 强制终止当前判题 Worker
+  function stopJudge() {
+    if (currentWorker) {
+      currentWorker.terminate()
+      currentWorker = null
+    }
+    if (currentResolve) {
+      currentResolve({ status: 'stopped', score: 0, results: [], earnedScore: 0, totalScore: 0 })
+      currentResolve = null
+    }
   }
 
   return {
@@ -261,6 +285,7 @@ export function useLibrary() {
     getQuestionById,
     reload,
     judgeChoice,
-    judgeProgram
+    judgeProgram,
+    stopJudge
   }
 }

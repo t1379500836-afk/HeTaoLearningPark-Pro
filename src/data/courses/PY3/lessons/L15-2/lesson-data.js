@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L15-2',
-  title: '人脸识别入门',
+  title: '城主遭贼',
   subtitle: '学会AI视觉模块的基本使用',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

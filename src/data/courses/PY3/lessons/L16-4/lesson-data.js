@@ -424,7 +424,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L16-4',
-  title: '颜色识别物流车',
+  title: '超人厂长',
   subtitle: '学会循线、颜色识别和物流分拣',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

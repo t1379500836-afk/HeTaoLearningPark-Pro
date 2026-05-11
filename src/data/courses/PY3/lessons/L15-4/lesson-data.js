@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L15-4',
-  title: '人脸识别进阶',
+  title: '门前大乌龙',
   subtitle: '学会人脸记录和权限判断',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L14-4',
-  title: '云端探险家进阶',
+  title: '至上荣耀',
   subtitle: '完善游戏：尖刺、计分、移动踏板、难度升级',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

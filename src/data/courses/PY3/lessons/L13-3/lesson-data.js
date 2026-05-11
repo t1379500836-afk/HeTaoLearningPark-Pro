@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L13-3',
-  title: '疯狂躲猫猫',
+  title: '变成猫啦？',
   subtitle: '学会碰撞检测和全局变量',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

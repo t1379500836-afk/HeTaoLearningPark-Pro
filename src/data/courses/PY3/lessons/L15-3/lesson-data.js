@@ -1,5 +1,5 @@
 /**
- * PY3 课程 L15-3: 智能门禁系统
+ * PY3 课程 L15-3: 天雷滚滚
  *
  * 核心知识点:
  * 1. 显示图片与声音提示
@@ -413,8 +413,8 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L15-3',
-  title: '智能门禁系统',
-  subtitle: '学会门禁系统的完整逻辑',
+  title: '天雷滚滚',
+  subtitle: '学会用模拟算法解决实际问题',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: [

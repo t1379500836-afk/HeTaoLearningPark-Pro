@@ -425,7 +425,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L14-2',
-  title: '自动发球机',
+  title: '盖世"武"侠',
   subtitle: '学会schedule_interval间隔定时器',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

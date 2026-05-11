@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L15-1',
-  title: '神奇的数列',
+  title: '神奇的递推',
   subtitle: '学会递推思想和斐波那契数列',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L13-2',
-  title: '飞机大战',
+  title: '奇怪的病患',
   subtitle: '学会列表存储多角色和碰撞检测',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

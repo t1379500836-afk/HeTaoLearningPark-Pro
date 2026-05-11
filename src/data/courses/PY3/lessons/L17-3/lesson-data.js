@@ -100,7 +100,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L17-3', title: '泡泡龙游戏', subtitle: '学会平台跳跃和泡泡碰撞', difficulty: '进阶',
+  id: 'L17-3', title: '咪噜打泡泡', subtitle: '学会平台跳跃和泡泡碰撞', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['掌握角色弹跳和平台控制', '学会泡泡生成和碰撞', '能实现游戏胜负判断'],
   prerequisites: ['Pygame Zero基础', '列表操作', '碰撞检测']

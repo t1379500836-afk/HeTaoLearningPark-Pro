@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L16-1',
-  title: '逻辑判断大师',
+  title: '雪丰冰城',
   subtitle: '学会and和or逻辑运算',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

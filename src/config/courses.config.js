@@ -137,40 +137,40 @@ export const lessonConfig = {
   'L12-4': { id: 'L12-4', title: '重返地球', subtitle: '综合应用 Pygame Zero 游戏开发' },
 
   // PY3 L13 单元
-  'L13-1': { id: 'L13-1', title: '猴赛雷的新衣', subtitle: '学会Pygame Zero框架和键盘控制' },
-  'L13-2': { id: 'L13-2', title: '飞机大战', subtitle: '学会列表存储多角色和碰撞检测' },
-  'L13-3': { id: 'L13-3', title: '疯狂躲猫猫', subtitle: '学会碰撞检测和全局变量' },
-  'L13-4': { id: 'L13-4', title: '木琴敲敲敲', subtitle: '学会多角色创建和精准碰撞检测' },
+  'L13-1': { id: 'L13-1', title: '末日地下城', subtitle: '学会Pygame Zero框架和键盘控制' },
+  'L13-2': { id: 'L13-2', title: '奇怪的病患', subtitle: '学会列表存储多角色和碰撞检测' },
+  'L13-3': { id: 'L13-3', title: '变成猫啦？', subtitle: '学会碰撞检测和全局变量' },
+  'L13-4': { id: 'L13-4', title: '全民音乐家', subtitle: '学会多角色创建和精准碰撞检测' },
 
   // PY3 L14 单元
-  'L14-1': { id: 'L14-1', title: '魔法闹钟', subtitle: '学会clock定时器的基本使用' },
-  'L14-2': { id: 'L14-2', title: '自动发球机', subtitle: '学会schedule_interval间隔定时器' },
-  'L14-3': { id: 'L14-3', title: '云端探险家', subtitle: '学会角色边缘坐标属性' },
-  'L14-4': { id: 'L14-4', title: '云端探险家进阶', subtitle: '完善游戏：尖刺、计分、移动踏板、难度升级' },
+  'L14-1': { id: 'L14-1', title: '不速之客', subtitle: '学会clock定时器的基本使用' },
+  'L14-2': { id: 'L14-2', title: '盖世"武"侠', subtitle: '学会schedule_interval间隔定时器' },
+  'L14-3': { id: 'L14-3', title: '师祖降临', subtitle: '学会角色边缘坐标属性' },
+  'L14-4': { id: 'L14-4', title: '至上荣耀', subtitle: '完善游戏：尖刺、计分、移动踏板、难度升级' },
 
   // PY3 L15 单元
-  'L15-1': { id: 'L15-1', title: '神奇的数列', subtitle: '学会递推思想和斐波那契数列' },
-  'L15-2': { id: 'L15-2', title: '人脸识别入门', subtitle: '学会AI视觉模块的基本使用' },
-  'L15-3': { id: 'L15-3', title: '智能门禁系统', subtitle: '学会门禁系统的完整逻辑' },
-  'L15-4': { id: 'L15-4', title: '人脸识别进阶', subtitle: '学会人脸记录和权限判断' },
+  'L15-1': { id: 'L15-1', title: '神奇的递推', subtitle: '学会递推思想和斐波那契数列' },
+  'L15-2': { id: 'L15-2', title: '城主遭贼', subtitle: '学会AI视觉模块的基本使用' },
+  'L15-3': { id: 'L15-3', title: '天雷滚滚', subtitle: '学会用模拟算法解决实际问题' },
+  'L15-4': { id: 'L15-4', title: '门前大乌龙', subtitle: '学会人脸记录和权限判断' },
 
   // PY3 L16 单元
-  'L16-1': { id: 'L16-1', title: '逻辑判断大师', subtitle: '学会and和or逻辑运算' },
-  'L16-2': { id: 'L16-2', title: '视觉智能车', subtitle: '学会路牌识别和智能车控制' },
-  'L16-3': { id: 'L16-3', title: '字符串探险家', subtitle: '学会字符串遍历和处理' },
-  'L16-4': { id: 'L16-4', title: '颜色识别物流车', subtitle: '学会循线、颜色识别和物流分拣' },
+  'L16-1': { id: 'L16-1', title: '雪丰冰城', subtitle: '学会and和or逻辑运算' },
+  'L16-2': { id: 'L16-2', title: '能源危机', subtitle: '学会路牌识别和智能车控制' },
+  'L16-3': { id: 'L16-3', title: '拯救大祭司', subtitle: '学会字符串遍历和处理' },
+  'L16-4': { id: 'L16-4', title: '超人厂长', subtitle: '学会循线、颜色识别和物流分拣' },
 
   // PY3 L17 单元
-  'L17-1': { id: 'L17-1', title: '声音魔法师', subtitle: '学会用音量控制游戏' },
-  'L17-2': { id: 'L17-2', title: '学会用设备姿态控制游戏', subtitle: '学会用设备姿态控制游戏' },
-  'L17-3': { id: 'L17-3', title: '学会平台跳跃和泡泡碰撞', subtitle: '学会平台跳跃和泡泡碰撞' },
-  'L17-4': { id: 'L17-4', title: '学会背景滚动和完整游戏', subtitle: '学会背景滚动和完整游戏' },
+  'L17-1': { id: 'L17-1', title: '豪华晚宴', subtitle: '学会用音量控制游戏' },
+  'L17-2': { id: 'L17-2', title: '他是谁', subtitle: '学会用设备姿态控制游戏' },
+  'L17-3': { id: 'L17-3', title: '咪噜打泡泡', subtitle: '学会平台跳跃和泡泡碰撞' },
+  'L17-4': { id: 'L17-4', title: '激流勇进', subtitle: '学会背景滚动和完整游戏' },
 
   // PY3 L18 单元
-  'L18-1': { id: 'L18-1', title: '学会关卡切换和串联', subtitle: '学会关卡切换和串联' },
-  'L18-2': { id: 'L18-2', title: '学会双角色控制和合作', subtitle: '学会双角色控制和合作' },
-  'L18-3': { id: 'L18-3', title: '学会射击和碰撞系统', subtitle: '学会射击和碰撞系统' },
-  'L18-4': { id: 'L18-4', title: '掌握布尔类型和条件判断', subtitle: '掌握布尔类型和条件判断' }
+  'L18-1': { id: 'L18-1', title: '失踪的快乐', subtitle: '学会关卡切换和串联' },
+  'L18-2': { id: 'L18-2', title: '默契大作战', subtitle: '学会双角色控制和合作' },
+  'L18-3': { id: 'L18-3', title: '勇闯通天塔', subtitle: '学会射击和碰撞系统' },
+  'L18-4': { id: 'L18-4', title: '究极决战', subtitle: '掌握布尔类型和条件判断' }
 }
 
 // 辅助函数：获取课次信息

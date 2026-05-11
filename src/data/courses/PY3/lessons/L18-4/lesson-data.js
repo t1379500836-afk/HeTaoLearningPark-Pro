@@ -100,7 +100,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L18-4', title: '布尔值与条件', subtitle: '掌握布尔类型和条件判断', difficulty: '进阶',
+  id: 'L18-4', title: '究极决战', subtitle: '掌握布尔类型和条件判断', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['理解True和False布尔值', '掌握比较运算和布尔运算', '能用布尔值进行条件判断'],
   prerequisites: ['Python条件语句', '比较运算符', '基础逻辑']

@@ -100,7 +100,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L18-2', title: '双人合作游戏', subtitle: '学会双角色控制和合作', difficulty: '进阶',
+  id: 'L18-2', title: '默契大作战', subtitle: '学会双角色控制和合作', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['掌握双角色不同控制方式', '理解角色特性和机关', '能设计合作通关策略'],
   prerequisites: ['L18-1 关卡切换', '智慧核心基础', 'Pygame Zero碰撞']

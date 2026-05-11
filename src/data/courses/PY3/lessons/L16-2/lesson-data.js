@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L16-2',
-  title: '视觉智能车',
+  title: '能源危机',
   subtitle: '学会路牌识别和智能车控制',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

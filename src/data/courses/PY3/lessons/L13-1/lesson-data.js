@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L13-1',
-  title: '猴赛雷的新衣',
+  title: '末日地下城',
   subtitle: '学会Pygame Zero框架和键盘控制',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L14-1',
-  title: '魔法闹钟',
+  title: '不速之客',
   subtitle: '学会clock定时器的基本使用',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L13-4',
-  title: '木琴敲敲敲',
+  title: '全民音乐家',
   subtitle: '学会多角色创建和精准碰撞检测',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

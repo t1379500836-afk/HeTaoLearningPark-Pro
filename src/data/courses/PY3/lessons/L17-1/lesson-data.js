@@ -376,7 +376,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L17-1',
-  title: '声音魔法师',
+  title: '豪华晚宴',
   subtitle: '学会用音量控制游戏',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

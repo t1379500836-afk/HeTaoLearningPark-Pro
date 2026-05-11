@@ -100,7 +100,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L18-1', title: '闯关游戏设计', subtitle: '学会关卡切换和串联', difficulty: '进阶',
+  id: 'L18-1', title: '失踪的快乐', subtitle: '学会关卡切换和串联', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['掌握姿态和按键控制', '学会全局变量关卡切换', '能设计闯关游戏'],
   prerequisites: ['Python全局变量', '条件判断', 'Pygame Zero基础']

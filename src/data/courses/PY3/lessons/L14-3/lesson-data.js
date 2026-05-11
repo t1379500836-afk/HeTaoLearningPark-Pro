@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L14-3',
-  title: '云端探险家',
+  title: '师祖降临',
   subtitle: '学会角色边缘坐标属性',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

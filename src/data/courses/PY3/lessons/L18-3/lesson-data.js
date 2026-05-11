@@ -100,7 +100,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L18-3', title: '射击游戏设计', subtitle: '学会射击和碰撞系统', difficulty: '进阶',
+  id: 'L18-3', title: '勇闯通天塔', subtitle: '学会射击和碰撞系统', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['掌握射击系统实现', '学会碰撞检测删除', '能设计子弹管理'],
   prerequisites: ['Pygame Zero角色', '列表操作', '碰撞检测']

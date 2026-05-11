@@ -76,7 +76,7 @@ export const exercises = [
 ]
 
 export const lessonMeta = {
-  id: 'L17-2', title: '姿态大师', subtitle: '学会用设备姿态控制游戏', difficulty: '进阶',
+  id: 'L17-2', title: '他是谁', subtitle: '学会用设备姿态控制游戏', difficulty: '进阶',
   estimatedTime: '30-45分钟',
   learningGoals: ['掌握getAttitude()获取姿态', '理解7种姿态类型', '能用姿态控制游戏'],
   prerequisites: ['Python条件判断', '字符串比较']

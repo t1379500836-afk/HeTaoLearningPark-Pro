@@ -413,7 +413,7 @@ export const exercises = [
 // 课次元数据
 export const lessonMeta = {
   id: 'L16-3',
-  title: '字符串探险家',
+  title: '拯救大祭司',
   subtitle: '学会字符串遍历和处理',
   difficulty: '进阶',
   estimatedTime: '30-45分钟',

@@ -46,6 +46,7 @@
             <div class="progress-bar">
               <div
                 class="progress-fill"
+                :class="{ 'low': progressPercent < 30, 'mid': progressPercent >= 30 && progressPercent < 70, 'high': progressPercent >= 70 }"
                 :style="{ width: progressPercent + '%' }"
               ></div>
             </div>
@@ -54,30 +55,39 @@
           <!-- 题目描述 -->
           <div class="content-card" v-html="renderedContent"></div>
 
-          <!-- 提交后的测试结果（编程题） -->
-          <div v-if="programResult" class="test-results-submit">
-            <div class="result-badge" :class="programResult.status">
-              {{ programResult.status === 'passed' ? '✅ 全部通过！' : '❌ 未全部通过' }}
-              <span v-if="programResult.totalScore > 0" class="result-score">
-                {{ programResult.earnedScore }}/{{ programResult.totalScore }} 分
-              </span>
-            </div>
-            <div class="test-results">
+          <!-- 测试用例展示 -->
+          <div class="testcases-modern" v-if="allTestCases.length > 0">
+            <div class="testcases-list">
               <div
-                v-for="(r, idx) in programResult.results"
+                v-for="(tc, idx) in allTestCases"
                 :key="idx"
-                class="test-result-item"
-                :class="r.passed ? 'pass' : 'fail'"
+                class="testcase-card"
               >
-                <div class="result-header">
-                  <span>{{ r.passed ? '✅' : '❌' }} 测试用例 {{ idx + 1 }}</span>
+                <div
+                  class="testcase-header"
+                  :class="{ expanded: expandedTestCases.has(idx) }"
+                  @click="toggleTestCase(idx)"
+                >
+                  <div class="testcase-badge">{{ idx + 1 }}</div>
+                  <span class="testcase-title">测试用例 {{ idx + 1 }}</span>
+                  <span class="expand-chevron">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
                 </div>
-                <div class="result-detail">
-                  <div><strong>输入：</strong><code>{{ r.input }}</code></div>
-                  <div><strong>期望输出：</strong><code>{{ r.expectedOutput }}</code></div>
-                  <div><strong>实际输出：</strong><code>{{ r.actualOutput || '(无输出)' }}</code></div>
-                  <div v-if="r.error" class="error-msg"><strong>错误：</strong>{{ r.error }}</div>
-                </div>
+                <transition name="fold">
+                  <div v-show="expandedTestCases.has(idx)" class="testcase-body">
+                    <div class="testcase-columns">
+                      <div class="testcase-col">
+                        <span class="row-label">输入</span>
+                        <pre class="row-code">{{ tc.input || '无' }}</pre>
+                      </div>
+                      <div class="testcase-col">
+                        <span class="row-label">期望输出</span>
+                        <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
               </div>
             </div>
           </div>
@@ -140,24 +150,6 @@
           <section v-else class="answer-section">
             <h3>编写代码</h3>
 
-            <!-- 测试用例（只显示第一条） -->
-            <div class="testcases-table" v-if="firstTestCase">
-              <table>
-                <thead>
-                  <tr>
-                    <th>输入</th>
-                    <th>期望输出</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>{{ firstTestCase.input }}</code></td>
-                    <td><code>{{ firstTestCase.expectedOutput }}</code></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
             <!-- 代码编辑器 -->
             <div class="editor-section">
               <div class="input-area">
@@ -204,6 +196,34 @@
               <button class="submit-btn" :disabled="isJudging" @click="submitCode">
                 {{ isJudging ? '提交中...' : '提交' }}
               </button>
+            </div>
+
+            <!-- 提交后的测试结果 -->
+            <div v-if="programResult" class="test-results-submit">
+              <div class="result-badge" :class="programResult.status">
+                {{ programResult.status === 'passed' ? '✅ 全部通过！' : '❌ 未全部通过' }}
+                <span v-if="programResult.totalScore > 0" class="result-score">
+                  {{ programResult.earnedScore }}/{{ programResult.totalScore }} 分
+                </span>
+              </div>
+              <div class="test-results">
+                <div
+                  v-for="(r, idx) in programResult.results"
+                  :key="idx"
+                  class="test-result-item"
+                  :class="r.passed ? 'pass' : 'fail'"
+                >
+                  <div class="result-header">
+                    <span>{{ r.passed ? '✅' : '❌' }} 测试用例 {{ idx + 1 }}</span>
+                  </div>
+                  <div class="result-detail">
+                    <div><strong>输入：</strong><code>{{ r.input }}</code></div>
+                    <div><strong>期望输出：</strong><code>{{ r.expectedOutput }}</code></div>
+                    <div><strong>实际输出：</strong><code>{{ r.actualOutput || '(无输出)' }}</code></div>
+                    <div v-if="r.error" class="error-msg"><strong>错误：</strong>{{ r.error }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         </template>
@@ -256,10 +276,8 @@ const progressPercent = computed(() => {
   return Math.round((passed / attempts) * 100)
 })
 
-const firstTestCase = computed(() => {
-  const cases = question.value?.testCases
-  if (!cases || cases.length === 0) return null
-  return cases[0]
+const allTestCases = computed(() => {
+  return question.value?.testCases || []
 })
 
 const renderedContent = computed(() => {
@@ -323,6 +341,17 @@ const programResult = ref(null)
 const runOutput = ref('')
 const hasError = ref(false)
 const skulptLoading = ref(false)
+const expandedTestCases = ref(new Set([0]))
+
+function toggleTestCase(idx) {
+  const newSet = new Set(expandedTestCases.value)
+  if (newSet.has(idx)) {
+    newSet.delete(idx)
+  } else {
+    newSet.add(idx)
+  }
+  expandedTestCases.value = newSet
+}
 const codeInput = ref('# 在此编写代码\nprint("Hello, World!")')
 let runWorker = null
 let workerReady = false
@@ -638,9 +667,20 @@ async function submitCode() {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ff9f00, #ff7f00);
   border-radius: 4px;
   transition: width 0.4s ease;
+}
+
+.progress-fill.low {
+  background: linear-gradient(90deg, #ef5350, #c62828);
+}
+
+.progress-fill.mid {
+  background: linear-gradient(90deg, #ffca28, #ff8f00);
+}
+
+.progress-fill.high {
+  background: linear-gradient(90deg, #66bb6a, #2e7d32);
 }
 
 /* 题目描述 */
@@ -856,48 +896,133 @@ async function submitCode() {
   word-break: break-all;
 }
 
-/* 测试用例表格 */
-.testcases-table {
+/* 现代感测试用例展示 */
+.testcases-modern {
   margin-bottom: 16px;
-  overflow-x: auto;
 }
 
-.testcases-table table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85rem;
+.testcases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.testcases-table th,
-.testcases-table td {
-  padding: 10px 14px;
-  border: 1px solid #eee;
-  vertical-align: top;
+.testcase-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e5e7;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
 }
 
-.testcases-table th {
-  background: #f8f9fa;
+.testcase-card:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.testcase-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.testcase-header:hover {
+  background: #f5f5f7;
+}
+
+.testcase-title {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+
+.expand-chevron {
+  margin-left: auto;
+  color: #86868b;
+  transition: transform 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+.testcase-header.expanded .expand-chevron {
+  transform: rotate(180deg);
+}
+
+.fold-enter-active,
+.fold-leave-active {
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.fold-enter-from,
+.fold-leave-to {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.fold-enter-to,
+.fold-leave-from {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.testcase-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  background: #e5e5e7;
+  color: #1d1d1f;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #555;
+  border-radius: 6px;
+  padding: 0 7px;
 }
 
-.testcases-table td:first-child {
-  text-align: left;
+.testcase-body {
+  padding: 0 14px 14px;
 }
 
-.testcases-table td:last-child {
-  text-align: left;
+.testcase-columns {
+  display: flex;
+  gap: 12px;
 }
 
-.testcases-table code {
-  background: #f4f4f5;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'Consolas', monospace;
-  font-size: 0.85em;
+.testcase-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.row-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.row-code {
+  margin: 0;
+  padding: 12px 14px;
+  background: #1c1c1e;
+  color: #f5f5f7;
+  border-radius: 8px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-all;
-  display: inline;
+  overflow-x: auto;
 }
 
 /* 编辑器区域 - 上下布局 */
@@ -1289,6 +1414,13 @@ async function submitCode() {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+}
+
+/* 测试用例左右排列响应式 */
+@media (max-width: 768px) {
+  .testcase-columns {
+    flex-direction: column;
+  }
 }
 
 /* 响应式 */

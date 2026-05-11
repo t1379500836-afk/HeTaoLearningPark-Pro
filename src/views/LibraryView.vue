@@ -114,7 +114,11 @@
               </td>
               <td class="col-rate">
                 <div class="rate-bar">
-                  <div class="rate-fill" :style="{ width: getQuestionStats(q.id).rate + '%' }"></div>
+                  <div
+                    class="rate-fill"
+                    :class="{ 'low': getQuestionStats(q.id).rate < 30, 'mid': getQuestionStats(q.id).rate >= 30 && getQuestionStats(q.id).rate < 70, 'high': getQuestionStats(q.id).rate >= 70 }"
+                    :style="{ width: getQuestionStats(q.id).rate + '%' }"
+                  ></div>
                 </div>
                 <span class="rate-text">{{ getQuestionStats(q.id).passed }}/{{ getQuestionStats(q.id).attempts }}</span>
               </td>
@@ -159,7 +163,11 @@
           </div>
           <div class="card-stats">
             <div class="card-rate-bar">
-              <div class="card-rate-fill" :style="{ width: getQuestionStats(q.id).rate + '%' }"></div>
+              <div
+                class="card-rate-fill"
+                :class="{ 'low': getQuestionStats(q.id).rate < 30, 'mid': getQuestionStats(q.id).rate >= 30 && getQuestionStats(q.id).rate < 70, 'high': getQuestionStats(q.id).rate >= 70 }"
+                :style="{ width: getQuestionStats(q.id).rate + '%' }"
+              ></div>
             </div>
             <span class="card-rate-text">{{ getQuestionStats(q.id).passed }}/{{ getQuestionStats(q.id).attempts }}</span>
           </div>
@@ -630,9 +638,20 @@ function prefixedPath(path) {
 
 .rate-fill {
   height: 100%;
-  background: linear-gradient(90deg, #52c41a, #95de64);
   border-radius: 3px;
   transition: width 0.3s;
+}
+
+.rate-fill.low {
+  background: linear-gradient(90deg, #ef5350, #c62828);
+}
+
+.rate-fill.mid {
+  background: linear-gradient(90deg, #ffca28, #ff8f00);
+}
+
+.rate-fill.high {
+  background: linear-gradient(90deg, #66bb6a, #2e7d32);
 }
 
 .rate-text {
@@ -705,9 +724,20 @@ function prefixedPath(path) {
 
 .card-rate-fill {
   height: 100%;
-  background: linear-gradient(90deg, #52c41a, #95de64);
   border-radius: 3px;
   transition: width 0.3s;
+}
+
+.card-rate-fill.low {
+  background: linear-gradient(90deg, #ef5350, #c62828);
+}
+
+.card-rate-fill.mid {
+  background: linear-gradient(90deg, #ffca28, #ff8f00);
+}
+
+.card-rate-fill.high {
+  background: linear-gradient(90deg, #66bb6a, #2e7d32);
 }
 
 .card-rate-text {

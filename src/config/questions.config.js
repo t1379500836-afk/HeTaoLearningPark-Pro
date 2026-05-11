@@ -15,7 +15,7 @@ export const questionsConfig = {
       difficulty: 'easy',
       tags: [6, 7, 8],
       content: '输入名字，然后打印',
-      testCases: [{ input: 'a', expectedOutput: 'a', score: 100 }, { input: 'b', expectedOutput: 'b', score: 100 }, { input: 'c', expectedOutput: 'c', score: 100 }]
+      testCases: [{ input: 'a', expectedOutput: 'a', score: 10 }, { input: 'b', expectedOutput: 'b', score: 20 }, { input: 'c', expectedOutput: 'c', score: 30 }]
     },
     {
       id: 4,

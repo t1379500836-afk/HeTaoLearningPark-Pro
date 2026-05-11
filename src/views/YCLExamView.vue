@@ -95,11 +95,27 @@
 
           <!-- 编程题 -->
           <div v-else-if="currentQuestion?.type === 'coding'" class="coding-area review-coding">
-            <div class="test-cases">
-              <h4>测试用例</h4>
-              <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="test-case">
-                <p><strong>输入：</strong><span v-html="formatOption(tc.input || '无')"></span></p>
-                <p><strong>输出：</strong><span v-html="formatOption(tc.expectedOutput)"></span></p>
+            <div class="testcases-modern">
+              <div class="testcases-header">
+                <span class="testcases-icon">🧪</span>
+                <span class="testcases-title">测试用例</span>
+                <span class="testcases-count">{{ currentQuestion?.testCases?.length || 0 }} 组</span>
+              </div>
+              <div class="testcases-list">
+                <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="testcase-card">
+                  <div class="testcase-badge">#{{ idx + 1 }}</div>
+                  <div class="testcase-body">
+                    <div class="testcase-row input-row">
+                      <span class="row-label"><span class="row-icon">📥</span>输入</span>
+                      <pre class="row-code">{{ tc.input || '无' }}</pre>
+                    </div>
+                    <div class="testcase-divider"><span class="divider-arrow">⬇</span></div>
+                    <div class="testcase-row output-row">
+                      <span class="row-label"><span class="row-icon">📤</span>期望输出</span>
+                      <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- 代码对比区域 -->
@@ -362,11 +378,27 @@
 
           <!-- 编程题 -->
           <div v-else-if="currentQuestion?.type === 'coding'" class="coding-area">
-            <div class="test-cases">
-              <h4>测试用例</h4>
-              <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="test-case">
-                <p><strong>输入：</strong><span v-html="formatOption(tc.input || '无')"></span></p>
-                <p><strong>输出：</strong><span v-html="formatOption(tc.expectedOutput)"></span></p>
+            <div class="testcases-modern">
+              <div class="testcases-header">
+                <span class="testcases-icon">🧪</span>
+                <span class="testcases-title">测试用例</span>
+                <span class="testcases-count">{{ currentQuestion?.testCases?.length || 0 }} 组</span>
+              </div>
+              <div class="testcases-list">
+                <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="testcase-card">
+                  <div class="testcase-badge">#{{ idx + 1 }}</div>
+                  <div class="testcase-body">
+                    <div class="testcase-row input-row">
+                      <span class="row-label"><span class="row-icon">📥</span>输入</span>
+                      <pre class="row-code">{{ tc.input || '无' }}</pre>
+                    </div>
+                    <div class="testcase-divider"><span class="divider-arrow">⬇</span></div>
+                    <div class="testcase-row output-row">
+                      <span class="row-label"><span class="row-icon">📤</span>期望输出</span>
+                      <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <textarea
@@ -1248,6 +1280,139 @@ onUnmounted(() => {
   margin: 5px 0;
   font-size: 0.9rem;
   color: #666;
+}
+
+/* 现代感测试用例展示 */
+.testcases-modern {
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.testcases-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.testcases-icon {
+  font-size: 1.2rem;
+}
+
+.testcases-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.testcases-count {
+  margin-left: auto;
+  font-size: 0.8rem;
+  background: rgba(255,255,255,0.2);
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.testcases-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.testcase-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.testcase-card:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.testcase-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin: 12px 0 0 14px;
+}
+
+.testcase-body {
+  padding: 12px 14px 16px;
+}
+
+.testcase-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.testcase-divider {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.divider-arrow {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.row-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.row-icon {
+  font-size: 0.9rem;
+}
+
+.row-code {
+  margin: 0;
+  padding: 12px 14px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+.input-row .row-code {
+  border-left: 3px solid #3b82f6;
+}
+
+.output-row .row-code {
+  border-left: 3px solid #10b981;
 }
 
 .code-editor {

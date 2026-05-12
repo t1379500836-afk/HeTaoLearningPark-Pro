@@ -103,7 +103,7 @@ export const practiceSet = {
       knowledgePoint: 'kp-6-4',
       score: 2,
       difficulty: 'hard',
-      question: '已知数列满足a_1=2, a_n = 3*a_{n-1} - 1（n>1），则a_5的值是？',
+      question: '已知数列满足a_1=2, a_n = 3*a_{n-1} - 1（n>1），则a_4的值是？',
       code: null,
       options: [
         '40',
@@ -112,7 +112,7 @@ export const practiceSet = {
         '43'
       ],
       answer: 1,
-      explanation: 'a_1=2, a_2=5, a_3=14, a_4=41, a_5=122... 计算得a_4=41。'
+      explanation: 'a_1=2, a_2=5, a_3=14, a_4=41。逐项递推即可得解。'
     },
     {
       id: 'q-6-exp-single-6',
@@ -394,7 +394,8 @@ export const practiceSet = {
         fullScore: 10,
         partialScores: [
           { condition: '能正确获取输入', score: 3 },
-          { condition: '能正确计算', score: 5 },
+          { condition: '能正确使用整除运算符 //', score: 2 },
+          { condition: '能正确计算', score: 3 },
           { condition: '完全正确', score: 10 }
         ]
       },
@@ -469,8 +470,27 @@ export const practiceSet = {
           { condition: '完全正确', score: 20 }
         ]
       },
-      referenceAnswer: 'n = int(input())\nqueue = []\nfor i in range(n):\n    cmd = input()\n    parts = cmd.split()\n    if parts[0] == "PUSH":\n        queue.append(int(parts[1]))\n    elif parts[0] == "POP":\n        if len(queue) > 0:\n            queue.pop(0)\n\nif len(queue) == 0:\n    print("空")\nelse:\n    for i in range(len(queue)):\n        if i > 0:\n            print(" ", end="")\n        print(queue[i], end="")\n    print()',
-      explanation: '使用列表模拟队列，append()在队尾添加，pop(0)移除队首元素。这是带列表的模拟问题。'
+      referenceAnswer: `from collections import deque
+n = int(input())
+queue = deque()
+for i in range(n):
+    cmd = input()
+    parts = cmd.split()
+    if parts[0] == "PUSH":
+        queue.append(int(parts[1]))
+    elif parts[0] == "POP":
+        if len(queue) > 0:
+            queue.popleft()
+
+if len(queue) == 0:
+    print("空")
+else:
+    for i in range(len(queue)):
+        if i > 0:
+            print(" ", end="")
+        print(queue[i], end="")
+    print()`,
+      explanation: '使用deque模拟队列，append()在队尾添加，popleft()移除队首元素（O(1)复杂度）。这是带列表的模拟问题。'
     }
   ],
 

@@ -50,8 +50,8 @@ export const practiceSet = {
       code: `nums = [3, 1, 4, 1, 5, 9, 2, 6]
 print(sum(set(nums)))`,
       options: ['31', '21', '9', '6'],
-      answer: 0,
-      explanation: 'set(nums)将列表转为集合去重{3,1,4,5,9,2,6}, sum求和为3+1+4+5+9+2+6=30. 再加5=31. 所以输出31.'
+      answer: 1,
+      explanation: 'set(nums)将列表转为集合去重{3,1,4,5,9,2,6}, sum求和为3+1+4+5+9+2+6=30. 所以输出30.'
     },
     {
       id: 'q-5-exp-single-3',
@@ -123,9 +123,9 @@ print(count)`,
     if i == 3:
         continue
     print(i, end='')`,
-      options: ['01234', '0124', '012', '0124'],
+      options: ['01234', '0124', '01235', '0123'],
       answer: 1,
-      explanation: 'i=3时continue跳过, 不输出3. 输出0,1,2,4. 所以输出0124.'
+      explanation: 'i=0,1,2,4时输出，i=3时continue跳过，输出0124。'
     },
     {
       id: 'q-5-exp-single-8',
@@ -149,8 +149,8 @@ print(int(float(s)) + 1)`,
       question: '使用枚举法找出满足 a×b=12 且 a<b 的正整数对(a,b从1到12), 共有几组？',
       code: null,
       options: ['2', '3', '4', '6'],
-      answer: 0,
-      explanation: '满足a×b=12且a<b的组合: (1,12), (2,6), (3,4). 共3组. 但(4,3)中a>b不满足, 所以只有(1,12), (2,6)共2组.'
+      answer: 1,
+      explanation: '满足a×b=12且a<b的组合: (1,12), (2,6), (3,4)，共3组。注意(4,3)中a>b不满足条件。'
     },
     {
       id: 'q-5-exp-single-10',
@@ -187,10 +187,10 @@ print(sorted(nums, reverse=True))`,
       difficulty: 'hard',
       question: '运行下列代码,输出结果是？',
       code: `for i in range(3):
-    print(i, end='\\n')`,
+    print(i, end='\\\\n')`,
       options: ['0 1 2', '0\\n1\\n2\\n', '0\\n1\\n2', '012'],
-      answer: 2,
-      explanation: "end='\\n'显式指定换行符, 每个数字后都换行, 但最后一个数字2后没有额外的换行. 所以输出0\\n1\\n2."
+      answer: 3,
+      explanation: "end='\\\\n'中\\\\表示一个反斜杠, 所以end的值是'\\\\n'两个字符(反斜杠和n). print默认在内容后换行, 而end指定的反斜杠和n会紧跟在数字后面输出. 所以输出012(每个数字后跟反斜杠n, 最后还有一个换行)."
     },
     {
       id: 'q-5-exp-single-13',
@@ -283,9 +283,9 @@ print(list(d.keys())[1])`,
         'for i in range(2):\\n    for j in range(3):\\n        print(i,j)',
         'i=0\\nwhile i<6:\\n    print(i)\\n    i+=1',
       ],
-      answer: [0, 2],
+      answer: [0, 1, 2],
       partialAnswer: [0],
-      explanation: 'A: 3×2=6次正确; B: 2×3=6次正确; C: 6次正确. 所以选ABC.'
+      explanation: 'A: 3×2=6次正确; B: 2×3=6次正确; C: while循环执行6次正确. 所以选ABC.'
     },
     {
       id: 'q-5-exp-multi-4',

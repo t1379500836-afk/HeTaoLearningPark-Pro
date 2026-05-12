@@ -187,7 +187,7 @@ while i < 6:
         '一直输出"rabbit"'
       ],
       answer: 3,
-      explanation: 'while循环的条件是i < 6，初始i=0，但循环体中没有改变i值的语句，i始终小于6，循环会无限执行。'
+      explanation: 'while循环的条件是i < 6，初始i=0，但循环体中没有改变i值的语句，i始终小于6，循环会无限执行。每次循环都执行print(\'rabbit\')，所以会一直输出\'rabbit\'。'
     },
     {
       id: 'q-5-1-single-10',
@@ -377,7 +377,7 @@ print(len(fruits))`,
       ],
       answer: [0, 1],
       partialAnswer: [0],
-      explanation: 'A选项：break语句的作用是立即结束当前所在的循环，正确。B选项：range(10)生成0到9的序列，for循环会遍历这些值后结束，正确。'
+      explanation: 'A选项：break语句的作用是立即结束当前所在的循环，正确。B选项：range(10)生成0到9的序列，for循环会遍历这些值后结束，正确。C选项错误：continue的作用是跳过本次循环进入下一次迭代，不是结束循环。D选项错误：break可以用于所有循环（for和while），不仅限于while。'
     },
     {
       id: 'q-5-1-multi-5',

@@ -1,5 +1,29 @@
 # 变更记录
 
+## 2026-05-12
+
+- **修复：YCL六级试卷题目/参考答案错误**
+  - expert.js：
+    - q-6-exp-single-5：题目从"求 a_5"改为"求 a_4"（选项中无 a_5 正确值 122），解析修正
+    - q-6-exp-coding-4：参考答案从 `list.pop(0)` 改为 `collections.deque` + `popleft()`（O(1) 出队）
+    - q-6-exp-coding-1：评分规则增加"能正确使用整除运算符 // 得 2分"，强调数据类型重要性
+  - basic-3.js：q-6-3-multi-1 D 选项"调用函数时必须传入所有参数"改为"调用函数时必须传入所有非默认参数"，解析补充默认值说明
+  - basic-1.js：q-6-1-multi-1 解析中提到 D 选项"import pgzrun"，但选项列表无 D，修正为直接说明三个正确选项
+
+- **修复：YCL五级五套试卷题目答案/解析错误**
+  - expert.js：
+    - q-5-exp-single-2：`sum(set(nums))` 答案31→30
+    - q-5-exp-single-7：消除选项重复（'012'→'01235'）
+    - q-5-exp-multi-3：答案 [0,2]→[0,1,2]（A/B/C执行次数均为6）
+    - q-5-exp-single-12：代码 `end='\\n'` 解析修正，答案→3
+  - advanced.js：
+    - q-5-adv-single-2：解析"2个22"→"2个2"
+    - q-5-adv-single-11：标点格式统一
+    - q-5-adv-multi-4：答案 [0,1,3]→[0,1]，解析补充 break/continue 不能在循环外使用
+  - basic-2.js：q-5-2-single-9 选项 s[-1]→s[-2]（-1 是 'N' 不是 'O'）
+  - basic-1.js：q-5-1-single-9、q-5-1-multi-4 解析补充说明
+  - basic-3.js：q-5-3-single-5 选项A改为有效Python表达式 `list(int(x) for x in fruits)`
+
 ## 2026-04-27
 
 - **修复：CDN 刷新不完整导致 CSS/JS 加载失败**

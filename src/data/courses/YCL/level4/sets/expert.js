@@ -470,7 +470,7 @@ else:
       knowledgePoint: 'kp-4-4',
       score: 10,
       difficulty: 'hard',
-      question: '小明去书店买书，一本书15元，如果他买n本，总价可以打9折。请编写程序，输入购买数量n，输出实际需要支付的金额（整数）。',
+      question: '小明去书店买书，每本书15元。现在书店全场打9折（购买任意数量均可享受9折优惠）。请编写程序，输入购买数量n，输出实际需要支付的金额（整数）。',
       codeTemplate: '# 请在下方编写代码\n',
       testCases: [
         { input: '2', expectedOutput: '27' },

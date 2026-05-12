@@ -301,7 +301,7 @@ export const practiceSet = {
       ],
       answer: [1, 2, 3],
       partialAnswer: [1],
-      explanation: '在PygameZero中，变量WIDTH表示窗口宽度（B正确）；Actor()函数的功能是创建角色（C正确）；HEIGHT表示窗口高度（A错误）；导入库的语句是import pgzrun（D正确）。'
+      explanation: 'WIDTH表示窗口宽度，不是高度；Actor()用于创建角色；导入库的语句是import pgzrun。'
     },
     {
       id: 'q-6-1-multi-2',

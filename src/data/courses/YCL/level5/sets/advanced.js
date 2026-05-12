@@ -52,7 +52,7 @@ print(s[-3])`,
 print(nums.count(2))`,
       options: ['1', '2', '3', '5'],
       answer: 1,
-      explanation: 'count(2)统计列表中2出现的次数，列表中有2个22'
+      explanation: 'count(2)统计列表中2出现的次数，列表中有2个2'
     },
     {
       id: 'q-5-adv-single-3',
@@ -182,7 +182,7 @@ d['z'] = 30
 print(len(d))`,
       options: ['2', '3', '4', '程序报错'],
       answer: 1,
-      explanation: "字典初始有2个键值对， d['z']=30新增一个,共3个键值对. "
+      explanation: '字典初始有2个键值对，d[\'z\']=30新增一个，共3个键值对。'
     },
     {
       id: 'q-5-adv-single-12',
@@ -274,9 +274,9 @@ print(total)`,
         'len(a)',
         'a[2] = 100'
       ],
-      answer: [1, 2],
-      partialAnswer: [1],
-      explanation: 'append(60)后列表变为6个元素;长度改变; pop()移除最后一个元素后变为5个元素;长度改变。 len(a)返回5,长度不变; a[2]=100只是索引修改,长度不变. '
+      answer: [2, 3],
+      partialAnswer: [2],
+      explanation: 'append(60)后列表变为6个元素,长度改变; pop()移除最后一个元素后变为4个元素,长度改变。len(a)返回5,长度不变;a[2]=100只是修改索引对应的值,长度不变。故选C和D。'
     },
     {
       id: 'q-5-adv-multi-3',
@@ -310,9 +310,9 @@ print(total)`,
         'break和continue可以在循环外使用',
         'break只能用于for循环，不能用于while循环'
       ],
-      answer: [0, 1, 3],
+      answer: [0, 1],
       partialAnswer: [0],
-      explanation: 'break结束整个循环; continue跳过本次循环. 两者都可用于for和while循环. 但只能在循环内使用.'
+      explanation: 'break结束整个循环；continue跳过本次循环。两者都不能在循环外使用（在循环外使用会报错），且break可以用于for和while两种循环。'
     },
     {
       id: 'q-5-adv-multi-5',
@@ -448,13 +448,13 @@ print(total)`,
       },
       referenceAnswer: `n = int(input())
 count = 0
-for a in range(1, 15):
-    for b in range(1, 15):
-        for c in range(1, 15):
+for a in range(1, n):
+    for b in range(1, n):
+        for c in range(1, n):
             if a + b + c == n:
                 count = count + 1
 print(count)`,
-      explanation: '使用三重循环枚举所有可能的组合,判断是否满足条件. 本题融合了枚举法和多重循环嵌套, 嶾较高难度.'
+      explanation: '使用三重循环枚举所有可能的组合,判断是否满足条件. a,b,c均从1到n-1枚举. 本题融合了枚举法和多重循环嵌套, 难度较高.'
     }
   ],
 

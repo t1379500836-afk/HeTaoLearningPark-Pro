@@ -109,7 +109,7 @@ print(b + 1)`,
       question: "已知 fruits = ['5', '9', '12']，下列哪个选项的值是 [5, 9, 12]？",
       code: null,
       options: [
-        'int(x) for x in fruits',
+        'list(int(x) for x in fruits)',
         '[int(x) for x in fruits]',
         '[x for x in fruits]',
         '[for int(x) in fruits]'

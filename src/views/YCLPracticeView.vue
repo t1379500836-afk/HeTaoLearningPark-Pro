@@ -224,14 +224,31 @@
                 <span v-else class="record-empty">暂无数据</span>
               </div>
               <div class="record-item">
-                <span class="record-label">编程题</span>
-                <span v-if="setRecords[set.id]" class="record-time">请找老师核对</span>
+                <span class="record-label">编程题得分</span>
+                <span v-if="setRecords[set.id]" class="record-score" :class="{ pass: (setRecords[set.id].codingScore || 0) >= (setRecords[set.id].codingTotal || 55) * 0.6 }">
+                  {{ setRecords[set.id].codingScore || 0 }}/{{ setRecords[set.id].codingTotal || 55 }}
+                </span>
                 <span v-else class="record-empty">暂无数据</span>
               </div>
               <div class="record-item">
                 <span class="record-label">完成时间</span>
                 <span v-if="setRecords[set.id]" class="record-time">{{ formatTime(setRecords[set.id].submitTime) }}</span>
                 <span v-else class="record-empty">暂无数据</span>
+              </div>
+            </div>
+
+            <!-- 总得分进度条 -->
+            <div v-if="setRecords[set.id]" class="total-score-progress">
+              <div class="progress-header">
+                <span class="progress-label">总得分</span>
+                <span class="progress-value">{{ (setRecords[set.id].score || 0) }}/{{ setRecords[set.id].totalScore || 100 }}</span>
+              </div>
+              <div class="progress-track">
+                <div
+                  class="progress-fill"
+                  :class="{ pass: (setRecords[set.id].score || 0) >= (setRecords[set.id].totalScore || 100) * 0.6 }"
+                  :style="{ width: Math.min(100, ((setRecords[set.id].score || 0) / (setRecords[set.id].totalScore || 100)) * 100) + '%' }"
+                ></div>
               </div>
             </div>
 
@@ -1352,6 +1369,71 @@ watch(() => route.params.level, (newLevel, oldLevel) => {
   gap: 16px;
 }
 
+/* 总得分进度条 - 液态玻璃苹果风 */
+.total-score-progress {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.progress-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.progress-track {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 5px;
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+  border-radius: 5px 5px 0 0;
+}
+
+.progress-fill.pass {
+  background: linear-gradient(90deg, #4caf50 0%, #2e7d32 100%);
+}
+
 .record-item {
   display: flex;
   flex-direction: column;
@@ -1491,6 +1573,22 @@ watch(() => route.params.level, (newLevel, oldLevel) => {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 16px;
+  }
+
+  .total-score-display {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+  }
+
+  .total-score-label {
+    font-size: 0.9rem;
+  }
+
+  .total-score-value {
+    font-size: 1.1rem;
   }
 
   .record-item {
@@ -1654,6 +1752,16 @@ watch(() => route.params.level, (newLevel, oldLevel) => {
 
   .record-score {
     font-size: 1.1rem;
+  }
+
+  .total-score-progress {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+  }
+
+  .progress-track {
+    height: 8px;
   }
 
   .set-actions {

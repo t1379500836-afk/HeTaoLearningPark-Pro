@@ -95,26 +95,39 @@
 
           <!-- 编程题 -->
           <div v-else-if="currentQuestion?.type === 'coding'" class="coding-area review-coding">
-            <div class="testcases-modern">
-              <div class="testcases-header">
-                <span class="testcases-icon">🧪</span>
-                <span class="testcases-title">测试用例</span>
-                <span class="testcases-count">{{ currentQuestion?.testCases?.length || 0 }} 组</span>
-              </div>
+            <!-- 测试用例展示 -->
+            <div class="testcases-modern" v-if="allTestCases.length > 0">
               <div class="testcases-list">
-                <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="testcase-card">
-                  <div class="testcase-badge">#{{ idx + 1 }}</div>
-                  <div class="testcase-body">
-                    <div class="testcase-row input-row">
-                      <span class="row-label"><span class="row-icon">📥</span>输入</span>
-                      <pre class="row-code">{{ tc.input || '无' }}</pre>
-                    </div>
-                    <div class="testcase-divider"><span class="divider-arrow">⬇</span></div>
-                    <div class="testcase-row output-row">
-                      <span class="row-label"><span class="row-icon">📤</span>期望输出</span>
-                      <pre class="row-code">{{ tc.expectedOutput }}</pre>
-                    </div>
+                <div
+                  v-for="(tc, idx) in allTestCases"
+                  :key="idx"
+                  class="testcase-card"
+                >
+                  <div
+                    class="testcase-header"
+                    :class="{ expanded: expandedTestCases.has(idx) }"
+                    @click="toggleTestCase(idx)"
+                  >
+                    <div class="testcase-badge">{{ idx + 1 }}</div>
+                    <span class="testcase-title">测试用例 {{ idx + 1 }}</span>
+                    <span class="expand-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
                   </div>
+                  <transition name="fold">
+                    <div v-show="expandedTestCases.has(idx)" class="testcase-body">
+                      <div class="testcase-columns">
+                        <div class="testcase-col">
+                          <span class="row-label">输入</span>
+                          <pre class="row-code">{{ tc.input || '无' }}</pre>
+                        </div>
+                        <div class="testcase-col">
+                          <span class="row-label">期望输出</span>
+                          <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </transition>
                 </div>
               </div>
             </div>
@@ -182,13 +195,17 @@
       <div class="result-content">
         <!-- 左侧：得分展示 -->
         <div class="score-section">
-          <div class="score-display objective-only">
-            <span class="score-label">选择题得分</span>
-            <span class="score-value">{{ objectiveScore }}</span>
-            <span class="score-total">/ {{ objectiveTotal }}</span>
+          <div class="score-display">
+            <span class="score-label">总得分</span>
+            <span class="score-value">{{ objectiveScore + codingScore }}</span>
+            <span class="score-total">/ {{ objectiveTotal + codingTotal }}</span>
           </div>
-          <div class="pass-status" :class="{ passed: objectiveScore >= objectiveTotal * 0.6, failed: objectiveScore < objectiveTotal * 0.6 }">
-            {{ objectiveScore >= objectiveTotal * 0.6 ? '🎉 选择题通过！' : '💪 继续加油！' }}
+          <div class="score-breakdown">
+            <span>选择题 {{ objectiveScore }}/{{ objectiveTotal }}</span>
+            <span>编程题 {{ codingScore }}/{{ codingTotal }}</span>
+          </div>
+          <div class="pass-status" :class="{ passed: (objectiveScore + codingScore) >= (objectiveTotal + codingTotal) * 0.6, failed: (objectiveScore + codingScore) < (objectiveTotal + codingTotal) * 0.6 }">
+            {{ (objectiveScore + codingScore) >= (objectiveTotal + codingTotal) * 0.6 ? '🎉 考试通过！' : '💪 继续加油！' }}
           </div>
         </div>
 
@@ -206,19 +223,9 @@
             </div>
             <div class="stat-item coding-item">
               <span class="stat-label">编程题</span>
-              <span class="stat-value pending">已答{{ codingAnswered }}/{{ codingCount }}题</span>
-              <span class="stat-tip">请找老师核对答案</span>
+              <span class="stat-value">{{ codingScore }}/{{ codingTotal }}</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- 编程题提示 -->
-      <div class="coding-notice" v-if="codingCount > 0">
-        <div class="notice-icon">📝</div>
-        <div class="notice-content">
-          <p class="notice-title">编程题需要老师评分</p>
-          <p class="notice-desc">您已完成 {{ codingAnswered }} 道编程题，请找老师核对答案获得最终分数。</p>
         </div>
       </div>
 
@@ -378,34 +385,84 @@
 
           <!-- 编程题 -->
           <div v-else-if="currentQuestion?.type === 'coding'" class="coding-area">
-            <div class="testcases-modern">
-              <div class="testcases-header">
-                <span class="testcases-icon">🧪</span>
-                <span class="testcases-title">测试用例</span>
-                <span class="testcases-count">{{ currentQuestion?.testCases?.length || 0 }} 组</span>
-              </div>
+            <!-- 测试用例展示 -->
+            <div class="testcases-modern" v-if="allTestCases.length > 0">
               <div class="testcases-list">
-                <div v-for="(tc, idx) in currentQuestion?.testCases" :key="idx" class="testcase-card">
-                  <div class="testcase-badge">#{{ idx + 1 }}</div>
-                  <div class="testcase-body">
-                    <div class="testcase-row input-row">
-                      <span class="row-label"><span class="row-icon">📥</span>输入</span>
-                      <pre class="row-code">{{ tc.input || '无' }}</pre>
-                    </div>
-                    <div class="testcase-divider"><span class="divider-arrow">⬇</span></div>
-                    <div class="testcase-row output-row">
-                      <span class="row-label"><span class="row-icon">📤</span>期望输出</span>
-                      <pre class="row-code">{{ tc.expectedOutput }}</pre>
-                    </div>
+                <div
+                  v-for="(tc, idx) in allTestCases"
+                  :key="idx"
+                  class="testcase-card"
+                >
+                  <div
+                    class="testcase-header"
+                    :class="{ expanded: expandedTestCases.has(idx) }"
+                    @click="toggleTestCase(idx)"
+                  >
+                    <div class="testcase-badge">{{ idx + 1 }}</div>
+                    <span class="testcase-title">测试用例 {{ idx + 1 }}</span>
+                    <span class="expand-chevron">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </span>
                   </div>
+                  <transition name="fold">
+                    <div v-show="expandedTestCases.has(idx)" class="testcase-body">
+                      <div class="testcase-columns">
+                        <div class="testcase-col">
+                          <span class="row-label">输入</span>
+                          <pre class="row-code">{{ tc.input || '无' }}</pre>
+                        </div>
+                        <div class="testcase-col">
+                          <span class="row-label">期望输出</span>
+                          <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </transition>
                 </div>
               </div>
             </div>
-            <textarea
-              v-model="answers[currentQuestion?.id]"
-              class="code-editor"
-              placeholder="在此编写代码..."
-            ></textarea>
+
+            <!-- 代码编辑器 -->
+            <div class="editor-section">
+              <div class="input-area">
+                <div class="input-header">
+                  <span>代码输入</span>
+                  <div class="header-btns">
+                    <button class="tool-btn run-btn" @click="runCode" :disabled="isRunning">
+                      {{ isRunning ? '■ 运行中' : '▶ 运行' }}
+                    </button>
+                    <button class="tool-btn clear-btn" @click="clearCode">清空</button>
+                  </div>
+                </div>
+                <textarea
+                  ref="codeTextareaRef"
+                  :value="answers[currentQuestion?.id]"
+                  class="code-input"
+                  placeholder="在此编写 Python 代码..."
+                  spellcheck="false"
+                ></textarea>
+              </div>
+              <div class="output-area">
+                <div class="output-header">
+                  <span>输出结果</span>
+                  <button class="tool-btn-small" @click="clearOutput">清空</button>
+                </div>
+                <div v-if="skulptLoading" class="loading-state">正在初始化 Python 环境，请稍等...</div>
+                <pre v-else class="output-content" :class="{ error: hasError }">{{ runOutput || '运行代码后查看输出结果...' }}</pre>
+
+                <!-- 终端输入行 -->
+                <div v-if="waitingForInput" class="terminal-input-line">
+                  <span class="terminal-prompt">{{ inputPrompt }}</span>
+                  <input
+                    v-model="terminalInput"
+                    type="text"
+                    class="terminal-input"
+                    @keydown.enter.prevent="submitTerminalInput"
+                  />
+                </div>
+                <div v-else-if="isRunning" class="terminal-status">程序运行中...</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -469,10 +526,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 import { examInfo } from '@/data/courses/YCL/config/exam-info.js'
+import { useLibrary } from '@/composables/useLibrary.js'
 import {
   getSetRecord,
   saveRecord,
@@ -514,6 +572,37 @@ const timer = ref(null)  // 计时器（使用 ref 确保响应式清理）
 // 复习模式
 const isReviewMode = ref(false)
 const reviewRecord = ref(null)
+
+// 编程题 IDE 状态
+const { judgeProgram } = useLibrary()
+const isRunning = ref(false)
+const isJudging = ref(false)
+const skulptLoading = ref(false)
+const runOutput = ref('')
+const hasError = ref(false)
+const programResult = ref(null)
+const waitingForInput = ref(false)
+const inputPrompt = ref('> ')
+const terminalInput = ref('')
+const codeTextareaRef = ref(null)
+let runWorker = null
+let workerReady = false
+let pendingInputResolve = null
+
+// 测试用例展开状态
+const expandedTestCases = ref(new Set([0]))
+function toggleTestCase(idx) {
+  const newSet = new Set(expandedTestCases.value)
+  if (newSet.has(idx)) {
+    newSet.delete(idx)
+  } else {
+    newSet.add(idx)
+  }
+  expandedTestCases.value = newSet
+}
+const allTestCases = computed(() => {
+  return currentQuestion.value?.testCases || []
+})
 
 // 当前题目
 const currentQuestion = computed(() => questions.value[currentIndex.value])
@@ -560,6 +649,23 @@ async function loadPracticeSet() {
             answers.value[q.id] = q.userAnswer
           }
         })
+        // 恢复编程题判题结果
+        if (record.codingReviewResults) {
+          codingReviewResults.value = record.codingReviewResults
+        }
+        // 恢复分数
+        if (record.codingScore !== undefined) {
+          codingScore.value = record.codingScore
+        }
+        if (record.codingTotal !== undefined) {
+          codingTotal.value = record.codingTotal
+        }
+        if (record.objectiveScore !== undefined) {
+          objectiveScore.value = record.objectiveScore
+        }
+        if (record.objectiveTotal !== undefined) {
+          objectiveTotal.value = record.objectiveTotal
+        }
         examSubmitted.value = true
       }
     }
@@ -634,10 +740,23 @@ function goToQuestion(index) {
   if (q && q.type === 'multiple-choice' && !Array.isArray(answers.value[q.id])) {
     answers.value[q.id] = []
   }
+  // 切换到编程题时，初始化 CodeMirror
+  if (q && q.type === 'coding') {
+    nextTick(() => {
+      if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
+        initCodeMirror()
+      }
+    })
+  }
 }
 
 function prevQuestion() {
   if (currentIndex.value > 0) {
+    // 离开编程题时销毁 CodeMirror，切换回去时重新初始化
+    if (currentQuestion.value?.type === 'coding' && cmEditor) {
+      cmEditor.toTextArea()
+      cmEditor = null
+    }
     currentIndex.value--
     // 切换到多选题时，确保答案是数组
     const q = questions.value[currentIndex.value]
@@ -649,6 +768,11 @@ function prevQuestion() {
 
 function nextQuestion() {
   if (currentIndex.value < questions.value.length - 1) {
+    // 离开编程题时销毁 CodeMirror，切换回去时重新初始化
+    if (currentQuestion.value?.type === 'coding' && cmEditor) {
+      cmEditor.toTextArea()
+      cmEditor = null
+    }
     currentIndex.value++
     // 切换到多选题时，确保答案是数组
     const q = questions.value[currentIndex.value]
@@ -664,13 +788,13 @@ function submitExam() {
 }
 
 // 确认提交
-function confirmSubmit() {
+async function confirmSubmit() {
   showSubmitConfirm.value = false
   clearInterval(timer.value)
   timer.value = null
   examStarted.value = false
   examSubmitted.value = true
-  calculateScore()
+  await calculateScore()
 
   // 保存考试记录到 localStorage
   saveExamRecord()
@@ -689,8 +813,9 @@ const codingScore = ref(0)
 const objectiveScore = ref(0)  // 选择题总分
 const objectiveTotal = ref(0)  // 选择题满分
 const codingTotal = ref(0)     // 编程题满分
+const codingReviewResults = ref({})  // 编程题判题结果（用于复习模式）
 
-function calculateScore() {
+async function calculateScore() {
   let score = 0
   let objScore = 0
   let objTotal = 0
@@ -699,7 +824,7 @@ function calculateScore() {
   multipleChoiceCorrect.value = 0
   codingScore.value = 0
 
-  questions.value.forEach(q => {
+  for (const q of questions.value) {
     const answer = answers.value[q.id]
 
     if (q.type === 'single-choice') {
@@ -716,21 +841,32 @@ function calculateScore() {
         objScore += q.score
         multipleChoiceCorrect.value++
       } else if (answer && q.answer.some(a => answer.includes(a))) {
-        // 部分正确：从配置获取分值，默认1分
         const partialScore = examInfo.multipleChoiceRule?.scoringRule?.partialCorrect ?? 1
         score += partialScore
         objScore += partialScore
       }
     } else if (q.type === 'coding') {
       codeTotal += q.score
+      if (answer && answer.trim()) {
+        try {
+          const result = await judgeProgram(q, answer)
+          // 全部通过才给分，否则不得分
+          if (result.status === 'passed') {
+            codingScore.value += q.score
+          }
+          // 保存判题结果用于复习模式
+          codingReviewResults.value[q.id] = result
+        } catch (e) {
+          console.error('判题失败:', q.id, e)
+        }
+      }
     }
-  })
+  }
 
   calculatedScore.value = score
   objectiveScore.value = objScore
   objectiveTotal.value = objTotal
   codingTotal.value = codeTotal
-  // codingAnswered 是 computed 属性，自动计算
 }
 
 function arraysEqual(a, b) {
@@ -752,8 +888,11 @@ function saveExamRecord() {
       isCorrect = userAnswer === q.answer
     } else if (q.type === 'multiple-choice') {
       isCorrect = arraysEqual(userAnswer, q.answer)
+    } else if (q.type === 'coding') {
+      // 编程题：使用保存的判题结果判定
+      const result = codingReviewResults.value[q.id]
+      isCorrect = result && result.status === 'passed'
     }
-    // 编程题不判断对错，由老师评分
 
     return {
       id: q.id,
@@ -766,7 +905,8 @@ function saveExamRecord() {
       referenceAnswer: q.referenceAnswer,  // 编程题参考答案
       isCorrect: isCorrect,
       score: q.score,
-      explanation: q.explanation || ''
+      explanation: q.explanation || '',
+      codingResult: codingReviewResults.value[q.id] || null  // 保存判题结果
     }
   })
 
@@ -775,18 +915,19 @@ function saveExamRecord() {
     // 选择题分数
     objectiveScore: objectiveScore.value,
     objectiveTotal: objectiveTotal.value,
-    // 编程题（需要老师评分）
-    codingAnswered: codingAnswered.value,
+    // 编程题
+    codingScore: codingScore.value,
     codingTotal: codingTotal.value,
-    // 总分（仅选择题）
-    score: objectiveScore.value,
+    // 总分
+    score: objectiveScore.value + codingScore.value,
     totalScore: totalScore,
     // 统计
-    correctCount: singleChoiceCorrect.value + multipleChoiceCorrect.value,
+    correctCount: singleChoiceCorrect.value + multipleChoiceCorrect.value + (codingScore.value > 0 ? 1 : 0),
     totalCount: totalQuestions.value,
     duration: duration,
     submitTime: new Date().toISOString(),
-    questions: questionRecords
+    questions: questionRecords,
+    codingReviewResults: codingReviewResults.value  // 保存编程题判题结果
   }
 
   saveRecord(props.level, props.setId, record)
@@ -816,6 +957,11 @@ function isAnswerCorrect(question) {
     return userAnswer === question.answer
   } else if (question.type === 'multiple-choice') {
     return arraysEqual(userAnswer, question.answer)
+  } else if (question.type === 'coding') {
+    if (!userAnswer || !userAnswer.trim()) return false
+    // 编程题：使用提交时保存的判题结果，全部用例通过则判定正确
+    const result = codingReviewResults.value[question.id]
+    return result && result.status === 'passed'
   }
   return false
 }
@@ -826,6 +972,127 @@ function isAnswerWrong(question) {
   const userAnswer = answers.value[question.id]
   if (userAnswer === undefined || userAnswer === null) return false
   return !isAnswerCorrect(question)
+}
+
+// 编程题 IDE 函数
+function initRunWorker() {
+  if (runWorker) runWorker.terminate()
+  runWorker = new Worker('/skulpt.worker.js')
+  workerReady = false
+  skulptLoading.value = true
+
+  runWorker.onmessage = (e) => {
+    const { type, text, prompt, message } = e.data
+    if (type === 'ready') {
+      workerReady = true
+      skulptLoading.value = false
+    } else if (type === 'output') {
+      runOutput.value += text
+    } else if (type === 'input') {
+      waitingForInput.value = true
+      inputPrompt.value = prompt || '> '
+      pendingInputResolve = (val) => {
+        waitingForInput.value = false
+        runWorker.postMessage({ type: 'input', input: val })
+      }
+    } else if (type === 'done') {
+      if (!runOutput.value) runOutput.value = '代码执行成功，无输出。'
+      isRunning.value = false
+      waitingForInput.value = false
+    } else if (type === 'error') {
+      hasError.value = true
+      runOutput.value = message
+      isRunning.value = false
+      waitingForInput.value = false
+    }
+  }
+
+  runWorker.onerror = () => {
+    skulptLoading.value = false
+    workerReady = false
+    hasError.value = true
+    runOutput.value = 'Python 环境加载失败，请刷新页面重试'
+    isRunning.value = false
+  }
+}
+
+function clearOutput() {
+  runOutput.value = ''
+  hasError.value = false
+}
+
+function clearCode() {
+  const code = '# 在此编写代码\n'
+  answers.value[currentQuestion.value?.id] = code
+  if (cmEditor) {
+    cmEditor.setValue(code)
+  }
+}
+
+function submitTerminalInput() {
+  const text = terminalInput.value
+  runOutput.value += (inputPrompt.value || '> ') + text + '\n'
+  terminalInput.value = ''
+  if (pendingInputResolve) {
+    pendingInputResolve(text)
+    pendingInputResolve = null
+  }
+}
+
+async function runCode() {
+  const code = answers.value[currentQuestion.value?.id]
+  if (!code?.trim()) return
+  if (!workerReady || skulptLoading.value) return
+
+  isRunning.value = true
+  runOutput.value = ''
+  hasError.value = false
+  runWorker.postMessage({ type: 'run', code })
+}
+
+function stopRun() {
+  if (runWorker) {
+    runWorker.terminate()
+    runWorker = null
+  }
+  workerReady = false
+  isRunning.value = false
+  waitingForInput.value = false
+  if (pendingInputResolve) {
+    pendingInputResolve('')
+    pendingInputResolve = null
+  }
+}
+
+// CodeMirror
+let cmEditor = null
+
+function initCodeMirror() {
+  if (cmEditor) return
+  if (typeof CodeMirror === 'undefined' || !codeTextareaRef.value) return
+
+  cmEditor = CodeMirror.fromTextArea(codeTextareaRef.value, {
+    mode: 'python',
+    theme: 'monokai',
+    lineNumbers: true,
+    indentUnit: 4,
+    tabSize: 4,
+    indentWithTabs: false,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    styleActiveLine: true,
+    viewportMargin: Infinity
+  })
+
+  cmEditor.on('change', () => {
+    answers.value[currentQuestion.value?.id] = cmEditor.getValue()
+  })
+
+  // 如果已有答案内容，设置到编辑器
+  const existingCode = answers.value[currentQuestion.value?.id]
+  if (existingCode) {
+    cmEditor.setValue(existingCode)
+  }
 }
 
 // 返回上一页
@@ -851,12 +1118,27 @@ function abandonExam() {
 // 生命周期
 onMounted(() => {
   loadPracticeSet()
+  initRunWorker()
+
+  const checkCodeMirror = setInterval(() => {
+    if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
+      clearInterval(checkCodeMirror)
+      initCodeMirror()
+    }
+  }, 100)
+  setTimeout(() => {
+    if (!cmEditor) clearInterval(checkCodeMirror)
+  }, 10000)
 })
 
 onUnmounted(() => {
   if (timer.value) {
     clearInterval(timer.value)
     timer.value = null
+  }
+  if (runWorker) {
+    runWorker.terminate()
+    runWorker = null
   }
 })
 </script>
@@ -1285,159 +1567,380 @@ onUnmounted(() => {
 /* 现代感测试用例展示 */
 .testcases-modern {
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
-}
-
-.testcases-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 18px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.testcases-icon {
-  font-size: 1.2rem;
-}
-
-.testcases-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.testcases-count {
-  margin-left: auto;
-  font-size: 0.8rem;
-  background: rgba(255,255,255,0.2);
-  padding: 3px 10px;
-  border-radius: 10px;
 }
 
 .testcases-list {
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .testcase-card {
   background: #fff;
-  border-radius: 14px;
-  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  border: 1px solid #e5e5e7;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s;
 }
 
 .testcase-card:hover {
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
-  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.testcase-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.testcase-header:hover {
+  background: #f5f5f7;
+}
+
+.testcase-title {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #1d1d1f;
+  letter-spacing: -0.01em;
+}
+
+.expand-chevron {
+  margin-left: auto;
+  color: #86868b;
+  transition: transform 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+.testcase-header.expanded .expand-chevron {
+  transform: rotate(180deg);
+}
+
+.fold-enter-active,
+.fold-leave-active {
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.fold-enter-from,
+.fold-leave-to {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.fold-enter-to,
+.fold-leave-from {
+  max-height: 2000px;
+  opacity: 1;
 }
 
 .testcase-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 700;
-  border-radius: 50%;
-  margin: 12px 0 0 14px;
+  min-width: 22px;
+  height: 22px;
+  background: #e5e5e7;
+  color: #1d1d1f;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0 7px;
 }
 
 .testcase-body {
-  padding: 12px 14px 16px;
+  padding: 0 14px 14px;
 }
 
-.testcase-row {
+.testcase-columns {
+  display: flex;
+  gap: 12px;
+}
+
+.testcase-col {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-.testcase-divider {
-  display: flex;
-  justify-content: center;
-  padding: 8px 0;
-}
-
-.divider-arrow {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f1f5f9;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  color: #64748b;
+  min-width: 0;
 }
 
 .row-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #475569;
-}
-
-.row-icon {
-  font-size: 0.9rem;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .row-code {
   margin: 0;
   padding: 12px 14px;
-  background: #0f172a;
-  color: #e2e8f0;
-  border-radius: 10px;
-  font-family: 'Consolas', 'Courier New', monospace;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  background: #1c1c1e;
+  color: #f5f5f7;
+  border-radius: 8px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 0.82rem;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-all;
   overflow-x: auto;
 }
 
-.input-row .row-code {
-  border-left: 3px solid #3b82f6;
+/* 编辑器区域 - 上下布局 */
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.output-row .row-code {
-  border-left: 3px solid #10b981;
-}
-
-.code-editor {
-  width: 100%;
-  min-height: 200px;
-  padding: 15px;
-  border: 2px solid #eee;
+.input-area {
+  background: #1a1d21;
   border-radius: 10px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  resize: vertical;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
 }
 
-.code-editor:focus {
-  outline: none;
-  border-color: #667eea;
-}
-
-.question-actions {
+.input-header {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
+  align-items: center;
+  padding: 8px 12px;
+  background: #2d3436;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+}
+
+.input-header span {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.header-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.code-input {
+  display: none;
+}
+
+:deep(.CodeMirror) {
+  flex: 1;
+  height: 100% !important;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  direction: ltr;
+  background: #282c34;
+}
+
+:deep(.CodeMirror-gutters) {
+  background: #282c34;
+  border-right: 1px solid #3e4451;
+}
+
+:deep(.CodeMirror-linenumber) {
+  color: #5c6370;
+  padding: 0 8px;
+}
+
+:deep(.CodeMirror-cursor) {
+  border-left: 2px solid #528bff;
+}
+
+:deep(.CodeMirror-selected) {
+  background: #3e4451 !important;
+}
+
+:deep(.cm-s-monokai .cm-keyword) { color: #c678dd; }
+:deep(.cm-s-monokai .cm-string) { color: #98c379; }
+:deep(.cm-s-monokai .cm-number) { color: #d19a66; }
+:deep(.cm-s-monokai .cm-comment) { color: #5c6370; font-style: italic; }
+:deep(.cm-s-monokai .cm-def) { color: #61afef; }
+:deep(.cm-s-monokai .cm-variable) { color: #e06c75; }
+:deep(.cm-s-monokai .cm-operator) { color: #56b6c2; }
+
+:deep(.CodeMirror-vscrollbar),
+:deep(.CodeMirror-hscrollbar) {
+  outline: none;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar) {
+  width: 8px;
+  height: 8px;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-track),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-track) {
+  background: #282c34;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-thumb),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-thumb) {
+  background: #4a4e57;
+  border-radius: 4px;
+}
+
+:deep(.CodeMirror-vscrollbar::-webkit-scrollbar-thumb:hover),
+:deep(.CodeMirror-hscrollbar::-webkit-scrollbar-thumb:hover) {
+  background: #5c6370;
+}
+
+.output-area {
+  background: #1a1d21;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background: #2d3436;
+  color: #ccc;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.tool-btn {
+  padding: 5px 14px;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.tool-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.tool-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.run-btn {
+  background: #27ae60;
+  color: #fff;
+}
+
+.tool-btn.clear-btn,
+.tool-btn-small {
+  background: #555;
+  color: #ddd;
+  border: 1px solid #666;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tool-btn-small {
+  padding: 3px 10px;
+  font-size: 0.78rem;
+}
+
+.tool-btn.clear-btn:hover,
+.tool-btn-small:hover {
+  background: #666;
+  color: #fff;
+}
+
+.output-content {
+  flex: 1;
+  margin: 0;
+  padding: 10px 15px;
+  color: #abb2bf;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.output-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-content::-webkit-scrollbar-track {
+  background: #1a1d21;
+}
+
+.output-content::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.output-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.output-content.error {
+  color: #e74c3c;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: #1a1d21;
+  border-top: 1px solid #444;
+  gap: 8px;
+  min-height: 44px;
+  flex-shrink: 0;
+}
+
+.terminal-prompt {
+  color: #888;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #abb2bf;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.85rem;
+  outline: none;
+  min-height: 24px;
+}
+
+.terminal-input:focus {
+  background: #25282e;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.terminal-status {
+  padding: 10px 15px;
+  color: #666;
+  font-size: 0.85rem;
+  border-top: 1px solid #444;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .btn-nav {
@@ -1447,6 +1950,7 @@ onUnmounted(() => {
   cursor: pointer;
   border: 2px solid #ddd;
   background: white;
+  transition: all 0.2s;
 }
 
 .btn-nav:disabled {
@@ -1460,10 +1964,58 @@ onUnmounted(() => {
   color: white;
 }
 
+.btn-nav.primary:hover {
+  opacity: 0.9;
+}
+
 .btn-nav.submit {
   background: #4caf50;
   border-color: #4caf50;
   color: white;
+}
+
+.btn-nav.submit:hover {
+  opacity: 0.9;
+}
+
+.question-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.question-counter {
+  font-size: 0.95rem;
+  color: #666;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .btn-nav {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-nav.primary {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+  }
+
+  .btn-nav.submit {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: white;
+  }
 }
 
 /* 考试结果页 */
@@ -1637,6 +2189,28 @@ onUnmounted(() => {
 /* 选择题单独展示样式 */
 .score-display.objective-only {
   background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+}
+
+/* 得分展示 */
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.score-breakdown {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #666;
 }
 
 /* 操作按钮 */
@@ -1835,16 +2409,6 @@ onUnmounted(() => {
   .option {
     padding: 12px 15px;
     font-size: 0.95rem;
-  }
-
-  .code-editor {
-    min-height: 150px;
-    font-size: 0.85rem;
-  }
-
-  .btn-nav {
-    padding: 10px 20px;
-    font-size: 0.9rem;
   }
 
   /* 结果页小屏适配 */

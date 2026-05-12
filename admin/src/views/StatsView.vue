@@ -297,9 +297,15 @@ const trendChartOption = computed(() => {
   const teacher = selectedTeacherName.value
 
   if (isSingleDay) {
-    const hourMap = {}
+    let hourMap = {}
     for (let h = 0; h < 24; h++) hourMap[h] = 0
-    for (const r of dauHourly.value) hourMap[r.hour] = r.count
+    if (teacher) {
+      for (const r of teacherHourlyStats.value) {
+        if (r.teacherName === teacher) hourMap[r.hour] = r.count
+      }
+    } else {
+      for (const r of dauHourly.value) hourMap[r.hour] = r.count
+    }
     const hours = Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, '0')}:00`)
     const values = Array.from({ length: 24 }, (_, i) => hourMap[i])
     const opts = {

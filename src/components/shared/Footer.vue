@@ -8,7 +8,7 @@
       <p class="slogan">让每个孩子爱上编程，在快乐中成长。</p>
       <div class="footer-links">
         <a href="#">关于我们</a>
-        <a href="#levels">课程介绍</a>
+        <router-link :to="prefixedPath('/levels')">课程介绍</router-link>
         <router-link :to="prefixedPath('/library')">练习题库</router-link>
         <router-link :to="prefixedPath('/contact')">联系作者</router-link>
       </div>

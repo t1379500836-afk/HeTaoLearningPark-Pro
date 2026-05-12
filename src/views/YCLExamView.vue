@@ -431,6 +431,9 @@
                     <button class="tool-btn run-btn" @click="runCode" :disabled="isRunning">
                       {{ isRunning ? '■ 运行中' : '▶ 运行' }}
                     </button>
+                    <button v-if="isRunning" class="tool-btn stop-btn" @click="stopRun">
+                      ■ 停止
+                    </button>
                     <button class="tool-btn clear-btn" @click="clearCode">清空</button>
                   </div>
                 </div>
@@ -440,6 +443,7 @@
                   class="code-input"
                   placeholder="在此编写 Python 代码..."
                   spellcheck="false"
+                  @input="e => answers[currentQuestion.id] = e.target.value"
                 ></textarea>
               </div>
               <div class="output-area">
@@ -537,6 +541,7 @@ import {
   formatDuration as formatDurationDisplay,
   formatTime as formatTimeDisplay
 } from '@/data/courses/YCL/utils/examRecord.js'
+import { useAuth } from '@/composables/useAuth.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -548,6 +553,9 @@ const currentPrefix = computed(() => getCurrentPrefix(route))
 function prefixedPath(path) {
   return buildPrefixedPath(currentPrefix.value, path)
 }
+
+// 教师验证状态
+const { teacherId } = useAuth()
 
 // Props
 const props = defineProps({
@@ -734,6 +742,11 @@ function getQuestionTypeText(type) {
 
 // 题目导航
 function goToQuestion(index) {
+  // 离开编程题时销毁 CodeMirror
+  if (currentQuestion.value?.type === 'coding' && cmEditor) {
+    cmEditor.toTextArea()
+    cmEditor = null
+  }
   currentIndex.value = index
   // 切换到多选题时，确保答案是数组
   const q = questions.value[index]
@@ -850,6 +863,7 @@ async function calculateScore() {
       if (answer && answer.trim()) {
         try {
           const result = await judgeProgram(q, answer)
+          console.log('[OJ] 编程题判题结果:', q.id, result)
           // 全部通过才给分，否则不得分
           if (result.status === 'passed') {
             codingScore.value += q.score
@@ -931,6 +945,53 @@ function saveExamRecord() {
   }
 
   saveRecord(props.level, props.setId, record)
+
+  // 提交到服务器
+  submitScoreToServer(record)
+}
+
+// 提交成绩到服务器
+async function submitScoreToServer(record) {
+  const studentName = localStorage.getItem('ycl_student_name')
+  if (!studentName || !teacherId.value) {
+    console.log('[YCL] 跳过提交：缺少学生姓名或老师ID')
+    return
+  }
+
+  try {
+    const payload = {
+      studentName,
+      teacherId: teacherId.value,
+      level: props.level,
+      setId: props.setId,
+      setName: record.setName,
+      score: record.score,
+      totalScore: record.totalScore,
+      correctCount: record.correctCount,
+      totalQuestions: record.totalCount,
+      duration: record.duration,
+      objectiveScore: record.objectiveScore,
+      objectiveTotal: record.objectiveTotal,
+      codingScore: record.codingScore,
+      codingTotal: record.codingTotal,
+      questions: record.questions
+    }
+
+    const res = await fetch('/api/ycl/scores', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+      console.log('[YCL] 成绩提交成功:', data)
+    } else {
+      console.error('[YCL] 成绩提交失败:', res.status)
+    }
+  } catch (e) {
+    console.error('[YCL] 成绩提交异常:', e)
+  }
 }
 
 // 查看解析
@@ -993,7 +1054,9 @@ function initRunWorker() {
       inputPrompt.value = prompt || '> '
       pendingInputResolve = (val) => {
         waitingForInput.value = false
-        runWorker.postMessage({ type: 'input', input: val })
+        if (runWorker) {
+          runWorker.postMessage({ type: 'input', input: val })
+        }
       }
     } else if (type === 'done') {
       if (!runOutput.value) runOutput.value = '代码执行成功，无输出。'
@@ -1050,18 +1113,30 @@ async function runCode() {
   runWorker.postMessage({ type: 'run', code })
 }
 
+let forceStopTimer = null
+let stoppingByUser = false
+
 function stopRun() {
-  if (runWorker) {
-    runWorker.terminate()
-    runWorker = null
-  }
-  workerReady = false
-  isRunning.value = false
+  stoppingByUser = true
+  pendingInputResolve = null
   waitingForInput.value = false
-  if (pendingInputResolve) {
-    pendingInputResolve('')
-    pendingInputResolve = null
+  isRunning.value = false
+
+  if (runWorker) {
+    runWorker.postMessage({ type: 'stop' })
   }
+
+  // 兜底：500ms 后强制终止并重建 Worker
+  if (forceStopTimer) clearTimeout(forceStopTimer)
+  forceStopTimer = setTimeout(() => {
+    forceStopTimer = null
+    stoppingByUser = false
+    if (runWorker) {
+      runWorker.terminate()
+      runWorker = null
+    }
+    initRunWorker()
+  }, 500)
 }
 
 // CodeMirror
@@ -1135,6 +1210,10 @@ onUnmounted(() => {
   if (timer.value) {
     clearInterval(timer.value)
     timer.value = null
+  }
+  if (forceStopTimer) {
+    clearTimeout(forceStopTimer)
+    forceStopTimer = null
   }
   if (runWorker) {
     runWorker.terminate()
@@ -1836,6 +1915,11 @@ onUnmounted(() => {
 
 .run-btn {
   background: #27ae60;
+  color: #fff;
+}
+
+.tool-btn.stop-btn {
+  background: #e74c3c;
   color: #fff;
 }
 

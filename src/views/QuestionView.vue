@@ -159,6 +159,9 @@
                     <button class="tool-btn run-btn" @click="runCode" :disabled="isRunning">
                       {{ isRunning ? '■ 运行中' : '▶ 运行' }}
                     </button>
+                    <button v-if="isRunning" class="tool-btn stop-btn" @click="stopRun">
+                      ■ 停止
+                    </button>
                     <button class="tool-btn clear-btn" @click="clearCode">清空</button>
                   </div>
                 </div>
@@ -355,6 +358,8 @@ function toggleTestCase(idx) {
 const codeInput = ref('# 在此编写代码\nprint("Hello, World!")')
 let runWorker = null
 let workerReady = false
+let forceStopTimer = null
+let stoppingByUser = false
 
 // 终端输入相关
 const waitingForInput = ref(false)
@@ -413,17 +418,26 @@ function submitTerminalInput() {
 }
 
 function stopRun() {
-  if (runWorker) {
-    runWorker.terminate()
-    runWorker = null
-  }
-  workerReady = false
-  isRunning.value = false
+  stoppingByUser = true
+  pendingInputResolve = null
   waitingForInput.value = false
-  if (pendingInputResolve) {
-    pendingInputResolve('')
-    pendingInputResolve = null
+  isRunning.value = false
+
+  if (runWorker) {
+    runWorker.postMessage({ type: 'stop' })
   }
+
+  // 兜底：500ms 后强制终止并重建 Worker
+  if (forceStopTimer) clearTimeout(forceStopTimer)
+  forceStopTimer = setTimeout(() => {
+    forceStopTimer = null
+    stoppingByUser = false
+    if (runWorker) {
+      runWorker.terminate()
+      runWorker = null
+    }
+    initRunWorker()
+  }, 500)
 }
 
 function initRunWorker() {
@@ -444,7 +458,9 @@ function initRunWorker() {
       inputPrompt.value = prompt || '> '
       pendingInputResolve = (val) => {
         waitingForInput.value = false
-        runWorker.postMessage({ type: 'input', input: val })
+        if (runWorker) {
+          runWorker.postMessage({ type: 'input', input: val })
+        }
       }
     } else if (type === 'done') {
       if (!runOutput.value) runOutput.value = '代码执行成功，无输出。'
@@ -1168,6 +1184,11 @@ async function submitCode() {
 
 .run-btn {
   background: #27ae60;
+  color: #fff;
+}
+
+.tool-btn.stop-btn {
+  background: #e74c3c;
   color: #fff;
 }
 

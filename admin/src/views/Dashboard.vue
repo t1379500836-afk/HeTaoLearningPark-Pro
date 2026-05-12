@@ -33,6 +33,10 @@
           <el-icon><Document /></el-icon>
           <span>题库管理</span>
         </el-menu-item>
+        <el-menu-item index="/ycl-scores">
+          <el-icon><Notebook /></el-icon>
+          <span>YCL成绩</span>
+        </el-menu-item>
       </el-menu>
       <div class="sidebar-footer">
         <button class="collapse-btn" @click="sidebarCollapsed = !sidebarCollapsed">
@@ -81,7 +85,7 @@ const logout = inject('logout')
 const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
 
-const PAGE_TITLES = { stats: '数据统计', teachers: '教师管理', messages: '消息管理', library: '题库管理' }
+const PAGE_TITLES = { stats: '数据统计', teachers: '教师管理', messages: '消息管理', library: '题库管理', 'ycl-scores': 'YCL成绩' }
 const pageTitle = computed(() => PAGE_TITLES[route.name] || '数据统计')
 
 function handleLogout() {

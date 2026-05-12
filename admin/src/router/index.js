@@ -15,6 +15,7 @@ const routes = [
       { path: 'teachers', name: 'teachers', component: TeachersView },
       { path: 'messages', name: 'messages', component: MessagesView },
       { path: 'library', name: 'library', component: LibraryView },
+      { path: 'ycl-scores', name: 'ycl-scores', component: () => import('../views/YCLScoresView.vue') },
       { path: 'questions', redirect: '/library' },
       { path: 'questions/tags', redirect: '/library' },
     ]

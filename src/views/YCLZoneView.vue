@@ -1,5 +1,30 @@
 <template>
   <div class="ycl-zone-view">
+    <!-- 学生姓名弹窗 -->
+    <div v-if="showNameModal" class="modal-overlay">
+      <div class="modal-content name-modal">
+        <button class="modal-close" @click="closeAndGoHome" aria-label="关闭">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="modal-icon">👋</div>
+        <h3>欢迎来到 YCL 考级专区</h3>
+        <p class="modal-desc">请输入你的名字，方便老师记录你的学习情况</p>
+        <input
+          v-model="studentName"
+          type="text"
+          class="name-input"
+          placeholder="请输入你的名字"
+          maxlength="20"
+          @keydown.enter="confirmName"
+        />
+        <p v-if="nameError" class="name-error">{{ nameError }}</p>
+        <button class="confirm-btn" @click="confirmName">开始学习</button>
+        <p class="name-hint">名字仅本地存储，可以随时清除</p>
+      </div>
+    </div>
+
     <!-- 悬浮返回按钮 -->
     <button class="floating-back-btn" @click="goBack" aria-label="返回上一页">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -155,7 +180,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 import { examInfo } from '@/data/courses/YCL/config/exam-info.js'
@@ -163,6 +188,36 @@ import { levelInfo, getKnowledgePointsByLevel, canAccessLevel } from '@/data/cou
 
 const router = useRouter()
 const route = useRoute()
+
+// 学生姓名弹窗
+const STUDENT_NAME_KEY = 'ycl_student_name'
+const showNameModal = ref(false)
+const studentName = ref('')
+const nameError = ref('')
+
+// 初始化检查姓名
+onMounted(() => {
+  const saved = localStorage.getItem(STUDENT_NAME_KEY)
+  if (saved) {
+    studentName.value = saved
+  }
+  showNameModal.value = !saved
+})
+
+function confirmName() {
+  const name = studentName.value.trim()
+  if (!name) {
+    nameError.value = '请输入你的名字'
+    return
+  }
+  if (name.length < 2) {
+    nameError.value = '名字至少2个字符'
+    return
+  }
+  localStorage.setItem(STUDENT_NAME_KEY, name)
+  showNameModal.value = false
+  nameError.value = ''
+}
 
 // 获取当前路由前缀
 const currentPrefix = computed(() => getCurrentPrefix(route))
@@ -201,6 +256,18 @@ function goBack() {
     router.back()
   }
 }
+
+// 获取保存的学生姓名（供其他组件使用）
+function getStudentName() {
+  return localStorage.getItem(STUDENT_NAME_KEY) || ''
+}
+
+function closeAndGoHome() {
+  router.push(prefixedPath('/'))
+}
+
+// 暴露给外部使用
+defineExpose({ getStudentName })
 </script>
 
 <style scoped>
@@ -777,5 +844,120 @@ function goBack() {
     width: 18px;
     height: 18px;
   }
+}
+
+/* 姓名弹窗 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.name-modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalIn 0.3s ease;
+  position: relative;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.name-modal .modal-icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+}
+
+.name-modal h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 0 0 10px;
+}
+
+.name-modal .modal-desc {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.name-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.name-input:focus {
+  border-color: #667eea;
+}
+
+.name-error {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin: 8px 0 0;
+}
+
+.name-modal .confirm-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+
+.name-modal .confirm-btn:hover {
+  opacity: 0.9;
+}
+
+.name-hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 12px 0 0;
+}
+
+/* 弹窗关闭按钮 */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #e0e0e0;
+  color: #666;
 }
 </style>

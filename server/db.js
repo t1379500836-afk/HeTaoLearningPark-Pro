@@ -215,6 +215,33 @@ export async function initDatabase() {
       if (!e.message.includes('Duplicate key')) throw e
     }
 
+    // YCL 成绩记录表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS ycl_scores (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        student_name VARCHAR(50) NOT NULL,
+        teacher_id INT NOT NULL,
+        level VARCHAR(10) NOT NULL,
+        set_id VARCHAR(50) NOT NULL,
+        set_name VARCHAR(100) NOT NULL,
+        score INT NOT NULL,
+        total_score INT NOT NULL,
+        correct_count INT NOT NULL,
+        total_questions INT NOT NULL,
+        duration INT NOT NULL,
+        objective_score INT DEFAULT 0,
+        objective_total INT DEFAULT 0,
+        coding_score INT DEFAULT 0,
+        coding_total INT DEFAULT 0,
+        questions JSON,
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_teacher (teacher_id),
+        INDEX idx_teacher_level (teacher_id, level),
+        INDEX idx_teacher_submitted (teacher_id, submitted_at),
+        INDEX idx_set (set_id)
+      )
+    `)
+
     console.log('数据库初始化完成')
   } finally {
     conn.release()

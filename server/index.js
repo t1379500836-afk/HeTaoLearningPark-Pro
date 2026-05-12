@@ -9,6 +9,7 @@ import messageRoutes from './routes/messages.js'
 import tagRoutes from './routes/tags.js'
 import questionRoutes from './routes/questions.js'
 import libraryRoutes from './routes/library.js'
+import yclScoreRoutes from './routes/ycl-scores.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -25,6 +26,7 @@ app.use('/api/messages', messageRoutes)
 app.use('/api/questions/tags', tagRoutes)
 app.use('/api/questions', questionRoutes)
 app.use('/api/library', libraryRoutes)
+app.use('/api/ycl', yclScoreRoutes)
 
 // 启动
 async function start() {

@@ -66,6 +66,7 @@ async function runAllTestCases(code, testCases) {
   shouldStop = false
   let earnedScore = 0
   let totalScore = 0
+  let passedCount = 0
 
   for (let i = 0; i < testCases.length; i++) {
     if (shouldStop) break
@@ -76,6 +77,7 @@ async function runAllTestCases(code, testCases) {
 
     const result = await runSingleTestCase(code, tc.input, tc.expectedOutput, tcScore)
     earnedScore += result.earnedScore
+    if (result.passed) passedCount++
 
     self.postMessage({
       type: 'result',
@@ -87,7 +89,7 @@ async function runAllTestCases(code, testCases) {
   }
 
   const finalScore = totalScore > 0 ? Math.round((earnedScore / totalScore) * 100) : 0
-  const finalStatus = earnedScore === totalScore && testCases.length > 0 ? 'passed' : 'failed'
+  const finalStatus = passedCount === testCases.length && testCases.length > 0 ? 'passed' : 'failed'
   self.postMessage({ type: 'done', earnedScore, totalScore, status: finalStatus, score: finalScore })
 }
 

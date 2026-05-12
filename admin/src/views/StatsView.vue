@@ -72,7 +72,10 @@
 
       <!-- 活跃排行榜 -->
       <div v-if="leaderboardData.length" class="leaderboard">
-      <h3 class="leaderboard__title">活跃排行榜</h3>
+      <div class="leaderboard__header">
+        <h3 class="leaderboard__title">活跃排行榜</h3>
+        <el-input v-model="lbSearchKeyword" placeholder="搜索老师..." clearable prefix-icon="Search" class="lb-search" />
+      </div>
       <div class="leaderboard__list">
         <div
           class="lb-item"
@@ -158,19 +161,27 @@ const dauHourly = ref([])
 const teacherHourlyStats = ref([])
 const leaderboardData = ref([])
 const lbPage = ref(1)
+const lbSearchKeyword = ref('')
 const LB_PAGE_SIZE = 5
 const selectedTeacherName = ref(user.value.role === 'teacher' ? user.value.displayName : null)
 
-const lbTotalPages = computed(() => Math.max(1, Math.ceil(leaderboardData.value.length / LB_PAGE_SIZE)))
+const lbTotalPages = computed(() => Math.max(1, Math.ceil(filteredLeaderboard.value.length / LB_PAGE_SIZE)))
+const filteredLeaderboard = computed(() => {
+  const kw = lbSearchKeyword.value.trim().toLowerCase()
+  if (!kw) return leaderboardData.value
+  return leaderboardData.value.filter(t => t.teacherName.toLowerCase().includes(kw))
+})
 const pagedLeaderboard = computed(() => {
   const start = (lbPage.value - 1) * LB_PAGE_SIZE
-  return leaderboardData.value.slice(start, start + LB_PAGE_SIZE)
+  return filteredLeaderboard.value.slice(start, start + LB_PAGE_SIZE)
 })
 
 watch(statsRange, () => {
   lbPage.value = 1
   selectedTeacherName.value = user.value.role === 'teacher' ? user.value.displayName : null
 })
+
+watch(lbSearchKeyword, () => { lbPage.value = 1 })
 
 function selectTeacher(name) {
   selectedTeacherName.value = selectedTeacherName.value === name ? null : name
@@ -389,7 +400,13 @@ onMounted(() => loadStats())
 
 /* 排行榜 */
 .leaderboard { background: #fff; border-radius: 16px; padding: 20px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; }
-.leaderboard__title { margin: 0 0 18px; font-size: 16px; font-weight: 600; color: #1a1a2e; }
+.leaderboard__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
+.leaderboard__title { margin: 0; font-size: 16px; font-weight: 600; color: #1a1a2e; }
+.lb-search { width: 180px; }
+.lb-search :deep(.el-input__wrapper) { border-radius: 20px; padding: 0 14px; box-shadow: 0 2px 8px rgba(102,126,234,0.1); border: 1px solid #e8e8f0; }
+.lb-search :deep(.el-input__wrapper:hover),
+.lb-search :deep(.el-input__wrapper:focus-within) { border-color: #667eea; box-shadow: 0 2px 12px rgba(102,126,234,0.2); }
+.lb-search :deep(.el-input__inner) { font-size: 13px; }
 .leaderboard__list { display: flex; flex-direction: column; }
 .lb-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: background 0.2s; }
 .lb-item:hover { background: #f8f9ff; }

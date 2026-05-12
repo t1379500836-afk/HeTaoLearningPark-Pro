@@ -93,10 +93,35 @@ export default questionsConfig
 // 获取题目列表
 router.get('/', async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1
+    const size = parseInt(req.query.size) || 10
+    const offset = (page - 1) * size
+    const { type, difficulty, search } = req.query
+
+    let where = '1=1'
+    const params = []
+
+    if (type) {
+      where += ' AND type = ?'
+      params.push(type)
+    }
+    if (difficulty) {
+      where += ' AND difficulty = ?'
+      params.push(difficulty)
+    }
+    if (search) {
+      where += ' AND title LIKE ?'
+      params.push(`%${search}%`)
+    }
+
     const [questions] = await pool.execute(
-      'SELECT id, title, content, type, difficulty, tags, choices, test_cases, created_at FROM questions ORDER BY id DESC'
+      `SELECT id, title, content, type, difficulty, tags, choices, test_cases, created_at FROM questions WHERE ${where} ORDER BY id DESC LIMIT ${size} OFFSET ${offset}`,
+      params
     )
-    res.json({ data: questions })
+    const [countResult] = await pool.execute(`SELECT COUNT(*) as total FROM questions WHERE ${where}`, params)
+    const total = countResult[0].total
+
+    res.json({ data: questions, total, page, size })
   } catch (err) {
     console.error('查询题目失败:', err)
     res.status(500).json({ error: '服务器错误' })

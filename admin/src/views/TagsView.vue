@@ -8,7 +8,10 @@
     </div>
 
     <div class="table-card">
-      <el-table :data="flatTags" stripe v-loading="loading" empty-text="暂无标签" row-key="id" :tree-props="{ children: 'children' }">
+      <div class="search-bar">
+        <el-input v-model="searchKeyword" placeholder="搜索标签名称..." clearable prefix-icon="Search" />
+      </div>
+      <el-table :data="tags" stripe v-loading="loading" empty-text="暂无标签" row-key="id" :tree-props="{ children: 'children' }">
         <el-table-column label="标签名" min-width="160">
           <template #default="{ row }">
             <el-tag :style="{ background: row.color, borderColor: row.color, color: '#fff' }">
@@ -32,6 +35,16 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="pagination-wrapper">
+        <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
+          background
+        />
+      </div>
     </div>
 
     <el-dialog v-model="dialogVisible" width="min(420px, 92vw)" destroy-on-close class="tag-dialog">
@@ -92,7 +105,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import api from '../api.js'
 import TagTree from '../components/TagTree.vue'
@@ -107,43 +120,39 @@ const dialogColor = ref('rgb(79, 172, 254)')
 const dialogParentId = ref(null)
 const parentSearchKeyword = ref('')
 const submitting = ref(false)
+const searchKeyword = ref('')
+const currentPage = ref(1)
+const pageSize = ref(10)
+const total = ref(0)
+
+async function loadTags() {
+  loading.value = true
+  try {
+    const params = { page: currentPage.value, size: pageSize.value }
+    if (searchKeyword.value) params.search = searchKeyword.value
+    const { data } = await api.get('/questions/tags/tree', { params })
+    tags.value = data.data || []
+    total.value = data.total || 0
+  } finally {
+    loading.value = false
+  }
+}
 
 onMounted(() => {
   loadTags()
 })
 
-async function loadTags() {
-  loading.value = true
-  try {
-    const { data } = await api.get('/questions/tags')
-    tags.value = data.data || []
-  } finally {
-    loading.value = false
-  }
-}
+watch([currentPage, pageSize], () => loadTags())
+watch(searchKeyword, () => {
+  currentPage.value = 1
+  loadTags()
+})
 
 // 标签映射表
 const tagMap = computed(() => {
   const map = {}
   tags.value.forEach(t => { map[t.id] = t })
   return map
-})
-
-// 构建树形结构用于表格展示
-const flatTags = computed(() => {
-  const map = new Map()
-  tags.value.forEach(t => {
-    map.set(t.id, { ...t, children: [] })
-  })
-  const roots = []
-  map.forEach(tag => {
-    if (tag.parent_id && map.has(tag.parent_id)) {
-      map.get(tag.parent_id).children.push(tag)
-    } else {
-      roots.push(tag)
-    }
-  })
-  return roots
 })
 
 // 可作为父标签的候选（排除自身）
@@ -299,6 +308,45 @@ async function handleDelete(id) {
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.pagination-wrapper {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-bar {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-bar :deep(.el-input__wrapper) {
+  border-radius: 20px;
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+  border: 1px solid #e8e8f0;
+  transition: all 0.3s ease;
+}
+
+.search-bar :deep(.el-input__wrapper:hover),
+.search-bar :deep(.el-input__wrapper:focus-within) {
+  border-color: #667eea;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
+}
+
+.search-bar :deep(.el-input__inner) {
+  font-size: 14px;
+}
+
+.search-bar :deep(.el-input__inner::placeholder) {
+  color: #a0a0b8;
+}
+
+.search-bar :deep(.el-icon) {
+  color: #a0a0b8;
 }
 
 .parent-label {

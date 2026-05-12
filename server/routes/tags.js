@@ -107,12 +107,25 @@ router.get('/', async (req, res) => {
 // 获取标签树
 router.get('/tree', async (req, res) => {
   try {
-    const [tags] = await pool.execute(
+    const page = parseInt(req.query.page) || 1
+    const size = parseInt(req.query.size) || 10
+    const search = req.query.search?.trim().toLowerCase()
+
+    const [allTags] = await pool.execute(
       'SELECT id, name, color, parent_id FROM question_tags ORDER BY id'
     )
 
+    let filteredTags = allTags
+    if (search) {
+      filteredTags = allTags.filter(t => t.name.toLowerCase().includes(search))
+    }
+
+    const total = filteredTags.length
+    const offset = (page - 1) * size
+    const paginatedTags = filteredTags.slice(offset, offset + size)
+
     const tagMap = new Map()
-    tags.forEach(t => {
+    paginatedTags.forEach(t => {
       tagMap.set(t.id, { ...t, children: [] })
     })
 
@@ -125,7 +138,7 @@ router.get('/tree', async (req, res) => {
       }
     })
 
-    res.json({ data: tree })
+    res.json({ data: tree, total, page, size })
   } catch (err) {
     console.error('查询标签树失败:', err)
     res.status(500).json({ error: '服务器错误' })

@@ -23,7 +23,7 @@
     </div>
 
     <div class="table-card">
-      <el-table :data="filteredQuestions" stripe v-loading="loading" empty-text="暂无题目">
+      <el-table :data="questions" stripe v-loading="loading" empty-text="暂无题目">
         <el-table-column label="标题" min-width="180">
           <template #default="{ row }">
             <span class="question-title">{{ row.title }}</span>
@@ -63,6 +63,16 @@
           </template>
         </el-table-column>
       </el-table>
+      <div class="pagination-wrapper">
+        <el-pagination
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
+          background
+        />
+      </div>
     </div>
 
     <!-- 新增/编辑题目对话框 -->
@@ -190,7 +200,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import api from '../api.js'
 import TagTree from '../components/TagTree.vue'
@@ -202,6 +212,9 @@ const filterType = ref('')
 const filterDifficulty = ref('')
 const searchText = ref('')
 const tagSearchKeyword = ref('')
+const currentPage = ref(1)
+const pageSize = ref(10)
+const total = ref(0)
 
 const dialogVisible = ref(false)
 const isEditing = ref(false)
@@ -225,16 +238,6 @@ const defaultForm = () => ({
 
 const form = ref(defaultForm())
 
-const filteredQuestions = computed(() => {
-  return questions.value.filter(q => {
-    if (filterType.value && q.type !== filterType.value) return false
-    if (filterDifficulty.value && q.difficulty !== filterDifficulty.value) return false
-    if (searchText.value && !q.title.toLowerCase().includes(searchText.value.toLowerCase())) return false
-    return true
-  })
-})
-
-// 从扁平标签构建树
 const tagTree = computed(() => {
   const map = new Map()
   allTags.value.forEach(t => map.set(t.id, { ...t, children: [] }))
@@ -342,23 +345,36 @@ function removeTestCase(idx) {
   form.value.test_cases.splice(idx, 1)
 }
 
-onMounted(() => {
-  loadData()
-})
-
-async function loadData() {
+async function loadQuestions() {
   loading.value = true
   try {
-    const [qRes, tRes] = await Promise.all([
-      api.get('/questions'),
-      api.get('/questions/tags')
-    ])
-    questions.value = qRes.data.data || []
-    allTags.value = tRes.data.data || []
+    const params = { page: currentPage.value, size: pageSize.value }
+    if (filterType.value) params.type = filterType.value
+    if (filterDifficulty.value) params.difficulty = filterDifficulty.value
+    if (searchText.value) params.search = searchText.value
+    const { data } = await api.get('/questions', { params })
+    questions.value = data.data || []
+    total.value = data.total || 0
   } finally {
     loading.value = false
   }
 }
+
+async function loadTags() {
+  const { data } = await api.get('/questions/tags')
+  allTags.value = data.data || []
+}
+
+onMounted(() => {
+  loadQuestions()
+  loadTags()
+})
+
+watch([currentPage, pageSize], () => loadQuestions())
+watch([filterType, filterDifficulty, searchText], () => {
+  currentPage.value = 1
+  loadQuestions()
+})
 
 function openAddDialog() {
   isEditing.value = false
@@ -437,7 +453,7 @@ async function handleSave() {
       ElMessage.success('题目已创建')
     }
     dialogVisible.value = false
-    loadData()
+    loadQuestions()
   } finally {
     submitting.value = false
   }
@@ -447,7 +463,7 @@ async function handleDelete(id) {
   await ElMessageBox.confirm('确定删除这道题目吗？', '删除确认', { type: 'warning' })
   await api.delete(`/questions/${id}`)
   ElMessage.success('已删除')
-  loadData()
+  loadQuestions()
 }
 </script>
 
@@ -492,6 +508,12 @@ async function handleDelete(id) {
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.pagination-wrapper {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .question-title {

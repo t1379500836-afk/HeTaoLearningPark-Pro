@@ -84,6 +84,23 @@
 .role-badge--admin { background: #764ba2; }
 .role-badge--teacher { background: #667eea; }
 
+/* 移动端弹窗全局适配 */
+@media (max-width: 768px) {
+  .el-dialog {
+    width: 95vw !important;
+    max-width: 95vw;
+    margin: 10px auto !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .el-dialog {
+    width: 85vw !important;
+    max-width: 85vw;
+    margin: 15px auto !important;
+  }
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
   .stats-row { grid-template-columns: 1fr; gap: 12px; }

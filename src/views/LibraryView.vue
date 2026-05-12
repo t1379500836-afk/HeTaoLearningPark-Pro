@@ -513,11 +513,14 @@ function prefixedPath(path) {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 .questions-table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-size: 0.9rem;
 }

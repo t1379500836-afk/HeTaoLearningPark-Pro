@@ -41,8 +41,9 @@
           v-model:page-size="pageSize"
           :page-sizes="[10, 20, 50, 100]"
           :total="total"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="total, sizes, prev, pager, next"
           background
+          size="small"
         />
       </div>
     </div>
@@ -468,6 +469,13 @@ async function handleDelete(id) {
 
   .table-card {
     padding: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pagination-wrapper {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 }
 </style>

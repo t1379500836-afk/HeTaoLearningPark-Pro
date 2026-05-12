@@ -16,6 +16,7 @@ const routes = [
       { path: 'messages', name: 'messages', component: MessagesView },
       { path: 'library', name: 'library', component: LibraryView },
       { path: 'ycl-scores', name: 'ycl-scores', component: () => import('../views/YCLScoresView.vue') },
+      { path: 'ycl-scores/set/:setId', name: 'ycl-set-detail', component: () => import('../views/YCLSetDetailView.vue') },
       { path: 'questions', redirect: '/library' },
       { path: 'questions/tags', redirect: '/library' },
     ]

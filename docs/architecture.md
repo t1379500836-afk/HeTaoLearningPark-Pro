@@ -35,7 +35,7 @@
 │   │   │   ├── DauChart.vue    # ECharts 图表封装
 │   │   │   └── EmojiPicker.vue # 表情选择器
 │   │   ├── styles/
-│   │   │   ├── main.css        # 全局样式入口
+│   │   │   ├── main.css        # 全局样式入口（含 el-dialog 移动端适配）
 │   │   │   └── shared.css      # 共用样式
 │   │   └── api.js              # Axios 实例 + JWT 拦截器
 │   └── package.json
@@ -186,6 +186,7 @@ URL（含前缀）
 |------|----------|------|
 | teachers | id, username, password_hash, role, display_name, key, status | status 为 active/disabled，删除为软删除；key 为教师口令字符串 |
 | daily_active_users | user_uuid, teacher_id, date | 唯一约束 (user_uuid, teacher_id, date) |
+| ycl_scores | id, teacher_id, student_name, set_id, set_name, level, score, total_score, submitted_at, duration, questions | YCL 考试成绩，按 teacher_id + set_id 分组 |
 | teacher_messages | teacher_id, title, content, created_at, updated_at | 教师寄语，teacher_id(INT) 外键关联 teachers.id |
 | whispers | teacher_id, content, created_at | 匿名悄悄话，teacher_id(INT) 外键关联 teachers.id |
 

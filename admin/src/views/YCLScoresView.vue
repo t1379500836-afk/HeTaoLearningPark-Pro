@@ -12,19 +12,28 @@
           class="toolbar__search"
           @input="loadScores"
         />
-        <el-select v-model="filters.level" placeholder="选择等级" clearable @change="onLevelChange">
-          <el-option value="level4" label="四级" />
-          <el-option value="level5" label="五级" />
-          <el-option value="level6" label="六级" />
-        </el-select>
-        <el-select v-model="filters.setId" placeholder="选择套卷" clearable :disabled="!filters.level" @change="loadScores">
-          <el-option
-            v-for="set in availableSets"
-            :key="set.id"
-            :value="set.id"
-            :label="set.name"
-          />
-        </el-select>
+        <div class="level-tags">
+          <span
+            class="level-tag"
+            :class="{ active: filters.level === '' }"
+            @click="onLevelTagChange('')"
+          >全部</span>
+          <span
+            class="level-tag"
+            :class="{ active: filters.level === 'level4' }"
+            @click="onLevelTagChange('level4')"
+          >四级</span>
+          <span
+            class="level-tag"
+            :class="{ active: filters.level === 'level5' }"
+            @click="onLevelTagChange('level5')"
+          >五级</span>
+          <span
+            class="level-tag"
+            :class="{ active: filters.level === 'level6' }"
+            @click="onLevelTagChange('level6')"
+          >六级</span>
+        </div>
         <el-date-picker
           v-model="filters.dateRange"
           type="daterange"
@@ -50,53 +59,14 @@
         </div>
         <div v-else>
           <!-- 按套卷分组展示 -->
-          <div v-for="(group, setId) in groupedScores" :key="setId" class="set-group">
-            <div class="set-group__header" @click="toggleSet(setId)">
+          <div v-for="(group, setId) in groupedScores" :key="setId" class="set-group" @click="goToSetDetail(setId, group)">
+            <div class="set-group__header">
               <div class="set-group__info">
                 <span class="set-group__name">{{ group.setName }}</span>
                 <span class="set-group__level">{{ getLevelName(group.level) }}</span>
                 <span class="set-group__count">{{ group.records.length }} 次提交</span>
               </div>
-              <div class="set-group__expand">
-                <span class="expand-icon" :class="{ expanded: expandedSets.has(setId) }">▼</span>
-              </div>
-            </div>
-            <div v-show="expandedSets.has(setId)" class="set-group__body">
-              <!-- 每次提交记录卡片 -->
-              <div
-                v-for="record in group.records"
-                :key="record.id"
-                class="score-card"
-                @click="openScoreDetail(record)"
-              >
-                <div class="score-card__header">
-                  <div class="score-card__student">
-                    <div class="student-avatar">{{ getInitial(record.student_name) }}</div>
-                    <div>
-                      <div class="student-name">{{ record.student_name }}</div>
-                      <div class="submit-time">{{ formatDateTime(record.submitted_at) }}</div>
-                    </div>
-                  </div>
-                  <div class="score-card__score" :class="{ pass: record.score >= record.total_score * 0.6 }">
-                    <span class="score-value">{{ record.score }}</span>
-                    <span class="score-total">/{{ record.total_score }}</span>
-                  </div>
-                </div>
-                <div class="score-card__breakdown">
-                  <span class="breakdown-item">
-                    <span class="breakdown-label">选择题</span>
-                    <span class="breakdown-value">{{ record.objective_score }}/{{ record.objective_total }}</span>
-                  </span>
-                  <span class="breakdown-item">
-                    <span class="breakdown-label">编程题</span>
-                    <span class="breakdown-value">{{ record.coding_score }}/{{ record.coding_total }}</span>
-                  </span>
-                  <span class="breakdown-item">
-                    <span class="breakdown-label">用时</span>
-                    <span class="breakdown-value">{{ formatDuration(record.duration) }}</span>
-                  </span>
-                </div>
-              </div>
+              <div class="set-group__arrow">›</div>
             </div>
           </div>
 
@@ -117,41 +87,6 @@
 
     <!-- Admin 视图 -->
     <template v-else>
-      <!-- 老师搜索 + 筛选工具栏 -->
-      <div class="toolbar">
-        <el-input
-          v-model="filters.teacherName"
-          placeholder="搜索老师姓名…"
-          prefix-icon="Search"
-          clearable
-          class="toolbar__search"
-          @input="loadTeachers"
-        />
-        <el-input
-          v-model="filters.studentName"
-          placeholder="搜索学生姓名…"
-          prefix-icon="Search"
-          clearable
-          class="toolbar__search"
-          @input="loadScores"
-        />
-        <el-select v-model="filters.level" placeholder="选择等级" clearable @change="onLevelChange">
-          <el-option value="level4" label="四级" />
-          <el-option value="level5" label="五级" />
-          <el-option value="level6" label="六级" />
-        </el-select>
-        <el-date-picker
-          v-model="filters.dateRange"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          value-format="YYYY-MM-DD"
-          @change="loadScores"
-          clearable
-        />
-      </div>
-
       <!-- 加载状态 -->
       <div v-if="loading" class="loading-state">
         <div class="spinner"></div>
@@ -159,10 +94,19 @@
       </div>
 
       <div v-else>
-        <!-- 老师列表（未选老师时显示） -->
-        <div v-if="!selectedTeacher" class="teacher-list">
+          <div v-if="!selectedTeacher" class="teacher-section">
+            <div class="toolbar">
+            <el-input
+              v-model="filters.teacherName"
+              placeholder="搜索教师姓名或口令…"
+              prefix-icon="Search"
+              clearable
+              class="toolbar__search"
+            />
+          </div>
+          <div class="teacher-list">
           <div
-            v-for="teacher in teacherList"
+            v-for="teacher in paginatedTeachers"
             :key="teacher.id"
             class="teacher-card"
             @click="selectTeacher(teacher)"
@@ -176,82 +120,107 @@
             </div>
             <div class="teacher-arrow">›</div>
           </div>
-          <div v-if="teacherList.length === 0" class="empty-state">
-            <p>暂无老师数据</p>
+          <div v-if="filteredTeachers.length === 0" class="empty-state">
+            <p>暂无教师数据</p>
+          </div>
+          <div v-if="filteredTeachers.length > teacherPageSize" class="pagination-wrap">
+            <el-pagination
+              v-model:current-page="teacherPage"
+              :page-size="teacherPageSize"
+              :total="filteredTeachers.length"
+              layout="prev, pager, next"
+              background
+            />
+          </div>
           </div>
         </div>
 
-        <!-- 选中老师后的成绩列表 -->
+        <!-- 选中老师后的套卷汇总列表 -->
         <div v-else>
           <div class="selected-teacher-bar">
-            <button class="back-btn" @click="selectedTeacher = null">← 返回老师列表</button>
-            <span class="selected-teacher-name">{{ selectedTeacher.display_name }} 的学生成绩</span>
+            <button class="back-btn" @click="selectedTeacher = null">← 返回教师列表</button>
+            <span class="selected-teacher-name">{{ selectedTeacher.display_name }} 的学生提交试卷列表</span>
           </div>
 
-          <div v-if="scoresData.length === 0" class="empty-state">
-            <p>该老师暂无学生成绩记录</p>
+          <!-- 学生姓名搜索 -->
+          <div class="student-search">
+            <el-input
+              v-model="studentSearchQuery"
+              placeholder="搜索学生姓名…"
+              prefix-icon="Search"
+              clearable
+              @input="onStudentSearch"
+              @clear="clearStudentSearch"
+              class="student-search__input"
+            />
+            <button v-if="isSearching" class="clear-search-btn" @click="clearStudentSearch">取消搜索</button>
           </div>
-          <div v-else>
-            <!-- 按套卷分组展示 -->
-            <div v-for="(group, setId) in groupedScores" :key="setId" class="set-group">
-              <div class="set-group__header" @click="toggleSet(setId)">
-                <div class="set-group__info">
-                  <span class="set-group__name">{{ group.setName }}</span>
-                  <span class="set-group__level">{{ getLevelName(group.level) }}</span>
-                  <span class="set-group__count">{{ group.records.length }} 次提交</span>
-                </div>
-                <div class="set-group__expand">
-                  <span class="expand-icon" :class="{ expanded: expandedSets.has(setId) }">▼</span>
+
+          <!-- 加载状态 -->
+          <div v-if="loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>加载中…</p>
+          </div>
+
+          <!-- 搜索结果列表 -->
+          <div v-else-if="isSearching">
+            <div v-if="studentSubmissions.length === 0" class="empty-state">
+              <p>未找到该学生的提交记录</p>
+            </div>
+            <div v-else>
+              <div v-for="item in studentSubmissions" :key="item.setId + item.studentName" class="set-group" @click="goToSetDetail(item)">
+                <div class="set-group__header">
+                  <div class="set-group__info">
+                    <span class="set-group__name">{{ item.setName }}</span>
+                    <span class="set-group__level">{{ getLevelName(item.level) }}</span>
+                    <span class="set-group__time">{{ formatDateTime(item.submittedAt) }}</span>
+                  </div>
+                  <div class="set-group__arrow">›</div>
                 </div>
               </div>
-              <div v-show="expandedSets.has(setId)" class="set-group__body">
-                <div
-                  v-for="record in group.records"
-                  :key="record.id"
-                  class="score-card"
-                  @click="openScoreDetail(record)"
-                >
-                  <div class="score-card__header">
-                    <div class="score-card__student">
-                      <div class="student-avatar">{{ getInitial(record.student_name) }}</div>
-                      <div>
-                        <div class="student-name">{{ record.student_name }}</div>
-                        <div class="submit-time">{{ formatDateTime(record.submitted_at) }}</div>
-                      </div>
-                    </div>
-                    <div class="score-card__score" :class="{ pass: record.score >= record.total_score * 0.6 }">
-                      <span class="score-value">{{ record.score }}</span>
-                      <span class="score-total">/{{ record.total_score }}</span>
-                    </div>
-                  </div>
-                  <div class="score-card__breakdown">
-                    <span class="breakdown-item">
-                      <span class="breakdown-label">选择题</span>
-                      <span class="breakdown-value">{{ record.objective_score }}/{{ record.objective_total }}</span>
-                    </span>
-                    <span class="breakdown-item">
-                      <span class="breakdown-label">编程题</span>
-                      <span class="breakdown-value">{{ record.coding_score }}/{{ record.coding_total }}</span>
-                    </span>
-                    <span class="breakdown-item">
-                      <span class="breakdown-label">用时</span>
-                      <span class="breakdown-value">{{ formatDuration(record.duration) }}</span>
-                    </span>
-                  </div>
-                </div>
+
+              <!-- 分页 -->
+              <div v-if="studentSubmissionsPages > 1" class="pagination-wrap">
+                <el-pagination
+                  v-model:current-page="studentSearchPage"
+                  :page-size="studentSearchPageSize"
+                  :total="studentSubmissionsTotal"
+                  layout="prev, pager, next"
+                  background
+                  @current-change="loadStudentSubmissions"
+                />
               </div>
             </div>
+          </div>
 
-            <!-- 分页 -->
-            <div v-if="totalPages > 1" class="pagination-wrap">
-              <el-pagination
-                v-model:current-page="currentPage"
-                :page-size="pageSize"
-                :total="total"
-                layout="prev, pager, next"
-                background
-                @current-change="loadScores"
-              />
+          <!-- 套卷汇总列表 -->
+          <div v-else>
+            <div v-if="teacherSets.length === 0" class="empty-state">
+              <p>暂无套卷提交记录</p>
+            </div>
+            <div v-else>
+              <div v-for="item in teacherSets" :key="item.setId" class="set-group" @click="goToSetDetail(item)">
+                <div class="set-group__header">
+                  <div class="set-group__info">
+                    <span class="set-group__name">{{ item.setName }}</span>
+                    <span class="set-group__level">{{ getLevelName(item.level) }}</span>
+                    <span class="set-group__count">{{ item.submissionCount }} 次提交</span>
+                  </div>
+                  <div class="set-group__arrow">›</div>
+                </div>
+              </div>
+
+              <!-- 分页 -->
+              <div v-if="teacherSetsTotalPages > 1" class="pagination-wrap">
+                <el-pagination
+                  v-model:current-page="teacherSetsPage"
+                  :page-size="teacherSetsPageSize"
+                  :total="teacherSetsTotal"
+                  layout="prev, pager, next"
+                  background
+                  @current-change="loadTeacherSets"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -259,7 +228,14 @@
     </template>
 
     <!-- 成绩详情弹窗 -->
-    <el-dialog v-model="showDetail" :title="currentRecord?.student_name + ' 的答题详情'" width="800px" destroy-on-close>
+    <el-dialog
+      v-model="showDetail"
+      :title="currentRecord?.student_name + ' 的答题详情'"
+      :fullscreen="isMobileDialog"
+      class="score-detail-dialog"
+      destroy-on-close
+      :show-close="true"
+    >
       <div v-if="currentRecord" class="detail-content">
         <div class="detail-header">
           <div class="detail-score" :class="{ pass: currentRecord.score >= currentRecord.total_score * 0.6 }">
@@ -354,8 +330,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, onMounted, inject, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import api from '../api.js'
+
+const router = useRouter()
+const route = useRoute()
 
 const user = inject('user')
 const loading = ref(false)
@@ -364,6 +344,19 @@ const total = ref(0)
 const currentPage = ref(1)
 const pageSize = ref(20)
 const totalPages = computed(() => Math.ceil(total.value / pageSize.value))
+
+// 弹窗宽度（平板和移动端自适应）
+const dialogWidth = computed(() => {
+  if (typeof window !== 'undefined' && window.innerWidth <= 1024) {
+    return window.innerWidth <= 768 ? '95vw' : '90vw'
+  }
+  return '800px'
+})
+
+const isMobileDialog = computed(() => {
+  if (typeof window === 'undefined') return false
+  return window.innerWidth <= 768
+})
 
 // 筛选条件
 const filters = ref({
@@ -377,9 +370,44 @@ const filters = ref({
 // 老师列表（admin用）
 const teacherList = ref([])
 const selectedTeacher = ref(null)
+const teacherPage = ref(1)
+const teacherPageSize = 10
 
-// 展开的套卷
-const expandedSets = ref(new Set())
+// 管理员选择老师后查看的套卷汇总列表
+const teacherSets = ref([])
+const teacherSetsTotal = ref(0)
+const teacherSetsTotalPages = computed(() => Math.ceil(teacherSetsTotal.value / teacherSetsPageSize.value))
+const teacherSetsPage = ref(1)
+const teacherSetsPageSize = ref(50)
+
+// 学生搜索
+const studentSearchQuery = ref('')
+const studentSubmissions = ref([])
+const studentSubmissionsTotal = ref(0)
+const studentSearchPage = ref(1)
+const studentSearchPageSize = ref(50)
+const studentSubmissionsPages = computed(() => Math.ceil(studentSubmissionsTotal.value / studentSearchPageSize.value))
+const isSearching = computed(() => studentSearchQuery.value.trim().length > 0)
+
+// 老师分页数据
+const paginatedTeachers = computed(() => {
+  const start = (teacherPage.value - 1) * teacherPageSize
+  return filteredTeachers.value.slice(start, start + teacherPageSize)
+})
+const teacherTotalPages = computed(() => Math.ceil(filteredTeachers.value.length / teacherPageSize))
+
+watch(() => filters.value.teacherName, () => { teacherPage.value = 1 })
+
+// 监听路由 query 变化恢复状态（从套卷详情页返回时）
+watch(() => route.query.teacherId, (newId) => {
+  if (newId && teacherList.value.length > 0) {
+    const teacher = teacherList.value.find(t => String(t.id) === String(newId))
+    if (teacher) {
+      selectedTeacher.value = teacher
+      loadTeacherSets()
+    }
+  }
+})
 
 // 成绩详情
 const showDetail = ref(false)
@@ -397,14 +425,17 @@ function getQuestionTypeText(type) {
   return map[type] || type
 }
 
-// 可选的套卷列表
-const availableSets = computed(() => {
-  if (!filters.value.level) return []
-  const levelData = scoresData.value.find(s => s.level === filters.value.level)
-  if (!levelData) return []
-  // 从已加载数据中提取该level下的所有set
-  return []
-})
+// 跳转套卷详情页
+function goToSetDetail(item) {
+  router.push({
+    path: `/ycl-scores/set/${item.setId}`,
+    query: {
+      setName: item.setName,
+      level: item.level,
+      teacherId: selectedTeacher.value?.id
+    }
+  })
+}
 
 // 按套卷分组（用 level + set_id 作为复合 key，避免不同等级的同名套卷混在一起）
 const groupedScores = computed(() => {
@@ -456,34 +487,104 @@ async function loadScores() {
 async function loadTeachers() {
   if (user.value?.role !== 'admin') return
   try {
-    const params = {}
-    if (filters.value.teacherName) params.search = filters.value.teacherName
-    const res = await api.get('/teachers', { params })
+    const res = await api.get('/teachers')
     teacherList.value = Array.isArray(res.data) ? res.data : []
+    // 教师列表加载完成后检查是否需要恢复选中状态
+    const teacherId = route.query.teacherId
+    if (teacherId) {
+      const teacher = teacherList.value.find(t => String(t.id) === String(teacherId))
+      if (teacher) {
+        selectedTeacher.value = teacher
+        loadTeacherSets()
+      }
+    }
   } catch (err) {
-    console.error('加载老师列表失败:', err)
+    console.error('加载教师列表失败:', err)
   }
 }
+
+// 前端筛选老师
+const filteredTeachers = computed(() => {
+  if (!filters.value.teacherName) return teacherList.value
+  const q = filters.value.teacherName.toLowerCase()
+  return teacherList.value.filter(t =>
+    t.display_name?.toLowerCase().includes(q) ||
+    t.key?.toLowerCase().includes(q)
+  )
+})
 
 // 选择老师
 function selectTeacher(teacher) {
   selectedTeacher.value = teacher
-  loadScores()
+  teacherSetsPage.value = 1
+  loadTeacherSets()
+}
+
+// 加载老师的套卷汇总
+async function loadTeacherSets() {
+  loading.value = true
+  try {
+    const params = {
+      page: teacherSetsPage.value,
+      pageSize: teacherSetsPageSize.value,
+      teacherId: selectedTeacher.value.id
+    }
+    const res = await api.get('/ycl/teacher-sets', { params })
+    teacherSets.value = res.data?.data || []
+    teacherSetsTotal.value = res.data?.total || 0
+  } catch (err) {
+    console.error('加载套卷汇总失败:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 学生姓名搜索（防抖）
+let studentSearchTimer = null
+function onStudentSearch() {
+  clearTimeout(studentSearchTimer)
+  studentSearchTimer = setTimeout(() => {
+    studentSearchPage.value = 1
+    if (studentSearchQuery.value.trim()) {
+      loadStudentSubmissions()
+    } else {
+      studentSubmissions.value = []
+    }
+  }, 300)
+}
+
+function clearStudentSearch() {
+  studentSearchQuery.value = ''
+  studentSubmissions.value = []
+}
+
+async function loadStudentSubmissions() {
+  loading.value = true
+  try {
+    const params = {
+      page: studentSearchPage.value,
+      pageSize: studentSearchPageSize.value,
+      teacherId: selectedTeacher.value.id,
+      studentName: studentSearchQuery.value.trim()
+    }
+    const res = await api.get('/ycl/student-sets', { params })
+    studentSubmissions.value = res.data?.data || []
+    studentSubmissionsTotal.value = res.data?.total || 0
+  } catch (err) {
+    console.error('搜索学生提交失败:', err)
+  } finally {
+    loading.value = false
+  }
 }
 
 // 等级变化时重置套卷筛选
 function onLevelChange() {
-  filters.value.setId = ''
   loadScores()
 }
 
-// 展开/收起套卷
-function toggleSet(setId) {
-  if (expandedSets.value.has(setId)) {
-    expandedSets.value.delete(setId)
-  } else {
-    expandedSets.value.add(setId)
-  }
+function onLevelTagChange(level) {
+  filters.value.level = level
+  onLevelChange()
 }
 
 // 打开成绩详情
@@ -512,22 +613,13 @@ function getMultiChoiceTotal(record) {
 
 // 工具函数
 function getInitial(name) {
-  return name ? name.charAt(0).toUpperCase() : '?'
+  if (!name) return '?'
+  const text = name.endsWith('老师') ? name.slice(0, -2) : name
+  return text.length > 4 ? text.slice(0, 4) : text
 }
 
-const GRADIENTS = [
-  'linear-gradient(135deg, #667eea, #764ba2)',
-  'linear-gradient(135deg, #f093fb, #f5576c)',
-  'linear-gradient(135deg, #4facfe, #00f2fe)',
-  'linear-gradient(135deg, #43e97b, #38f9d7)',
-  'linear-gradient(135deg, #fa709a, #fee140)',
-  'linear-gradient(135deg, #a8edea, #fed6e3)',
-  'linear-gradient(135deg, #d299c2, #fef9d7)',
-  'linear-gradient(135deg, #89f7fe, #66a6ff)',
-]
-function getGradient(name) {
-  const idx = (name || '').charCodeAt(0) % GRADIENTS.length
-  return GRADIENTS[idx]
+function getGradient() {
+  return 'linear-gradient(135deg, #667eea, #764ba2)'
 }
 
 function formatDateTime(iso) {
@@ -545,7 +637,22 @@ function formatDuration(seconds) {
 
 // 初始化
 onMounted(() => {
-  if (user.role === 'admin') {
+  // 只有从套卷详情页返回（URL 有 teacherId）才恢复教师选中状态
+  // 直接从侧边栏进入则显示教师列表
+  const teacherId = route.query.teacherId
+  if (teacherId) {
+    if (teacherList.value.length > 0) {
+      const teacher = teacherList.value.find(t => String(t.id) === String(teacherId))
+      if (teacher) {
+        selectedTeacher.value = teacher
+        loadTeacherSets()
+      }
+    }
+  } else {
+    selectedTeacher.value = null
+  }
+
+  if (user.value?.role === 'admin') {
     loadTeachers()
   } else {
     loadScores()
@@ -585,6 +692,25 @@ onMounted(() => {
   color: #999;
 }
 
+/* 等级标签 */
+.level-tags { display: flex; gap: 8px; align-items: center; }
+.level-tag {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.level-tag:hover { background: #e0e0e0; }
+.level-tag.active {
+  background: #667eea;
+  color: #fff;
+  font-weight: 500;
+}
+
 /* 老师卡片（admin） */
 .teacher-list { display: flex; flex-direction: column; gap: 12px; }
 .teacher-card {
@@ -599,17 +725,16 @@ onMounted(() => {
   transition: all 0.2s;
 }
 .teacher-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); transform: translateY(-1px); }
-.teacher-avatar {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 600; font-size: 1.1rem;
-  flex-shrink: 0;
-}
+.teacher-avatar { min-width: 40px; height: 40px; border-radius: 10px; color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0 10px; box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3); }
 .teacher-info { flex: 1; }
 .teacher-name { font-size: 1.05rem; font-weight: 500; color: #333; }
 .teacher-key { font-size: 0.85rem; color: #888; margin-top: 4px; }
 .teacher-arrow { font-size: 1.5rem; color: #ccc; }
+
+/* 分页 */
+.pagination-wrap { display: flex; justify-content: center; margin-top: 20px; }
+:deep(.el-pagination) { --el-pagination-button-bg-color: #fff; --el-pagination-hover-color: #667eea; }
+:deep(.el-pagination .el-pager li.is-active) { background: #667eea !important; color: #fff; }
 
 /* 选中老师栏 */
 .selected-teacher-bar {
@@ -630,6 +755,25 @@ onMounted(() => {
 .back-btn:hover { background: #e8e8e8; }
 .selected-teacher-name { font-size: 1.1rem; font-weight: 500; color: #333; }
 
+/* 学生搜索 */
+.student-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+.student-search__input { width: 240px; }
+.clear-search-btn {
+  padding: 8px 16px;
+  background: #ff9f00;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
 /* 套卷分组 */
 .set-group {
   margin-bottom: 16px;
@@ -637,13 +781,15 @@ onMounted(() => {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
 }
+.set-group:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); transform: translateY(-1px); }
 .set-group__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  cursor: pointer;
   background: #fafafa;
 }
 .set-group__header:hover { background: #f0f0f0; }
@@ -654,8 +800,8 @@ onMounted(() => {
   padding: 2px 10px; border-radius: 10px; font-size: 0.8rem;
 }
 .set-group__count { color: #888; font-size: 0.85rem; }
-.expand-icon { color: #999; font-size: 0.8rem; transition: transform 0.2s; }
-.expand-icon.expanded { transform: rotate(180deg); }
+.set-group__time { color: #888; font-size: 0.8rem; }
+.set-group__arrow { font-size: 1.5rem; color: #ccc; }
 
 .set-group__body { padding: 12px 16px; display: flex; flex-direction: column; gap: 12px; }
 
@@ -810,5 +956,19 @@ onMounted(() => {
   .toolbar__search { width: 100%; }
   .detail-header { flex-direction: column; }
   .score-card__breakdown { flex-wrap: wrap; gap: 10px; }
+  .student-search { flex-direction: column; align-items: stretch; }
+  .student-search__input { width: 100%; }
+  .selected-teacher-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .selected-teacher-name { font-size: 1rem; }
+  .set-group__info { flex-wrap: wrap; gap: 8px; }
+}
+
+/* 移动端弹窗适配 */
+@media (max-width: 768px) {
+  .detail-content { max-height: 65vh; overflow-y: auto; }
+  .detail-stats { flex-direction: column; gap: 12px; }
+  .detail-score { flex-direction: row; gap: 12px; align-items: center; }
+  .question-item__header { flex-wrap: wrap; gap: 6px; }
+  .result-tag { margin-left: 0; }
 }
 </style>

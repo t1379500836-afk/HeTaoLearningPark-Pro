@@ -62,6 +62,48 @@ export const vocabData = [
 - 无 `source` 字段的单词卡不显示来源标签（向后兼容）
 
 
+### 题目详情页（QuestionView）
+
+页面 `/library/:id`，左右双栏布局：
+
+- **左侧容器**：编号 T+标题、难度标签、运行通过进度条、题目描述、测试用例卡片（可折叠）
+- **右侧容器**：答题区（编程题编辑器+输出 / 选择题选项+结果）
+
+编程题特性：
+- 停止运行按钮，修复停止后无法再次运行的 bug
+- 运行/提交分离：运行用 `skulpt.worker.js` 执行显示输出，提交用 `skulpt-oj.worker.js` 判题
+- `input()` 终端输入支持（等待输入时显示输入框）
+- 提交后进度条实时更新
+- 全部用例通过才给分，否则不得分
+
+编辑器特性：
+- CodeMirror 6：行号显示、Python 语法高亮、Monokai 主题
+- 输入/输出区固定高度（280px/200px），超出滚动
+- 多行输入支持（`white-space: pre-wrap`）
+
+选择题特性：
+- 选项横向排列，提交后显示正确/错误状态
+- 正确答案绿色高亮，用户错误答案红色高亮
+
+进度条颜色：<30% 红色，30-70% 黄色，>70% 绿色
+
+### 题库管理（admin）
+
+页面 `/admin/questions`，支持：
+
+- 题目类型/难度/标签筛选，标题搜索
+- 后端分页（10/20/50/100 每页）
+- 新增/编辑题目弹窗（选择题：多选项 + 正确答案；编程题：多测试用例 + 分值）
+- 移动端横向滚动适配
+
+### 标签管理（admin）
+
+页面 `/admin/questions/tags`，支持：
+
+- 树形标签（支持多级父子关系）
+- 后端分页与搜索
+- 管理后台与学生端标签树共用同一数据源
+
 ## 在线编程
 
 页面 `/python`，基于 CodeMirror 的 Python 编辑器，支持代码执行。
@@ -73,8 +115,16 @@ export const vocabData = [
 | 考试大厅 | `/ycl` | 等级介绍、时间分配、备考建议 |
 | 知识点复习 | `/ycl/practice/:level` | 按知识点逐个复习，进度存 localStorage |
 | 模拟考试 | `/ycl/exam/:level/:setId` | 计时考试、自动判分、答题回顾 |
+| YCL 成绩 | `/admin/ycl-scores` | 管理员：教师列表 → 套卷汇总 → 学生提交记录；教师：自己的学生成绩 |
 
 支持等级：4级、5级、6级，每级 5 套练习题（基础x3 + 进阶 + 挑战）。
+
+考试功能：
+- 编程题添加停止运行按钮
+- 测试用例卡片样式（渐变背景、分组编号、可折叠）
+- 编程题评分：全部用例通过才给分
+- 复习模式使用保存的判题结果判定正误
+- 总得分液态玻璃苹果风进度条
 
 ## 身份验证
 
@@ -118,7 +168,17 @@ export const vocabData = [
 | GET | /api/messages/manage/whispers | 管理端获取悄悄话 | JWT |
 | DELETE | /api/messages/manage/whisper/:id | 删除悄悄话 | JWT |
 
+## YCL 成绩 API
+
+| 方法 | 路径 | 说明 | 认证 |
+|------|------|------|------|
+| GET | /api/ycl/scores | 获取成绩列表（支持 page/pageSize/studentName/level/teacherId/startDate/endDate） | 无 |
+| GET | /api/ycl/teacher-sets | 获取老师的套卷汇总列表 | 无 |
+| GET | /api/ycl/student-sets | 按学生姓名搜索提交记录 | 无 |
+| GET | /api/ycl/score/:id | 获取成绩详情（含题目列表） | 无 |
+
 数据库表：
+- `ycl_scores`（id, teacher_id, student_name, set_id, set_name, level, score, total_score, submitted_at, duration, questions）
 - `teacher_messages`（id, teacher_id, title, content, created_at, updated_at）。teacher_id(INT) 外键关联 teachers.id。
 - `whispers`（id, teacher_id, content, created_at）。匿名，无发送者信息，teacher_id(INT) 外键关联 teachers.id。
 
@@ -170,6 +230,9 @@ export const vocabData = [
 | Login | `/admin/`（未登录时） | 登录页，渐变背景，移动端适配 |
 | 数据统计 | `/admin/stats` | DAU 趋势图、活跃排行榜、概览卡片（默认首页） |
 | 教师管理 | `/admin/teachers` | Admin：教师表格；Teacher：个人资料卡片 |
+| 题库管理 | `/admin/questions` | 题目 CRUD，后端分页+搜索，移动端横向滚动 |
+| 标签管理 | `/admin/questions/tags` | 树形标签，后端分页+搜索 |
+| YCL成绩 | `/admin/ycl-scores` | Admin：教师列表→套卷汇总→学生提交；Teacher：自己学生成绩 |
 | 消息管理 | `/admin/messages` | Admin：教师选择+寄语/悄悄话管理；Teacher：自己数据管理 |
 
 ### 数据统计功能
@@ -203,3 +266,4 @@ export const vocabData = [
 | KnowledgeCard | 知识点展示（三级难度切换） |
 | ExerciseCard | 练习题卡片（选择、判对错、解析） |
 | DifficultyBadge | 难度标签 |
+| Footer | 底部信息栏，包含「关于我们」（跳转联系作者）、课程介绍、练习题库等链接 |

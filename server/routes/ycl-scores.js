@@ -198,6 +198,113 @@ router.get('/scores/:id', authMiddleware, async (req, res) => {
 })
 
 /**
+ * GET /api/ycl/teacher-sets
+ * 获取指定老师的套卷提交汇总（每个套卷的提交次数）
+ */
+router.get('/teacher-sets', authMiddleware, async (req, res) => {
+  try {
+    const { teacherId, page = 1, pageSize = 50 } = req.query
+
+    if (!teacherId) {
+      return res.status(400).json({ error: '缺少 teacherId 参数' })
+    }
+
+    const teacherIdNum = Number(teacherId)
+    if (isNaN(teacherIdNum)) {
+      return res.status(400).json({ error: 'teacherId 必须为数字' })
+    }
+
+    // 统计每个套卷的提交次数
+    const [countResult] = await pool.execute(
+      `SELECT COUNT(DISTINCT set_id) as total FROM ycl_scores WHERE teacher_id = ?`,
+      [teacherIdNum]
+    )
+    const total = countResult[0].total
+
+    const offset = (Number(page) - 1) * Number(pageSize)
+    const [rows] = await pool.execute(
+      `SELECT set_id, set_name, level, COUNT(*) as submissionCount, MAX(submitted_at) as lastSubmit
+       FROM ycl_scores
+       WHERE teacher_id = ?
+       GROUP BY set_id, set_name, level
+       ORDER BY lastSubmit DESC
+       LIMIT ${Number(pageSize)} OFFSET ${offset}`,
+      [teacherIdNum]
+    )
+
+    res.json({
+      data: rows.map(row => ({
+        setId: row.set_id,
+        setName: row.set_name,
+        level: row.level,
+        submissionCount: row.submissionCount
+      })),
+      total,
+      page: Number(page),
+      pageSize: Number(pageSize),
+      totalPages: Math.ceil(total / Number(pageSize))
+    })
+  } catch (err) {
+    console.error('查询套卷汇总失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+/**
+ * GET /api/ycl/student-sets
+ * 查询某学生的套卷提交记录（按套卷分组，去重）
+ */
+router.get('/student-sets', authMiddleware, async (req, res) => {
+  try {
+    const { teacherId, studentName, page = 1, pageSize = 50 } = req.query
+
+    if (!teacherId || !studentName) {
+      return res.status(400).json({ error: '缺少 teacherId 或 studentName 参数' })
+    }
+
+    const teacherIdNum = Number(teacherId)
+    if (isNaN(teacherIdNum)) {
+      return res.status(400).json({ error: 'teacherId 必须为数字' })
+    }
+
+    // 统计去重后的套卷数量
+    const [countResult] = await pool.execute(
+      `SELECT COUNT(DISTINCT set_id) as total FROM ycl_scores WHERE teacher_id = ? AND student_name LIKE ?`,
+      [teacherIdNum, `%${studentName}%`]
+    )
+    const total = countResult[0].total
+
+    const offset = (Number(page) - 1) * Number(pageSize)
+    const [rows] = await pool.execute(
+      `SELECT set_id, set_name, level, student_name, MAX(submitted_at) as submittedAt
+       FROM ycl_scores
+       WHERE teacher_id = ? AND student_name LIKE ?
+       GROUP BY set_id, set_name, level, student_name
+       ORDER BY submittedAt DESC
+       LIMIT ${Number(pageSize)} OFFSET ${offset}`,
+      [teacherIdNum, `%${studentName}%`]
+    )
+
+    res.json({
+      data: rows.map(row => ({
+        setId: row.set_id,
+        setName: row.set_name,
+        level: row.level,
+        studentName: row.student_name,
+        submittedAt: row.submittedAt
+      })),
+      total,
+      page: Number(page),
+      pageSize: Number(pageSize),
+      totalPages: Math.ceil(total / Number(pageSize))
+    })
+  } catch (err) {
+    console.error('查询学生套卷失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+/**
  * GET /api/ycl/levels
  * 获取所有等级和套卷信息（供管理后台筛选使用）
  */

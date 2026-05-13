@@ -96,7 +96,7 @@ router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1
     const size = parseInt(req.query.size) || 10
     const offset = (page - 1) * size
-    const { type, difficulty, search } = req.query
+    const { type, difficulty, search, tags } = req.query
 
     let where = '1=1'
     const params = []
@@ -110,18 +110,49 @@ router.get('/', async (req, res) => {
       params.push(difficulty)
     }
     if (search) {
-      where += ' AND title LIKE ?'
-      params.push(`%${search}%`)
+      const searchTrim = search.trim()
+      const searchLower = searchTrim.toLowerCase()
+      // 支持编号搜索：T123 模糊匹配编号，或纯数字模糊匹配编号/标题
+      if (searchLower.startsWith('t')) {
+        const idPart = searchTrim.slice(1)
+        if (/^\d+$/.test(idPart)) {
+          // T1 匹配 id 包含 1 的题目（1, 10-19, 21, 31...）
+          where += ' AND CAST(id AS CHAR) LIKE ?'
+          params.push(`%${idPart}%`)
+        } else {
+          where += ' AND title LIKE ?'
+          params.push(`%${searchTrim}%`)
+        }
+      } else if (/^\d+$/.test(searchTrim)) {
+        // 纯数字：模糊匹配 id 或标题
+        where += ' AND (CAST(id AS CHAR) LIKE ? OR title LIKE ?)'
+        params.push(`%${searchTrim}%`, `%${searchTrim}%`)
+      } else {
+        where += ' AND title LIKE ?'
+        params.push(`%${searchTrim}%`)
+      }
     }
 
-    const [questions] = await pool.execute(
-      `SELECT id, title, content, type, difficulty, tags, choices, test_cases, created_at FROM questions WHERE ${where} ORDER BY id DESC LIMIT ${size} OFFSET ${offset}`,
-      params
-    )
-    const [countResult] = await pool.execute(`SELECT COUNT(*) as total FROM questions WHERE ${where}`, params)
-    const total = countResult[0].total
+    // 获取所有符合条件的题目（用于标签筛选）
+    let questionsQuery = `SELECT id, title, content, type, difficulty, tags, choices, test_cases, created_at FROM questions WHERE ${where} ORDER BY id DESC`
 
-    res.json({ data: questions, total, page, size })
+    // 处理标签筛选（在内存中进行，因为标签是 JSON 数组）
+    let [questions] = await pool.execute(questionsQuery, params)
+
+    if (tags) {
+      const tagIds = tags.split(',').map(id => id.trim()).filter(Boolean)
+      if (tagIds.length > 0) {
+        questions = questions.filter(q => {
+          const qTags = typeof q.tags === 'string' ? JSON.parse(q.tags || '[]') : (q.tags || [])
+          return tagIds.some(tagId => qTags.includes(tagId) || qTags.includes(parseInt(tagId)))
+        })
+      }
+    }
+
+    const total = questions.length
+    const paginatedQuestions = questions.slice(offset, offset + size)
+
+    res.json({ data: paginatedQuestions, total, page, size })
   } catch (err) {
     console.error('查询题目失败:', err)
     res.status(500).json({ error: '服务器错误' })

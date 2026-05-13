@@ -19,11 +19,40 @@
         <el-option label="中等" value="medium" />
         <el-option label="困难" value="hard" />
       </el-select>
-      <el-input v-model="searchText" placeholder="搜索标题..." clearable style="max-width: 200px" />
+      <el-button
+        class="tag-filter-btn"
+        :class="{ 'has-selection': selectedTagIds.length > 0 }"
+        @click="openTagModal"
+      >
+        <span v-if="selectedTagIds.length === 0">选择标签</span>
+        <span v-else>已选 {{ selectedTagIds.length }} 个标签</span>
+        <el-icon class="arrow-icon"><ArrowDown /></el-icon>
+      </el-button>
+      <el-input v-model="searchText" placeholder="搜索编号或标题..." clearable style="max-width: 200px" />
+    </div>
+
+    <!-- 已选标签展示 -->
+    <div v-if="selectedTags.length > 0" class="selected-tags-bar">
+      <span
+        v-for="tag in selectedTags"
+        :key="tag.id"
+        class="selected-tag-pill"
+        :style="{ background: tag.color + '20', color: tag.color, borderColor: tag.color + '40' }"
+        @click="toggleTagFilter(tag.id)"
+      >
+        {{ tag.name }}
+        <span class="remove-icon">×</span>
+      </span>
+      <el-button link size="small" @click="clearSelectedTags" class="clear-btn">清空</el-button>
     </div>
 
     <div class="table-card">
       <el-table :data="questions" stripe v-loading="loading" empty-text="暂无题目">
+        <el-table-column label="编号" width="90">
+          <template #default="{ row }">
+            <span class="question-id">T{{ row.id }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="标题" min-width="180">
           <template #default="{ row }">
             <span class="question-title">{{ row.title }}</span>
@@ -219,6 +248,38 @@
         </div>
       </template>
     </el-dialog>
+
+    <!-- 标签筛选弹窗 -->
+    <el-dialog v-model="tagModalVisible" title="选择标签" width="min(400px, 92vw)" destroy-on-close class="tag-filter-dialog">
+      <div class="tag-filter-content">
+        <el-input
+          v-model="filterTagSearchKeyword"
+          placeholder="搜索标签..."
+          clearable
+          class="tag-filter-search"
+          prefix-icon="Search"
+        />
+        <div class="tag-filter-tree">
+          <TagTree
+            :nodes="filteredTagTreeForFilter"
+            :selected-ids="selectedTagIds"
+            @toggle="toggleTagFilter"
+          />
+          <div v-if="filteredTagTreeForFilter.length === 0" class="tag-filter-empty">
+            未找到匹配的标签
+          </div>
+        </div>
+      </div>
+      <template #footer>
+        <div class="tag-filter-footer">
+          <span class="tag-selected-count">已选 {{ selectedTagIds.length }} 个标签</span>
+          <div class="tag-filter-actions">
+            <el-button @click="clearSelectedTags" link>清空</el-button>
+            <el-button type="primary" @click="tagModalVisible = false">确定</el-button>
+          </div>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -243,6 +304,74 @@ const dialogVisible = ref(false)
 const isEditing = ref(false)
 const editingId = ref(null)
 const submitting = ref(false)
+
+// 标签筛选相关
+const tagModalVisible = ref(false)
+const selectedTagIds = ref([])
+const filterTagSearchKeyword = ref('')
+
+// 已选标签对象数组（用于展示）
+const selectedTags = computed(() => {
+  return allTags.value.filter(t => selectedTagIds.value.includes(t.id))
+})
+
+// 标签筛选弹窗中的标签树
+const filteredTagTreeForFilter = computed(() => {
+  const kw = filterTagSearchKeyword.value.trim().toLowerCase()
+  if (!kw) return tagTree.value
+
+  function flatten(nodes, result = []) {
+    nodes.forEach(n => {
+      result.push(n)
+      if (n.children && n.children.length > 0) flatten(n.children, result)
+    })
+    return result
+  }
+
+  const flat = flatten(tagTree.value)
+  const matchedIds = new Set()
+
+  flat.forEach(t => {
+    if (t.name.toLowerCase().includes(kw)) {
+      matchedIds.add(t.id)
+      let parent = flat.find(p => p.children?.some(c => c.id === t.id))
+      while (parent) {
+        matchedIds.add(parent.id)
+        parent = flat.find(p => p.children?.some(c => c.id === parent.id))
+      }
+    }
+  })
+
+  function filterTree(nodes) {
+    return nodes.map(node => {
+      const children = node.children ? filterTree(node.children) : []
+      if (matchedIds.has(node.id) || children.length > 0) {
+        return { ...node, children }
+      }
+      return null
+    }).filter(Boolean)
+  }
+
+  return filterTree(tagTree.value)
+})
+
+function openTagModal() {
+  tagModalVisible.value = true
+  filterTagSearchKeyword.value = ''
+}
+
+function toggleTagFilter(tagId) {
+  const idx = selectedTagIds.value.indexOf(tagId)
+  if (idx >= 0) {
+    selectedTagIds.value.splice(idx, 1)
+  } else {
+    selectedTagIds.value.push(tagId)
+  }
+}
+
+function clearSelectedTags() {
+  selectedTagIds.value = []
+}
 
 const defaultForm = () => ({
   title: '',
@@ -387,6 +516,7 @@ async function loadQuestions() {
     if (filterType.value) params.type = filterType.value
     if (filterDifficulty.value) params.difficulty = filterDifficulty.value
     if (searchText.value) params.search = searchText.value
+    if (selectedTagIds.value.length > 0) params.tags = selectedTagIds.value.join(',')
     const { data } = await api.get('/questions', { params })
     questions.value = data.data || []
     total.value = data.total || 0
@@ -410,6 +540,10 @@ watch([filterType, filterDifficulty, searchText], () => {
   currentPage.value = 1
   loadQuestions()
 })
+watch(selectedTagIds, () => {
+  currentPage.value = 1
+  loadQuestions()
+}, { deep: true })
 
 function openAddDialog() {
   isEditing.value = false
@@ -555,8 +689,145 @@ async function handleDelete(id) {
 .filter-bar {
   display: flex;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+/* 标签筛选按钮 */
+.tag-filter-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  background: #fff;
+  color: #a8abb2;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* el-button 内部结构处理 */
+.tag-filter-btn :deep(span) {
+  flex: 1;
+  text-align: left;
+}
+
+.tag-filter-btn:hover {
+  border-color: #c0c4cc;
+}
+
+.tag-filter-btn span {
+  color: #a8abb2;
+}
+
+.arrow-icon {
+  font-size: 12px;
+  color: #a8abb2;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+/* 有选中值时的样式 */
+.tag-filter-btn.has-selection {
+  color: #606266;
+}
+
+.tag-filter-btn.has-selection span {
+  color: #606266;
+}
+
+/* 已选标签栏 */
+.selected-tags-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.selected-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  border: 1px solid;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.selected-tag-pill:hover {
+  opacity: 0.8;
+}
+
+.remove-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.clear-btn {
+  color: #909399;
+}
+
+.clear-btn:hover {
+  color: #606266;
+}
+
+/* 标签筛选弹窗 */
+.tag-filter-dialog :deep(.el-dialog__body) {
+  padding: 16px 20px;
+}
+
+.tag-filter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tag-filter-search {
+  width: 100%;
+}
+
+.tag-filter-tree {
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid #e4e7ed;
+  border-radius: 4px;
+  padding: 12px;
+  background: #fafafa;
+}
+
+.tag-filter-empty {
+  text-align: center;
+  padding: 20px;
+  color: #909399;
+  font-size: 14px;
+}
+
+.tag-filter-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.tag-selected-count {
+  font-size: 14px;
+  color: #606266;
+}
+
+.tag-filter-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .table-card {
@@ -570,6 +841,15 @@ async function handleDelete(id) {
   margin-top: 16px;
   display: flex;
   justify-content: flex-end;
+}
+
+.question-id {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-weight: 600;
+  color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
 .question-title {
@@ -812,11 +1092,36 @@ async function handleDelete(id) {
   }
 
   .filter-bar {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .filter-bar > * {
     width: 100%;
+    min-width: 0;
+  }
+
+  .filter-bar .el-select,
+  .filter-bar .tag-filter-btn,
+  .filter-bar .el-input {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .filter-bar .el-input {
+    grid-column: 1 / -1;
+  }
+
+  /* 已选标签栏移动端适配 */
+  .selected-tags-bar {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .selected-tag-pill {
+    font-size: 0.8rem;
+    padding: 3px 8px;
   }
 
   .table-card {
@@ -859,6 +1164,30 @@ async function handleDelete(id) {
 
   .score-stepper {
     align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar .el-input {
+    grid-column: 1;
+  }
+
+  .tag-filter-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .tag-filter-actions {
+    justify-content: stretch;
+  }
+
+  .tag-filter-actions .el-button {
+    flex: 1;
   }
 }
 </style>

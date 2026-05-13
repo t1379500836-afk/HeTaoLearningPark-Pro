@@ -1436,7 +1436,7 @@ export const questionsConfig = {
       type: 'choice',
       difficulty: 'medium',
       tags: ['23', '4', '2'],
-      content: '以下代码输出什么？\n```python\ndef f(x):\n    return x * 2\n\nprint(f(3) + f(4))\n```',
+      content: 'def f(x): return x * 2; print(f(3) + f(4))输出什么？',
       choices: [{ content: '14', isCorrect: true }, { content: '24', isCorrect: false }, { content: '6 8', isCorrect: false }, { content: '报错', isCorrect: false }]
     },
     {

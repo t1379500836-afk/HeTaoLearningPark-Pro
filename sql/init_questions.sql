@@ -239,3 +239,20 @@ INSERT INTO questions (title, content, type, difficulty, tags, choices) VALUES
 ('集合综合', 'set([1,2,2,3,3,3])的结果是什么？', 'choice', 'medium', '[21, 16, 22]', '[{"content": "[1, 2, 3]", "isCorrect": false}, {"content": "{1, 2, 3}", "isCorrect": true}, {"content": "(1, 2, 3)", "isCorrect": false}, {"content": "报错", "isCorrect": false}]'),
 ('类型转换综合', 'str(123) + str(456)的结果是什么？', 'choice', 'medium', '[22, 14, 4]', '[{"content": "579", "isCorrect": false}, {"content": "123456", "isCorrect": true}, {"content": "[123, 456]", "isCorrect": false}, {"content": "报错", "isCorrect": false}]'),
 ('函数综合', 'def f(x): return x * 2; print(f(3) + f(4))输出什么？', 'choice', 'medium', '[23, 4, 2]', '[{"content": "14", "isCorrect": true}, {"content": "24", "isCorrect": false}, {"content": "6 8", "isCorrect": false}, {"content": "报错", "isCorrect": false}]');
+
+-- ========================================
+-- 追加10道困难难度选择题（第七批）
+-- 综合题型，涉及算法思维
+-- ========================================
+
+INSERT INTO questions (title, content, type, difficulty, tags, choices) VALUES
+('冒泡排序理解', '冒泡排序中，每次遍历都会把最大的元素放到哪里？', 'choice', 'hard', '[9, 16, 18, 8]', '[{"content": "放到开头位置", "isCorrect": false}, {"content": "放到末尾位置", "isCorrect": true}, {"content": "放到中间位置", "isCorrect": false}, {"content": "位置不变", "isCorrect": false}]'),
+('二分查找理解', '二分查找要求数据必须满足什么条件？', 'choice', 'hard', '[9, 6, 8, 10]', '[{"content": "数据可以是任意顺序", "isCorrect": false}, {"content": "数据必须有序排列", "isCorrect": true}, {"content": "数据必须全是奇数", "isCorrect": false}, {"content": "数据长度必须是偶数", "isCorrect": false}]'),
+('递归思想', '递归函数必须具备的两个要素是什么？', 'choice', 'hard', '[23, 8, 9]', '[{"content": "循环和判断", "isCorrect": false}, {"content": "终止条件和递归调用", "isCorrect": true}, {"content": "输入和输出", "isCorrect": false}, {"content": "变量和函数", "isCorrect": false}]'),
+('字典查找优化', '在大量数据中查找某个元素，哪种数据结构效率最高？', 'choice', 'hard', '[20, 16, 17]', '[{"content": "列表，因为简单", "isCorrect": false}, {"content": "字典，因为查找速度快", "isCorrect": true}, {"content": "字符串，因为占空间小", "isCorrect": false}, {"content": "都一样快", "isCorrect": false}]'),
+('字符串算法', '判断一个字符串是否是回文串，最高效的方法是？', 'choice', 'hard', '[14, 9, 8]', '[{"content": "从头到尾遍历", "isCorrect": false}, {"content": "首尾双指针向中间逼近", "isCorrect": true}, {"content": "反转字符串再比较", "isCorrect": false}, {"content": "转换为列表再比较", "isCorrect": false}]'),
+('二维列表遍历', '遍历一个n行m列的二维列表，时间复杂度是？', 'choice', 'hard', '[19, 11, 9, 16]', '[{"content": "O(n)", "isCorrect": false}, {"content": "O(m)", "isCorrect": false}, {"content": "O(n*m)", "isCorrect": true}, {"content": "O(n+m)", "isCorrect": false}]'),
+('列表推导式优化', '列表推导式相比普通for循环创建列表的优势是？', 'choice', 'hard', '[24, 9, 8, 6]', '[{"content": "可以处理更复杂逻辑", "isCorrect": false}, {"content": "代码更简洁且效率更高", "isCorrect": true}, {"content": "可以使用break和continue", "isCorrect": false}, {"content": "可以处理无限循环", "isCorrect": false}]'),
+('随机算法', '从列表中随机抽取不重复的n个元素，应该使用？', 'choice', 'hard', '[25, 9, 16]', '[{"content": "多次调用random.choice", "isCorrect": false}, {"content": "random.sample函数", "isCorrect": true}, {"content": "random.randint函数", "isCorrect": false}, {"content": "random.shuffle后切片", "isCorrect": false}]'),
+('质数判断优化', '判断一个数n是否为质数，最优化只需遍历到？', 'choice', 'hard', '[8, 9, 6, 10]', '[{"content": "n/2", "isCorrect": false}, {"content": "n的平方根", "isCorrect": true}, {"content": "n-1", "isCorrect": false}, {"content": "n", "isCorrect": false}]'),
+('斐波那契优化', '计算斐波那契数列第n项，使用递归会重复计算，更好的方法是？', 'choice', 'hard', '[9, 16, 10, 4]', '[{"content": "每次重新计算", "isCorrect": false}, {"content": "使用循环或记忆化存储", "isCorrect": true}, {"content": "使用更多递归调用", "isCorrect": false}, {"content": "使用字符串存储", "isCorrect": false}]');

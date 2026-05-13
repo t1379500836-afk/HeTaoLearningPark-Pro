@@ -4,6 +4,7 @@
       <div class="tag-tree-row" :style="{ paddingLeft: depth * 20 + 'px' }">
         <button
           v-if="node.children && node.children.length > 0"
+          type="button"
           class="expand-btn"
           @click.stop="toggleExpand(node.id)"
         >

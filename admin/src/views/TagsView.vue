@@ -11,7 +11,7 @@
       <div class="search-bar">
         <el-input v-model="searchKeyword" placeholder="搜索标签名称..." clearable prefix-icon="Search" />
       </div>
-      <el-table :data="tags" stripe v-loading="loading" empty-text="暂无标签" row-key="id" :tree-props="{ children: 'children' }">
+      <el-table :data="tagTree" stripe v-loading="loading" empty-text="暂无标签" row-key="id" :tree-props="{ children: 'children' }">
         <el-table-column label="标签名" min-width="160">
           <template #default="{ row }">
             <el-tag :style="{ background: row.color, borderColor: row.color, color: '#fff' }">
@@ -35,17 +35,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="pagination-wrapper">
-        <el-pagination
-          v-model:current-page="currentPage"
-          v-model:page-size="pageSize"
-          :page-sizes="[10, 20, 50, 100]"
-          :total="total"
-          layout="total, sizes, prev, pager, next"
-          background
-          size="small"
-        />
-      </div>
     </div>
 
     <el-dialog v-model="dialogVisible" width="min(420px, 92vw)" destroy-on-close class="tag-dialog">
@@ -106,12 +95,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import api from '../api.js'
 import TagTree from '../components/TagTree.vue'
 
-const tags = ref([])
 const loading = ref(false)
 const dialogVisible = ref(false)
 const isEditing = ref(false)
@@ -123,40 +111,58 @@ const parentSearchKeyword = ref('')
 const submitting = ref(false)
 const searchKeyword = ref('')
 const allTags = ref([])
-const currentPage = ref(1)
-const pageSize = ref(10)
-const total = ref(0)
 
 async function loadTags() {
   loading.value = true
   try {
-    const params = { page: currentPage.value, size: pageSize.value }
-    if (searchKeyword.value) params.search = searchKeyword.value
-    const { data } = await api.get('/questions/tags/tree', { params })
-    tags.value = data.data || []
-    total.value = data.total || 0
+    const { data } = await api.get('/questions/tags')
+    allTags.value = data.data || []
   } finally {
     loading.value = false
   }
 }
 
-async function loadAllTags() {
-  try {
-    const { data } = await api.get('/questions/tags')
-    allTags.value = data.data || []
-  } catch (e) {
-    console.error('加载所有标签失败', e)
-  }
-}
+// 构建标签树（考虑搜索过滤）
+const tagTree = computed(() => {
+  const kw = searchKeyword.value.trim().toLowerCase()
+  let filtered = allTags.value
 
-onMounted(() => {
-  loadAllTags()
-  loadTags()
+  if (kw) {
+    // 搜索时，找出匹配的标签及其所有父标签
+    const matchedIds = new Set()
+    const tagMap = {}
+    allTags.value.forEach(t => { tagMap[t.id] = t })
+
+    allTags.value.forEach(t => {
+      if (t.name.toLowerCase().includes(kw)) {
+        matchedIds.add(t.id)
+        // 添加所有父标签
+        let parentId = t.parent_id
+        while (parentId && tagMap[parentId]) {
+          matchedIds.add(parentId)
+          parentId = tagMap[parentId].parent_id
+        }
+      }
+    })
+
+    filtered = allTags.value.filter(t => matchedIds.has(t.id))
+  }
+
+  // 构建树
+  const map = new Map()
+  filtered.forEach(t => map.set(t.id, { ...t, children: [] }))
+  const roots = []
+  map.forEach(tag => {
+    if (tag.parent_id && map.has(tag.parent_id)) {
+      map.get(tag.parent_id).children.push(tag)
+    } else {
+      roots.push(tag)
+    }
+  })
+  return roots
 })
 
-watch([currentPage, pageSize], () => loadTags())
-watch(searchKeyword, () => {
-  currentPage.value = 1
+onMounted(() => {
   loadTags()
 })
 
@@ -167,9 +173,9 @@ const tagMap = computed(() => {
   return map
 })
 
-// 可作为父标签的候选（排除自身）
+// 可作为父标签的候选（排除自身，基于所有标签）
 const parentCandidates = computed(() => {
-  return tags.value.filter(t => t.id !== editingId.value)
+  return allTags.value.filter(t => t.id !== editingId.value)
 })
 
 // 父标签候选树
@@ -273,7 +279,6 @@ async function handleSave() {
     }
     dialogVisible.value = false
     loadTags()
-    loadAllTags()
   } finally {
     submitting.value = false
   }
@@ -321,12 +326,6 @@ async function handleDelete(id) {
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-.pagination-wrapper {
-  margin-top: 16px;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .search-bar {
@@ -483,11 +482,6 @@ async function handleDelete(id) {
     padding: 14px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-  }
-
-  .pagination-wrapper {
-    flex-wrap: wrap;
-    gap: 8px;
   }
 }
 </style>

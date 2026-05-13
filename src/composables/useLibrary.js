@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 // 使用 ref 存储配置，支持热更新
 const configRef = ref({ tags: [], questions: [] })
@@ -30,6 +30,8 @@ const selectedTagIds = ref([])
 const selectedDifficulty = ref('all')
 const selectedType = ref('all')
 const searchKeyword = ref('')
+const currentPage = ref(1)
+const pageSize = ref(10)
 
 // 递归扁平化标签树
 function flattenTags(tree, result = []) {
@@ -128,6 +130,24 @@ export function useLibrary() {
     }
 
     return result
+  })
+
+  const paginatedQuestions = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value
+    return filteredQuestions.value.slice(start, start + pageSize.value)
+  })
+
+  const totalPages = computed(() => Math.ceil(filteredQuestions.value.length / pageSize.value))
+
+  function goToPage(page) {
+    currentPage.value = Math.max(1, Math.min(page, totalPages.value || 1))
+  }
+
+  function nextPage() { goToPage(currentPage.value + 1) }
+  function prevPage() { goToPage(currentPage.value - 1) }
+
+  watch([selectedTagIds, selectedDifficulty, selectedType, searchKeyword], () => {
+    currentPage.value = 1
   })
 
   // 根据 ID 获取题目
@@ -281,6 +301,13 @@ export function useLibrary() {
     selectedType,
     searchKeyword,
     filteredQuestions,
+    paginatedQuestions,
+    totalPages,
+    currentPage,
+    pageSize,
+    goToPage,
+    nextPage,
+    prevPage,
     questionStats,
     getQuestionById,
     reload,

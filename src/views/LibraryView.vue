@@ -85,7 +85,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="q in filteredQuestions"
+              v-for="q in paginatedQuestions"
               :key="q.id"
               class="question-row"
               @click="goQuestion(q.id)"
@@ -129,6 +129,27 @@
         <div v-if="filteredQuestions.length === 0" class="table-empty">
           <p>暂无符合条件的题目</p>
         </div>
+
+        <!-- 分页 -->
+        <div v-if="totalPages > 1" class="pagination">
+          <span class="pagination-info">
+            共 {{ filteredQuestions.length }} 题，第 {{ currentPage }}/{{ totalPages }} 页
+          </span>
+          <div class="pagination-btns">
+            <button class="page-btn" :disabled="currentPage === 1" @click="prevPage">上一页</button>
+            <button
+              v-for="p in visiblePages"
+              :key="p"
+              class="page-btn"
+              :class="{ active: p === currentPage, ellipsis: p === '...' }"
+              :disabled="p === '...'"
+              @click="p !== '...' && goToPage(p)"
+            >
+              {{ p }}
+            </button>
+            <button class="page-btn" :disabled="currentPage === totalPages" @click="nextPage">下一页</button>
+          </div>
+        </div>
       </section>
 
       <!-- 移动端：卡片 -->
@@ -139,7 +160,7 @@
         </div>
 
         <div
-          v-for="q in filteredQuestions"
+          v-for="q in paginatedQuestions"
           :key="q.id"
           class="question-card"
           @click="goQuestion(q.id)"
@@ -171,6 +192,13 @@
             </div>
             <span class="card-rate-text">{{ getQuestionStats(q.id).passed }}/{{ getQuestionStats(q.id).attempts }}</span>
           </div>
+        </div>
+
+        <!-- 移动端分页 -->
+        <div v-if="totalPages > 1" class="pagination mobile">
+          <button class="page-btn" :disabled="currentPage === 1" @click="prevPage">上一页</button>
+          <span class="pagination-info">{{ currentPage }}/{{ totalPages }}</span>
+          <button class="page-btn" :disabled="currentPage === totalPages" @click="nextPage">下一页</button>
         </div>
       </section>
     </div>
@@ -248,9 +276,30 @@ const {
   selectedType,
   searchKeyword,
   filteredQuestions,
+  paginatedQuestions,
+  totalPages,
+  currentPage,
+  goToPage,
+  nextPage,
+  prevPage,
   questionStats,
   reload
 } = useLibrary()
+
+const visiblePages = computed(() => {
+  const total = totalPages.value
+  const cur = currentPage.value
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+  const pages = []
+  if (cur <= 4) {
+    pages.push(1, 2, 3, 4, 5, '...', total)
+  } else if (cur >= total - 3) {
+    pages.push(1, '...', total - 4, total - 3, total - 2, total - 1, total)
+  } else {
+    pages.push(1, '...', cur - 1, cur, cur + 1, '...', total)
+  }
+  return pages
+})
 
 function getQuestionStats(qid) {
   const s = questionStats.value[qid]
@@ -308,6 +357,7 @@ function resetFilters() {
   selectedDifficulty.value = 'all'
   selectedType.value = 'all'
   searchKeyword.value = ''
+  currentPage.value = 1
 }
 
 function goQuestion(id) {
@@ -1009,5 +1059,68 @@ function prefixedPath(path) {
   .tag-modal-actions button {
     flex: 1;
   }
+}
+
+/* 分页 */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pagination.mobile {
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.pagination-info {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.pagination-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fff;
+  color: #666;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.page-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.page-btn.ellipsis {
+  border: none;
+  background: none;
+  cursor: default;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 </style>

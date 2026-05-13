@@ -181,6 +181,23 @@
                 </el-button>
               </div>
             </div>
+            <!-- 随机数提示区域 -->
+            <div class="random-hint-box">
+              <div class="random-hint-title">
+                <el-icon><InfoFilled /></el-icon>
+                <span>支持随机数验证：使用 <code>__RANDOM_类型__最小值-最大值__</code> 格式</span>
+              </div>
+              <div class="random-hint-items">
+                <el-tag
+                  class="random-template-tag"
+                  effect="plain"
+                  @click="copyTemplate('__RANDOM_SUM__1-100__')"
+                >
+                  示例：__RANDOM_SUM__1-100__
+                  <el-icon class="copy-icon"><CopyDocument /></el-icon>
+                </el-tag>
+              </div>
+            </div>
             <el-button type="primary" link @click="addTestCase" class="add-choice-btn">
               <el-icon><Plus /></el-icon> 添加测试用例
             </el-button>
@@ -236,6 +253,16 @@ const defaultForm = () => ({
     { input: '', expectedOutput: '', score: 10 }
   ]
 })
+
+// 复制模板到剪贴板
+async function copyTemplate(value) {
+  try {
+    await navigator.clipboard.writeText(value)
+    ElMessage.success(`已复制: ${value}`)
+  } catch (err) {
+    ElMessage.error('复制失败，请手动复制')
+  }
+}
 
 const form = ref(defaultForm())
 
@@ -427,9 +454,9 @@ async function handleSave() {
   }
 
   if (form.value.type === 'program') {
-    const validCases = form.value.test_cases.filter(tc => tc.input.trim() && tc.expectedOutput.trim())
-    if (validCases.length < 1) return ElMessage.warning('编程题至少需要1个测试用例')
-    form.value.test_cases = validCases
+    const validCases = form.value.test_cases.filter(tc => tc.expectedOutput && tc.expectedOutput.trim())
+    if (validCases.length < 1) return ElMessage.warning('编程题至少需要1个测试用例（输入可以为空）')
+    form.value.test_cases = form.value.test_cases.filter(tc => tc.expectedOutput && tc.expectedOutput.trim())
   }
 
   submitting.value = true
@@ -632,6 +659,47 @@ async function handleDelete(id) {
 
 .add-choice-btn {
   margin-top: 10px;
+}
+
+/* 随机数提示框 */
+.random-hint-box {
+  margin: 12px 0;
+  padding: 12px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+}
+
+.random-hint-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  color: #0369a1;
+  font-weight: 500;
+}
+
+.random-hint-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.random-template-tag {
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.random-template-tag:hover {
+  background: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+.copy-icon {
+  margin-left: 4px;
+  font-size: 12px;
 }
 
 .tag-selector {

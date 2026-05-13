@@ -57,7 +57,7 @@ export async function regenerateQuestionsConfig() {
       title: '${escape(q.title)}',
       type: '${q.type}',
       difficulty: '${q.difficulty || 'medium'}',
-      tags: [${tags.join(', ')}],
+      tags: [${tags.map(t => `'${t}'`).join(', ')}],
       content: '${escape(q.content)}',
       ${q.type === 'choice'
         ? `choices: [${choices.map(c => `{ content: '${escape(c.content)}', isCorrect: ${c.isCorrect} }`).join(', ')}]`

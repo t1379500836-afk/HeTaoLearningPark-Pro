@@ -135,8 +135,54 @@ async function runSingleTestCase(code, input, expectedOutput, score) {
   }
 
   const expected = (expectedOutput || '').replace(/\r\n/g, '\n').trim()
-  passed = !error && actualOutput === expected
+  // 特殊标记校验：随机数题目
+  if (!error && expected.startsWith('__RANDOM_')) {
+    passed = validateRandomOutput(actualOutput, expected)
+  } else {
+    passed = !error && actualOutput === expected
+  }
   if (passed) earnedScore = score
 
   return { actualOutput, error, passed, earnedScore }
+}
+
+function validateRandomOutput(actual, expected) {
+  const num = Number(actual)
+  if (isNaN(num) || actual.trim() !== String(num)) return false
+
+  // __RANDOM_INT__1-10__  随机整数范围
+  const intMatch = expected.match(/^__RANDOM_INT__(\d+)-(\d+)__$/)
+  if (intMatch) {
+    const [_, min, max] = intMatch.map(Number)
+    return num >= min && num <= max
+  }
+
+  // __RANDOM_SUM__5-500__  随机整数求和范围 (n个随机数之和)
+  const sumMatch = expected.match(/^__RANDOM_SUM__(\d+)-(\d+)__$/)
+  if (sumMatch) {
+    const [_, min, max] = sumMatch.map(Number)
+    return num >= min && num <= max
+  }
+
+  // __RANDOM_CHOICE__[10,20,30]__  随机选择列表中的元素
+  const choiceMatch = expected.match(/^__RANDOM_CHOICE__\[(.*)\]__$/)
+  if (choiceMatch) {
+    const items = choiceMatch[1].split(',')
+    return items.includes(actual.trim())
+  }
+
+  // __RANDOM_SAMPLE__ABC123__4__  从字符集中随机选n个字符组成验证码
+  const sampleMatch = expected.match(/^__RANDOM_SAMPLE__(.+)__(\d+)__$/)
+  if (sampleMatch) {
+    const [_, pool, n] = sampleMatch
+    const actualTrim = actual.trim()
+    if (actualTrim.length !== Number(n)) return false
+    const poolSet = new Set(pool.split(''))
+    for (const ch of actualTrim) {
+      if (!poolSet.has(ch)) return false
+    }
+    return true
+  }
+
+  return false
 }

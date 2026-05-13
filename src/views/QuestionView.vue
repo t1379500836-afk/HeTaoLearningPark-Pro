@@ -84,6 +84,10 @@
                       <div class="testcase-col">
                         <span class="row-label">期望输出</span>
                         <pre class="row-code">{{ tc.expectedOutput }}</pre>
+                        <div v-if="tc.expectedOutput && tc.expectedOutput.includes('__RANDOM_')" class="random-hint">
+                          <span class="random-hint-icon">🎲</span>
+                          <span class="random-hint-text">此题为随机数输出，答案为范围随机数</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -355,7 +359,7 @@ function toggleTestCase(idx) {
   }
   expandedTestCases.value = newSet
 }
-const codeInput = ref('# 在此编写代码\nprint("Hello, World!")')
+const codeInput = ref('# 在此编写代码\n')
 let runWorker = null
 let workerReady = false
 let forceStopTimer = null
@@ -1039,6 +1043,26 @@ async function submitCode() {
   white-space: pre-wrap;
   word-break: break-all;
   overflow-x: auto;
+}
+
+.random-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: #fff8e1;
+  border-radius: 6px;
+  border: 1px solid #ffcc80;
+}
+
+.random-hint-icon {
+  font-size: 0.9rem;
+}
+
+.random-hint-text {
+  font-size: 0.75rem;
+  color: #e65100;
 }
 
 /* 编辑器区域 - 上下布局 */

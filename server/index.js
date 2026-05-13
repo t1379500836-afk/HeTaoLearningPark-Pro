@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
+import { resolve } from 'path'
 import { initDatabase } from './db.js'
 import authRoutes from './routes/auth.js'
 import teacherRoutes from './routes/teachers.js'
@@ -17,6 +18,15 @@ const PORT = process.env.PORT || 3000
 // 中间件
 app.use(cors())
 app.use(express.json())
+
+// 配置文件静态服务
+const { existsSync } = await import('fs')
+const PROJECT_ROOT = resolve(process.cwd())
+const userSrcPath = resolve(PROJECT_ROOT, 'user/src')
+const srcPath = resolve(PROJECT_ROOT, 'src')
+const configPath = existsSync(userSrcPath) ? userSrcPath : srcPath
+
+app.use('/src/config', express.static(resolve(configPath, 'config')))
 
 // 路由
 app.use('/api/auth', authRoutes)

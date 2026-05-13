@@ -1,26 +1,12 @@
 import { ref, computed, watch } from 'vue'
+import { questionsConfig } from '@/config/questions.config.js'
 
 // 使用 ref 存储配置，支持热更新
-const configRef = ref({ tags: [], questions: [] })
+const configRef = ref(questionsConfig || { tags: [], questions: [] })
 
 // 当前 OJ 判题 Worker，可被终止
 let currentWorker = null
 let currentResolve = null
-
-async function loadStaticConfig() {
-  try {
-    // 使用绝对路径 + 时间戳绕过 Vite 模块缓存
-    const mod = await import(`/src/config/questions.config.js?t=${Date.now()}`)
-    const cfg = mod.questionsConfig || mod.default || { tags: [], questions: [] }
-    configRef.value = cfg
-  } catch (e) {
-    console.log('题库静态配置未找到，使用空数据', e)
-    configRef.value = { tags: [], questions: [] }
-  }
-}
-
-// 立即尝试加载
-loadStaticConfig()
 
 // 响应式状态
 const questions = computed(() => configRef.value.questions || [])
@@ -177,11 +163,13 @@ export function useLibrary() {
     }
   }
 
-  // 重新加载配置
+  // 重新加载配置（刷新页面时调用）
   async function reload() {
-    await loadStaticConfig()
     await loadStats()
   }
+
+  // 初始化加载统计
+  loadStats()
 
   // 选择题本地判分
   function judgeChoice(question, selectedIndex) {

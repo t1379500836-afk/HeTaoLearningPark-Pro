@@ -122,6 +122,7 @@ const dialogParentId = ref(null)
 const parentSearchKeyword = ref('')
 const submitting = ref(false)
 const searchKeyword = ref('')
+const allTags = ref([])
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
@@ -139,7 +140,17 @@ async function loadTags() {
   }
 }
 
+async function loadAllTags() {
+  try {
+    const { data } = await api.get('/questions/tags')
+    allTags.value = data.data || []
+  } catch (e) {
+    console.error('加载所有标签失败', e)
+  }
+}
+
 onMounted(() => {
+  loadAllTags()
   loadTags()
 })
 
@@ -149,10 +160,10 @@ watch(searchKeyword, () => {
   loadTags()
 })
 
-// 标签映射表
+// 标签映射表（基于所有标签，确保能解析父标签名称）
 const tagMap = computed(() => {
   const map = {}
-  tags.value.forEach(t => { map[t.id] = t })
+  allTags.value.forEach(t => { map[t.id] = t })
   return map
 })
 
@@ -262,6 +273,7 @@ async function handleSave() {
     }
     dialogVisible.value = false
     loadTags()
+    loadAllTags()
   } finally {
     submitting.value = false
   }

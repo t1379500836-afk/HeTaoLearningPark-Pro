@@ -786,7 +786,7 @@ export const questionsConfig = {
       id: 87,
       title: '随机数累加',
       type: 'program',
-      difficulty: 'easy',
+      difficulty: 'medium',
       tags: ['25', '9'],
       content: '使用random.randint(1, 100)生成5个随机整数，输出它们的和。',
       testCases: [{ input: '', expectedOutput: '__RANDOM_SUM__5-500__', score: 100 }]
@@ -970,6 +970,564 @@ export const questionsConfig = {
       tags: ['14', '9', '22'],
       content: '读取一个二进制字符串（只含0和1），将其转换为十进制整数并输出。',
       testCases: [{ input: '1010', expectedOutput: '10', score: 34 }, { input: '1111', expectedOutput: '15', score: 33 }, { input: '100', expectedOutput: '4', score: 33 }]
+    },
+    {
+      id: 108,
+      title: 'print输出',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['2'],
+      content: '下面哪个代码可以正确输出Hello Python？',
+      choices: [{ content: 'print(Hello Python)', isCorrect: false }, { content: 'print Hello Python', isCorrect: false }, { content: 'print函数加括号包裹字符串', isCorrect: true }, { content: 'echo Hello Python', isCorrect: false }]
+    },
+    {
+      id: 109,
+      title: 'input输入',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['3'],
+      content: '读取用户输入的整数并保存到变量n，正确的代码是？',
+      choices: [{ content: 'n = input()', isCorrect: false }, { content: 'n = int(input())', isCorrect: true }, { content: 'input(n)', isCorrect: false }, { content: 'n = input', isCorrect: false }]
+    },
+    {
+      id: 110,
+      title: '变量赋值',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['4'],
+      content: '执行 a = 5 后，再执行 a = a + 3，a的最终值是多少？',
+      choices: [{ content: '5', isCorrect: false }, { content: '8', isCorrect: true }, { content: '3', isCorrect: false }, { content: 'a + 3', isCorrect: false }]
+    },
+    {
+      id: 111,
+      title: '布尔值',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['5'],
+      content: '下面哪个是Python中表示真的布尔值？',
+      choices: [{ content: 'true', isCorrect: false }, { content: 'True', isCorrect: true }, { content: 'FALSE', isCorrect: false }, { content: '真', isCorrect: false }]
+    },
+    {
+      id: 112,
+      title: '比较运算',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['6'],
+      content: '表达式 10 > 5 的结果是？',
+      choices: [{ content: 'True', isCorrect: true }, { content: 'False', isCorrect: false }, { content: '1', isCorrect: false }, { content: '0', isCorrect: false }]
+    },
+    {
+      id: 113,
+      title: '等于判断',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['6'],
+      content: '判断两个值是否相等，应该使用哪个运算符？',
+      choices: [{ content: '=', isCorrect: false }, { content: '==', isCorrect: true }, { content: '===', isCorrect: false }, { content: '!=', isCorrect: false }]
+    },
+    {
+      id: 114,
+      title: 'and运算',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['7'],
+      content: '表达式 True and False 的结果是？',
+      choices: [{ content: 'True', isCorrect: false }, { content: 'False', isCorrect: true }, { content: 'and', isCorrect: false }, { content: '0', isCorrect: false }]
+    },
+    {
+      id: 115,
+      title: 'or运算',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['7'],
+      content: '表达式 False or True 的结果是？',
+      choices: [{ content: 'False', isCorrect: false }, { content: 'True', isCorrect: true }, { content: 'or', isCorrect: false }, { content: '1', isCorrect: false }]
+    },
+    {
+      id: 116,
+      title: 'not运算',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['7'],
+      content: '表达式 not True 的结果是？',
+      choices: [{ content: 'True', isCorrect: false }, { content: 'False', isCorrect: true }, { content: 'None', isCorrect: false }, { content: 'not', isCorrect: false }]
+    },
+    {
+      id: 117,
+      title: 'if单分支',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['8'],
+      content: '以下哪个是正确的if语句语法？',
+      choices: [{ content: 'if x > 0: print(x)', isCorrect: false }, { content: 'if x > 0换行缩进print(x)', isCorrect: true }, { content: 'if x > 0 then print(x)', isCorrect: false }, { content: 'if (x > 0) print(x)', isCorrect: false }]
+    },
+    {
+      id: 118,
+      title: 'if多分支',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['8'],
+      content: '要判断x分别等于1、2、其他三种情况，应该使用？',
+      choices: [{ content: 'if elif else', isCorrect: true }, { content: 'if if else', isCorrect: false }, { content: 'switch case', isCorrect: false }, { content: 'if else if', isCorrect: false }]
+    },
+    {
+      id: 119,
+      title: 'for循环',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['9'],
+      content: '要输出1到5，正确的方法是？',
+      choices: [{ content: 'for i in range(1, 5)', isCorrect: false }, { content: 'for i in range(1, 6)', isCorrect: true }, { content: 'for i in range(5)', isCorrect: false }, { content: 'for 1 to 5', isCorrect: false }]
+    },
+    {
+      id: 120,
+      title: 'range函数',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['9'],
+      content: 'range(1, 10, 2)会生成什么序列？',
+      choices: [{ content: '1到9的整数', isCorrect: false }, { content: '1, 3, 5, 7, 9', isCorrect: true }, { content: '2, 4, 6, 8, 10', isCorrect: false }, { content: '1到10的整数', isCorrect: false }]
+    },
+    {
+      id: 121,
+      title: 'while循环',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['10'],
+      content: '以下哪个是while循环的正确格式？',
+      choices: [{ content: 'while i < 10换行缩进执行代码', isCorrect: true }, { content: 'while i < 10', isCorrect: false }, { content: 'while (i < 10) { }', isCorrect: false }, { content: 'loop while i < 10', isCorrect: false }]
+    },
+    {
+      id: 122,
+      title: 'while计数',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['10'],
+      content: '以下代码会输出什么？\n```python\ni = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```',
+      choices: [{ content: '1 2 3', isCorrect: false }, { content: '0 1 2', isCorrect: true }, { content: '0 1 2 3', isCorrect: false }, { content: '1 2', isCorrect: false }]
+    },
+    {
+      id: 123,
+      title: 'break语句',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['12'],
+      content: '在循环中，break语句的作用是什么？',
+      choices: [{ content: '跳过本次循环，继续下一次', isCorrect: false }, { content: '结束整个循环', isCorrect: true }, { content: '暂停程序', isCorrect: false }, { content: '退出程序', isCorrect: false }]
+    },
+    {
+      id: 124,
+      title: 'continue语句',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['13'],
+      content: '在循环中，continue语句的作用是什么？',
+      choices: [{ content: '结束整个循环', isCorrect: false }, { content: '跳过本次循环，继续下一次', isCorrect: true }, { content: '暂停循环', isCorrect: false }, { content: '重新开始循环', isCorrect: false }]
+    },
+    {
+      id: 125,
+      title: '字符串定义',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['14'],
+      content: '下面哪个是正确的字符串定义方式？',
+      choices: [{ content: '双引号或单引号包裹', isCorrect: true }, { content: '直接写Hello', isCorrect: false }, { content: '方括号包裹', isCorrect: false }, { content: '圆括号包裹', isCorrect: false }]
+    },
+    {
+      id: 126,
+      title: '字符串连接',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['14'],
+      content: '在Python中，两个字符串s1和s2怎么连接？',
+      choices: [{ content: 's1 + s2', isCorrect: true }, { content: 's1 & s2', isCorrect: false }, { content: 's1 . s2', isCorrect: false }, { content: 's1 , s2', isCorrect: false }]
+    },
+    {
+      id: 127,
+      title: '字符串切片',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['15'],
+      content: 's = Python，s[1:4]的结果是？',
+      choices: [{ content: 'Pyt', isCorrect: false }, { content: 'yth', isCorrect: true }, { content: 'ytho', isCorrect: false }, { content: 'thon', isCorrect: false }]
+    },
+    {
+      id: 128,
+      title: '列表创建',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['16'],
+      content: '创建一个包含数字1, 2, 3的列表，正确的方法是？',
+      choices: [{ content: '[1, 2, 3]', isCorrect: true }, { content: '{1, 2, 3}', isCorrect: false }, { content: '(1, 2, 3)', isCorrect: false }, { content: '<1, 2, 3>', isCorrect: false }]
+    },
+    {
+      id: 129,
+      title: '列表索引',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['16'],
+      content: 'nums = [10, 20, 30]，nums[0]的值是？',
+      choices: [{ content: '10', isCorrect: true }, { content: '20', isCorrect: false }, { content: '30', isCorrect: false }, { content: '1', isCorrect: false }]
+    },
+    {
+      id: 130,
+      title: '列表遍历',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['17'],
+      content: '用for循环遍历列表names，正确的写法是？',
+      choices: [{ content: 'for name in names', isCorrect: true }, { content: 'for name of names', isCorrect: false }, { content: 'foreach name in names', isCorrect: false }, { content: 'for names', isCorrect: false }]
+    },
+    {
+      id: 131,
+      title: 'append方法',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['18'],
+      content: 'lst = [1, 2]，执行lst.append(3)后，lst变成？',
+      choices: [{ content: '[1, 2, 3]', isCorrect: true }, { content: '[3, 1, 2]', isCorrect: false }, { content: '[1, 2]', isCorrect: false }, { content: '1, 2, 3', isCorrect: false }]
+    },
+    {
+      id: 132,
+      title: '二维列表访问',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['19'],
+      content: 'matrix = [[1,2],[3,4]]，matrix[1][0]的值是？',
+      choices: [{ content: '1', isCorrect: false }, { content: '2', isCorrect: false }, { content: '3', isCorrect: true }, { content: '4', isCorrect: false }]
+    },
+    {
+      id: 133,
+      title: '字典创建',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['20'],
+      content: '创建一个字典存储name和age，正确的方法是？',
+      choices: [{ content: '花括号包裹键值对', isCorrect: true }, { content: '方括号包裹', isCorrect: false }, { content: '圆括号包裹', isCorrect: false }, { content: '尖括号包裹', isCorrect: false }]
+    },
+    {
+      id: 134,
+      title: '字典访问',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['20'],
+      content: 'd = {a: 1, b: 2}，d[a]的值是？',
+      choices: [{ content: 'a', isCorrect: false }, { content: '1', isCorrect: true }, { content: '2', isCorrect: false }, { content: 'b', isCorrect: false }]
+    },
+    {
+      id: 135,
+      title: '集合特点',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['21'],
+      content: '集合（set）的特点是什么？',
+      choices: [{ content: '有序且可重复', isCorrect: false }, { content: '无序且不重复', isCorrect: true }, { content: '有序且不重复', isCorrect: false }, { content: '无序且可重复', isCorrect: false }]
+    },
+    {
+      id: 136,
+      title: '类型转换',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['22'],
+      content: '将字符串123转换为整数，正确的方法是？',
+      choices: [{ content: 'int函数', isCorrect: true }, { content: 'integer函数', isCorrect: false }, { content: 'str函数', isCorrect: false }, { content: 'float函数', isCorrect: false }]
+    },
+    {
+      id: 137,
+      title: '函数定义',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['23'],
+      content: '定义一个名为add的函数，参数为a和b，正确的方法是？',
+      choices: [{ content: 'def add(a, b):', isCorrect: true }, { content: 'function add(a, b):', isCorrect: false }, { content: 'func add(a, b)', isCorrect: false }, { content: 'define add(a, b):', isCorrect: false }]
+    },
+    {
+      id: 138,
+      title: '列表推导式',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['24'],
+      content: '以下哪个是列表推导式的正确写法？',
+      choices: [{ content: '[x for x in range(5)]', isCorrect: true }, { content: '(x for x in range(5))', isCorrect: false }, { content: '{x for x in range(5)}', isCorrect: false }, { content: 'x for x in range(5)', isCorrect: false }]
+    },
+    {
+      id: 139,
+      title: 'random模块',
+      type: 'choice',
+      difficulty: 'easy',
+      tags: ['25'],
+      content: '使用random模块生成1到10的随机整数，正确的是？',
+      choices: [{ content: 'random.randint(1, 10)', isCorrect: true }, { content: 'random.random(1, 10)', isCorrect: false }, { content: 'random.choice(1, 10)', isCorrect: false }, { content: 'random.number(1, 10)', isCorrect: false }]
+    },
+    {
+      id: 140,
+      title: 'print综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['2', '4', '22'],
+      content: '执行代码：x = 5; print(x + 3)会输出什么？',
+      choices: [{ content: 'x + 3', isCorrect: false }, { content: '8', isCorrect: true }, { content: '53', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 141,
+      title: 'input综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['3', '22', '4'],
+      content: '执行n = input()后输入123，如何得到整数123？',
+      choices: [{ content: '直接打印n', isCorrect: false }, { content: '使用int(n)转换', isCorrect: true }, { content: '使用str(n)', isCorrect: false }, { content: '无法转换', isCorrect: false }]
+    },
+    {
+      id: 142,
+      title: '变量比较',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['4', '6', '5'],
+      content: '执行a = 10; b = 20后，a > b的结果是什么？',
+      choices: [{ content: 'True', isCorrect: false }, { content: 'False', isCorrect: true }, { content: '10', isCorrect: false }, { content: '20', isCorrect: false }]
+    },
+    {
+      id: 143,
+      title: '布尔逻辑',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['5', '7', '6'],
+      content: '表达式5 > 3 and 2 > 4的结果是什么？',
+      choices: [{ content: 'True', isCorrect: false }, { content: 'False', isCorrect: true }, { content: 'and', isCorrect: false }, { content: 'None', isCorrect: false }]
+    },
+    {
+      id: 144,
+      title: '比较运算综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['6', '7', '8'],
+      content: '判断x是否在1到10之间，正确的写法是？',
+      choices: [{ content: 'x >= 1 and x <= 10', isCorrect: true }, { content: 'x >= 1 or x <= 10', isCorrect: false }, { content: '1 <= x <= 10', isCorrect: true }, { content: 'x > 1 and x < 10', isCorrect: false }]
+    },
+    {
+      id: 145,
+      title: '逻辑综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['7', '6', '8'],
+      content: 'not (x > 5 and x < 10)等价于什么？',
+      choices: [{ content: 'x <= 5 or x >= 10', isCorrect: true }, { content: 'x < 5 or x > 10', isCorrect: false }, { content: 'x <= 5 and x >= 10', isCorrect: false }, { content: 'not x > 5 and not x < 10', isCorrect: false }]
+    },
+    {
+      id: 146,
+      title: 'if循环综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['8', '9', '2'],
+      content: '以下代码输出什么？\n```python\nfor i in range(3):\n    if i == 1:\n        print(i)\n```',
+      choices: [{ content: '0 1 2', isCorrect: false }, { content: '1', isCorrect: true }, { content: '0 2', isCorrect: false }, { content: '什么都不输出', isCorrect: false }]
+    },
+    {
+      id: 147,
+      title: 'range综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['9', '16', '4'],
+      content: 'range(2, 8, 2)会生成哪些数字？',
+      choices: [{ content: '2, 4, 6, 8', isCorrect: false }, { content: '2, 4, 6', isCorrect: true }, { content: '2, 4, 6, 8, 10', isCorrect: false }, { content: '2, 3, 4, 5, 6, 7, 8', isCorrect: false }]
+    },
+    {
+      id: 148,
+      title: 'while综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['10', '4', '2'],
+      content: '以下代码会执行几次 print？\n```python\ni = 0\nwhile i < 3:\n    print(i)\n    i += 1\n```',
+      choices: [{ content: '2次', isCorrect: false }, { content: '3次', isCorrect: true }, { content: '4次', isCorrect: false }, { content: '无限次', isCorrect: false }]
+    },
+    {
+      id: 149,
+      title: '循环嵌套输出',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['11', '9', '2'],
+      content: '以下代码会输出几行？\n```python\nfor i in range(2):\n    for j in range(2):\n        print(i, j)\n```',
+      choices: [{ content: '2行', isCorrect: false }, { content: '4行', isCorrect: true }, { content: '3行', isCorrect: false }, { content: '1行', isCorrect: false }]
+    },
+    {
+      id: 150,
+      title: 'break综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['12', '9', '8'],
+      content: '以下代码会输出什么？\n```python\nfor i in range(5):\n    if i == 3:\n        break\n    print(i)\n```',
+      choices: [{ content: '0 1 2 3 4', isCorrect: false }, { content: '0 1 2', isCorrect: true }, { content: '3', isCorrect: false }, { content: '什么都不输出', isCorrect: false }]
+    },
+    {
+      id: 151,
+      title: 'continue综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['13', '9', '8'],
+      content: '以下代码会输出什么？\n```python\nfor i in range(4):\n    if i == 2:\n        continue\n    print(i)\n```',
+      choices: [{ content: '0 1 2 3', isCorrect: false }, { content: '0 1 3', isCorrect: true }, { content: '0 1 2', isCorrect: false }, { content: '2', isCorrect: false }]
+    },
+    {
+      id: 152,
+      title: '字符串切片综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['15', '14', '6'],
+      content: 's = Python, s[1:4]和s[0:3]哪个更长？',
+      choices: [{ content: 's[1:4]更长', isCorrect: false }, { content: 's[0:3]更长', isCorrect: false }, { content: '一样长', isCorrect: true }, { content: '无法比较', isCorrect: false }]
+    },
+    {
+      id: 153,
+      title: '列表遍历综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['17', '16', '9'],
+      content: '以下代码会输出什么？\n```python\nlst = [1, 2, 3]\nfor i in lst:\n    print(i * 2)\n```',
+      choices: [{ content: '1 2 3', isCorrect: false }, { content: '2 4 6', isCorrect: true }, { content: '[2, 4, 6]', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 154,
+      title: '列表操作综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['18', '16', '2'],
+      content: '以下代码输出什么？\n```python\nlst = [1, 2, 3]\nlst.append(4)\nprint(len(lst))\n```',
+      choices: [{ content: '3', isCorrect: false }, { content: '4', isCorrect: true }, { content: '[1, 2, 3, 4]', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 155,
+      title: '二维列表综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['19', '16', '4'],
+      content: '以下代码输出什么？\n```python\nm = [[1, 2], [3, 4]]\nprint(m[0][1] + m[1][0])\n```',
+      choices: [{ content: '5', isCorrect: false }, { content: '6', isCorrect: true }, { content: '7', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 156,
+      title: '字典综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['20', '8', '2'],
+      content: '以下代码输出什么？\n```python\nd = {"a": 1, "b": 2}\nprint(d.get("c", 0))\n```',
+      choices: [{ content: '报错', isCorrect: false }, { content: '0', isCorrect: true }, { content: 'None', isCorrect: false }, { content: 'c', isCorrect: false }]
+    },
+    {
+      id: 157,
+      title: '集合综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['21', '16', '22'],
+      content: 'set([1,2,2,3,3,3])的结果是什么？',
+      choices: [{ content: '[1, 2, 3]', isCorrect: false }, { content: '{1, 2, 3}', isCorrect: true }, { content: '(1, 2, 3)', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 158,
+      title: '类型转换综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['22', '14', '4'],
+      content: 'str(123) + str(456)的结果是什么？',
+      choices: [{ content: '579', isCorrect: false }, { content: '123456', isCorrect: true }, { content: '[123, 456]', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 159,
+      title: '函数综合',
+      type: 'choice',
+      difficulty: 'medium',
+      tags: ['23', '4', '2'],
+      content: '以下代码输出什么？\n```python\ndef f(x):\n    return x * 2\n\nprint(f(3) + f(4))\n```',
+      choices: [{ content: '14', isCorrect: true }, { content: '24', isCorrect: false }, { content: '6 8', isCorrect: false }, { content: '报错', isCorrect: false }]
+    },
+    {
+      id: 160,
+      title: '冒泡排序理解',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['9', '16', '18', '8'],
+      content: '冒泡排序中，每次遍历都会把最大的元素放到哪里？',
+      choices: [{ content: '放到开头位置', isCorrect: false }, { content: '放到末尾位置', isCorrect: true }, { content: '放到中间位置', isCorrect: false }, { content: '位置不变', isCorrect: false }]
+    },
+    {
+      id: 161,
+      title: '二分查找理解',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['9', '6', '8', '10'],
+      content: '二分查找要求数据必须满足什么条件？',
+      choices: [{ content: '数据可以是任意顺序', isCorrect: false }, { content: '数据必须有序排列', isCorrect: true }, { content: '数据必须全是奇数', isCorrect: false }, { content: '数据长度必须是偶数', isCorrect: false }]
+    },
+    {
+      id: 162,
+      title: '递归思想',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['23', '8', '9'],
+      content: '递归函数必须具备的两个要素是什么？',
+      choices: [{ content: '循环和判断', isCorrect: false }, { content: '终止条件和递归调用', isCorrect: true }, { content: '输入和输出', isCorrect: false }, { content: '变量和函数', isCorrect: false }]
+    },
+    {
+      id: 163,
+      title: '字典查找优化',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['20', '16', '17'],
+      content: '在大量数据中查找某个元素，哪种数据结构效率最高？',
+      choices: [{ content: '列表，因为简单', isCorrect: false }, { content: '字典，因为查找速度快', isCorrect: true }, { content: '字符串，因为占空间小', isCorrect: false }, { content: '都一样快', isCorrect: false }]
+    },
+    {
+      id: 164,
+      title: '字符串算法',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['14', '9', '8'],
+      content: '判断一个字符串是否是回文串，最高效的方法是？',
+      choices: [{ content: '从头到尾遍历', isCorrect: false }, { content: '首尾双指针向中间逼近', isCorrect: true }, { content: '反转字符串再比较', isCorrect: false }, { content: '转换为列表再比较', isCorrect: false }]
+    },
+    {
+      id: 165,
+      title: '二维列表遍历',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['19', '11', '9', '16'],
+      content: '遍历一个n行m列的二维列表，时间复杂度是？',
+      choices: [{ content: 'O(n)', isCorrect: false }, { content: 'O(m)', isCorrect: false }, { content: 'O(n*m)', isCorrect: true }, { content: 'O(n+m)', isCorrect: false }]
+    },
+    {
+      id: 166,
+      title: '列表推导式优化',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['24', '9', '8', '6'],
+      content: '列表推导式相比普通for循环创建列表的优势是？',
+      choices: [{ content: '可以处理更复杂逻辑', isCorrect: false }, { content: '代码更简洁且效率更高', isCorrect: true }, { content: '可以使用break和continue', isCorrect: false }, { content: '可以处理无限循环', isCorrect: false }]
+    },
+    {
+      id: 167,
+      title: '随机算法',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['25', '9', '16'],
+      content: '从列表中随机抽取不重复的n个元素，应该使用？',
+      choices: [{ content: '多次调用random.choice', isCorrect: false }, { content: 'random.sample函数', isCorrect: true }, { content: 'random.randint函数', isCorrect: false }, { content: 'random.shuffle后切片', isCorrect: false }]
+    },
+    {
+      id: 168,
+      title: '质数判断优化',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['8', '9', '6', '10'],
+      content: '判断一个数n是否为质数，最优化只需遍历到？',
+      choices: [{ content: 'n/2', isCorrect: false }, { content: 'n的平方根', isCorrect: true }, { content: 'n-1', isCorrect: false }, { content: 'n', isCorrect: false }]
+    },
+    {
+      id: 169,
+      title: '斐波那契优化',
+      type: 'choice',
+      difficulty: 'hard',
+      tags: ['9', '16', '10', '4'],
+      content: '计算斐波那契数列第n项，使用递归会重复计算，更好的方法是？',
+      choices: [{ content: '每次重新计算', isCorrect: false }, { content: '使用循环或记忆化存储', isCorrect: true }, { content: '使用更多递归调用', isCorrect: false }, { content: '使用字符串存储', isCorrect: false }]
     }
   ]
 }

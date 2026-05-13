@@ -289,7 +289,14 @@ const allTestCases = computed(() => {
 
 const renderedContent = computed(() => {
   if (!question.value) return ''
-  return question.value.content.replace(/\n/g, '<br>')
+  let content = question.value.content
+  // 处理代码块 ```python ... ```
+  content = content.replace(/```python\n([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>')
+  // 处理行内代码 `code`
+  content = content.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+  // 普通换行转 <br>（但代码块内的不处理）
+  content = content.replace(/\n/g, '<br>')
+  return content
 })
 
 const starterCode = computed(() => {
@@ -818,6 +825,34 @@ async function submitCode() {
   background: transparent;
   padding: 0;
   color: #333;
+}
+
+/* 代码块样式 */
+.content-card :deep(.code-block) {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-x: auto;
+}
+
+.content-card :deep(.code-block code) {
+  background: transparent;
+  padding: 0;
+  color: #cdd6f4;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.content-card :deep(.inline-code) {
+  background: #f4f4f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #c7254e;
 }
 
 /* 右侧答题区 - 整体一个面板 */

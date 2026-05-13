@@ -106,8 +106,13 @@
           <el-input v-model="form.title" maxlength="200" show-word-limit placeholder="输入题目标题..." />
         </el-form-item>
 
-        <el-form-item label="题目内容">
-          <el-input v-model="form.content" type="textarea" :rows="3" placeholder="输入题目内容..." />
+        <el-form-item label="题目描述（文字）">
+          <el-input v-model="form.textContent" type="textarea" :rows="3" placeholder="输入题目描述文字..." />
+        </el-form-item>
+
+        <el-form-item label="代码区域（可选）">
+          <el-input v-model="form.codeContent" type="textarea" :rows="6" placeholder="输入Python代码，会自动格式化显示..." />
+          <div class="code-hint">如有代码，会显示为带缩进的代码块；没有则只显示文字</div>
         </el-form-item>
 
         <el-form-item label="标签">
@@ -242,6 +247,8 @@ const submitting = ref(false)
 const defaultForm = () => ({
   title: '',
   content: '',
+  textContent: '',
+  codeContent: '',
   type: 'choice',
   difficulty: 'medium',
   tags: [],
@@ -428,9 +435,22 @@ function openEditDialog(row) {
   const tags = safeParse(row.tags)
   const choices = safeParse(row.choices)
   const test_cases = safeParse(row.test_cases)
+
+  // 解析 content，分离文字和代码
+  const content = row.content || ''
+  const codeMatch = content.match(/```python\n([\s\S]*?)```/)
+  let textContent = content
+  let codeContent = ''
+  if (codeMatch) {
+    textContent = content.substring(0, codeMatch.index).trim()
+    codeContent = codeMatch[1].trim()
+  }
+
   form.value = {
     title: row.title,
     content: row.content,
+    textContent,
+    codeContent,
     type: row.type,
     difficulty: row.difficulty || 'medium',
     tags,
@@ -444,7 +464,9 @@ function openEditDialog(row) {
 
 async function handleSave() {
   if (!form.value.title.trim()) return ElMessage.warning('请输入题目标题')
-  if (!form.value.content.trim()) return ElMessage.warning('请输入题目内容')
+  if (!form.value.textContent.trim() && !form.value.codeContent.trim()) {
+    return ElMessage.warning('请输入题目描述或代码')
+  }
 
   if (form.value.type === 'choice') {
     const validChoices = form.value.choices.filter(c => c.content.trim())
@@ -461,9 +483,15 @@ async function handleSave() {
 
   submitting.value = true
   try {
+    // 合并文字和代码为最终 content
+    let finalContent = form.value.textContent.trim()
+    if (form.value.codeContent.trim()) {
+      finalContent += '\n```python\n' + form.value.codeContent.trim() + '\n```'
+    }
+
     const payload = {
       title: form.value.title.trim(),
-      content: form.value.content.trim(),
+      content: finalContent,
       type: form.value.type,
       difficulty: form.value.difficulty,
       tags: form.value.tags,
@@ -763,6 +791,13 @@ async function handleDelete(id) {
   border: none !important;
   border-radius: 20px !important;
   font-weight: 500;
+}
+
+/* 代码输入框样式 */
+.code-hint {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #666;
 }
 
 :deep(.el-dialog) {

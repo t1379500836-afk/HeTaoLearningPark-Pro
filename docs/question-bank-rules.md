@@ -101,18 +101,26 @@
 
 ### 1. 标签存储格式（重要）
 
-**必须使用标签 ID，不可用标签名！**
+**数据库中存储数字 ID，前端配置文件中转为字符串。**
 
-前端 `getTagName()` 和 `getTagColor()` 函数通过 ID 查找标签：
-```js
-function getTagName(tagId) {
-  const tag = allTags.value.find(t => t.id === tagId)
-  return tag ? tag.name : `Tag ${tagId}`
-}
+数据库存储（数字）：
+```json
+[2]           // 单标签
+[3, 22]       // 多标签
 ```
 
-正确：`[2]` 或 `[3, 22]`
-错误：`["print命令"]` 或 `["input输入", "数据类型转换"]`
+前端 `questions.config.js` 生成结果（字符串）：
+```js
+tags: ['2']           // 单标签
+tags: ['3', '22']     // 多标签
+```
+
+> **注意**：前端筛选时需统一类型比较，因为 `tags.config.js` 中 `id` 是数字，而题目 `tags` 是字符串数组。
+
+错误示例（数据库中不可用标签名）：
+```json
+["print命令"]   // ❌ 错误
+```
 
 ### 2. tags JSON 格式
 ```json

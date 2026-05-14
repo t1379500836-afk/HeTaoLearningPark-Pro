@@ -70,14 +70,24 @@
 ```
 
 > 后端代码通过检测 `user/src` 目录是否存在自动适配两种结构，详见 [deployment.md](deployment.md) 的"本地开发与服务器部署路径适配"章节。
-├── data/                   # 静态课程数据
-│   ├── courses/PY1/        # PY1 的 24 课数据
-│   ├── courses/PY2/        # PY2 的 24 课数据
-│   ├── courses/PY3/        # PY3 的课程数据
-│   ├── courses/YCL/        # YCL 考试数据和题库
-│   └── chinese-typing-pool.js
+
+## 数据目录结构
+
+```
+src/
+├── data/                       # 静态课程数据
+│   ├── courses/PY1/            # PY1 的 24 课数据
+│   ├── courses/PY2/            # PY2 的 24 课数据
+│   ├── courses/PY3/            # PY3 的课程数据
+│   ├── courses/YCL/            # YCL 考试数据和题库
+│   └── chinese-typing-pool.js  # 中文打字题库
+├── config/                     # 配置文件（由后端自动生成）
+│   ├── teachers.config.js      # 教师口令配置
+│   ├── messages.config.js      # 教师寄语静态数据
+│   ├── questions.config.js     # 题库配置
+│   └── tags.config.js          # 题库标签配置
 └── assets/
-    ├── styles/variables.css # CSS 变量
+    ├── styles/variables.css    # CSS 变量
     └── images/
 ```
 

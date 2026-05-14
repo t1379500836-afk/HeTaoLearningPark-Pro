@@ -100,7 +100,10 @@ export function useLibrary() {
     if (selectedTagIds.value.length > 0) {
       result = result.filter(q => {
         const qTags = Array.isArray(q.tags) ? q.tags : []
-        return selectedTagIds.value.some(id => qTags.includes(id))
+        // 统一转为字符串比较，解决类型不一致问题（题目tags是字符串数组，标签id是数字）
+        const selectedStr = selectedTagIds.value.map(String)
+        const qTagsStr = qTags.map(String)
+        return selectedStr.some(id => qTagsStr.includes(id))
       })
     }
 

@@ -252,7 +252,16 @@ function openScoreDetail(record) {
 }
 
 function goBack() {
-  router.go(-1)
+  const from = route.query.from
+  if (from) {
+    const query = {}
+    if (route.query.teacherId) {
+      query.teacherId = route.query.teacherId
+    }
+    router.push({ path: from, query })
+  } else {
+    router.push({ name: 'ycl-scores' })
+  }
 }
 
 function getSingleChoiceCorrect(record) {

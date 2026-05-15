@@ -432,7 +432,8 @@ function goToSetDetail(item) {
     query: {
       setName: item.setName,
       level: item.level,
-      teacherId: selectedTeacher.value?.id
+      teacherId: selectedTeacher.value?.id,
+      from: '/ycl-scores'
     }
   })
 }

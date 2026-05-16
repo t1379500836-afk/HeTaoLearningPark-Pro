@@ -133,13 +133,13 @@
             <div class="history-list">
               <div v-for="w in historyWhispers" :key="w.id" class="history-card">
                 <div class="history-question">
-                  <span class="q-icon">Q</span>
+                  <span class="q-icon">👤</span>
                   <p class="q-text">{{ w.content }}</p>
                   <span class="q-time">{{ formatTime(w.createdAt) }}</span>
                 </div>
                 <div v-if="w.replies && w.replies.length" class="history-answers">
                   <div v-for="reply in w.replies" :key="reply.id" class="answer-item">
-                    <span class="a-icon">{{ reply.isStudent ? '我' : teacherName + '老师' }}</span>
+                    <span class="a-icon">{{ reply.isStudent ? '👤' : teacherName }}</span>
                     <div class="answer-body">
                       <p class="a-text">{{ reply.content }}</p>
                       <span class="a-time">{{ formatTime(reply.createdAt) }}</span>
@@ -160,6 +160,7 @@
                     rows="2"
                   ></textarea>
                   <div class="reply-form-actions">
+                    <EmojiPicker @select="insertReplyEmoji" />
                     <span class="char-count-sm">{{ replyForm.content.length }}/500</span>
                     <button class="btn-cancel" @click="closeReplyForm">取消</button>
                     <button
@@ -294,6 +295,10 @@ function onHistoryRangeChange(value) {
 
 function insertEmoji(emoji) {
   whisperContent.value += emoji
+}
+
+function insertReplyEmoji(emoji) {
+  replyForm.value.content += emoji
 }
 
 async function handleSubmit() {
@@ -703,9 +708,9 @@ onMounted(() => {
   padding: 2px 10px;
   border-radius: 12px;
   width: auto;
-  min-width: 48px;
+  min-width: 36px;
   height: auto;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .q-text, .a-text {

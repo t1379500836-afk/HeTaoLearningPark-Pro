@@ -152,12 +152,13 @@
                       <!-- 回复列表 -->
                       <div v-if="w.replies && w.replies.length" class="reply-list">
                         <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
-                          <span class="reply-icon">💬</span>
+                          <span class="reply-icon">{{ reply.isStudent ? '👤' : '💬' }}</span>
                           <div class="reply-body">
                             <div class="reply-main">
                               <span class="reply-text">{{ reply.content }}</span>
                               <div class="reply-btns">
-                                <el-button type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
+                                <el-button v-if="reply.isStudent" type="primary" link size="small" @click="openReplyDialog(w)">回复</el-button>
+                                <el-button v-else type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
                                 <el-button type="danger" link size="small" @click="handleDeleteReply(reply.id)">删除</el-button>
                               </div>
                             </div>
@@ -304,12 +305,13 @@
                   <!-- 回复列表 -->
                   <div v-if="w.replies && w.replies.length" class="reply-list">
                     <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
-                      <span class="reply-icon">💬</span>
+                      <span class="reply-icon">{{ reply.isStudent ? '👤' : '💬' }}</span>
                       <div class="reply-body">
                         <div class="reply-main">
                           <span class="reply-text">{{ reply.content }}</span>
                           <div class="reply-btns">
-                            <el-button type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
+                            <el-button v-if="reply.isStudent" type="primary" link size="small" @click="openReplyDialog(w)">回复</el-button>
+                            <el-button v-else type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
                             <el-button type="danger" link size="small" @click="handleDeleteReply(reply.id)">删除</el-button>
                           </div>
                         </div>

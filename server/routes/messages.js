@@ -233,7 +233,7 @@ router.get('/whispers/public', async (req, res) => {
         whisperMap.get(row.id).replies.push({
           id: row.reply_id,
           content: row.reply_content,
-          isStudent: row.reply_teacher_id === 0,
+          isStudent: !row.reply_teacher_id || row.reply_teacher_id === 0,
           createdAt: toLocalISO(row.reply_created_at)
         })
       }
@@ -484,6 +484,7 @@ router.get('/manage/whispers', async (req, res) => {
           id: r.id,
           content: r.reply_content,
           teacherId: r.teacher_id,
+          isStudent: !r.teacher_id || r.teacher_id === 0,
           createdAt: toLocalISO(r.created_at)
         })
       }

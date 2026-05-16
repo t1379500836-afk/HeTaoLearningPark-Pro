@@ -530,7 +530,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCurrentPrefix, prefixedPath as buildPrefixedPath } from '@/composables/useRoutePrefix.js'
 import { examInfo } from '@/data/courses/YCL/config/exam-info.js'
@@ -776,6 +776,14 @@ function prevQuestion() {
     if (q && q.type === 'multiple-choice' && !Array.isArray(answers.value[q.id])) {
       answers.value[q.id] = []
     }
+    // 切换到编程题时，初始化 CodeMirror
+    if (q && q.type === 'coding') {
+      nextTick(() => {
+        if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
+          initCodeMirror()
+        }
+      })
+    }
   }
 }
 
@@ -791,6 +799,14 @@ function nextQuestion() {
     const q = questions.value[currentIndex.value]
     if (q && q.type === 'multiple-choice' && !Array.isArray(answers.value[q.id])) {
       answers.value[q.id] = []
+    }
+    // 切换到编程题时，初始化 CodeMirror
+    if (q && q.type === 'coding') {
+      nextTick(() => {
+        if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
+          initCodeMirror()
+        }
+      })
     }
   }
 }
@@ -1190,20 +1206,21 @@ function abandonExam() {
   goBack()
 }
 
+// 监听题目切换，自动初始化编程题编辑器
+watch(() => currentQuestion.value, (q) => {
+  if (q && q.type === 'coding') {
+    nextTick(() => {
+      if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
+        initCodeMirror()
+      }
+    })
+  }
+}, { immediate: false })
+
 // 生命周期
 onMounted(() => {
   loadPracticeSet()
   initRunWorker()
-
-  const checkCodeMirror = setInterval(() => {
-    if (typeof CodeMirror !== 'undefined' && codeTextareaRef.value && !cmEditor) {
-      clearInterval(checkCodeMirror)
-      initCodeMirror()
-    }
-  }, 100)
-  setTimeout(() => {
-    if (!cmEditor) clearInterval(checkCodeMirror)
-  }, 10000)
 })
 
 onUnmounted(() => {

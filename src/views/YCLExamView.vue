@@ -526,6 +526,20 @@
         </div>
       </div>
     </div>
+
+    <!-- 继续考试确认弹窗 -->
+    <div v-if="showResumeConfirm" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-icon">⏰</div>
+        <h3 class="modal-title">发现未完成的考试</h3>
+        <p class="modal-message">您有一份未完成的试卷，是否继续答题？</p>
+        <p class="modal-warning">⚠️ 选择"重新开始"将清除之前的答题记录</p>
+        <div class="modal-actions">
+          <button class="btn-cancel" @click="abandonDraft">重新开始</button>
+          <button class="btn-confirm" @click="resumeExam">继续答题</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -538,6 +552,10 @@ import { useLibrary } from '@/composables/useLibrary.js'
 import {
   getSetRecord,
   saveRecord,
+  getDraft,
+  saveDraft,
+  deleteDraft,
+  hasDraft,
   formatDuration as formatDurationDisplay,
   formatTime as formatTimeDisplay
 } from '@/data/courses/YCL/utils/examRecord.js'
@@ -581,6 +599,10 @@ const timer = ref(null)  // 计时器（使用 ref 确保响应式清理）
 const isReviewMode = ref(false)
 const reviewRecord = ref(null)
 
+// 草稿恢复相关
+const showResumeConfirm = ref(false)  // 是否显示继续考试确认弹窗
+const hasSavedDraft = ref(false)   // 是否有未保存的草稿
+
 // 编程题 IDE 状态
 const { judgeProgram } = useLibrary()
 const isRunning = ref(false)
@@ -596,6 +618,7 @@ const codeTextareaRef = ref(null)
 let runWorker = null
 let workerReady = false
 let pendingInputResolve = null
+let draftData = null  // 暂存草稿数据
 
 // 测试用例展开状态
 const expandedTestCases = ref(new Set([0]))
@@ -676,6 +699,8 @@ async function loadPracticeSet() {
         }
         examSubmitted.value = true
       }
+    } else {
+      // 不在这里检查草稿，移到 startExam 中检查
     }
   } catch (err) {
     console.error('加载套卷失败:', err)
@@ -686,6 +711,46 @@ async function loadPracticeSet() {
 
 // 开始考试
 function startExam() {
+  // 检查是否有未完成的草稿
+  const draft = getDraft(props.level, props.setId)
+  if (draft) {
+    hasSavedDraft.value = true
+    showResumeConfirm.value = true
+    draftData = draft
+    return  // 等待用户确认
+  }
+  examStarted.value = true
+  examStartTime.value = Date.now()
+  startTimer()
+}
+
+// 继续考试（恢复草稿）
+function resumeExam() {
+  if (!draftData) return
+  // 恢复答题数据
+  answers.value = { ...draftData.answers }
+  currentIndex.value = draftData.currentIndex
+  // 恢复倒计时：基于原始开始时间计算剩余时间
+  const elapsed = Math.floor((Date.now() - draftData.startTime) / 1000)
+  const originalDuration = practiceSet.value?.meta?.duration || 90
+  remainingTime.value = Math.max(0, originalDuration * 60 - elapsed)
+  examStartTime.value = draftData.startTime
+  // 关闭确认弹窗
+  showResumeConfirm.value = false
+  hasSavedDraft.value = false
+  draftData = null
+  // 进入考试状态并开始计时器
+  examStarted.value = true
+  startTimer()
+}
+
+// 放弃草稿，重新开始
+function abandonDraft() {
+  deleteDraft(props.level, props.setId)
+  showResumeConfirm.value = false
+  hasSavedDraft.value = false
+  draftData = null
+  // 直接开始新考试
   examStarted.value = true
   examStartTime.value = Date.now()
   startTimer()
@@ -693,10 +758,20 @@ function startExam() {
 
 // 开始计时
 function startTimer() {
+  // 防止重复启动计时器
+  if (timer.value) {
+    clearInterval(timer.value)
+    timer.value = null
+  }
+  // 立即检查是否已超时
+  if (remainingTime.value <= 0) {
+    submitExam()
+    return
+  }
   timer.value = setInterval(() => {
-    if (remainingTime.value > 0) {
-      remainingTime.value--
-    } else {
+    remainingTime.value--
+    if (remainingTime.value <= 0) {
+      remainingTime.value = 0
       submitExam()
     }
   }, 1000)
@@ -827,6 +902,8 @@ async function confirmSubmit() {
 
   // 保存考试记录到 localStorage
   saveExamRecord()
+  // 清除草稿
+  deleteDraft(props.level, props.setId)
 }
 
 // 取消提交
@@ -1202,6 +1279,8 @@ function abandonExam() {
     clearInterval(timer.value)
     timer.value = null
   }
+  // 清除草稿
+  deleteDraft(props.level, props.setId)
   // 返回练习列表页
   goBack()
 }
@@ -1217,13 +1296,43 @@ watch(() => currentQuestion.value, (q) => {
   }
 }, { immediate: false })
 
+// 实时保存草稿
+let saveDraftTimer = null
+watch([answers, currentIndex], () => {
+  if (!examStarted.value || examSubmitted.value) return
+  // 防抖保存
+  if (saveDraftTimer) clearTimeout(saveDraftTimer)
+  saveDraftTimer = setTimeout(() => {
+    saveDraft(props.level, props.setId, {
+      remainingTime: remainingTime.value,
+      currentIndex: currentIndex.value,
+      startTime: examStartTime.value,
+      answers: JSON.parse(JSON.stringify(answers.value))
+    })
+  }, 500)
+}, { deep: true })
+
+// 保存草稿（页面卸载时立即保存）
+function saveDraftOnUnload() {
+  if (!examStarted.value || examSubmitted.value) return
+  saveDraft(props.level, props.setId, {
+    remainingTime: remainingTime.value,
+    currentIndex: currentIndex.value,
+    startTime: examStartTime.value,
+    answers: JSON.parse(JSON.stringify(answers.value))
+  })
+}
+
 // 生命周期
 onMounted(() => {
   loadPracticeSet()
   initRunWorker()
+  // 页面卸载时保存草稿
+  window.addEventListener('beforeunload', saveDraftOnUnload)
 })
 
 onUnmounted(() => {
+  window.removeEventListener('beforeunload', saveDraftOnUnload)
   if (timer.value) {
     clearInterval(timer.value)
     timer.value = null
@@ -1235,6 +1344,10 @@ onUnmounted(() => {
   if (runWorker) {
     runWorker.terminate()
     runWorker = null
+  }
+  if (saveDraftTimer) {
+    clearTimeout(saveDraftTimer)
+    saveDraftTimer = null
   }
 })
 </script>

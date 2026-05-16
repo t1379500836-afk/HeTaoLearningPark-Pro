@@ -6,6 +6,7 @@
  */
 
 const STORAGE_KEY = 'ycl_exam_records'
+const DRAFT_KEY = 'ycl_exam_draft'
 
 /**
  * 获取所有考试记录
@@ -134,6 +135,86 @@ export function hasRecord(level, setId) {
   return getSetRecord(level, setId) !== null
 }
 
+// ============ 草稿相关函数 ============
+
+/**
+ * 获取草稿
+ * @param {string} level - 等级标识
+ * @param {string} setId - 试卷标识
+ * @returns {Object|null} 草稿数据或null
+ */
+export function getDraft(level, setId) {
+  try {
+    const data = localStorage.getItem(DRAFT_KEY)
+    if (!data) return null
+    const drafts = JSON.parse(data)
+    return drafts[level]?.[setId] || null
+  } catch (e) {
+    console.error('读取草稿失败:', e)
+    return null
+  }
+}
+
+/**
+ * 保存草稿
+ * @param {string} level - 等级标识
+ * @param {string} setId - 试卷标识
+ * @param {Object} draft - 草稿数据
+ * @param {number} draft.remainingTime - 剩余时间（秒）
+ * @param {number} draft.currentIndex - 当前题目索引
+ * @param {number} draft.startTime - 考试开始时间戳
+ * @param {Object} draft.answers - 答题数据
+ */
+export function saveDraft(level, setId, draft) {
+  try {
+    const data = localStorage.getItem(DRAFT_KEY)
+    const drafts = data ? JSON.parse(data) : {}
+    if (!drafts[level]) {
+      drafts[level] = {}
+    }
+    drafts[level][setId] = {
+      ...draft,
+      updateTime: new Date().toISOString()
+    }
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts))
+    return true
+  } catch (e) {
+    console.error('保存草稿失败:', e)
+    return false
+  }
+}
+
+/**
+ * 删除草稿
+ * @param {string} level - 等级标识
+ * @param {string} setId - 试卷标识
+ */
+export function deleteDraft(level, setId) {
+  try {
+    const data = localStorage.getItem(DRAFT_KEY)
+    if (!data) return true
+    const drafts = JSON.parse(data)
+    if (drafts[level]?.[setId]) {
+      delete drafts[level][setId]
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts))
+    }
+    return true
+  } catch (e) {
+    console.error('删除草稿失败:', e)
+    return false
+  }
+}
+
+/**
+ * 检查是否有草稿
+ * @param {string} level - 等级标识
+ * @param {string} setId - 试卷标识
+ * @returns {boolean}
+ */
+export function hasDraft(level, setId) {
+  return getDraft(level, setId) !== null
+}
+
 /**
  * 格式化时长显示
  * @param {number} seconds - 秒数
@@ -169,5 +250,10 @@ export default {
   clearAllRecords,
   hasRecord,
   formatDuration,
-  formatTime
+  formatTime,
+  // 草稿相关
+  getDraft,
+  saveDraft,
+  deleteDraft,
+  hasDraft
 }

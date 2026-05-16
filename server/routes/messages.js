@@ -542,4 +542,60 @@ router.patch('/manage/whisper/:id/public', async (req, res) => {
   }
 })
 
+// 管理端：编辑回复
+router.put('/manage/reply/:id', async (req, res) => {
+  const { id } = req.params
+  const { replyContent } = req.body
+  const cleanContent = sanitizeContent(replyContent)
+
+  if (!cleanContent || cleanContent.length > 500) {
+    return res.status(400).json({ error: '回复内容不能为空且不超过500字' })
+  }
+
+  try {
+    const teacherId = getTeacherIdById(req.teacher.id)
+
+    // 验证回复存在且属于该教师的悄悄话
+    const [reply] = await pool.execute(
+      req.teacher.role === 'admin'
+        ? 'SELECT id FROM whisper_replies WHERE id = ?'
+        : `SELECT r.id FROM whisper_replies r JOIN whispers w ON r.whisper_id = w.id WHERE r.id = ? AND w.teacher_id = ?`,
+      req.teacher.role === 'admin' ? [id] : [id, teacherId]
+    )
+    if (reply.length === 0) return res.status(404).json({ error: '回复不存在' })
+
+    const [result] = await pool.execute(
+      'UPDATE whisper_replies SET reply_content = ? WHERE id = ?',
+      [cleanContent, id]
+    )
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('编辑回复失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+// 管理端：删除回复
+router.delete('/manage/reply/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const teacherId = getTeacherIdById(req.teacher.id)
+
+    // 验证回复存在且属于该教师的悄悄话
+    const [reply] = await pool.execute(
+      req.teacher.role === 'admin'
+        ? 'SELECT id FROM whisper_replies WHERE id = ?'
+        : `SELECT r.id FROM whisper_replies r JOIN whispers w ON r.whisper_id = w.id WHERE r.id = ? AND w.teacher_id = ?`,
+      req.teacher.role === 'admin' ? [id] : [id, teacherId]
+    )
+    if (reply.length === 0) return res.status(404).json({ error: '回复不存在' })
+
+    await pool.execute('DELETE FROM whisper_replies WHERE id = ?', [id])
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('删除回复失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
 export default router

@@ -141,30 +141,38 @@
                 <el-empty description="还没有悄悄话~" />
               </div>
               <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card" :class="{ selected: selectedWhispers.includes(w.id) }">
-                <div class="whisper-checkbox">
-                  <el-checkbox v-model="w._selected" @change="handleSelectChange(w.id)"></el-checkbox>
-                </div>
-                <div class="whisper-body">
-                  <span class="whisper-icon">🤫</span>
-                  <div class="whisper-content">
-                    <p class="whisper-text">{{ w.content }}</p>
-                    <!-- 回复列表 -->
-                    <div v-if="w.replies && w.replies.length" class="reply-list">
-                      <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
-                        <span class="reply-icon">💬</span>
-                        <div class="reply-content">
-                          <span class="reply-text">{{ reply.content }}</span>
-                          <span class="reply-time">{{ formatDate(reply.createdAt) }}</span>
+                <div class="whisper-card__main">
+                  <div class="whisper-checkbox">
+                    <el-checkbox v-model="w._selected" @change="handleSelectChange(w.id)"></el-checkbox>
+                  </div>
+                  <div class="whisper-body">
+                    <span class="whisper-icon">🤫</span>
+                    <div class="whisper-content">
+                      <p class="whisper-text">{{ w.content }}</p>
+                      <!-- 回复列表 -->
+                      <div v-if="w.replies && w.replies.length" class="reply-list">
+                        <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
+                          <span class="reply-icon">💬</span>
+                          <div class="reply-body">
+                            <div class="reply-main">
+                              <span class="reply-text">{{ reply.content }}</span>
+                              <div class="reply-btns">
+                                <el-button type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
+                                <el-button type="danger" link size="small" @click="handleDeleteReply(reply.id)">删除</el-button>
+                              </div>
+                            </div>
+                            <span class="reply-time">{{ formatDate(reply.createdAt) }}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="whisper-footer">
-                  <div class="whisper-meta">
+                  <div class="whisper-footer__meta">
                     <span>{{ formatDate(w.createdAt) }}</span>
                   </div>
-                  <div class="whisper-actions">
+                  <div class="whisper-footer__actions">
                     <el-switch
                       v-model="w.isPublic"
                       active-text="显示给学生"
@@ -297,8 +305,14 @@
                   <div v-if="w.replies && w.replies.length" class="reply-list">
                     <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
                       <span class="reply-icon">💬</span>
-                      <div class="reply-content">
-                        <span class="reply-text">{{ reply.content }}</span>
+                      <div class="reply-body">
+                        <div class="reply-main">
+                          <span class="reply-text">{{ reply.content }}</span>
+                          <div class="reply-btns">
+                            <el-button type="primary" link size="small" @click="openEditReplyDialog(reply, w)">编辑</el-button>
+                            <el-button type="danger" link size="small" @click="handleDeleteReply(reply.id)">删除</el-button>
+                          </div>
+                        </div>
                         <span class="reply-time">{{ formatDate(reply.createdAt) }}</span>
                       </div>
                     </div>
@@ -306,10 +320,10 @@
                 </div>
               </div>
               <div class="whisper-footer">
-                <div class="whisper-meta">
+                <div class="whisper-footer__meta">
                   <span>{{ formatDate(w.createdAt) }}</span>
                 </div>
-                <div class="whisper-actions">
+                <div class="whisper-footer__actions">
                   <el-switch
                     v-model="w.isPublic"
                     active-text="显示给学生"
@@ -391,7 +405,7 @@
       <template #header>
         <div class="dialog-header">
           <span class="dialog-icon">💬</span>
-          <span class="dialog-title">回复悄悄话</span>
+          <span class="dialog-title">{{ isEditingReply ? '编辑回复' : '回复悄悄话' }}</span>
         </div>
       </template>
       <div class="reply-origin">
@@ -419,7 +433,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="replyDialogVisible = false">取消</el-button>
-          <el-button type="primary" :loading="submittingReply" @click="handleSubmitReply" class="save-btn">发送回复</el-button>
+          <el-button type="primary" :loading="submittingReply" @click="handleSubmitReply" class="save-btn">{{ isEditingReply ? '更新回复' : '发送回复' }}</el-button>
         </div>
       </template>
     </el-dialog>
@@ -508,6 +522,8 @@ const paginatedWhispers = computed(() => whispers.value)
 
 // 回复对话框
 const replyDialogVisible = ref(false)
+const isEditingReply = ref(false)
+const editingReplyId = ref(null)
 const replyWhisperId = ref(null)
 const replyWhisperContent = ref('')
 const replyContent = ref('')
@@ -716,9 +732,20 @@ async function handleDeleteWhisper(id) {
 }
 
 function openReplyDialog(w) {
+  isEditingReply.value = false
+  editingReplyId.value = null
   replyWhisperId.value = w.id
   replyWhisperContent.value = w.content
   replyContent.value = ''
+  replyDialogVisible.value = true
+}
+
+function openEditReplyDialog(reply, w) {
+  isEditingReply.value = true
+  editingReplyId.value = reply.id
+  replyWhisperId.value = w.id
+  replyWhisperContent.value = w.content
+  replyContent.value = reply.content
   replyDialogVisible.value = true
 }
 
@@ -728,17 +755,31 @@ async function handleSubmitReply() {
   }
   submittingReply.value = true
   try {
-    await api.post(`/messages/manage/whisper/${replyWhisperId.value}/reply`, {
-      replyContent: replyContent.value
-    })
-    ElMessage.success('回复成功')
+    if (isEditingReply.value) {
+      await api.put(`/messages/manage/reply/${editingReplyId.value}`, {
+        replyContent: replyContent.value
+      })
+      ElMessage.success('回复已更新')
+    } else {
+      await api.post(`/messages/manage/whisper/${replyWhisperId.value}/reply`, {
+        replyContent: replyContent.value
+      })
+      ElMessage.success('回复成功')
+    }
     replyDialogVisible.value = false
     loadData()
   } catch (err) {
-    ElMessage.error(err.message || '回复失败')
+    ElMessage.error(err.message || '操作失败')
   } finally {
     submittingReply.value = false
   }
+}
+
+async function handleDeleteReply(replyId) {
+  await ElMessageBox.confirm('确定删除这条回复吗？', '删除确认', { type: 'warning' })
+  await api.delete(`/messages/manage/reply/${replyId}`)
+  ElMessage.success('已删除')
+  loadData()
 }
 
 function handleSelectChange(id) {
@@ -984,7 +1025,7 @@ function formatDate(isoString) {
   padding: 16px 20px;
   transition: background 0.15s;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -1007,6 +1048,7 @@ function formatDate(isoString) {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  min-width: 0;
 }
 
 .whisper-icon {
@@ -1032,20 +1074,41 @@ function formatDate(isoString) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
   padding-top: 8px;
   border-top: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.whisper-meta {
+.whisper-footer__meta {
   font-size: 0.82rem;
   color: #aaa;
 }
 
-.whisper-actions {
+.whisper-footer__actions {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.reply-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #e0e0e0;
+  flex-wrap: wrap;
+}
+
+.reply-actions-label {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.reply-action-btns {
+  display: flex;
+  gap: 4px;
 }
 
 /* 回复列表 */
@@ -1067,10 +1130,19 @@ function formatDate(isoString) {
   flex-shrink: 0;
 }
 
-.reply-content {
+.reply-body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.reply-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .reply-text {
@@ -1078,6 +1150,13 @@ function formatDate(isoString) {
   color: #666;
   white-space: pre-wrap;
   word-break: break-word;
+  flex: 1;
+}
+
+.reply-btns {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
 }
 
 .reply-time {
@@ -1219,5 +1298,64 @@ function formatDate(isoString) {
   .whispers-toolbar__dates { width: 100%; flex-wrap: wrap; }
   .whispers-toolbar__dates :deep(.el-date-editor) { flex: 1; min-width: 120px; }
   .whispers-toolbar :deep(.el-radio-button__inner) { padding: 6px 10px; font-size: 13px; }
+
+  .whisper-card {
+    padding: 12px 14px;
+  }
+
+  .whisper-body {
+    flex-direction: column;
+  }
+
+  .whisper-icon {
+    margin-top: 0;
+  }
+
+  .whisper-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .whisper-footer__meta,
+  .whisper-footer__actions {
+    width: 100%;
+  }
+
+  .whisper-footer__actions {
+    justify-content: flex-start;
+  }
+
+  .reply-item {
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 0;
+  }
+
+  .reply-icon {
+    font-size: 1rem;
+  }
+
+  .reply-body,
+  .reply-content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .reply-main {
+    flex-direction: column;
+  }
+
+  .reply-btns {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #eee;
+  }
+
+  .reply-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
 }
 </style>

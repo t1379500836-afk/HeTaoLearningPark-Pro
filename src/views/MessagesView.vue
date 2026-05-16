@@ -139,7 +139,7 @@
                 </div>
                 <div v-if="w.replies && w.replies.length" class="history-answers">
                   <div v-for="reply in w.replies" :key="reply.id" class="answer-item">
-                    <span class="a-icon">A</span>
+                    <span class="a-icon">{{ teacherName }}老师</span>
                     <p class="a-text">{{ reply.content }}</p>
                     <span class="a-time">{{ formatTime(reply.createdAt) }}</span>
                   </div>
@@ -641,6 +641,12 @@ onMounted(() => {
 .a-icon {
   background: #e8f5e9;
   color: #4caf50;
+  padding: 2px 10px;
+  border-radius: 12px;
+  width: auto;
+  min-width: 48px;
+  height: auto;
+  font-size: 0.75rem;
 }
 
 .q-text, .a-text {

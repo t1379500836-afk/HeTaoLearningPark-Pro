@@ -123,19 +123,60 @@
                   @change="onWhisperDateChange"
                 />
               </div>
+              <div class="select-all-wrap">
+                <el-checkbox
+                  :model-value="isAllSelected"
+                  :indeterminate="isIndeterminate"
+                  @change="handleSelectAll"
+                >全选</el-checkbox>
+              </div>
+              <div v-if="selectedWhispers.length" class="batch-actions">
+                <span class="batch-count">已选 {{ selectedWhispers.length }} 项</span>
+                <el-button size="small" @click="handleBatchShow">批量显示</el-button>
+                <el-button size="small" @click="handleBatchHide">批量隐藏</el-button>
+              </div>
             </div>
             <div v-loading="loadingWhispers" class="whisper-list">
               <div v-if="!paginatedWhispers.length && !loadingWhispers" class="empty-state">
                 <el-empty description="还没有悄悄话~" />
               </div>
-              <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card">
+              <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card" :class="{ selected: selectedWhispers.includes(w.id) }">
+                <div class="whisper-checkbox">
+                  <el-checkbox v-model="w._selected" @change="handleSelectChange(w.id)"></el-checkbox>
+                </div>
                 <div class="whisper-body">
                   <span class="whisper-icon">🤫</span>
-                  <p class="whisper-text">{{ w.content }}</p>
+                  <div class="whisper-content">
+                    <p class="whisper-text">{{ w.content }}</p>
+                    <!-- 回复列表 -->
+                    <div v-if="w.replies && w.replies.length" class="reply-list">
+                      <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
+                        <span class="reply-icon">💬</span>
+                        <div class="reply-content">
+                          <span class="reply-text">{{ reply.content }}</span>
+                          <span class="reply-time">{{ formatDate(reply.createdAt) }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="whisper-meta">
-                  <span>{{ formatDate(w.createdAt) }}</span>
-                  <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
+                <div class="whisper-footer">
+                  <div class="whisper-meta">
+                    <span>{{ formatDate(w.createdAt) }}</span>
+                  </div>
+                  <div class="whisper-actions">
+                    <el-switch
+                      v-model="w.isPublic"
+                      active-text="显示给学生"
+                      inactive-text="隐藏"
+                      inline-prompt
+                      size="small"
+                      style="--el-switch-on-color: #67c23a; --el-switch-off-color: #909399"
+                      @change="handleTogglePublic(w)"
+                    />
+                    <el-button type="primary" link size="small" @click="openReplyDialog(w)">回复</el-button>
+                    <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -227,19 +268,60 @@
                 @change="onWhisperDateChange"
               />
             </div>
+            <div class="select-all-wrap">
+              <el-checkbox
+                :model-value="isAllSelected"
+                :indeterminate="isIndeterminate"
+                @change="handleSelectAll"
+              >全选</el-checkbox>
+            </div>
+            <div v-if="selectedWhispers.length" class="batch-actions">
+              <span class="batch-count">已选 {{ selectedWhispers.length }} 项</span>
+              <el-button size="small" @click="handleBatchShow">批量显示</el-button>
+              <el-button size="small" @click="handleBatchHide">批量隐藏</el-button>
+            </div>
           </div>
           <div v-loading="loadingWhispers" class="whisper-list">
             <div v-if="!paginatedWhispers.length && !loadingWhispers" class="empty-state">
               <el-empty description="还没有悄悄话~" />
             </div>
-            <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card">
+            <div v-for="w in paginatedWhispers" :key="w.id" class="whisper-card" :class="{ selected: selectedWhispers.includes(w.id) }">
+              <div class="whisper-checkbox">
+                <el-checkbox v-model="w._selected" @change="handleSelectChange(w.id)"></el-checkbox>
+              </div>
               <div class="whisper-body">
                 <span class="whisper-icon">🤫</span>
-                <p class="whisper-text">{{ w.content }}</p>
+                <div class="whisper-content">
+                  <p class="whisper-text">{{ w.content }}</p>
+                  <!-- 回复列表 -->
+                  <div v-if="w.replies && w.replies.length" class="reply-list">
+                    <div v-for="reply in w.replies" :key="reply.id" class="reply-item">
+                      <span class="reply-icon">💬</span>
+                      <div class="reply-content">
+                        <span class="reply-text">{{ reply.content }}</span>
+                        <span class="reply-time">{{ formatDate(reply.createdAt) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="whisper-meta">
-                <span>{{ formatDate(w.createdAt) }}</span>
-                <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
+              <div class="whisper-footer">
+                <div class="whisper-meta">
+                  <span>{{ formatDate(w.createdAt) }}</span>
+                </div>
+                <div class="whisper-actions">
+                  <el-switch
+                    v-model="w.isPublic"
+                    active-text="显示给学生"
+                    inactive-text="隐藏"
+                    inline-prompt
+                    size="small"
+                    style="--el-switch-on-color: #67c23a; --el-switch-off-color: #909399"
+                    @change="handleTogglePublic(w)"
+                  />
+                  <el-button type="primary" link size="small" @click="openReplyDialog(w)">回复</el-button>
+                  <el-button type="danger" link size="small" @click="handleDeleteWhisper(w.id)">删除</el-button>
+                </div>
               </div>
             </div>
           </div>
@@ -300,6 +382,44 @@
           <el-button type="primary" :loading="submitting" @click="handleSave" class="save-btn">
             {{ isEditing ? '更新寄语' : '发布寄语' }}
           </el-button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- 回复悄悄话对话框 -->
+    <el-dialog v-model="replyDialogVisible" width="min(450px, 92vw)" destroy-on-close class="msg-dialog">
+      <template #header>
+        <div class="dialog-header">
+          <span class="dialog-icon">💬</span>
+          <span class="dialog-title">回复悄悄话</span>
+        </div>
+      </template>
+      <div class="reply-origin">
+        <span class="reply-origin__label">学生留言：</span>
+        <p class="reply-origin__content">{{ replyWhisperContent }}</p>
+      </div>
+      <el-form label-position="top" class="dialog-form">
+        <el-form-item label="回复内容">
+          <div class="field-col">
+            <el-input
+              v-model="replyContent"
+              type="textarea"
+              :rows="4"
+              maxlength="500"
+              show-word-limit
+              placeholder="写下你的回复..."
+            />
+            <div class="field-col__footer">
+              <EmojiPicker @select="replyContent += $event" />
+              <span class="char-hint">{{ replyContent.length }} / 500</span>
+            </div>
+          </div>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="replyDialogVisible = false">取消</el-button>
+          <el-button type="primary" :loading="submittingReply" @click="handleSubmitReply" class="save-btn">发送回复</el-button>
         </div>
       </template>
     </el-dialog>
@@ -386,6 +506,43 @@ const whisperStartDate = ref(null)
 const whisperEndDate = ref(null)
 const paginatedWhispers = computed(() => whispers.value)
 
+// 回复对话框
+const replyDialogVisible = ref(false)
+const replyWhisperId = ref(null)
+const replyWhisperContent = ref('')
+const replyContent = ref('')
+const submittingReply = ref(false)
+
+// 批量选择
+const selectedWhispers = ref([])
+
+const isAllSelected = computed(() => {
+  if (paginatedWhispers.value.length === 0) return false
+  return paginatedWhispers.value.every(w => selectedWhispers.value.includes(w.id))
+})
+
+const isIndeterminate = computed(() => {
+  const currentPageSelected = paginatedWhispers.value.filter(w => selectedWhispers.value.includes(w.id)).length
+  return currentPageSelected > 0 && currentPageSelected < paginatedWhispers.value.length
+})
+
+function handleSelectAll(val) {
+  if (val) {
+    paginatedWhispers.value.forEach(w => {
+      if (!selectedWhispers.value.includes(w.id)) {
+        selectedWhispers.value.push(w.id)
+      }
+      w._selected = true
+    })
+  } else {
+    paginatedWhispers.value.forEach(w => {
+      const idx = selectedWhispers.value.indexOf(w.id)
+      if (idx > -1) selectedWhispers.value.splice(idx, 1)
+      w._selected = false
+    })
+  }
+}
+
 // 对话框
 const dialogVisible = ref(false)
 const isEditing = ref(false)
@@ -453,7 +610,10 @@ async function loadWhispers(params = {}) {
       ...(end && { endDate: end })
     }
     const { data } = await api.get('/messages/manage/whispers', { params: queryParams })
-    whispers.value = data.data || []
+    whispers.value = (data.data || []).map(w => ({
+      ...w,
+      _selected: selectedWhispers.value.includes(w.id)
+    }))
     whispersTotal.value = data.total || 0
     const maxPage = Math.max(1, Math.ceil(whispersTotal.value / whisperPageSize))
     if (whisperPage.value > maxPage) whisperPage.value = maxPage
@@ -553,6 +713,72 @@ async function handleDeleteWhisper(id) {
   await api.delete(`/messages/manage/whisper/${id}`)
   ElMessage.success('已删除')
   loadData()
+}
+
+function openReplyDialog(w) {
+  replyWhisperId.value = w.id
+  replyWhisperContent.value = w.content
+  replyContent.value = ''
+  replyDialogVisible.value = true
+}
+
+async function handleSubmitReply() {
+  if (!replyContent.value.trim()) {
+    return ElMessage.warning('请输入回复内容')
+  }
+  submittingReply.value = true
+  try {
+    await api.post(`/messages/manage/whisper/${replyWhisperId.value}/reply`, {
+      replyContent: replyContent.value
+    })
+    ElMessage.success('回复成功')
+    replyDialogVisible.value = false
+    loadData()
+  } catch (err) {
+    ElMessage.error(err.message || '回复失败')
+  } finally {
+    submittingReply.value = false
+  }
+}
+
+function handleSelectChange(id) {
+  const idx = selectedWhispers.value.indexOf(id)
+  if (idx > -1) {
+    selectedWhispers.value.splice(idx, 1)
+  } else {
+    selectedWhispers.value.push(id)
+  }
+}
+
+async function handleBatchShow() {
+  if (!selectedWhispers.value.length) return
+  for (const id of selectedWhispers.value) {
+    await api.patch(`/messages/manage/whisper/${id}/public`, { isPublic: true })
+  }
+  ElMessage.success(`已设置 ${selectedWhispers.value.length} 项显示`)
+  selectedWhispers.value = []
+  loadWhispers(isAdmin.value && selectedTeacherKey.value ? { teacherKey: selectedTeacherKey.value } : {})
+}
+
+async function handleBatchHide() {
+  if (!selectedWhispers.value.length) return
+  for (const id of selectedWhispers.value) {
+    await api.patch(`/messages/manage/whisper/${id}/public`, { isPublic: false })
+  }
+  ElMessage.success(`已设置 ${selectedWhispers.value.length} 项隐藏`)
+  selectedWhispers.value = []
+  loadWhispers(isAdmin.value && selectedTeacherKey.value ? { teacherKey: selectedTeacherKey.value } : {})
+}
+
+async function handleTogglePublic(w) {
+  try {
+    await api.patch(`/messages/manage/whisper/${w.id}/public`, {
+      isPublic: w.isPublic
+    })
+  } catch (err) {
+    ElMessage.error(err.message || '设置失败')
+    w.isPublic = !w.isPublic
+  }
 }
 
 function formatDate(isoString) {
@@ -706,6 +932,22 @@ function formatDate(isoString) {
 .whispers-toolbar__dates { display: flex; align-items: center; gap: 8px; }
 .whispers-toolbar__sep { color: #999; font-size: 14px; }
 
+.select-all-wrap {
+  margin-left: 12px;
+}
+
+.batch-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.batch-count {
+  font-size: 0.85rem;
+  color: #666;
+}
+
 .table-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -741,13 +983,27 @@ function formatDate(isoString) {
   border-radius: 14px;
   padding: 16px 20px;
   transition: background 0.15s;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .whisper-card:hover {
   background: #f5f5f5;
 }
 
+.whisper-card.selected {
+  background: #f0f7ff;
+  border: 1px solid #409eff;
+}
+
+.whisper-checkbox {
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
 .whisper-body {
+  flex: 1;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -768,15 +1024,85 @@ function formatDate(isoString) {
   word-break: break-word;
 }
 
-.whisper-meta {
+.whisper-content {
+  flex: 1;
+}
+
+.whisper-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px solid #eee;
+}
+
+.whisper-meta {
   font-size: 0.82rem;
   color: #aaa;
+}
+
+.whisper-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 回复列表 */
+.reply-list {
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 2px solid #e0e0e0;
+}
+
+.reply-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.reply-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.reply-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reply-text {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.reply-time {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+/* 回复对话框 */
+.reply-origin {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.reply-origin__label {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.reply-origin__content {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: #444;
+  white-space: pre-wrap;
 }
 
 .empty-state {

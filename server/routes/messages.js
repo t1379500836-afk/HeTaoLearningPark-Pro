@@ -174,6 +174,77 @@ router.get('/teacher-messages', async (req, res) => {
   }
 })
 
+// 学生端：获取公开的悄悄话（含回复，支持分页和日期筛选）
+router.get('/whispers/public', async (req, res) => {
+  const { teacherId, page, pageSize, startDate, endDate } = req.query
+  const validId = await validateTeacherById(teacherId)
+  if (!validId) return res.status(400).json({ error: '无效的教师信息' })
+
+  const pageNum = Math.max(1, parseInt(page) || 1)
+  const size = Math.min(10, Math.max(1, parseInt(pageSize) || 10))
+  const offset = (pageNum - 1) * size
+
+  try {
+    // 构建 WHERE 条件
+    const conditions = ['w.teacher_id = ?', 'w.is_public = 1']
+    const bindParams = [validId]
+
+    if (startDate) {
+      conditions.push('w.created_at >= ?')
+      bindParams.push(startDate)
+    }
+    if (endDate) {
+      conditions.push('w.created_at < DATE_ADD(?, INTERVAL 1 DAY)')
+      bindParams.push(endDate)
+    }
+
+    const whereClause = conditions.join(' AND ')
+
+    // 查询总数
+    const [countResult] = await pool.execute(
+      `SELECT COUNT(*) AS total FROM whispers w WHERE ${whereClause}`,
+      bindParams
+    )
+    const total = countResult[0].total
+
+    // 查询数据（分页）- LIMIT/OFFSET 不能用参数绑定，直接拼接整数
+    const [rows] = await pool.execute(`
+      SELECT w.id, w.content, w.created_at,
+             r.id AS reply_id, r.reply_content, r.teacher_id AS reply_teacher_id, r.created_at AS reply_created_at
+      FROM whispers w
+      LEFT JOIN whisper_replies r ON r.whisper_id = w.id
+      WHERE ${whereClause}
+      ORDER BY w.created_at DESC, r.created_at ASC
+      LIMIT ${size} OFFSET ${offset}
+    `, bindParams)
+
+    // 按悄悄话分组
+    const whisperMap = new Map()
+    for (const row of rows) {
+      if (!whisperMap.has(row.id)) {
+        whisperMap.set(row.id, {
+          id: row.id,
+          content: row.content,
+          createdAt: toLocalISO(row.created_at),
+          replies: []
+        })
+      }
+      if (row.reply_id) {
+        whisperMap.get(row.id).replies.push({
+          id: row.reply_id,
+          content: row.reply_content,
+          createdAt: toLocalISO(row.reply_created_at)
+        })
+      }
+    }
+
+    res.json({ data: Array.from(whisperMap.values()), total })
+  } catch (err) {
+    console.error('查询公开悄悄话失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
 // 学生提交匿名悄悄话
 router.post('/whisper', async (req, res) => {
   const { teacherId, content } = req.body
@@ -344,7 +415,7 @@ router.get('/manage/whispers', async (req, res) => {
     const offset = (page - 1) * pageSize
 
     let countSql = 'SELECT COUNT(*) as total FROM whispers WHERE teacher_id = ?'
-    let dataSql = `SELECT w.id, w.content, w.created_at, t.display_name FROM whispers w JOIN teachers t ON w.teacher_id = t.id WHERE w.teacher_id = ?`
+    let dataSql = `SELECT w.id, w.content, w.is_public, w.created_at, t.display_name FROM whispers w JOIN teachers t ON w.teacher_id = t.id WHERE w.teacher_id = ?`
     const bindParams = [teacherId]
 
     if (req.query.startDate) {
@@ -365,12 +436,32 @@ router.get('/manage/whispers', async (req, res) => {
 
     const [rows] = await pool.execute(dataSql, bindParams)
 
+    // 查询每条悄悄话的回复
+    const whisperIds = rows.map(r => r.id)
+    const repliesMap = new Map()
+    if (whisperIds.length > 0) {
+      const [replies] = await pool.execute(
+        `SELECT id, whisper_id, reply_content, teacher_id, created_at FROM whisper_replies WHERE whisper_id IN (${whisperIds.join(',')}) ORDER BY created_at ASC`
+      )
+      for (const r of replies) {
+        if (!repliesMap.has(r.whisper_id)) repliesMap.set(r.whisper_id, [])
+        repliesMap.get(r.whisper_id).push({
+          id: r.id,
+          content: r.reply_content,
+          teacherId: r.teacher_id,
+          createdAt: toLocalISO(r.created_at)
+        })
+      }
+    }
+
     res.json({
       data: rows.map(r => ({
         id: r.id,
         content: r.content,
+        isPublic: !!r.is_public,
         teacherName: r.display_name,
-        createdAt: toLocalISO(r.created_at)
+        createdAt: toLocalISO(r.created_at),
+        replies: repliesMap.get(r.id) || []
       })),
       total
     })
@@ -390,9 +481,63 @@ router.delete('/manage/whisper/:id', async (req, res) => {
       : await pool.execute('DELETE FROM whispers WHERE id = ? AND teacher_id = ?', [id, teacherId])
 
     if (result.affectedRows === 0) return res.status(404).json({ error: '悄悄话不存在' })
+    // 同时删除相关回复
+    await pool.execute('DELETE FROM whisper_replies WHERE whisper_id = ?', [id])
     res.json({ ok: true })
   } catch (err) {
     console.error('删除悄悄话失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+// 管理端：回复悄悄话
+router.post('/manage/whisper/:id/reply', async (req, res) => {
+  const { id } = req.params
+  const { replyContent } = req.body
+  const cleanContent = sanitizeContent(replyContent)
+
+  if (!cleanContent || cleanContent.length > 500) {
+    return res.status(400).json({ error: '回复内容不能为空且不超过500字' })
+  }
+
+  try {
+    const teacherId = getTeacherIdById(req.teacher.id)
+
+    // 验证悄悄话存在
+    const [whisper] = await pool.execute(
+      req.teacher.role === 'admin'
+        ? 'SELECT id FROM whispers WHERE id = ?'
+        : 'SELECT id FROM whispers WHERE id = ? AND teacher_id = ?',
+      req.teacher.role === 'admin' ? [id] : [id, teacherId]
+    )
+    if (whisper.length === 0) return res.status(404).json({ error: '悄悄话不存在' })
+
+    const [result] = await pool.execute(
+      'INSERT INTO whisper_replies (whisper_id, reply_content, teacher_id) VALUES (?, ?, ?)',
+      [id, cleanContent, teacherId]
+    )
+    res.status(201).json({ ok: true, id: result.insertId })
+  } catch (err) {
+    console.error('回复悄悄话失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+// 管理端：设置悄悄话公开状态
+router.patch('/manage/whisper/:id/public', async (req, res) => {
+  const { id } = req.params
+  const { isPublic } = req.body
+
+  try {
+    const teacherId = getTeacherIdById(req.teacher.id)
+    const [result] = req.teacher.role === 'admin'
+      ? await pool.execute('UPDATE whispers SET is_public = ? WHERE id = ?', [isPublic ? 1 : 0, id])
+      : await pool.execute('UPDATE whispers SET is_public = ? WHERE id = ? AND teacher_id = ?', [isPublic ? 1 : 0, id, teacherId])
+
+    if (result.affectedRows === 0) return res.status(404).json({ error: '悄悄话不存在' })
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('设置公开状态失败:', err)
     res.status(500).json({ error: '服务器错误' })
   }
 })

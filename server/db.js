@@ -79,8 +79,21 @@ export async function initDatabase() {
         id INT AUTO_INCREMENT PRIMARY KEY,
         teacher_id INT NOT NULL,
         content VARCHAR(500) NOT NULL,
+        is_public TINYINT DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         INDEX idx_teacher_created (teacher_id, created_at DESC)
+      )
+    `)
+
+    // 悄悄话回复表
+    await conn.execute(`
+      CREATE TABLE IF NOT EXISTS whisper_replies (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        whisper_id INT NOT NULL,
+        reply_content VARCHAR(500) NOT NULL,
+        teacher_id INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_whisper (whisper_id)
       )
     `)
 
@@ -100,6 +113,13 @@ export async function initDatabase() {
     // 兼容旧表：添加 teacher_id 列（如果还没有）
     try {
       await conn.execute("ALTER TABLE whispers ADD COLUMN teacher_id INT NOT NULL DEFAULT 0")
+    } catch (e) {
+      if (!e.message.includes('Duplicate column')) throw e
+    }
+
+    // 兼容旧表：添加 is_public 列（如果还没有）
+    try {
+      await conn.execute("ALTER TABLE whispers ADD COLUMN is_public TINYINT DEFAULT 0")
     } catch (e) {
       if (!e.message.includes('Duplicate column')) throw e
     }

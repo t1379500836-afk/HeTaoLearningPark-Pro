@@ -233,6 +233,7 @@ router.get('/whispers/public', async (req, res) => {
         whisperMap.get(row.id).replies.push({
           id: row.reply_id,
           content: row.reply_content,
+          isStudent: row.reply_teacher_id === 0,
           createdAt: toLocalISO(row.reply_created_at)
         })
       }
@@ -270,6 +271,40 @@ router.post('/whisper', async (req, res) => {
     res.status(201).json({ ok: true, id: result.insertId })
   } catch (err) {
     console.error('提交悄悄话失败:', err)
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
+// 学生端：回复悄悄话（回复老师的回复）
+router.post('/whisper/:id/reply', async (req, res) => {
+  const { id } = req.params
+  const { content } = req.body
+  const cleanContent = sanitizeContent(content)
+
+  if (!cleanContent || cleanContent.length > 500) {
+    return res.status(400).json({ error: '回复内容不能为空且不超过500字' })
+  }
+
+  try {
+    const { teacherId } = req.query
+    const validId = await validateTeacherById(teacherId)
+    if (!validId) return res.status(400).json({ error: '无效的教师信息' })
+
+    // 验证悄悄话存在
+    const [whisper] = await pool.execute(
+      'SELECT id FROM whispers WHERE id = ? AND teacher_id = ?',
+      [id, validId]
+    )
+    if (whisper.length === 0) return res.status(404).json({ error: '悄悄话不存在' })
+
+    // 学生回复存入 0 表示学生身份
+    const [result] = await pool.execute(
+      'INSERT INTO whisper_replies (whisper_id, reply_content, teacher_id) VALUES (?, ?, ?)',
+      [id, cleanContent, 0]
+    )
+    res.status(201).json({ ok: true, id: result.insertId })
+  } catch (err) {
+    console.error('回复悄悄话失败:', err)
     res.status(500).json({ error: '服务器错误' })
   }
 })

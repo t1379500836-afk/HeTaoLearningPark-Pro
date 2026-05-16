@@ -139,10 +139,38 @@
                 </div>
                 <div v-if="w.replies && w.replies.length" class="history-answers">
                   <div v-for="reply in w.replies" :key="reply.id" class="answer-item">
-                    <span class="a-icon">{{ teacherName }}老师</span>
-                    <p class="a-text">{{ reply.content }}</p>
-                    <span class="a-time">{{ formatTime(reply.createdAt) }}</span>
+                    <span class="a-icon">{{ reply.isStudent ? '我' : teacherName + '老师' }}</span>
+                    <div class="answer-body">
+                      <p class="a-text">{{ reply.content }}</p>
+                      <span class="a-time">{{ formatTime(reply.createdAt) }}</span>
+                      <!-- 只对老师回复显示回复按钮 -->
+                      <button v-if="!reply.isStudent" class="reply-btn" @click="openReplyForm(w.id, reply.id)">
+                        💬 回复
+                      </button>
+                    </div>
                   </div>
+                </div>
+                <!-- 回复输入框 -->
+                <div v-if="replyForm.whisperId === w.id" class="reply-form">
+                  <textarea
+                    v-model="replyForm.content"
+                    class="reply-textarea"
+                    placeholder="输入你的回复..."
+                    maxlength="500"
+                    rows="2"
+                  ></textarea>
+                  <div class="reply-form-actions">
+                    <span class="char-count-sm">{{ replyForm.content.length }}/500</span>
+                    <button class="btn-cancel" @click="closeReplyForm">取消</button>
+                    <button
+                      class="btn-submit"
+                      :disabled="!replyForm.content.trim() || replyForm.submitting"
+                      @click="submitStudentReply"
+                    >
+                      {{ replyForm.submitting ? '发送中...' : '发送' }}
+                    </button>
+                  </div>
+                  <p v-if="replyForm.error" class="reply-error">{{ replyForm.error }}</p>
                 </div>
               </div>
             </div>
@@ -192,6 +220,7 @@ const {
   loadStatic,
   fetchFresh,
   submitWhisper,
+  submitReply,
   formatTime,
   // 历史悄悄话
   historyWhispers,
@@ -218,6 +247,14 @@ const currentMsg = computed(() => teacherMessages.value[selectedIdx.value] || nu
 
 // 历史悄悄话弹窗
 const historyModalVisible = ref(false)
+
+// 回复表单
+const replyForm = ref({
+  whisperId: null,
+  content: '',
+  submitting: false,
+  error: ''
+})
 
 const dateRangeOpts = [
   { label: '全部', value: 'all' },
@@ -262,6 +299,28 @@ function insertEmoji(emoji) {
 async function handleSubmit() {
   const ok = await submitWhisper(whisperContent.value)
   if (ok) whisperContent.value = ''
+}
+
+// 回复功能
+function openReplyForm(whisperId) {
+  replyForm.value = { whisperId, content: '', submitting: false, error: '' }
+}
+
+function closeReplyForm() {
+  replyForm.value = { whisperId: null, content: '', submitting: false, error: '' }
+}
+
+async function submitStudentReply() {
+  if (!replyForm.value.content.trim()) return
+  replyForm.value.submitting = true
+  replyForm.value.error = ''
+  const result = await submitReply(replyForm.value.whisperId, replyForm.value.content)
+  replyForm.value.submitting = false
+  if (result === true) {
+    closeReplyForm()
+  } else if (result?.error) {
+    replyForm.value.error = result.error
+  }
 }
 
 onMounted(() => {
@@ -670,6 +729,94 @@ onMounted(() => {
   align-items: flex-start;
   gap: 12px;
   padding-left: 8px;
+}
+
+.answer-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reply-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 0;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+.reply-btn:hover {
+  color: var(--primary-color);
+}
+
+.reply-form {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: var(--radius-md);
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e8e8e8;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.reply-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.reply-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.char-count-sm {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin-left: auto;
+}
+
+.btn-cancel {
+  padding: 6px 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.btn-submit {
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reply-error {
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  margin: 8px 0 0;
 }
 
 /* ===== 历史悄悄话悬浮球 ===== */

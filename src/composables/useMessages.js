@@ -133,6 +133,28 @@ export function useMessages() {
     }
   }
 
+  // 回复悄悄话（回复老师的回复）
+  async function submitReply(whisperId, content) {
+    if (!teacherId.value || !content.trim()) return false
+    try {
+      const res = await fetch(`/api/messages/whisper/${whisperId}/reply?teacherId=${teacherId.value}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: content.trim() })
+      })
+      const data = await res.json()
+      if (res.ok) {
+        // 刷新历史记录
+        await fetchHistoryWhispers(historyPage.value)
+        return true
+      } else {
+        return { error: data.error }
+      }
+    } catch {
+      return { error: '网络错误，请稍后重试' }
+    }
+  }
+
   function formatTime(isoString) {
     if (!isoString) return ''
     const d = new Date(isoString)
@@ -152,6 +174,7 @@ export function useMessages() {
     fetchFresh,
     fetchPublicWhispers,
     submitWhisper,
+    submitReply,
     formatTime,
     // 历史悄悄话（弹窗）
     historyWhispers,

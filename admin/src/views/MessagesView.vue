@@ -796,7 +796,7 @@ function handleSelectChange(id) {
 async function handleBatchShow() {
   if (!selectedWhispers.value.length) return
   for (const id of selectedWhispers.value) {
-    await api.patch(`/messages/manage/whisper/${id}/public`, { isPublic: true })
+    await api.post(`/messages/manage/whisper/${id}/public`, { isPublic: true })
   }
   ElMessage.success(`已设置 ${selectedWhispers.value.length} 项显示`)
   selectedWhispers.value = []
@@ -806,7 +806,7 @@ async function handleBatchShow() {
 async function handleBatchHide() {
   if (!selectedWhispers.value.length) return
   for (const id of selectedWhispers.value) {
-    await api.patch(`/messages/manage/whisper/${id}/public`, { isPublic: false })
+    await api.post(`/messages/manage/whisper/${id}/public`, { isPublic: false })
   }
   ElMessage.success(`已设置 ${selectedWhispers.value.length} 项隐藏`)
   selectedWhispers.value = []
@@ -815,7 +815,7 @@ async function handleBatchHide() {
 
 async function handleTogglePublic(w) {
   try {
-    await api.patch(`/messages/manage/whisper/${w.id}/public`, {
+    await api.post(`/messages/manage/whisper/${w.id}/public`, {
       isPublic: w.isPublic
     })
   } catch (err) {

@@ -560,7 +560,7 @@ router.post('/manage/whisper/:id/reply', async (req, res) => {
 })
 
 // 管理端：设置悄悄话公开状态
-router.patch('/manage/whisper/:id/public', async (req, res) => {
+router.post('/manage/whisper/:id/public', async (req, res) => {
   const { id } = req.params
   const { isPublic } = req.body
 

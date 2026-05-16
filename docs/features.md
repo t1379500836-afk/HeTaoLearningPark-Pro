@@ -140,7 +140,7 @@ export const vocabData = [
 页面 `/messages`，两个板块：
 
 - **教师寄语**：左侧标题列表 + 右侧内容区，选择标题查看详情。数据先从静态配置即时渲染，再异步拉取 API 刷新。
-- **匿名悄悄话**：输入框 + EmojiPicker + 发送按钮。IP 限流 30 秒/次，内容限 500 字符，HTML 标签自动过滤。提交友好提示引导文明发言。
+- **匿名悄悄话**：输入框 + EmojiPicker + 发送按钮。IP 限流 30 秒/次，内容限 500 字符，HTML 标签自动过滤。提交友好提示引导文明发言。支持查看公开的悄悄话列表（含老师回复）、历史悄悄话弹窗（分页+日期筛选）、回复老师回复。
 - 首页 HeroSection 下方横幅显示最新寄语标题，点击跳转寄语页。
 
 ### 管理后台
@@ -152,7 +152,7 @@ export const vocabData = [
 - **Admin 模式**：教师选择面板（4列卡片网格、搜索、分页），选中后进入该教师的寄语/悄悄话管理
 - **Teacher 模式**：直接管理自己的数据，双标签页切换
 - **寄语标签页**：el-table 列表（标题、内容预览、时间、操作），新增/编辑弹窗含标题+内容+EmojiPicker
-- **悄悄话标签页**：卡片列表，仅支持删除
+- **悄悄话标签页**：卡片列表，支持删除、公开/隐藏切换、批量操作
 - 横向滚动适配移动端，弹窗 `min(500px, 92vw)` 自适应
 
 ### API
@@ -160,13 +160,19 @@ export const vocabData = [
 | 方法 | 路径 | 说明 | 认证 |
 |------|------|------|------|
 | POST | /api/messages/whisper | 提交匿名悄悄话 | 无（IP限流30s） |
+| GET | /api/messages/whispers/public | 获取公开的悄悄话（含回复） | 无 |
+| POST | /api/messages/whisper/:id/reply | 学生端回复悄悄话 | 无 |
 | GET | /api/messages/teacher-messages | 获取教师寄语列表 | 无 |
 | GET | /api/messages/manage/messages | 管理端获取寄语 | JWT |
 | POST | /api/messages/manage/message | 新增寄语 | JWT |
 | PUT | /api/messages/manage/message/:id | 编辑寄语 | JWT |
 | DELETE | /api/messages/manage/message/:id | 删除寄语 | JWT |
 | GET | /api/messages/manage/whispers | 管理端获取悄悄话 | JWT |
+| POST | /api/messages/manage/whisper/:id/public | 设置公开状态 | JWT |
 | DELETE | /api/messages/manage/whisper/:id | 删除悄悄话 | JWT |
+| POST | /api/messages/manage/whisper/:id/reply | 管理端回复悄悄话 | JWT |
+| PUT | /api/messages/manage/reply/:id | 管理端编辑回复 | JWT |
+| DELETE | /api/messages/manage/reply/:id | 管理端删除回复 | JWT |
 
 ## YCL 成绩 API
 
@@ -180,7 +186,8 @@ export const vocabData = [
 数据库表：
 - `ycl_scores`（id, teacher_id, student_name, set_id, set_name, level, score, total_score, submitted_at, duration, questions）
 - `teacher_messages`（id, teacher_id, title, content, created_at, updated_at）。teacher_id(INT) 外键关联 teachers.id。
-- `whispers`（id, teacher_id, content, created_at）。匿名，无发送者信息，teacher_id(INT) 外键关联 teachers.id。
+- `whispers`（id, teacher_id, content, is_public, created_at）。匿名，无发送者信息，is_public 控制是否对学生可见，teacher_id(INT) 外键关联 teachers.id。
+- `whisper_replies`（id, whisper_id, reply_content, teacher_id, created_at）。悄悄话回复表，teacher_id(INT) 外键关联 teachers.id。
 
 **双层标识设计**：
 - `teacherKey`（字符串）：教师口令，用于前端身份验证和 API 查询参数
@@ -193,7 +200,7 @@ export const vocabData = [
 
 | 文件 | 作用 |
 |------|------|
-| server/routes/messages.js | 后端 API（8个端点 + IP限流 + HTML过滤 + 配置再生） |
+| server/routes/messages.js | 后端 API（14个端点 + IP限流 + HTML过滤 + 配置再生） |
 | server/build.js | 共享构建调度（scheduleBuild + 10分钟定时器） |
 | src/config/messages.config.js | 静态寄语数据（后端自动生成，含 getMessages/getLatestTeacherMessage） |
 | src/composables/useMessages.js | 数据层（loadStatic 即时 + fetchFresh 异步 + submitWhisper） |

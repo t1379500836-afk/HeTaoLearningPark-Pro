@@ -1,5 +1,20 @@
 # 变更记录
 
+## 2026-05-17
+
+- **feat: 悄悄话回复功能**
+  - 学生端：查看公开悄悄话列表（含老师回复）、历史悄悄话弹窗（分页+日期筛选）、回复老师回复
+  - 管理端：回复悄悄话、编辑回复、删除回复、公开/隐藏切换、批量操作
+  - 新增 `whisper_replies` 数据表（id, whisper_id, reply_content, teacher_id, created_at）
+  - `whispers` 表新增 `is_public` 字段控制是否对学生可见
+  - 新增 6 个 API：学生端获取公开悄悄话/回复；管理端回复/编辑回复/删除回复/设置公开状态
+
+- **fix: 悄悄话公开状态 API PATCH 改为 POST**
+  - 问题：服务器上请求返回 400 Bad Request，`x-swift-error: request parse msg error`
+  - 原因：阿里云 CDN 不支持 PATCH 方法带请求体
+  - 修复：将接口从 `PATCH /manage/whisper/:id/public` 改为 `POST /manage/whisper/:id/public`
+  - 涉及文件：`server/routes/messages.js`、`admin/src/views/MessagesView.vue`
+
 ## 2026-05-14
 
 - **fix: 题库标签筛选类型不匹配**

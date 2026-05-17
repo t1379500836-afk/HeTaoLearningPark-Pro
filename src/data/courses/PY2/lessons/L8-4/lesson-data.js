@@ -463,12 +463,12 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '模式识别',
-    question: '下面哪个列表生成式能把每个数字乘以2？\n\n```python\nA. [n * 2 for n in [1, 2, 3]]\nB. [n + 2 for n in [1, 2, 3]]\nC. [2 for n in [1, 2, 3]]\nD. n * 2 for n in [1, 2, 3]\n```',
+    question: '下面哪个列表生成式能把每个数字乘以2？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. [n * 2 for n in [1, 2, 3]]',
+      'B. [n + 2 for n in [1, 2, 3]]',
+      'C. [2 for n in [1, 2, 3]]',
+      'D. n * 2 for n in [1, 2, 3]'
     ],
     answer: 0, // A
     explanation: '列表生成式格式：[操作 for 元素 in 列表]\n\n正确答案：A. [n * 2 for n in [1, 2, 3]]\n\n结果：[2, 4, 6]\n\n- A: [n * 2 for ...] 每个元素乘2 ✓\n- B: [n + 2 for ...] 每个元素加2\n- C: [2 for ...] 结果是 [2, 2, 2]\n- D: 缺少方括号，语法错误',

@@ -321,7 +321,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '位置问题',
-    question: '列表 ["红", "黄", "蓝", "绿"] 中，"蓝" 的索引是多少？\n\nA. 2\nB. 3\nC. 4\nD. 1',
+    question: '列表 ["红", "黄", "蓝", "绿"] 中，"蓝" 的索引是多少？',
     options: [
       'A. 2',
       'B. 3',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '位置问题',
-    question: '执行下面的代码，会打印什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子"]\nprint(fruits[-1])\n```\n\nA. 苹果\nB. 香蕉\nC. 橙子\nD. 报错',
+    question: '执行下面的代码，会打印什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子"]\nprint(fruits[-1])\n```',
     options: [
       'A. 苹果',
       'B. 香蕉',
@@ -359,7 +359,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: '执行下面的代码，列表会变成什么？\n\n```python\nnumbers = [10, 20, 30]\nnumbers[1] = numbers[0] + numbers[2]\nprint(numbers)\n```\n\nA. [10, 20, 30]\nB. [10, 40, 30]\nC. [40, 20, 30]\nD. [10, 50, 30]',
+    question: '执行下面的代码，列表会变成什么？\n\n```python\nnumbers = [10, 20, 30]\nnumbers[1] = numbers[0] + numbers[2]\nprint(numbers)\n```',
     options: [
       'A. [10, 20, 30]',
       'B. [10, 40, 30]',
@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '周期问题',
-    question: '循环会执行几次？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nfor fruit in fruits:\n    print(fruit)\n```\n\nA. 3次\nB. 4次\nC. 5次\nD. 1次',
+    question: '循环会执行几次？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nfor fruit in fruits:\n    print(fruit)\n```',
     options: [
       'A. 3次',
       'B. 4次',
@@ -397,7 +397,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '累加求和',
-    question: '执行下面的代码，变量 total 的值是多少？\n\n```python\nnumbers = [1, 2, 3, 4]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)\n```\n\nA. 4\nB. 10\nC. 1\nD. 9',
+    question: '执行下面的代码，变量 total 的值是多少？\n\n```python\nnumbers = [1, 2, 3, 4]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)\n```',
     options: [
       'A. 4',
       'B. 10',
@@ -415,7 +415,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: '执行下面的代码，打印结果是什么？\n\n```python\nnumbers = [5, 10, 15]\nfor i in range(len(numbers)):\n    numbers[i] = numbers[i] + 5\nprint(numbers)\n```\n\nA. [5, 10, 15]\nB. [10, 15, 20]\nC. [0, 5, 10]\nD. [10, 10, 10]',
+    question: '执行下面的代码，打印结果是什么？\n\n```python\nnumbers = [5, 10, 15]\nfor i in range(len(numbers)):\n    numbers[i] = numbers[i] + 5\nprint(numbers)\n```',
     options: [
       'A. [5, 10, 15]',
       'B. [10, 15, 20]',

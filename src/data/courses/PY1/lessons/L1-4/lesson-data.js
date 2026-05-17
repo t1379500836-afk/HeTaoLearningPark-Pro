@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '命令格式',
-    question: '想要检测按钮A是否被按下，应该使用以下哪个命令？\n\nA. isPressed("A")\nB. isPressed(A)\nC. isPressed "A"\nD. isPressed A',
+    question: '想要检测按钮A是否被按下，应该使用以下哪个命令？',
     options: [
       'A. isPressed("A")',
       'B. isPressed(A)',
@@ -395,7 +395,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '坐标概念',
-    question: '想要在屏幕上位置(3,5)打印"hello"，应该使用以下哪个命令？\n\nA. printPos(3, 5, "hello")\nB. printPos(3, 5); print("hello")\nC. printPos("hello", 3, 5)\nD. print("hello", 3, 5)',
+    question: '想要在屏幕上位置(3,5)打印"hello"，应该使用以下哪个命令？',
     options: [
       'A. printPos(3, 5, "hello")',
       'B. printPos(3, 5); print("hello")',
@@ -415,7 +415,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '命令功能',
-    question: '以下哪个命令可以播放录制好的声音？\n\nA. playSound()\nB. playRecord()\nC. record()\nD. sound()',
+    question: '以下哪个命令可以播放录制好的声音？',
     options: [
       'A. playSound()',
       'B. playRecord()',
@@ -433,7 +433,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '命令组合',
-    question: '想要在按下按钮A时播放欢迎音效，应该使用以下哪段代码？\n\nA. isPressed("A") = playSound("welcome")\nB. if isPressed("A"): playSound("welcome")\nC. playSound("welcome") if isPressed("A")\nD. isPressed("A") and playSound("welcome")',
+    question: '想要在按下按钮A时播放欢迎音效，应该使用以下哪段代码？',
     options: [
       'A. isPressed("A") = playSound("welcome")',
       'B. if isPressed("A"): playSound("welcome")',
@@ -471,7 +471,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '坐标系统',
-    question: 'printPos(5, 3) 把光标移动到什么位置？\n\nA. 第5行第3列\nB. 第3行第5列\nC. 第5行第5列\nD. 第3行第3列',
+    question: 'printPos(5, 3) 把光标移动到什么位置？',
     options: [
       'A. 第5行第3列',
       'B. 第3行第5列',

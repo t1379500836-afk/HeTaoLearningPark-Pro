@@ -71,10 +71,10 @@ export const lessonConfig = {
   'L1-4': { id: 'L1-4', title: '智能门铃和语音留言', subtitle: '硬件编程：声音、按钮检测、屏幕显示' },
 
   // PY1 L2 单元
-  'L2-1': { id: 'L2-1', title: '循环初体验', subtitle: '学会 while 循环重复执行代码' },
-  'L2-2': { id: 'L2-2', title: '字符串分割', subtitle: '学会用 split() 分割字符串' },
-  'L2-3': { id: 'L2-3', title: '列表索引', subtitle: '学会用索引访问列表元素' },
-  'L2-4': { id: 'L2-4', title: '海龟绘图', subtitle: '学会用海龟画各种图形' },
+  'L2-1': { id: 'L2-1', title: 'if-else 分支判断', subtitle: '学会 if-else 分支判断' },
+  'L2-2': { id: 'L2-2', title: 'for 循环', subtitle: '学会用 for 循环重复执行代码' },
+  'L2-3': { id: 'L2-3', title: 'for-if 嵌套', subtitle: '学会 for-if 嵌套使用' },
+  'L2-4': { id: 'L2-4', title: 'Online Judge 入门', subtitle: '学会 Online Judge 线上测评' },
 
   // PY1 L3 单元
   'L3-1': { id: 'L3-1', title: '变量修改和计数', subtitle: '学会修改变量值和在循环中计数' },

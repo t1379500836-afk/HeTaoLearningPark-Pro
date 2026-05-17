@@ -395,12 +395,12 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '数字与文字',
-    question: '下面哪个代码能把数字 123 变成字符串 "123"？\n\n```python\nA. str(123)\nB. int(123)\nC. float(123)\nD. string(123)\n```',
+    question: '下面哪个代码能把数字 123 变成字符串 "123"？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. str(123)',
+      'B. int(123)',
+      'C. float(123)',
+      'D. string(123)'
     ],
     answer: 0, // A
     explanation: 'str() 函数可以把数据转换成字符串。\n\n正确答案：A\n\n- str(123) → "123"（正确）\n- int(123) → 123（还是整数）\n- float(123) → 123.0（变成小数）\n- string() 不是 Python 函数',

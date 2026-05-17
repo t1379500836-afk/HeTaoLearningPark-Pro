@@ -222,7 +222,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '变量替换',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "home"\nn = "homework"\nprint(n)\n```\n\nA. home\nB. homework\nC. n\nD. 程序报错',
+    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "home"\nn = "homework"\nprint(n)\n```',
     options: [
       'A. home',
       'B. homework',
@@ -240,7 +240,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '计数起始值',
-    question: '要做变量计数，应该把变量初始化为什么值？\n\nA. 1\nB. 0\nC. -1\nD. 任意值',
+    question: '要做变量计数，应该把变量初始化为什么值？',
     options: [
       'A. 1',
       'B. 0',
@@ -260,7 +260,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '累加计算',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = 1\nfor i in range(4):\n    n = n + 1\nprint(n)\n```\n\nA. 3\nB. 4\nC. 5\nD. 1111',
+    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = 1\nfor i in range(4):\n    n = n + 1\nprint(n)\n```',
     options: [
       'A. 3',
       'B. 4',
@@ -278,7 +278,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '字符串拼接',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "3"\nn = n + "1"\nprint(n)\n```\n\nA. 4\nB. 31\nC. "31"\nD. 程序报错',
+    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "3"\nn = n + "1"\nprint(n)\n```',
     options: [
       'A. 4',
       'B. 31',
@@ -298,7 +298,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '条件计数',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\ncat = 0\nfor i in range(5):\n    if i > 2:\n        cat = cat + 1\nprint(cat)\n```\n\nA. 2\nB. 3\nC. 4\nD. 5',
+    question: '执行下面的代码，程序会打印出什么？\n\n```python\ncat = 0\nfor i in range(5):\n    if i > 2:\n        cat = cat + 1\nprint(cat)\n```',
     options: [
       'A. 2',
       'B. 3',
@@ -316,7 +316,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '累加求和',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\ntotal = 0\nfor i in range(4):\n    total = total + i\nprint(total)\n```\n\nA. 6\nB. 7\nC. 10\nD. 0+1+2+3',
+    question: '执行下面的代码，程序会打印出什么？\n\n```python\ntotal = 0\nfor i in range(4):\n    total = total + i\nprint(total)\n```',
     options: [
       'A. 6',
       'B. 7',

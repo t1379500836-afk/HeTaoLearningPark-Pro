@@ -1,59 +1,43 @@
 /**
- * PY1 课程 L2-3: 列表索引
+ * PY1 课程 L2-3: for-if 嵌套
  *
  * 核心知识点:
- * 1. 列表索引 - 访问列表中的元素
- * 2. 索引规则 - 从0开始计数
- * 3. 负索引 - 从末尾访问元素
+ * 1. for-if嵌套格式
+ * 2. for-if执行过程
+ * 3. for-if应用场景
  */
 
-// 单词卡数据 - OCR 提取 + 拓展词汇
+// 单词卡数据 - OCR 提取
 export const vocabData = [
-  // OCR 提取的单词
   {
     word: 'color',
     pronunciation: "['kʌlər]",
     partOfSpeech: 'n./v.',
-    meaning: '颜色；着色；色素；染；歪曲',
+    meaning: '颜色；着色；色素',
     level: 'easy',
     example: 'What color do you like?',
     exampleTranslation: '你喜欢什么颜色？',
-    note: 'color 颜色',
-    source: 'ocr'
+    note: 'color 颜色'
   },
   {
     word: 'red',
     pronunciation: '[red]',
     partOfSpeech: 'n./adj.',
-    meaning: '红色；红葡萄酒；红的；红色的',
+    meaning: '红色；红的',
     level: 'easy',
     example: 'red wine 红酒',
     exampleTranslation: '红酒',
-    note: 'red 红色',
-    source: 'ocr'
+    note: 'red 红色'
   },
   {
     word: 'blue',
-    pronunciation: '[bluː]',
-    partOfSpeech: 'adj./n.',
-    meaning: '蓝色的；忧郁的；蓝色；天蓝色',
+    pronunciation: '[blu:]',
+    partOfSpeech: 'n./adj.',
+    meaning: '蓝色；蓝色的',
     level: 'easy',
     example: 'blue sky 蓝天',
     exampleTranslation: '蓝天',
-    note: 'blue 蓝色',
-    source: 'ocr'
-  },
-  // 拓展单词
-  {
-    word: 'index',
-    pronunciation: "['ɪndeks]",
-    partOfSpeech: 'n./v.',
-    meaning: '索引；指数；指标；做索引',
-    level: 'medium',
-    example: 'Use index to get the element.',
-    exampleTranslation: '用索引获取元素。',
-    note: '列表索引从0开始',
-    source: 'extended'
+    note: 'blue 蓝色'
   }
 ]
 
@@ -61,76 +45,76 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '魔法编号 - 列表索引',
-    emoji: '🔢',
+    title: '循环判断 - for-if嵌套',
+    emoji: '🔄',
     gradeLevel: '1-2',
-    summary: '用索引访问列表中的元素',
+    summary: '在循环中进行条件判断',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象每个人都有自己的学号，老师只要叫学号，就能找到对应的人！列表中的每个元素也有这样的"学号"，叫做索引。',
-      concept: '列表中的每个元素都有一个索引，从0开始。用方括号[]加索引可以访问对应的元素。',
-      syntax: '列表名[索引]',
+      story: '想象你在做一个游戏，每次循环时要检查是否达到了目标！for-if嵌套就是在每次循环时做判断！',
+      concept: 'for循环中可以嵌套if语句。每次循环时，都会判断条件是否成立。',
+      syntax: 'for i in range(n):\n    if 条件:\n        执行的代码',
       example: {
-        title: '访问列表元素',
-        code: 'fruits = ["苹果", "香蕉", "橙子"]\nprint(fruits[0])\nprint(fruits[1])\nprint(fruits[2])',
-        output: '苹果\n香蕉\n橙子',
-        explanation: 'fruits[0]是第一个元素"苹果"，fruits[1]是第二个元素"香蕉"，fruits[2]是第三个元素"橙子"。'
+        title: '基本for-if',
+        code: 'for i in range(3):\n    if i == 1:\n        print("找到了")',
+        output: '找到了',
+        explanation: '循环3次，i分别是0,1,2。当i==1时打印"找到了"。'
       },
       practice: [
         {
-          question: '列表的索引从几开始？',
-          answer: '从0开始'
+          question: 'for-if嵌套中，if语句写在循环的哪里？',
+          answer: '写在循环内部，缩进一次'
         },
         {
-          question: 'fruits[0] 表示第几个元素？',
-          answer: '第1个元素'
+          question: '每次循环都会判断if条件吗？',
+          answer: '是的，每次循环都会判断'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的编号系统升级了！你可以快速找到任何位置的学生，甚至可以修改任何位置的信息！',
-      concept: '索引是访问列表元素的关键。可以读取元素值，也可以修改元素值。索引必须是一个整数。',
-      syntax: '# 读取元素\nvalue = list[index]\n# 修改元素\nlist[index] = new_value',
+      story: '你的判断能力更强了！现在可以在循环中根据不同情况做不同的事情！',
+      concept: 'for循环中可以用if语句根据不同条件执行不同的代码。',
+      syntax: 'for i in range(n):\n    if 条件1:\n        代码1\n    else:\n        代码2',
       example: {
-        title: '修改列表元素',
-        code: 'scores = [80, 90, 85]\nprint("修改前:", scores)\nscores[1] = 95\nprint("修改后:", scores)',
-        output: '修改前: [80, 90, 85]\n修改后: [80, 95, 85]',
-        explanation: 'scores[1]原本是90，用scores[1]=95把它改成95。索引1表示第二个元素。'
+        title: 'if-else在循环中',
+        code: 'for i in range(4):\n    if i % 2 == 0:\n        print("偶数")\n    else:\n        print("奇数")',
+        output: '偶数\n奇数\n偶数\n奇数',
+        explanation: '0,1,2,3中，0和2是偶数，1和3是奇数。\n\n数学知识：能被2整除的是偶数。'
       },
       practice: [
         {
-          question: '索引可以是小数吗？',
-          answer: '不可以，索引必须是整数'
+          question: 'i % 2 == 0 是什么意思？',
+          answer: '判断i是否是偶数'
         },
         {
-          question: '如何修改列表的第3个元素？',
-          answer: '使用 list[2] = 新值（因为索引从0开始，第3个元素的索引是2）'
+          question: 'for-if嵌套中缩进要注意什么？',
+          answer: 'if语句要在for语句内部，需要两次缩进'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '索引大师模式！你可以用变量作为索引，甚至用表达式计算索引，实现灵活的元素访问！',
-      concept: '索引可以是任何结果为整数的表达式。这允许你用循环遍历列表，或根据条件动态访问元素。',
-      syntax: 'list[i]  # i是变量\nlist[i+1]  # 使用表达式\nlist[int(x)]  # 类型转换',
+      story: '嵌套专家！现在你可以处理复杂的循环判断！',
+      concept: '复杂的for-if嵌套可以实现高级的筛选和统计功能。',
+      syntax: 'for i in range(n):\n    if 条件1:\n        if 条件2:\n            代码\n        else:\n            代码\n    else:\n        代码',
       example: {
-        title: '动态索引访问',
-        code: 'colors = ["红", "黄", "蓝", "绿"]\ni = 2\nprint(colors[i])\nprint(colors[i+1])',
-        output: '蓝\n绿',
-        explanation: 'i=2，所以colors[i]即colors[2]是"蓝"。colors[i+1]即colors[3]是"绿"。'
+        title: '双重条件判断',
+        code: 'count = 0\nfor i in range(10):\n    if i > 0:\n        if i % 2 == 0:\n            count = count + 1\nprint(count)',
+        output: '4',
+        explanation: 'i从0到9，大于0的有1-9，其中偶数有2,4,6,8共4个。\n\n数学知识：1-9中的偶数：2,4,6,8'
       },
       practice: [
         {
-          question: 'colors[i+1] 和 colors[i] + 1 有什么区别？',
-          answer: '前者访问索引为i+1的元素，后者是colors[i]的值加1（如果是数字的话）'
+          question: '如何统计满足两个条件的数量？',
+          answer: '用嵌套的if语句'
         },
         {
-          question: '如何用循环遍历列表的所有索引？',
-          answer: '用 for i in range(len(list)) 或 for item in list'
+          question: '嵌套if要注意缩进吗？',
+          answer: '要注意，每层都要正确缩进'
         }
       ]
     }
@@ -138,76 +122,76 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '从零开始 - 索引规则',
-    emoji: '🚩',
+    title: '执行规则 - 逐层判断',
+    emoji: '📋',
     gradeLevel: '1-2',
-    summary: '理解索引从0开始的规则',
+    summary: '理解for-if的执行顺序',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象一排楼梯，第1级台阶的编号是0，第2级是1，第3级是2...这就是Python的索引规则！',
-      concept: 'Python中索引从0开始，不是从1开始。第1个元素的索引是0，第2个是1，依此类推。',
-      syntax: '第1个元素: list[0]\n第2个元素: list[1]\n第3个元素: list[2]',
+      story: '想象你在过安检：先检查你是否带行李（for循环），再检查你是否携带危险品（if判断）！',
+      concept: 'for语句控制循环次数，if语句在每次循环中进行判断。',
+      syntax: '执行顺序：\n1. for循环启动\n2. 每次循环先执行for的代码\n3. 然后执行if的判断',
       example: {
-        title: '索引与位置对应',
-        code: 'animals = ["猫", "狗", "兔", "鸟"]\nprint("索引0:", animals[0])\nprint("索引1:", animals[1])\nprint("索引2:", animals[2])',
-        output: '索引0: 猫\n索引1: 狗\n索引2: 兔',
-        explanation: '索引0对应第1个元素，索引1对应第2个元素，索引2对应第3个元素。'
+        title: '执行顺序示例',
+        code: 'for i in range(3):\n    print("循环", i)\n    if i == 1:\n        print("找到了1")',
+        output: '循环 0\n循环 1\n找到了1\n循环 2',
+        explanation: '先打印"循环 i"，然后判断i是否等于1。'
       },
       practice: [
         {
-          question: '第5个元素的索引是多少？',
-          answer: '是4，因为索引从0开始'
+          question: 'for和if的执行顺序是怎样的？',
+          answer: '先执行for的代码，再执行if的判断'
         },
         {
-          question: '为什么索引要从0开始？',
-          answer: '这是计算机科学的设计传统，从0开始计数在很多编程语言中都是标准'
+          question: '每次循环都会执行if判断吗？',
+          answer: '是的，每次循环都会判断'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你已经熟悉了索引规则！现在你可以快速计算任何位置的索引，甚至解决实际的问题！',
-      concept: '索引 = 位置 - 1。如果有n个元素，有效索引范围是0到n-1。访问超出范围的索引会报错。',
-      syntax: '索引范围: 0 到 len(list)-1\nlist[len(list)-1]  # 最后一个元素',
+      story: '你现在完全理解执行顺序了！for先运行，然后if判断！',
+      concept: '执行顺序：for循环控制总次数，if语句在每次循环中单独判断。',
+      syntax: '外层for循环\n    内层if判断\n    每次循环都要经过if判断',
       example: {
-        title: '访问最后一个元素',
-        code: 'nums = [10, 20, 30, 40, 50]\nlast_index = len(nums) - 1\nprint("最后一个:", nums[last_index])',
-        output: '最后一个: 50',
-        explanation: '列表有5个元素，len(nums)=5，最后一个元素的索引是5-1=4，所以nums[4]是50。'
+        title: '条件统计',
+        code: 'count = 0\nfor i in range(5):\n    if i > 2:\n        count = count + 1\nprint(count)',
+        output: '2',
+        explanation: 'i=0,1,2时不满足i>2，i=3,4时满足，所以count=2。\n\n数学知识：3和4大于2，共2个。'
       },
       practice: [
         {
-          question: '10个元素的列表，最后一个元素的索引是多少？',
-          answer: '是9（10-1=9）'
+          question: '循环变量i在每次循环时会变吗？',
+          answer: '会，依次变成0,1,2,...'
         },
         {
-          question: '访问索引100会发生什么？',
-          answer: '会报错，因为索引超出范围'
+          question: '如何只统计满足条件的次数？',
+          answer: '在if语句内累加计数器'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '索引专家模式！你可以精确计算索引范围，避免越界错误，并用索引实现复杂的数据操作！',
-      concept: '理解索引边界是编程的重要技能。可以用条件检查索引是否有效，或使用异常处理避免程序崩溃。',
-      syntax: 'if 0 <= index < len(list):\n    安全访问\ntry:\n    list[index]\nexcept:\n    处理错误',
+      story: '执行顺序专家！你完全理解了！',
+      concept: '复杂的嵌套要理解逐层执行：外层for → 内层for → if判断。',
+      syntax: '执行顺序：\n外层循环第1次→内层循环全部→外层循环第2次→...',
       example: {
-        title: '安全的索引访问',
-        code: 'fruits = ["苹果", "香蕉", "橙子"]\nindex = 5\nif index < len(fruits):\n    print(fruits[index])\nelse:\n    print("索引超出范围")',
-        output: '索引超出范围',
-        explanation: 'index=5超出了列表范围（有效索引是0、1、2），所以条件判断后打印提示信息而不是报错。'
+        title: '复杂嵌套',
+        code: 'result = []\nfor i in range(2):\n    for j in range(3):\n        if (i + j) % 2 == 0:\n            result.append((i, j))\nprint(result)',
+        output: '[(0, 0), (0, 2), (1, 1)]',
+        explanation: 'i+j为偶数的有：(0,0)、(0,2)、(1,1)。\n\n数学知识：(i+j)能被2整除的就是偶数。'
       },
       practice: [
         {
-          question: 'len(list) 返回什么？',
-          answer: '返回列表中元素的个数'
+          question: '双重循环嵌套时，if在哪个循环里？',
+          answer: '在内层循环里'
         },
         {
-          question: '如何检查索引是否有效？',
-          answer: '用 if index >= 0 and index < len(list) 检查'
+          question: '(i+j)%2是什么意思？',
+          answer: '判断i+j是否是偶数'
         }
       ]
     }
@@ -215,76 +199,77 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '倒着数 - 负索引',
-    emoji: '🔙',
+    title: '实际应用 - 分类统计',
+    emoji: '📊',
     gradeLevel: '1-2',
-    summary: '用负数从列表末尾访问元素',
+    summary: '用for-if解决实际问题',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '有时候你想从队伍的最后开始数，Python允许你用负数索引来实现！-1表示最后一个，-2表示倒数第二个...',
-      concept: '负索引从列表末尾开始计数。-1是最后一个元素，-2是倒数第二个，依此类推。',
-      syntax: 'list[-1]  # 最后一个\nlist[-2]  # 倒数第二个\nlist[-3]  # 倒数第三个',
+      story: '想象你在给同学们分组：男生一组，女生一组！for-if就可以帮你做这个！',
+      concept: '可以用for-if来统计和分类。',
+      syntax: 'for i in 列表:\n    if 条件:\n        分到A组\n    else:\n        分到B组',
       example: {
-        title: '使用负索引',
-        code: 'colors = ["红", "黄", "蓝", "绿"]\nprint(colors[-1])\nprint(colors[-2])',
-        output: '绿\n蓝',
-        explanation: 'colors[-1]是最后一个元素"绿"，colors[-2]是倒数第二个元素"蓝"。'
+        title: '分类问题',
+        code: 'colors = ["红", "蓝", "红", "绿"]\nfor c in colors:\n    if c == "红":\n        print("红色系")\n    else:\n        print("其他")',
+        output: '红色系\n其他\n红色系\n其他',
+        explanation: '逐一检查颜色，"红"打印"红色系"，其他打印"其他"。'
       },
       practice: [
         {
-          question: '-1 表示哪个元素？',
-          answer: '最后一个元素'
+          question: 'for-if可以用于分类吗？',
+          answer: '可以'
         },
         {
-          question: '如何用负索引访问倒数第3个元素？',
-          answer: '用 list[-3]'
+          question: '如何判断是否等于某个值？',
+          answer: '用 == 符号'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的倒数技巧升级了！你可以用正索引和负索引灵活地访问同一个元素，选择更方便的方式！',
-      concept: '正索引和负索引可以访问同一个元素。对于长度为n的列表，索引i和索引i-n是同一个元素。',
-      syntax: '# 等价关系\nlist[-1] == list[n-1]\nlist[-2] == list[n-2]',
+      story: '你现在可以用for-if来做统计了！统计数量、分类汇总！',
+      concept: '用for-if可以实现统计功能：累加器+条件判断。',
+      syntax: '设置计数器\n循环中用if判断\n满足条件时计数器加1',
       example: {
-        title: '正索引和负索引',
-        code: 'nums = [10, 20, 30, 40, 50]\nprint("正索引[4]:", nums[4])\nprint("负索引[-1]:", nums[-1])\nprint("正索引[3]:", nums[3])\nprint("负索引[-2]:", nums[-2])',
-        output: '正索引[4]: 50\n负索引[-1]: 50\n正索引[3]: 40\n负索引[-2]: 40',
-        explanation: 'nums[4]和nums[-1]都是最后一个元素50，nums[3]和nums[-2]都是倒数第二个元素40。'
+        title: '统计个数',
+        code: 'scores = [90, 80, 70, 60, 50]\ncount = 0\nfor s in scores:\n    if s >= 60:\n        count = count + 1\nprint("及格人数:", count)',
+        output: '及格人数: 3',
+        explanation: '90,80,70及格（3个），60,50不及格。\n\n数学知识：3个数字大于等于60。'
       },
       practice: [
         {
-          question: '有7个元素的列表，索引-3等于正索引多少？',
-          answer: '等于正索引4（7-3=4）'
+          question: '如何统计满足条件的数量？',
+          answer: '用计数器在if内累加'
         },
         {
-          question: '什么时候用负索引更方便？',
-          answer: '想访问最后几个元素时，不用计算列表长度'
+          question: 'for-in和range有什么区别？',
+          answer: 'for-in遍历列表，for-range遍历数字'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '负索引大师模式！你可以灵活切换正负索引，处理各种列表操作场景！',
-      concept: '熟练使用正负索引可以简化代码。负索引特别适合获取列表末尾的元素，避免计算len(list)。',
-      syntax: '# 常用模式\nlast = list[-1]\nsecond_last = list[-2]\nfirst = list[0]',
+      story: '统计专家！你现在可以做复杂的统计和分析了！',
+      concept: '复杂的统计需要多个计数器和多重条件判断。',
+      syntax: '设置多个计数器\n分别统计不同类别\n最后输出各个类别的数量',
       example: {
-        title: '灵活运用索引',
-        code: 'data = [5, 10, 15, 20, 25]\nfirst = data[0]\nlast = data[-1]\nsecond_last = data[-2]\nprint("首:" + str(first) + ", 尾:" + str(last) + ", 次尾:" + str(second_last))',
-        output: '首:5, 尾:25, 次尾:20',
-        explanation: '用data[0]获取第一个元素，用data[-1]获取最后一个，用data[-2]获取倒数第二个，非常方便。'
+        title: '多重统计',
+        code: 'scores = [90, 85, 70, 65, 95, 55]\na = b = c = 0\nfor s in scores:\n    if s >= 90:\n        a = a + 1\n    elif s >= 80:\n        b = b + 1\n    else:\n        c = c + 1\nprint("A:", a, "B:", b, "C:", c)',
+        output: 'A: 2 B: 1 C: 3',
+        explanation: '90,95是A（2个），85是B（1个），70,65,55是C（3个）。\n\n数学知识：分段统计。',
+        note: 'elif是else if的缩写'
       },
       practice: [
         {
-          question: '如何获取列表的最后3个元素？',
-          answer: '用 list[-3:] 切片，或 list[-3], list[-2], list[-1]'
+          question: '如何统计多个类别？',
+          answer: '用多个计数器'
         },
         {
-          question: 'data[-0] 和 data[0] 有区别吗？',
-          answer: '没有区别，-0等于0，都表示第一个元素'
+          question: 'elif和if-else有什么区别？',
+          answer: 'elif是else if的缩写，用于多个条件'
         }
       ]
     }
@@ -300,17 +285,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数数',
-    question: '执行下面的代码，会打印什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nprint(fruits[2])\n```\n\nA. 苹果\nB. 香蕉\nC. 橙子\nD. 葡萄',
+    mathConcept: '条件判断',
+    question: '运行下面的代码，会打印几次"找"？\n\n```python\nfor i in range(4):\n    if i == 2:\n        print("找")\n```',
     options: [
-      'A. 苹果',
-      'B. 香蕉',
-      'C. 橙子',
-      'D. 葡萄'
+      'A. 1次',
+      'B. 2次',
+      'C. 3次',
+      'D. 4次'
     ],
-    answer: 2, // C
-    explanation: '索引从0开始：\n- fruits[0] = "苹果"\n- fruits[1] = "香蕉"\n- fruits[2] = "橙子"\n- fruits[3] = "葡萄"\n\n所以fruits[2]输出"橙子"。\n\n数学知识：这是位置索引问题，索引2对应第3个元素。',
-    hint: '索引0是第1个，索引1是第2个，索引2是第3个'
+    answer: 0, // A
+    explanation: '循环4次，i分别是0,1,2,3。只有i==2时条件成立，打印1次"找"。',
+    hint: 'i == 2 何时成立？'
   },
   {
     id: 'ex-2',
@@ -318,17 +303,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '位置索引',
-    question: '下面哪个代码能打印列表的最后一个元素？\n\n```python\nnums = [5, 10, 15, 20, 25]\n```\n\nA. print(nums[5])\nB. print(nums[4])\nC. print(nums[-1])\nD. B和C都对',
+    mathConcept: '缩进',
+    question: '下面哪个是for-if的正确格式？',
     options: [
-      'A. print(nums[5])',
-      'B. print(nums[4])',
-      'C. print(nums[-1])',
-      'D. B和C都对'
+      'A. A选项',
+      'B. B选项',
+      'C. C选项',
+      'D. D选项'
     ],
-    answer: 3, // D
-    explanation: '列表有5个元素：\n- nums[4]是第5个元素（索引0-4）\n- nums[-1]是最后一个元素（负索引）\n\n两者都能打印最后一个元素25。\n\nnums[5]会报错，因为没有索引5。\n\n数学知识：5个元素的索引是0、1、2、3、4，或者用-1表示最后。',
-    hint: '最后一个元素可以用正索引4或负索引-1'
+    answer: 1, // B
+    explanation: '正确的格式：for和if都要有冒号，都要正确缩进。选项B符合。',
+    hint: '注意冒号和缩进'
   },
 
   // 🟡 进阶题
@@ -338,17 +323,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '执行下面的代码，会打印什么？\n\n```python\nnums = [3, 6, 9, 12, 15]\ni = 2\nprint(nums[i] + nums[i+1])\n```\n\nA. 11\nB. 21\nC. 18\nD. 15',
+    mathConcept: '统计',
+    question: '运行下面的代码，count的值是多少？\n\n```python\ncount = 0\nfor i in range(5):\n    if i > 2:\n        count = count + 1\nprint(count)\n```',
     options: [
-      'A. 11',
-      'B. 21',
-      'C. 18',
-      'D. 15'
+      'A. 2',
+      'B. 3',
+      'C. 4',
+      'D. 5'
     ],
-    answer: 1, // B
-    explanation: 'i=2，所以：\n- nums[i] = nums[2] = 9\n- nums[i+1] = nums[3] = 12\n- 9 + 12 = 21\n\n输出21。\n\n数学知识：这是索引计算问题，需要先计算索引值再相加。',
-    hint: '先算出 nums[2] 和 nums[3] 分别是多少'
+    answer: 0, // A
+    explanation: 'i=0,1,2时不满足i>2，i=3,4时满足，共2个。',
+    hint: 'i大于2的有几个？'
   },
   {
     id: 'ex-4',
@@ -356,17 +341,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '执行下面的代码，会输出什么？\n\n```python\nscores = [80, 90, 85, 95, 88]\nprint(scores[1] + scores[-2])\n```\n\nA. 170\nB. 175\nC. 180\nD. 185',
+    mathConcept: '分类',
+    question: '运行下面的代码，最终输出什么？\n\n```python\nnumbers = [1, 2, 3, 4]\nfor n in numbers:\n    if n % 2 == 0:\n        print("偶")\n    else:\n        print("奇")\n```',
     options: [
-      'A. 170',
-      'B. 175',
-      'C. 180',
-      'D. 185'
+      'A. 偶 偶 偶 偶',
+      'B. 偶 奇 偶 奇',
+      'C. 奇 偶 奇 偶',
+      'D. 奇 偶 奇 偶'
     ],
-    answer: 3, // D
-    explanation: '- scores[1] = 90（第2个元素）\n- scores[-2] = 95（倒数第2个元素）\n- 90 + 95 = 185\n\n输出185。\n\n数学知识：这是正负索引计算问题，需要先确定两个索引对应的元素再相加。',
-    hint: '找出正索引1和负索引-2对应的元素'
+    answer: 1, // B
+    explanation: '1是奇数，2是偶数，3是奇数，4是偶数。\n\n数学知识：能被2整除的是偶数。',
+    hint: '1是奇数，2是偶数...'
   },
 
   // 🔴 挑战题
@@ -376,17 +361,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '变量计算',
-    question: '执行下面的代码，最后i的值是多少？\n\n```python\nnums = [10, 20, 30, 40]\ni = 0\nwhile i < len(nums):\n    i = i + 1\nprint(i)\n```\n\nA. 3\nB. 4\nC. 5\nD. 出错',
+    mathConcept: '多重统计',
+    question: '运行下面的代码，会打印什么？\n\n```python\na = b = 0\nfor i in range(1, 6):\n    if i % 2 == 0:\n        a = a + 1\n    else:\n        b = b + 1\nprint(a, b)\n```',
     options: [
-      'A. 3',
-      'B. 4',
-      'C. 5',
-      'D. 出错'
+      'A. 2 3',
+      'B. 3 2',
+      'C. 2 2',
+      'D. 3 3'
     ],
-    answer: 1, // B
-    explanation: 'len(nums)=4，循环过程：\n- i=0: 0<4成立, i=0+1=1\n- i=1: 1<4成立, i=1+1=2\n- i=2: 2<4成立, i=2+1=3\n- i=3: 3<4成立, i=3+1=4\n- i=4: 4<4不成立，退出\n\n最后i=4。\n\n数学知识：这是计数循环问题，i从0累加到4，共循环4次。',
-    hint: 'len(nums) 是 4，i 从 0 开始每次加 1，什么时候不满足 <4？'
+    answer: 0, // A
+    explanation: '1-5中偶数有2,4（2个），奇数有1,3,5（3个）。\n\n数学知识：2和4是偶数，1,3,5是奇数。',
+    hint: '偶数几个？奇数几个？'
   },
   {
     id: 'ex-6',
@@ -394,67 +379,66 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '累加计算',
-    question: '执行下面的代码，会打印什么？\n\n```python\nnums = [5, 3, 8, 2, 7]\ntotal = 0\nfor i in range(len(nums)):\n    if nums[i] > 5:\n        total = total + nums[i]\nprint(total)\n```\n\nA. 15\nB. 20\nC. 25\nD. 18',
+    mathConcept: '嵌套条件',
+    question: '运行下面的代码，最终result是什么？\n\n```python\nresult = 0\nfor i in range(5):\n    if i > 0:\n        if i % 2 == 0:\n            result = result + i\nprint(result)\n```',
     options: [
-      'A. 15',
-      'B. 20',
-      'C. 25',
-      'D. 18'
+      'A. 4',
+      'B. 6',
+      'C. 8',
+      'D. 10'
     ],
-    answer: 0, // A
-    explanation: '遍历索引0到4，累加大于5的元素：\n- i=0: nums[0]=5, 5>5不成立，跳过\n- i=1: nums[1]=3, 3>5不成立，跳过\n- i=2: nums[2]=8, 8>5成立, total=0+8=8\n- i=3: nums[3]=2, 2>5不成立，跳过\n- i=4: nums[4]=7, 7>5成立, total=8+7=15\n\n最后total=15。\n\n数学知识：这是条件求和问题，只累加符合条件的元素：8+7=15。',
-    hint: '找出列表中大于5的元素并累加'
+    answer: 1, // B
+    explanation: 'i>0的偶数有2,4。\n\n2+4=6。\n\n数学知识：2和4是偶数，求和为6。',
+    hint: 'i=2和4满足条件'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L2-3',
-  title: '列表索引',
-  subtitle: '学会用索引访问列表元素',
+  title: 'for-if 嵌套',
+  subtitle: '学会 for-if 嵌套使用',
   difficulty: '进阶',
   estimatedTime: '30-40分钟',
   learningGoals: [
-    '理解列表索引的基本概念',
-    '掌握索引从0开始的规则',
-    '学会使用负索引访问元素',
-    '避免索引越界错误'
+    '理解 for-if 嵌套格式',
+    '掌握 for-if 执行顺序',
+    '能够用 for-if 解决实际问题',
+    '能够进行分类统计'
   ],
   prerequisites: [
-    '掌握 print() 命令',
-    '理解列表的基本概念',
-    '会使用变量',
-    '了解 while 和 for 循环'
+    '掌握 for 循环',
+    '掌握 if 条件判断',
+    '理解变量的概念'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['index', 'list', 'first', 'last', 'color', 'red', 'blue'],
-  medium: ['element', 'access', 'position', 'range'],
-  hard: ['negative', 'boundary', 'iteration', 'subscript']
+  easy: ['for', 'if', 'loop', 'condition'],
+  medium: ['nested', 'counter', '统计', 'classify'],
+  hard: ['elif', 'multiple', 'condition', 'group']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'fruits = ["苹果", "香蕉"]',
-    'print(fruits[0])',
-    'print(fruits[-1])',
-    'colors = ["红", "黄", "蓝"]'
+    'for i in range(3):\n    if i == 1:\n        print(1)',
+    'for i in range(4):\n    if i > 2:\n        print(i)',
+    'for i in range(3):\n    if i == 0:\n        print("0")',
+    'for i in range(3):\n    if i != 1:\n        print(i)'
   ],
   medium: [
-    'nums = [10, 20, 30, 40]\nprint(nums[2])',
-    'items = ["a", "b", "c", "d"]\nprint(items[-1])',
-    'scores = [80, 90, 85]\nscores[1] = 95',
-    'print(len(items))'
+    'count = 0\nfor i in range(5):\n    if i > 2:\n        count = count + 1',
+    'for i in range(4):\n    if i % 2 == 0:\n        print("偶")\n    else:\n        print("奇")',
+    'total = 0\nfor i in range(1, 5):\n    if i % 2 != 0:\n        total = total + i',
+    'for n in [1,2,3]:\n    if n > 1:\n        print(n)'
   ],
   hard: [
-    'nums = [5, 10, 15, 20, 25]\nfor i in range(len(nums)):\nprint(nums[i])',
-    'data = [1, 2, 3, 4, 5]\nprint(data[0], data[-1])',
-    'items = ["a", "b", "c", "d", "e"]\nfor i in range(len(items)):\nif items[i] == "c":\nprint(i)',
-    'nums = [10, 20, 30, 40]\ni = 1\nprint(nums[i] + nums[i+1])'
+    'a = b = 0\nfor i in range(5):\n    if i % 2 == 0:\n        a = a + 1\n    else:\n        b = b + 1',
+    'result = 0\nfor i in range(5):\n    if i > 0:\n        if i % 2 == 0:\n            result = result + i',
+    'for i in range(3):\n    for j in range(2):\n        if i > j:\n            print(i, j)',
+    'a = b = c = 0\nfor i in [90,80,70,60,50]:\n    if i >= 90:\n        a = a + 1\n    elif i >= 80:\n        b = b + 1\n    else:\n        c = c + 1'
   ]
 }
 

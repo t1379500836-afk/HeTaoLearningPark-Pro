@@ -321,7 +321,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '数数',
-    question: '执行下面的代码，列表中有几个元素？\n\n```python\nanimals = ["小狗", "小猫", "兔子"]\nanimals.append("小鸟")\n```\n\nA. 3个\nB. 4个\nC. 5个\nD. 2个',
+    question: '执行下面的代码，列表中有几个元素？\n\n```python\nanimals = ["小狗", "小猫", "兔子"]\nanimals.append("小鸟")\n```',
     options: [
       'A. 3个',
       'B. 4个',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '找规律',
-    question: '执行下面的代码，打印结果是什么？\n\n```python\nnumbers = [1, 2, 3]\nnumbers.remove(2)\nprint(numbers)\n```\n\nA. [1, 2, 3]\nB. [1, 3]\nC. [2, 3]\nD. [1, 2]',
+    question: '执行下面的代码，打印结果是什么？\n\n```python\nnumbers = [1, 2, 3]\nnumbers.remove(2)\nprint(numbers)\n```',
     options: [
       'A. [1, 2, 3]',
       'B. [1, 3]',
@@ -359,7 +359,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '分组问题',
-    question: '列表中有几个数字大于5？\n\n```python\nnumbers = [3, 7, 2, 8, 5, 9]\nnumbers.append(6)\n```\n\nA. 2个\nB. 3个\nC. 4个\nD. 5个',
+    question: '列表中有几个数字大于5？\n\n```python\nnumbers = [3, 7, 2, 8, 5, 9]\nnumbers.append(6)\n```',
     options: [
       'A. 2个',
       'B. 3个',
@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '算式计算',
-    question: '执行下面的代码，列表中所有数的和是多少？\n\n```python\nnumbers = [10, 20, 30]\nnumbers.append(15)\nnumbers.remove(20)\n```\n\nA. 55\nB. 75\nC. 60\nD. 45',
+    question: '执行下面的代码，列表中所有数的和是多少？\n\n```python\nnumbers = [10, 20, 30]\nnumbers.append(15)\nnumbers.remove(20)\n```',
     options: [
       'A. 55',
       'B. 75',
@@ -397,7 +397,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: '执行下面的代码，变量 n 的值是多少？\n\n```python\nnumbers = [5, 10, 15]\nn = len(numbers)\nnumbers.append(20)\nnumbers.remove(10)\nn = len(numbers)\n```\n\nA. 2\nB. 3\nC. 4\nD. 5',
+    question: '执行下面的代码，变量 n 的值是多少？\n\n```python\nnumbers = [5, 10, 15]\nn = len(numbers)\nnumbers.append(20)\nnumbers.remove(10)\nn = len(numbers)\n```',
     options: [
       'A. 2',
       'B. 3',
@@ -415,7 +415,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '植树问题',
-    question: '列表中有重复的数字，执行后剩下几个 2？\n\n```python\nnumbers = [1, 2, 2, 3, 2]\nnumbers.remove(2)\nnumbers.append(2)\n```\n\nA. 1个\nB. 2个\nC. 3个\nD. 4个',
+    question: '列表中有重复的数字，执行后剩下几个 2？\n\n```python\nnumbers = [1, 2, 2, 3, 2]\nnumbers.remove(2)\nnumbers.append(2)\n```',
     options: [
       'A. 1个',
       'B. 2个',

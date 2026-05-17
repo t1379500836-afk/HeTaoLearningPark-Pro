@@ -401,7 +401,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'rotateTo函数',
-    question: 'rotateTo(90)会让舵机转到什么位置？\n\nA. 0度\nB. 90度\nC. 180度\nD. 360度',
+    question: 'rotateTo(90)会让舵机转到什么位置？',
     options: [
       'A. 0度',
       'B. 90度',
@@ -419,7 +419,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '字符串拼接',
-    question: '"12" + "ab" 等于什么？\n\nA. "12ab"\nB. "ab12"\nC. "14"\nD. 报错',
+    question: '"12" + "ab" 等于什么？',
     options: [
       'A. "12ab"',
       'B. "ab12"',
@@ -439,7 +439,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: 'isdigit判断',
-    question: '"12a3".isdigit() 的结果是什么？\n\nA. True\nB. False\nC. "12a3"\nD. 报错',
+    question: '"12a3".isdigit() 的结果是什么？',
     options: [
       'A. True',
       'B. False',
@@ -457,7 +457,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '遥控器逻辑',
-    question: '执行下面的代码，按down键会怎样？\n\n```python\nwhile True:\n    key = getKey()\n    if key == "up":\n        print("向上")\n    elif key == "down":\n        print("向下")\n    elif key == "stop":\n        break\n```\n\nA. 打印"向上"\nB. 打印"向下"\nC. 退出循环\nD. 什么都不做',
+    question: '执行下面的代码，按down键会怎样？\n\n```python\nwhile True:\n    key = getKey()\n    if key == "up":\n        print("向上")\n    elif key == "down":\n        print("向下")\n    elif key == "stop":\n        break\n```',
     options: [
       'A. 打印"向上"',
       'B. 打印"向下"',
@@ -477,7 +477,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '综合逻辑',
-    question: '下面哪个密码能通过下面的验证？\n\n```python\nif len(password) == 4 and password.isdigit():\n    print("正确!")\n```\n\nA. "123"\nB. "1234"\nC. "abcd"\nD. "12ab"',
+    question: '下面哪个密码能通过下面的验证？\n\n```python\nif len(password) == 4 and password.isdigit():\n    print("正确!")\n```',
     options: [
       'A. "123"',
       'B. "1234"',
@@ -495,7 +495,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '循环计数',
-    question: '执行下面的代码，result的值是什么？\n\n```python\nresult = ""\nfor i in range(3):\n    result = result + str(i)\n```\n\nA. "012"\nB. "0123"\nC. "3"\nD. ""',
+    question: '执行下面的代码，result的值是什么？\n\n```python\nresult = ""\nfor i in range(3):\n    result = result + str(i)\n```',
     options: [
       'A. "012"',
       'B. "0123"',

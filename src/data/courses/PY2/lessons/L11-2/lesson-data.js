@@ -459,11 +459,12 @@ export const exercises = [
     levelEmoji: '',
     type: 'multiple-choice',
     mathConcept: '条件判断',
-    question: '下列选项中，正确定义函数的是？\n\nA. `function myFunc():`\nB. `def myFunc():`\nC. `define myFunc():`\nD. `func myFunc():`',
+    question: '下列选项中，正确定义函数的是？',
     options: [
-      'A',
-      'B',
-      'C'
+      'A. function myFunc():',
+      'B. def myFunc():',
+      'C. define myFunc():',
+      'D. func myFunc():'
     ],
     answer: 1, // B
     explanation: 'Python中定义函数使用def关键字，格式是`def 函数名(参数):`。\n\n记忆技巧：def是define（定义）的缩写。',

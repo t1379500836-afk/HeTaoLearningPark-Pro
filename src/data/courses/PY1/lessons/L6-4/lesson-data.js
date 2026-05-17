@@ -321,7 +321,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '范围问题',
-    question: 'random.randint(1, 6) 不能生成哪个数字？\n\nA. 1\nB. 3\nC. 6\nD. 7',
+    question: 'random.randint(1, 6) 不能生成哪个数字？',
     options: [
       'A. 1',
       'B. 3',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '计数问题',
-    question: '列表 ["红", "黄", "蓝"] 中，random.choice() 可能选择几个不同的结果？\n\nA. 1种\nB. 2种\nC. 3种\nD. 无数种',
+    question: '列表 ["红", "黄", "蓝"] 中，random.choice() 可能选择几个不同的结果？',
     options: [
       'A. 1种',
       'B. 2种',
@@ -359,7 +359,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '概率问题',
-    question: '列表 [1, 2, 3, 4, 5] 中，random.choice() 选择到偶数的概率是多少？\n\nA. 1/5\nB. 2/5\nC. 1/2\nD. 3/5',
+    question: '列表 [1, 2, 3, 4, 5] 中，random.choice() 选择到偶数的概率是多少？',
     options: [
       'A. 1/5',
       'B. 2/5',
@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '范围问题',
-    question: 'random.randint(10, 20) 能生成的最小和最大数字是什么？\n\nA. 最小10，最大19\nB. 最小11，最大20\nC. 最小10，最大20\nD. 最小0，最大20',
+    question: 'random.randint(10, 20) 能生成的最小和最大数字是什么？',
     options: [
       'A. 最小10，最大19',
       'B. 最小11，最大20',
@@ -397,7 +397,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '概率计算',
-    question: '执行下面的代码，结果能被3整除的概率是多少？\n\n```python\nimport random\nnumber = random.randint(1, 9)\n```\n\nA. 1/9\nB. 1/3\nC. 3/9\nD. 1/2',
+    question: '执行下面的代码，结果能被3整除的概率是多少？\n\n```python\nimport random\nnumber = random.randint(1, 9)\n```',
     options: [
       'A. 1/9',
       'B. 1/3',
@@ -415,7 +415,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '范围计算',
-    question: 'random.randint(0, 100) 生成大于50的数字的概率最接近多少？\n\nA. 49%\nB. 50%\nC. 51%\nD. 99%',
+    question: 'random.randint(0, 100) 生成大于50的数字的概率最接近多少？',
     options: [
       'A. 49%',
       'B. 50%',

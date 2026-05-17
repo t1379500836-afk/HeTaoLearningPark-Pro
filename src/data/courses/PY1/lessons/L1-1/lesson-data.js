@@ -223,7 +223,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '符号识别',
-    question: '下面哪段代码能正确打印出 "乌拉乎"？\n\nA. print(乌拉乎)\nB. print 乌拉乎\nC. print(\'乌拉乎\')\nD. print \'乌拉乎\'',
+    question: '下面哪段代码能正确打印出 "乌拉乎"？',
     options: [
       'A. print(乌拉乎)',
       'B. print 乌拉乎',
@@ -241,7 +241,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '变量理解',
-    question: '执行下面的代码，打印结果是什么？\n\n```python\nn = 12\nprint(n)\n```\n\nA. n\nB. 12\nC. \'12\'\nD. n=12',
+    question: '执行下面的代码，打印结果是什么？\n\n```python\nn = 12\nprint(n)\n```',
     options: [
       'A. n',
       'B. 12',
@@ -261,7 +261,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '算式计算',
-    question: '下面哪段代码能打印出 30？\n\nA. print(7 + 6)\nB. print(n + 20)\nC. print("n + 20")\nD. print(7 + 6)',
+    question: '下面哪段代码能打印出 30？',
     options: [
       'A. print(7 + 6)',
       'B. print(n + 20)',
@@ -281,7 +281,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '算式计算',
-    question: "下面哪段代码能打印出 30？\n\n```python\nn = 10\n```\n\nA. print(7 + 6)\nB. print(n + 20)\nC. print(\"n + 20\")\nD. print(7 + 6)",
+    question: "下面哪段代码能打印出 30？\n\n```python\nn = 10\n```",
     options: [
       'A. print(7 + 6)',
       'B. print(n + 20)',
@@ -301,7 +301,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: "执行下面的代码，会输出什么？\n\n```python\nn = 10\nprint(n * 2 + 5)\n```\n\nA. 20\nB. 25\nC. 30\nD. n * 2 + 5",
+    question: "执行下面的代码，会输出什么？\n\n```python\nn = 10\nprint(n * 2 + 5)\n```",
     options: [
       'A. 20',
       'B. 25',
@@ -319,7 +319,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '累加计算',
-    question: "执行下面的代码，变量 n 的值会变成多少？\n\n```python\nn = 5\nn = n + 3\nprint(n)\n```\n\nA. 5\nB. 8\nC. 3\nD. n + 3",
+    question: "执行下面的代码，变量 n 的值会变成多少？\n\n```python\nn = 5\nn = n + 3\nprint(n)\n```",
     options: [
       'A. 5',
       'B. 8',

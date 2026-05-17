@@ -243,7 +243,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '位置问题',
-    question: '执行下面的代码，"黄色"会插入到哪个位置？\n\n```python\ncolors = ["红", "蓝"]\ncolors.insert(1, "黄")\n```\n\nA. 最前面\nB. 红和蓝之间\nC. 最后面\nD. 不变',
+    question: '执行下面的代码，"黄色"会插入到哪个位置？\n\n```python\ncolors = ["红", "蓝"]\ncolors.insert(1, "黄")\n```',
     options: [
       'A. 最前面',
       'B. 红和蓝之间',
@@ -261,7 +261,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '数数',
-    question: '执行下面的代码，列表中有几个元素？\n\n```python\nnumbers = [1, 2, 3]\nnumbers.insert(1, 5)\nnumbers.pop()\n```\n\nA. 2个\nB. 3个\nC. 4个\nD. 5个',
+    question: '执行下面的代码，列表中有几个元素？\n\n```python\nnumbers = [1, 2, 3]\nnumbers.insert(1, 5)\nnumbers.pop()\n```',
     options: [
       'A. 2个',
       'B. 3个',
@@ -281,7 +281,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '位置问题',
-    question: '执行下面的代码，变量 x 的值是什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nx = fruits.pop(2)\n```\n\nA. "苹果"\nB. "香蕉"\nC. "橙子"\nD. "葡萄"',
+    question: '执行下面的代码，变量 x 的值是什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nx = fruits.pop(2)\n```',
     options: [
       'A. "苹果"',
       'B. "香蕉"',
@@ -299,7 +299,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '算式计算',
-    question: '执行下面的代码，列表所有数的和是多少？\n\n```python\nnumbers = [10, 20, 30]\nnumbers.insert(1, 15)\nnumbers.pop(0)\n```\n\nA. 75\nB. 65\nC. 45\nD. 60',
+    question: '执行下面的代码，列表所有数的和是多少？\n\n```python\nnumbers = [10, 20, 30]\nnumbers.insert(1, 15)\nnumbers.pop(0)\n```',
     options: [
       'A. 75',
       'B. 65',
@@ -319,7 +319,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: '执行下面的代码，变量 result 的值是多少？\n\n```python\nnumbers = [5, 10, 15]\nresult = numbers.pop(1) + numbers[0]\n```\n\nA. 15\nB. 20\nC. 10\nD. 25',
+    question: '执行下面的代码，变量 result 的值是多少？\n\n```python\nnumbers = [5, 10, 15]\nresult = numbers.pop(1) + numbers[0]\n```',
     options: [
       'A. 15',
       'B. 20',
@@ -337,7 +337,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '累加计算',
-    question: '执行下面的代码，变量 total 的值是多少？\n\n```python\nnumbers = [1, 2, 3]\ntotal = 0\nfor i in range(3):\n    total = total + numbers.pop(0)\n```\n\nA. 0\nB. 3\nC. 6\nD. 会报错',
+    question: '执行下面的代码，变量 total 的值是多少？\n\n```python\nnumbers = [1, 2, 3]\ntotal = 0\nfor i in range(3):\n    total = total + numbers.pop(0)\n```',
     options: [
       'A. 0',
       'B. 3',

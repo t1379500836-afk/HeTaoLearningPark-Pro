@@ -493,12 +493,12 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '速度与方向',
-    question: '想让智能车小幅右转，应该用哪个代码？\n\n```python\nA. setPower(80, 0)\nB. setPower(0, 80)\nC. setPower(80, 40)\nD. setPower(40, 80)\n```',
+    question: '想让智能车小幅右转，应该用哪个代码？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. setPower(80, 0)',
+      'B. setPower(0, 80)',
+      'C. setPower(80, 40)',
+      'D. setPower(40, 80)'
     ],
     answer: 2, // C
     explanation: 'setPower(左轮速度, 右轮速度)\n\n小幅右转需要：左轮快，右轮慢\n\n正确答案：C. setPower(80, 40)\n\n- A. (80, 0) 大幅右转\n- B. (0, 80) 大幅左转\n- C. (80, 40) 小幅右转 ✓\n- D. (40, 80) 小幅左转',
@@ -513,12 +513,12 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '索引与编号',
-    question: '智能车的4号传感器检测到黑线，应该用什么判断？\n\n```python\nA. if n[3] == 0:\nB. if n[3] == 1:\nC. if n[4] == 0:\nD. if n[4] == 1:\n```',
+    question: '智能车的4号传感器检测到黑线，应该用什么判断？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. if n[3] == 0:',
+      'B. if n[3] == 1:',
+      'C. if n[4] == 0:',
+      'D. if n[4] == 1:'
     ],
     answer: 1, // B
     explanation: '传感器编号从1开始，但索引从0开始：\n\n- 1号传感器 → 索引0\n- 2号传感器 → 索引1\n- 3号传感器 → 索引2\n- 4号传感器 → 索引3\n- 5号传感器 → 索引4\n\n4号传感器对应索引3，检测到黑线返回1。\n\n正确答案：B. if n[3] == 1:',

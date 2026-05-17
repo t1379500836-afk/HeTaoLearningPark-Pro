@@ -301,7 +301,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '大小比较',
-    question: '下面哪段代码能正确判断数字 5 是否大于 3？\n\nA. if 5 > 3\nB. if 5 > 3:\nC. if (5 > 3)\nD. if 5 >= 3',
+    question: '下面哪段代码能正确判断数字 5 是否大于 3？',
     options: [
       'A. if 5 > 3',
       'B. if 5 > 3:',
@@ -319,7 +319,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '相等判断',
-    question: '执行下面的代码，会输出什么？\n\n```python\nn = 5\nif n == 5:\n    print("等于五")\nelse:\n    print("不等于五")\n```\n\nA. "等于五"\nB. "不等于五"\nC. 5\nD. 什么都不会输出',
+    question: '执行下面的代码，会输出什么？\n\n```python\nn = 5\nif n == 5:\n    print("等于五")\nelse:\n    print("不等于五")\n```',
     options: [
       'A. "等于五"',
       'B. "不等于五"',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '范围判断',
-    question: '小明的年龄是 10 岁。下面哪段代码能正确判断他是不是小学生（6-12岁）？\n\nA. if age > 6 and age < 12\nB. if age >= 6 and age <= 12\nC. if age > 6 or age < 12\nD. if age >= 6 or age <= 12',
+    question: '小明的年龄是 10 岁。下面哪段代码能正确判断他是不是小学生（6-12岁）？',
     options: [
       'A. if age > 6 and age < 12',
       'B. if age >= 6 and age <= 12',
@@ -357,7 +357,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '奇偶判断',
-    question: '如何判断一个数字 n 是偶数？\n\nA. if n % 2 == 0\nB. if n % 2 == 1\nC. if n / 2 == 0\nD. if n == 2',
+    question: '如何判断一个数字 n 是偶数？',
     options: [
       'A. if n % 2 == 0',
       'B. if n % 2 == 1',
@@ -395,7 +395,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '三数比较',
-    question: '找出三个数中最大的一个，应该用？\n\n```python\na = 5\nb = 8\nc = 3\n```\n\nA. if a > b and a > c\nB. if b > a or b > c\nC. if a > b: print(b)\nD. if b >= a and b >= c',
+    question: '找出三个数中最大的一个，应该用？\n\n```python\na = 5\nb = 8\nc = 3\n```',
     options: [
       'A. if a > b and a > c',
       'B. if b > a or b > c',

@@ -307,12 +307,12 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '模式识别',
-    question: '下面哪个是正确的字典格式？\n\n```python\nA. {"苹果": 5, "香蕉": 3}\nB. ["苹果": 5, "香蕉": 3]\nC. ("苹果": 5, "香蕉": 3)\nD. <"苹果": 5, "香蕉": 3>\n```',
+    question: '下面哪个是正确的字典格式？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. {"苹果": 5, "香蕉": 3}',
+      'B. ["苹果": 5, "香蕉": 3]',
+      'C. ("苹果": 5, "香蕉": 3)',
+      'D. <"苹果": 5, "香蕉": 3>'
     ],
     answer: 0, // A
     explanation: '字典用大括号{}括起来，键和值之间用冒号:连接。\n\n正确答案：A\n\n格式：{键: 值, 键: 值}\n记忆方法：{}像宝箱，:像钥匙开锁',
@@ -345,12 +345,12 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '替换与更新',
-    question: '请看下面的代码：\n\n```python\nfruit = {"苹果": 5.9, "香蕉": 3}\n```\n\n如果要完成以下两个操作，应该用什么代码？\n1. 将"苹果"的值改为8\n2. 新增"猕猴桃": 6\n\n```python\nA. fruit["苹果"] = 8; fruit["猕猴桃"] = 6\nB. fruit[苹果] = 8; fruit[猕猴桃] = 6\nC. fruit["苹果"] == 8; fruit["猕猴桃"] == 6\nD. fruit.苹果 = 8; fruit.猕猴桃 = 6\n```',
+    question: '请看下面的代码：\n\n```python\nfruit = {"苹果": 5.9, "香蕉": 3}\n```\n\n如果要完成以下两个操作，应该用什么代码？\n1. 将"苹果"的值改为8\n2. 新增"猕猴桃": 6',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. fruit["苹果"] = 8; fruit["猕猴桃"] = 6',
+      'B. fruit[苹果] = 8; fruit[猕猴桃] = 6',
+      'C. fruit["苹果"] == 8; fruit["猕猴桃"] == 6',
+      'D. fruit.苹果 = 8; fruit.猕猴桃 = 6'
     ],
     answer: 0, // A
     explanation: '字典修改的格式是 字典名[键] = 值，键是字符串需要用引号括起来。\n\n正确答案：A\n\nB选项没有引号，C选项用了==（比较），D选项用了错误的点语法。',
@@ -363,12 +363,12 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '查找问题',
-    question: '有一个学生成绩字典：\n\n```python\nscores = {"小明": 95, "小红": 88, "小刚": 92}\n```\n\n如何安全地查询"小丽"的成绩，如果不存在就返回"未找到"？\n\n```python\nA. scores["小丽"] or "未找到"\nB. scores.get("小丽", "未找到")\nC. scores["小丽"] if "小丽" in scores else "未找到"\nD. 以上都可以\n```',
+    question: '有一个学生成绩字典：\n\n```python\nscores = {"小明": 95, "小红": 88, "小刚": 92}\n```\n\n如何安全地查询"小丽"的成绩，如果不存在就返回"未找到"？',
     options: [
-      'A',
-      'B',
-      'C',
-      'D'
+      'A. scores["小丽"] or "未找到"',
+      'B. scores.get("小丽", "未找到")',
+      'C. scores["小丽"] if "小丽" in scores else "未找到"',
+      'D. 以上都可以'
     ],
     answer: 1, // B (get()方法是正确做法)
     explanation: '这三种方法都可以实现安全查询：\n\nA. 短路或运算（但会先报错）\nB. get()方法（推荐，最简洁）\nC. 条件表达式（正确但较复杂）\n\n注意：A实际上会先报错，所以正确答案是B和C。但作为选择题，D是合理的。',

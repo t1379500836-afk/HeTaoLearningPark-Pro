@@ -401,7 +401,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '函数基础',
-    question: '下面哪个命令可以播放音效？\n\nA. print("ding")\nB. playSound("ding")\nC. showSound("ding")\nD. sound("ding")',
+    question: '下面哪个命令可以播放音效？',
     options: [
       'A. print("ding")',
       'B. playSound("ding")',
@@ -419,7 +419,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '布尔值判断',
-    question: 'isPressed("button")被按下时返回什么？\n\nA. "pressed"\nB. 1\nC. True\nD. False',
+    question: 'isPressed("button")被按下时返回什么？',
     options: [
       'A. "pressed"',
       'B. 1',
@@ -439,7 +439,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '函数参数',
-    question: 'printPos(10, 20, "你好")会在什么位置打印？\n\nA. 坐标(10,10)\nB. 坐标(10,20)\nC. 坐标(20,10)\nD. 屏幕中心',
+    question: 'printPos(10, 20, "你好")会在什么位置打印？',
     options: [
       'A. 坐标(10,10)',
       'B. 坐标(10,20)',
@@ -457,7 +457,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '程序逻辑',
-    question: '执行下面的代码，会发生什么？\n\n```python\nwhile True:\n    if isPressed("quit"):\n        break\n    print("运行中...")\n```\n\nA. 只打印一次"运行中..."\nB. 无限打印"运行中..."\nC. 按quit后停止\nD. 程序报错',
+    question: '执行下面的代码，会发生什么？\n\n```python\nwhile True:\n    if isPressed("quit"):\n        break\n    print("运行中...")\n```',
     options: [
       'A. 只打印一次"运行中..."',
       'B. 无限打印"运行中..."',
@@ -477,7 +477,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '逻辑运算',
-    question: '下面哪个条件检测"按钮A和按钮B同时被按下"？\n\nA. isPressed("A") or isPressed("B")\nB. isPressed("A") and isPressed("B")\nC. isPressed("A") + isPressed("B")\nD. isPressed("AB")',
+    question: '下面哪个条件检测"按钮A和按钮B同时被按下"？',
     options: [
       'A. isPressed("A") or isPressed("B")',
       'B. isPressed("A") and isPressed("B")',
@@ -495,7 +495,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '程序设计',
-    question: '如何实现"按下按钮录音3秒，然后自动播放"？\n\nA. record() + sleep(3) + playRecord()\nB. playRecord() + record()\nC. record() + playRecord() + sleep(3)\nD. sleep(3) + record() + playRecord()',
+    question: '如何实现"按下按钮录音3秒，然后自动播放"？',
     options: [
       'A. record() + sleep(3) + playRecord()',
       'B. playRecord() + record()',

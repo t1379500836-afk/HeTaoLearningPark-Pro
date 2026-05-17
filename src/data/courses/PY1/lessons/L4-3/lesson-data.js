@@ -322,7 +322,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'break语句',
-    question: 'break语句的作用是什么？\n\nA. 暂停程序\nB. 结束循环\nC. 跳过本次循环\nD. 重新开始循环',
+    question: 'break语句的作用是什么？',
     options: [
       'A. 暂停程序',
       'B. 结束循环',
@@ -340,7 +340,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'while循环条件',
-    question: 'while循环什么时候结束？\n\nA. 条件为True时\nB. 条件为False时\nC. 永远不结束\nD. 执行5次后',
+    question: 'while循环什么时候结束？',
     options: [
       'A. 条件为True时',
       'B. 条件为False时',
@@ -360,7 +360,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '循环执行次数',
-    question: '执行下面的代码，循环会执行几次？\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    if count == 3:\n        break\n    count = count + 1\n```\n\nA. 3次\nB. 4次\nC. 5次\nD. 无限次',
+    question: '执行下面的代码，循环会执行几次？\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    if count == 3:\n        break\n    count = count + 1\n```',
     options: [
       'A. 3次',
       'B. 4次',
@@ -378,7 +378,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '逻辑运算',
-    question: 'while count < 10 and errors < 3: 什么时候循环继续？\n\nA. count<10或errors<3\nB. count<10且errors<3\nC. count>=10或errors>=3\nD. count>=10且errors>=3',
+    question: 'while count < 10 and errors < 3: 什么时候循环继续？',
     options: [
       'A. count<10或errors<3',
       'B. count<10且errors<3',
@@ -398,7 +398,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '算法逻辑',
-    question: '执行下面的代码，最后a的值是多少？\n\n```python\na = 48\nb = 18\nwhile b != 0:\n    a, b = b, a % b\n```\n\nA. 0\nB. 6\nC. 12\nD. 18',
+    question: '执行下面的代码，最后a的值是多少？\n\n```python\na = 48\nb = 18\nwhile b != 0:\n    a, b = b, a % b\n```',
     options: [
       'A. 0',
       'B. 6',
@@ -416,7 +416,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '循环嵌套',
-    question: '下面关于嵌套循环中的break，哪个说法正确？\n\nA. break退出所有循环\nB. break只退出内层循环\nC. break不能用在嵌套循环中\nD. break跳过本次循环',
+    question: '下面关于嵌套循环中的break，哪个说法正确？',
     options: [
       'A. break退出所有循环',
       'B. break只退出内层循环',

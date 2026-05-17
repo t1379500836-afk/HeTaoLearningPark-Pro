@@ -1,13 +1,14 @@
 /**
- * PY3 课程 L16-1: 逻辑判断大师
+ * PY3 课程 L16-1: 雪丰冰城（枚举法组合数）
  *
  * 核心知识点:
- * 1. and逻辑与运算
- * 2. or逻辑或运算
- * 3. 复合条件判断
+ * 1. for循环嵌套枚举组合数
+ * 2. 组合成两位数
+ * 3. 筛选符合条件的数
+ * 4. 字符串组合
  */
 
-// 单词卡数据 - OCR 提取 + 拓展词汇
+// 单词卡数据 - OCR 提取
 export const vocabData = [
   // OCR 提取的单词
   {
@@ -16,8 +17,8 @@ export const vocabData = [
     partOfSpeech: 'conj.',
     meaning: '和，与；加；接着',
     level: 'easy',
-    example: 'You and I are friends.',
-    exampleTranslation: '你和我是朋友。',
+    example: 'Leng Xuefeng and Hou Sailei are both confused.',
+    exampleTranslation: '冷雪丰和猴赛雷都很疑惑。',
     note: 'Python中的逻辑与运算符',
     source: 'ocr'
   },
@@ -25,7 +26,7 @@ export const vocabData = [
     word: 'or',
     pronunciation: '[o:r]',
     partOfSpeech: 'conj.',
-    meaning: '或；或者；否则',
+    meaning: '或；否则；要不然',
     level: 'easy',
     example: 'Yes or no?',
     exampleTranslation: '是或否？',
@@ -40,7 +41,7 @@ export const vocabData = [
     level: 'medium',
     example: 'The ice is cold.',
     exampleTranslation: '冰是冷的。',
-    note: '',
+    note: '冰',
     source: 'ocr'
   },
   {
@@ -51,19 +52,30 @@ export const vocabData = [
     level: 'medium',
     example: 'I love candy.',
     exampleTranslation: '我喜欢糖果。',
-    note: '',
+    note: '糖果',
     source: 'ocr'
   },
   // 拓展单词
   {
-    word: 'condition',
-    pronunciation: "[kan'dijan]",
-    partOfSpeech: 'n.',
-    meaning: '条件；情况',
+    word: 'enumerate',
+    pronunciation: "[i'nju:mareit]",
+    partOfSpeech: 'v.',
+    meaning: '枚举；列举',
     level: 'hard',
-    example: 'Check the condition.',
-    exampleTranslation: '检查条件。',
-    note: '',
+    example: 'Enumerate all possibilities.',
+    exampleTranslation: '枚举所有可能性。',
+    note: '枚举',
+    source: 'extended'
+  },
+  {
+    word: 'digit',
+    pronunciation: "['did3it]",
+    partOfSpeech: 'n.',
+    meaning: '数字；位数',
+    level: 'medium',
+    example: 'This is a two-digit number.',
+    exampleTranslation: '这是一个两位数。',
+    note: '数字',
     source: 'extended'
   }
 ]
@@ -72,73 +84,73 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: 'and逻辑与运算',
-    emoji: '🔗',
+    title: '枚举组合数 - for循环嵌套',
+    emoji: '🔢',
     gradeLevel: '3-4',
-    summary: '两个条件都为真时结果才为真',
+    summary: '用for循环嵌套枚举所有组合',
 
     easy: {
-      story: 'and就像"同时"！比如：有糖果AND有冰激凌，才能开心！两个都要有才行！',
-      concept: 'and是逻辑与运算符。只有当and两边的条件都为True时，整个表达式才为True。只要有一个False，结果就是False。',
-      syntax: "# and 运算\n# 条件1 and 条件2\n# 两个都为True，结果才为True\n\nif has_candy and has_ice:\n    print('开心！')\nelse:\n    print('有点遗憾...')",
+      story: '想象你要找出用数字1、2、3能组成哪些两位数？就需要用两个for循环，一个看十位，一个看个位！',
+      concept: '用for循环嵌套可以枚举多个数字的组合。外层循环取十位，内层循环取个位。',
+      syntax: 'nums = [1, 2, 3]\nfor n1 in nums:      # 十位\n    for n2 in nums:    # 个位\n        n = n1 * 10 + n2  # 组合成两位数',
       example: {
-        title: '双条件判断',
-        code: "score = 85\nhomework_done = True\n\n# 必须分数高且作业完成\nif score > 80 and homework_done:\n    print('可以玩游戏！')\nelse:\n    print('继续努力')",
-        output: '分数>80且作业完成才能玩游戏',
-        explanation: 'and要求两个条件同时满足。'
+        title: '组合两位数',
+        code: 'nums = [1, 2, 3]\nfor n1 in nums:\n    for n2 in nums:\n        n = n1 * 10 + n2\n        print(n)',
+        output: '11\n12\n13\n21\n22\n23\n31\n32\n33',
+        explanation: '用for循环嵌套，组合出所有两位数。11是1*10+1，12是1*10+2...'
       },
       practice: [
         {
-          question: 'and两边都为True时，结果是什么？',
-          answer: 'True'
+          question: 'for循环嵌套用来做什么？',
+          answer: '枚举多个数字的组合'
         },
         {
-          question: 'and有一边为False时，结果是什么？',
-          answer: 'False'
+          question: '外层循环取的是哪一位？',
+          answer: '十位'
         }
       ]
     },
 
     medium: {
-      story: '在游戏中，and经常用来判断复杂条件！比如：玩家在安全区AND生命值大于0，才能继续游戏！',
-      concept: 'and常用于需要多个条件同时满足的场景：游戏状态判断、权限验证、输入验证等。',
-      syntax: "# 常见应用场景\n\n# 1. 游戏状态\nif is_alive and in_safe_zone:\n    rest()\n\n# 2. 权限验证\nif is_admin and has_password:\n    grant_access()\n\n# 3. 范围判断\nif age >= 18 and age <= 65:\n    print('成年人')",
+      story: '组合完数字后，还需要筛选出符合条件的数！比如：找出所有偶数！',
+      concept: '在for循环嵌套后，用if语句筛选符合条件的数。',
+      syntax: '# 筛选偶数\nfor n1 in nums:\n    for n2 in nums:\n        n = n1 * 10 + n2\n        if n % 2 == 0:  # 偶数判断\n            print(n)',
       example: {
-        title: '范围判断',
-        code: "score = 75\n\n# 判断分数是否在60-100之间\nif score >= 60 and score <= 100:\n    print('及格！')\nelse:\n    print('分数无效或不及格')",
-        output: '判断分数是否在有效范围内',
-        explanation: '用and判断数值是否在某个区间。'
+        title: '筛选偶数',
+        code: 'nums = [1, 2, 3]\ncount = 0\nfor n1 in nums:\n    for n2 in nums:\n        n = n1 * 10 + n2\n        if n % 2 == 0:\n            count = count + 1\n            print(n)\nprint("偶数个数:", count)',
+        output: '12\n32\n偶数个数: 2',
+        explanation: '找出用1、2、3组成的偶数：12和32，共2个。\n\n数学知识：能被2整除的数是偶数。'
       },
       practice: [
         {
-          question: '如何判断x是否在1-10之间？',
-          answer: 'if x >= 1 and x <= 10'
+          question: '如何判断一个数是偶数？',
+          answer: 'n % 2 == 0'
         },
         {
-          question: 'and可以连接多个条件吗？',
-          answer: '可以，如 a and b and c'
+          question: '如何在组合后筛选？',
+          answer: '在循环中添加if判断'
         }
       ]
     },
 
     hard: {
-      story: 'and的短路特性！如果第一个条件是False，Python不会检查第二个条件，直接返回False！',
-      concept: 'and的短路求值：从左到右判断，遇到False就停止，不再判断后面的条件。这在某些情况下可以提高效率。',
-      syntax: "# and 短路求值\n# 如果左边是False，右边不执行\n\n# 例子：避免除以0\nif divisor != 0 and num / divisor > 1:\n    print('结果大于1')\n\n# 如果divisor=0，不会执行除法",
+      story: '组合三位数需要三层for循环！百位、十位、个位各用一个循环！',
+      concept: '组合三位数需要三层for循环嵌套：百位×100 + 十位×10 + 个位。',
+      syntax: 'nums = [1, 2, 3]\nfor n1 in nums:      # 百位\n    for n2 in nums:    # 十位\n        for n3 in nums:  # 个位\n            n = n1*100 + n2*10 + n3',
       example: {
-        title: '短路求值',
-        code: "# 安全除法\ndef safe_divide(a, b):\n    if b != 0 and a / b > 1:\n        return a / b\n    return 0\n\n# 如果b=0，第一个条件为False，不会执行除法\nresult = safe_divide(10, 0)\nprint(result)  # 0，没有报错",
-        output: '安全地进行条件除法',
-        explanation: '利用短路特性避免错误。'
+        title: '组合三位数',
+        code: 'nums = [1, 2]\nfor n1 in nums:\n    for n2 in nums:\n        for n3 in nums:\n            n = n1*100 + n2*10 + n3\n            print(n)',
+        output: '111\n112\n121\n122\n211\n212\n221\n222',
+        explanation: '用三层for循环嵌套，组合出所有三位数。\n\n数学知识：这是排列组合，2×2×2=8种'
       },
       practice: [
         {
-          question: 'and的短路是什么意思？',
-          answer: '第一个False就停止，不检查后面'
+          question: '组合三位数需要几层循环？',
+          answer: '三层'
         },
         {
-          question: '为什么利用短路可以避免除以0？',
-          answer: '先检查除数不为0，通过才做除法'
+          question: '三位数的计算公式是什么？',
+          answer: '百位×100 + 十位×10 + 个位'
         }
       ]
     }
@@ -146,73 +158,73 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: 'or逻辑或运算',
-    emoji: '🔀',
+    title: '字符串组合 - 双重循环',
+    emoji: '🔗',
     gradeLevel: '3-4',
-    summary: '只要有一个条件为真，结果就为真',
+    summary: '用双重for循环遍历多个列表进行组合',
 
     easy: {
-      story: 'or就像"或者"！比如：有糖果OR有冰激凌，就能开心！只要有一样就行！',
-      concept: 'or是逻辑或运算符。只要or两边的条件有一个为True，整个表达式就为True。只有两个都为False，结果才是False。',
-      syntax: "# or 运算\n# 条件1 or 条件2\n# 只要有一个True，结果就是True\n\nif has_candy or has_ice:\n    print('开心！')\nelse:\n    print('都没有...')",
+      story: '就像点餐一样！可以选择主食AND饮料！用两个列表的组合来表示！',
+      concept: '用双层for循环分别遍历两个列表，可以找出所有的搭配组合。',
+      syntax: 'ice = ["冰淇淋", "冰沙"]\ncandy = ["糖果", "巧克力"]\nfor i in ice:\n    for c in candy:\n        print(i, c)',
       example: {
-        title: '或条件判断',
-        code: "day = 'Saturday'\n\n# 周六或周日可以休息\nif day == 'Saturday' or day == 'Sunday':\n    print('周末快乐！')\nelse:\n    print('工作日')",
-        output: '周六或周日显示周末快乐',
-        explanation: 'or只需要一个条件满足即可。'
+        title: '早餐组合',
+        code: 'drinks = ["果汁", "酸奶"]\nfood = ["饭团", "三明治"]\nfor d in drinks:\n    for f in food:\n        print(d, f)',
+        output: '果汁 饭团\n果汁 三明治\n酸奶 饭团\n酸奶 三明治',
+        explanation: '用双重循环遍历两个列表，找出所有搭配组合。\n\n数学知识：2×2=4种组合'
       },
       practice: [
         {
-          question: 'or有一边为True时，结果是什么？',
-          answer: 'True'
+          question: '双重for循环遍历两个列表有多少种组合？',
+          answer: '列表1长度 × 列表2长度'
         },
         {
-          question: 'or两边都为False时，结果是什么？',
-          answer: 'False'
+          question: '字符串组合用什么符号连接？',
+          answer: '用逗号或+号'
         }
       ]
     },
 
     medium: {
-      story: 'or经常用于多个选项判断！比如：选择红色OR蓝色OR绿色，只要选了一个颜色就可以！',
-      concept: 'or常用于多选一的场景：颜色选择、难度选择、角色选择等。可以用多个or连接多个条件。',
-      syntax: "# 多个or连接\nif color == 'red' or color == 'blue' or color == 'green':\n    print('选择了有效颜色')\n\n# 游戏中的应用\nif level == 'easy' or level == 'medium' or level == 'hard':\n    start_game()",
+      story: '点餐时如果不想吃某种组合怎么办？用if判断排除它！',
+      concept: '在循环中添加if语句，可以筛选出符合条件的组合，排除不符合的。',
+      syntax: '# 排除某个组合\nfor i in ice:\n    for c in candy:\n        if i != "某个":\n            print(i, c)',
       example: {
-        title: '多选项判断',
-        code: "choice = input('输入选择(A/B/C): ')\n\nif choice == 'A' or choice == 'B' or choice == 'C':\n    print('有效选择！')\nelse:\n    print('无效选择，请重新输入')",
-        output: '判断输入是否是有效选项',
-        explanation: '用or判断多个有效选项。'
+        title: '筛选组合',
+        code: 'ice = ["冰淇淋", "冰沙"]\ncandy = ["糖果", "巧克力"]\nfor i in ice:\n    for c in candy:\n        if i != "冰沙":  # 排除冰沙\n            print(i, c)',
+        output: '冰淇淋 糖果\n冰淇淋 巧克力',
+        explanation: '用if语句排除"冰沙"相关的组合。\n\n数学知识：排除法'
       },
       practice: [
         {
-          question: '如何判断字母是否是元音(a,e,i,o,u)？',
-          answer: 'if letter=="a" or letter=="e" or ...'
+          question: '如何排除某个组合？',
+          answer: '用if判断排除'
         },
         {
-          question: 'or可以连接很多个条件吗？',
-          answer: '可以'
+          question: '排除和筛选有什么区别？',
+          answer: '排除是不满足条件的不要，筛选是只取满足条件的'
         }
       ]
     },
 
     hard: {
-      story: 'or也有短路特性！如果第一个条件是True，Python不会检查后面的条件，直接返回True！',
-      concept: 'or的短路求值：从左到右判断，遇到True就停止，不再判断后面的条件。可以用于提供默认值。',
-      syntax: "# or 短路求值\n# 如果左边是True，右边不执行\n\n# 提供默认值\nname = user_input or 'Guest'\n# 如果user_input为空，使用'Guest'\n\n# 快速判断\nif is_vip or check_permission():\n    grant_access()",
+      story: '字符串组合也可以筛选！比如：排除含有"芒果"的组合！',
+      concept: '字符串的 in 运算符可以检查字符串是否包含某个子串。配合if可以筛选复杂条件。',
+      syntax: '# 用in检查是否包含\nif "芒果" in combo:\n    continue  # 跳过',
       example: {
-        title: '默认值设置',
-        code: "# 用户输入或默认值\nuser_name = ''  # 用户没输入\n\n# 如果user_name为空，使用默认值\nname = user_name or 'Player1'\nprint(name)  # 输出: Player1\n\n# 等价于：\nif user_name:\n    name = user_name\nelse:\n    name = 'Player1'",
-        output: '空值时使用默认值',
-        explanation: '利用or的短路特性设置默认值。'
+        title: '排除���含��物的组合',
+        code: 'ice = ["芒果冰淇淋", "草莓冰淇淋"]\ncandy = ["巧克力", "软糖"]\nfor i in ice:\n    for c in candy:\n        if "芒果" not in i:  # 排除芒果\n            print(i, c)',
+        output: '草莓冰淇淋 巧克力\n草莓冰淇淋 软糖',
+        explanation: '用"芒果" not in i 排除含有芒果的组合。'
       },
       practice: [
         {
-          question: 'or的短路是什么意思？',
-          answer: '第一个True就停止，不检查后面'
+          question: '如何检查字符串包含某个字符？',
+          answer: '用 in 运算符'
         },
         {
-          question: 'a or b 如何设置默认值？',
-          answer: '如果a为空/False，使用b作为默认值'
+          question: '"芒果" in i 是什么意思？',
+          answer: '检查i中是否包含"芒果"'
         }
       ]
     }
@@ -220,73 +232,73 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '复合条件判断',
-    emoji: '🧩',
+    title: '组合数公式 - 数学应用',
+    emoji: '🧮',
     gradeLevel: '3-4',
-    summary: '组合and和or实现复杂逻辑',
+    summary: '用数学公式组合数，解决实际问题',
 
     easy: {
-      story: '有时候需要组合and和or！比如：(周六或周日) AND 天气好，才能出去玩！',
-      concept: '复合条件就是把and和or组合在一起。用括号可以明确优先级：括号里的先计算。',
-      syntax: "# 复合条件\n# (周六或周日) 且 天气好\nif (day == 'Saturday' or day == 'Sunday') and weather == 'sunny':\n    print('出去玩！')\n\n# 注意括号的作用！",
+      story: '组成两位数的公式：十位数字×10 + 个位数字！这就是数学在编程中的应用！',
+      concept: '两位数的组成公式：十位×10 + 个位。n1是十位数字，n2是个位数字。',
+      syntax: '# 两位数 = 十位 × 10 + 个位\n# 例如：3和7 → 3×10 + 7 = 37',
       example: {
-        title: '括号的重要性',
-        code: "# 没有括号 - and优先级高于or\nif True or False and False:\n    print('A')  # 会打印A\n\n# 有括号 - 括号优先\nif (True or False) and False:\n    print('B')  # 不会打印",
-        output: '展示括号对优先级的影响',
-        explanation: 'and优先级高于or，括号可以改变计算顺序。'
+        title: '两位数计算',
+        code: 'def make_two_digit(a, b):\n    return a * 10 + b\n\nprint(make_two_digit(1, 2))  # 12\nprint(make_two_digit(3, 7))  # 37',
+        output: '12\n37',
+        explanation: '用公式快速组合两位数。\n\n数学知识：十进制数的组成'
       },
       practice: [
         {
-          question: 'and和or哪个优先级更高？',
-          answer: 'and优先级更高'
+          question: '两位数的计算公式是什么？',
+          answer: '十位×10 + 个位'
         },
         {
-          question: '如何改变运算顺序？',
-          answer: '用括号()'
+          question: '数字7和9能组成什么？',
+          answer: '79'
         }
       ]
     },
 
     medium: {
-      story: '在游戏中，复合条件非常常见！比如：(有钥匙或会开锁) AND 门没锁，才能进入！',
-      concept: '复合条件可以表达复杂的游戏规则、业务逻辑。关键是用括号明确表达意图。',
-      syntax: "# 游戏中的复合条件\n\n# 进入条件\nif (has_key or can_picklock) and not door_locked:\n    enter_room()\n\n# 攻击条件\nif is_alive and (has_sword or has_magic):\n    attack()\n\n# 得分条件\nif (score > 100 or time_bonus) and not cheated:\n    add_bonus()",
+      story: '组合完后还需要验证！比如：验证一个数是否是3的倍数！',
+      concept: '用模运算（取余）可以验证整除关系。n % 3 == 0 表示能被3整除。',
+      syntax: '# 验证3的倍数\nif n % 3 == 0:\n    print("是3的倍数")',
       example: {
-        title: '游戏规则',
-        code: "has_key = True\ncan_swim = False\nbridge_broken = True\n\n# 有钥匙 且 (会游泳或桥没断)\nif has_key and (can_swim or not bridge_broken):\n    print('可以过河')\nelse:\n    print('需要找其他方法')",
-        output: '根据复合条件判断是否可以过河',
-        explanation: '括号确保逻辑正确。'
+        title: '筛选3的倍数',
+        code: 'nums = [1, 2, 3, 4, 5, 6]\nfor n in nums:\n    if n % 3 == 0:\n        print(n, "是3的倍数")',
+        output: '3 是3的倍数\n6 是3的倍数',
+        explanation: '用 n % 3 == 0 判断是否是3的倍数。\n\n数学知识：能被3整除的数'
       },
       practice: [
         {
-          question: '如何表达"A且(B或C)"？',
-          answer: 'if A and (B or C)'
+          question: '如何判断n是5的倍数？',
+          answer: 'n % 5 == 0'
         },
         {
-          question: '为什么要用括号？',
-          answer: '明确优先级，避免逻辑错误'
+          question: '% 运算是什么？',
+          answer: '取余数/模运算'
         }
       ]
     },
 
     hard: {
-      story: '复杂逻辑可能需要多层嵌套！但要注意可读性，太复杂时可以拆分成多个判断！',
-      concept: '复杂的复合条件可以：1.使用括号分组 2.拆分成多个if 3.使用变量存储中间结果。保持代码清晰。',
-      syntax: "# 方式1：括号分组\nif (a and b) or (c and d):\n    pass\n\n# 方式2：拆分判断\ncondition1 = a and b\ncondition2 = c and d\nif condition1 or condition2:\n    pass\n\n# 方式3：嵌套if\nif a:\n    if b:\n        pass\n    elif c:\n        if d:\n            pass",
+      story: '三位数的组成公式：百位×100 + 十位×10 + 个位！',
+      concept: '三位数的组成公式：百位×100 + 十位×10 + 个位。这是十进制的本质！',
+      syntax: '# 三位数 = 百位×100 + 十位×10 + 个位\n# 例如：1,2,3 → 1×100 + 2×10 + 3 = 123',
       example: {
-        title: '清晰的条件判断',
-        code: "# 不好：一行太长\nif (score > 80 and attendance > 90) or (score > 90 and attendance > 80) or is_vip:\n    print('优秀学生')\n\n# 好：拆分成变量\nhigh_score = score > 80\ngood_attendance = attendance > 90\nexcellent = score > 90 and attendance > 80\n\nif (high_score and good_attendance) or excellent or is_vip:\n    print('优秀学生')",
-        output: '用变量让条件更清晰',
-        explanation: '用变量存储条件，提高可读性。'
+        title: '三位数公式',
+        code: 'def make_three_digit(a, b, c):\n    return a*100 + b*10 + c\n\nprint(make_three_digit(1, 2, 3))  # 123\nprint(make_three_digit(4, 5, 6))  # 456',
+        output: '123\n456',
+        explanation: '用公式组合三位数。\n\n数学知识：十进制的位值原理'
       },
       practice: [
         {
-          question: '条件太长时应该怎么办？',
-          answer: '用变量存储中间条件'
+          question: '三位数的公式是什么？',
+          answer: '百位×100 + 十位×10 + 个位'
         },
         {
-          question: '为什么要保持代码清晰？',
-          answer: '方便理解和维护'
+          question: '数字2、0、2组成什么？',
+          answer: '202'
         }
       ]
     }
@@ -302,35 +314,34 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: 'and运算',
-    question: 'True and False 的结果是什么？',
+    mathConcept: '两位数组合',
+    question: '用数字1、2、3组合成所有两位数，n应该等于什么？\n\n```python\nnums = [1, 2, 3]\nfor n1 in nums:\n    for n2 in nums:\n        n = ?\n        print(n)\n```',
     options: [
-      'True',
-      'False',
-      'None',
-      'Error'
+      'A. n1 + n2',
+      'B. n1 * n2',
+      'C. n1 * 10 + n2'
     ],
-    answer: 1,
-    explanation: 'and要求两边都为True才返回True。有一个False，结果就是False。',
-    hint: 'and要两个都True'
+    answer: 2, // C
+    explanation: '两位数的组成：十位×10 + 个位。例如：3和7组成37 = 3×10 + 7。',
+    hint: '两位数的十位需要乘10'
   },
+
   {
     id: 'ex-2',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: 'or运算',
-    question: 'True or False 的结果是什么？',
+    mathConcept: '偶数判断',
+    question: '想从数字1、2、3中找出所有偶数，判断条件正确的是？',
     options: [
-      'True',
-      'False',
-      'None',
-      'Error'
+      'A. n % 2 == 0',
+      'B. n % 2 != 0',
+      'C. n / 2 == 0'
     ],
-    answer: 0,
-    explanation: 'or只要有一个True就返回True。左边是True，所以结果是True。',
-    hint: 'or有一个True就行'
+    answer: 0, // A
+    explanation: '偶数就是能被2整除的数，余数为0。n % 2 == 0 表示n是偶数。',
+    hint: '偶数能被2整除'
   },
 
   // 🟡 进阶题
@@ -340,35 +351,36 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '复合条件',
-    question: 'True or False and False 的结果是什么？（and优先级更高）',
+    mathConcept: '字符串组合',
+    question: '两个列表 ["冰淇淋", "冰沙"] 和 ["糖果", "巧克力"]，一共有多少种组合？',
     options: [
-      'True',
-      'False',
-      'None',
-      'Error'
+      'A. 2种',
+      'B. 3种',
+      'C. 4种',
+      'D. 5种'
     ],
-    answer: 0,
-    explanation: 'and先算：False and False = False。然后：True or False = True。',
-    hint: 'and比or优先级高'
+    answer: 2, // C
+    explanation: '2×2=4种组合。数学知识：列表1长度 × 列表2长度。',
+    hint: '2 × 2 = ?'
   },
+
   {
     id: 'ex-4',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '括号影响',
-    question: '(True or False) and False 的结果是什么？',
+    mathConcept: '排除法',
+    question: '下面的代码会输出什么？\n\n```python\nnums = [1, 2, 3]\nfor n in nums:\n    if n != 2:\n        print(n)\n```',
     options: [
-      'True',
-      'False',
-      'None',
-      'Error'
+      'A. 1 2',
+      'B. 1 3',
+      'C. 2 3',
+      'D. 1 2 3'
     ],
-    answer: 1,
-    explanation: '括号先算：True or False = True。然后：True and False = False。',
-    hint: '括号改变优先级'
+    answer: 1, // B
+    explanation: 'n != 2 排除数字2，所以输出1和3。',
+    hint: '不等于2的数'
   },
 
   // 🔴 挑战题
@@ -378,35 +390,36 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '综合判断',
-    question: 'score=75, age=15，判断 score >= 60 and score <= 100 and age >= 18 的结果？',
+    mathConcept: '三位数组合',
+    question: '用数字1、2能组成几个三位数？',
     options: [
-      'True',
-      'False',
-      'None',
-      'Error'
+      'A. 4种',
+      'B. 6种',
+      'C. 8种',
+      'D. 9种'
     ],
-    answer: 1,
-    explanation: 'score>=60(✓) and score<=100(✓) and age>=18(✗)。最后一个条件不满足，结果是False。',
-    hint: '年龄条件不满足'
+    answer: 2, // C
+    explanation: '三位数需要3个位置：百位、十位、个位各2种选择。2×2×2=8种。\n\n数学知识：2的3次方=8',
+    hint: '2 × 2 × 2 = ?'
   },
+
   {
     id: 'ex-6',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '短路求值',
-    question: '执行 a = 0 or 5 后，a的值是什么？',
+    mathConcept: '筛选条件',
+    question: '用数字1、2、3组成两位数，且十位和个位不同的有几种？\n\n```python\nnums = [1, 2, 3]\ncount = 0\nfor n1 in nums:\n    for n2 in nums:\n        if n1 != n2:\n            count = count + 1\nprint(count)\n```',
     options: [
-      '0',
-      '5',
-      'True',
-      'False'
+      'A. 4种',
+      'B. 5种',
+      'C. 6种',
+      'D. 7种'
     ],
-    answer: 1,
-    explanation: 'or返回第一个为真的值。0为假，继续判断5，5为真，返回5。',
-    hint: 'or返回第一个真值'
+    answer: 2, // C
+    explanation: '总共9种(3×3)，排除2种(11,22,33)，剩下6种。\n或用排列公式：3×2=6种。\n\n数学知识：排列组合',
+    hint: '3×3 - 3 = ? 或 3×2 = ?'
   }
 ]
 
@@ -414,45 +427,45 @@ export const exercises = [
 export const lessonMeta = {
   id: 'L16-1',
   title: '雪丰冰城',
-  subtitle: '学会and和or逻辑运算',
+  subtitle: '用枚举法解决组合数问题',
   difficulty: '进阶',
-  estimatedTime: '30-45分钟',
+  estimatedTime: '30-40分钟',
   learningGoals: [
-    '掌握and逻辑与运算',
-    '掌握or逻辑或运算',
-    '理解短路求值特性',
-    '能组合使用and和or'
+    '掌握for循环嵌套枚举组合数',
+    '学会组合成两位数和三位数',
+    '能够用if语句筛选符合条件的数',
+    '能够进行字符串组合'
   ],
   prerequisites: [
-    'Python条件判断',
-    '布尔值True/False',
-    '比较运算符'
+    '掌握for循环基础',
+    '了解列表的使用',
+    '理解if条件判断'
   ]
 }
 
-// 打字练习单词（按难度分组，纯英文）
+// 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['and', 'or', 'true', 'false'],
-  medium: ['candy', 'logic', 'check', 'valid', 'ice'],
-  hard: ['condition', 'operator', 'boolean', 'priority']
+  easy: ['enumerate', 'combination', 'digit', 'tens'],
+  medium: ['multiple', 'filter', 'exclude', 'pair'],
+  hard: ['hundreds', 'tens', 'ones', 'permutation']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'if a and b:',
-    'if a or b:',
-    'if x > 0 and y > 0:',
-    'if color == "red" or color == "blue":'
+    'nums = [1, 2, 3]\nfor n1 in nums:\n    for n2 in nums:\n        n = n1*10 + n2',
+    'for i in range(3):\n    for j in range(3):\n        print(i, j)',
+    'nums = [1, 2]\nfor n in nums:\n    print(n)'
   ],
   medium: [
-    'if score >= 60 and score <= 100:\n    print("pass")',
-    'if day == "Sat" or day == "Sun":\n    print("weekend")',
-    'if (a or b) and c:\n    pass'
+    'nums = [1, 2, 3]\nfor n in nums:\n    if n % 2 == 0:\n        print(n)',
+    'drinks = ["果汁", "酸奶"]\nfood = ["饭团", "汉堡"]\nfor d in drinks:\n    for f in food:\n        print(d, f)',
+    'for i in range(3):\n    for j in range(3):\n        if i != j:\n            print(i, j)'
   ],
   hard: [
-    'if (score > 80 and attendance > 90) or is_vip:\n    print("excellent")',
-    'cond1 = a and b\ncond2 = c or d\nif cond1 and cond2:\n    pass'
+    'nums = [1, 2]\nfor n1 in nums:\n    for n2 in nums:\n        for n3 in nums:\n            n = n1*100 + n2*10 + n3',
+    'def make_two_digit(a, b):\n    return a*10 + b\nprint(make_two_digit(3, 7))',
+    'ice = ["冰淇淋", "冰沙"]\nfor i in ice:\n    if "芒果" not in i:\n        print(i)'
   ]
 }
 

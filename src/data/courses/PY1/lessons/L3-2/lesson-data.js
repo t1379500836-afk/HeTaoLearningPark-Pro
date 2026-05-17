@@ -223,7 +223,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '循环变量值',
-    question: 'for i in range(3)循环中，i的值依次是什么？\n\nA. 1、2、3\nB. 0、1、2\nC. 0、1、2、3\nD. 1、2',
+    question: 'for i in range(3)循环中，i的值依次是什么？',
     options: [
       'A. 1、2、3',
       'B. 0、1、2',
@@ -241,7 +241,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '循环变量加法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(3):\n    print(i + 1)\n```\n\nA. 0、1、2\nB. 1、2、3\nC. 1、2、3、4\nD. 0、1、2、3',
+    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(3):\n    print(i + 1)\n```',
     options: [
       'A. 0、1、2',
       'B. 1、2、3',
@@ -261,7 +261,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '循环变量乘法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(4):\n    print(i * 2)\n```\n\nA. 0、2、4、6\nB. 2、4、6、8\nC. 0、1、2、3\nD. 1、2、3、4',
+    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(4):\n    print(i * 2)\n```',
     options: [
       'A. 0、2、4、6',
       'B. 2、4、6、8',
@@ -279,7 +279,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '循环变量减法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(4 - i)\n```\n\nA. 4、3、2、1、0\nB. 5、4、3、2、1\nC. 0、1、2、3、4\nD. 1、2、3、4、5',
+    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(4 - i)\n```',
     options: [
       'A. 4、3、2、1、0',
       'B. 5、4、3、2、1',
@@ -299,7 +299,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '等差数列',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(i * 3 + 1)\n```\n\nA. 1、4、7、10、13\nB. 3、6、9、12、15\nC. 0、3、6、9、12\nD. 1、3、5、7、9',
+    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(i * 3 + 1)\n```',
     options: [
       'A. 1、4、7、10、13',
       'B. 3、6、9、12、15',
@@ -317,7 +317,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '序列规律',
-    question: '要输出偶数序列2、4、6、8、10，应该使用哪个代码？\n\nA. for i in range(5): print(i * 2)\nB. for i in range(5): print((i + 1) * 2)\nC. for i in range(5): print(i + 2)\nD. for i in range(5): print(i * 2 + 2)',
+    question: '要输出偶数序列2、4、6、8、10，应该使用哪个代码？',
     options: [
       'A. for i in range(5): print(i * 2)',
       'B. for i in range(5): print((i + 1) * 2)',

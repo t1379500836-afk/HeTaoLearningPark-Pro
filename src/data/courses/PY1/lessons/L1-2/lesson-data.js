@@ -301,7 +301,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '符号识别',
-    question: '下面哪段代码能**正确接收**用户输入的年龄？\n\nA. age = input(请输入年龄：)\nB. age = input("请输入年龄：")\nC. input("请输入年龄：")\nD. age = input("请输入年龄："）',
+    question: '下面哪段代码能**正确接收**用户输入的年龄？',
     options: [
       'A. age = input(请输入年龄：)',
       'B. age = input("请输入年龄：")',
@@ -319,7 +319,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '数字识别',
-    question: '执行下面的代码，会输出什么？\n\n```python\nn = int("5")\nprint(n + 3)\n```\n\nA. "53"\nB. 8\nC. "5"\nD. 53',
+    question: '执行下面的代码，会输出什么？\n\n```python\nn = int("5")\nprint(n + 3)\n```',
     options: [
       'A. "53"',
       'B. 8',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '小数计算',
-    question: '小明的身高是 1.4 米，爸爸比他高 0.6 米。下面哪段代码能正确计算爸爸的身高？\n\n```python\nh = float(input("小明的身高："))\n```\n\nA. print(h + 0.6)\nB. print(h + "0.6")\nC. print("h + 0.6")\nD. print(h + 0.6米)',
+    question: '小明的身高是 1.4 米，爸爸比他高 0.6 米。下面哪段代码能正确计算爸爸的身高？\n\n```python\nh = float(input("小明的身高："))\n```',
     options: [
       'A. print(h + 0.6)',
       'B. print(h + "0.6")',
@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '舍去问题',
-    question: '关于 int() 和 float() 的转换，下面说法**正确**的是？\n\nA. int(3.9) 的结果是 4\nB. float("3.14") 会报错\nC. int("3.14") 会报错\nD. float(3) 会变成 3',
+    question: '关于 int() 和 float() 的转换，下面说法**正确**的是？',
     options: [
       'A. int(3.9) 的结果是 4',
       'B. float("3.14") 会报错',
@@ -395,7 +395,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '总价计算',
-    question: '苹果每斤 5.5 元，小明买了 2.4 斤。下面哪段代码能正确计算总价？\n\n```python\nprice = float(input("请输入单价："))\nweight = float(input("请输入斤数："))\n```\n\nA. print(price * weight)\nB. print(price + weight)\nC. print("price * weight")\nD. print(price × weight)',
+    question: '苹果每斤 5.5 元，小明买了 2.4 斤。下面哪段代码能正确计算总价？\n\n```python\nprice = float(input("请输入单价："))\nweight = float(input("请输入斤数："))\n```',
     options: [
       'A. print(price * weight)',
       'B. print(price + weight)',

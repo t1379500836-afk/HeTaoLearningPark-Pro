@@ -321,7 +321,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '布尔值基础',
-    question: '下面哪个是Python中正确的"真"的写法？\n\nA. true\nB. True\nC. TRUE\nD. "true"',
+    question: '下面哪个是Python中正确的"真"的写法？',
     options: [
       'A. true',
       'B. True',
@@ -339,7 +339,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '比较运算',
-    question: '5 > 3 的结果是什么？\n\nA. True\nB. False\nC. 5\nD. 3',
+    question: '5 > 3 的结果是什么？',
     options: [
       'A. True',
       'B. False',
@@ -359,7 +359,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: 'while循环逻辑',
-    question: '执行下面的代码，会打印几次"你好"？\n\n```python\ncount = 0\nwhile count < 3:\n    print("你好")\n    count = count + 1\n```\n\nA. 2次\nB. 3次\nC. 4次\nD. 无限次',
+    question: '执行下面的代码，会打印几次"你好"？\n\n```python\ncount = 0\nwhile count < 3:\n    print("你好")\n    count = count + 1\n```',
     options: [
       'A. 2次',
       'B. 3次',
@@ -377,7 +377,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '逻辑运算',
-    question: 'True and False 的结果是什么？\n\nA. True\nB. False\nC. 0\nD. 1',
+    question: 'True and False 的结果是什么？',
     options: [
       'A. True',
       'B. False',
@@ -397,7 +397,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '循环累加',
-    question: '执行下面的代码，最后total是多少？\n\n```python\ntotal = 0\ncount = 1\nwhile count <= 4:\n    total = total + count\n    count = count + 1\nprint(total)\n```\n\nA. 6\nB. 10\nC. 4\nD. 5',
+    question: '执行下面的代码，最后total是多少？\n\n```python\ntotal = 0\ncount = 1\nwhile count <= 4:\n    total = total + count\n    count = count + 1\nprint(total)\n```',
     options: [
       'A. 6',
       'B. 10',
@@ -415,7 +415,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '布尔表达式',
-    question: '假设 age = 10，下面哪个表达式的结果是 False？\n\nA. age > 5\nB. age < 20\nC. age == 10\nD. age > 15',
+    question: '假设 age = 10，下面哪个表达式的结果是 False？',
     options: [
       'A. age > 5',
       'B. age < 20',

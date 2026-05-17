@@ -223,15 +223,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '条件判断顺序',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              'score = 75' + '\n' +
-              'if score >= 90:' + '\n' +
-              '    print("A")' + '\n' +
-              'elif score >= 60:' + '\n' +
-              '    print("B")' + '\n' +
-              'else:' + '\n' +
-              '    print("C")' + '\n\n' +
-              'A. A  B. B  C. C  D. 程序报错',
+    question: '执行下面的代码，会输出什么？\n\n```python\nscore = 75\nif score >= 90:\n    print("A")\nelif score >= 60:\n    print("B")\nelse:\n    print("C")\n```',
     options: [
       'A. A',
       'B. B',
@@ -249,15 +241,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'else的作用',
-    question: '如果所有if和elif条件都不满足，会执行什么？' + '\n\n' +
-              'age = 5' + '\n' +
-              'if age >= 18:' + '\n' +
-              '    print("成人")' + '\n' +
-              'elif age >= 12:' + '\n' +
-              '    print("少年")' + '\n' +
-              'else:' + '\n' +
-              '    print("儿童")' + '\n\n' +
-              'A. 成人  B. 少年  C. 儿童  D. 不输出',
+    question: '如果所有if和elif条件都不满足，会执行什么？\n\n```python\nage = 5\nif age >= 18:\n    print("成人")\nelif age >= 12:\n    print("少年")\nelse:\n    print("儿童")\n```',
     options: [
       'A. 成人',
       'B. 少年',
@@ -277,15 +261,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '条件优先级',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              'score = 95' + '\n' +
-              'if score >= 80:' + '\n' +
-              '    print("B")' + '\n' +
-              'elif score >= 90:' + '\n' +
-              '    print("A")' + '\n' +
-              'else:' + '\n' +
-              '    print("C")' + '\n\n' +
-              'A. A  B. B  C. C  D. 程序报错',
+    question: '执行下面的代码，会输出什么？\n\n```python\nscore = 95\nif score >= 80:\n    print("B")\nelif score >= 90:\n    print("A")\nelse:\n    print("C")\n```',
     options: [
       'A. A',
       'B. B',
@@ -303,16 +279,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '范围判断',
-    question: 'age=15时，下面代码会输出什么？' + '\n\n' +
-              'if age < 6:' + '\n' +
-              '    print("幼儿")' + '\n' +
-              'elif age < 12:' + '\n' +
-              '    print("儿童")' + '\n' +
-              'elif age < 18:' + '\n' +
-              '    print("少年")' + '\n' +
-              'else:' + '\n' +
-              '    print("成人")' + '\n\n' +
-              'A. 幼儿  B. 儿童  C. 少年  D. 成人',
+    question: 'age=15时，下面代码会输出什么？\n\n```python\nif age < 6:\n    print("幼儿")\nelif age < 12:\n    print("儿童")\nelif age < 18:\n    print("少年")\nelse:\n    print("成人")\n```',
     options: [
       'A. 幼儿',
       'B. 儿童',
@@ -332,16 +299,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '组合条件',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              'a = 5' + '\n' +
-              'b = 10' + '\n' +
-              'if a > 3 and b < 10:' + '\n' +
-              '    print(1)' + '\n' +
-              'elif a > 3 or b < 10:' + '\n' +
-              '    print(2)' + '\n' +
-              'else:' + '\n' +
-              '    print(3)' + '\n\n' +
-              'A. 1  B. 2  C. 3  D. 程序报错',
+    question: '执行下面的代码，会输出什么？\n\n```python\na = 5\nb = 10\nif a > 3 and b < 10:\n    print(1)\nelif a > 3 or b < 10:\n    print(2)\nelse:\n    print(3)\n```',
     options: [
       'A. 1',
       'B. 2',
@@ -359,11 +317,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '逻辑推理',
-    question: '要实现90分及以上A，80-89分B，60-79分C，60分以下D，应该怎么写？' + '\n\n' +
-              'A. >=90, >=80, >=60, 其他' + '\n' +
-              'B. >=90, >=80且<90, >=60且<80, 其他' + '\n' +
-              'C. >=90, >=80, >=60, <60' + '\n' +
-              'D. >=90, 80-89, 60-79, <60',
+    question: '要实现90分及以上A，80-89分B，60-79分C，60分以下D，应该怎么写条件？',
     options: [
       'A. >=90, >=80, >=60, 其他',
       'B. >=90, >=80且<90, >=60且<80, 其他',

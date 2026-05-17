@@ -222,14 +222,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'and的基本使用',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              'a = 5' + '\n' +
-              'b = 3' + '\n' +
-              'if a > 3 and b > 0:' + '\n' +
-              '    print(1)' + '\n' +
-              'else:' + '\n' +
-              '    print(2)' + '\n\n' +
-              'A. 1  B. 2  C. 程序报错',
+    question: '执行下面的代码，会输出什么？\n\n```python\na = 5\nb = 3\nif a > 3 and b > 0:\n    print(1)\nelse:\n    print(2)\n```',
     options: [
       'A. 1',
       'B. 2',
@@ -246,14 +239,7 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: 'or的基本使用',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              'x = 1' + '\n' +
-              'y = 10' + '\n' +
-              'if x > 5 or y > 5:' + '\n' +
-              '    print(1)' + '\n' +
-              'else:' + '\n' +
-              '    print(2)' + '\n\n' +
-              'A. 1  B. 2  C. 程序报错',
+    question: '执行下面的代码，会输出什么？\n\n```python\nx = 1\ny = 10\nif x > 5 or y > 5:\n    print(1)\nelse:\n    print(2)\n```',
     options: [
       'A. 1',
       'B. 2',
@@ -272,11 +258,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: 'and的逻辑',
-    question: '如果a=5, b=7，哪个条件成立？' + '\n\n' +
-              'A. a > b' + '\n' +
-              'B. a == 5 and a > b' + '\n' +
-              'C. b > a or b == 7' + '\n' +
-              'D. a == b',
+    question: '如果a=5, b=7，哪个条件成立？',
     options: [
       'A. a > b',
       'B. a == 5 and a > b',
@@ -294,11 +276,7 @@ export const exercises = [
     levelEmoji: '🟡',
     type: 'multiple-choice',
     mathConcept: '范围检查',
-    question: 'x=8时，下面哪个条件成立？' + '\n\n' +
-              'A. x < 5 or x > 10' + '\n' +
-              'B. x >= 5 and x <= 10' + '\n' +
-              'C. x < 0 and x > 100' + '\n' +
-              'D. x > 10',
+    question: 'x=8时，下面哪个条件成立？',
     options: [
       'A. x < 5 or x > 10',
       'B. x >= 5 and x <= 10',
@@ -318,16 +296,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '组合条件',
-    question: '执行下面的代码，会输出什么？' + '\n\n' +
-              "a = 'yes'" + '\n' +
-              "b = 'no'" + '\n' +
-              "c = 'no'" + '\n' +
-              "if a == 'yes' and b == 'no':" + '\n' +
-              '    print(1)' + '\n' +
-              "elif a == 'no' or c == 'no':" + '\n' +
-              '    print(2)' + '\n' +
-              'else:' + '\n' +
-              '    print(3)',
+    question: '执行下面的代码，会输出什么？\n\n```python\na = "yes"\nb = "no"\nc = "no"\nif a == "yes" and b == "no":\n    print(1)\nelif a == "no" or c == "no":\n    print(2)\nelse:\n    print(3)\n```',
     options: [
       'A. 1',
       'B. 2',
@@ -345,15 +314,7 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '逻辑推理',
-    question: 'score=56时，会输出什么？' + '\n\n' +
-              'if score >= 90:' + '\n' +
-              "    print('优秀')" + '\n' +
-              'elif score >= 80:' + '\n' +
-              "    print('良好')" + '\n' +
-              'elif score >= 60:' + '\n' +
-              "    print('及格')" + '\n' +
-              'else:' + '\n' +
-              "    print('不及格')",
+    question: 'score=56时，会输出什么？\n\n```python\nif score >= 90:\n    print("优秀")\nelif score >= 80:\n    print("良好")\nelif score >= 60:\n    print("及格")\nelse:\n    print("不及格")\n```',
     options: [
       'A. 优秀',
       'B. 良好',

@@ -7,8 +7,9 @@
  * 3. for 循环应用
  */
 
-// 单词卡数据 - OCR 提取
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'for',
     pronunciation: '[fo:r]',
@@ -17,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'For the people',
     exampleTranslation: '为了人民',
-    note: 'for 为了'
+    note: 'for 为了',
+    source: 'ocr'
   },
   {
     word: 'in',
@@ -27,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'In the box',
     exampleTranslation: '在盒子里面',
-    note: 'in 在...里面'
+    note: 'in 在...里面',
+    source: 'ocr'
   },
   {
     word: 'range',
@@ -37,8 +40,10 @@ export const vocabData = [
     level: 'medium',
     example: 'range of motion',
     exampleTranslation: '活动范围',
-    note: 'range 区间'
+    note: 'range 区间',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'shoot',
     pronunciation: '[ʃu:t]',
@@ -47,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'shoot a ball',
     exampleTranslation: '投篮',
-    note: 'shoot 射击'
+    note: 'shoot 射击',
+    source: 'extended'
   }
 ]
 
@@ -316,10 +322,10 @@ export const exercises = [
     mathConcept: '符号识别',
     question: '下面哪个是for循环的正确格式？',
     options: [
-      'A. A选项',
-      'B. B选项',
-      'C. C选项',
-      'D. D选项'
+      'A. for i in range(3)\n    print(i)',
+      'B. for i in range(3):\n    print(i)',
+      'C. for i in range(3):\nprint(i)',
+      'D. for i in range(3)\n    print(i)'
     ],
     answer: 1, // B
     explanation: '正确的for循环格式：for i in range(n):后面要有冒号，循环体要缩进。选项B符合。',

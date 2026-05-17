@@ -7,8 +7,9 @@
  * 3. for-if应用场景
  */
 
-// 单词卡数据 - OCR 提取
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'color',
     pronunciation: "['kʌlər]",
@@ -17,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'What color do you like?',
     exampleTranslation: '你喜欢什么颜色？',
-    note: 'color 颜色'
+    note: 'color 颜色',
+    source: 'ocr'
   },
   {
     word: 'red',
@@ -27,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'red wine 红酒',
     exampleTranslation: '红酒',
-    note: 'red 红色'
+    note: 'red 红色',
+    source: 'ocr'
   },
   {
     word: 'blue',
@@ -37,7 +40,8 @@ export const vocabData = [
     level: 'easy',
     example: 'blue sky 蓝天',
     exampleTranslation: '蓝天',
-    note: 'blue 蓝色'
+    note: 'blue 蓝色',
+    source: 'ocr'
   }
 ]
 
@@ -306,10 +310,10 @@ export const exercises = [
     mathConcept: '缩进',
     question: '下面哪个是for-if的正确格式？',
     options: [
-      'A. A选项',
-      'B. B选项',
-      'C. C选项',
-      'D. D选项'
+      'A. for i in range(3)\n    if i > 0:\n        print(i)',
+      'B. for i in range(3):\n    if i > 0:\n        print(i)',
+      'C. for i in range(3):\n    if i > 0\n        print(i)',
+      'D. for i in range(3)\n    if i > 0:\n        print(i)'
     ],
     answer: 1, // B
     explanation: '正确的格式：for和if都要有冒号，都要正确缩进。选项B符合。',

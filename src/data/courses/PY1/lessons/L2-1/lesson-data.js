@@ -7,8 +7,9 @@
  * 3. if-else 应用场景
  */
 
-// 单词卡数据 - OCR 提取
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'hit',
     pronunciation: '[hit]',
@@ -17,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'hit song 畅销歌曲',
     exampleTranslation: '畅销歌曲',
-    note: 'hit 击打'
+    note: 'hit 击打',
+    source: 'ocr'
   },
   {
     word: 'else',
@@ -27,7 +29,8 @@ export const vocabData = [
     level: 'easy',
     example: 'If you are ready, go. Else wait.',
     exampleTranslation: '如果你准备好了就走，否则等待。',
-    note: 'else 否则（if-else语句）'
+    note: 'else 否则（if-else语句）',
+    source: 'ocr'
   },
   {
     word: 'link',
@@ -37,8 +40,10 @@ export const vocabData = [
     level: 'medium',
     example: 'Click the link to open the page.',
     exampleTranslation: '点击链接打开页面。',
-    note: 'link 链接'
+    note: 'link 链接',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'replace',
     pronunciation: "[ri'pleis]",
@@ -47,7 +52,8 @@ export const vocabData = [
     level: 'medium',
     example: 'Replace the old with the new.',
     exampleTranslation: '用新的取代旧的。',
-    note: 'replace 替换'
+    note: 'replace 替换',
+    source: 'extended'
   }
 ]
 
@@ -353,10 +359,10 @@ export const exercises = [
     mathConcept: '执行顺序',
     question: '下面哪个if-else格式是正确的？',
     options: [
-      'A. 正确格式（A选项）',
-      'B. B选项',
-      'C. C选项',
-      'D. D选项'
+      'A. if a > b:\n    print("A")\nelse:\n    print("B")',
+      'B. if a > b\n    print("A")\nelse\n    print("B")',
+      'C. if a > b:\nprint("A")\nelse:\nprint("B")',
+      'D. if a > b:\n    print("A")\n    else:\n    print("B")'
     ],
     answer: 0, // A
     explanation: '正确的if-else格式：if条件后面要有冒号，if和else要对齐，它们下面的代码要缩进。选项A符合所有要求。',

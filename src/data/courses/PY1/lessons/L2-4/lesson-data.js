@@ -7,8 +7,9 @@
  * 3. OJ 实战应用
  */
 
-// 单词卡数据 - OCR 提取
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'online',
     pronunciation: "[ˌɒn'laɪn]",
@@ -17,7 +18,8 @@ export const vocabData = [
     level: 'easy',
     example: 'This game has many online users.',
     exampleTranslation: '这个游戏有很多在线用户。',
-    note: 'online 在线'
+    note: 'online 在线',
+    source: 'ocr'
   },
   {
     word: 'judge',
@@ -27,7 +29,8 @@ export const vocabData = [
     level: 'medium',
     example: 'The judge gave a fair verdict.',
     exampleTranslation: '法官给出了公平的判决。',
-    note: 'judge 裁判'
+    note: 'judge 裁判',
+    source: 'ocr'
   },
   {
     word: 'submit',
@@ -37,8 +40,10 @@ export const vocabData = [
     level: 'medium',
     example: 'Please submit your homework.',
     exampleTranslation: '请提交你的作业。',
-    note: 'submit 提交'
+    note: 'submit 提交',
+    source: 'ocr'
   },
+  // 拓展单词
   {
     word: 'input',
     pronunciation: '[ɪn-pʊt]',
@@ -47,7 +52,8 @@ export const vocabData = [
     level: 'easy',
     example: 'Enter your input here.',
     exampleTranslation: '在这里输入。',
-    note: 'input 输入'
+    note: 'input 输入',
+    source: 'extended'
   },
   {
     word: 'output',
@@ -57,7 +63,8 @@ export const vocabData = [
     level: 'easy',
     example: 'The output is incorrect.',
     exampleTranslation: '输出是不正确的。',
-    note: 'output 输出'
+    note: 'output 输出',
+    source: 'extended'
   }
 ]
 
@@ -363,10 +370,10 @@ export const exercises = [
     mathConcept: '编程',
     question: '编写程序：输入两个整数，输出它们的和。以下代码正确的是？',
     options: [
-      'print(input() + input())',
-      'print(int(input()) + int(input()))',
-      'a = int(input())\nb = int(input())\nprint(a + b)',
-      'print(input() + input())'
+      'A. print(input() + input())',
+      'B. print(int(input()) + int(input()))',
+      'C. a = int(input())\nb = int(input())\nprint(a + b)',
+      'D. input() + input()'
     ],
     answer: 2, // C
     explanation: '需要先把input()转换为int，然后求和。选项C正确。',

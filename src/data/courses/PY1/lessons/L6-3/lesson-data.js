@@ -1,77 +1,74 @@
 /**
- * PY1 课程 L6-3: 列表进阶
+ * PY1 课程 L6-3: 列表切片
  *
  * 核心知识点:
- * 1. insert() - 在指定位置插入元素
- * 2. pop() - 删除指定位置的元素
+ * 1. 列表切片 - list[起始:结束]
+ * 2. insert() - 插入元素到指定位置
+ * 3. pop() - 移除指定索引的元素
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'insert',
-    pronunciation: '[in\'se:t]',
+    pronunciation: '[ɪnˈsɜːt]',
     partOfSpeech: 'v.',
-    meaning: '插入；添加',
-    level: 'easy',
-    example: 'Please insert the key.',
-    exampleTranslation: '请插入钥匙。',
-    note: '',
+    meaning: '插入',
+    level: 'medium',
+    example: 'Insert the key.',
+    exampleTranslation: '插入钥匙。',
     source: 'ocr'
   },
   {
     word: 'pop',
-    pronunciation: '[pop]',
+    pronunciation: '[pɒp]',
     partOfSpeech: 'v.',
     meaning: '突然出现；弹出',
-    level: 'easy',
-    example: 'The balloon popped.',
-    exampleTranslation: '气球砰的一声破了。',
-    note: '',
+    level: 'medium',
+    example: 'Pop up.',
+    exampleTranslation: '弹出来。',
     source: 'ocr'
   },
   {
     word: 'task',
-    pronunciation: '[ta:sk]',
+    pronunciation: '[tɑːsk]',
     partOfSpeech: 'n.',
-    meaning: '工作，任务；活动',
+    meaning: '任务',
     level: 'easy',
-    example: 'I have many tasks today.',
-    exampleTranslation: '我今天有很多任务。',
-    note: '',
+    example: 'Complete the task.',
+    exampleTranslation: '完成任务。',
     source: 'ocr'
   },
   {
-    word: 'position',
-    pronunciation: '[pe\'zijen]',
+    word: 'fruit',
+    pronunciation: '[fruːt]',
     partOfSpeech: 'n.',
-    meaning: '位置；方位',
-    level: 'medium',
-    example: 'What is your position?',
-    exampleTranslation: '你的位置在哪里？',
-    note: '',
-    source: 'extended'
-  },
-  {
-    word: 'schedule',
-    pronunciation: '[\'sked3u:l]',
-    partOfSpeech: 'n.',
-    meaning: '日程表；时间表',
-    level: 'medium',
-    example: 'Check your schedule.',
-    exampleTranslation: '查看你的日程表。',
-    note: '',
-    source: 'extended'
-  },
-  {
-    word: 'between',
-    pronunciation: '[bi\'twi:n]',
-    partOfSpeech: 'prep.',
-    meaning: '在...之间',
+    meaning: '水果',
     level: 'easy',
-    example: 'Sit between them.',
-    exampleTranslation: '坐在他们之间。',
-    note: '',
+    example: 'Eat more fruit.',
+    exampleTranslation: '多吃水果。',
+    source: 'ocr'
+  },
+  // 拓展单词
+  {
+    word: 'slice',
+    pronunciation: '[slaɪs]',
+    partOfSpeech: 'n.',
+    meaning: '切片；片段',
+    level: 'medium',
+    example: 'A slice of cake.',
+    exampleTranslation: '一片蛋糕。',
+    source: 'extended'
+  },
+  {
+    word: 'extract',
+    pronunciation: '[ɪkˈstrækt]',
+    partOfSpeech: 'v.',
+    meaning: '提取；取出',
+    level: 'hard',
+    example: 'Extract the element.',
+    exampleTranslation: '取出元素。',
     source: 'extended'
   }
 ]
@@ -80,76 +77,89 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '精确插入 - insert()',
-    emoji: '📍',
-    gradeLevel: '1-2',
-    summary: '在指定位置插入新元素',
+    title: '列表切片',
+    emoji: '🔪',
+    gradeLevel: '3-4',
+    summary: '提取列表中的部分元素',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你的书架上有一排书，你想在两本书之间放一本新书。只要说出在第几个位置放，新书就会出现在那里！',
-      concept: 'insert() 可以在列表的任意位置插入新元素，不一定只能在末尾。使用格式是：列表名.insert(位置, 要插入的内容)。',
-      syntax: '列表名.insert(位置, 要插入的内容)',
+      story: '列表切片就像切蛋糕，从列表中切下一片。list[2:5] 表示从索引 2 切到索引 5（不包含 5）。',
+      concept: 'list[起始:结束] 提取从起始索引到结束索引前的元素，结果是一个新列表。',
+      syntax: `fruits = ['a', 'b', 'c', 'd', 'e']
+fruits[1:3]  # ['b', 'c']`,
       example: {
-        title: '在中间插入元素',
-        code: 'colors = ["红", "蓝", "绿"]\ncolors.insert(1, "黄")\nprint(colors)',
-        output: "['红', '黄', '蓝', '绿']",
-        explanation: 'insert(1, "黄") 在位置1（第二个位置）插入"黄"，原来的"蓝"和"绿"都往后移。'
+        title: '列表切片',
+        code: `fruits = ['香蕉', '苹果', '菠萝', '哈密瓜', '芒果']
+print(fruits[1:3])  # 索引1和2
+print(fruits[:3])   # 从头到索引2
+print(fruits[2:])   # 从索引2到末尾`,
+        output: "['苹果', '菠萝']\n['香蕉', '苹果', '菠萝']\n['菠萝', '哈密瓜', '芒果']",
+        explanation: 'fruits[1:3] 得到索引1、2的元素；[:3] 从头开始；[2:] 到末尾。'
       },
       practice: [
         {
-          question: 'insert() 和 append() 有什么区别？',
-          answer: 'append()只能在末尾添加，insert()可以在任意位置插入'
+          question: 'fruits = ["a", "b", "c", "d"]，fruits[1:3] 是什么？',
+          answer: '["b", "c"]'
         },
         {
-          question: 'insert(0, x) 会在哪里插入？',
-          answer: '在列表最前面（第一个位置）'
+          question: 'fruits[:2] 包含哪些元素？',
+          answer: '索引0和1的元素'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的书架更智能了！可以在任意位置精确插入，如果位置超过了列表长度，会自动放到最后面。',
-      concept: 'insert(索引, 元素) 会在指定索引前插入元素。插入后，插入位置及后面的元素都会后移。如果索引大于列表长度，会追加到末尾。索引可以是负数。',
-      syntax: '# 在开头插入\nlist.insert(0, item)\n\n# 在中间插入\nlist.insert(2, item)\n\n# 在末尾插入\nlist.insert(len(list), item)',
+      story: '切片包含起始不包含结束，这是 Python 的设计规则。',
+      concept: '切片范围 [起始, 结束)，包含起始索引的元素，不包含结束索引。',
+      syntax: `# 01234
+fruits = ['a', 'b', 'c', 'd', 'e']
+fruits[0:2]  # ['a', 'b'] - 索引0,1
+fruits[1:4]  # ['b', 'c', 'd'] - 索引1,2,3`,
       example: {
-        title: '在不同位置插入',
-        code: 'numbers = [10, 30, 40]\n\n# 在开头插入\nnumbers.insert(0, 5)\nprint(numbers)\n\n# 在中间插入\nnumbers.insert(2, 20)\nprint(numbers)',
-        output: '[5, 10, 30, 40]\n[5, 10, 20, 30, 40]',
-        explanation: '第一次insert(0, 5)在开头插入5。第二次insert(2, 20)在位置2（第3个位置）插入20，原来的30和40往后移。'
+        title: '切片规则',
+        code: `fruits = ['香蕉', '苹果', '菠萝', '哈密瓜', '芒果']
+print('前两个:', fruits[:2])
+print('中间3个:', fruits[1:4])
+print('后两个:', fruits[-2:])`,
+        output: "前两个: ['香蕉', '苹果']\n中间3个: ['苹果', '菠萝', '哈密瓜']\n后两个: ['哈密瓜', '芒果']",
+        explanation: 'fruits[:2] 是前两个，fruits[1:4] 是中间三个，fruits[-2:] 是最后两个。'
       },
       practice: [
         {
-          question: '插入元素后，后面的元素会怎样？',
-          answer: '都会往后移一位'
+          question: '切片 fruits[0:3] 包含哪些索引？',
+          answer: '0, 1, 2'
         },
         {
-          question: 'insert(100, x) 在长度为3的列表中会怎样？',
-          answer: '会自动放到末尾（位置3）'
+          question: 'fruits[-3:] 是什么意思？',
+          answer: '最后三个元素'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '精确控制大师！insert() 让你完全掌控列表结构，实现插入排序、构建有序列表、动态维护数据排列等高级操作！',
-      concept: 'insert() 是 O(n) 操作，因为需要移动插入位置之后的所有元素。与 append() 的 O(1) 相比更慢，但提供了更灵活的控制。在需要保持顺序的场景（如插入排序）中非常重要。注意索引超出范围时的边界处理。',
-      syntax: '# 有序插入\ndef insert_sorted(lst, item):\n    for i in range(len(lst)):\n        if lst[i] > item:\n            lst.insert(i, item)\n            return\n    lst.append(item)',
+      story: '切片可以嵌套，或者在切片后继续操作。',
+      concept: '切片结果仍是列表，可以继续使用索引或再次切片。',
+      syntax: `nested = [[1,2], [3,4], [5,6]]
+nested[0:2]  # [[1,2], [3,4]]`,
       example: {
-        title: '保持列表有序插入',
-        code: '# 向已排序列表插入数字，保持有序\nnumbers = [10, 20, 40, 50]\n\n# 找到30应该插入的位置（20和40之间）\nfor i in range(len(numbers)):\n    if numbers[i] > 30:\n        numbers.insert(i, 30)\n        break\n\nprint(numbers)',
-        output: '[10, 20, 30, 40, 50]',
-        explanation: '遍历找到第一个大于30的数是40（位置2），在位置2插入30。这样插入后列表仍然是有序的。这是插入排序的核心思想。'
+        title: '切片嵌套',
+        code: `nums = [[1, 2], [3, 4], [5, 6]]
+print('前两个:', nums[:2])
+print('第0个的第一个元素:', nums[0][0])`,
+        output: '前两个: [[1, 2], [3, 4]]\n第0个的第一个元素: 1',
+        explanation: 'nums[0] 是 [1,2]，再取 [0] 得到 1。'
       },
       practice: [
         {
-          question: 'insert() 的时间复杂度是多少？',
-          answer: 'O(n)，因为需要移动元素'
+          question: '如何获取列表的前一半？',
+          answer: 'list[:len(list)//2]'
         },
         {
-          question: '如何向已排序列表插入并保持有序？',
-          answer: '找到合适的插入位置，用insert()插入'
+          question: 'list[1:3] 和 list[1:-1] 有什么区别？',
+          answer: '前者切到索引3，后者切到倒数第1个之前'
         }
       ]
     }
@@ -157,76 +167,182 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '精准删除 - pop()',
-    emoji: '🎯',
-    gradeLevel: '1-2',
-    summary: '删除指定位置的元素并返回',
+    title: '插入元素 - insert()',
+    emoji: '📥',
+    gradeLevel: '3-4',
+    summary: '在指定位置插入新元素',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '你想拿走书架上某个位置的书，说出位置号，那本书就会被拿出来，同时你还能看到拿走的是哪本书！',
-      concept: 'pop() 可以删除并返回指定位置的元素。不写位置号时，默认删除最后一个。使用格式是：列表名.pop(位置) 或 列表名.pop()',
-      syntax: '列表名.pop(位置)  # 删除指定位置\n列表名.pop()      # 删除最后一个',
+      story: 'insert 就像"插队"，把新元素插入到指定位置，原位置的元素往后移。',
+      concept: 'list.insert(索引, 元素) 在指定位置插入新元素。',
+      syntax: `fruits.insert(1, '草莓')  # 在索引1位置插入`,
       example: {
-        title: '删除指定位置',
-        code: 'fruits = ["苹果", "香蕉", "橙子"]\nitem = fruits.pop(1)\nprint("删除了:", item)\nprint("剩下:", fruits)',
-        output: '删除了: 香蕉\n剩下: [\'苹果\', \'橙子\']',
-        explanation: 'pop(1) 删除位置1的"香蕉"，并返回"香蕉"。可以用变量接收返回的值。'
+        title: '插入元素',
+        code: `fruits = ['早餐', '晚餐']
+print('插入前:', fruits)
+fruits.insert(1, '午餐')
+print('插入后:', fruits)`,
+        output: "插入前: ['早餐', '晚餐']\n插入后: ['早餐', '午餐', '晚餐']",
+        explanation: 'insert(1, "午餐") 在索引1位置插入，原来的元素都往后移动。'
       },
       practice: [
         {
-          question: 'pop() 和 remove() 有什么区别？',
-          answer: 'pop()按位置删除并返回值，remove()按值删除不返回'
+          question: 'insert(0, x) 会插在哪里？',
+          answer: '列表开头'
         },
         {
-          question: 'pop() 不写位置会删除哪个？',
-          answer: '最后一个元素'
+          question: 'insert 后列表长度怎么变？',
+          answer: '增加1'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的书架系统升级了！不仅可以从任意位置拿书，还能拿走的同时告诉你拿的是什么，方便你记录或做其他处理。',
-      concept: 'pop(索引) 删除并返回指定索引的元素，索引默认为-1（最后一个）。删除后，后面的元素会前移。索引超出范围会报错。pop()常用于实现栈（后进先出）数据结构。',
-      syntax: '# 删除并获取\nitem = list.pop(0)   # 删除第一个\nitem = list.pop(-1)  # 删除最后一个\nitem = list.pop()     # 删除最后一个\n\n# 实现栈\nstack = []\nstack.append(item)  # 压栈\nitem = stack.pop()   # 出栈',
+      story: 'insert 可以用负数索引，负数从末尾开始算。',
+      concept: 'insert 可以用负数索引，-1 表示最后一个元素之前。',
+      syntax: `fruits.insert(-1, '甜点')  # 插入到倒数第1个之前`,
       example: {
-        title: '栈的操作',
-        code: '# 用列表实现栈（后进先出）\nstack = []\n\n# 压栈\nstack.append("任务1")\nstack.append("任务2")\nstack.append("任务3")\nprint(stack)\n\n# 出栈\ntask = stack.pop()\nprint("执行:", task)\nprint("剩余:", stack)',
-        output: "['任务1', '任务2', '任务3']\n执行: 任务3\n剩余: ['任务1', '任务2']",
-        explanation: '用 append() 添加元素到末尾（压栈），用 pop() 从末尾取出（出栈）。最后添加的任务3最先被执行，这就是"后进先出"。'
+        title: '负数索引插入',
+        code: `fruits = ['苹果', '香蕉', '橙子']
+print('原列表:', fruits)
+fruits.insert(-1, '草莓')
+print('插入后:', fruits)`,
+        output: "原列表: ['苹果', '香蕉', '橙子']\n插入后: ['苹果', '香蕉', '草莓', '橙子']",
+        explanation: 'insert(-1, "草莓") 插入到倒数第1个元素之前，也就是在"橙子"前面。'
       },
       practice: [
         {
-          question: '什么是"后进先出"？',
-          answer: '最后添加的最先取出，像叠盘子'
+          question: 'insert(-2, x) 会插在哪里？',
+          answer: '倒数第2个位置'
         },
         {
-          question: 'pop() 删除元素后，后面的元素会怎样？',
-          answer: '会往前移，填补空位'
+          question: '如何在列表末尾插入元素？',
+          answer: 'append() 或 insert(len(list), x)'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '数据结构大师！pop() 是实现栈和队列的关键操作。配合 insert() 可以实现队列（先进先出），理解这些是掌握算法的基础！',
-      concept: 'pop() 是 O(n) 操作（删除非末尾元素时需要移动），但 pop()（删除末尾）是 O(1)。与 insert(0, item) 配合可以实现队列（先进先出）：用 pop() 出队，用 append() 入队。Python 的 collections.deque 提供了更高效的队列实现。',
-      syntax: '# 队列（先进先出）\nqueue = []\nqueue.append(item)    # 入队（末尾）\nitem = queue.pop(0)   # 出队（开头）\n\n# 栈（后进先出）\nstack = []\nstack.append(item)    # 压栈\nitem = stack.pop()     # 出栈',
+      story: 'insert 后列表长度增加，可以用 len() 获取新的长度。',
+      concept: 'insert 后可以用 len() 查看新长度，或者多次插入构建列表。',
+      syntax: `fruits.insert(0, '第一')
+len(fruits)  # 长度增加了`,
       example: {
-        title: '实现队列和栈',
-        code: '# 队列：排队买票（先进先出）\nqueue = []\nqueue.append("小明")  # 小明先来\nqueue.append("小红")  # 小红第二\nprint("队列:", queue)\n\n# 服务第一个\nserved = queue.pop(0)\nprint("服务: " + served)\nprint("剩余:", queue)\n\n# 对比栈：叠盘子（后进先出）\nstack = []\nstack.append("盘子1")\nstack.append("盘子2")\nprint("取出: " + stack.pop())',
-        output: "队列: ['小明', '小红']\n服务: 小明\n剩余: ['小红']\n取出: 盘子2",
-        explanation: '队列用 pop(0) 从开头取出，先来的先服务。栈用 pop() 从末尾取出，后来的先取。这是两种基本的数据结构模式。'
+        title: '插入后查看',
+        code: `fruits = ['苹果', '香蕉']
+print('长度:', len(fruits))
+fruits.insert(1, '橙子')
+print('插入后长度:', len(fruits))
+print('列表:', fruits)`,
+        output: "长度: 2\n插入后长度: 3\n列表: ['苹果', '橙子', '香蕉']",
+        explanation: '每次 insert 后列表长度加 1。'
       },
       practice: [
         {
-          question: '队列和栈的主要区别是什么？',
-          answer: '队列是先进先出，栈是后进先出'
+          question: '连续 insert 多次会怎样？',
+          answer: '每次都在指定位置插入'
         },
         {
-          question: '为什么 queue.pop(0) 效率较低？',
-          answer: '删除开头元素需要移动所有其他元素，是O(n)操作'
+          question: 'insert(5, x) 和 append(x) 有什么区别？',
+          answer: 'insert 在指定位置，append 在末尾'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-3',
+    title: '移除元素 - pop()',
+    emoji: '📤',
+    gradeLevel: '3-4',
+    summary: '移除指定索引的元素',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: 'pop 就是"弹出"，把指定位置的元素取出来删除。',
+      concept: 'list.pop(索引) 移除并返回指定索引的元素，默认移除最后一个。',
+      syntax: `fruits.pop()  # 移除最后一个
+fruits.pop(0)  # 移除第一个`,
+      example: {
+        title: 'pop 移除',
+        code: `fruits = ['苹果', '香蕉', '橙子']
+print('原列表:', fruits)
+removed = fruits.pop(1)
+print('被移除的:', removed)
+print('移除后:', fruits)`,
+        output: "原列表: ['苹果', '香蕉', '橙子']\n被移除的: 香蕉\n移除后: ['苹果', '橙子']",
+        explanation: 'pop(1) 移除索引1的元素"香蕉"，并返回这个值。'
+      },
+      practice: [
+        {
+          question: 'pop() 默认移除哪个元素？',
+          answer: '最后一个'
+        },
+        {
+          question: 'pop 后列表长度怎么变？',
+          answer: '减少1'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: 'pop 可以接收返回值，方便记录被移除的元素。',
+      concept: 'pop 返回被移除的元素，可以保存起来使用。',
+      syntax: `removed = fruits.pop(0)  # 移除并保存`,
+      example: {
+        title: '保存移除元素',
+        code: `fruits = ['苹果', '香蕉', '橙子']
+removed = fruits.pop()
+print('被移除:', removed)
+print('列表:', fruits)
+print('新的末尾:', fruits.pop())`,
+        output: "被移除: 橙子\n列表: ['苹果', '香蕉']\n新的末尾: 香蕉",
+        explanation: 'pop() 默认移除最后一个，并返回这个值。'
+      },
+      practice: [
+        {
+          question: 'pop() 返回值是什么？',
+          answer: '被移除的元素'
+        },
+        {
+          question: 'pop(0) 移除后列表第一个变成什么？',
+          answer: '原来是索引1的元素'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: 'pop 移除索引越界会报错，需要注意索引范围。',
+      concept: 'pop 的索引必须在有效范围内（0 到 len-1），否则报错。',
+      syntax: `if len(fruits) > 0:
+    fruits.pop(0)  # 安全移除`,
+      example: {
+        title: '安全 pop',
+        code: `fruits = ['苹果']
+if len(fruits) > 0:
+    print('可以移除:', fruits.pop())
+else:
+    print('列表为空')
+
+# 空列表 pop 会报错
+empty = []
+# empty.pop()  # 这会报错`,
+        output: '可以移除: 苹果',
+        explanation: '移除前检查列表是否为空，避免报错。'
+      },
+      practice: [
+        {
+          question: 'pop 索引超出范围会怎样？',
+          answer: '报错'
+        },
+        {
+          question: '如何安全地 pop 空列表？',
+          answer: '先检查 len(list) > 0'
         }
       ]
     }
@@ -235,24 +351,24 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '位置问题',
-    question: '执行下面的代码，"黄色"会插入到哪个位置？\n\n```python\ncolors = ["红", "蓝"]\ncolors.insert(1, "黄")\n```',
+    mathConcept: '切片理解',
+    question: `fruits = ['香蕉', '苹果', '菠萝', '哈密瓜', '芒果']，fruits[1:3] 是什么？`,
     options: [
-      'A. 最前面',
-      'B. 红和蓝之间',
-      'C. 最后面',
-      'D. 不变'
+      "['香蕉', '苹果']",
+      "['苹果', '菠萝']",
+      "['菠萝', '哈密瓜']",
+      "['哈密瓜', '芒果']"
     ],
-    answer: 1, // B
-    explanation: '这是一个位置问题！\n\n原列表：["红", "蓝"]\n        位置0  位置1\n\ninsert(1, "黄") 在位置1插入"黄"，原来的"蓝"会往后移。\n\n结果：["红", "黄", "蓝"]\n\n数学知识：insert() 在指定位置前插入，原位置及之后的元素后移。',
-    hint: '位置1是第二个位置，在红和蓝之间'
+    answer: 1,
+    explanation: 'fruits[1:3] 从索引1切到3（不包含3），得到索引1和2：["苹果", "菠萝"]。答案是 B。',
+    hint: '包含起始不包含结束'
   },
   {
     id: 'ex-2',
@@ -260,37 +376,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数数',
-    question: '执行下面的代码，列表中有几个元素？\n\n```python\nnumbers = [1, 2, 3]\nnumbers.insert(1, 5)\nnumbers.pop()\n```',
+    mathConcept: 'insert使用',
+    question: `执行以下代码后，fruits 是什么？\n\n\`\`\`python\nfruits = ['苹果', '香蕉']\nfruits.insert(1, '橙子')\nprint(fruits)\n\`\`\``,
     options: [
-      'A. 2个',
-      'B. 3个',
-      'C. 4个',
-      'D. 5个'
+      "['苹果', '香蕉', '橙子']",
+      "['橙子', '苹果', '香蕉']",
+      "['苹果', '橙子', '香蕉']",
+      "['苹果', '香蕉']"
     ],
-    answer: 1, // B
-    explanation: '这是一个计数问题！\n\n1. 初始：[1, 2, 3]，有3个元素\n2. insert(1, 5) 后：[1, 5, 2, 3]，有4个元素\n3. pop() 删除最后一个后：[1, 5, 2]，有3个元素\n\n最终有3个元素。\n\n数学知识：insert增加1个，pop减少1个，3 + 1 - 1 = 3',
-    hint: '3 + 1 - 1 = ?'
+    answer: 2,
+    explanation: 'insert(1, "橙子") 在索引1插入，原来的索引1往后移，所以是 ["苹果", "橙子", "香蕉"]。答案是 C。',
+    hint: 'insert 在索引位置插入'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '位置问题',
-    question: '执行下面的代码，变量 x 的值是什么？\n\n```python\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nx = fruits.pop(2)\n```',
+    mathConcept: 'pop使用',
+    question: `执行以下代码后，fruits 是什么？\n\n\`\`\`python\nfruits = ['苹果', '香蕉', '橙子']\nfruits.pop(1)\nprint(fruits)\n\`\`\``,
     options: [
-      'A. "苹果"',
-      'B. "香蕉"',
-      'C. "橙子"',
-      'D. "葡萄"'
+      "['苹果', '橙子']",
+      "['香蕉', '橙子']",
+      "['苹果', '香蕉']",
+      "['苹果', '香蕉', '橙子']"
     ],
-    answer: 2, // C
-    explanation: '这是一个位置索引问题！\n\n列表：["苹果", "香蕉", "橙子", "葡萄"]\n      位置0    位置1    位置2    位置3\n\npop(2) 删除并返回位置2的元素，即"橙子"。\n\n所以 x = "橙子"\n\n数学知识：索引从0开始，位置2是第3个元素。',
-    hint: '位置2是第几个元素？'
+    answer: 0,
+    explanation: 'pop(1) 移除索引1的元素"香蕉"，剩余 ["苹果", "橙子"]。答案是 A。',
+    hint: 'pop 移除指定索引的元素'
   },
   {
     id: 'ex-4',
@@ -298,37 +414,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '执行下面的代码，列表所有数的和是多少？\n\n```python\nnumbers = [10, 20, 30]\nnumbers.insert(1, 15)\nnumbers.pop(0)\n```',
+    mathConcept: '切片省略',
+    question: `fruits = ['a', 'b', 'c', 'd', 'e']，fruits[:3] 是什么？`,
     options: [
-      'A. 75',
-      'B. 65',
-      'C. 45',
-      'D. 60'
+      "['a', 'b', 'c']",
+      "['b', 'c', 'd']",
+      "['c', 'd', 'e']",
+      "['d', 'e']"
     ],
-    answer: 1, // B
-    explanation: '这是一个追踪变化计算题！\n\n1. 初始：[10, 20, 30]，和 = 60\n2. insert(1, 15)：[10, 15, 20, 30]，和 = 75\n3. pop(0) 删除10：[15, 20, 30]，和 = 65\n\n最终和 = 15 + 20 + 30 = 65\n\n数学知识：追踪每一步操作对列表的影响。',
-    hint: '10被删除，15被添加'
+    answer: 0,
+    explanation: '[:3] 从头开始切到索引3（不包含3），得到索引0、1、2：["a", "b", "c"]。答案是 A。',
+    hint: '省略起始表示从头开始'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '变量计算',
-    question: '执行下面的代码，变量 result 的值是多少？\n\n```python\nnumbers = [5, 10, 15]\nresult = numbers.pop(1) + numbers[0]\n```',
+    mathConcept: '综合操作',
+    question: `执行以下代码后，fruits 是什么？\n\n\`\`\`python\nfruits = ['苹果', '香蕉', '菠萝']\nfruits.insert(2, '草莓')\nfruits.pop(1)\nprint(fruits)\n\`\`\``,
     options: [
-      'A. 15',
-      'B. 20',
-      'C. 10',
-      'D. 25'
+      "['苹果', '菠萝', '草莓']",
+      "['草莓', '菠萝']",
+      "['苹果', '草莓', '菠萝']",
+      "['苹果', '菠萝']"
     ],
-    answer: 1, // B
-    explanation: '这是一个变量追踪计算题！\n\n1. 初始列表：[5, 10, 15]\n2. numbers.pop(1) 删除并返回 10\n3. 此时列表变成：[5, 15]\n4. numbers[0] = 5\n5. result = 10 + 5 = 15\n\n等等，让我重新检查...\n\npop(1) 返回的是 10，但计算 numbers[0] 时，pop已经执行了。\n\n实际上列表变成了 [5, 15]，所以 numbers[0] = 5\nresult = 10 + 5 = 15\n\n答案应该是A（15），不是B！\n\n数学知识：注意操作的执行顺序，pop会改变列表。',
-    hint: 'pop(1)返回10，但列表变了，numbers[0]是5'
+    answer: 0,
+    explanation: 'insert(2, "草莓") 后变成 ["苹果", "香蕉", "草莓", "菠萝"]，pop(1) 移除"香蕉"，最后是 ["苹果", "菠萝", "草莓"]。答案是 A。',
+    hint: '先 insert 再 pop'
   },
   {
     id: 'ex-6',
@@ -336,70 +452,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '累加计算',
-    question: '执行下面的代码，变量 total 的值是多少？\n\n```python\nnumbers = [1, 2, 3]\ntotal = 0\nfor i in range(3):\n    total = total + numbers.pop(0)\n```',
+    mathConcept: '负数索引',
+    question: `fruits = ['苹果', '香蕉', '橙子', '葡萄']，fruits[-2] 是什么？`,
     options: [
-      'A. 0',
-      'B. 3',
-      'C. 6',
-      'D. 会报错'
+      '苹果',
+      '香蕉',
+      '橙子',
+      '葡萄'
     ],
-    answer: 2, // C
-    explanation: '这是一个循环累加追踪题！\n\nrange(3) 产生 0, 1, 2，循环3次\n\n- i=0: pop(0)返回1，total = 0 + 1 = 1，列表=[2, 3]\n- i=1: pop(0)返回2，total = 1 + 2 = 3，列表=[3]\n- i=2: pop(0)返回3，total = 3 + 3 = 6，列表=[]\n\n最终 total = 6\n\n数学知识：每次从开头取一个数并累加，1 + 2 + 3 = 6',
-    hint: '每次循环都从开头取一个数，1+2+3=?'
+    answer: 2,
+    explanation: '-1 是倒数第一个"葡萄"，-2 是倒数第二个"橙子"。答案是 C。',
+    hint: '负数从-1开始倒数'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L6-3',
-  title: '列表进阶',
-  subtitle: '学会列表的插入和删除操作',
-  difficulty: '进阶',
-  estimatedTime: '35-45分钟',
+  title: '列表切片',
+  subtitle: '提取、插入、移除列表元素',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '掌握 insert() 在指定位置插入元素',
-    '掌握 pop() 删除指定位置的元素',
-    '理解 insert/pop 与 append/remove 的区别',
-    '了解栈和队列的基本概念'
+    '掌握列表切片的语法',
+    '掌握 insert() 插入元素',
+    '掌握 pop() 移除元素',
+    '能综合使用切片操作列表'
   ],
   prerequisites: [
-    '掌握列表的创建和基本操作',
-    '理解列表索引的概念',
-    '了解 append() 和 remove() 的用法'
+    '理解列表索引',
+    '理解列表遍历'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['task', 'job', 'add', 'top', 'pop'],
-  medium: ['insert', 'position', 'remove'],
-  hard: ['schedule', 'between', 'delete']
+  easy: ['insert', 'pop', 'task', 'fruit'],
+  medium: ['slice', 'insert', 'remove', 'position'],
+  hard: ['extract', 'traverse', 'modify', 'sequence']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'tasks = ["作业", "阅读"]',
-    'tasks.insert(1, "游戏")',
-    'tasks.pop()',
-    'print(tasks)',
-    'tasks.insert(0, "运动")',
-    'x = tasks.pop(1)'
+    'fruits[1:3]',
+    'fruits[:3]',
+    'fruits[2:]',
+    "fruits.insert(1, '新元素')"
   ],
   medium: [
-    'tasks = ["任务1", "任务3"]\ntasks.insert(1, "任务2")',
-    'fruits = ["苹果", "橙子"]\nfruits.pop(0)',
-    'numbers = [10, 30]\nnumbers.insert(1, 20)\nprint(numbers)',
-    'stack = []\nstack.append("a")\nstack.append("b")',
-    'x = stack.pop()\nprint(x)'
+    'fruits.pop(1)',
+    'fruits.pop()',
+    "fruits.insert(-1, '元素')",
+    'fruits[-2:]'
   ],
   hard: [
-    'tasks = []\ntasks.append("任务1")\ntasks.append("任务2")\ntask = tasks.pop()\nprint(task)',
-    'numbers = [10, 40]\nnumbers.insert(1, 20)\nnumbers.insert(2, 30)',
-    'stack = []\nfor i in range(3):\n    stack.append(i)\nwhile stack:\n    print(stack.pop())',
-    'queue = []\nqueue.append("小明")\nqueue.append("小红")',
-    'served = queue.pop(0)\nprint(served)'
+    "fruits = ['a', 'b', 'c']\nfruits.insert(1, 'x')\nfruits.pop(0)",
+    'fruits[1:-1]',
+    'for i in range(len(fruits)):\n    fruits[i] = fruits[i] * 2',
+    'fruits = fruits[1:3]'
   ]
 }
 

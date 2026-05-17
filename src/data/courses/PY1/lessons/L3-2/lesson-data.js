@@ -1,57 +1,74 @@
 /**
- * PY1 课程 L3-2: 循环变量和应用
+ * PY1 课程 L3-2: for-if 嵌套
  *
  * 核心知识点:
- * 1. 循环变量 - for循环中的变量i
- * 2. 循环变量应用 - 利用循环变量生成有规律的数字
+ * 1. for-if 嵌套语法
+ * 2. for-if 执行过程
+ * 3. for-if 应用场景
  */
 
-// 单词卡数据（源文件 + 拓展词汇）
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // 源文件单词
+  // OCR 提取的单词
   {
-    word: 'time',
-    pronunciation: '[taim]',
-    partOfSpeech: 'n./v.',
-    meaning: '时间；为...安排时间',
+    word: 'fly',
+    pronunciation: '[flaɪ]',
+    partOfSpeech: 'v.',
+    meaning: '飞；飞行',
     level: 'easy',
-    example: 'What time is it?',
-    exampleTranslation: '现在几点了？',
-    note: 'on time 准时',
+    example: 'The bird can fly.',
+    exampleTranslation: '鸟会飞。',
     source: 'ocr'
   },
   {
-    word: 'sleep',
-    pronunciation: '[sli:p]',
-    partOfSpeech: 'v./n.',
-    meaning: '睡觉；睡眠',
+    word: 'blue',
+    pronunciation: '[bluː]',
+    partOfSpeech: 'adj.',
+    meaning: '蓝色的',
     level: 'easy',
-    example: 'I sleep at 9 PM.',
-    exampleTranslation: '我晚上9点睡觉。',
-    note: 'go to sleep 去睡觉',
+    example: 'The sky is blue.',
+    exampleTranslation: '天空是蓝色的。',
     source: 'ocr'
   },
-  // 拓展编程词汇（循环变量相关）
   {
-    word: 'loop',
-    pronunciation: '[lu:p]',
-    partOfSpeech: 'n./v.',
-    meaning: '循环；圈；环',
+    word: 'red',
+    pronunciation: '[red]',
+    partOfSpeech: 'adj.',
+    meaning: '红色的',
     level: 'easy',
-    example: 'The program runs in a loop.',
-    exampleTranslation: '程序循环运行。',
-    note: 'for loop for循环',
-    source: 'extended'
+    example: 'The apple is red.',
+    exampleTranslation: '苹果是红色的。',
+    source: 'ocr'
   },
   {
-    word: 'range',
-    pronunciation: '[reindʒ]',
-    partOfSpeech: 'n./v.',
-    meaning: '范围；范围',
-    level: 'medium',
-    example: 'for i in range(5):',
-    exampleTranslation: '循环5次',
-    note: 'range() 生成数字序列',
+    word: 'left',
+    pronunciation: '[left]',
+    partOfSpeech: 'n.',
+    meaning: '左边；左转弯',
+    level: 'easy',
+    example: 'Turn left at the corner.',
+    exampleTranslation: '在拐角处向左转。',
+    source: 'ocr'
+  },
+  {
+    word: 'right',
+    pronunciation: '[raɪt]',
+    partOfSpeech: 'n.',
+    meaning: '右边',
+    level: 'easy',
+    example: 'Turn right at the corner.',
+    exampleTranslation: '在拐角处向右转。',
+    source: 'ocr'
+  },
+  // 拓展单词
+  {
+    word: 'color',
+    pronunciation: '[ˈkʌlə]',
+    partOfSpeech: 'n.',
+    meaning: '颜色',
+    level: 'easy',
+    example: 'What color is it?',
+    exampleTranslation: '它是什么颜色？',
     source: 'extended'
   }
 ]
@@ -60,76 +77,97 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '循环变量',
-    emoji: '🔄',
-    gradeLevel: '1-2',
-    summary: 'for循环中的变量i叫做循环变量',
+    title: 'for-if 代码格式',
+    emoji: '🔢',
+    gradeLevel: '3-4',
+    summary: '在 for 循环里嵌套 if 判断',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个神奇的数字计数器，它会自动从0开始数数：0、1、2、3...这个计数器就是循环变量！',
-      concept: '在 for i in range() 中，变量 i 叫做循环变量。循环变量会从0开始，每次增加1，直到达到循环次数。循环变量的名字可以改成a、n等，但前后要保持一致。',
-      syntax: 'for i in range(次数):\n    # 使用循环变量i',
+      story: '想象一个场景：老师让同学们排队，每个人都要检查是否戴了帽子。这里"让每个人排队"就是一个循环，"检查帽子"就是一个判断。',
+      concept: 'for-if 嵌套是在循环里加入条件判断，每次循环都会检查条件，根据结果决定是否执行。',
+      syntax: `for i in range(次数):
+    if 条件:
+        下级代码`,
       example: {
-        title: '打印循环变量',
-        code: 'for i in range(4):\n    print(i)',
-        output: '0\n1\n2\n3',
-        explanation: '循环4次，i的值依次是0、1、2、3。'
+        title: '检查颜色',
+        code: `for i in range(3):
+    color = input()
+    if color == '蓝色':
+        print('2')`,
+        output: '（假设输入：蓝 红 蓝）\n2\n2',
+        explanation: '循环3次，每次获取颜色，如果等于"蓝色"就打印2。输入蓝、红、蓝，所以第1次和第3次打印2。'
       },
       practice: [
         {
-          question: 'for i in range(3)中，i的值依次是什么？',
-          answer: '0、1、2'
+          question: 'for-if 嵌套中，if 判断在什么里面进行？',
+          answer: '每次循环中'
         },
         {
-          question: '循环变量的名字可以改成什么？',
-          answer: '可以改成a、n等任意变量名'
+          question: 'for i in range(3) 里嵌套 if，每次循环都会判断吗？',
+          answer: '是的'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的计数器升级了！现在你不仅知道循环变量的值，还可以用它来计算！比如i+3会让每个数字都变大！',
-      concept: '循环变量可以在循环中使用和计算。在每次循环中，i都有不同的值，可以用于生成新的数字。例如 print(i + 3) 会打印3、4、5、6...',
-      syntax: 'for i in range(次数):\n    print(i + 数字)',
+      story: 'for 循环控制循环次数，if 在每次循环时进行条件判断。如果条件成立就执行下级代码，不成立就跳过。',
+      concept: 'for 控制循环次数，if 判断条件，条件成立时执行 if 的下级代码。',
+      syntax: `for i in range(3):        # 循环3次
+    if 条件:             # 每次都判断
+        执行代码          # 条件成立时执行`,
       example: {
-        title: '循环变量计算',
-        code: 'for i in range(5):\n    print(i + 3)',
-        output: '3\n4\n5\n6\n7',
-        explanation: 'i依次是0、1、2、3、4，加3后输出3、4、5、6、7。'
+        title: '逐个检查',
+        code: `# 检查输入是否为 'w'
+for i in range(4):
+    a = input()
+    if a == 'w':
+        print('1')`,
+        output: '（输入：w z w python）\n1\n1',
+        explanation: '循环4次，每次输入一个值，如果是"w"就打印1。输入 w、z、w、python，所以打印两个1。'
       },
       practice: [
         {
-          question: 'i的值是2时，i + 5等于多少？',
-          answer: '7'
+          question: 'for i in range(4) 嵌套 if，会判断几次？',
+          answer: '4次'
         },
         {
-          question: '如何让循环输出5、6、7、8？',
-          answer: 'for i in range(4):\n    print(i + 5)'
+          question: '每次循环的 if 判断结果一定相同吗？',
+          answer: '不一定，取决于输入'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '循环变量大师模式！你可以利用循环变量生成各种有规律的数字序列：递增、递减、倍数...只要改变计算方式就能实现！',
-      concept: '循环变量的本质是一个自动递增的数字序列。通过不同的计算表达式，可以生成各种规律序列：i+常数（平移）、i*常数（倍数）、常数-i（递减）。这是编程中生成规律序列的基础方法。',
-      syntax: '# 递增序列\nfor i in range(n):\n    print(i + a)\n\n# 递减序列\nfor i in range(n):\n    print(n - 1 - i)',
+      story: 'for-if 嵌套可以让程序根据每次循环的不同情况做出不同反应，实现更复杂的功能。',
+      concept: '理解 for-if 的执行顺序：先执行 for 的初始化，再进入循环，每次循环先执行 if 判断，再决定是否执行。',
+      syntax: `for i in range(n):
+    # 1. 进入循环
+    # 2. if 判断
+    # 3. 条件成立执行 if 内代码
+    # 4. 循环结束，回到步骤1`,
       example: {
-        title: '递减序列',
-        code: 'for i in range(5):\n    print(4 - i)',
-        output: '4\n3\n2\n1\n0',
-        explanation: 'i依次是0、1、2、3、4，4-i的结果依次是4、3、2、1、0，生成递减序列。'
+        title: '完整执行流程',
+        code: `# 统计输入中'z'的个数
+count = 0
+for i in range(3):
+    a = input()
+    if a == 'z':
+        count = count + 1
+print(count)`,
+        output: '（输入：z w z）\n2',
+        explanation: '循环3次，每次输入。如果是"z"，count 加1。最终 count=2。'
       },
       practice: [
         {
-          question: '如何生成10、20、30、40、50？',
-          answer: 'for i in range(5):\n    print((i + 1) * 10)'
+          question: 'for-if 嵌套中，if 的缩进应该是什么？',
+          answer: '比 for 多一次缩进'
         },
         {
-          question: '循环变量i从0开始，如何让它从1开始计数？',
-          answer: '使用i + 1，如print(i + 1)'
+          question: 'for-if 可以实现什么功能？',
+          answer: '在循环中根据条件进行不同处理'
         }
       ]
     }
@@ -137,83 +175,204 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '循环变量应用',
-    emoji: '📊',
-    gradeLevel: '1-2',
-    summary: '利用循环变量生成有规律的数字',
+    title: 'for-if 执行过程',
+    emoji: '⚙️',
+    gradeLevel: '3-4',
+    summary: '每次循环都进行条件判断',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你需要一串连续的数字标签：1、2、3、4...用循环变量就可以自动生成这些数字！',
-      concept: '循环变量应用就是利用i的值生成需要的数字。最常用的是print(i + 1)来生成从1开始的编号。',
-      syntax: 'for i in range(次数):\n    print(i + 1)',
+      story: 'for-if 就像一个自动检票机，for 是让人们排好队，if 是检查每张票是否有效。每次经过检票口，都要检查一次。',
+      concept: 'for 控制循环次数，if 在每次循环中进行判断，根据条件决定是否执行。',
+      syntax: `for → 循环
+if → 判断
+循环内每次都判断`,
       example: {
-        title: '生成编号',
-        code: 'for i in range(3):\n    print(i + 1)',
-        output: '1\n2\n3',
-        explanation: 'i是0、1、2，加1后输出1、2、3，就像编号一样。'
+        title: '检票过程',
+        code: `for i in range(3):
+    ticket = input()
+    if ticket == '有效':
+        print('通过')`,
+        output: '',
+        explanation: '循环3次，每次获取票的状态，如果"有效"就打印"通过"。'
       },
       practice: [
         {
-          question: '如何生成1到5的数字？',
-          answer: 'for i in range(5):\n    print(i + 1)'
+          question: 'for 循环内嵌套 if，每次循环会执行几次 if 判断？',
+          answer: '1次'
         },
         {
-          question: 'i + 1的作用是什么？',
-          answer: '让循环从1开始计数，而不是从0'
+          question: 'if 的条件成立时会发生什么？',
+          answer: '执行 if 的下级代码'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '数字序列进阶！你不仅可以生成递增序列，还可以生成递减序列：5、4、3、2、1！这需要用减法来实现。',
-      concept: '要生成递减序列，可以用"总数 - i"的方式。例如循环5次时，用 4 - i 可以得到4、3、2、1、0的递减序列。',
-      syntax: '# 递增序列\nprint(i + 1)\n\n# 递减序列\nprint(总次数 - 1 - i)',
+      story: '在 for 循环中，每次循环都会把能量板颜色存入变量 color，然后 if 判断 color 是否等于特定值。',
+      concept: '每次循环都会获取新的数据，if 根据新数据做出判断。',
+      syntax: `for i in range(3):
+    color = input()  # 每次获取新颜色
+    if color == '蓝色':
+        print('2')`,
       example: {
-        title: '倒计时',
-        code: 'for i in range(5):\n    print(4 - i)',
-        output: '4\n3\n2\n1\n0',
-        explanation: 'i是0→4时，4-i是4→0，生成递减序列。'
+        title: '处理颜色',
+        code: `# 如果颜色是蓝色打印2，红色打印4
+for i in range(3):
+    color = input()
+    if color == '蓝色':
+        print('2')
+    if color == '红色':
+        print('4')`,
+        output: '（输入：蓝 红 蓝）\n2\n4\n2',
+        explanation: '第1次 color="蓝"，打印2；第2次 color="红"，打印4；第3次 color="蓝"，打印2。'
       },
       practice: [
         {
-          question: '循环5次时，如何输出3、2、1、0、-1？',
-          answer: 'for i in range(5):\n    print(3 - i)'
+          question: '如果输入都是"红"，会打印几次4？',
+          answer: '3次'
         },
         {
-          question: '递增和递减序列有什么区别？',
-          answer: '递增用加法（i + 数字），递减用减法（数字 - i）'
+          question: '两个 if 的关系是什么？',
+          answer: '各自独立判断'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '序列大师模式！你可以生成各种复杂的数字序列：等差数列、倍数序列、交替序列...只要掌握循环变量的运算规律！',
-      concept: '循环变量序列的本质是函数映射：output = f(i)。常见模式有：等差序列(i*d+a)、倍数序列(i*m)、递减序列(n-1-i)。可以组合使用生成更复杂的序列。',
-      syntax: '# 等差序列（公差d）\nprint(i * d + a)\n\n# 倍数序列\nprint(i * m)\n\n# 递减序列\nprint(n - 1 - i)',
+      story: '理解 for-if 的执行顺序：进入循环 → 获取数据 → if 判断 → 执行或不执行 → 下一轮循环。',
+      concept: 'for-if 是顺序执行的，每次循环完整执行完 if 再进入下一次。',
+      syntax: `第1次循环：获取数据1 → if判断 → 执行或不执行
+第2次循环：获取数据2 → if判断 → 执行或不执行
+第3次循环：获取数据3 → if判断 → 执行或不执行`,
       example: {
-        title: '等差数列',
-        code: 'for i in range(5):\n    print(i * 2 + 1)',
-        output: '1\n3\n5\n7\n9',
-        explanation: 'i乘以2加1，生成奇数序列1、3、5、7、9。这是首项为1、公差为2的等差数列。'
+        title: '顺序执行',
+        code: `# 输入 w z w z，统计打印1的次数
+for i in range(4):
+    a = input()
+    if a == 'w':
+        print('1')`,
+        output: '（输入：w z w z）\n1\n1',
+        explanation: '第1次 a="w" → 打印1；第2次 a="z" → 不打印；第3次 a="w" → 打印1；第4次 a="z" → 不打印。'
       },
       practice: [
         {
-          question: '如何生成偶数序列2、4、6、8、10？',
-          answer: 'for i in range(5):\n    print((i + 1) * 2)'
+          question: '如果输入都是"w"，4次循环会打印几个1？',
+          answer: '4个'
         },
         {
-          question: 'i * 3 + 1会生成什么序列？',
-          answer: '1、4、7、10、13...（首项1，公差3的等差数列）'
+          question: 'for-if 的执行顺序是什么？',
+          answer: '先循环，再判断，然后进入下一轮'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-3',
+    title: 'for-if 应用场景',
+    emoji: '📋',
+    gradeLevel: '3-4',
+    summary: '处理多次输入，每次数不同判断',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: '比如给班级同学按性别分类，需要输入每个同学的性别，根据性别打印不同的数字。for 循环处理多次输入，if 判断性别。',
+      concept: '当需要处理多组数据，每组数据需要根据条件做不同处理时，使用 for-if 嵌套。',
+      syntax: `for i in range(n):
+    data = input()
+    if data == '男':
+        print('1')
+    if data == '女':
+        print('2')`,
+      example: {
+        title: '性别分类',
+        code: `# 输入3个同学的性别，打印对应数字
+for i in range(3):
+    gender = input()
+    if gender == '男':
+        print('1')
+    if gender == '女':
+        print('2')`,
+        output: '（输入：男 女 男）\n1\n2\n1',
+        explanation: '第1次"男"打印1，第2次"女"打印2，第3次"男"打印1。'
+      },
+      practice: [
+        {
+          question: 'for-if 适合什么场景？',
+          answer: '多次输入，每次需要不同处理'
+        },
+        {
+          question: '给30个同学分类需要循环几次？',
+          answer: '30次'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: 'for-if 可以解决"筛选"问题：从一堆数据中找出符合条件的数据并处理。',
+      concept: 'for 遍历所有数据，if 判断是否符合条件，符合则处理。',
+      syntax: `结果 = []
+for 数据 in 列表:
+    if 条件:
+        处理数据`,
+      example: {
+        title: '筛选数据',
+        code: `# 找出所有偶数
+for i in range(5):
+    n = int(input())
+    if n % 2 == 0:
+        print(n)`,
+        output: '（输入：1 4 3 6 5）\n4\n6',
+        explanation: '输入5个数字，逐个判断如果是偶数（n%2==0）就打印。4和6是偶数，所以打印它们。'
+      },
+      practice: [
+        {
+          question: '如何找出所有大于10的数？',
+          answer: 'if n > 10: print(n)'
+        },
+        {
+          question: 'for-if 筛选数据的流程是什么？',
+          answer: '遍历→判断→处理'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: '在物理中，光的反射角度和入射角度关于法线对称。通过旋转平面可以改变反射角度。',
+      concept: '理解光的反射原理：入射角等于反射角，旋转反射面会改变反射光的方向。',
+      syntax: `入射角 = 反射角
+旋转反射面 → 改变反射方向`,
+      example: {
+        title: '光反射',
+        code: `# 光的反射
+入射光角度 = 30度
+反射光角度 = 30度（关于法线对称）
+# 旋转反射面10度
+新的入射角 = 40度
+新的反射角 = 40度`,
+        output: '',
+        explanation: '反射定律：入射角等于反射角。如果旋转反射面，就相当于改变了入射角和反射角。'
+      },
+      practice: [
+        {
+          question: '光的反射定律是什么？',
+          answer: '入射角等于反射角'
+        },
+        {
+          question: '旋转反射面会怎样？',
+          answer: '改变反射光的方向'
         }
       ]
     }
   }
 ]
 
-// 习题数据（根据源文件知识点创作6道拓展题）
+// 习题数据
 export const exercises = [
   // 🟢 基础题（1-2年级）
   {
@@ -222,17 +381,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '循环变量值',
-    question: 'for i in range(3)循环中，i的值依次是什么？',
+    mathConcept: '循环嵌套',
+    question: `运行以下代码，input() 依次输入：hetao, python, python, code。最终输出区会打印几个 1？\n\n\`\`\`python\nfor i in range(4):\n    a = input()\n    if a == 'python':\n        print('1')\n\`\`\``,
     options: [
-      'A. 1、2、3',
-      'B. 0、1、2',
-      'C. 0、1、2、3',
-      'D. 1、2'
+      '1个',
+      '2个',
+      '3个',
+      '4个'
     ],
     answer: 1,
-    explanation: 'range(3)表示循环3次，i从0开始，依次是0、1、2，不包含3。',
-    hint: 'range(3)循环3次，从0开始'
+    explanation: '输入 hetao 时不打印，输入 python 时打印1，输入 python 时打印1，输入 code 时不打印。所以打印2个1。',
+    hint: '只有等于"python"才打印'
   },
   {
     id: 'ex-2',
@@ -240,17 +399,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '循环变量加法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(3):\n    print(i + 1)\n```',
+    mathConcept: '格式判断',
+    question: '在 for 循环中嵌套使用 if 语句，下列哪个代码格式是正确的？',
     options: [
-      'A. 0、1、2',
-      'B. 1、2、3',
-      'C. 1、2、3、4',
-      'D. 0、1、2、3'
+      'for i in range(3): if a == 5: print(5)',
+      'for i in range(3): if a == 5\n        print(5)',
+      'for i in range(3):\n    if a == 5:\n        print(5)',
+      'for i in range(3)\n    if a == 5:\n        print(5)'
     ],
-    answer: 1,
-    explanation: 'i依次是0、1、2，i+1的结果是1、2、3。所以输出1、2、3。',
-    hint: 'i是0、1、2，分别加1'
+    answer: 2,
+    explanation: 'for 循环需要冒号，if 也需要冒号，if 的下级代码需要缩进。选项 C 格式正确。',
+    hint: '注意冒号和缩进'
   },
 
   // 🟡 进阶题（3-4年级）
@@ -260,17 +419,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '循环变量乘法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(4):\n    print(i * 2)\n```',
+    mathConcept: '条件分析',
+    question: `执行下方代码，输入 z w z，输出区打印的值是？\n\n\`\`\`python\nfor i in range(3):\n    a = input()\n    if a == 'w':\n        print('1')\n    if a == 'z':\n        print('2')\n\`\`\``,
     options: [
-      'A. 0、2、4、6',
-      'B. 2、4、6、8',
-      'C. 0、1、2、3',
-      'D. 1、2、3、4'
+      '1 1 1',
+      '2 1 2',
+      '1 2 1',
+      '2 1 2'
     ],
-    answer: 0,
-    explanation: 'i依次是0、1、2、3，i*2的结果是0、2、4、6。\n\n数学知识：这是乘法运算，0×2=0，1×2=2，2×2=4，3×2=6。',
-    hint: '计算0×2、1×2、2×2、3×2'
+    answer: 1,
+    explanation: '第1次 a="z" → 打印2；第2次 a="w" → 打印1；第3次 a="z" → 打印2。输出 2 1 2。',
+    hint: 'w打印1，z打印2'
   },
   {
     id: 'ex-4',
@@ -278,17 +437,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '循环变量减法',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(4 - i)\n```',
+    mathConcept: '缩进理解',
+    question: `以下代码的输出是什么？\n\n\`\`\`python\nfor i in range(3):\n    a = input()\n    if a == 'a':\n        print('1')\n\`\`\``,
     options: [
-      'A. 4、3、2、1、0',
-      'B. 5、4、3、2、1',
-      'C. 0、1、2、3、4',
-      'D. 1、2、3、4、5'
+      '输入3个a才打印',
+      '每次输入a都打印1',
+      '打印3次1',
+      '什么都不打印'
     ],
-    answer: 0,
-    explanation: 'i依次是0、1、2、3、4，4-i的结果是4、3、2、1、0。\n\n数学知识：这是递减序列，每次减1。',
-    hint: '计算4-0、4-1、4-2、4-3、4-4'
+    answer: 1,
+    explanation: '每次循环都会获取输入并判断，如果是"a"就打印1。不是3个a才打印，也不是打印3次1。',
+    hint: '每次循环独立判断'
   },
 
   // 🔴 挑战题（5-6年级）
@@ -298,17 +457,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '等差数列',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(5):\n    print(i * 3 + 1)\n```',
+    mathConcept: '综合应用',
+    question: `输入 w w w，以下代码的输出是什么？\n\n\`\`\`python\ncount = 0\nfor i in range(3):\n    a = input()\n    if a == 'w':\n        count = count + 1\nprint(count)\n\`\`\``,
     options: [
-      'A. 1、4、7、10、13',
-      'B. 3、6、9、12、15',
-      'C. 0、3、6、9、12',
-      'D. 1、3、5、7、9'
+      '0',
+      '1',
+      '2',
+      '3'
     ],
-    answer: 0,
-    explanation: 'i依次是0、1、2、3、4，i*3+1的结果是1、4、7、10、13。\n\n数学知识：这是首项为1、公差为3的等差数列，通项公式an = 3n + 1（n从0开始）。',
-    hint: '计算0×3+1、1×3+1、2×3+1、3×3+1、4×3+1'
+    answer: 3,
+    explanation: 'count 初始化为0，每次输入"w"时 count 加1。3次输入都是"w"，所以 count=3。',
+    hint: '每次w都让count加1'
   },
   {
     id: 'ex-6',
@@ -316,69 +475,66 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '序列规律',
-    question: '要输出偶数序列2、4、6、8、10，应该使用哪个代码？',
+    mathConcept: '流程分析',
+    question: `执行以下代码，第三次循环时 a 的值和输出是？\n\n\`\`\`python\nfor i in range(3):\n    a = input()\n    if a == 'z':\n        print('2')\n    else:\n        print('1')\n\`\`\``,
     options: [
-      'A. for i in range(5): print(i * 2)',
-      'B. for i in range(5): print((i + 1) * 2)',
-      'C. for i in range(5): print(i + 2)',
-      'D. for i in range(5): print(i * 2 + 2)'
+      'z → 打印2',
+      'z → 打印1',
+      'w → 打印2',
+      'w → 打印1'
     ],
-    answer: 1,
-    explanation: '分析各选项：\n- A：i*2输出0、2、4、6、8（从0开始）\n- B：(i+1)*2输出2、4、6、8、10（正确！）\n- C：i+2输出2、3、4、5、6\\n- D：i*2+2输出2、4、6、8、10（也可以，但B更直观）\n\n数学知识：正偶数序列通项公式an = 2n（n从1开始），对应(i+1)*2。',
-    hint: 'i是0、1、2、3、4，要让输出是2、4、6、8、10'
+    answer: 0,
+    explanation: '第3次循环时 a 的值取决于第3次输入。if a == "z" 成立则打印2，else 打印1。',
+    hint: '根据输入决定输出'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L3-2',
-  title: '循环变量和应用',
-  subtitle: '学会使用循环变量生成有规律的数字',
+  title: 'for-if嵌套',
+  subtitle: '循环里加入条件判断',
   difficulty: '入门',
-  estimatedTime: '30-40分钟',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '理解循环变量i的含义和变化规律',
-    '学会使用循环变量进行计算',
-    '掌握生成递增和递减序列的方法',
-    '了解等差数列的生成方式'
+    '理解 for-if 嵌套的语法格式',
+    '掌握 for-if 的执行过程',
+    '能用 for-if 处理多次输入',
+    '能解决筛选问题'
   ],
   prerequisites: [
-    'Python 基础语法',
-    'for 循环基础',
-    '变量基础概念',
-    '基础算术运算'
+    '理解 for 循环',
+    '理解 if 语句',
+    '知道什么是缩进'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['time', 'loop', 'count', 'print'],
-  medium: ['sleep', 'range', 'cycle', 'number'],
-  hard: ['variable', 'sequence', 'increase', 'decrease']
+  easy: ['fly', 'blue', 'red', 'left', 'right'],
+  medium: ['color', 'check', 'equal', 'condition'],
+  hard: ['nested', 'iterate', 'filter', 'process']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'for i in range(3):',
-    'print(i)',
-    'print(i + 1)',
-    'for n in range(4):',
-    'print(n)',
-    'for a in range(5):'
+    'for i in range(3):\n    a = input()',
+    "if a == 'blue':\n    print('2')",
+    'for i in range(3):\n    if a == "red":\n        print("4")',
+    'for i in range(4):\n    a = input()\n    if a == "w":\n        print("1")'
   ],
   medium: [
-    'for i in range(4):\n    print(i + 1)',
-    'for i in range(5):\n    print(i * 2)',
-    'for i in range(3):\n    print(i + 5)',
-    'for n in range(4):\n    print(3 - n)'
+    'for i in range(3):\n    color = input()\n    if color == "blue":\n        print("2")\n    if color == "red":\n        print("4")',
+    'for i in range(4):\n    a = input()\n    if a == "w":\n        print("1")\n    if a == "z":\n        print("2")',
+    'for i in range(3):\n    n = int(input())\n    if n > 10:\n        print("big")',
+    'count = 0\nfor i in range(5):\n    a = input()\n    if a == "w":\n        count = count + 1'
   ],
   hard: [
-    'for i in range(5):\n    print(i * 3 + 1)',
-    'for i in range(5):\n    print((i + 1) * 2)',
-    'for i in range(5):\n    print(4 - i)',
-    'for i in range(6):\n    print(i * 2 + 1)'
+    'count = 0\nfor i in range(3):\n    a = input()\n    if a == "z":\n        count = count + 1\nprint(count)',
+    'for i in range(4):\n    n = int(input())\n    if n % 2 == 0:\n        print("even")\n    else:\n        print("odd")',
+    'for i in range(5):\n    score = int(input())\n    if score >= 90:\n        print("A")\n    elif score >= 80:\n        print("B")\n    else:\n        print("C")',
+    'total = 0\nfor i in range(4):\n    n = int(input())\n    if n > 0:\n        total = total + n\nprint(total)'
   ]
 }
 

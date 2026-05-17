@@ -1,9 +1,9 @@
 /**
- * PY1 课程 L1-1: 编程启程
+ * PY1 课程 L1-1: print()命令与变量
  *
  * 核心知识点:
- * 1. print() 命令 - 在输出区显示内容
- * 2. 变量 - 存储数据的盒子
+ * 1. print() 命令 - 打印内容
+ * 2. 变量 - 创建和使用
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
@@ -12,46 +12,62 @@ export const vocabData = [
   {
     word: 'print',
     pronunciation: '[print]',
-    partOfSpeech: 'v./n.',
-    meaning: '打印；印刷；出版',
+    partOfSpeech: 'v.',
+    meaning: '打印；输出',
     level: 'easy',
-    example: 'Please print your name.',
-    exampleTranslation: '请打印你的名字。',
-    note: 'out of print 绝版的；已售完',
+    example: 'Press the print button to print the document.',
+    exampleTranslation: '按下打印按钮来打印文件。',
     source: 'ocr'
   },
   {
     word: 'weight',
     pronunciation: '[weit]',
     partOfSpeech: 'n.',
-    meaning: '重量；分量；重物',
-    level: 'easy',
-    example: 'What is your weight?',
-    exampleTranslation: '你的体重是多少？',
-    note: 'lose weight 减肥',
+    meaning: '重量；体重',
+    level: 'medium',
+    example: 'The weight of this box is 5 kilograms.',
+    exampleTranslation: '这个盒子的重量是5公斤。',
     source: 'ocr'
   },
   {
     word: 'height',
     pronunciation: '[hait]',
     partOfSpeech: 'n.',
-    meaning: '高度；高处；高地',
+    meaning: '高度',
+    level: 'medium',
+    example: 'The height of this building is 100 meters.',
+    exampleTranslation: '这栋楼的高度是100米。',
+    source: 'ocr'
+  },
+  {
+    word: 'right',
+    pronunciation: '[rait]',
+    partOfSpeech: 'n.',
+    meaning: '右边；正确',
     level: 'easy',
-    example: 'What is your height?',
-    exampleTranslation: '你的身高是多少？',
-    note: '',
+    example: 'Turn right at the corner.',
+    exampleTranslation: '在拐角处向右转。',
     source: 'ocr'
   },
   // 拓展单词
   {
     word: 'variable',
-    pronunciation: "['veəriəbl]",
-    partOfSpeech: 'n./adj.',
-    meaning: '变量；可变的；易变的',
+    pronunciation: '[ˈveəriəbl]',
+    partOfSpeech: 'n.',
+    meaning: '变量',
     level: 'medium',
-    example: 'Create a variable to store the value.',
-    exampleTranslation: '创建一个变量来存储这个值。',
-    note: 'variable 变量',
+    example: 'A variable stores data that can change.',
+    exampleTranslation: '变量存储可以改变的数据。',
+    source: 'extended'
+  },
+  {
+    word: 'output',
+    pronunciation: '[ˈaʊtpʊt]',
+    partOfSpeech: 'n.',
+    meaning: '输出；输出结果',
+    level: 'medium',
+    example: 'The output shows the result of the program.',
+    exampleTranslation: '输出显示程序的结果。',
     source: 'extended'
   }
 ]
@@ -60,29 +76,29 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '魔法打印机 - print()命令',
+    title: '打印命令 - print()',
     emoji: '🖨️',
     gradeLevel: '1-2',
-    summary: '在输出区显示文字和计算结果',
+    summary: '把内容打印到输出区',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一台魔法打印机，只要告诉它要打印什么，它就会在屏幕上显示出来！',
-      concept: 'print() 命令可以把括号中的内容显示在输出区，就像魔法打印机一样。',
+      story: '想象 print() 是一个神奇的打印机，你告诉它打印什么，它就会在输出区显示什么。就像用印章盖在纸上一样！',
+      concept: 'print() 命令可以把括号里的内容打印到输出区显示出来。',
       syntax: "print('要打印的内容')",
       example: {
-        title: '打印问候语',
-        code: "print('你好，世界!')",
-        output: '你好，世界!',
-        explanation: 'print() 命令会把单引号中的文字原样打印在输出区。'
+        title: '打印文字',
+        code: "print('Hello')",
+        output: 'Hello',
+        explanation: 'print() 命令会直接把单引号里的内容打印出来。注意：文字要用单引号包裹起来。'
       },
       practice: [
         {
-          question: '如何打印 "你好"？',
-          answer: "print('你好')"
+          question: "print('你好') 会输出什么？",
+          answer: '你好'
         },
         {
-          question: 'print() 命令中，文字需要加什么符号？',
+          question: '打印文字时，文字两边要加什么？',
           answer: '单引号'
         }
       ]
@@ -90,14 +106,14 @@ export const knowledgePoints = [
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的魔法打印机升级了！不仅能打印文字，还能帮你做数学题，直接算出结果！',
-      concept: 'print() 命令非常智能，如果括号中是数学算式，它会自动计算并显示结果。',
-      syntax: "print('文字')  # 打印文字\nprint(算式)  # 计算并打印结果",
+      story: 'print() 不仅能打印文字，还能打印数学算式的结果！就像一个计算器一样。',
+      concept: '如果括号里写的是数学算式，print() 会先计算再显示结果。',
+      syntax: 'print(算式)\nprint(数字)',
       example: {
-        title: '计算数学题',
-        code: 'print(2 * 3)',
-        output: '6',
-        explanation: 'print() 会自动计算 2 * 3 的结果，然后输出 6。'
+        title: '打印数字和计算结果',
+        code: 'print(2 * 3)\nprint(10 + 5)',
+        output: '6\n15',
+        explanation: 'print(2 * 3) 会先计算 2×3=6，然后打印出 6。print(10 + 5) 会先计算 10+5=15，然后打印出 15。'
       },
       practice: [
         {
@@ -105,31 +121,31 @@ export const knowledgePoints = [
           answer: '8'
         },
         {
-          question: 'print("10 + 20") 会输出什么？',
-          answer: '10 + 20（不会计算，因为加了引号）'
+          question: 'print(2 * 4) 会输出什么？',
+          answer: '8'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '打印机大师模式！你可以用 print() 显示各种信息：文字、数字、计算结果，甚至是变量的值！',
-      concept: 'print() 是编程中最基础的输出命令，配合变量可以实现更复杂的功能。打印变量时不需要加引号。',
-      syntax: "print('文字')    # 打印字符串\nprint(数字)    # 打印数字\nprint(变量)    # 打印变量值（不加引号！）",
+      story: '高级打印技巧！你可以用 print() 同时打印多个内容，或者打印变量的值。',
+      concept: 'print() 可以打印变量、表达式，甚至多个用逗号分隔的内容。',
+      syntax: 'print(变量名)\nprint(内容1, 内容2)',
       example: {
-        title: '打印计算结果',
-        code: 'number = 7\nprint(number * 5)',
-        output: '35',
-        explanation: '先创建变量 number = 7，然后打印 number * 5 的结果，输出 35。'
+        title: '打印变量和混合内容',
+        code: `number = 7\nprint(number)\nprint('结果是', number * 2)`,
+        output: '7\n结果是 14',
+        explanation: '打印变量时不需要加引号，直接写变量名即可。print 还能同时打印多个内容，用逗号隔开。'
       },
       practice: [
         {
-          question: '打印变量时需要加引号吗？',
-          answer: '不需要，加引号会打印变量名而不是值'
+          question: 'n = 5, print(n) 会输出什么？',
+          answer: '5'
         },
         {
-          question: 'print("2*3") 和 print(2*3) 有什么区别？',
-          answer: '前者输出 "2*3"，后者输出 "6"'
+          question: 'print(3, 5) 会输出什么？',
+          answer: '3 5'
         }
       ]
     }
@@ -137,76 +153,76 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '神奇储物盒 - 变量',
+    title: '神奇的变量盒子',
     emoji: '📦',
     gradeLevel: '1-2',
     summary: '存储数据，随时取用',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有很多神奇的盒子，每个盒子上都贴着标签。你可以在盒子里放东西，以后要用的时候，只要找到盒子就能拿到里面的东西！',
-      concept: '变量就像一个有标签的盒子，可以存储各种数据，比如数字、文字等。以后想用这个数据时，只要说出变量名就可以了。',
-      syntax: '变量名 = 变量的值',
+      story: '变量就像一个盒子，你可以把东西放进去，需要的时候再拿出来用。每个盒子都有自己的名字。',
+      concept: '变量就像一个存储数据的盒子，可以用变量名来访问里面的数据。',
+      syntax: '变量名 = 数据',
       example: {
-        title: '创建数字变量',
-        code: 'number = 7\nprint(number)',
-        output: '7',
-        explanation: 'number = 7 表示把数字7存入变量number中，print(number)会打印出变量中的值7。'
+        title: '创建和使用变量',
+        code: "fruit = 'apple'\nprint(fruit)",
+        output: 'apple',
+        explanation: 'fruit = "apple" 把字符串 "apple" 存储到变量 fruit 中。print(fruit) 会打印出 fruit 里的内容。'
       },
       practice: [
         {
-          question: '如何把数字10存入变量age？',
-          answer: 'age = 10'
+          question: "n = 7, print(n) 会输出什么？",
+          answer: '7'
         },
         {
-          question: '变量可以存储什么？',
-          answer: '数字、文字等各种数据'
+          question: '变量名用什么符号赋值？',
+          answer: '='
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的储物盒升级了！不仅可以存数字，还可以存文字，甚至可以用存好的数据进行计算！',
-      concept: '变量可以存储不同类型的数据：整数、小数、字符串等。存储后可以反复使用，还可以参与运算。',
-      syntax: '# 存储数字\nnumber = 7\n\n# 存储文字\nfruit = "apple"\n\n# 使用变量计算\nprint(number * 5)',
+      story: '变量盒子可以存储各种类型的数据：数字、文字、还有算式计算的结果！',
+      concept: '变量可以存储数字、字符串等多种数据类型，使用时不需要加引号。',
+      syntax: '数字变量 = 数字\n字符串变量 = "文字"',
       example: {
-        title: '存储文字并打印',
-        code: 'fruit = "apple"\nprint(fruit)',
-        output: 'apple',
-        explanation: '把文字 "apple" 存入变量 fruit，打印时输出存储的文字。注意文字需要加引号。'
+        title: '存储数字并计算',
+        code: 'number = 7\nprint(number * 5)',
+        output: '35',
+        explanation: 'number = 7 把数字 7 存入变量 number。print(number * 5) 会先取出 number 的值 7，乘以 5 得到 35，然后打印出来。'
       },
       practice: [
         {
-          question: '如何存储名字 "小明" 到变量 name？',
-          answer: 'name = "小明"'
+          question: 'a = 3, b = 5, print(a + b) 会输出什么？',
+          answer: '8'
         },
         {
-          question: '变量名可以随意取名吗？',
-          answer: '基本可以，但最好用有意义的名字，不能用数字开头'
+          question: '打印变量时需要加引号吗？',
+          answer: '不需要'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '储物大师模式！你可以创建多个变量，让它们之间互相配合，完成复杂的计算任务！',
-      concept: '变量是编程的基础，可以创建多个变量，并且可以用一个变量的值来计算另一个变量。变量名应该有意义，方便阅读代码。',
-      syntax: '# 创建多个变量\na = 10\nb = 20\n\n# 变量参与运算\nprint(a + b)\n\n# 变量赋值给变量\nc = a',
+      story: '变量可以重新赋值，而且可以用在其他地方。理解变量的本质很重要！',
+      concept: '变量可以多次赋值，新的值会覆盖旧的值。变量就像一个盒子，里面的东西可以更换。',
+      syntax: '变量 = 新值\n变量 = 变量 + 数字',
       example: {
-        title: '多个变量配合计算',
-        code: 'number = 7\nresult = number * 5\nprint(result)',
-        output: '35',
-        explanation: '先创建变量 number = 7，然后用 number 的值计算 result = 35，最后打印 result。'
+        title: '变量赋值和更新',
+        code: 'n = 12\nprint(n)\nn = 20\nprint(n)',
+        output: '12\n20',
+        explanation: '变量可以多次赋值。第一次 n = 12，print 输出 12；第二次 n = 20，原来的 12 被替换成 20，print 输出 20。'
       },
       practice: [
         {
-          question: 'number = 10 后，number = number + 5 的值是多少？',
-          answer: '15（number 变成了 15）'
+          question: 'n = 5, n = 10, print(n) 会输出什么？',
+          answer: '10'
         },
         {
-          question: '变量名最好用什么风格？',
-          answer: '小写字母，多个词用下划线连接，如 student_name'
+          question: '变量存储的是什么？',
+          answer: '数据的值'
         }
       ]
     }
@@ -215,24 +231,24 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '符号识别',
-    question: '下面哪段代码能正确打印出 "乌拉乎"？',
+    mathConcept: '文字对应',
+    question: '下面哪段代码能打印出"乌拉乎"？',
     options: [
-      'A. print(乌拉乎)',
-      'B. print 乌拉乎',
-      'C. print(\'乌拉乎\')',
-      'D. print \'乌拉乎\''
+      "print(乌拉乎)",
+      "print 乌拉乎",
+      "print('乌拉乎')",
+      "print '乌拉乎'"
     ],
-    answer: 2, // C
-    explanation: 'print() 命令的正确格式是：print 后面跟括号，打印文字时文字两侧要加单引号。C选项完全符合要求。',
-    hint: 'print() 命令需要括号，文字需要加引号'
+    answer: 2,
+    explanation: 'print() 命令打印文字时，文字两侧要加上单引号。所以 C 选项 print("乌拉乎") 是正确的。',
+    hint: '文字两边要加什么符号？'
   },
   {
     id: 'ex-2',
@@ -240,60 +256,58 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '变量理解',
-    question: '执行下面的代码，打印结果是什么？\n\n```python\nn = 12\nprint(n)\n```',
+    mathConcept: '变量取值',
+    question: '这段代码的打印结果是？\n\n```python\nn = 12\nprint(n)\n```',
     options: [
-      'A. n',
-      'B. 12',
-      'C. \'12\'',
-      'D. n=12'
+      'n',
+      '12',
+      "'12'",
+      'n=12'
     ],
-    answer: 1, // B
-    explanation: 'n = 12 表示将数字12存入变量n中，print(n)会打印出变量n中存储的值，即12。注意打印变量时不加引号，所以不会输出\'12\'这种带引号的形式。',
-    hint: 'print(n) 打印的是变量 n 中存储的值'
+    answer: 1,
+    explanation: 'n = 12 表示将数字 12 存入变量 n 中，print(n) 打印出变量 n 的值，为 12。注意打印变量时不需要加引号。',
+    hint: 'print(变量名) 会打印变量的值'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '下面哪段代码能打印出 30？',
+    mathConcept: '数学运算',
+    question: '下面哪段代码能打印出 30 ？',
     options: [
-      'A. print(7 + 6)',
-      'B. print(n + 20)',
-      'C. print("n + 20")',
-      'D. print(7 + 6)'
+      'print(5 + 10)',
+      'print(n + 20)',
+      'print(5 + 5 * 5)',
+      'print(3 * 4)'
     ],
-    answer: 1, // B
-    explanation: '这是一个陷阱题！需要仔细计算每个选项：\n- A选项：7 + 6 = 13，输出13\n- B选项：假设n=10，10 + 20 = 30，输出30 ✓\n- C选项：加了引号，输出字符串 "n + 20"\n- D选项：7 + 6 = 13，输出13\n\n注意：如果括号中填写的是数学算式，会直接打印出计算结果。',
-    hint: '计算每个选项的算式结果，注意有引号和无引号的区别'
+    answer: 2,
+    explanation: 'A 选项打印 13；B 选项打印 n+20（变量未定义）；C 选项 5 + 5*5 = 5 + 25 = 30，正确；D 选项打印 12。',
+    hint: '先算乘除，后算加减'
   },
-
-  // 🟡 进阶题
   {
     id: 'ex-4',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: "下面哪段代码能打印出 30？\n\n```python\nn = 10\n```",
+    mathConcept: '运算顺序',
+    question: 'print(2 + 3 * 4) 会输出什么？',
     options: [
-      'A. print(7 + 6)',
-      'B. print(n + 20)',
-      'C. print("n + 20")',
-      'D. print(7 + 6)'
+      '20',
+      '24',
+      '14',
+      '11'
     ],
-    answer: 1, // B
-    explanation: '需要仔细计算每个选项：\n- A选项：7 + 6 = 13，输出13\n- B选项：n=10，10 + 20 = 30，输出30 ✓\n- C选项：加了引号，输出字符串 "n + 20"\n- D选项：7 + 6 = 13，输出13\n\n注意：如果括号中填写的是数学算式，会直接打印出计算结果。',
-    hint: '计算每个选项的算式结果，注意有引号和无引号的区别'
+    answer: 2,
+    explanation: '先算乘法 3*4=12，再算加法 2+12=14。注意 Python 和数学一样，先算乘除后算加减。',
+    hint: '先算乘法还是加法？'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
@@ -301,16 +315,16 @@ export const exercises = [
     levelEmoji: '🔴',
     type: 'multiple-choice',
     mathConcept: '变量计算',
-    question: "执行下面的代码，会输出什么？\n\n```python\nn = 10\nprint(n * 2 + 5)\n```",
+    question: '如果 a = 5, b = 4，执行 print(a + a * b) 会输出什么？',
     options: [
-      'A. 20',
-      'B. 25',
-      'C. 30',
-      'D. n * 2 + 5'
+      '25',
+      '20',
+      '36',
+      '45'
     ],
-    answer: 1, // B
-    explanation: '这是一个数学计算题！需要遵循运算优先级：\n\n1. 先计算 n * 2 = 10 * 2 = 20\n2. 再计算 20 + 5 = 25\n\n所以输出结果是 25。\n\n数学知识：乘法优先于加法，这与数学中的运算顺序一致。',
-    hint: '先算乘法，再算加法：10 × 2 + 5 = ?'
+    answer: 0,
+    explanation: 'a = 5, b = 4。a + a * b = 5 + 5 * 4 = 5 + 20 = 25。先算乘法 a * b = 20，再算加法 5 + 20 = 25。',
+    hint: '先算 a * b，再算 a + (a*b)'
   },
   {
     id: 'ex-6',
@@ -318,45 +332,44 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '累加计算',
-    question: "执行下面的代码，变量 n 的值会变成多少？\n\n```python\nn = 5\nn = n + 3\nprint(n)\n```",
+    mathConcept: '变量更新',
+    question: '执行以下代码，第三次 print(n) 会输出什么？\n\n```python\nn = 5\nn = n + 3\nn = n * 2\nprint(n)\n```',
     options: [
-      'A. 5',
-      'B. 8',
-      'C. 3',
-      'D. n + 3'
+      '8',
+      '11',
+      '16',
+      '10'
     ],
-    answer: 1, // B
-    explanation: '这是一个累加计算！\n\n1. 第一行：n = 5，把5存入变量n\n2. 第二行：n = n + 3，先算右边 n + 3 = 5 + 3 = 8，再把8存入变量n\n3. 第三行：print(n)，输出8\n\n数学知识：这是基础的累加运算，n = n + 3 表示让 n 增加3。',
-    hint: 'n = n + 3 表示让原来的 n 加上 3'
+    answer: 2,
+    explanation: 'n = 5 → n = n + 3 = 8 → n = n * 2 = 16。所以 print(n) 输出 16。',
+    hint: '每次赋值都会用新值覆盖原来的值'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L1-1',
-  title: '编程启程',
-  subtitle: '学会 print() 命令和变量',
+  title: 'print与变量',
+  subtitle: '学会输出和存储数据',
   difficulty: '入门',
-  estimatedTime: '30-40分钟',
+  estimatedTime: '30-45分钟',
   learningGoals: [
     '掌握 print() 命令的基本用法',
-    '理解变量的概念和用途',
-    '学会创建和使用变量',
-    '了解键盘符号输入方法'
+    '理解变量的概念和创建方法',
+    '能使用变量存储和使用数据',
+    '能进行简单的数学运算'
   ],
   prerequisites: [
-    '无需编程基础',
-    '认识英文字母和数字',
-    '会使用键盘输入'
+    '认识数字和基本运算符号',
+    '会用键盘输入内容'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['print', 'code', 'name', 'text'],
-  medium: ['weight', 'height', 'number'],
-  hard: ['variable', 'keyboard', 'symbol']
+  easy: ['print', 'right', 'box'],
+  medium: ['weight', 'height', 'variable', 'number'],
+  hard: ['output', 'assign', 'calculate', 'expression']
 }
 
 // 代码模板练习（按难度分组）
@@ -364,24 +377,20 @@ export const typingTemplates = {
   easy: [
     "print('Hello')",
     'print(123)',
-    'name = "Tom"',
-    'age = 10',
-    'print(name)',
-    'print(2 + 3)'
+    'n = 5',
+    'print(n)'
   ],
   medium: [
-    'number = 7\nprint(number)',
-    'fruit = "apple"\nprint(fruit)',
-    'age = 10\nprint(age * 2)',
-    'x = 5\ny = x + 3',
-    'score = 100\nprint(score)'
+    "fruit = 'apple'",
+    'print(fruit)',
+    'print(3 + 5)',
+    'number = 7\nprint(number)'
   ],
   hard: [
-    'a = 10\nb = a + 5\nprint(b)',
-    'n = 1\nn = n + 2\nprint(n)',
-    'x = 5\ny = x * 2\nprint(x + y)',
-    'name = "Py"\nprint(name + "thon")',
-    'a = 10\nb = 20\nprint(a + b)'
+    "print('结果是', 3 + 5)",
+    'n = 5\nn = n + 3',
+    'a = 3\nb = 4\nprint(a + b)',
+    'print(2 * 3 + 4)'
   ]
 }
 

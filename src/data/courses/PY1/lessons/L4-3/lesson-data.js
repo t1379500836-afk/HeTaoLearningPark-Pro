@@ -2,78 +2,72 @@
  * PY1 课程 L4-3: break语句与while循环条件
  *
  * 核心知识点:
- * 1. break语句 - 结束循环
- * 2. while循环条件 - 条件成立执行，不成立结束
- * 3. 条件控制循环 - 灵活控制循环执行
+ * 1. break 语句 - 结束循环
+ * 2. while 循环条件 - 条件控制循环
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  {
-    word: 'break',
-    pronunciation: '[breɪk]',
-    partOfSpeech: 'v./n.',
-    meaning: '中断；弄坏；打破（记录）；暂停；休息；骨折',
-    level: 'easy',
-    example: 'Press break to stop.',
-    exampleTranslation: '按break键停止。',
-    note: 'coffee break 休息时间',
-    source: 'ocr'
-  },
+  // OCR 提取的单词
   {
     word: 'tomato',
-    pronunciation: "[təˈmɑːtəʊ]",
+    pronunciation: '[təˈmeɪtəʊ]',
     partOfSpeech: 'n.',
-    meaning: '番茄，西红柿',
+    meaning: '西红柿；番茄',
     level: 'easy',
-    example: 'I like tomatoes.',
-    exampleTranslation: '我喜欢西红柿。',
-    note: '复数形式是tomatoes',
+    example: 'Tomato is red.',
+    exampleTranslation: '西红柿是红色的。',
     source: 'ocr'
   },
   {
-    word: 'state',
-    pronunciation: '[steɪt]',
-    partOfSpeech: 'n./v./adj.',
-    meaning: '状态；国家；州；陈述；公布；国家的',
-    level: 'medium',
-    example: 'What state is it in?',
-    exampleTranslation: '它处于什么状态？',
-    note: 'United States 美国',
-    source: 'ocr'
-  },
-  {
-    word: 'exit',
-    pronunciation: "['eksit]",
-    partOfSpeech: 'v./n.',
-    meaning: '退出；出口；离开',
-    level: 'medium',
-    example: 'Press exit to quit.',
-    exampleTranslation: '按exit键退出。',
-    note: 'exit sign 出口标志',
-    source: 'extended'
-  },
-  {
-    word: 'condition',
-    pronunciation: "[kən'dɪʃn]",
+    word: 'carrot',
+    pronunciation: '[ˈkærət]',
     partOfSpeech: 'n.',
-    meaning: '条件；状况；状态',
-    level: 'medium',
-    example: 'Check the condition.',
-    exampleTranslation: '检查条件。',
-    note: 'conditional 条件的',
-    source: 'extended'
+    meaning: '胡萝卜',
+    level: 'easy',
+    example: 'Rabbits love carrots.',
+    exampleTranslation: '兔子爱吃胡萝卜。',
+    source: 'ocr'
   },
   {
-    word: 'control',
-    pronunciation: "[kən'trəʊl]",
-    partOfSpeech: 'v./n.',
-    meaning: '控制；支配；管理；控制',
-    level: 'hard',
-    example: 'Control the loop.',
-    exampleTranslation: '控制循环。',
-    note: 'remote control 遥控器',
-    source: 'extended'
+    word: 'wood',
+    pronunciation: '[wʊd]',
+    partOfSpeech: 'n.',
+    meaning: '木头；木材',
+    level: 'easy',
+    example: 'The table is made of wood.',
+    exampleTranslation: '桌子是木头做的。',
+    source: 'ocr'
+  },
+  {
+    word: 'glue',
+    pronunciation: '[ɡluː]',
+    partOfSpeech: 'n.',
+    meaning: '胶水',
+    level: 'medium',
+    example: 'This glue is strong.',
+    exampleTranslation: '这个胶水很牢固。',
+    source: 'ocr'
+  },
+  {
+    word: 'mood',
+    pronunciation: '[muːd]',
+    partOfSpeech: 'n.',
+    meaning: '情绪；心情',
+    level: 'medium',
+    example: 'Good mood today.',
+    exampleTranslation: '今天心情好。',
+    source: 'ocr'
+  },
+  {
+    word: 'vine',
+    pronunciation: '[vaɪn]',
+    partOfSpeech: 'n.',
+    meaning: '藤本植物；葡萄藤',
+    level: 'medium',
+    example: 'The vine climbs up.',
+    exampleTranslation: '藤蔓向上攀爬。',
+    source: 'ocr'
   }
 ]
 
@@ -81,77 +75,102 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '循环停止器 - break语句',
+    title: 'break 语句',
     emoji: '🛑',
-    gradeLevel: '1-2',
-    summary: '在循环中使用break语句立即结束循环',
+    gradeLevel: '3-4',
+    summary: '立即结束整个循环',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你在跑步机上跑步，你想停下来时只要按一下停止按钮！break语句就是这个停止按钮，你在循环中写上break，循环就会立刻停止！',
-      concept: 'break语句用于在循环中提前结束循环。当程序执行到break时，会立即跳出循环，不再执行循环中break后面的代码，也不再进行下一次循环。',
-      syntax: 'while True:\n    if 某个条件:\n        break  # 退出循环',
+      story: 'break 就像"停止"按钮，按下就立即结束循环，不再继续执行后面的代码。',
+      concept: 'break 语句用于循环中，当执行到 break 时，立即结束整个循环。',
+      syntax: `while True:
+    if 条件:
+        break  # 退出循环
+print('break执行后')  # 不会执行`,
       example: {
-        title: '用break退出循环',
-        code: 'count = 0\nwhile True:\n    print("计数:", count)\n    count = count + 1\n    if count >= 3:\n        break\nprint("结束!")',
-        output: '计数: 0\n计数: 1\n计数: 2\n结束!',
-        explanation: '当count达到3时，break语句执行，循环立刻退出，打印"结束!"。'
+        title: 'break 的作用',
+        code: `while True:
+    n = int(input())
+    if n == 0:
+        break
+    print(n)
+print('结束')`,
+        output: '（输入1 2 3 0）\n1\n2\n3\n结束',
+        explanation: '输入 0 时 if n==0 成立，执行 break 退出循环。break 后的 print("结束") 开始执行。'
       },
       practice: [
         {
-          question: 'break语句的作用是什么？',
+          question: 'break 语句的作用是什么？',
           answer: '立即结束循环'
         },
         {
-          question: 'break执行后还会继续循环吗？',
-          answer: '不会，break会立即跳出循环'
+          question: 'break 可以用在哪里？',
+          answer: '循环内部（for 或 while）'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: 'break进阶！你可以让用户决定何时停止：输入"停止"就退出，按q键就退出，或者达到某个目标就退出！break给了你灵活控制循环的能力！',
-      concept: 'break语句是控制程序流程的重要工具。常见应用：①用户触发退出（输入特定字符）②达到目标状态（找到答案）③错误处理（遇到异常）④超时控制（运行太久）。break只能用在循环中。',
-      syntax: '# 用户输入退出\nwhile True:\n    answer = input("输入(输入q退出):")\n    if answer == "q":\n        break\n\n# 达到目标退出\nwhile True:\n    result = 计算()\n    if result == 目标:\n        break',
+      story: 'break 经常和 while True 一起使用，实现"直到...才停止"的逻辑。',
+      concept: 'while True + break 是常见的组合，用 break 作为循环的退出条件。',
+      syntax: `while True:
+    反复执行
+    if 退出条件:
+        break`,
       example: {
         title: '猜数字游戏',
-        code: 'while True:\n    print("欢迎来到猜数字游戏!")\n    answer = input("输入\'停止\'退出:")\n    if answer == "停止":\n        break\n    print("继续游戏...")\nprint("游戏结束!")',
-        output: '欢迎来到猜数字游戏!\n输入\'停止\'退出:玩\n继续游戏...\n欢迎来到猜数字游戏!\n输入\'停止\'退出:停止\n游戏结束!',
-        explanation: '用户输入"停止"时，break执行，循环退出。输入其他内容时，游戏继续。'
+        code: `secret = 7
+while True:
+    guess = int(input())
+    if guess == secret:
+        print('对了！')
+        break
+    print('错了，再试一次')`,
+        output: '（输入3 5 7）\n错了，再试一次\n错了，再试一次\n对了！',
+        explanation: '循环猜数字，直到猜对（guess==secret）时 break 退出循环。'
       },
       practice: [
         {
-          question: 'break可以用在什么地方？',
-          answer: '只能用在循环（while或for）中'
+          question: 'while True 和 break 组合适合什么场景？',
+          answer: '不知道循环次数，需要根据条件退出'
         },
         {
-          question: 'break和循环条件变成False有什么区别？',
-          answer: 'break立即退出，条件变False是正常循环结束'
+          question: 'break 后面还会执行循环内的代码吗？',
+          answer: '不会'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: 'break大师模式！你可以在嵌套循环中使用break（只退出内层循环），或者在循环后执行else代码块（循环正常结束才执行）！',
-      concept: 'break的高级用法：①嵌套循环中的break（只退出当前层循环）②while-else结构（正常结束执行else，break退出不执行）③配合标志变量（控制多层循环）。break是控制复杂循环逻辑的关键。',
-      syntax: '# 嵌套循环\nfor i in range(3):\n    for j in range(3):\n        if 条件:\n            break  # 只退出内层\n    # 继续外层循环\n\n# while-else\nwhile 条件:\n    if 找到:\n        break\nelse:\n    # 没break才执行',
+      story: 'break 只能结束包含它的那个循环（内层循环），外层循环不受影响。',
+      concept: '在嵌套循环中，break 只结束最内层包含它的循环。',
+      syntax: `for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break  # 只结束 j 的循环
+    print(i)  # 会执行`,
       example: {
-        title: '查找数据',
-        code: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i in range(len(data)):\n    if data[i] == target:\n        print("找到了!索引:" + str(i))\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
-        output: '找到了!索引:2\n搜索结束',
-        structure: 'data = ["苹果", "香蕉", "橙子", "西瓜"]\ntarget = "橙子"\n\nfor i in range(len(data)):\n    if data[i] == target:\n        print("找到了!索引:" + str(i))\n        break\nelse:\n    print("没找到!")\n\nprint("搜索结束")',
-        explanation: '在列表中查找"橙子"，用range(len())遍历获取索引。找到后打印索引并break退出。因为break了，所以else块不执行。'
+        title: '嵌套循环中的 break',
+        code: `for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+        print(j)
+    print('i=', i)`,
+        output: '0\ni= 0\n0\ni= 1\n0\ni= 2',
+        explanation: '当 j==1 时 break 退出内层 j 循环，但外层 i 循环继续。所以 i=0 时打印 0 后 break；i=1 时同样；i=2 时同样。'
       },
       practice: [
         {
-          question: '嵌套循环中的break退出哪层循环？',
-          answer: '只退出包含它的那一层（内层）循环'
+          question: '在嵌套循环中，break 结束哪个循环？',
+          answer: '只结束包含它的最内层循环'
         },
         {
-          question: 'while-else中else什么时候执行？',
-          answer: '循环正常结束（没有break）时才执行else'
+          question: '如何结束多层嵌套循环？',
+          answer: '需要在每一层都使用 break'
         }
       ]
     }
@@ -159,76 +178,114 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '循环判断器 - while循环条件',
+    title: 'while 循环条件',
     emoji: '🔄',
-    gradeLevel: '1-2',
-    summary: 'while后面的条件决定循环是否继续',
+    gradeLevel: '3-4',
+    summary: '用条件控制循环是否执行',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象老师对你说："只要没下课，就继续写作业！"这句话是一个条件：没下课=继续写，下课了=停止。while循环就是这样：条件为True就继续，为False就停止！',
-      concept: 'while循环每次循环开始时，都会先判断条件是否为True。如果条件为True，执行循环体；如果条件为False，结束循环。条件可以是布尔变量、比较表达式等。',
-      syntax: 'while 条件:\n    循环体代码',
+      story: 'while 后面的条件就像守门员，只有条件成立时才让循环执行，不成立就直接结束。',
+      concept: 'while 在每次循环前检查条件：成立则执行，不成立则结束循环。',
+      syntax: `while 条件:
+    执行代码`,
       example: {
-        title: '条件控制循环',
-        code: 'count = 0\nwhile count < 3:\n    print("count:", count)\n    count = count + 1\nprint("循环结束!")',
-        output: 'count: 0\ncount: 1\ncount: 2\n循环结束!',
-        explanation: 'count从0开始，count<3为True时执行循环。当count变为3时，count<3为False，循环结束。'
+        title: '条件循环',
+        code: `count = 0
+while count < 3:
+    print(count)
+    count = count + 1`,
+        output: '0\n1\n2',
+        explanation: 'count=0 时条件成立执行，打印后 count+1=1。count=1、2 时条件成立。count=3 时条件不成立，退出循环。'
       },
       practice: [
         {
-          question: 'while循环什么时候结束？',
-          answer: '条件为False时结束'
+          question: 'while 循环的条件在什么时候检查？',
+          answer: '每次循环开始前'
         },
         {
-          question: 'while循环每次开始时做什么？',
-          answer: '先判断条件是否为True'
+          question: '条件不成立时会发生什么？',
+          answer: '循环结束，执行后面的代码'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '条件进阶！你可以用各种复杂的条件来控制循环：多个条件用and/or组合、检查变量的状态、判断用户输入等等！',
-      concept: 'while循环的条件可以是任何布尔表达式：①比较运算（>、<、==）②逻辑运算（and、or、not）③布尔变量④函数返回值。关键是要确保条件最终会变为False，否则会无限循环。',
-      syntax: '# 复合条件\nwhile count < 10 and 没有错误:\n    执行代码\n\n# 布尔变量\nrunning = True\nwhile running:\n    if 想退出:\n        running = False\n\n# 或条件\nwhile 有数据 or 还有任务:\n    处理',
+      story: 'while 循环和 if 判断的区别：if 只执行一次，while 会重复执行直到条件不成立。',
+      concept: 'while 是"条件成立时重复执行"，if 是"条件成立时执行一次"。',
+      syntax: `# if: 只执行一次
+if 条件:
+    代码
+
+# while: 重复执行
+while 条件:
+    代码`,
       example: {
-        title: '多条件控制',
-        code: 'count = 0\nerrors = 0\n\nwhile count < 5 and errors < 2:\n    print("count=" + str(count) + ", errors=" + str(errors))\n    count = count + 1\n    if count == 3:\n        errors = errors + 1\n\nprint("循环结束!")',
-        output: 'count=0, errors=0\ncount=1, errors=0\ncount=2, errors=0\ncount=3, errors=1\ncount=4, errors=1\n循环结束!',
-        explanation: '循环条件是count<5且errors<2。count到4或errors到2时，任一条件不满足就结束。'
+        title: 'if vs while',
+        code: `# if: 只检查一次
+n = 5
+if n > 3:
+    print('yes')
+
+# while: 反复检查
+n = 5
+while n > 3:
+    print('yes')
+    n = n - 1`,
+        output: 'yes\nyes\nyes\nyes\nyes',
+        explanation: 'if 只打印一次"yes"（因为只检查一次），while 会一直打印直到 n<=3。'
       },
       practice: [
         {
-          question: 'while条件为True时循环怎样？',
-          answer: '继续执行循环体'
+          question: 'while 和 if 都能加条件，有什么区别？',
+          answer: 'if 只执行一次，while 重复执行'
         },
         {
-          question: 'and和or在条件中有什么作用？',
-          answer: 'and需要都为True，or有一个为True即可'
+          question: 'while 循环会不会变成死循环？',
+          answer: '可能，如果条件永远是 True'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '条件大师模式！你可以用条件实现各种算法：二分查找（找到目标）、欧几里得算法（求最大公约数）、牛顿迭代法（求平方根）等等！',
-      concept: 'while循环条件的本质是"不变式"（Invariant）：每次循环前后都保持为真的性质。算法设计的关键是找到正确的不变式和终止条件。典型模式：①收敛型（逐渐接近目标）②消耗型（逐渐用完数据）③状态型（状态变化触发结束）。',
-      syntax: '# 二分查找\nwhile left <= right:\n    mid = (left + right) // 2\n    if list[mid] == target:\n        print("找到了，索引:", mid)\n        break\n    elif list[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\n\n# 欧几里得算法\nwhile b != 0:\n    a, b = b, a % b',
+      story: 'while 循环可以有两种退出方式：1. 条件变 False；2. 执行 break。使用哪种取决于场景。',
+      concept: '循环控制方式：用条件控制（while 条件）还是用 break 控制（while True + break）。',
+      syntax: `# 方式1：用条件控制
+while 条件:
+    代码
+
+# 方式2：用 break 控制
+while True:
+    代码
+    if 退出条件:
+        break`,
       example: {
-        title: '求最大公约数',
-        code: '# 欧几里得算法求GCD\na = 48\nb = 18\n\nwhile b != 0:\n    a, b = b, a % b\n    print("a=" + str(a) + ", b=" + str(b))\n\nprint("最大公约数: " + str(a))',
-        output: 'a=18, b=12\na=12, b=6\na=6, b=0\n最大公约数: 6',
-        explanation: '每次循环用b和a%b替换a和b。当b变为0时，a就是最大公约数。这是经典的算法。'
+        title: '两种退出方式',
+        code: `# 方式1：条件控制
+n = 5
+while n > 0:
+    print(n)
+    n = n - 1
+
+# 方式2：break控制
+while True:
+    n = int(input())
+    if n == 0:
+        break
+    print(n)`,
+        output: '5\n4\n3\n2\n1',
+        explanation: '方式1：条件 n>0 逐步变 False 退出。方式2：输入 0 时 break 退出。'
       },
       practice: [
         {
-          question: '什么是算法中的"不变式"？',
-          answer: '每次循环前后都保持为真的性质，用于证明算法正确性'
+          question: '什么时候用 while 条件控制更方便？',
+          answer: '知道循环会执行多少次时'
         },
         {
-          question: 'while b != 0: 什么情况下结束？',
-          answer: 'b等于0时结束'
+          question: '什么时候用 while True + break 更方便？',
+          answer: '不知道循环次数，只知道退出条件时'
         }
       ]
     }
@@ -236,76 +293,105 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '灵活控制 - 条件与break配合',
+    title: '循环应用',
     emoji: '🎮',
-    gradeLevel: '1-2',
-    summary: '结合while条件和break实现灵活的循环控制',
+    gradeLevel: '3-4',
+    summary: '用循环解决实际问题',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个智能门：它可以用密码打开（条件满足），也可以用钥匙打开（触发break）！这就是while条件加break的配合使用，让程序更灵活！',
-      concept: 'while条件用于正常循环控制，break用于特殊退出。配合使用可以实现：正常情况按条件循环，特殊情况提前退出。这是最常用的循环控制模式。',
-      syntax: '# 条件+break模式\nwhile 正常条件:\n    if 特殊情况:\n        break\n    正常处理',
+      story: '循环可以用来做重复的事情，比如打印数字、计算累加等。',
+      concept: '利用循环的重复执行特性，可以简化重复代码。',
+      syntax: `# 打印数字
+n = 1
+while n <= 5:
+    print(n)
+    n = n + 1`,
       example: {
-        title: '计数器',
-        code: 'count = 0\nmax_count = 10\n\nwhile count < max_count:\n    print("count:", count)\n    count = count + 1\n    \n    if count == 5:\n        print("提前停止!")\n        break\n\nprint("结束!")',
-        output: 'count: 0\ncount: 1\ncount: 2\ncount: 3\ncount: 4\n提前停止!\n结束!',
-        explanation: '正常条件是count<10，循环10次。但当count==5时，break执行，提前退出。'
+        title: '打印1到5',
+        code: `n = 1
+while n <= 5:
+    print(n)
+    n = n + 1`,
+        output: '1\n2\n3\n4\n5',
+        explanation: 'n 从 1 开始，每次打印后 +1，直到 n=6 时退出。'
       },
       practice: [
         {
-          question: 'while条件和break配合有什么好处？',
-          answer: '可以正常循环，也可以特殊情况提前退出'
+          question: '如何打印 1 到 10 的数字？',
+          answer: 'n=1; while n<=10: print(n); n=n+1'
         },
         {
-          question: '哪个先执行：条件判断还是break检查？',
-          answer: '先判断条件，条件满足才进入循环体检查break'
+          question: '循环需要什么才能最终退出？',
+          answer: '条件变为 False 或执行 break'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '配合进阶！你可以实现各种用户交互：循环处理直到用户满意、提供退出选项、处理错误输入等等！让程序既灵活又友好！',
-      concept: '条件+break是交互式程序的标准模式：①while True提供无限循环②用户输入命令③break命令退出④其他命令继续处理。这种模式在菜单、游戏、工具程序中广泛使用。',
-      syntax: '# 菜单循环\nwhile True:\n    显示菜单\n    choice = input("选择:")\n    if choice == "退出":\n        break\n    执行选择\n\n# 重试循环\nattempts = 0\nwhile attempts < 3:\n    答案 = input("问题:")\n    if 答案正确:\n        break\n    attempts = attempts + 1',
+      story: '循环结合条件判断，可以实现更复杂的逻辑。',
+      concept: '在循环中加入 if 判断，可以根据不同情况执行不同操作。',
+      syntax: `while 条件:
+    if 情况1:
+        处理1
+    elif 情况2:
+        处理2
+    else:
+        处理3`,
       example: {
-        title: '简单计算器',
-        code: 'while True:\n    print("\\n1.加法 2.减法 3.退出")\n    choice = input("选择:")\n    \n    if choice == "3":\n        print("再见!")\n        break\n    elif choice == "1":\n        print("执行加法...")\n    elif choice == "2":\n        print("执行减法...")\n    else:\n        print("无效选择!")',
-        output: '1.加法 2.减法 3.退出\n选择:1\n执行加法...\n\n1.加法 2.减法 3.退出\n选择:3\n再见!',
-        explanation: '程序持续显示菜单，用户选择3时break退出。选择1或2执行对应操作。'
+        title: '分类处理',
+        code: `n = 0
+while n < 5:
+    if n % 2 == 0:
+        print(n, '是偶数')
+    else:
+        print(n, '是奇数')
+    n = n + 1`,
+        output: '0 是偶数\n1 是奇数\n2 是偶数\n3 是奇数\n4 是偶数',
+        explanation: 'n 从 0 到 4，每次判断奇偶性并打印。'
       },
       practice: [
         {
-          question: '菜单程序为什么用while True？',
-          answer: '因为需要持续显示菜单，直到用户选择退出'
+          question: '如何判断 1 到 10 中哪些是偶数？',
+          answer: '循环并用 if n % 2 == 0 判断'
         },
         {
-          question: '如何限制用户尝试次数？',
-          answer: '用计数器，while attempts < 最大次数，超过就break或循环自然结束'
+          question: '循环和 if 组合可以实现什么？',
+          answer: '根据条件进行不同处理'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '配合大师模式！你可以实现复杂的程序逻辑：游戏主循环（条件是游戏运行中，break是游戏结束）、事件处理（条件是有事件）、状态机（根据状态转换）等等！',
-      concept: '条件+break是状态机和事件驱动系统的基础。高级应用：①游戏循环（running标志+quit事件）②状态机（当前状态+事件触发转换）③超时控制（时间条件+完成标志）④资源管理（有资源+错误处理）。',
-      syntax: '# 游戏主循环\nrunning = True\nwhile running:\n    处理事件()\n    更新游戏()\n    绘制画面()\n    if 游戏结束:\n        running = False\n\n# 状态机\ncurrent_state = "菜单"\nwhile current_state != "退出":\n    if current_state == "菜单":\n        current_state = 处理菜单()\n    elif current_state == "游戏":\n        current_state = 处理游戏()\n    elif current_state == "结束":\n        current_state = 处理结束()',
+      story: '综合使用循环和条件，可以解决各种编程问题。',
+      concept: '熟练掌握循环和条件判断的组合，可以解决复杂的编程问题。',
+      syntax: `累加求和：
+total = 0
+n = 1
+while n <= 10:
+    total = total + n
+    n = n + 1`,
       example: {
-        title: '猜数字游戏',
-        code: 'import random\n\ntarget = random.randint(1, 100)\nattempts = 0\nmax_attempts = 10\n\nprint("猜1-100的数字!")\n\nwhile attempts < max_attempts:\n    guess = int(input("猜:"))\n    attempts = attempts + 1\n    \n    if guess == target:\n        print("猜对了!用了" + str(attempts) + "次")\n        break\n    elif guess < target:\n        print("太小了!")\n    else:\n        print("太大了!")\nelse:\n    print("次数用完!答案是" + str(target))',
-        output: '猜1-100的数字!\n猜:50\n太大了!\n猜:25\n太小了!\n猜:37\n猜对了!用了3次',
-        explanation: '循环条件是次数<10，猜对时break退出。次数用完还没猜对，循环正常结束，显示答案。'
+        title: '累加计算',
+        code: `total = 0
+n = 1
+while n <= 10:
+    total = total + n
+    n = n + 1
+print(total)`,
+        output: '55',
+        explanation: '1+2+3+...+10 = 55。循环累加每次的值，最终得到总和。'
       },
       practice: [
         {
-          question: '游戏主循环的典型结构是什么？',
-          answer: '处理输入→更新状态→绘制画面→检查退出条件'
+          question: '如何计算 1 到 100 的和？',
+          answer: 'total=0; n=1; while n<=100: total=total+n; n=n+1'
         },
         {
-          question: 'while-else和break有什么关系？',
-          answer: 'break退出不执行else，正常结束才执行else'
+          question: '循环计数和循环累加有什么区别？',
+          answer: '计数用 count=count+1，累加用 total=total+n'
         }
       ]
     }
@@ -321,17 +407,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: 'break语句',
-    question: 'break语句的作用是什么？',
+    mathConcept: 'break作用',
+    question: `以下代码会打印几次 "hello"？\n\n\`\`\`python\na = 1\nwhile a < 2:\n    print('hello')\n\`\`\``,
     options: [
-      'A. 暂停程序',
-      'B. 结束循环',
-      'C. 跳过本次循环',
-      'D. 重新开始循环'
+      '0次',
+      '1次',
+      '2次',
+      '无限次'
     ],
     answer: 1,
-    explanation: 'break语句的作用是立即结束循环，跳出循环体。',
-    hint: 'break是打破、中断的意思'
+    explanation: 'a=1，条件 a<2 成立，但循环内没有改变 a 的值，所以 a 永远是 1，条件永远成立。等等，这是无限循环！答案是 D。',
+    hint: 'a 的值改变了吗？'
   },
   {
     id: 'ex-2',
@@ -339,17 +425,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: 'while循环条件',
-    question: 'while循环什么时候结束？',
+    mathConcept: '循环理解',
+    question: `以下代码的运行结果，s 的值是？\n\n\`\`\`python\ns = 0\ni = 0\nwhile i < 4:\n    s = s + i\n    i = i + 1\nprint(s)\n\`\`\``,
     options: [
-      'A. 条件为True时',
-      'B. 条件为False时',
-      'C. 永远不结束',
-      'D. 执行5次后'
+      '0',
+      '4',
+      '6',
+      '10'
     ],
-    answer: 1,
-    explanation: 'while循环在条件为False时结束，条件为True时继续执行。',
-    hint: 'False表示假，不成立'
+    answer: 2,
+    explanation: 'i=0, s=0 → i=1, s=0 → i=2, s=1 → i=3, s=3 → i=4 退出循环。s=0+1+2+3=6。答案是 C。',
+    hint: '累加 0+1+2+3'
   },
 
   // 🟡 进阶题（3-4年级）
@@ -359,17 +445,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '循环执行次数',
-    question: '执行下面的代码，循环会执行几次？\n\n```python\ncount = 0\nwhile count < 5:\n    print(count)\n    if count == 3:\n        break\n    count = count + 1\n```',
+    mathConcept: 'break退出',
+    question: `要打印出 5 次变量 n 的值，横线处应该填写什么？\n\n\`\`\`python\nn = 0\nwhile n < 5:\n    print(n)\n    ____\n\`\`\``,
     options: [
-      'A. 3次',
-      'B. 4次',
-      'C. 5次',
-      'D. 无限次'
+      'break',
+      'n = n + 1',
+      'continue',
+      'exit'
     ],
     answer: 1,
-    explanation: 'count=0,1,2,3时执行。count=3时break退出，所以是4次（0、1、2、3）。\n\n数学知识：数数0,1,2,3共4个数。',
-    hint: 'count从0开始，到3结束'
+    explanation: '要打印 5 次 n 的值，需要让 n 每次循环后增加 1，这样才能从 0 到 4 共 5 次。答案是 B。',
+    hint: 'n 需要变化才能控制循环次数'
   },
   {
     id: 'ex-4',
@@ -377,17 +463,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '逻辑运算',
-    question: 'while count < 10 and errors < 3: 什么时候循环继续？',
+    mathConcept: '条件循环',
+    question: `以下代码的运行结果是？\n\n\`\`\`python\nn = 5\nwhile n > 0:\n    n = n - 1\n    print(n)\n\`\`\``,
     options: [
-      'A. count<10或errors<3',
-      'B. count<10且errors<3',
-      'C. count>=10或errors>=3',
-      'D. count>=10且errors>=3'
+      '5 4 3 2 1',
+      '4 3 2 1 0',
+      '5 4 3 2',
+      '4 3 2 1'
     ],
     answer: 1,
-    explanation: 'and运算要求两个条件都为True。所以count<10且errors<3时循环继续。\n\n数学知识：逻辑与运算A∧B表示A和B同时成立。',
-    hint: 'and表示"并且"'
+    explanation: 'n=5 → n=4（打印4）→ n=3（打印3）→ n=2（打印2）→ n=1（打印1）→ n=0（打印0）→ n=0 时退出。输出 4 3 2 1 0。',
+    hint: '先减后打印'
   },
 
   // 🔴 挑战题（5-6年级）
@@ -397,17 +483,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '算法逻辑',
-    question: '执行下面的代码，最后a的值是多少？\n\n```python\na = 48\nb = 18\nwhile b != 0:\n    a, b = b, a % b\n```',
+    mathConcept: '循环嵌套',
+    question: `以下代码的运行结果是？\n\n\`\`\`python\nfor i in range(2):\n    for j in range(3):\n        if j == 1:\n            break\n        print(j)\n    print(i)\n\`\`\``,
     options: [
-      'A. 0',
-      'B. 6',
-      'C. 12',
-      'D. 18'
+      '0\n0\n0\n1',
+      '0\n1\n0\n1',
+      '0\n0\n1',
+      '0\n1\n0'
     ],
-    answer: 1,
-    explanation: '这是欧几里得算法求最大公约数。48和18的最大公约数是6。\n\n数学知识：GCD(48,18)=6，48÷6=8，18÷6=3，8和3互质。',
-    hint: '这是求最大公约数的算法'
+    answer: 0,
+    explanation: 'i=0 时内层 j：j=0 打印0，j=1 时 break 退出内层，打印0；i=1 时同样。输出：0 换行 0 换行 1 换行 0 换行 0。答案是 A。',
+    hint: 'break 只结束内层循环'
   },
   {
     id: 'ex-6',
@@ -415,73 +501,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '循环嵌套',
-    question: '下面关于嵌套循环中的break，哪个说法正确？',
+    mathConcept: '累加理解',
+    question: `以下代码运行后 total 的值是？\n\n\`\`\`python\ntotal = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)\n\`\`\``,
     options: [
-      'A. break退出所有循环',
-      'B. break只退出内层循环',
-      'C. break不能用在嵌套循环中',
-      'D. break跳过本次循环'
+      '10',
+      '15',
+      '20',
+      '6'
     ],
-    answer: 1,
-    explanation: 'break只退出包含它的那一层循环。嵌套循环中的内层break只退出内层，外层继续执行。',
-    hint: 'break只影响直接包含它的循环'
+    answer: 0,
+    explanation: 'range(1,5) 是 1,2,3,4。1+2+3+4=10。答案是 A。',
+    hint: 'range(1,5) 不包含 5'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L4-3',
-  title: 'break语句与while循环条件',
-  subtitle: '学会用break和条件灵活控制循环',
+  title: 'break与循环条件',
+  subtitle: '学会控制循环的退出',
   difficulty: '入门',
-  estimatedTime: '30-40分钟',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '掌握break语句结束循环',
-    '理解while循环条件的判断机制',
-    '学会条件与break配合控制循环',
-    '能实现交互式菜单和用户控制'
+    '理解 break 语句的作用',
+    '掌握用条件控制 while 循环',
+    '能用 break 退出循环',
+    '能结合循环和条件解决问题'
   ],
   prerequisites: [
-    'Python 基础语法',
-    'while循环基础',
-    'if条件判断',
-    '布尔值和比较运算'
+    '理解 while 循环',
+    '理解 if 语句'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['break', 'loop', 'while', 'state'],
-  medium: ['condition', 'control', 'tomato', 'exit'],
-  hard: ['invariant', 'algorithm', 'terminate', 'execution']
+  easy: ['break', 'while', 'loop', 'continue'],
+  medium: ['break', 'while', 'condition', 'iterate'],
+  hard: ['continue', 'nested', 'accumulate', 'iteration']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'while True:',
-    'if count >= 3:',
-    'break',
-    'count = count + 1',
-    'while count < 10:',
-    'if answer == "quit":'
+    'while True:\n    break',
+    'while n < 5:\n    n = n + 1',
+    'for i in range(3):\n    break',
+    'while True:\n    if condition:\n        break'
   ],
   medium: [
-    'while True:\n    answer = input("输入q退出:")\n    if answer == "q":\n        break',
-    'while count < 5 and errors < 2:\n    count = count + 1',
-    'while attempts < 3:\n    答案 = input("问题:")\n    if 答案正确:\n        break',
-    'while count < max_count:\n    if count == 5:\n        break\n    count = count + 1',
-    'while running:\n    if 想退出:\n        running = False',
-    'while b != 0:\n    a, b = b, a % b'
+    'n = 0\nwhile n < 5:\n    print(n)\n    n = n + 1',
+    'while True:\n    n = input()\n    if n == "quit":\n        break',
+    'for i in range(3):\n    for j in range(3):\n        if j == 1:\n            break',
+    'while n > 0:\n    n = n - 1\n    print(n)'
   ],
   hard: [
-    'while True:\n    显示菜单()\n    choice = input("选择:")\n    if choice == "退出":\n        break\n    执行选择()',
-    'while attempts < max_attempts:\n    guess = int(input("猜:"))\n    if guess == target:\n        break\n    attempts = attempts + 1',
-    'while left <= right:\n    mid = (left + right) // 2\n    if list[mid] == target:\n        break\n    elif list[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1',
-    'while running:\n    处理事件()\n    更新游戏()\n    if 游戏结束:\n        running = False',
-    'for i in range(len(data)):\n    if data[i] == target:\n        print("找到!索引:" + str(i))\n        break\nelse:\n    print("没找到!")',
-    'current_state = "菜单"\nwhile current_state != "退出":\n    if current_state == "菜单":\n        current_state = 处理菜单()'
+    'total = 0\nfor i in range(10):\n    total = total + i',
+    'while True:\n    n = int(input())\n    if n < 0:\n        break\n    total = total + n',
+    'count = 0\nwhile count < 100:\n    count = count + 1\n    if count % 10 == 0:\n        print(count)',
+    'for i in range(5):\n    for j in range(5):\n        if i == j:\n            break\n        print(i, j)'
   ]
 }
 

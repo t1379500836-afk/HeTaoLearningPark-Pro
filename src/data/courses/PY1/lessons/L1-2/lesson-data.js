@@ -1,10 +1,9 @@
 /**
- * PY1 课程 L1-2: 互动魔法屋
+ * PY1 课程 L1-2: input()命令
  *
  * 核心知识点:
- * 1. input() 命令 - 获取用户输入
- * 2. int() 命令 - 转换为整数
- * 3. float() 命令 - 转换为小数
+ * 1. input() 命令 - 接收用户输入
+ * 2. input() 应用 - 多次输入
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
@@ -12,47 +11,63 @@ export const vocabData = [
   // OCR 提取的单词
   {
     word: 'input',
-    pronunciation: "['input]",
-    partOfSpeech: 'n./v.',
-    meaning: '输入量；输入端；把(数据)输入计算机',
+    pronunciation: '[ˈɪnˌpʊt]',
+    partOfSpeech: 'v.',
+    meaning: '输入；把...输入计算机',
     level: 'easy',
-    example: 'Please input your name.',
-    exampleTranslation: '请输入你的名字。',
-    note: 'input() 输入命令',
+    example: 'Please input your password.',
+    exampleTranslation: '请输入您的密码。',
     source: 'ocr'
   },
   {
     word: 'theme',
-    pronunciation: '[θi:m]',
+    pronunciation: '[θiːm]',
     partOfSpeech: 'n.',
     meaning: '主题；主旋律',
     level: 'medium',
-    example: 'The theme of the party is music.',
-    exampleTranslation: '派对的主题是音乐。',
-    note: 'for the people 为人民服务',
+    example: 'The theme of this party is summer.',
+    exampleTranslation: '这个派对的主题是夏天。',
     source: 'ocr'
   },
   {
     word: 'name',
-    pronunciation: '[neim]',
-    partOfSpeech: 'n./v.',
-    meaning: '名称；名字；命名',
+    pronunciation: '[neɪm]',
+    partOfSpeech: 'n.',
+    meaning: '名字；名称',
     level: 'easy',
-    example: 'My name is Taozi.',
-    exampleTranslation: '我的名字是桃子。',
-    note: 'Hi, my name is... 你好，我叫...',
+    example: 'What is your name?',
+    exampleTranslation: '你叫什么名字？',
+    source: 'ocr'
+  },
+  {
+    word: 'box',
+    pronunciation: '[bɒks]',
+    partOfSpeech: 'n.',
+    meaning: '盒子；箱子',
+    level: 'easy',
+    example: 'The gift is in the box.',
+    exampleTranslation: '礼物在盒子里。',
     source: 'ocr'
   },
   // 拓展单词
   {
-    word: 'convert',
-    pronunciation: '[kənˈvɜːt]',
-    partOfSpeech: 'v.',
-    meaning: '转换；转变；兑换',
+    word: 'output',
+    pronunciation: '[ˈaʊtpʊt]',
+    partOfSpeech: 'n.',
+    meaning: '输出',
     level: 'medium',
-    example: 'Convert the string to a number.',
-    exampleTranslation: '把字符串转换成数字。',
-    note: 'int() 和 float() 用于类型转换',
+    example: 'The output shows the result.',
+    exampleTranslation: '输出显示结果。',
+    source: 'extended'
+  },
+  {
+    word: 'password',
+    pronunciation: '[ˈpæsˌwɜːd]',
+    partOfSpeech: 'n.',
+    meaning: '密码；口令',
+    level: 'medium',
+    example: 'Please enter your password.',
+    exampleTranslation: '请输入您的密码。',
     source: 'extended'
   }
 ]
@@ -61,76 +76,76 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '魔法收信箱 - input()命令',
-    emoji: '📬',
+    title: '输入命令 - input()',
+    emoji: '⌨️',
     gradeLevel: '1-2',
-    summary: '让用户输入内容，程序可以接收',
+    summary: '接收用户的输入',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个魔法收信箱，别人可以在里面放纸条，你打开就能看到他们写的内容！',
-      concept: 'input() 命令可以让用户在程序运行时输入内容，程序会把输入的内容接收下来。',
-      syntax: "变量 = input('提示文字')",
+      story: 'input() 就像一个接收器，当程序运行到它时，会停下等待你输入内容。就像老师提问后等待同学回答一样！',
+      concept: 'input() 命令可以接收用户输入的内容，并存储到变量中。',
+      syntax: '变量 = input()',
       example: {
-        title: '询问名字',
-        code: "name = input('请输入你的名字：')\nprint('你好，' + name)",
-        output: '请输入你的名字：小明\n你好，小明',
-        explanation: 'input() 会显示提示文字，然后等待用户输入。用户输入的内容会被存入变量 name 中。'
+        title: '接收用户输入',
+        code: 'name = input()',
+        output: '（等待用户输入...）',
+        explanation: '执行这行代码时，程序会停下等待输入。输入内容后按下回车，输入的内容就存储到变量 name 中了。'
       },
       practice: [
         {
-          question: 'input() 命令的作用是什么？',
-          answer: '让用户输入内容，程序接收'
+          question: 'input() 命令执行后会发生什么？',
+          answer: '程序会等待用户输入内容'
         },
         {
-          question: '用户输入的内容会被存到哪里？',
-          answer: '存入变量中'
+          question: '用户输入完成后要按什么键？',
+          answer: '回车键'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的魔法收信箱升级了！它不仅能接收文字，还能把收到的内容和程序中的其他内容组合在一起使用！',
-      concept: 'input() 命令接收的内容默认是字符串类型（文字），可以和其他文字拼接使用。',
-      syntax: "变量 = input('提示文字')\nprint(变量 + '其他文字')",
+      story: 'input() 后面可以加提示文字，这样用户就知道要输入什么了！就像有提示的填空题。',
+      concept: '可以在 input() 的括号里写提示文字，让用户知道要输入什么。',
+      syntax: "变量 = input('提示文字')",
       example: {
-        title: '个性化问候',
-        code: "name = input('你叫什么名字？')\nprint(name + '，欢迎来到编程世界！')",
-        output: '你叫什么名字？小红\n小红，欢迎来到编程世界！',
-        explanation: 'input() 接收用户输入的名字，然后用 + 号把名字和其他文字连接起来。'
+        title: '带提示的输入',
+        code: "name = input('请输入你的名字：')\nprint(name)",
+        output: '请输入你的名字：小明\n小明',
+        explanation: 'input() 括号里的提示文字会先显示出来，然后等待用户输入。用户输入"小明"后按回车，程序打印出"小明"。'
       },
       practice: [
         {
-          question: 'input() 接收的内容是什么类型？',
-          answer: '字符串类型（文字）'
+          question: "input('请输入年龄：') 中的'请输入年龄：'会显示在哪里？",
+          answer: '输出区'
         },
         {
-          question: '如何把两个文字连接起来？',
-          answer: '用 + 号'
+          question: '用户输入的内容存储在哪里？',
+          answer: '变量中'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '收信大师模式！input() 是程序与用户交互的核心，可以获取各种信息用于后续的计算和处理。',
-      concept: 'input() 返回的是字符串，如果需要进行数学运算，必须先用 int() 或 float() 转换成数字类型。',
-      syntax: "# 接收文字\nname = input('名字：')\n\n# 接收数字（需要转换）\nage = int(input('年龄：'))\n\n# 使用输入的数字计算\nprint('10年后你的年龄：' + str(age + 10))",
+      story: '多个 input() 可以按顺序接收多次输入，每个 input() 会接收各自对应的输入内容。',
+      concept: '多个 input() 命令按顺序执行，每个接收一次输入。',
+      syntax: 'a1 = input()\na2 = input()',
       example: {
-        title: '年龄计算器',
-        code: "age = int(input('你今年几岁？'))\nprint('10年后你' + str(age + 10) + '岁')",
-        output: '你今年几岁？8\n10年后你18岁',
-        explanation: 'input() 接收的是字符串"8"，用 int() 转换成数字8，然后计算 8+10=18，再用 str() 转回字符串输出。'
+        title: '多次输入',
+        code: "print('你最喜欢的水果？')\nfruit = input()\nprint('你今年几岁？')\nage = input()\nprint('你喜欢', fruit, '，今年', age, '岁')",
+        output: '你最喜欢的水果？\n苹果\n你今年几岁？\n8\n你喜欢 苹果 ，今年 8 岁',
+        explanation: '第一个 input() 接收对"水果"问题的回答，第二个 input() 接收对"年龄"问题的回答。程序按顺序执行，每个 input() 都会等待一次输入。'
       },
       practice: [
         {
-          question: '为什么 input() 接收的数字不能直接计算？',
-          answer: '因为是字符串类型，需要转换成数字'
+          question: '如果有3个 input() 命令，会等待用户输入几次？',
+          answer: '3次'
         },
         {
-          question: 'int(input()) 是做什么的？',
-          answer: '把用户输入的文字转换成整数'
+          question: '第2个 input() 接收的是第几次输入？',
+          answer: '第2次'
         }
       ]
     }
@@ -138,160 +153,83 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '变身魔法棒 - int()命令',
-    emoji: '🪄',
-    gradeLevel: '1-2',
-    summary: '把文字变成整数，可以进行计算',
-
-    // 🟢 基础版（1-2年级）
-    easy: {
-      story: '想象你有一根魔法棒，它可以把写着数字的纸条，变成真正的数字，这样就可以用来做算术题了！',
-      concept: 'int() 命令可以把"看起来像数字"的文字，变成真正的整数（没有小数点的数字）。',
-      syntax: "int(要转换的内容)",
-      example: {
-        title: '文字变数字',
-        code: "# 变成数字后可以计算\nn = int('10')\nprint(n + 5)",
-        output: '15',
-        explanation: "字符串'10'变成数字10，然后10+5=15。"
-      },
-      practice: [
-        {
-          question: 'int("7") 会变成什么？',
-          answer: '数字7'
-        },
-        {
-          question: '变成数字后可以做什么？',
-          answer: '可以用来做算术计算'
-        }
-      ]
-    },
-
-    // 🟡 进阶版（3-4年级）
-    medium: {
-      story: '魔法棒升级！它不仅能把文字变成数字，还能处理用户输入的内容，让程序能对用户的数字做出反应！',
-      concept: 'int() 常用于处理 input() 的结果，因为用户输入的永远是文字，如果需要计算就必须转换。',
-      syntax: "数字 = int(input('请输入数字：'))",
-      example: {
-        title: '数字翻倍器',
-        code: "n = int(input('输入一个数字：'))\nprint('这个数字的两倍是：' + str(n * 2))",
-        output: '输入一个数字：6\n这个数字的两倍是：12',
-        explanation: '用户输入的"6"是文字，int() 把它变成数字6，计算 6×2=12，再用 str() 转回文字输出。'
-      },
-      practice: [
-        {
-          question: '为什么需要 int(input())？',
-          answer: '因为 input() 返回的是文字，计算需要数字'
-        },
-        {
-          question: 'int("3.14") 会成功吗？',
-          answer: '不会，int() 只能转换整数，不能转换小数'
-        }
-      ]
-    },
-
-    // 🔴 挑战版（5-6年级）
-    hard: {
-      story: '魔法大师模式！理解类型转换是编程的重要基础，不同类型的数据有不同的用途和操作方式。',
-      concept: 'int() 只能转换"看起来像整数"的字符串。如果字符串包含小数点或非数字字符，会报错。',
-      syntax: "# 正确转换\nn1 = int('123')  ✓\n\n# 错误示例\nn2 = int('3.14')  ✗ 包含小数点\nn3 = int('abc')   ✗ 不是数字",
-      example: {
-        title: '类型转换判断',
-        code: "# 以下哪些可以成功转换？\nprint(int('100'))     # ✓ 成功\n# print(int('3.14')) # ✗ 失败！要用float()\n# print(int('hello')) # ✗ 失败！不是数字",
-        output: '100',
-        explanation: 'int() 只能转换纯整数字符串。带小数点的要用 float()，非数字字符会报错。'
-      },
-      practice: [
-        {
-          question: 'int("3.5") 会怎样？',
-          answer: '报错，因为包含小数点，应该用 float()'
-        },
-        {
-          question: '如何判断一个字符串能不能用 int() 转换？',
-          answer: '必须是纯数字，不能有小数点或字母'
-        }
-      ]
-    }
-  },
-
-  {
-    id: 'kp-3',
-    title: '精确变身术 - float()命令',
-    emoji: '🎯',
+    title: '输入与输出设备',
+    emoji: '💻',
     gradeLevel: '3-4',
-    summary: '把文字变成小数，处理精确的数字',
+    summary: '计算机的交互方式',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '你知道吗？有些数字带着小尾巴，比如 3.14、1.5。float() 命令可以把这些带小数点的文字变成真正的数字！',
-      concept: 'float() 命令可以把"看起来像数字"的文字变成小数（带小数点的数字）。',
-      syntax: "float(要转换的内容)",
+      story: '计算机就像一个需要和人交流的机器人。input() 是它"听"的方式，print() 是它"说"的方式。',
+      concept: 'input() 是输入设备（如键盘）给计算机传送信息的方式，print() 是计算机显示信息的方式。',
+      syntax: '输入：input()\n输出：print()',
       example: {
-        title: '小数转换',
-        code: "n = float('3.14')\nprint(n)",
-        output: '3.14',
-        explanation: "float() 把文字'3.14'变成数字3.14。"
+        title: '对话程序',
+        code: "print('你好！我叫小核桃。')\nname = input('你叫什么名字？')\nprint('你好，', name, '！')",
+        output: '你好！我叫小核桃。\n你叫什么名字？小明\n你好， 小明 ！',
+        explanation: '程序先打印问候语，然后等待输入名字，最后用输入的名字进行回复。这就是人机对话！'
       },
       practice: [
         {
-          question: 'float("5.5") 会变成什么？',
-          answer: '数字5.5'
+          question: 'print() 和 input() 哪个是"说"，哪个是"听"？',
+          answer: 'print()是说，input()是听'
         },
         {
-          question: 'float() 和 int() 有什么区别？',
-          answer: 'float() 可以转换小数，int() 只能转换整数'
+          question: '键盘属于什么设备？',
+          answer: '输入设备'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '精确变身术升级！现在你可以处理各种小数：身高、体重、成绩、价格等等，让程序能处理生活中的真实数据！',
-      concept: 'float() 可以处理带小数点的数字，常用于处理身高、体重、成绩、价格等需要精确计算的场景。',
-      syntax: "price = float(input('请输入价格：'))",
+      story: '计算机有很多输入输出设备。键盘、鼠标、触摸屏是输入，显示器、打印机、音响是输出。',
+      concept: '输入设备把信息传给计算机，输出设备把信息从计算机传出来。',
+      syntax: '输入设备：键盘、鼠标、触摸屏\n输出设备：显示器、打印机、音响',
       example: {
-        title: '计算总价',
-        code: "price = float(input('苹果每斤多少钱：'))\nweight = float(input('你要买几斤：'))\nprint('总价：' + str(price * weight) + '元')",
-        output: '苹果每斤多少钱：5.5\n你要买几斤：2.4\n总价：13.2元',
-        explanation: '用 float() 转换价格和重量，计算 5.5×2.4=13.2，得到准确的总价。'
+        title: '分类设备',
+        code: '# 输入设备\n键盘、鼠标、触摸屏、麦克风、摄像头\n# 输出设备\n显示器、打印机、音响、投影仪',
+        output: '',
+        explanation: 'input() 命令相当于键盘的"嘴巴"，帮计算机接收信息。了解输入输出设备能帮助我们理解程序怎么和用户交流。'
       },
       practice: [
         {
-          question: 'float("10") 会变成 10.0 吗？',
-          answer: '是的，整数用 float() 转换后会变成 10.0 的形式'
+          question: '摄像头是输入设备还是输出设备？',
+          answer: '输入设备'
         },
         {
-          question: '什么情况下应该用 float() 而不是 int()？',
-          answer: '需要处理小数的时候，比如价格、身高、体重'
+          question: '耳机是输入设备还是输出设备？',
+          answer: '输出设备'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '精确计算大师！float() 让你能处理各种精确计算，理解整数和小数的区别是数学和编程的双重基础。',
-      concept: 'float() 不仅可以转换小数字符串，还能转换整数字符串。int() 会舍弃小数部分，而 float() 会保留。',
-      syntax: "# float() 可以转换整数和小数\nn1 = float('100')   # 变成 100.0\nn2 = float('3.14')  # 变成 3.14\n\n# int() 会舍弃小数\nn3 = int(3.99)     # 变成 3（不是4！）",
+      story: '有些设备同时是输入和输出，比如触摸屏！它既可以接收你的触摸（输入），又能显示内容（输出）。',
+      concept: '一些设备同时具备输入和输出功能，如触摸屏、手机屏幕等。',
+      syntax: '输入输出设备：触摸屏、手机',
       example: {
-        title: '类型转换对比',
-        code: "print(int('3.14'))   # 报错！int()不能直接转小数字符串\nprint(float('3.14')) # 3.14 成功\nprint(int(3.99))     # 3（舍弃小数）\nprint(float(3.99))   # 3.99（保留小数）",
-        output: '3.14\n3\n3.99',
-        explanation: 'int() 对小数会直接舍弃（不是四舍五入），float() 会保留完整的小数值。'
+        title: '智能设备',
+        code: '# 触摸屏手机\n触摸屏幕 → 输入（手指滑动、点击）\n屏幕显示 → 输出（看视频、图片）\n# 智慧核心\n按键输入 → input()\n屏幕显示 → print()',
+        output: '',
+        explanation: '理解输入输出的概念后，你会发现身边的智能设备都是按照这个原理工作的。程序通过 input() 获取信息，通过 print() 展示结果。'
       },
       practice: [
         {
-          question: 'int(3.99) 的结果是？',
-          answer: '3，int() 会舍弃小数部分，不是四舍五入'
+          question: '触摸屏属于什么类型的设备？',
+          answer: '输入和输出设备'
         },
         {
-          question: 'float("100") 和 int("100") 有什么区别？',
-          answer: 'float("100") = 100.0，int("100") = 100，数据类型不同'
+          question: '在智慧核心上，input() 对应什么操作？',
+          answer: '用户通过按键或触摸输入'
         }
       ]
     }
   }
 ]
 
-// 习题数据（编程 × 数学融合）
+// 习题数据
 export const exercises = [
   // 🟢 基础题（1-2年级）
   {
@@ -300,17 +238,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '符号识别',
-    question: '下面哪段代码能**正确接收**用户输入的年龄？',
+    mathConcept: '概念理解',
+    question: '关于 input() 命令，下列说法正确的是？',
     options: [
-      'A. age = input(请输入年龄：)',
-      'B. age = input("请输入年龄：")',
-      'C. input("请输入年龄：")',
-      'D. age = input("请输入年龄："）'
+      'input() 命令是 Python 中的输出命令',
+      'input() 命令的运行效果是在输出区弹出一个光标',
+      '使用 input() 命令时，可以使用变量存储用户输入的文字',
+      'input() 命令可以直接打印出文字'
     ],
-    answer: 1, // B
-    explanation: 'input() 命令的正确格式是：input("提示文字")，并且要把结果存入变量。\n\n- A选项：提示文字没有加引号，会报错\n- B选项：正确！\n- C选项：没有把输入结果存入变量\n- D选项：使用了中文引号',
-    hint: 'input() 的提示文字需要加引号，结果要存入变量'
+    answer: 2,
+    explanation: 'input() 是输入命令，用于接收用户输入；执行时输出区会出现闪烁光标等待输入；输入的内容可以存储到变量中。',
+    hint: 'input 是"输入"的意思'
   },
   {
     id: 'ex-2',
@@ -318,17 +256,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数字识别',
-    question: '执行下面的代码，会输出什么？\n\n```python\nn = int("5")\nprint(n + 3)\n```',
+    mathConcept: '操作流程',
+    question: '执行 input() 命令时，用户要在哪里输入内容？输入完成后要按下什么键？',
     options: [
-      'A. "53"',
-      'B. 8',
-      'C. "5"',
-      'D. 53'
+      '舞台区；空格',
+      '代码区；回车',
+      '输出区；空格',
+      '输出区；回车'
     ],
-    answer: 1, // B
-    explanation: 'int("5") 把文字"5"变成数字5，然后 5+3=8。\n\n数学知识：这是"文字变数字"的过程，转换后可以进行数学运算。',
-    hint: 'int() 把文字变成数字后才能计算'
+    answer: 3,
+    explanation: '执行 input() 时，程序会在输出区出现闪烁光标，用户在输出区输入内容，输入完成后按回车键，程序就能接收到输入的内容。',
+    hint: '输出区会有光标闪烁'
   },
 
   // 🟡 进阶题（3-4年级）
@@ -338,17 +276,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '小数计算',
-    question: '小明的身高是 1.4 米，爸爸比他高 0.6 米。下面哪段代码能正确计算爸爸的身高？\n\n```python\nh = float(input("小明的身高："))\n```',
+    mathConcept: '顺序理解',
+    question: '下面代码的执行顺序是？\n\n```python\na = input()\nb = input()\nc = input()\n```',
     options: [
-      'A. print(h + 0.6)',
-      'B. print(h + "0.6")',
-      'C. print("h + 0.6")',
-      'D. print(h + 0.6米)'
+      '依次等待3次输入，每次输入都存入对应变量',
+      '同时等待3次输入',
+      '只等待1次输入，然后结束',
+      '不需要等待输入'
     ],
-    answer: 0, // A
-    explanation: '需要用数字进行计算，不能和文字相加。\n\n- A选项：h是数字1.4，1.4+0.6=2.0\n- B选项：h是数字，不能和文字"0.6"相加\n- C选项：加了引号，原样输出"h + 0.6"\n- D选项：0.6米不是合法的Python数字\n\n数学知识：小数加法，1.4+0.6=2.0',
-    hint: '数字和数字才能相加计算'
+    answer: 0,
+    explanation: '三个 input() 命令按顺序执行。第一个 a = input() 等待第一次输入，第二个 b = input() 等待第二次输入，第三个 c = input() 等待第三次输入。',
+    hint: '每个 input() 都会等待一次输入'
   },
   {
     id: 'ex-4',
@@ -356,17 +294,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '用户输入数字 10，下面代码会输出什么？\n\n```python\nn = int(input("请输入一个数字："))\nprint(n * 2 + 5)\n```',
+    mathConcept: '设备分类',
+    question: '下列哪个是输入设备？',
     options: [
-      '20',
-      '25',
-      '15',
-      '30'
+      '显示器',
+      '打印机',
+      '键盘',
+      '音响'
     ],
-    answer: 1, // B
-    explanation: '输入10被转换成数字，然后计算：10×2+5=25。\n\n数学知识：运算顺序，先乘除后加减。\n\n计算过程：\n1. n = 10\n2. 10 × 2 = 20\n3. 20 + 5 = 25',
-    hint: '先算乘法，再算加法'
+    answer: 2,
+    explanation: '键盘是用来向计算机输入信息的设备，属于输入设备。显示器和打印机是输出设备，音响也是输出设备。',
+    hint: '键盘是向计算机输入信息的'
   },
 
   // 🔴 挑战题（5-6年级）
@@ -376,17 +314,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '舍去问题',
-    question: '关于 int() 和 float() 的转换，下面说法**正确**的是？',
+    mathConcept: '综合应用',
+    question: `运行代码，按顺序输入：甜味、7天、24。最终输出的顺序是？\n\n\`\`\`python\nprint('你最喜欢什么口味？')\na = input()\nprint('一周有几天？')\nb = input()\nprint('一天有几个小时？')\nc = input()\nprint(a, b, c)\n\`\`\``,
     options: [
-      'A. int(3.9) 的结果是 4',
-      'B. float("3.14") 会报错',
-      'C. int("3.14") 会报错',
-      'D. float(3) 会变成 3'
+      '甜味、7天、24',
+      '24、甜味、7天',
+      '7天、24、甜味',
+      '7天、甜味、24'
     ],
-    answer: 2, // C
-    explanation: '逐一分析：\n\n- A选项：错误。int(3.9)=3，直接舍弃小数（不是四舍五入）\n- B选项：错误。float("3.14")=3.14，可以成功\n- C选项：正确！int() 不能直接转小数字符串，会报错\n- D选项：错误。float(3)=3.0，会变成小数形式\n\n数学知识：int() 舍弃小数，float() 保留小数。',
-    hint: 'int() 会舍弃小数部分，不能直接转小数字符串'
+    answer: 0,
+    explanation: '按题目要求顺序输入"甜味"、"7天"、"24"，分别存储到变量 a、b、c 中。最后 print(a, b, c) 按变量顺序输出：甜味 7天 24。',
+    hint: '按输入顺序存储到变量，最后按变量顺序输出'
   },
   {
     id: 'ex-6',
@@ -394,70 +332,64 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '总价计算',
-    question: '苹果每斤 5.5 元，小明买了 2.4 斤。下面哪段代码能正确计算总价？\n\n```python\nprice = float(input("请输入单价："))\nweight = float(input("请输入斤数："))\n```',
+    mathConcept: '逻辑推理',
+    question: '触摸屏手机属于什么设备？',
     options: [
-      'A. print(price * weight)',
-      'B. print(price + weight)',
-      'C. print("price * weight")',
-      'D. print(price × weight)'
+      '只有输入设备',
+      '只有输出设备',
+      '既是输入设备又是输出设备',
+      '既不是输入设备也不是输出设备'
     ],
-    answer: 0, // A
-    explanation: '计算总价要用乘法。\n\n- A选项：5.5×2.4=13.2元\n- B选项：5.5+2.4=7.9，这是加法不是总价\n- C选项：加了引号，原样输出文字\n- D选项：×不是Python的乘法符号\n\n数学知识：总价 = 单价 × 数量\n\n计算：5.5×2.4=13.2元',
-    hint: '计算总价是用单价乘以数量'
+    answer: 2,
+    explanation: '触摸屏手机可以接收触摸输入（手指滑动、点击等输入操作），同时也能显示画面和内容（输出），所以同时具备输入和输出功能。',
+    hint: '触摸屏既可以"感受"触摸，又能显示内容'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L1-2',
-  title: '互动魔法屋',
-  subtitle: '学会 input()、int() 和 float() 命令',
+  title: 'input输入',
+  subtitle: '学会接收用户输入的信息',
   difficulty: '入门',
   estimatedTime: '30-45分钟',
   learningGoals: [
-    '掌握 input() 命令获取用户输入',
-    '理解 int() 和 float() 类型转换',
-    '学会处理整数和小数数据',
-    '能编写简单的交互程序'
+    '掌握 input() 命令的基本用法',
+    '能在 input() 中使用提示文字',
+    '理解多次 input() 的执行顺序',
+    '了解计算机的输入输出设备'
   ],
   prerequisites: [
-    'Python 基础语法',
-    '变量概念',
-    'print() 命令'
+    '认识数字和基本运算符号',
+    '会用键盘输入内容'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['input', 'string', 'type', 'name'],
-  medium: ['int', 'float', 'number', 'value', 'theme'],
-  hard: ['convert', 'integer', 'decimal', 'transform']
+  easy: ['input', 'name', 'box', 'key'],
+  medium: ['theme', 'output', 'password', 'enter'],
+  hard: ['variable', 'device', 'keyboard', 'monitor']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    "name = input('名字：')",
-    'print(name)',
-    "n = int('10')",
-    'print(n + 5)',
-    "x = float('3.14')",
-    'age = int(input())'
+    'n = input()',
+    "name = input('请输入：')",
+    'print(n)',
+    "print('你输入的是', n)"
   ],
   medium: [
-    "name = input('请输入：')\nprint(name)",
-    "n = int(input('数字：'))",
-    "x = float(input('小数：'))",
-    "age = int(input('年龄：'))\nprint(age)",
-    "price = float(input('价格：'))"
+    "a = input('第一个：')",
+    "b = input('第二个：')",
+    "print('结果是', a, b)",
+    'n1 = input()\nn2 = input()'
   ],
   hard: [
-    "n = int(input('数字：'))\nprint(n * 2)",
-    "age = int(input())\nprint(age + 10)",
-    "price = float(input())\nweight = float(input())",
-    "x = float(input())\ny = float(input())\nprint(x + y)",
-    "n = int(input())\nprint(str(n) + ' 是你输入的数字')"
+    "print('问题1：')\na = input()\nprint('问题2：')\nb = input()\nprint(a, b)",
+    "name = input('名字：')\nage = input('年龄：')\nprint('你好，', name)",
+    'x = input()\ny = input()\nz = input()\nprint(x, y, z)'
   ]
 }
 

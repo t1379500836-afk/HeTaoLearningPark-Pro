@@ -1,57 +1,84 @@
 /**
- * PY1 课程 L3-3: 多条件判断
+ * PY1 课程 L3-3: 变量修改与计数
  *
  * 核心知识点:
- * 1. if-elif-else - 处理三种或更多情况的条件判断
- * 2. 分支应用 - 多条件分支的实际应用
+ * 1. 变量修改 - 在循环中修改变量
+ * 2. 变量计数 - 用变量进行统计
+ * 3. 数字运算与字符串拼接
  */
 
-// 单词卡数据（源文件 + 拓展词汇）
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // 源文件单词
+  // OCR 提取的单词
   {
-    word: 'show',
-    pronunciation: '[ʃəu]',
-    partOfSpeech: 'v./n.',
-    meaning: '显示；展示；节目',
+    word: 'moon',
+    pronunciation: '[muːn]',
+    partOfSpeech: 'n.',
+    meaning: '月亮；月球',
     level: 'easy',
-    example: 'Please show me your homework.',
-    exampleTranslation: '请给我看看你的作业。',
-    note: 'show off 炫耀',
+    example: 'The moon is bright tonight.',
+    exampleTranslation: '今晚的月亮很亮。',
     source: 'ocr'
   },
-  // 拓展编程词汇（条件判断相关）
   {
-    word: 'elif',
-    pronunciation: '[ilaif]',
-    partOfSpeech: 'conj.',
-    meaning: '否则如果（else if的缩写）',
-    level: 'medium',
-    example: 'Use elif for another condition.',
-    exampleTranslation: '用elif检查另一个条件。',
-    note: 'elif = else if',
-    source: 'extended'
-  },
-  {
-    word: 'branch',
-    pronunciation: '[bra:ntʃ]',
-    partOfSpeech: 'n./v.',
-    meaning: '分支；分支机构',
-    level: 'medium',
-    example: 'The program has three branches.',
-    exampleTranslation: '这个程序有三个分支。',
-    note: 'if-elif-else 分支结构',
-    source: 'extended'
-  },
-  {
-    word: 'condition',
-    pronunciation: "[kən'diʃən]",
+    word: 'cat',
+    pronunciation: '[kæt]',
     partOfSpeech: 'n.',
-    meaning: '条件；状况',
-    level: 'hard',
-    example: 'Check the condition first.',
-    exampleTranslation: '先检查条件。',
-    note: 'if condition 条件判断',
+    meaning: '猫',
+    level: 'easy',
+    example: 'The cat is sleeping.',
+    exampleTranslation: '猫在睡觉。',
+    source: 'ocr'
+  },
+  {
+    word: 'dog',
+    pronunciation: '[dɒɡ]',
+    partOfSpeech: 'n.',
+    meaning: '狗',
+    level: 'easy',
+    example: 'The dog is running.',
+    exampleTranslation: '狗在跑。',
+    source: 'ocr'
+  },
+  {
+    word: 'snake',
+    pronunciation: '[sneɪk]',
+    partOfSpeech: 'n.',
+    meaning: '蛇',
+    level: 'medium',
+    example: 'The snake is crawling.',
+    exampleTranslation: '蛇在爬行。',
+    source: 'ocr'
+  },
+  {
+    word: 'sun',
+    pronunciation: '[sʌn]',
+    partOfSpeech: 'n.',
+    meaning: '太阳',
+    level: 'easy',
+    example: 'The sun is shining.',
+    exampleTranslation: '阳光照耀。',
+    source: 'ocr'
+  },
+  {
+    word: 'total',
+    pronunciation: '[ˈtəʊtəl]',
+    partOfSpeech: 'n.',
+    meaning: '总计；总数',
+    level: 'medium',
+    example: 'What is the total?',
+    exampleTranslation: '总数是多少？',
+    source: 'ocr'
+  },
+  // 拓展单词
+  {
+    word: 'count',
+    pronunciation: '[kaʊnt]',
+    partOfSpeech: 'v.',
+    meaning: '计数；计算',
+    level: 'medium',
+    example: 'Count from one to ten.',
+    exampleTranslation: '从一数到十。',
     source: 'extended'
   }
 ]
@@ -60,76 +87,104 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: 'if-elif-else多条件判断',
-    emoji: '🔀',
-    gradeLevel: '1-2',
-    summary: '处理三种或更多情况的条件判断',
+    title: '变量修改',
+    emoji: '✏️',
+    gradeLevel: '3-4',
+    summary: '变量的值可以被重新修改',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有三条路可以走：if检查第一条路，elif检查第二条路，else处理剩下的第三种情况。这样就能处理三种不同的选择！',
-      concept: 'if-elif-else用于处理三种或更多情况。if检查第一种情况，elif（否则如果）检查第二种情况，else处理前面都不满足的情况。它们是一个整体，左侧要对齐，都以冒号结尾。',
-      syntax: 'if 条件1:\n    情况1的代码\nelif 条件2:\n    情况2的代码\nelse:\n    其他情况的代码',
+      story: '变量就像一个盒子，里面可以放东西。如果你想换成别的东西，只需要把新东西放进去就行了。',
+      concept: '变量的值可以通过赋值语句进行修改，新的值会覆盖旧的值。',
+      syntax: `n = 1      # n 是 1
+n = 2      # n 变成 2
+n = 'hi'   # n 变成字符串 'hi'`,
       example: {
-        title: '三种情况判断',
-        code: "score = 85\nif score >= 90:\n    print('优秀')\nelif score >= 60:\n    print('及格')\nelse:\n    print('不及格')",
-        output: '及格',
-        explanation: 'score=85不满足>=90，但满足>=60，所以打印"及格"。'
+        title: '变量赋值',
+        code: `n = 1
+print(n)
+n = 2
+print(n)
+n = 'hi'
+print(n)`,
+        output: '1\n2\nhi',
+        explanation: '变量可以多次赋值，每次赋值都会用新值覆盖旧值。n 先是 1，然后变成 2，最后变成 "hi"。'
       },
       practice: [
         {
-          question: 'elif是什么的缩写？',
-          answer: 'else if（否则如果）'
+          question: 'n = 5 然后 n = 10，n 的最终值是多少？',
+          answer: '10'
         },
         {
-          question: 'if-elif-else的左侧需要对齐吗？',
-          answer: '需要，它们是一个整体'
+          question: '变量可以修改几次？',
+          answer: '无数次'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '多条件判断升级！现在你可以检查很多种情况，就像电梯有很多层一样，程序会一层层检查，找到满足条件的那一层就停下来！',
-      concept: 'if-elif-else的执行顺序是：从上到下依次判断。一旦某个条件成立，就执行对应的代码，然后结束整个判断。后面的条件不会再检查。可以有多个elif来处理更多情况。',
-      syntax: 'if 条件1:\n    代码1\nelif 条件2:\n    代码2\nelif 条件3:\n    代码3\nelse:\n    其他代码',
+      story: '在 for 循环中修改变量，可以让变量随着循环不断变化。',
+      concept: 'n = n + 1 表示把 n 的值加 1，然后再赋值给 n。',
+      syntax: `n = n + 1
+# 相当于：
+# 1. 读取 n 的值（假设是 1）
+# 2. 计算 1 + 1 = 2
+# 3. 把 2 赋值给 n`,
       example: {
-        title: '多个elif',
-        code: "age = 12\nif age < 6:\n    print('幼儿')\nelif age < 12:\n    print('儿童')\nelif age < 18:\n    print('少年')\nelse:\n    print('成人')",
-        output: '少年',
-        explanation: 'age=12不满足<6和<12，但满足<18，所以打印"少年"。'
+        title: '循环中修改变量',
+        code: `n = 1
+for i in range(4):
+    n = n + 1
+print(n)`,
+        output: '5',
+        explanation: 'n 初始值 1。循环4次：第1次 n=1+1=2；第2次 n=2+1=3；第3次 n=3+1=4；第4次 n=4+1=5。最终 n=5。'
       },
       practice: [
         {
-          question: 'if条件成立后，还会检查elif吗？',
-          answer: '不会，直接结束判断'
+          question: 'n = 0，循环3次 n = n + 2，最终 n 是多少？',
+          answer: '6'
         },
         {
-          question: '可以有多个elif吗？',
-          answer: '可以，根据需要添加多个elif'
+          question: 'n = n + 1 的含义是什么？',
+          answer: 'n 的值增加 1'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '条件判断大师模式！你可以设计复杂的条件逻辑，处理各种可能的情况。关键是理解条件的顺序和互斥关系！',
-      concept: 'if-elif-else的核心是条件的优先级和互斥性。条件从上到下依次检查，先满足的条件优先执行。设计时要注意：①更严格的条件放前面②条件之间不要有重叠③else处理所有"漏网之鱼"。',
-      syntax: '# 条件设计原则\n# 1. 具体条件在前\n# 2. 一般条件在后\n# 3. else兜底\nif 最严格条件:\n    ...\nelif 次严格条件:\n    ...\nelse:\n    ...',
+      story: '区分数字运算和字符串拼接：n = n + 1 是数字加法，n = n + "1" 是字符串拼接。',
+      concept: '根据变量的类型不同，+ 号的意义不同。数字是加法，字符串是拼接。',
+      syntax: `# 数字运算
+n = 5
+n = n + 1  # n = 6
+
+# 字符串拼接
+n = '5'
+n = n + '1'  # n = '51'`,
       example: {
-        title: '成绩等级',
-        code: "score = 95\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 60:\n    print('C')\nelse:\n    print('D')",
-        output: 'A',
-        explanation: 'score=95满足>=90，直接打印"A"，后面的>=80和>=60都不会检查。注意>=90必须在>=80前面！'
+        title: '区分运算类型',
+        code: `# 数字运算
+n = 1
+n = n + 1
+print(n)  # 输出 2
+
+# 字符串拼接
+s = '1'
+s = s + '1'
+print(s)  # 输出 11`,
+        output: '2\n11',
+        explanation: 'n = n + 1 是数字加法，1+1=2。s = s + "1" 是字符串拼接，"1"+"1"="11"。'
       },
       practice: [
         {
-          question: '为什么if score >= 90要写在elif score >= 80前面？',
-          answer: '因为>=90的情况也满足>=80，如果反了会永远不执行>=90的分支'
+          question: "n = 'a'，n = n + 'b'，n 是多少？",
+          answer: '"ab"'
         },
         {
-          question: 'else可以省略吗？',
-          answer: '可以，但如果所有条件都不满足，程序不会执行任何操作'
+          question: "n = 5，n = n + 3，n 是多少？",
+          answer: '8'
         }
       ]
     }
@@ -137,83 +192,215 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '分支应用',
-    emoji: '🌳',
-    gradeLevel: '1-2',
-    summary: '多条件分支的实际应用',
+    title: '变量计数',
+    emoji: '🔢',
+    gradeLevel: '3-4',
+    summary: '用变量统计数量',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你在做一个红绿灯程序：红灯停、绿灯行、黄灯等待。三种情况需要三个分支来处理！',
-      concept: '分支应用就是把if-elif-else用在真实场景中。比如根据分数评级、根据年龄分类、根据温度选择衣服等。每个分支处理一种特定情况。',
-      syntax: 'if 情况1:\n    处理情况1\nelif 情况2:\n    处理情况2\nelse:\n    处理其他情况',
+      story: '计数就像数东西，先找一个盒子（变量）来装数字，每遇到一个就往里面加一个。',
+      concept: '变量计数需要三步：1. 设置初始值 2. 在循环中修改 3. 循环结束得到结果。',
+      syntax: `count = 0        # 1. 设置初始值
+for i in range(3):
+    count = count + 1  # 2. 循环中修改
+print(count)           # 3. 得到结果`,
       example: {
-        title: '天气选择',
-        code: "weather = 'rain'\nif weather == 'sun':\n    print('去公园')\nelif weather == 'rain':\n    print('在家看书')\nelse:\n    print('去 shopping')",
-        output: '在家看书',
-        explanation: 'weather是"rain"，匹配elif分支，打印"在家看书"。'
+        title: '数一数',
+        code: `count = 0
+for i in range(4):
+    count = count + 1
+print(count)`,
+        output: '4',
+        explanation: 'count 初始值 0，循环4次每次加1：0→1→2→3→4，最终 count=4。'
       },
       practice: [
         {
-          question: '根据天气做决定需要几个分支？',
-          answer: '至少3个（晴、雨、其他）'
+          question: 'count = 0，循环5次 count = count + 1，最终 count 是多少？',
+          answer: '5'
         },
         {
-          question: 'if-elif-else和三个独立的if有什么区别？',
-          answer: 'if-elif-else只会执行一个分支，三个if可能执行多个'
+          question: '变量计数需要哪三步？',
+          answer: '设置初始值、循环中修改、得到结果'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '分支应用进阶！现在你可以处理更复杂的情况：比如成绩评级（优秀/良好/及格/不及格）、年龄分段（幼儿/儿童/少年/成人）等。',
-      concept: '分支应用的关键是合理设计条件区间。常用技巧：①用范围条件（>=和<=）②确保区间没有遗漏③用else处理边界情况。例如成绩评级：>=90优秀，>=80良好，>=60及格，其他不及格。',
-      syntax: '# 成绩分级模式\nif score >= 90:\n    优秀\nelif score >= 80:\n    良好\nelif score >= 60:\n    及格\nelse:\n    不及格',
+      story: '可以数任意东西！比如数有多少个偶数，多少个正数，或者统计输入的"猫"出现了几次。',
+      concept: '在 if 判断成立后进行计数，可以统计符合条件的数据个数。',
+      syntax: `count = 0
+for i in range(5):
+    m = input()
+    if m == '猫':
+        count = count + 1`,
       example: {
-        title: '成绩分级',
-        code: "score = 75\nif score >= 90:\n    print('优秀')\nelif score >= 80:\n    print('良好')\nelif score >= 60:\n    print('及格')\nelse:\n    print('不及格')",
-        output: '及格',
-        explanation: 'score=75，不满足>=90和>=80，但满足>=60，所以是"及格"。'
+        title: '数猫',
+        code: `# 统计输入中出现几次"猫"
+count = 0
+for i in range(4):
+    m = input()
+    if m == '猫':
+        count = count + 1
+print(count)`,
+        output: '（输入：狗 猫 猫 鸟）\n2',
+        explanation: '输入"狗"、"猫"、"猫"、"鸟"。只有第2、3次是"猫"，count 加了2次，最终 count=2。'
       },
       practice: [
         {
-          question: 'score=58会输出什么？',
-          answer: '不及格（因为不满足>=60）'
+          question: '统计"苹果"出现几次，count 应该在什么时候加1？',
+          answer: '当输入等于"苹果"时'
         },
         {
-          question: '如何设计4个年龄分段？',
-          answer: '用if-elif-else加3个elif，判断条件如<6、<12、<18、其他'
+          question: 'count = 0 和 count = 1 有什么区别？',
+          answer: '初始值不同，最终结果会差1'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '分支应用大师模式！你可以设计复杂的决策系统：游戏难度选择、菜单导航、状态机...只要条件设计得当，可以处理任何逻辑！',
-      concept: '复杂的分支应用往往涉及多个条件的组合。可以使用and/or来组合条件，或者嵌套if语句。关键是要理清逻辑关系，避免条件冲突或遗漏。常见应用：菜单选择、状态判断、错误处理等。',
-      syntax: '# 组合条件模式\nif 条件1 and 条件2:\n    ...\nelif 条件3 or 条件4:\n    ...\nelse:\n    ...\n\n# 嵌套模式\nif 外层条件:\n    if 内层条件:\n        ...',
+      story: '变量计数可以用于各种统计：统计总分、统计个数、求平均值等。',
+      concept: '变量不仅可以计数，还可以累加求和。',
+      syntax: `total = 0
+for i in range(3):
+    n = int(input())
+    total = total + n
+print(total)`,
       example: {
-        title: '游戏状态',
-        code: "health = 30\nhas_armor = True\nif health <= 0:\n    print('游戏结束')\nelif health < 30 and has_armor:\n    print('危险，有护甲保护')\nelif health < 30:\n    print('危险！')\nelse:\n    print('安全')",
-        output: '危险，有护甲保护',
-        explanation: 'health=30不满足<=0，但满足<30且有护甲，所以打印"危险，有护甲保护"。'
+        title: '求和',
+        code: `# 计算3个数的和
+total = 0
+for i in range(3):
+    n = int(input())
+    total = total + n
+print(total)`,
+        output: '（输入：3 4 5）\n12',
+        explanation: 'total 初始值0。输入3，total=0+3=3；输入4，total=3+4=7；输入5，total=7+5=12。'
       },
       practice: [
         {
-          question: 'and和or在条件中有什么作用？',
-          answer: 'and需要同时满足两个条件，or只需要满足其中一个'
+          question: '如何计算10个数的总和？',
+          answer: '循环10次，每次 total = total + n'
         },
         {
-          question: '如果health=20且没有护甲，会输出什么？',
-          answer: '危险！（不满足has_armor，跳到elif health<30分支）'
+          question: 'total 和 count 有什么区别？',
+          answer: 'total 累加数值，count 累加次数'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-3',
+    title: '综合应用',
+    emoji: '🎯',
+    gradeLevel: '3-4',
+    summary: '结合循环和条件进行数据处理',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: '综合使用 for 循环和 if 判断，可以解决很多实际问题。',
+      concept: '循环处理多次输入，if 判断条件，变量存储结果。',
+      syntax: `结果变量 = 0
+for i in range(n):
+    数据 = input()
+    if 条件:
+        结果变量 = 结果变量 + 1`,
+      example: {
+        title: '完整流程',
+        code: `# 统计及格人数
+count = 0
+for i in range(5):
+    score = int(input())
+    if score >= 60:
+        count = count + 1
+print(count)`,
+        output: '（输入：70 50 80 90 40）\n3',
+        explanation: '输入5个成绩：70≥60 count=1，50<60 不计，80≥60 count=2，90≥60 count=3，40<60 不计。最终 count=3。'
+      },
+      practice: [
+        {
+          question: '如何统计不及格人数？',
+          answer: 'if score < 60: count = count + 1'
+        },
+        {
+          question: 'count 初始值一般设为什么？',
+          answer: '0'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: '字符串和数字的处理要注意区分类型。数字可以加减，字符串只能拼接。',
+      concept: '用 int() 将字符串转数字后再进行数学运算。',
+      syntax: `n = '123'    # 字符串
+n = int(n)   # 转数字
+n = n + 1    # 加1，变成124`,
+      example: {
+        title: '类型转换',
+        code: `# 字符串转数字后计算
+n = '5'
+result = int(n) + 3
+print(result)  # 8`,
+        output: '8',
+        explanation: '"5" 是字符串，直接 +3 会变成 "53"（拼接）。用 int("5") 转成数字 5 后，5+3=8。'
+      },
+      practice: [
+        {
+          question: "'3' + 4 应该怎么写才能得到7？",
+          answer: 'int("3") + 4'
+        },
+        {
+          question: '什么情况下需要类型转换？',
+          answer: '字符串需要当数字用时'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: '实际问题往往需要多种技能组合：循环输入、判断条件、修改变量、类型转换等。',
+      concept: '综合应用多种技能解决复杂问题。',
+      syntax: `count = 0
+total = 0
+for i in range(5):
+    score = int(input())
+    if score >= 60:
+        count = count + 1
+        total = total + score`,
+      example: {
+        title: '综合统计',
+        code: `# 统计及格人数和总分
+count = 0
+total = 0
+for i in range(5):
+    score = int(input())
+    if score >= 60:
+        count = count + 1
+        total = total + score
+print(count)
+print(total)`,
+        output: '（输入：70 50 80 90 40）\n3\n240',
+        explanation: '70、80、90 三个及格，count=3，total=70+80+90=240。'
+      },
+      practice: [
+        {
+          question: '如何同时统计及格人数和平均分？',
+          answer: 'count 统计人数，total 累加总分，最后 total/count'
+        },
+        {
+          question: '综合应用的步骤是什么？',
+          answer: '循环输入→条件判断→修改变量→输出结果'
         }
       ]
     }
   }
 ]
 
-// 习题数据（根据源文件知识点创作6道拓展题）
+// 习题数据
 export const exercises = [
   // 🟢 基础题（1-2年级）
   {
@@ -222,17 +409,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '条件判断顺序',
-    question: '执行下面的代码，会输出什么？\n\n```python\nscore = 75\nif score >= 90:\n    print("A")\nelif score >= 60:\n    print("B")\nelse:\n    print("C")\n```',
+    mathConcept: '字符串拼接',
+    question: `执行下方代码，程序会打印出什么？\n\n\`\`\`python\nn = 'home'\nn = n + 'work'\nprint(n)\n\`\`\``,
     options: [
-      'A. A',
-      'B. B',
-      'C. C',
-      'D. 程序报错'
+      'home',
+      'work',
+      'homework',
+      'home work'
     ],
-    answer: 1,
-    explanation: 'score=75不满足>=90，但满足>=60，所以执行elif分支，打印"B"。',
-    hint: '从上到下检查条件，75满足>=60'
+    answer: 2,
+    explanation: 'n = "home"，n = n + "work" 是字符串拼接，结果是 "homework"。',
+    hint: '字符串用加号拼接'
   },
   {
     id: 'ex-2',
@@ -240,17 +427,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: 'else的作用',
-    question: '如果所有if和elif条件都不满足，会执行什么？\n\n```python\nage = 5\nif age >= 18:\n    print("成人")\nelif age >= 12:\n    print("少年")\nelse:\n    print("儿童")\n```',
+    mathConcept: '变量修改',
+    question: `执行下方代码，程序会打印出什么？\n\n\`\`\`python\nn = 1\nfor i in range(3):\n    n = n + 1\nprint(n)\n\`\`\``,
     options: [
-      'A. 成人',
-      'B. 少年',
-      'C. 儿童',
-      'D. 不输出'
+      '3',
+      '4',
+      '1',
+      '程序报错'
     ],
-    answer: 2,
-    explanation: 'age=5不满足>=18和>=12，所以执行else分支，打印"儿童"。',
-    hint: 'else处理前面条件都不满足的情况'
+    answer: 1,
+    explanation: 'n 初始值 1，循环3次：1→2→3→4，最终 n=4。',
+    hint: '每次循环 n 加 1'
   },
 
   // 🟡 进阶题（3-4年级）
@@ -260,17 +447,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '条件优先级',
-    question: '执行下面的代码，会输出什么？\n\n```python\nscore = 95\nif score >= 80:\n    print("B")\nelif score >= 90:\n    print("A")\nelse:\n    print("C")\n```',
+    mathConcept: '变量计数',
+    question: `执行下方代码，程序会打印出什么？\n\n\`\`\`python\ncount = 0\nfor i in range(4):\n    count = count + 1\nprint(count)\n\`\`\``,
     options: [
-      'A. A',
-      'B. B',
-      'C. C',
-      'D. 程序报错'
+      '3',
+      '4',
+      '5',
+      '0'
     ],
     answer: 1,
-    explanation: 'score=95满足>=80，直接执行if分支，打印"B"。虽然也满足>=90，但不会执行elif分支。注意：条件顺序很重要，>=90应该写在>=80前面！',
-    hint: '从上到下检查，>=80先被满足'
+    explanation: 'count 初始值 0，循环4次每次加1，最终 count=4。',
+    hint: '循环4次就加4次'
   },
   {
     id: 'ex-4',
@@ -278,17 +465,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '范围判断',
-    question: 'age=15时，下面代码会输出什么？\n\n```python\nif age < 6:\n    print("幼儿")\nelif age < 12:\n    print("儿童")\nelif age < 18:\n    print("少年")\nelse:\n    print("成人")\n```',
+    mathConcept: '类型区分',
+    question: `'3' + '5' 和 3 + 5 有什么区别？`,
     options: [
-      'A. 幼儿',
-      'B. 儿童',
-      'C. 少年',
-      'D. 成人'
+      "'3' + '5' = '35', 3 + 5 = 8",
+      "'3' + '5' = 8, 3 + 5 = '35'",
+      '两者相等',
+      '两者都报错'
     ],
-    answer: 2,
-    explanation: 'age=15，不满足<6和<12，但满足<18，所以打印"少年"。',
-    hint: '15在12到18之间'
+    answer: 0,
+    explanation: `"'3' + '5' 是字符串拼接，结果是 '35'。3 + 5 是数字加法，结果是 8。`,
+    hint: '加号对字符串是拼接，对数字是加法'
   },
 
   // 🔴 挑战题（5-6年级）
@@ -298,17 +485,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '组合条件',
-    question: '执行下面的代码，会输出什么？\n\n```python\na = 5\nb = 10\nif a > 3 and b < 10:\n    print(1)\nelif a > 3 or b < 10:\n    print(2)\nelse:\n    print(3)\n```',
+    mathConcept: '综合运算',
+    question: `执行以下代码，输入 1 2 3，输出是什么？\n\n\`\`\`python\ntotal = 0\nfor i in range(3):\n    n = int(input())\n    total = total + n\nprint(total)\n\`\`\``,
     options: [
-      'A. 1',
-      'B. 2',
-      'C. 3',
-      'D. 程序报错'
+      '1',
+      '2',
+      '3',
+      '6'
     ],
-    answer: 1,
-    explanation: '分析条件：a=5满足a>3，但b=10不满足b<10，所以"and"整体不成立，不打印1。检查elif：a>3成立，"or"整体成立，打印2。注意：and需要两个都满足，or只需要一个满足。',
-    hint: 'and需要两个都满足，or只需要一个'
+    answer: 3,
+    explanation: 'total 初始值0。输入1，total=1；输入2，total=3；输入3，total=6。最终输出6。',
+    hint: '累加三个数'
   },
   {
     id: 'ex-6',
@@ -316,68 +503,66 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '逻辑推理',
-    question: '要实现90分及以上A，80-89分B，60-79分C，60分以下D，应该怎么写条件？',
+    mathConcept: '条件统计',
+    question: `执行以下代码，输入 5 10 15 20 25，输出是什么？\n\n\`\`\`python\ncount = 0\nfor i in range(5):\n    n = int(input())\n    if n > 10:\n        count = count + 1\nprint(count)\n\`\`\``,
     options: [
-      'A. >=90, >=80, >=60, 其他',
-      'B. >=90, >=80且<90, >=60且<80, 其他',
-      'C. >=90, >=80, >=60, <60',
-      'D. >=90, 80-89, 60-79, <60'
+      '1',
+      '2',
+      '3',
+      '4'
     ],
-    answer: 0,
-    explanation: '选项A正确！利用从上到下检查的特性：- >=90会把90-100归为A- >=80会把80-89归为B（90+已经被A处理）- >=60会把60-79归为C（80+已经被处理）- else处理60以下选项B的"且<90"是多余的，因为>=90已经在前面处理了。',
-    hint: '利用顺序检查，后一个条件不需要排除前面已处理的范围'
+    answer: 2,
+    explanation: '输入5个数：5不>10不计，10不>10不计，15>10 count=1，20>10 count=2，25>10 count=3。最终 count=3。',
+    hint: '数一数哪些大于10'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L3-3',
-  title: '多条件判断',
-  subtitle: '学会使用if-elif-else处理多种情况',
+  title: '变量修改与计数',
+  subtitle: '学会在循环中修改变量和统计',
   difficulty: '入门',
-  estimatedTime: '30-40分钟',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '掌握if-elif-else的语法格式',
-    '理解多条件判断的执行顺序',
-    '学会设计合理的条件区间',
-    '了解and/or在条件中的应用'
+    '理解变量的可修改性',
+    '掌握 n = n + 1 的含义',
+    '能用变量进行计数和累加',
+    '能结合循环和条件判断进行统计'
   ],
   prerequisites: [
-    'Python 基础语法',
-    'if-else 条件判断',
-    '比较运算符（>, <, >=, <=, ==, !=）'
+    '理解 for 循环',
+    '理解 if 语句',
+    '知道什么是变量'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['show', 'if', 'elif', 'else'],
-  medium: ['score', 'grade', 'level', 'check'],
-  hard: ['condition', 'branch', 'priority', 'evaluate']
+  easy: ['moon', 'cat', 'dog', 'sun', 'run'],
+  medium: ['total', 'count', 'number', 'value'],
+  hard: ['increment', 'accumulate', 'statistics', 'variable']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    "if score >= 90:\n    print('A')",
-    "elif score >= 80:\n    print('B')",
-    "else:\n    print('C')",
-    'if age < 6:\n    print("child")',
-    'elif age < 18:\n    print("teen")',
-    'else:\n    print("adult")'
+    'n = 1',
+    'n = n + 1',
+    'count = 0',
+    'count = count + 1'
   ],
   medium: [
-    "score = 85\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 60:\n    print('C')\nelse:\n    print('D')",
-    "age = 12\nif age < 6:\n    print('幼儿')\nelif age < 12:\n    print('儿童')\nelif age < 18:\n    print('少年')\nelse:\n    print('成人')",
-    'if a > 0 and b > 0:\n    print("正数")',
-    'if a > 0 or b > 0:\n    print("至少一个正")'
+    'n = 1\nfor i in range(3):\n    n = n + 1',
+    'count = 0\nfor i in range(5):\n    count = count + 1',
+    's = "home"\ns = s + "work"',
+    'n = int(input())\ntotal = total + n'
   ],
   hard: [
-    "score = 75\nif score >= 90:\n    print('优秀')\nelif score >= 80:\n    print('良好')\nelif score >= 60:\n    print('及格')\nelse:\n    print('不及格')",
-    'health = 30\nhas_armor = True\nif health <= 0:\n    print("结束")\nelif health < 30 and has_armor:\n    print("危险有护甲")\nelif health < 30:\n    print("危险")\nelse:\n    print("安全")',
-    "if a > 10 and b > 10:\n    print('都大于10')\nelif a > 10 or b > 10:\n    print('至少一个大于10')\nelse:\n    print('都不大于10')",
-    'if x >= 0 and y >= 0:\n    print("第一象限")\nelif x >= 0 or y >= 0:\n    print("轴上")\nelse:\n    print("其他")'
+    'count = 0\nfor i in range(5):\n    n = int(input())\n    if n > 10:\n        count = count + 1',
+    'total = 0\nfor i in range(4):\n    n = int(input())\n    total = total + n\nprint(total)',
+    'n = 1\nfor i in range(3):\n    n = n + 2\nprint(n)',
+    'count = 0\nfor i in range(3):\n    m = input()\n    if m == "cat":\n        count = count + 1'
   ]
 }
 

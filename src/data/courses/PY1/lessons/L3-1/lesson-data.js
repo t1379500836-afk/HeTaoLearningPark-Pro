@@ -1,57 +1,75 @@
 /**
- * PY1 课程 L3-1: 变量修改和计数
+ * PY1 课程 L3-1: for 循环
  *
  * 核心知识点:
- * 1. 变量修改 - 使用赋值语句修改变量的值
- * 2. 变量计数 - 在循环中对变量进行连续修改
+ * 1. for 循环 - 简化重复代码
+ * 2. for i in range() - 循环格式
+ * 3. for 循环应用
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
   // OCR 提取的单词
   {
-    word: 'move',
-    pronunciation: '[mu:v]',
-    partOfSpeech: 'v./n.',
-    meaning: '移动；搬家；调动；使感动',
+    word: 'for',
+    pronunciation: '[fɔː(r)]',
+    partOfSpeech: 'prep./conj.',
+    meaning: '为了；因为',
     level: 'easy',
-    example: 'The cat moves slowly.',
-    exampleTranslation: '猫慢慢移动。',
-    note: 'on the move 在活动中',
+    example: 'This is for you.',
+    exampleTranslation: '这是给你的。',
     source: 'ocr'
   },
   {
-    word: 'cat',
-    pronunciation: '[kæt]',
+    word: 'in',
+    pronunciation: '[ɪn]',
+    partOfSpeech: 'prep.',
+    meaning: '在...里面；进入',
+    level: 'easy',
+    example: 'The cat is in the box.',
+    exampleTranslation: '猫在盒子里。',
+    source: 'ocr'
+  },
+  {
+    word: 'range',
+    pronunciation: '[reɪndʒ]',
     partOfSpeech: 'n.',
-    meaning: '猫；猫科动物',
-    level: 'easy',
-    example: 'The cat is sleeping.',
-    exampleTranslation: '猫在睡觉。',
-    note: '',
-    source: 'ocr'
-  },
-  {
-    word: 'dog',
-    pronunciation: '[dɒɡ]',
-    partOfSpeech: 'n./v.',
-    meaning: '狗；公狗；困扰；纠缠；跟踪',
-    level: 'easy',
-    example: 'The dog is running.',
-    exampleTranslation: '狗在跑。',
-    note: '',
-    source: 'ocr'
-  },
-  {
-    word: 'total',
-    pronunciation: "['təʊt(ə)l]",
-    partOfSpeech: 'adj./n./v.',
-    meaning: '总的；彻底的；总数；计算...的总和',
+    meaning: '区间；范围',
     level: 'medium',
-    example: 'The total is 100.',
-    exampleTranslation: '总数是100。',
-    note: 'in total 总共',
+    example: 'The age range is 5 to 10.',
+    exampleTranslation: '年龄范围是5到10岁。',
     source: 'ocr'
+  },
+  {
+    word: 'shoot',
+    pronunciation: '[ʃuːt]',
+    partOfSpeech: 'v.',
+    meaning: '射击；拍摄',
+    level: 'medium',
+    example: 'Shoot the ball.',
+    exampleTranslation: '射门。',
+    source: 'ocr'
+  },
+  // 拓展单词
+  {
+    word: 'loop',
+    pronunciation: '[luːp]',
+    partOfSpeech: 'n.',
+    meaning: '循环',
+    level: 'medium',
+    example: 'The loop runs three times.',
+    exampleTranslation: '循环运行三次。',
+    source: 'extended'
+  },
+  {
+    word: 'repeat',
+    pronunciation: '[rɪˈpiːt]',
+    partOfSpeech: 'v.',
+    meaning: '重复',
+    level: 'medium',
+    example: 'Repeat the word.',
+    exampleTranslation: '重复这个单词。',
+    source: 'extended'
   }
 ]
 
@@ -59,76 +77,85 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '变量修改',
+    title: 'for 循环',
     emoji: '🔄',
-    gradeLevel: '1-2',
-    summary: '使用赋值语句修改变量的值',
+    gradeLevel: '3-4',
+    summary: '用 for 简化重复的代码',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个神奇的盒子，你可以随时把里面的东西换成别的！变量就像这个盒子，可以改变它存储的内容。',
-      concept: '变量的值可以使用赋值语句 "=" 进行修改。等号右边的结果会赋值给左边的变量，替换掉原来的值。',
-      syntax: '变量名 = 新值',
+      story: '想象你要打印5次"你好"，如果没有for循环，你需要写5行print。如果用for循环，只需要写一行就能让电脑帮你重复5次！',
+      concept: 'for 循环可以简化重复的代码，让程序按照指定次数重复执行某段代码。',
+      syntax: `for i in range(重复次数):
+    下级代码（重复执行的内容）`,
       example: {
-        title: '修改变量值',
-        code: "n = 'home'\nn = 'homework'\nprint(n)",
-        output: 'homework',
-        explanation: '第一次n存储"home"，第二次n被重新赋值为"homework"，所以最终打印"homework"。'
+        title: '重复打印',
+        code: `for i in range(3):
+    print('你好')`,
+        output: '你好\n你好\n你好',
+        explanation: 'for i in range(3) 表示重复执行3次。print("你好") 是下级代码，被重复执行了3次。'
       },
       practice: [
         {
-          question: '如何把变量n的值改成10？',
-          answer: 'n = 10'
+          question: 'for i in range(5) 会重复执行多少次？',
+          answer: '5次'
         },
         {
-          question: '变量n原来存储5，执行n = 8后，n的值是多少？',
-          answer: '8（新值替换了旧值）'
+          question: 'for 循环的下级代码有什么特点？',
+          answer: '会被重复执行'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的魔法盒升级了！不仅可以直接替换内容，还可以基于原来的值进行计算修改！比如让数字增加，让文字变长！',
-      concept: '修改变量时，新值可以基于旧值计算得出。例如 n = n + 1 表示让n的值在原来的基础上增加1。需要注意字符串拼接和数字计算的区别。',
-      syntax: "# 字符串拼接\nn = n + 'word'\n\n# 数字计算\nn = n + 1",
+      story: 'for 循环的标准格式是 for i in range(数字)，数字决定循环次数。i 是一个变量，每次循环会取不同的值（虽然我们一般不用）。',
+      concept: 'for i in range(n) 中，i 是循环变量，range(n) 产生0到n-1的数字，循环执行n次。',
+      syntax: `for i in range(3):
+    # 第1次：i=0
+    # 第2次：i=1
+    # 第3次：i=2`,
       example: {
-        title: '累加修改变量',
-        code: 'n = 5\nn = n + 3\nprint(n)',
-        output: '8',
-        explanation: 'n初始值是5，执行 n = n + 3 时，先计算右边 5 + 3 = 8，然后把8赋值给n，所以n变成8。'
+        title: 'range的原理',
+        code: `for i in range(3):
+    print(i)`,
+        output: '0\n1\n2',
+        explanation: 'range(3) 产生 0, 1, 2 三个数字，i 依次等于 0, 1, 2，所以打印出 0, 1, 2。'
       },
       practice: [
         {
-          question: 'n = 10，执行 n = n + 5 后，n的值是多少？',
-          answer: '15'
+          question: 'range(3) 产生的数字有哪些？',
+          answer: '0, 1, 2'
         },
         {
-          question: 's = "hello"，执行 s = s + " world" 后，s的值是多少？',
-          answer: '"hello world"（字符串拼接）'
+          question: 'for i in range(4) 循环几次？',
+          answer: '4次'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '变量大师模式！你可以在循环中不断修改变量，让变量值按规律变化！这是编程中非常重要的累加思想。',
-      concept: '在循环中使用 n = n + 1 可以实现变量值的连续变化。每次循环都会让n增加1，经过多次循环后，n会从初始值逐渐变大。这种模式叫做"累加"。',
-      syntax: "# 循环累加\nn = 初始值\nfor i in range(次数):\n    n = n + 1\nprint(n)",
+      story: 'for 循环的下级代码（缩进的代码）会重复执行，不缩进的代码只在循环结束后执行一次。',
+      concept: '缩进决定代码是否在循环内：在循环内的会重复执行，不在循环内的只在最后执行一次。',
+      syntax: `# 有缩进：循环内，重复执行
+# 无缩进：循环外，执行一次`,
       example: {
-        title: '循环累加',
-        code: 'n = 1\nfor i in range(4):\n    n = n + 1\nprint(n)',
-        output: '5',
-        explanation: 'n从1开始，循环4次，每次增加1：1→2→3→4→5。最终n的值是5。'
+        title: '缩进的作用',
+        code: `for i in range(3):
+    print('*')  # 缩进，重复3次
+print('完成')   # 无缩进，执行1次`,
+        output: '*\n*\n*\n完成',
+        explanation: 'print("*") 有缩进所以重复3次；print("完成") 无缩进在循环外，只在最后执行1次。'
       },
       practice: [
         {
-          question: 'n = 0，循环3次执行 n = n + 2，最终n是多少？',
-          answer: '6（每次增加2，共3次：0+2+2+2=6）'
+          question: '循环内的代码和循环外的代码有什么区别？',
+          answer: '循环内的重复执行，循环外的只执行一次'
         },
         {
-          question: '如何用循环让变量n从1变到10？',
-          answer: 'n = 1\nfor i in range(9):\n    n = n + 1'
+          question: 'print 在 for 循环外面和里面有什么区别？',
+          answer: '里面重复执行，外面只执行一次'
         }
       ]
     }
@@ -136,83 +163,190 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '变量计数',
-    emoji: '🔢',
-    gradeLevel: '1-2',
-    summary: '使用变量在循环中统计数量',
+    title: 'for 循环与无人机',
+    emoji: '🚁',
+    gradeLevel: '3-4',
+    summary: '用 for 控制无人机移动',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你在数操场上有多少只猫。你可以用一个数字来记录，每看到一只猫，就让这个数字加1！这就是变量计数。',
-      concept: '变量计数就是用一个变量来记录数量。开始时把变量设为0，然后在循环中每次加1，最后变量中存储的就是总数。',
-      syntax: '# 设置初始值\nn = 0\n\n# 循环中计数\nfor 每一次:\n    n = n + 1',
+      story: '用 for 循环可以控制无人机移动。比如让无人机连续向右移动3格，只需要把"向右"的命令放在 for 循环里。',
+      concept: '在 for 循环内使用 print 输出指令，无人机就会按指令移动相应的次数。',
+      syntax: `for i in range(次数):
+    print('r')  # 向右移动`,
       example: {
-        title: '统计猫的数量',
-        code: "cat = 0\nfor i in range(3):\n    cat = cat + 1\nprint(cat)",
-        output: '3',
-        explanation: 'cat从0开始，循环3次，每次加1：0→1→2→3。最终cat的值是3，表示有3只猫。'
+        title: '控制无人机',
+        code: `# 连续向右移动3格
+for i in range(3):
+    print('r')`,
+        output: 'r\nr\nr',
+        explanation: '循环3次，每次输出一个"r"，表示向右移动一格。'
       },
       practice: [
         {
-          question: '计数变量通常从什么数字开始？',
-          answer: '从0开始'
+          question: '如何让无人机连续向上移动5格？',
+          answer: 'for i in range(5): print("u")'
         },
         {
-          question: '每次计数时，变量应该怎么变化？',
-          answer: '每次加1（n = n + 1）'
+          question: 'for i in range(3): print("d") 会输出什么？',
+          answer: 'd\nd\nd'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '计数升级！现在你不仅数猫，还能数任何东西！只要设置好初始值，然后在循环中根据条件来增加计数器！',
-      concept: '变量计数需要三个步骤：①设置初始值（通常是0）②在循环中根据条件修改变量③循环结束后得到统计结果。可以用if语句来判断是否需要计数。',
-      syntax: "# 计数模式\nn = 0\nfor i in range(次数):\n    if 满足条件:\n        n = n + 1\nprint(n)",
+      story: '可以让无人机先执行一段循环到达一个位置，然后执行另一个动作到达终点。理解哪些在循环内、哪些在循环外很重要。',
+      concept: '循环内的代码重复执行，循环外的代码在所有循环结束后执行一次。',
+      syntax: `for i in range(3):
+    print('r')  # 重复3次右移
+print('d')         # 最后下移1次`,
       example: {
-        title: '条件计数',
-        code: "cat = 0\nfor i in range(4):\n    if i > 1:\n        cat = cat + 1\nprint(cat)",
-        output: '2',
-        explanation: 'i的值是0,1,2,3。只有i=2和i=3时满足i>1，所以cat增加2次，最终值是2。'
+        title: '完整路线',
+        code: `# 先右移3格，再下移1格
+for i in range(3):
+    print('r')
+print('d')`,
+        output: 'r\nr\nr\nd',
+        explanation: 'for 循环输出3次"r"，然后 print("d") 输出"d"。无人机先右移3格，再下移1格。'
       },
       practice: [
         {
-          question: '如何统计1到5中有多少个偶数？',
-          answer: '用循环加if判断，当i能被2整除时计数'
+          question: '右移4格、下移1格、左移2格的代码怎么写？',
+          answer: 'for i in range(4): print("r"), for i in range(1): print("d"), for i in range(2): print("l")'
         },
         {
-          question: '计数结束后，变量的值代表什么？',
-          answer: '代表满足条件的数量总数'
+          question: 'print("d") 在循环外和循环内有什么区别？',
+          answer: '循环内重复执行，循环外只执行一次'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '计数大师模式！你可以用变量进行复杂的统计：计数、求和、找最大值...只要改变循环中的处理方式，就能实现各种统计功能！',
-      concept: '变量计数的本质是累加思想。不仅可以用 n = n + 1 来计数，还可以用 n = n + 数字 来求和，或者用比较来记录最大值。这些都是基于"在循环中更新变量"的核心思想。',
-      syntax: "# 计数累加模式\nn = 初始值\nfor i in range(次数):\n    n = n + 步长\nprint(n)",
+      story: '理解无人机路线时，要注意每个print对应一次移动。循环内的print会被重复执行，循环外的只执行一次。',
+      concept: '分析无人机路线时，需要区分循环内外的代码，正确计算总移动次数。',
+      syntax: `for i in range(3):
+    print('r')  # 右移3次
+print('d')       # 下移1次（只1次）
+print('u')       # 上移1次（只1次）`,
       example: {
-        title: '累加求和',
-        code: 'total = 0\nfor i in range(5):\n    total = total + i\nprint(total)',
-        output: '10',
-        explanation: 'i依次是0,1,2,3,4，total累加：0+0+1+2+3+4=10。这是求和的基本模式。'
+        title: '分析路线',
+        code: `# 路线：右3→下1→右4
+for i in range(3):
+    print('r')
+print('d')
+for i in range(4):
+    print('r')`,
+        output: 'r\nr\nr\nd\nr\nr\nr\nr',
+        explanation: '第一个for循环3次"r"，下移1次"d"，第二个for循环4次"r"。无人机最终位置：右7下1。'
       },
       practice: [
         {
-          question: '如何计算1到10的和？',
-          answer: 'total = 0\nfor i in range(1, 11):\n    total = total + i'
+          question: 'for i in range(2): print("r") 后再 print("u")，总共移动几次？',
+          answer: '右移2次，上移1次'
         },
         {
-          question: '计数(n=n+1)和求和(n=n+i)有什么区别？',
-          answer: '计数每次加1，统计个数；求和每次加i，累加数值'
+          question: '无人机路线分析的关键是什么？',
+          answer: '区分哪些在循环内（重复）哪些在循环外（一次）'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-3',
+    title: '计算机大脑 CPU',
+    emoji: '🧠',
+    gradeLevel: '3-4',
+    summary: '了解计算机的中央处理器',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: 'CPU 就像计算机的大脑，它负责计算和控制。CPU 越强大，计算机运行程序就越快。',
+      concept: 'CPU 是中央处理器的简称，是计算机最核心的部件，负责执行指令。',
+      syntax: `CPU = Central Processing Unit
+中央处理器`,
+      example: {
+        title: 'CPU 的作用',
+        code: `# CPU 负责：
+# 1. 计算数据
+# 2. 执行指令
+# 3. 控制其他部件`,
+        output: '',
+        explanation: 'CPU 是计算机的大脑，所有程序都要靠 CPU 来执行。'
+      },
+      practice: [
+        {
+          question: 'CPU 是什么意思？',
+          answer: '中央处理器'
+        },
+        {
+          question: 'CPU 在计算机中起什么作用？',
+          answer: '计算和控制'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: 'CPU 广泛应用于各种设备：手机、电视、电脑、汽车、卫星甚至火箭都需要 CPU。',
+      concept: 'CPU 是通用处理器，可以执行各种程序，应用于各个领域。',
+      syntax: `手机 CPU → 运行APP
+电脑 CPU → 运行程序
+卫星 CPU → 控制飞行`,
+      example: {
+        title: 'CPU 的应用',
+        code: `# 不同设备的 CPU：
+手机：运行APP和游戏
+电脑：运行Windows或Mac系统
+电视：控制画面显示
+汽车：控制引擎和导航`,
+        output: '',
+        explanation: '虽然设备不同，但它们的核心都是 CPU，执行计算和控制功能。'
+      },
+      practice: [
+        {
+          question: 'CPU 只存在于电脑中吗？',
+          answer: '不，手机、电视、汽车等很多设备都有CPU'
+        },
+        {
+          question: 'CPU 和程序是什么关系？',
+          answer: 'CPU 负责执行程序中的指令'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: 'CPU 的速度用 GHz 来衡量，GHz 越高，CPU 越快。for 循环让 CPU 可以高效地重复执行任务。',
+      concept: 'CPU 速度越来越快，现代 CPU 可以每秒执行数十亿次操作，for 循环在眨眼间就能完成海量重复。',
+      syntax: `1 GHz = 10 亿次/秒
+现代 CPU 约 3-5 GHz`,
+      example: {
+        title: 'CPU 速度',
+        code: `# 3 GHz CPU：
+# 每秒可以执行 30 亿次操作
+# for i in range(1000000) 这样的循环
+# 在现代 CPU 上瞬间完成`,
+        output: '',
+        explanation: 'CPU 速度极快，我们写的 for 循环在它看来只是很小的工作。'
+      },
+      practice: [
+        {
+          question: 'GHz 越高意味着什么？',
+          answer: 'CPU 速度越快'
+        },
+        {
+          question: '现代 CPU 有多快？',
+          answer: '每秒可以执行数十亿次操作'
         }
       ]
     }
   }
 ]
 
-// 习题数据（根据源文件知识点创作6道拓展题）
+// 习题数据
 export const exercises = [
   // 🟢 基础题（1-2年级）
   {
@@ -221,17 +355,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '变量替换',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "home"\nn = "homework"\nprint(n)\n```',
+    mathConcept: '循环次数',
+    question: `在横线处填写什么，可以让无人机连续向右移动三格？\n\n\`\`\`python\n____\n    print('r')\n\`\`\``,
     options: [
-      'A. home',
-      'B. homework',
-      'C. n',
-      'D. 程序报错'
+      'for i in range(3)',
+      'for i in range(4)',
+      'for i in range(2)',
+      'for i in range(1)'
     ],
-    answer: 1,
-    explanation: '第1行n存储"home"，第2行n被重新赋值为"homework"，旧值被替换，所以打印"homework"。',
-    hint: '新值会替换旧值'
+    answer: 0,
+    explanation: '连续向右移动三格，意味着要重复执行 print("r") 三次，所以用 for i in range(3)。',
+    hint: '需要重复执行3次'
   },
   {
     id: 'ex-2',
@@ -239,17 +373,17 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '计数起始值',
-    question: '要做变量计数，应该把变量初始化为什么值？',
+    mathConcept: '循环理解',
+    question: `下方代码，print('d') 会执行几次？\n\n\`\`\`python\nfor i in range(3):\n    print('r')\nprint('d')\n\`\`\``,
     options: [
-      'A. 1',
-      'B. 0',
-      'C. -1',
-      'D. 任意值'
+      '0次',
+      '1次',
+      '2次',
+      '3次'
     ],
     answer: 1,
-    explanation: '计数器通常从0开始，这样每次加1后的结果就是实际数量。如果从1开始，数量会多1。',
-    hint: '计数从0开始，和真实数量一致'
+    explanation: 'print("d") 没有缩进，不在 for 循环内，所以只在循环结束后执行1次。答案是 B。',
+    hint: '没有缩进的代码不在循环内'
   },
 
   // 🟡 进阶题（3-4年级）
@@ -259,17 +393,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '累加计算',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = 1\nfor i in range(4):\n    n = n + 1\nprint(n)\n```',
+    mathConcept: 'range理解',
+    question: `for i in range(4) 会循环几次？`,
     options: [
-      'A. 3',
-      'B. 4',
-      'C. 5',
-      'D. 1111'
+      '3次',
+      '4次',
+      '5次',
+      '无数次'
     ],
-    answer: 2,
-    explanation: 'n从1开始，循环4次，每次加1：1→2→3→4→5。循环次数是4次，但最终值是5。\n\n数学知识：初始值1 + 循环次数4 = 5',
-    hint: 'n从1开始，循环4次每次加1'
+    answer: 1,
+    explanation: 'range(4) 产生 0, 1, 2, 3 四个数字，所以循环执行4次。',
+    hint: 'range(n) 循环n次'
   },
   {
     id: 'ex-4',
@@ -277,17 +411,17 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '字符串拼接',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\nn = "3"\nn = n + "1"\nprint(n)\n```',
+    mathConcept: '缩进作用',
+    question: `以下代码的输出是什么？\n\n\`\`\`python\nfor i in range(2):\n    print('a')\nprint('b')\n\`\`\``,
     options: [
-      'A. 4',
-      'B. 31',
-      'C. "31"',
-      'D. 程序报错'
+      'aa',
+      'aab',
+      'ab',
+      'b'
     ],
     answer: 1,
-    explanation: 'n存储的是字符串"3"，字符串拼接的结果是"31"，不是数字4。字符串拼接和数字计算不同。',
-    hint: '注意是字符串拼接还是数字计算'
+    explanation: 'print("a") 缩进在循环内，执行2次；print("b") 无缩进，执行1次。所以输出 a a b。',
+    hint: '循环内执行2次，循环外执行1次'
   },
 
   // 🔴 挑战题（5-6年级）
@@ -297,17 +431,17 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '条件计数',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\ncat = 0\nfor i in range(5):\n    if i > 2:\n        cat = cat + 1\nprint(cat)\n```',
+    mathConcept: '综合分析',
+    question: `以下代码的输出是什么？\n\n\`\`\`python\nfor i in range(3):\n    print('r')\nprint('d')\nfor i in range(2):\n    print('u')\n\`\`\``,
     options: [
-      'A. 2',
-      'B. 3',
-      'C. 4',
-      'D. 5'
+      'rrddduu',
+      'rrdduu',
+      'rrrdd',
+      'rrrduu'
     ],
-    answer: 0,
-    explanation: 'i的值依次是0,1,2,3,4。满足i>2的只有3和4，共2个值，所以cat增加2次，最终值是2。\n\n数学知识：在0到4中，大于2的数有2个（3和4）。',
-    hint: 'i的值是0,1,2,3,4，哪些满足大于2？'
+    answer: 3,
+    explanation: '第一个for循环3次"r"，然后 print("d") 输出"d"，第二个for循环2次"u"。最终输出 rrrduu。',
+    hint: '按顺序分析每个部分'
   },
   {
     id: 'ex-6',
@@ -315,69 +449,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '累加求和',
-    question: '执行下面的代码，程序会打印出什么？\n\n```python\ntotal = 0\nfor i in range(4):\n    total = total + i\nprint(total)\n```',
+    mathConcept: '循环设计',
+    question: `要让无人机执行：右移3格 → 下移1格 → 右移4格，代码正确的是？`,
     options: [
-      'A. 6',
-      'B. 7',
-      'C. 10',
-      'D. 0+1+2+3'
+      'print("r")*3; print("d"); print("r")*4',
+      'for i in range(3): print("r"); print("d"); for i in range(4): print("r")',
+      'for i in range(3): print("r")\nprint("d")\nfor i in range(4): print("r")',
+      'for i in range(3,4,1): print("r")'
     ],
-    answer: 0,
-    explanation: 'i的值依次是0,1,2,3，total累加：0+0=0，0+1=1，1+2=3，3+3=6。最终total是6。\n\n数学知识：0+1+2+3 = 6，这是等差数列求和。',
-    hint: '计算0+1+2+3的和'
+    answer: 2,
+    explanation: '右移3格用 for i in range(3)，下移1格用 print("d")，右移4格用 for i in range(4)。',
+    hint: '循环用于重复动作，单次print用于单个动作'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L3-1',
-  title: '变量修改和计数',
-  subtitle: '学会修改变量值和在循环中计数',
+  title: 'for循环',
+  subtitle: '用循环简化重复代码',
   difficulty: '入门',
-  estimatedTime: '30-40分钟',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '掌握使用赋值语句修改变量的值',
-    '理解累加模式 n = n + 1 的含义',
-    '学会使用变量在循环中计数',
-    '区分字符串拼接和数字计算'
+    '理解 for 循环的作用',
+    '掌握 for i in range() 的格式',
+    '能区分循环内外的代码',
+    '能用 for 循环控制无人机移动'
   ],
   prerequisites: [
-    'Python 基础语法',
-    'for 循环基础',
-    'if 条件判断',
-    '变量基础概念'
+    '理解 if 语句',
+    '知道什么是缩进'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['move', 'cat', 'stop', 'count', 'dog'],
-  medium: ['total', 'change', 'number', 'value'],
-  hard: ['variable', 'modify', 'increase', 'counter']
+  easy: ['for', 'in', 'range', 'loop'],
+  medium: ['repeat', 'execute', 'iterate', 'colon'],
+  hard: ['iteration', 'indent', 'nested', 'sequence']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    "n = 5",
-    "n = n + 1",
-    "cat = 0",
-    "print(n)",
     'for i in range(3):',
-    'cat = cat + 1'
+    "print('r')",
+    'for i in range(5):',
+    "print('*')"
   ],
   medium: [
-    'n = 1\nfor i in range(4):\n    n = n + 1',
-    "s = 'home'\ns = s + 'work'\nprint(s)",
-    'cat = 0\nfor i in range(3):\n    cat = cat + 1\nprint(cat)',
-    'total = 0\nfor i in range(5):\n    total = total + i'
+    'for i in range(3):\n    print("r")',
+    'for i in range(4):\n    print("d")',
+    'for i in range(2):\n    print("u")\nprint("d")',
+    'for i in range(5):\n    print("*")'
   ],
   hard: [
-    'n = 1\nfor i in range(4):\n    n = n + 1\nprint(n)',
-    "s = 'hello'\nfor i in range(3):\n    s = s + '!'\nprint(s)",
-    'count = 0\nfor i in range(10):\n    if i > 5:\n        count = count + 1',
-    'total = 0\nfor i in range(1, 6):\n    total = total + i\nprint(total)'
+    'for i in range(3):\n    print("r")\nprint("d")\nfor i in range(4):\n    print("r")',
+    'for i in range(5):\n    print("u")\nfor i in range(3):\n    print("d")',
+    'for i in range(2):\n    print("l")\nprint("u")\nfor i in range(3):\n    print("r")',
+    'for i in range(1):\n    print("u")\nfor i in range(5):\n    print("r")\nfor i in range(1):\n    print("d")'
   ]
 }
 

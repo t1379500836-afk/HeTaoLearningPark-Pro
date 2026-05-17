@@ -1,58 +1,74 @@
 /**
- * PY1 课程 L2-1: if-else 分支判断
+ * PY1 课程 L2-1: if-else 语句
  *
  * 核心知识点:
  * 1. if-else 语句格式
  * 2. if-else 执行逻辑
- * 3. if-else 应用场景
+ * 3. if-else 语句应用
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
   // OCR 提取的单词
   {
-    word: 'hit',
-    pronunciation: '[hit]',
-    partOfSpeech: 'v./n.',
-    meaning: '打；打击；击中；命中',
+    word: 'else',
+    pronunciation: '[els]',
+    partOfSpeech: 'adv.',
+    meaning: '其他的；不同的',
     level: 'easy',
-    example: 'hit song 畅销歌曲',
-    exampleTranslation: '畅销歌曲',
-    note: 'hit 击打',
+    example: 'Do you have anything else?',
+    exampleTranslation: '你还有其他东西吗？',
     source: 'ocr'
   },
   {
-    word: 'else',
-    pronunciation: '[els]',
-    partOfSpeech: 'adv./adj.',
-    meaning: '别的；其他的',
-    level: 'easy',
-    example: 'If you are ready, go. Else wait.',
-    exampleTranslation: '如果你准备好了就走，否则等待。',
-    note: 'else 否则（if-else语句）',
+    word: 'hit',
+    pronunciation: '[hɪt]',
+    partOfSpeech: 'v.',
+    meaning: '打；撞击',
+    level: 'medium',
+    example: 'Hit the ball hard.',
+    exampleTranslation: '用力击球。',
     source: 'ocr'
   },
   {
     word: 'link',
-    pronunciation: '[liŋk]',
-    partOfSpeech: 'n./v.',
-    meaning: '链接；连接；联系',
+    pronunciation: '[lɪŋk]',
+    partOfSpeech: 'n.',
+    meaning: '联系；纽带',
     level: 'medium',
-    example: 'Click the link to open the page.',
-    exampleTranslation: '点击链接打开页面。',
-    note: 'link 链接',
+    example: 'The link between two events is clear.',
+    exampleTranslation: '两个事件之间的联系很清楚。',
+    source: 'ocr'
+  },
+  {
+    word: 'replace',
+    pronunciation: '[rɪˈpleɪs]',
+    partOfSpeech: 'v.',
+    meaning: '替换；更新',
+    level: 'hard',
+    example: 'Replace the old battery with a new one.',
+    exampleTranslation: '用新电池替换旧电池。',
+    source: 'ocr'
+  },
+  {
+    word: 'password',
+    pronunciation: '[ˈpæswɜːd]',
+    partOfSpeech: 'n.',
+    meaning: '口令；密码',
+    level: 'medium',
+    example: 'Please enter your password.',
+    exampleTranslation: '请输入您的密码。',
     source: 'ocr'
   },
   // 拓展单词
   {
-    word: 'replace',
-    pronunciation: "[ri'pleis]",
-    partOfSpeech: 'v.',
-    meaning: '取代；代替',
+    word: 'condition',
+    pronunciation: '[kənˈdɪʃən]',
+    partOfSpeech: 'n.',
+    meaning: '条件；情况',
     level: 'medium',
-    example: 'Replace the old with the new.',
-    exampleTranslation: '用新的取代旧的。',
-    note: 'replace 替换',
+    example: 'The condition is true, so the code runs.',
+    exampleTranslation: '条件为真，所以代码执行。',
     source: 'extended'
   }
 ]
@@ -61,76 +77,98 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '条件分支 - if-else语句',
-    emoji: '🔀',
+    title: 'if-else 语句格式',
+    emoji: '⚖️',
     gradeLevel: '1-2',
-    summary: '根据条件选择执行不同的代码',
+    summary: '条件成立执行if，否则执行else',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个魔法门，门前有一个开关。当你按下按钮时，门会打开；不按的话，门就关闭。if-else就像这样，根据条件决定做什么！',
-      concept: 'if-else语句：条件成立时，执行if的下级代码；否则，执行else的下级代码。',
-      syntax: 'if 条件:\n    要执行的代码\nelse:\n    否则执行的代码',
+      story: 'if-else 就像一个双叉路口，if 负责检查条件，else 负责处理剩下的情况。当条件成立时走 if 分支，条件不成立时走 else 分支。',
+      concept: 'if-else 语句：条件成立时执行 if 的下级代码，否则执行 else 的下级代码。',
+      syntax: `if 条件:
+    下级代码
+else:
+    下级代码`,
       example: {
-        title: '简单的if-else',
-        code: 'age = 10\nif age >= 6:\n    print("可以上学")\nelse:\n    print("再等等")',
-        output: '可以上学',
-        explanation: 'age是10，10>=6条件成立，所以执行print("可以上学")。'
+        title: '如果...否则...',
+        code: `a = 10
+b = 5
+if a > b:
+    print('a')
+else:
+    print('b')`,
+        output: 'a',
+        explanation: 'a=10, b=5，条件 a > b 成立，执行 if 的下级代码 print("a")。'
       },
       practice: [
         {
-          question: 'if-else语句中，else是什么意思？',
-          answer: '否则，表示条件不成立时执行'
+          question: 'if-else 语句中，else 什么时候执行？',
+          answer: 'if 条件不成立时'
         },
         {
-          question: 'if和else的下级代码需要缩进吗？',
-          answer: '需要，都要缩进一次'
+          question: 'if 和 else 的下级代码有什么区别？',
+          answer: '都会缩进，执行取决于条件'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的判断能力升级了！现在可以根据不同的条件做不同的事情，就像有多个答案的问答机器！',
-      concept: 'if-else语句可以判断两种情况：条件成立或不成立。根据条件选择执行不同的代码。',
-      syntax: 'if 条件:\n    条件成立时执行的代码\nelse:\n    条件不成立时执行的代码',
+      story: 'if 和 else 是同级代码，都要对齐，else 要写在和 if 同样的位置上。',
+      concept: 'if-else 是一个整体，if 和 else 左侧对齐，都以冒号结尾。',
+      syntax: `if 条件:
+    代码块1
+else:
+    代码块2`,
       example: {
-        title: '判断成绩是否合格',
-        code: 'score = 75\nif score >= 60:\n    print("合格")\nelse:\n    print("需要努力")',
-        output: '合格',
-        explanation: 'score是75，75>=60条件成立，所以打印"合格"。'
+        title: '完整的 if-else',
+        code: `height = 120
+if height >= 120:
+    print('可以玩')
+else:
+    print('不能玩')`,
+        output: '可以玩',
+        explanation: 'height=120，120>=120 成立，执行 if 分支打印"可以玩"。'
       },
       practice: [
         {
-          question: 'if和else哪个先执行？',
-          answer: '先执行if，条件不成立才执行else'
+          question: 'else 要写在哪里？',
+          answer: '与 if 同级的位置'
         },
         {
-          question: 'if和else需要同级对齐吗？',
-          answer: '需要，if和else要在同一个缩进级别'
+          question: 'if-else 语句以什么结尾？',
+          answer: '都以冒号结尾'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '判断大师模式！你可以用复杂的条件来判断不同的情况！',
-      concept: 'if-else可以嵌套使用，也可以和变量、运算结合使用来实现复杂的判断逻辑。',
-      syntax: 'if 条件1:\n    代码1\nelse:\n    if 条件2:\n        代码2\n    else:\n        代码3',
+      story: 'if-else 可以用于根据不同情况做出不同反应，比如根据身高决定能不能玩项目。',
+      concept: 'if-else 让程序可以根据条件选择不同的执行路径，实现智能决策。',
+      syntax: `if 条件A:
+    执行A
+else:
+    执行B`,
       example: {
-        title: '分段判断成绩',
-        code: 'score = 85\nif score >= 90:\n    print("优秀")\nelse:\n    if score >= 80:\n        print("良好")\n    else:\n        print("继续努力")',
-        output: '良好',
-        explanation: '85>=90不成立，进入else。85>=80成立，打印"良好"。'
+        title: '根据情况选择',
+        code: `score = 85
+if score >= 60:
+    print('合格')
+else:
+    print('不合格')`,
+        output: '合格',
+        explanation: 'score=85，85>=60 成立，打印"合格"。如果 score=50，则会打印"不合格"。'
       },
       practice: [
         {
-          question: 'if-else可以嵌套使用吗？',
-          answer: '可以，else中还可以放if-else'
+          question: 'if 条件和 else 条件是什么关系？',
+          answer: '互补的，if 不成立时 else 就成立'
         },
         {
-          question: '多个if-else嵌套时要注意什么？',
-          answer: '注意缩进层次不要混乱'
+          question: 'if-else 能实现什么功能？',
+          answer: '根据条件的真假选择不同的代码路径'
         }
       ]
     }
@@ -138,76 +176,102 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '判断规则 - 执行顺序',
-    emoji: '📋',
-    gradeLevel: '1-2',
-    summary: '理解if-else的执行顺序',
+    title: 'if-else 执行逻辑',
+    emoji: '🔄',
+    gradeLevel: '3-4',
+    summary: '从上到下判断，成立执行对应代码',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你在做选择题，题目只有一个条件。满足就选A，不满足就选B。这就是if-else的原理！',
-      concept: 'if-else的执行顺序：从上到下，先判断if的条件，条件成立执行if的代码并结束，否则执行else的代码。',
-      syntax: '从上到下判断：\n1. if条件 -> 成立就执行\n2. 否则 -> 执行else',
+      story: '程序执行 if-else 时，就像走路一样，先检查 if 的条件，如果成立就执行 if 的代码然后结束，否则执行 else 的代码。',
+      concept: '执行规则：①从上到下逐行执行 ②if 条件成立执行 if 下级代码 ③条件不成立执行 else 下级代码',
+      syntax: `执行顺序：
+if成立 → 执行if代码 → 结束
+if不成立 → 执行else代码 → 结束`,
       example: {
-        title: '判断大小',
-        code: 'a = 5\nb = 3\nif a > b:\n    print("a更大")\nelse:\n    print("b更大")',
-        output: 'a更大',
-        explanation: 'a=5，b=3，5>3条件成立，执行if的代码打印"a更大"。'
+        title: '执行顺序演示',
+        code: `a = 3
+b = 7
+if a > b:
+    print('A')
+else:
+    print('B')`,
+        output: 'B',
+        explanation: 'a=3, b=7，a>b 不成立（3不大于7），所以跳过 if 执行 else 的代码，打印"B"。'
       },
       practice: [
         {
-          question: 'if的条件成立时，会执行else的代码吗？',
-          answer: '不会，执行完if就结束整个if-else'
+          question: 'if 条件成立时，else 的代码会执行吗？',
+          answer: '不会'
         },
         {
-          question: 'if-else从上到下执行的顺序是怎样的？',
-          answer: '先判断if，if不成立才判断else'
+          question: '执行完 if 或 else 后，程序会怎样？',
+          answer: '继续执行后面的代码'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的判断逻辑更清晰了！现在你能理解程序的执行顺序，就像看懂老师的指令一样！',
-      concept: '执行顺序：①从上到下逐行执行 ②if条件成立执行if下级代码 ③if条件不成立执行else下级代码。',
-      syntax: '执行规则：\n① 先判断if的条件\n② 成立 -> 执行if代码并结束\n③ 不成立 -> 执行else代码',
+      story: '理解执行顺序很重要：只会执行其中一个分支，不会两个都执行。',
+      concept: 'if-else 是二选一，条件要么成立要么不成立，只会进入其中一个分支。',
+      syntax: `if True:  → 执行if
+else:     → 执行else（不会同时执行）`,
       example: {
-        title: '判断是否及格',
-        code: 'score = 58\nif score >= 60:\n    print("及格")\nelse:\n    print("不及格")\nprint("程序结束")',
-        output: '不及格\n程序结束',
-        explanation: '58>=60不成立，执行else，打印"不及格"，然后继续执行后面的print("程序结束")。'
+        title: '二选一',
+        code: `n = 15
+if n > 10:
+    print('大于10')
+else:
+    print('小于等于10')
+print('结束')`,
+        output: '大于10\n结束',
+        explanation: 'n=15，n>10 成立，执行 if 分支打印"大于10"，然后继续执行打印"结束"。'
       },
       practice: [
         {
-          question: 'if-else执行完后，程序会继续往下执行吗？',
-          answer: '会，继续执行if-else后面的代码'
+          question: 'if 和 else 会同时执行吗？',
+          answer: '不会，只会执行其中一个'
         },
         {
-          question: 'else后面的代码什么时候执行？',
-          answer: '当if条件不成立时执行'
+          question: 'if-else 执行完后，程序会停止吗？',
+          answer: '不会，会继续执行后面的代码'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '执行顺序专家！你现在完全理解程序的运行规则了！',
-      concept: '复杂的执行顺序：多个if-else嵌套时，从最外层开始判断，逐层深入，找到第一个满足的条件就执行并结束。',
-      syntax: '多层嵌套执行顺序：\n从外到内逐层判断\n找到满足条件就执行\n不再继续判断后面的else',
+      story: 'if-else 和多个 if 连用的区别：if-else 是二选一，多个 if 是每个都会判断。',
+      concept: 'if-else 确保恰好有一个分支执行；多个 if 连用可能导致多个条件都成立。',
+      syntax: `if-else: 互斥，只执行一个
+if + if: 独立，可能都执行`,
       example: {
-        title: '找最大数',
-        code: 'a = 10\nb = 20\nc = 15\nif a > b:\n    if a > c:\n        print("a最大")\n    else:\n        print("c最大")\nelse:\n    if b > c:\n        print("b最大")\n    else:\n        print("c最大")',
-        output: 'b最大',
-        explanation: '10>20不成立，进入第一个else。20>15成立，进入第二个if，打印"b最大"。'
+        title: '对比 if 和 if-else',
+        code: `# 多个 if（可能都执行）
+n = 15
+if n > 10:
+    print('大于10')
+if n < 20:
+    print('小于20')
+
+# if-else（恰好一个）
+n = 15
+if n > 10:
+    print('大于10')
+else:
+    print('其他')`,
+        output: '大于10\n小于20\n大于10',
+        explanation: '多个 if 时两个条件都成立所以都执行；if-else 只有一个执行。'
       },
       practice: [
         {
-          question: '嵌套的if-else如何执行？',
-          answer: '从外到内逐层判断'
+          question: '多个 if 连用和 if-else 有什么区别？',
+          answer: 'if-else 互斥，多个 if 独立'
         },
         {
-          question: '找到一个满足条件后还会继续判断吗？',
-          answer: '不会，执行完就结束'
+          question: '什么时候适合用 if-else？',
+          answer: '只有两种互斥情况时'
         }
       ]
     }
@@ -215,76 +279,96 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '实际应用 - 判断问题',
-    emoji: '🎯',
-    gradeLevel: '1-2',
-    summary: '用if-else解决实际问题',
+    title: '密码组合',
+    emoji: '🔐',
+    gradeLevel: '3-4',
+    summary: '理解密码的组成和安全原则',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个机器人，你可以让它根据不同的情况做不同的事情！比如：如果下雨了，就撑伞；否则，就不带伞。',
-      concept: 'if-else可以用于根据不同的情况执行不同的操作。',
-      syntax: 'if 情况:\n    这样做\nelse:\n    那样做',
+      story: '密码就像一把钥匙，只有知道正确密码的人才能打开。密码可以由字母、数字、符号组成。',
+      concept: '密码是由字母、数字、符号任意组合形成的，用于保护信息安全。',
+      syntax: `密码组合示例：
+字母：abc, XYZ
+数字：123, 456
+符号：@#$%`,
       example: {
-        title: '判断天气',
-        code: 'weather = "下雨"\nif weather == "下雨":\n    print("带伞")\nelse:\n    print("不带伞")',
-        output: '带伞',
-        explanation: 'weather是"下雨"，weather=="下雨"成立，执行print("带伞")。'
+        title: '简单密码',
+        code: `password = 'abc123'
+if password == 'abc123':
+    print('正确')
+else:
+    print('错误')`,
+        output: '正确',
+        explanation: '输入的密码和预设密码相等，条件成立，打印"正确"。'
       },
       practice: [
         {
-          question: 'if-else可以用于判断什么？',
-          answer: '可以判断各种情况，如天气、成绩、年龄等'
+          question: '密码有什么作用？',
+          answer: '保护信息安全'
         },
         {
-          question: '判断相等用什么符号？',
-          answer: '用两个等于号 =='
+          question: '密码只能由什么组成？',
+          answer: '字母、数字、符号'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的应用能力更强了！现在可以用if-else来解决实际的编程问题！',
-      concept: '用if-else解决实际问题的步骤：①分析需要判断什么条件 ②根据条件写对应的代码。',
-      syntax: '实际问题解决步骤：\n1. 确定判断条件\n2. 写if-else结构\n3. 填充具体代码',
+      story: '密码越长，组合的可能性越多，就越安全。但太复杂的密码可能自己也记不住。',
+      concept: '密码安全原则：长度越长越安全，但也要方便记忆。',
+      syntax: `密码安全性：
+4位 = 10^4 种可能
+6位 = 10^6 种可能
+8位 = 10^8 种可能`,
       example: {
-        title: '判断身高',
-        code: 'height = 125\nif height >= 120:\n    print("可以玩过山车")\nelse:\n    print("不能玩过山车")',
-        output: '可以玩过山车',
-        explanation: 'height是125，125>=120条件成立，所以可以玩过山车。'
+        title: '密码长度与安全',
+        code: `password = '1234'
+if len(password) >= 6:
+    print('安全')
+else:
+    print('太简单')`,
+        output: '太简单',
+        explanation: 'password="1234" 只有4位，长度小于6，判断为不安全。'
       },
       practice: [
         {
-          question: '解决实际问题前首先要做什么？',
-          answer: '先分析需要判断什么条件'
+          question: '密码是不是越长越好？',
+          answer: '越长越安全，但也要能记住'
         },
         {
-          question: 'if-else适合判断几种情况？',
-          answer: '两种情况：成立或不成立'
+          question: '什么样的密码比较安全？',
+          answer: '长度足够，包含多种字符'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '应用大师！你可以用if-else解决各种复杂的实际问题！',
-      concept: '复杂的实际问题需要结合多个条件来判断，可以用嵌套的if-else来实现。',
-      syntax: '复杂问题解决：\n分析多个条件\n使用嵌套if-else\n逐层判断',
+      story: '设置密码时要平衡安全性和易记性，可以用熟悉的歌词或诗词来帮助记忆。',
+      concept: '好的密码策略：既安全又方便记忆，可以用诗词、歌词等有规律的内容。',
+      syntax: `易记密码策略：
+诗词密码：锄禾日当午...
+歌词密码：我爱北京天安门`,
       example: {
-        title: '判断成绩等级',
-        code: 'score = 87\nif score >= 90:\n    grade = "A"\nelse:\n    if score >= 80:\n        grade = "B"\n    else:\n        if score >= 70:\n            grade = "C"\n        else:\n            grade = "D"\nprint("等级是" + grade)',
-        output: '等级是B',
-        explanation: '87>=90不成立，87>=80成立，所以等级是B。'
+        title: '设置好记的密码',
+        code: `password = 'chmsrd'
+if password == 'chmsrd':
+    print('登录成功')
+else:
+    print('密码错误')`,
+        output: '登录成功',
+        explanation: '密码"chmsrd"是"锄禾日当午"首字母，简单好记又安全。'
       },
       practice: [
         {
-          question: '复杂问题如何用if-else解决？',
-          answer: '通过嵌套多个if-else'
+          question: '太复杂的密码有什么问题？',
+          answer: '可能自己也记不住'
         },
         {
-          question: 'if-else嵌套要注意什么？',
-          answer: '注意缩进和对应关系'
+          question: '可以用什么方法设置易记又安全的密码？',
+          answer: '使用诗词、歌词等有规律的内容'
         }
       ]
     }
@@ -293,7 +377,7 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
@@ -301,16 +385,22 @@ export const exercises = [
     levelEmoji: '🟢',
     type: 'multiple-choice',
     mathConcept: '条件判断',
-    question: '运行下面的代码，程序会打印什么？\n\n```python\na = 10\nb = 5\nif a > b:\n    print("A")\nelse:\n    print("B")\n```',
+    question: `运行这段代码，程序会在输出区打印出什么？\n\n\`\`\`python\na = 10
+b = 5
+if a > b:
+    print('a')
+else:
+    print('b')
+\`\`\``,
     options: [
-      'A. A',
-      'B. B',
-      'C. A B',
-      'D. 程序报错'
+      'a',
+      'b',
+      'a b',
+      '没有输出'
     ],
-    answer: 0, // A
-    explanation: 'a=10，b=5，10>5条件成立，执行if的下级代码print("A")，所以打印A。',
-    hint: '10 > 5 是否成立？'
+    answer: 0,
+    explanation: 'a=10, b=5，条件 a>b 成立（10>5），执行 if 的下级代码 print("a")。C 是易错项，程序打印的是字符串"a"，而不是变量 a。',
+    hint: '条件 a>b 是否成立？'
   },
   {
     id: 'ex-2',
@@ -318,37 +408,41 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '符号识别',
-    question: '下面哪个符号表示"等于"？',
+    mathConcept: '二选一',
+    question: `如果 n=50，执行以下代码会打印什么？\n\n\`\`\`python\nif n > 5:
+    print('大于5')
+else:
+    print('其他')
+\`\`\``,
     options: [
-      'A. = (单个等号)',
-      'B. == (两个等号)',
-      'C. >= (大于等于)',
-      'D. <= (小于等于)'
+      '大于5',
+      '其他',
+      '大于5 其他',
+      '没有输出'
     ],
-    answer: 1, // B
-    explanation: '在Python中，判断相等要用两个等号==。单个等号=是赋值，两个等号==是判断相等。',
-    hint: '判断相等用两个等号'
+    answer: 0,
+    explanation: 'n=50，50>5 成立，执行 if 分支打印"大于5"。',
+    hint: '50 是否大于 5？'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '条件判断',
-    question: '运行下面的代码，输入6，会打印什么？\n\n```python\na = input()\nif a > "5":\n    print("大于5")\nelse:\n    print("不大于5")\n```',
+    mathConcept: '执行顺序',
+    question: `关于 if-else 语句的执行顺序，下列说法正确的是？`,
     options: [
-      'A. 大于5',
-      'B. 不大于5',
-      'C. 程序报错',
-      'D. 没有输出'
+      'if 和 else 都会执行',
+      '只会执行其中一个',
+      '先执行 if 再执行 else',
+      '先执行 else 再执行 if'
     ],
-    answer: 1, // B
-    explanation: 'input()返回的是字符串"6"，字符串"6"和字符串"5"比较，"6">"5"不成立（按字典序），所以执行else，打印"不大于5"。\n\n注意：input()返回的是字符串，需要转换为数字。',
-    hint: 'input()返回的是字符串类型'
+    answer: 1,
+    explanation: 'if-else 是二选一的结构，条件成立时执行 if 分支，条件不成立时执行 else 分支，恰好只有一个会执行。',
+    hint: 'if-else 是互斥的'
   },
   {
     id: 'ex-4',
@@ -356,37 +450,42 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '执行顺序',
-    question: '下面哪个if-else格式是正确的？',
+    mathConcept: '格式规则',
+    question: `下列关于 if-else 格式的说法，正确的是？`,
     options: [
-      'A. if a > b:\n    print("A")\nelse:\n    print("B")',
-      'B. if a > b\n    print("A")\nelse\n    print("B")',
-      'C. if a > b:\nprint("A")\nelse:\nprint("B")',
-      'D. if a > b:\n    print("A")\n    else:\n    print("B")'
+      'else 要写在 if 的下级',
+      'if 和 else 要左侧对齐',
+      'if 后面不需要冒号',
+      'else 的下级代码不需要缩进'
     ],
-    answer: 0, // A
-    explanation: '正确的if-else格式：if条件后面要有冒号，if和else要对齐，它们下面的代码要缩进。选项A符合所有要求。',
-    hint: '注意冒号和缩进'
+    answer: 1,
+    explanation: 'if-else 是一个整体，if 和 else 左侧要对齐，都以冒号结尾，下级代码都要缩进。',
+    hint: 'if 和 else 是什么关系？'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '嵌套判断',
-    question: '运行下面的代码，会打印什么？\n\n```python\na = 15\nif a > 10:\n    if a > 20:\n        print("A")\n    else:\n        print("B")\nelse:\n    print("C")\n```',
+    mathConcept: '综合应用',
+    question: `运行以下代码，输入 120，输出是什么？\n\n\`\`\`python\nheight = int(input())
+if height >= 120:
+    print('可以玩')
+else:
+    print('不能玩')
+\`\`\``,
     options: [
-      'A. A',
-      'B. B',
-      'C. C',
-      'D. A B'
+      '可以玩',
+      '不能玩',
+      '120',
+      '没有输出'
     ],
-    answer: 1, // B
-    explanation: '15>10成立，进入第一个if。15>20不成立，进入else，打印"B"。所以输出是B。',
-    hint: '先判断第一个条件，满足后再判断第二个'
+    answer: 0,
+    explanation: 'int(input()) 获取数字 120，120>=120 成立，执行 if 分支打印"可以玩"。',
+    hint: '120 是否大于等于 120？'
   },
   {
     id: 'ex-6',
@@ -394,66 +493,70 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '综合应用',
-    question: '编写程序判断年份是否为闰年（年份能被4整除且不能被100整除，或者能被400整除）。输入2024判断是否闰年？',
+    mathConcept: '密码判断',
+    question: `以下代码如果 password='abc' 会打印什么？\n\n\`\`\`python\npassword = 'abc'
+if password == '123':
+    print('正确')
+else:
+    print('错误')
+\`\`\``,
     options: [
-      'A. 闰年',
-      'B. 平年',
-      'C. 程序报错',
-      'D. 闰年 平年'
+      '正确',
+      '错误',
+      'abc',
+      '没有输出'
     ],
-    answer: 0, // A
-    explanation: '2024%4=0且2024%100!=0，条件成立，打印"闰年"。\n\n数学知识：闰年判断规则（能被4整除且不能被100整除）或能被400整除。',
-    hint: '2024能否被4整除？'
+    answer: 1,
+    explanation: 'password="abc"，判断 "abc"=="123"，条件不成立，执行 else 分支打印"错误"。',
+    hint: '"abc" 等于 "123" 吗？'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L2-1',
-  title: 'if-else 分支判断',
-  subtitle: '学会 if-else 分支判断',
-  difficulty: '进阶',
-  estimatedTime: '30-40分钟',
+  title: 'if-else判断',
+  subtitle: '学会两种情况的判断',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '理解 if-else 语句的基本格式',
-    '掌握 if-else 的执行逻辑',
-    '能够使用 if-else 解决实际问题',
-    '了解 if-else 的嵌套使用'
+    '掌握 if-else 语句的格式',
+    '理解 if-else 的执行逻辑',
+    '能用 if-else 解决实际问题',
+    '了解密码组合的概念'
   ],
   prerequisites: [
-    '掌握 print() 命令',
-    '理解变量的概念',
-    '会使用比较运算符',
-    '了解 if 条件判断'
+    '理解 if 语句的基础',
+    '知道什么是条件'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['if', 'else', 'condition', 'branch'],
-  medium: ['execute', 'logic', 'indent', 'colon'],
-  hard: ['nested', 'structure', 'comparison', 'decision']
+  easy: ['else', 'hit', 'link', 'run'],
+  medium: ['password', 'condition', 'replace', 'check'],
+  hard: ['execute', 'statement', 'argument', 'branch']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'if a > 5:\nprint(1)',
-    'if age >= 6:\nprint("可以")',
-    'if name == "Tom":\nprint(1)',
-    'if a > b:\nprint("大")\nelse:\nprint("小")'
+    "if a > b:",
+    "else:",
+    "print('a')",
+    "print('b')"
   ],
   medium: [
-    'if score >= 60:\nprint("及格")\nelse:\nprint("不及格")',
-    'if a > b:\n    print("a更大")\nelse:\n    print("b更大")',
-    'num = input()\nif int(num) > 10:\n    print("大于10")',
-    'if a == b:\n    print("相等")\nelse:\n    print("不相等")'
+    "if height >= 120:\n    print('可以')",
+    "else:\n    print('不可以')",
+    "if password == '123':\n    print('正确')",
+    "else:\n    print('错误')"
   ],
   hard: [
-    'if a > 10:\n    if a > 20:\n        print("A")\n    else:\n        print("B")\nelse:\n    print("C")',
-    'if score >= 90:\n    grade = "A"\nelif score >= 80:\n    grade = "B"\nelse:\n    grade = "C"',
-    'if a > b and a > c:\n    print("a最大")\nelse:\n    if b > c:\n        print("b最大")\n    else:\n        print("c最大")'
+    "n = int(input())\nif n > 10:\n    print('大于10')\nelse:\n    print('其他')",
+    "score = 85\nif score >= 60:\n    print('合格')\nelse:\n    print('不合格')",
+    "if a == b:\n    print('相等')\nelse:\n    print('不相等')",
+    "height = 120\nif height >= 120:\n    print('通过')\nelse:\n    print('不通过')"
   ]
 }
 

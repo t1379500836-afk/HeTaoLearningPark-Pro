@@ -1,78 +1,74 @@
 /**
- * PY1 课程 L6-4: 随机模块
+ * PY1 课程 L6-4: 今天吃什么
  *
  * 核心知识点:
- * 1. import - 导入模块
- * 2. random.choice() - 从列表中随机选择
- * 3. random.randint() - 生成随机整数
+ * 1. random.choice() - 随机选择列表元素
+ * 2. import random - 导入随机工具箱
+ * 3. not in - 判断元素不在列表中
  */
 
-// 单词卡数据
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
+  // OCR 提取的单词
   {
     word: 'import',
-    pronunciation: '[im\'po:t]',
+    pronunciation: '[ɪmˈpɔːt]',
     partOfSpeech: 'v.',
-    meaning: '进口；导入',
+    meaning: '导入；输入',
     level: 'medium',
-    example: 'Import random module.',
-    exampleTranslation: '导入随机模块。',
-    note: '',
+    example: 'Import the file.',
+    exampleTranslation: '导入文件。',
     source: 'ocr'
   },
   {
-    word: 'random',
-    pronunciation: '[\'raendem]',
-    partOfSpeech: 'adj.',
-    meaning: '任意的，随机的',
+    word: 'menu',
+    pronunciation: '[ˈmenjuː]',
+    partOfSpeech: 'n.',
+    meaning: '菜单',
     level: 'easy',
-    example: 'Pick a random number.',
-    exampleTranslation: '选一个随机数。',
-    note: 'random numbers 随机数',
+    example: 'Restaurant menu.',
+    exampleTranslation: '餐厅菜单。',
     source: 'ocr'
   },
   {
     word: 'choice',
-    pronunciation: '[tJois]',
+    pronunciation: '[tʃɔɪs]',
     partOfSpeech: 'n.',
-    meaning: '选择；选择权',
+    meaning: '选择',
     level: 'easy',
-    example: 'Make your choice.',
-    exampleTranslation: '做出你的选择。',
-    note: '',
+    example: 'Make a choice.',
+    exampleTranslation: '做出选择。',
     source: 'ocr'
   },
   {
-    word: 'module',
-    pronunciation: '[\'mod3u:l]',
+    word: 'vegetable',
+    pronunciation: '[ˈvedʒtəbl]',
     partOfSpeech: 'n.',
-    meaning: '模块；组件',
-    level: 'medium',
-    example: 'Import a module.',
-    exampleTranslation: '导入一个模块。',
-    note: '',
-    source: 'extended'
-  },
-  {
-    word: 'lucky',
-    pronunciation: '[\'l^ki]',
-    partOfSpeech: 'adj.',
-    meaning: '幸运的',
+    meaning: '蔬菜',
     level: 'easy',
-    example: 'Good luck!',
-    exampleTranslation: '祝你好运！',
-    note: '',
+    example: 'Fresh vegetables.',
+    exampleTranslation: '新鲜蔬菜。',
+    source: 'ocr'
+  },
+  // 拓展单词
+  {
+    word: 'random',
+    pronunciation: '[ˈrændəm]',
+    partOfSpeech: 'adj.',
+    meaning: '随机的',
+    level: 'medium',
+    example: 'Random number.',
+    exampleTranslation: '随机数。',
     source: 'extended'
   },
   {
-    word: 'range',
-    pronunciation: '[reind3]',
-    partOfSpeech: 'n.',
-    meaning: '范围；区间',
-    level: 'medium',
-    example: 'Choose a number in range.',
-    exampleTranslation: '在这个范围内选一个数。',
-    note: '',
+    word: 'shuffle',
+    pronunciation: '[ˈʃʌfl]',
+    partOfSpeech: 'v.',
+    meaning: '洗牌；打乱顺序',
+    level: 'hard',
+    example: 'Shuffle the cards.',
+    exampleTranslation: '洗牌。',
     source: 'extended'
   }
 ]
@@ -81,76 +77,90 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '工具箱 - import 导入模块',
-    emoji: '🧰',
-    gradeLevel: '1-2',
-    summary: '导入Python的工具模块',
+    title: '随机选择 - random.choice()',
+    emoji: '🎲',
+    gradeLevel: '3-4',
+    summary: '从列表中随机选择一个元素',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个超级工具箱，里面有各种神奇工具。想用什么工具，只要把它拿出来就行了！import 就是把工具从箱子里拿出来的命令！',
-      concept: 'Python 有很多内置的工具叫做"模块"。使用 import 命令可以把这些工具导入到你的程序中使用。格式是：import 模块名',
-      syntax: 'import 模块名',
+      story: 'random.choice() 就像抓阄，从列表中随便选一个。就像决定今天吃什么一样，随机选一道菜。',
+      concept: 'random.choice(列表) 从列表中随机选择一个元素。',
+      syntax: `import random
+random.choice(['苹果', '香蕉', '橙子'])`,
       example: {
-        title: '导入随机模块',
-        code: 'import random\nprint("模块导入成功！")',
-        output: '模块导入成功！',
-        explanation: 'import random 导入了 Python 的随机模块。导入后就可以使用这个模块里的各种功能了。'
+        title: '随机选水果',
+        code: `import random
+fruits = ['苹果', '香蕉', '橙子']
+choice = random.choice(fruits)
+print('今天吃:', choice)`,
+        output: '今天吃: 苹果\n（每次运行结果可能不同）',
+        explanation: 'random.choice() 从列表中随机挑选一个元素。'
       },
       practice: [
         {
-          question: 'import 命令有什么作用？',
-          answer: '导入Python模块，让程序可以使用模块里的功能'
+          question: '如何从列表中随机选一个？',
+          answer: 'random.choice(列表)'
         },
         {
-          question: 'import random 导入的是什么？',
-          answer: 'Python的随机模块，可以生成随机数'
+          question: '使用 random.choice 需要什么？',
+          answer: 'import random'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的工具箱更大了！有计算工具、随机工具、时间工具等各种专业模块。想用哪个就导入哪个，就像从工具箱选工具一样简单！',
-      concept: 'Python 有丰富的标准库模块：random（随机）、math（数学）、time（时间）等。导入模块后，用"模块名.功能名"的方式使用。也可以只导入特定功能：from 模块 import 功能',
-      syntax: '# 导入整个模块\nimport random\nimport math\n\n# 导入特定功能\nfrom random import choice',
+      story: 'random.choice 每次只选一个，连续选择可以得到多个随机结果。',
+      concept: '可以多次调用 random.choice 来选择多个元素。',
+      syntax: `for i in range(3):
+    print(random.choice(items))`,
       example: {
-        title: '导入不同模块',
-        code: '# 导入随机模块\nimport random\n\n# 导入数学模块\nimport math\nprint(math.pi)\n\n# 只导入choice功能\nfrom random import choice',
-        output: '3.14159...',
-        explanation: 'import random 导入随机模块。import math 导入数学模块，可以用 math.pi 获取圆周率。from random import choice 只导入 choice 功能。'
+        title: '多次选择',
+        code: `import random
+fruits = ['苹果', '香蕉', '橙子', '葡萄']
+for i in range(3):
+    print('随机选:', random.choice(fruits))`,
+        output: '随机选: 橙子\n随机选: 苹果\n随机选: 香蕉',
+        explanation: '循环 3 次，每次随机选一个水果。'
       },
       practice: [
         {
-          question: '导入模块后如何使用模块的功能？',
-          answer: '用"模块名.功能名"的方式，如 random.choice()'
+          question: '如何随机选两个水果？',
+          answer: '连续调用 random.choice() 两次'
         },
         {
-          question: 'import random 和 from random import choice 有什么区别？',
-          answer: '前者导入整个模块用random.choice()，后者只导入choice直接用choice()'
+          question: 'random.choice 每次选择后列表会变吗？',
+          answer: '不会，列表保持不变'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '模块大师模式！你可以导入各种专业模块，扩展 Python 的功能。理解模块系统是成为 Python 高手的必经之路！',
-      concept: '模块是 Python 代码组织的核心方式。标准库模块（如 random、math）内置在 Python 中。第三方模块需要先用 pip 安装。导入时会执行模块代码，创建模块对象。模块名存入 sys.modules 缓存，重复导入不会重复执行。',
-      syntax: '# 常见标准库模块\nimport random   # 随机数\nimport math     # 数学函数\nimport time     # 时间相关\nimport json     # JSON处理\nimport os       # 操作系统接口',
+      story: '可以选择后从列表中移除，避免重复选择。',
+      concept: '选择后用 remove() 移除，或者用 random.shuffle() 打乱顺序。',
+      syntax: `import random
+items = [1, 2, 3, 4, 5]
+random.shuffle(items)  # 打乱顺序
+print(items)`,
       example: {
-        title: '使用多个模块',
-        code: '# 综合使用多个模块\nimport random\nimport math\nimport time\n\n# 生成随机角度\nangle = random.randint(0, 360)\nprint("角度: " + str(angle) + "度")\n\n# 计算正弦值\nsin_value = math.sin(math.radians(angle))\nprint("正弦: " + str(sin_value))',
-        output: '角度: 247度\n正弦: -0.9205...',
-        explanation: '导入三个模块，用 random 生成随机角度，用 math 计算正弦值。不同模块配合可以实现复杂功能。'
+        title: '打乱顺序',
+        code: `import random
+nums = [1, 2, 3, 4, 5]
+random.shuffle(nums)
+print('打乱后:', nums)`,
+        output: '打乱后: [3, 1, 5, 2, 4]',
+        explanation: 'shuffle() 直接打乱原列表，不返回新列表。'
       },
       practice: [
         {
-          question: '重复导入同一个模块会怎样？',
-          answer: 'Python会缓存模块，不会重复执行，直接使用缓存的版本'
+          question: 'shuffle 和 choice 有什么区别？',
+          answer: 'shuffle 打乱整个列表，choice 只选一个'
         },
         {
-          question: '如何查看模块中有哪些功能？',
-          answer: '用 dir(模块名) 可以查看模块的所有属性和方法'
+          question: '如何避免 random.choice 选到重复的？',
+          answer: '选择后用 remove() 移除'
         }
       ]
     }
@@ -158,76 +168,105 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '随机选择 - random.choice()',
-    emoji: '🎲',
-    gradeLevel: '1-2',
-    summary: '从列表中随机选择一个元素',
+    title: 'not in 判断',
+    emoji: '❌',
+    gradeLevel: '3-4',
+    summary: '判断元素是否不在列表中',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一顶神奇的魔法帽，里面有很多纸条。摇一摇帽子，它会随机吐出一张纸条！random.choice() 就是这样的魔法！',
-      concept: 'random.choice(列表) 会从列表中随机选择一个元素。每次选择的结果可能是列表中的任意一个元素，完全随机！',
-      syntax: 'import random\nrandom.choice(列表)',
+      story: 'not in 就是"不在里面"，用来检查某个东西是不是不在列表中。',
+      concept: '元素 not in 列表 返回 True（不在）或 False（在）。',
+      syntax: `'苹果' not in ['香蕉', '橙子']  # True
+'苹果' not in ['苹果', '香蕉']  # False`,
       example: {
-        title: '随机选择水果',
-        code: 'import random\nfruits = ["苹果", "香蕉", "橙子", "葡萄"]\nresult = random.choice(fruits)\nprint("选中:", result)',
-        output: '选中: 香蕉',
-        explanation: 'random.choice(fruits) 从水果列表中随机选择一个。每次运行可能得到不同的结果。'
+        title: 'not in 判断',
+        code: `fruits = ['苹果', '香蕉', '橙子']
+print('苹果在吗?', '苹果' in fruits)
+print('葡萄在吗?', '葡萄' in fruits)
+print('苹果不在?', '苹果' not in fruits)
+print('葡萄不在?', '葡萄' not in fruits)`,
+        output: '苹果在吗? True\n葡萄在吗? False\n苹果不在? False\n葡萄不在? True',
+        explanation: 'in 检查存在，not in 检查不存在。'
       },
       practice: [
         {
-          question: 'random.choice() 会选择几个元素？',
-          answer: '一个元素'
+          question: '"香蕉" not in ["苹果", "香蕉"] 结果是？',
+          answer: 'False'
         },
         {
-          question: '每次运行结果会一样吗？',
-          answer: '不一定，是随机的'
+          question: '"葡萄" not in ["苹果", "香蕉"] 结果是？',
+          answer: 'True'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的魔法帽更强大了！可以放入任意多的东西，每次都能公平随机地选出一样。用来做抽奖、决定游戏顺序都很棒！',
-      concept: 'random.choice() 从非空序列中随机返回一个元素。序列可以是列表、字符串、元组等。对于空序列会报 IndexError。每次调用独立随机，可能选择相同元素。',
-      syntax: 'import random\n\n# 从列表选择\nitem = random.choice(list)\n\n# 从字符串选择\nchar = random.choice("hello")',
+      story: '可以用 not in 来避免选择重复的元素。',
+      concept: '选择前检查是否已经选过，如果选过就换一个。',
+      syntax: `if item not in selected:
+    selected.append(item)`,
       example: {
-        title: '多种随机选择',
-        code: 'import random\n\n# 抽奖活动\nprizes = ["一等奖", "二等奖", "三等奖", "谢谢参与"]\nmy_prize = random.choice(prizes)\nprint("恭喜获得: " + my_prize)\n\n# 随机动作\nactions = ["跳", "跑", "爬", "走"]\naction = random.choice(actions)\nprint("请你" + action + "！")',
-        output: '恭喜获得: 二等奖\n请你跑！',
-        explanation: '第一个例子从奖品列表随机选择一个。第二个从动作列表随机选择一个。每次运行结果可能不同。'
+        title: '避免重复选择',
+        code: `import random
+fruits = ['苹果', '香蕉', '橙子']
+selected = []
+for i in range(2):
+    while True:
+        f = random.choice(fruits)
+        if f not in selected:
+            selected.append(f)
+            break
+print('已选:', selected)`,
+        output: '已选: [\'苹果\', \'橙子\']',
+        explanation: '选之前检查是否已经选过，如果选过就重新选。'
       },
       practice: [
         {
-          question: 'random.choice() 可以用于哪些类型？',
-          answer: '列表、字符串、元组等序列类型'
+          question: '为什么需要 not in 来避免重复？',
+          answer: 'random.choice 可能选中之前已经选过的元素'
         },
         {
-          question: '如果列表是空的会怎样？',
-          answer: '会报 IndexError 错误'
+          question: '如何实现不重复的选择？',
+          answer: '用列表记录已选择的，检查 not in'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '随机算法大师！random.choice() 实现了等概率随机选择。理解随机数生成原理、概率分布，是编写游戏、模拟、抽样程序的基础！',
-      concept: 'random.choice() 使用 Mersenne Twister 算法生成伪随机数，每个元素被选中的概率相等（均匀分布）。对于真随机场景（如抽奖），需用 secrets 模块。random.choice(seq) 等价于 seq[random.randint(0, len(seq)-1)]',
-      syntax: '# random.choice() 内部原理类似这样：\nimport random\nindex = random.randint(0, len(seq) - 1)\nresult = seq[index]\n\n# 如果要选多个不重复的元素，可以用循环实现\nselected = []\nfor i in range(k):\n    item = random.choice(列表)\n    while item in selected:\n        item = random.choice(列表)\n    selected.append(item)',
+      story: '结合输入和 not in，可以实现用户定制选择。',
+      concept: '用户输入想要的数量，从列表中随机选择对应数量。',
+      syntax: `n = int(input())
+for i in range(n):
+    f = random.choice(fruits)
+    if f not in selected:
+        selected.append(f)`,
       example: {
-        title: '随机选择应用',
-        code: 'import random\n\n# 模拟掷骰子1000次，统计频率\ncounts = [0, 0, 0, 0, 0, 0]  # 用列表存储每个面出现的次数\nfor _ in range(1000):\n    result = random.choice([1, 2, 3, 4, 5, 6])\n    counts[result-1] += 1  # result-1是因为列表索引从0开始\n\nprint("掷骰子结果分布:")\nfor i in range(6):\n    face = i + 1\n    count = counts[i]\n    print(str(face) + "点: " + str(count) + "次 (" + str(count/10) + "%)")',
-        output: '掷骰子结果分布:\n1点: 167次 (16.7%)\n2点: 158次 (15.8%)\n3点: 175次 (17.5%)\n4点: 161次 (16.1%)\n5点: 170次 (17.0%)\n6点: 169次 (16.9%)',
-        explanation: '掷骰子1000次，每个数字出现的频率都在16.7%左右，验证了随机选择的均匀性。次数越多，分布越均匀。'
+        title: '用户定制数量',
+        code: `import random
+fruits = ['苹果', '香蕉', '橙子', '葡萄', '草莓']
+selected = []
+n = 3
+for i in range(n):
+    while True:
+        f = random.choice(fruits)
+        if f not in selected:
+            selected.append(f)
+            break
+print('选择的', n, '个水果:', selected)`,
+        output: '选择的 3 个水果: [\'橙子\', \'草莓\', \'香蕉\']',
+        explanation: '用户输入数量，循环选择不重复的水果。'
       },
       practice: [
         {
-          question: 'random.choice() 每个元素被选中的概率一样吗？',
-          answer: '一样，是均匀分布'
+          question: '如何实现从列表中随机选 2 个不重复的？',
+          answer: '循环2次，用 not in 检查避免重复'
         },
         {
-          question: 'random.choice() 和 random.randint() 有什么区别？',
-          answer: 'random.choice() 从列表中选，random.randint() 从数字范围中选'
+          question: '为什么要用 while True 循环？',
+          answer: '因为可能选到重复的，需要重新选'
         }
       ]
     }
@@ -235,76 +274,99 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '随机整数 - random.randint()',
-    emoji: '🔢',
-    gradeLevel: '1-2',
-    summary: '生成指定范围的随机整数',
+    title: '项目实践 - 今天吃什么',
+    emoji: '🍽️',
+    gradeLevel: '3-4',
+    summary: '综合应用随机选择实现点菜程序',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个数字抽奖机，可以设置范围。比如设置1到10，它就会随机吐出1到10之间的某个数字！',
-      concept: 'random.randint(a, b) 会生成 a 到 b 之间的随机整数（包括 a 和 b）。每次运行可能得到不同的结果。',
-      syntax: 'import random\nrandom.randint(起始数, 结束数)',
+      story: '今天吃什么？可以用 random.choice 来随机决定！',
+      concept: '创建一个菜单列表，用 random.choice 随机选一个。',
+      syntax: `menu = ['宫保鸡丁', '鱼香肉丝', '番茄炒蛋']
+print(random.choice(menu))`,
       example: {
-        title: '生成随机数字',
-        code: 'import random\n\n# 生成1到10的随机数\nnumber = random.randint(1, 10)\nprint("幸运数字:", number)',
-        output: '幸运数字: 7',
-        explanation: 'random.randint(1, 10) 生成1到10之间的随机整数。可能是1、2、3...直到10中的任何一个。'
+        title: '随机点菜',
+        code: `import random
+menu = ['宫保鸡丁', '鱼香肉丝', '番茄炒蛋']
+print('今天吃:', random.choice(menu))`,
+        output: '今天吃: 鱼香肉丝',
+        explanation: '简单的随机点菜程序。'
       },
       practice: [
         {
-          question: 'random.randint(1, 10) 能生成哪些数字？',
-          answer: '1到10之间的任意整数，包括1和10'
+          question: 'random.choice 需要什么导入？',
+          answer: 'import random'
         },
         {
-          question: '每次运行结果一样吗？',
-          answer: '不一定，是随机的'
+          question: '如何增加更多菜品到菜单？',
+          answer: '往列表里添加更多字符串'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的数字抽奖机更灵活了！可以设置任意范围，比如骰子的1-6，月份的1-12，年龄的1-100等等！',
-      concept: 'random.randint(a, b) 返回 [a, b] 范围内的随机整数，两端都包含。注意 a 必须 <= b，否则会报错。常用于模拟掷骰子、随机年龄、随机年份等场景。',
-      syntax: 'import random\n\n# 掷骰子\ndice = random.randint(1, 6)\n\n# 随机月份\nmonth = random.randint(1, 12)\n\n# 随机年份\nyear = random.randint(2000, 2024)',
+      story: '可以把菜单分成荤菜和素菜，荤素搭配选择。',
+      concept: '用两个列表分别存荤菜和素菜，分别选择。',
+      syntax: `meat = ['糖醋排骨', '红烧肉']
+veg = ['清炒时蔬', '凉拌黄瓜']
+print('荤菜:', random.choice(meat))
+print('素菜:', random.choice(veg))`,
       example: {
-        title: '各种随机数生成',
-        code: 'import random\n\n# 模拟掷骰子\nprint("掷骰子:", random.randint(1, 6))\n\n# 模拟抛硬币（1=正面, 2=反面）\ncoin = random.randint(1, 2)\nif coin == 1:\n    print("抛硬币: 正面")\nelse:\n    print("抛硬币: 反面")\n\n# 随机幸运数（1-100）\nlucky = random.randint(1, 100)\nprint("幸运数: " + str(lucky))',
-        output: '掷骰子: 4\n抛硬币: 反面\n幸运数: 73',
-        explanation: '第一个模拟骰子（1-6）。第二个模拟硬币（1-2，1是正面，2是反面）。第三个生成1-100的幸运数。'
+        title: '荤素搭配',
+        code: `import random
+meat = ['糖醋排骨', '红烧肉', '宫保鸡丁']
+veg = ['清炒时蔬', '凉拌黄瓜', '番茄炒蛋']
+print('今日推荐:')
+print('荤菜:', random.choice(meat))
+print('素菜:', random.choice(veg))`,
+        output: '今日推荐:\n荤菜: 红烧肉\n素菜: 番茄炒蛋',
+        explanation: '荤素搭配，一荤一素营养好。'
       },
       practice: [
         {
-          question: 'random.randint(1, 6) 能生成6吗？',
-          answer: '能，两端都包含'
+          question: '荤素搭配用什么分开存储？',
+          answer: '两个列表'
         },
         {
-          question: 'random.randint(5, 5) 会返回什么？',
-          answer: '总是返回5，因为范围只有一个数字'
+          question: '如何从荤菜和素菜各选一个？',
+          answer: 'random.choice(meat) 和 random.choice(veg)'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '随机数大师！理解随机数生成的原理和应用场景，可以实现游戏、模拟实验、数据采样等各种有趣功能！',
-      concept: 'random.randint(a, b) 底层调用 random.randrange(a, b+1)。生成的随机数是伪随机，由种子（seed）决定。random.seed(n) 可以设置种子，使随机序列可重现。真随机应用需用 secrets 模块。',
-      syntax: '# 设置种子（可重现）\nimport random\nrandom.seed(42)\nn1 = random.randint(1, 10)\n\n# 随机浮点数\nf = random.random()  # [0.0, 1.0)\n\n# 随机范围浮点数\nrf = random.uniform(1.0, 10.0)',
+      story: '可以让用户输入想选几个菜，然后随机选择不重复的菜品。',
+      concept: '用户输入数量，去重选择，然后打印菜单。',
+      syntax: `n = int(input())
+while len(selected) < n:
+    c = random.choice(menu)
+    if c not in selected:
+        selected.append(c)`,
       example: {
-        title: '随机数种子和应用',
-        code: 'import random\n\n# 设置种子，使结果可重现\nrandom.seed(100)\nprint("固定序列:")\nfor i in range(5):\n    print(random.randint(1, 100))\n\n# 不设置种子，每次不同\nprint("\\n随机序列:")\nfor i in range(5):\n    print(random.randint(1, 100))',
-        output: '固定序列:\n5\n23\n44\n75\n19\n\n随机序列:\n(每次运行会变化)',
-        explanation: '设置种子后，随机数序列是固定的，这在调试和测试时很有用。不设置种子时，每次运行结果不同。'
+        title: '完整点菜程序',
+        code: `import random
+menu = ['糖醋排骨', '红烧肉', '宫保鸡丁', '清炒时蔬', '凉拌黄瓜', '番茄炒蛋']
+selected = []
+n = int(input('想选几个菜?:'))
+while len(selected) < n:
+    c = random.choice(menu)
+    if c not in selected:
+        selected.append(c)
+print('今日菜单:', selected)`,
+        output: '想选几个菜?: 3\n今日菜单: [\'宫保鸡丁\', \'凉拌黄瓜\', \'糖醋排骨\']',
+        explanation: '用户输入数量，程序随机选出不重复的菜品。'
       },
       practice: [
         {
-          question: '为什么要设置随机数种子？',
-          answer: '使随机结果可重现，方便调试和测试'
+          question: '用户输入后如何确保选出不重复的？',
+          answer: '用 not in 检查，已选过就重新选'
         },
         {
-          question: 'random.randint() 和 random.randrange() 有什么区别？',
-          answer: 'randint两端都包含，randrange右端不包含'
+          question: 'while len(selected) < n 是什么循环？',
+          answer: '当已选数量不足时继续选'
         }
       ]
     }
@@ -313,24 +375,24 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '范围问题',
-    question: 'random.randint(1, 6) 不能生成哪个数字？',
+    mathConcept: '随机选择',
+    question: '如何从 fruits 列表中随机选一个水果？',
     options: [
-      'A. 1',
-      'B. 3',
-      'C. 6',
-      'D. 7'
+      'random.choice(fruits)',
+      'choice.random(fruits)',
+      'fruits.random()',
+      'random(fruits)'
     ],
-    answer: 3, // D
-    explanation: '这是一个范围问题！\n\nrandom.randint(1, 6) 生成 1 到 6 之间的随机整数。\n\n范围：[1, 2, 3, 4, 5, 6]\n\n可以生成：1, 2, 3, 4, 5, 6\n不能生成：7\n\n数学知识：randint(a, b) 的范围是从 a 到 b（包括两端）。',
-    hint: '1到6之间不包括7'
+    answer: 0,
+    explanation: '正确格式是 random.choice(列表)，需要先 import random。答案是 A。',
+    hint: 'random.choice 是正确格式'
   },
   {
     id: 'ex-2',
@@ -338,37 +400,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '计数问题',
-    question: '列表 ["红", "黄", "蓝"] 中，random.choice() 可能选择几个不同的结果？',
+    mathConcept: 'in 判断',
+    question: `"葡萄" in ['苹果', '香蕉'] 的结果是？`,
     options: [
-      'A. 1种',
-      'B. 2种',
-      'C. 3种',
-      'D. 无数种'
+      'True',
+      'False',
+      '葡萄苹果',
+      '报错'
     ],
-    answer: 2, // C
-    explanation: '这是一个计数问题！\n\n列表 ["红", "黄", "蓝"] 有3个元素。\n\nrandom.choice() 会从3个元素中随机选择1个。\n\n可能的结果：\n- "红"\n- "黄"  \n- "蓝"\n\n一共有3种可能的选择结果。\n\n数学知识：选择结果的数量等于列表元素的数量。',
-    hint: '列表有几个元素，就有几种可能的选择'
+    answer: 1,
+    explanation: '"葡萄" 不在列表中，所以返回 False。答案是 B。',
+    hint: 'in 检查是否在列表中'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '概率问题',
-    question: '列表 [1, 2, 3, 4, 5] 中，random.choice() 选择到偶数的概率是多少？',
+    mathConcept: 'not in 判断',
+    question: `"苹果" not in ['苹果', '香蕉'] 的结果是？`,
     options: [
-      'A. 1/5',
-      'B. 2/5',
-      'C. 1/2',
-      'D. 3/5'
+      'True',
+      'False',
+      '苹果',
+      '香蕉'
     ],
-    answer: 1, // B
-    explanation: '这是一个概率问题！\n\n列表 [1, 2, 3, 4, 5] 中：\n- 偶数有：2, 4（2个）\n- 总共有5个数\n\n每个数被选中的概率相等。\n\nP(选择偶数) = 偶数个数 / 总数 = 2/5\n\n数学知识：概率 = 有利结果数 / 所有可能结果数。',
-    hint: '数一数偶数有几个'
+    answer: 1,
+    explanation: '"苹果" 在列表中，所以 not in 返回 False。答案是 B。',
+    hint: 'not in 检查是否不在列表中'
   },
   {
     id: 'ex-4',
@@ -376,37 +438,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '范围问题',
-    question: 'random.randint(10, 20) 能生成的最小和最大数字是什么？',
+    mathConcept: '避免重复',
+    question: '如何避免 random.choice 选到重复的？',
     options: [
-      'A. 最小10，最大19',
-      'B. 最小11，最大20',
-      'C. 最小10，最大20',
-      'D. 最小0，最大20'
+      '直接多次调用 random.choice',
+      '用列表记录已选过的，检查 not in',
+      '选完一个就从列表删除',
+      '用 for 循环代替 while 循环'
     ],
-    answer: 2, // C
-    explanation: '这是一个范围问题！\n\nrandom.randint(10, 20) 生成 10 到 20 之间的随机整数。\n\nrandint(a, b) 两端都包含：\n- 最小值：10\n- 最大值：20\n\n可能生成：10, 11, 12, ..., 19, 20\n\n数学知识：randint 的两个参数都包含在范围内。',
-    hint: 'randint的两个参数都包含在内'
+    answer: 1,
+    explanation: '用列表记录已选择的，每次选之前检查是否已选过。答案是 B。',
+    hint: '记录已选择的，用 not in 检查'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '概率计算',
-    question: '执行下面的代码，结果能被3整除的概率是多少？\n\n```python\nimport random\nnumber = random.randint(1, 9)\n```',
+    mathConcept: '综合应用',
+    question: `执行以下代码，输入 3，输出是？\n\n\`\`\`python\nfruits = ['苹果', '香蕉', '橙子', '葡萄']\nfor i in range(3):\n    c = random.choice(fruits)\n    print(c)\n# （假设随机选到：苹果、香蕉、橙子）\n\`\`\``,
     options: [
-      'A. 1/9',
-      'B. 1/3',
-      'C. 3/9',
-      'D. 1/2'
+      '苹果 香蕉 橙子 葡萄',
+      '苹果 香蕉 橙子',
+      '苹果 苹果 苹果',
+      '3'
     ],
-    answer: 1, // B
-    explanation: '这是一个概率计算问题！\n\nrandint(1, 9) 生成 [1, 2, 3, 4, 5, 6, 7, 8, 9]，共9个数。\n\n能被3整除的数：3, 6, 9（3个）\n\nP(能被3整除) = 3/9 = 1/3\n\n数学知识：先找出范围内满足条件的数，再计算概率。',
-    hint: '1到9中能被3整除的有3、6、9'
+    answer: 1,
+    explanation: '循环 3 次，每次随机选一个并打印。如果正好选到苹果、香蕉、橙子，就打印这三个。答案是 B。',
+    hint: '循环3次选3个'
   },
   {
     id: 'ex-6',
@@ -414,70 +476,67 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '范围计算',
-    question: 'random.randint(0, 100) 生成大于50的数字的概率最接近多少？',
+    mathConcept: '去重选择',
+    question: `如何从 5 个水果中选 3 个不重复的？
+fruits = ['苹果', '香蕉', '橙子', '葡萄', '草莓']`,
     options: [
-      'A. 49%',
-      'B. 50%',
-      'C. 51%',
-      'D. 99%'
+      '直接用 random.choice 选 3 次',
+      '选一个就从列表中删除',
+      '用 not in 检查已选过的，避免重复',
+      '用 for 循环选 3 个'
     ],
-    answer: 0, // A
-    explanation: '这是一个概率计算问题！\n\nrandint(0, 100) 生成 [0, 1, 2, ..., 100]，共101个数。\n\n大于50的数：51, 52, ..., 100\n个数 = 100 - 51 + 1 = 50个\n\nP(大于50) = 50/101 ≈ 49.5%\n\n最接近 49%\n\n数学知识：注意0也被计入，总数是101个，大于50的有50个。',
-    hint: '注意是从0开始，不是从1开始'
+    answer: 2,
+    explanation: '关键是避免重复，可以用 not in 检查是否已经选过。答案是 C。',
+    hint: '需要去重机制'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L6-4',
-  title: '随机模块',
-  subtitle: '学会使用随机模块',
-  difficulty: '进阶',
-  estimatedTime: '35-45分钟',
+  title: '今天吃什么',
+  subtitle: '随机选择与项目实践',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '学会使用 import 导入模块',
     '掌握 random.choice() 随机选择',
-    '掌握 random.randint() 生成随机整数',
-    '了解随机数在编程中的应用'
+    '理解 import random 的用法',
+    '掌握 not in 判断',
+    '能综合应用实现点菜程序'
   ],
   prerequisites: [
-    '掌握列表的基本操作',
-    '理解函数调用的概念',
-    '了解模块的基本概念'
+    '理解列表创建',
+    '理解列表遍历',
+    '理解 while 循环'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['lucky', 'dice', 'pick', 'select'],
-  medium: ['import', 'random', 'choice', 'range'],
-  hard: ['module', 'probability', 'generate']
+  easy: ['import', 'menu', 'choice', 'random'],
+  medium: ['vegetable', 'shuffle', 'select', 'option'],
+  hard: ['random', 'shuffle', 'choice', 'select']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
     'import random',
-    'number = random.randint(1, 10)',
-    'print(number)',
-    'fruits = ["苹果", "香蕉"]',
-    'x = random.choice(fruits)',
-    'print(x)'
+    "random.choice(['a', 'b', 'c'])",
+    "menu = ['宫保鸡丁', '鱼香肉丝']",
+    "print(random.choice(menu))"
   ],
   medium: [
-    'import random\nfruits = ["苹果", "香蕉", "橙子"]\nresult = random.choice(fruits)',
-    'import random\ndice = random.randint(1, 6)\nprint("骰子: " + str(dice))',
-    'import random\nlucky = random.randint(1, 100)\nprint("幸运数: " + str(lucky))',
-    'import random\nprizes = ["一等奖", "谢谢参与"]\nprint(random.choice(prizes))',
-    'import random\ncoin = random.randint(1, 2)\nif coin == 1:\n    print("正面")\nelse:\n    print("反面")'
+    "'苹果' not in selected",
+    "selected = []\nselected.append('苹果')",
+    "while len(selected) < 3:",
+    "if f not in selected:\n    selected.append(f)"
   ],
   hard: [
-    'import random\nrandom.seed(42)\nfor i in range(5):\n    print(random.randint(1, 100))',
-    'import random\nnumbers = [1, 2, 3, 4, 5]\nfor _ in range(10):\n    print(random.choice(numbers))',
-    'import random\nfor _ in range(3):\n    dice = random.randint(1, 6)\n    print("掷骰子: " + str(dice))',
-    'import random\nactions = ["跳", "跑", "爬"]\nprint("请你" + random.choice(actions) + "！")',
-    'import random\nnumber = random.randint(0, 100)\nprint("随机数: " + str(number))\nif number > 50:\n    print("大于50: True")\nelse:\n    print("大于50: False")'
+    "import random\nfruits = ['a', 'b', 'c']\nrandom.shuffle(fruits)",
+    "n = int(input())\nfor i in range(n):",
+    "while len(selected) < n:\n    c = random.choice(menu)\n    if c not in selected:\n        selected.append(c)",
+    "meat = ['红烧肉']\nveg = ['炒青菜']\nprint(random.choice(meat))"
   ]
 }
 

@@ -1,58 +1,74 @@
 /**
- * PY1 课程 L2-2: for 循环
+ * PY1 课程 L2-2: 数据类型
  *
  * 核心知识点:
- * 1. for 循环基本格式
- * 2. range() 函数
- * 3. for 循环应用
+ * 1. 数据类型 - 字符串和数字
+ * 2. 字符串 - 引号包裹的内容
+ * 3. int() 命令 - 把字符串转成数字
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
   // OCR 提取的单词
   {
-    word: 'for',
-    pronunciation: '[fo:r]',
-    partOfSpeech: 'prep./conj.',
-    meaning: '为了；对；因为',
+    word: 'number',
+    pronunciation: '[ˈnʌmbə]',
+    partOfSpeech: 'n.',
+    meaning: '数字；编号；数量',
     level: 'easy',
-    example: 'For the people',
-    exampleTranslation: '为了人民',
-    note: 'for 为了',
+    example: 'Please enter your phone number.',
+    exampleTranslation: '请输入您的电话号码。',
     source: 'ocr'
   },
   {
-    word: 'in',
-    pronunciation: '[in]',
-    partOfSpeech: 'prep./adv.',
-    meaning: '在...里面；参与',
-    level: 'easy',
-    example: 'In the box',
-    exampleTranslation: '在盒子里面',
-    note: 'in 在...里面',
-    source: 'ocr'
-  },
-  {
-    word: 'range',
-    pronunciation: '[reindʒ]',
-    partOfSpeech: 'n./v.',
-    meaning: '区间；范围；徘徊',
+    word: 'integer',
+    pronunciation: '[ˈɪntɪdʒə]',
+    partOfSpeech: 'n.',
+    meaning: '整数',
     level: 'medium',
-    example: 'range of motion',
-    exampleTranslation: '活动范围',
-    note: 'range 区间',
+    example: 'Five is an integer.',
+    exampleTranslation: '5是一个整数。',
+    source: 'ocr'
+  },
+  {
+    word: 'check',
+    pronunciation: '[tʃek]',
+    partOfSpeech: 'v.',
+    meaning: '检查；核对',
+    level: 'medium',
+    example: 'Check your homework before submitting.',
+    exampleTranslation: '提交前检查一下作业。',
+    source: 'ocr'
+  },
+  {
+    word: 'food',
+    pronunciation: '[fuːd]',
+    partOfSpeech: 'n.',
+    meaning: '食物；食品',
+    level: 'easy',
+    example: 'I like Chinese food.',
+    exampleTranslation: '我喜欢中国食物。',
     source: 'ocr'
   },
   // 拓展单词
   {
-    word: 'shoot',
-    pronunciation: '[ʃu:t]',
-    partOfSpeech: 'v./n.',
-    meaning: '射击；发芽',
+    word: 'string',
+    pronunciation: '[strɪŋ]',
+    partOfSpeech: 'n.',
+    meaning: '字符串',
     level: 'medium',
-    example: 'shoot a ball',
-    exampleTranslation: '投篮',
-    note: 'shoot 射击',
+    example: 'This is a string of characters.',
+    exampleTranslation: '这是一串字符。',
+    source: 'extended'
+  },
+  {
+    word: 'calculate',
+    pronunciation: '[ˈkælkjʊleɪt]',
+    partOfSpeech: 'v.',
+    meaning: '计算',
+    level: 'medium',
+    example: 'Calculate the result.',
+    exampleTranslation: '计算结果。',
     source: 'extended'
   }
 ]
@@ -61,77 +77,90 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '重复执行 - for循环',
-    emoji: '🔁',
+    title: '数据类型',
+    emoji: '📊',
     gradeLevel: '1-2',
-    summary: '让代码重复执行',
+    summary: '数据有不同的类型，字符串和数字是两种基本类型',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一台复印机，可以让你想复制的图案重复打印多次！for循环就是这样的复印机，让代码重复执行！',
-      concept: 'for循环可以让代码重复执行指定的次数。',
-      syntax: 'for i in range(次数):\n    要重复的代码',
+      story: '数据就像不同的食材，有不同的种类。字符串就像一串文字，数字就是用来计算的。',
+      concept: 'Python 中数据有两种基本类型：字符串（用引号包裹的文字）和数字（用来计算）。',
+      syntax: `字符串：用引号包裹
+'你好' 'apple' '123'
+
+数字：直接写
+1 78 101 1259`,
       example: {
-        title: '简单的for循环',
-        code: 'for i in range(3):\n    print("你好")',
-        output: '你好\n你好\n你好',
-        explanation: 'range(3)表示重复3次，所以打印3次"你好"。'
+        title: '两种数据类型',
+        code: `# 字符串
+print('apple')
+# 数字
+print(123)`,
+        output: 'apple\n123',
+        explanation: '"apple" 是字符串所以打印出 apple；123 是数字直接打印出 123。'
       },
       practice: [
         {
-          question: 'for循环后面要加什么符号？',
-          answer: '要加冒号 :'
+          question: "'123' 是字符串还是数字？",
+          answer: '字符串（因为有引号）'
         },
         {
-          question: 'range(3)表示重复几次？',
-          answer: '重复3次'
+          question: '123 是什么类型？',
+          answer: '数字'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的复印机升级了！现在你可以精确控制重复的次数，就像数数一样简单！',
-      concept: 'for i in range(n) 表示重复n次，i会从0数到n-1。',
-      syntax: 'for i in range(n):\n    重复的代码\n# i会依次是0,1,2,...,n-1',
+      story: '字符串可以包含各种内容：汉字、字母、数字、符号、空格都可以。不同数据类型无法直接比较或计算。',
+      concept: '字符串用引号包裹，可以包含汉字、字母、数字、符号。字符串和数字是不同类型，不能直接比较。',
+      syntax: `'汉字' 'ABC' '123!' ' '`,
       example: {
-        title: '使用循环变量',
-        code: 'for i in range(4):\n    print(i)',
-        output: '0\n1\n2\n3',
-        explanation: 'range(4)表示4次，i依次是0,1,2,3。每次循环打印i的值。'
+        title: '各种字符串',
+        code: `print('你好')
+print('Hello')
+print('123')
+print('!@#')`,
+        output: '你好\nHello\n123\n!@#',
+        explanation: '字符串可以包含各种字符，包括汉字、英文、数字、符号。'
       },
       practice: [
         {
-          question: 'range(4)中i的值依次是什么？',
-          answer: '0, 1, 2, 3'
+          question: '"apple" 和 123 能直接比较吗？',
+          answer: '不能，数据类型不同'
         },
         {
-          question: 'for循环中的i叫什么？',
-          answer: '叫循环变量'
+          question: '字符串用什么包裹？',
+          answer: '引号'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '循环大师！你现在可以用for循环做各种复杂的事情！',
-      concept: 'for循环可以和变量、运算结合，实现复杂的重复逻辑。',
-      syntax: 'for 变量 in range(开始,结束,步长):\n    代码',
+      story: '理解数据类型是编程的基础。不同数据类型有不同的操作方式，混用会导致错误。',
+      concept: '数据类型决定了可以进行的操作。字符串可以进行拼接，数字可以进行数学运算。',
+      syntax: `字符串操作：拼接
+数字操作：+ - * /`,
       example: {
-        title: '指定范围和步长',
-        code: 'for i in range(1, 10, 2):\n    print(i)',
-        output: '1\n3\n5\n7\n9',
-        explanation: 'range(1,10,2)表示从1到9，步长2，所以打印1,3,5,7,9。\n\n数学知识：等差数列，公差为2。',
-        hint: '从1开始，每次加2，直到小于10'
+        title: '数据类型决定操作',
+        code: `# 字符串拼接
+print('你好' + '小核桃')
+# 数字运算
+print(3 + 5)`,
+        output: '你好小核桃\n8',
+        explanation: '"你好" + "小核桃" 是字符串拼接；3 + 5 是数字加法。'
       },
       practice: [
         {
-          question: 'range(1,10,2)中第三个参数是什么？',
-          answer: '是步长'
+          question: '"3" + "5" 会得到什么？',
+          answer: '"35"（字符串拼接）'
         },
         {
-          question: '如何只取偶数？',
-          answer: 'range(0, 10, 2)'
+          question: '3 + 5 会得到什么？',
+          answer: '8（数字加法）'
         }
       ]
     }
@@ -139,76 +168,84 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '计数工具 - range函数',
-    emoji: '📊',
+    title: '字符串',
+    emoji: '🔤',
     gradeLevel: '1-2',
-    summary: '控制循环次数',
+    summary: '用引号包裹的文字，可以拼接',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: 'range就像一个会自动数数的计数器，帮你数到指定的数字！',
-      concept: 'range(n) 会生成从0到n-1的数列，共n个数字。',
-      syntax: 'range(n)  # 生成0到n-1\n例如：range(5) = 0,1,2,3,4',
+      story: '字符串就像一串珠子，用引号串在一起。可以用加号把两个字符串拼接成一个更长的字符串。',
+      concept: '字符串是用引号包裹的文字，可以用加号拼接。',
+      syntax: `'文字1' + '文字2'`,
       example: {
-        title: 'range基本用法',
-        code: 'for i in range(5):\n    print(i)',
-        output: '0\n1\n2\n3\n4',
-        explanation: 'range(5)生成0,1,2,3,4，共5个数字，循环5次。'
+        title: '字符串拼接',
+        code: `print('今天吃' + '番茄')
+print('你好' + '小核桃')`,
+        output: '今天吃番茄\n你好小核桃',
+        explanation: '加号可以把两个字符串连接成一个。'
       },
       practice: [
         {
-          question: 'range(5)有几个数字？',
-          answer: '5个：0,1,2,3,4'
+          question: "'苹果' + '香蕉' 会得到什么？",
+          answer: '"苹果香蕉"'
         },
         {
-          question: 'range(3)会循环几次？',
-          answer: '3次'
+          question: '字符串用什么符号拼接？',
+          answer: '加号 +'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的计数器更高级了！现在你可以设置开始的数字！',
-      concept: 'range(开始, 结束) 表示从开始到结束（不含结束）的数列。',
-      syntax: 'range(开始, 结束)  # 含开始，不含结束\n例如：range(2, 6) = 2,3,4,5',
+      story: 'input() 获取的用户输入是字符串类型。如果需要当作数字使用，需要转换。',
+      concept: 'input() 接收的内容以字符串形式保存，需要用 int() 转换才能当数字用。',
+      syntax: `a = input()      # 字符串
+n = int(input()) # 数字`,
       example: {
-        title: 'range指定开始',
-        code: 'for i in range(2, 7):\n    print(i)',
-        output: '2\n3\n4\n5\n6',
-        explanation: 'range(2,7)生成2,3,4,5,6，共5个数字。\n\n数学知识：这是等差数列，首项2，公差1。'
+        title: 'input() 获取的是字符串',
+        code: `a = input()
+print(a + a)
+print(int(a) + int(a))`,
+        output: '（假设输入 5）\n55\n10',
+        explanation: 'input() 返回的是字符串，所以 a+a 得到"55"（拼接）。需要 int() 转换后才能相加。'
       },
       practice: [
         {
-          question: 'range(2, 7)包含7吗？',
-          answer: '不包含'
+          question: 'input() 返回的数据是什么类型？',
+          answer: '字符串'
         },
         {
-          question: 'range(1, 5)有几个数字？',
-          answer: '4个：1,2,3,4'
+          question: '如何把字符串"5"变成数字5？',
+          answer: 'int("5")'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '计数器专家！你现在完全掌握range的用法了！',
-      concept: 'range(开始, 结束, 步长) 可以设置步长，可以控制递增或递减。',
-      syntax: 'range(开始, 结束, 步长)  # 含开始，不含结束，按步长变化\nrange(5, 0, -1) = 5,4,3,2,1',
+      story: '字符串可以包含空格，空格也是字符。理解字符串的组成对处理文本很重要。',
+      concept: '字符串由字符组成，包括汉字、字母、数字、符号、空格等。',
+      syntax: `'你好' → 你 好
+'abc' → a b c
+'1 2 3' → 1 空格 2 空格 3`,
       example: {
-        title: '倒序循环',
-        code: 'for i in range(5, 0, -1):\n    print(i)',
-        output: '5\n4\n3\n2\n1',
-        explanation: 'range(5,0,-1)从5倒到1，步长-1。\n\n数学知识：这是等差数列，公差-1。'
+        title: '字符串的组成',
+        code: `s = 'Hi'
+print(s[0])
+print(s[1])`,
+        output: 'H\ni',
+        explanation: '字符串 "Hi" 由两个字符组成，s[0] 是第一个字符 "H"，s[1] 是第二个字符 "i"。'
       },
       practice: [
         {
-          question: 'range(5, 0, -1)最后打印什么？',
-          answer: '1'
+          question: '字符串 "abc" 有几个字符？',
+          answer: '3个'
         },
         {
-          question: '正序和倒序的区别是什么？',
-          answer: '步长为正数是递增，为负数是递减'
+          question: 's[0] 表示什么？',
+          answer: '第一个字符'
         }
       ]
     }
@@ -216,76 +253,183 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '缩进与作用域',
-    emoji: '📏',
-    gradeLevel: '1-2',
-    summary: '理解循环中的缩进',
+    title: 'int() 命令',
+    emoji: '🔄',
+    gradeLevel: '3-4',
+    summary: '把字符串转换成整数',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '在for循环中，缩进的代码会被重复执行，不缩进的代码只执行一次！',
-      concept: '缩进一次（4个空格）的代码是for循环的下级代码，会被重复执行。',
-      syntax: 'for i in range(3):\n    print("重复")  # 这行会重复执行\nprint("执行一次")  # 这行只执行一次',
+      story: 'int() 就像一个翻译器，它能把字符串"变成"数字，这样就可以进行数学计算了。',
+      concept: 'int() 可以把数字字符串转换成整数，这样就能进行加减乘除运算了。',
+      syntax: `int('数字') → 数字
+int(变量)`,
       example: {
-        title: '缩进的区别',
-        code: 'for i in range(3):\n    print("a")\nprint("b")',
-        output: 'a\na\na\nb',
-        explanation: 'print("a")有缩进，循环3次；print("b")没有缩进，只执行1次在循环结束后。'
+        title: '字符串转数字',
+        code: `a = int('6')
+print(a + 2)`,
+        output: '8',
+        explanation: 'int("6") 把字符串 "6" 转换成数字 6，然后 6+2=8。'
       },
       practice: [
         {
-          question: '缩进的代码在哪里执行？',
-          answer: '在循环内部执行'
+          question: 'int("123") 会得到什么？',
+          answer: '123（数字）'
         },
         {
-          question: '不缩进的代码执行几次？',
-          answer: '只执行1次'
+          question: 'int() 有什么用？',
+          answer: '把字符串转换成数字'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你现在理解缩进了！可以用这个特性来做计数器！',
-      concept: '利用缩进可以实现：循环内累加、循环外输出结果。',
-      syntax: '循环开始前设置变量\n在循环中修改变量\n循环结束后使用变量',
+      story: 'int() 只能转换纯数字的字符串。如果字符串里包含文字，int() 会报错。',
+      concept: 'int() 要求字符串必须是纯数字，否则会出错。',
+      syntax: `int('123') → 123
+int('abc') → 报错！`,
       example: {
-        title: '累加计算',
-        code: 'total = 0\nfor i in range(5):\n    total = total + 1\nprint(total)',
-        output: '5',
-        explanation: '循环5次，每次total加1，最后total=5。\n\n数学知识：这是计算1+1+1+1+1=5。'
+        title: 'int() 的限制',
+        code: `# 正确的转换
+n = '123'
+print(int(n) + 1)
+
+# 字符串转数字后再运算
+a = int('5')
+b = int('3')
+print(a + b)`,
+        output: '124\n8',
+        explanation: 'int() 把纯数字字符串转换成整数，然后就可以进行数学运算了。'
       },
       practice: [
         {
-          question: '循环外能使用循环变量i吗？',
-          answer: '不能，i在循环结束后会消失'
+          question: 'int("123abc") 会怎样？',
+          answer: '会报错'
         },
         {
-          question: '如何保存循环的结果？',
-          answer: '用变量在循环中累加'
+          question: '什么情况下 int() 会成功？',
+          answer: '字符串是纯数字时'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '缩进专家！你现在完全理解了！',
-      concept: '复杂的嵌套缩进可以实现复杂的逻辑。',
-      syntax: '外层循环\n    外层代码\n    内层循环\n        内层代码',
+      story: '使用 int() 时要小心，它不会改变原变量的类型，只是得到一个转换后的结果。',
+      concept: 'int() 命令得到一个新值，不会修改变量原来的值。',
+      syntax: `n = '123'    # n 是字符串
+int(n)      # 得到 123，不改变 n
+n = int(n)  # 重新赋值给 n，n 变成数字`,
       example: {
-        title: '双重循环',
-        code: 'for i in range(2):\n    for j in range(3):\n        print(i, j)',
-        output: '0 0\n0 1\n0 2\n1 0\n1 1\n1 2',
-        explanation: '外层循环2次，内层循环3次，共6次。\n\n数学知识：2×3=6，排列组合。'
+        title: 'int() 不改变原变量',
+        code: `n = '6'
+print(int(n) + 2)
+print(n)`,
+        output: '8\n6',
+        explanation: 'int(n) 得到 8，但打印 n 时还是 "6"，因为 int(n) 没有改变 n 的值。只有 n = int(n) 才会改变 n。'
       },
       practice: [
         {
-          question: '双重循环执行多少次？',
-          answer: '外层次数×内层次数'
+          question: 'int(n) 会改变 n 的值吗？',
+          answer: '不会，除非重新赋值'
         },
         {
-          question: '内层循环和外层循环有什么关系？',
-          answer: '内层循环在外层循环的每次中都会执行'
+          question: 'n = int(n) 做了什么？',
+          answer: '把 int(n) 的结果重新赋值给 n'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-4',
+    title: '数学运算',
+    emoji: '➕',
+    gradeLevel: '3-4',
+    summary: '数字可以加减乘除，注意运算顺序',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: 'Python 中的数字和数学一样，可以做加减乘除。乘法用 *，除法用 /。',
+      concept: '数学运算：加法 +，减法 -，乘法 *，除法 /。',
+      syntax: `加法：+
+减法：-
+乘法：* （shift+8）
+除法：/ （斜杠）`,
+      example: {
+        title: '基本运算',
+        code: `print(3 + 5)
+print(10 - 3)
+print(4 * 2)
+print(8 / 2)`,
+        output: '8\n7\n8\n4.0',
+        explanation: '加法、减法、乘法、除法都可以直接使用。注意除法结果可能有小数。'
+      },
+      practice: [
+        {
+          question: 'print(2 * 6) 输出什么？',
+          answer: '12'
+        },
+        {
+          question: 'print(10 / 3) 输出什么？',
+          answer: '3.333...'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: '数学运算有顺序：先乘除后加减，有括号先算括号里面的。',
+      concept: '运算优先级：先算乘除，后算加减，有括号先算括号里的。',
+      syntax: `先算：* /
+后算：+ -
+有括号：先算括号里的`,
+      example: {
+        title: '运算顺序',
+        code: `print(2 + 3 * 4)
+print((2 + 3) * 4)
+print(10 - 4 / 2)`,
+        output: '14\n20\n8.0',
+        explanation: '2+3*4=2+12=14；(2+3)*4=5*4=20；10-4/2=10-2=8。'
+      },
+      practice: [
+        {
+          question: 'print(5 + 2 * 3) 输出什么？',
+          answer: '11'
+        },
+        {
+          question: 'print((5 + 2) * 3) 输出什么？',
+          answer: '21'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: '可以把变量和数学运算结合使用，实现复杂的计算。',
+      concept: '变量可以参与数学运算，结果可以重新赋值给变量。',
+      syntax: `a = 5
+b = 4
+result = a + a * b
+print(result)`,
+      example: {
+        title: '变量运算',
+        code: `a = 5
+b = 4
+result = a + a * b
+print(result)`,
+        output: '25',
+        explanation: 'a=5, b=4。a + a * b = 5 + 5 * 4 = 5 + 20 = 25。先算乘法再算加法。'
+      },
+      practice: [
+        {
+          question: 'a=3, b=2, a + a * b = ?',
+          answer: '9'
+        },
+        {
+          question: 'a + a * b 和 (a + a) * b 有什么区别？',
+          answer: '后者先算加法'
         }
       ]
     }
@@ -294,24 +438,24 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数数',
-    question: '执行下面的代码，会打印几次"你好"？\n\n```python\nfor i in range(3):\n    print("你好")\n```',
+    mathConcept: '数据类型识别',
+    question: '下列哪个选项不是字符串？',
     options: [
-      'A. 2次',
-      'B. 3次',
-      'C. 4次',
-      'D. 5次'
+      "'我不是字符串'",
+      "'this is a string...!&'",
+      '我不是字符串',
+      "'一、二、三、四、五，大家数一数'"
     ],
-    answer: 1, // B
-    explanation: 'range(3)表示重复3次，所以打印3次"你好"。',
-    hint: 'range(3) 是几？'
+    answer: 2,
+    explanation: 'Python 中使用一对引号（\' 或 "）引起来的内容叫做字符串。C 选项没有引号，不是字符串。',
+    hint: '没有引号就不是字符串'
   },
   {
     id: 'ex-2',
@@ -319,37 +463,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '符号识别',
-    question: '下面哪个是for循环的正确格式？',
+    mathConcept: '字符串拼接',
+    question: "'今天吃' + '番茄' + '炒' + '鸡蛋' 会输出什么？",
     options: [
-      'A. for i in range(3)\n    print(i)',
-      'B. for i in range(3):\n    print(i)',
-      'C. for i in range(3):\nprint(i)',
-      'D. for i in range(3)\n    print(i)'
+      '今天吃番茄鸡蛋',
+      '今天吃 + 番茄 + 炒 + 鸡蛋',
+      '番茄炒鸡蛋',
+      '鸡蛋番茄'
     ],
-    answer: 1, // B
-    explanation: '正确的for循环格式：for i in range(n):后面要有冒号，循环体要缩进。选项B符合。',
-    hint: '注意冒号和缩进'
+    answer: 0,
+    explanation: '字符串拼接用加号，把"今天吃"、"番茄"、"炒"、"鸡蛋"连接起来，得到"今天吃番茄炒鸡蛋"。',
+    hint: '加号连接字符串'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '算式计算',
-    question: '执行下面的代码，变量total的值是多少？\n\n```python\ntotal = 0\nfor i in range(4):\n    total = total + 1\nprint(total)\n```',
+    mathConcept: 'int()转换',
+    question: '下列选项中，正确的是？',
     options: [
-      'A. 3',
-      'B. 4',
-      'C. 5',
-      'D. 6'
+      "int('12') == 12",
+      "int('12') == '12'",
+      "int('12') < 12",
+      "'12' == 12"
     ],
-    answer: 1, // B
-    explanation: 'total初始为0，循环4次，每次加1。\n\n0→1→2→3→4，所以最后total=4。\n\n数学知识：这是计算1+1+1+1=4。',
-    hint: 'total 每次加1，加4次'
+    answer: 0,
+    explanation: 'int("12") 得到数字 12，12 == 12 成立。A 正确。B int()结果是数字，"12"是字符串，不相等。C 12 < 12 不成立。D 字符串和数字不能比较。',
+    hint: 'int() 转换后是数字类型'
   },
   {
     id: 'ex-4',
@@ -357,37 +501,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '循环变量',
-    question: '执行下面的代码，会输出什么？\n\n```python\nfor i in range(2, 6):\n    print(i)\n```',
+    mathConcept: '运算顺序',
+    question: 'print(5 + 5 * 4) 会输出什么？',
     options: [
-      'A. 2 3 4 5',
-      'B. 2 3 4 5 6',
-      'C. 1 2 3 4 5',
-      'D. 3 4 5 6'
+      '40',
+      '25',
+      '20',
+      '45'
     ],
-    answer: 0, // A
-    explanation: 'range(2,6)生成2,3,4,5（不含6）。\n\n数学知识：这是等差数列，首项2，公差1。',
-    hint: 'range(2,6) 不包含6'
+    answer: 1,
+    explanation: '先算乘法 5*4=20，再算加法 5+20=25。',
+    hint: '先乘除，后加减'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '循环计算',
-    question: '执行下面的代码，总和是多少？\n\n```python\ntotal = 0\nfor i in range(1, 6, 2):\n    total = total + i\nprint(total)\n```',
+    mathConcept: '综合运算',
+    question: '执行以下代码，a 和 b 分别是 5 和 4，打印结果是什么？\n\n```python\na = 5\nb = 4\nprint(a + a * b)\n```',
     options: [
-      'A. 5',
-      'B. 6',
-      'C. 9',
-      'D. 12'
+      '25',
+      '20',
+      '36',
+      '45'
     ],
-    answer: 2, // C
-    explanation: 'range(1,6,2)生成1,3,5。\n\ntotal = 0 + 1 + 3 + 5 = 9。\n\n数学知识：1+3+5=9，这是奇数求和。',
-    hint: '1 + 3 + 5 = ?'
+    answer: 0,
+    explanation: 'a=5, b=4。a + a * b = 5 + 5 * 4 = 5 + 20 = 25。先算乘法 a*b=20，再算加法。',
+    hint: '先算 a * b，再算 a + (a*b)'
   },
   {
     id: 'ex-6',
@@ -395,66 +539,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '双重循环',
-    question: '执行下面的代码，会输出几个数字？\n\n```python\nfor i in range(2):\n    for j in range(3):\n        print(i, j)\n```',
+    mathConcept: '数据类型转换',
+    question: `以下代码会输出什么？\n\n\`\`\`python\nn = '123'\nprint(int(n) + 1)\n\`\`\``,
     options: [
-      'A. 4个',
-      'B. 5个',
-      'C. 6个',
-      'D. 9个'
+      '1231',
+      '124',
+      '123',
+      '报错'
     ],
-    answer: 2, // C
-    explanation: '外层循环2次，内层循环3次，共2×3=6次。\n\n每次都打印一个数字对(i, j)，共6个输出。\n\n数学知识：2×3=6，排列组合。',
-    hint: '外层次数 × 内层次数'
+    answer: 1,
+    explanation: 'n="123"，int(n) 把字符串 "123" 转换成数字 123，然后 123 + 1 = 124。',
+    hint: 'int() 把字符串变成数字'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L2-2',
-  title: 'for 循环',
-  subtitle: '学会用 for 循环重复执行代码',
-  difficulty: '进阶',
-  estimatedTime: '30-40分钟',
+  title: '数据类型',
+  subtitle: '认识字符串和数字',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '理解 for 循环的基本概念',
-    '掌握 range() 函数的用法',
-    '能够使用 for 循环解决实际问题',
-    '了解嵌套循环'
+    '理解字符串和数字两种数据类型',
+    '掌握字符串拼接的方法',
+    '掌握 int() 命令的使用',
+    '能进行基本的数学运算'
   ],
   prerequisites: [
-    '掌握 print() 命令',
-    '理解变量的概念',
-    '了解基本的数学运算'
+    '认识数字和基本运算符号',
+    '知道什么是变量'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['for', 'loop', 'range', 'repeat'],
-  medium: ['iteration', 'variable', 'counter', 'index'],
-  hard: ['nested', 'iteration', 'sequence', 'step']
+  easy: ['number', 'food', 'apple', 'hello'],
+  medium: ['integer', 'check', 'string', 'convert'],
+  hard: ['calculate', 'operation', 'expression', 'parentheses']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'for i in range(3):\nprint(i)',
-    'for i in range(5):\nprint("hello")',
-    'for i in range(4):\nprint(i)',
-    'for i in range(2):\nprint("a")'
+    "print('apple')",
+    "print('你好')",
+    "print(123)",
+    "'abc' + '123'"
   ],
   medium: [
-    'for i in range(1, 5):\nprint(i)',
-    'for i in range(2, 8, 2):\nprint(i)',
-    'total = 0\nfor i in range(4):\ntotal = total + 1',
-    'for i in range(3):\nprint(i * 2)'
+    "a = int('5')",
+    "print(int('3') + 2)",
+    "n = input()\nprint(int(n) + 1)",
+    "print(3 + 5 * 2)"
   ],
   hard: [
-    'for i in range(5, 0, -1):\nprint(i)',
-    'for i in range(3):\nfor j in range(2):\nprint(i, j)',
-    'total = 0\nfor i in range(1, 6, 2):\ntotal = total + i',
-    'for i in range(4):\n    if i % 2 == 0:\n        print(i)'
+    "a = 5\nb = 4\nprint(a + a * b)",
+    "n = '123'\nprint(int(n) + 1)",
+    "print((2 + 3) * 4)",
+    "x = int(input())\ny = int(input())\nprint(x + y)"
   ]
 }
 

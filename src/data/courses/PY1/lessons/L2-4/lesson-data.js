@@ -1,69 +1,63 @@
 /**
- * PY1 课程 L2-4: Online Judge 入门
+ * PY1 课程 L2-4: OJ训练营
  *
  * 核心知识点:
- * 1. 认识 OJ 线上测评系统
- * 2. OJ 解题流程
- * 3. OJ 实战应用
+ * 1. 认识OJ - 线上测评系统
+ * 2. OJ实战 - 变量、字符串拼接、if-else
  */
 
 // 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
   // OCR 提取的单词
   {
-    word: 'online',
-    pronunciation: "[ˌɒn'laɪn]",
-    partOfSpeech: 'adj./adv.',
-    meaning: '联机的；在线的；在网上地',
-    level: 'easy',
-    example: 'This game has many online users.',
-    exampleTranslation: '这个游戏有很多在线用户。',
-    note: 'online 在线',
-    source: 'ocr'
-  },
-  {
-    word: 'judge',
-    pronunciation: '[dʒʌdʒ]',
-    partOfSpeech: 'n./v.',
-    meaning: '法官；裁判；判断；评判',
-    level: 'medium',
-    example: 'The judge gave a fair verdict.',
-    exampleTranslation: '法官给出了公平的判决。',
-    note: 'judge 裁判',
-    source: 'ocr'
-  },
-  {
-    word: 'submit',
-    pronunciation: '[səb-mɪt]',
+    word: 'print',
+    pronunciation: '[prɪnt]',
     partOfSpeech: 'v.',
-    meaning: '提交；呈交',
+    meaning: '打印；印刷',
+    level: 'easy',
+    example: 'Print the document.',
+    exampleTranslation: '打印文件。',
+    source: 'ocr'
+  },
+  {
+    word: 'input',
+    pronunciation: '[ˈɪnpʊt]',
+    partOfSpeech: 'v.',
+    meaning: '输入',
+    level: 'easy',
+    example: 'Please input your answer.',
+    exampleTranslation: '请输入您的答案。',
+    source: 'ocr'
+  },
+  {
+    word: 'int',
+    pronunciation: '[ɪnt]',
+    partOfSpeech: 'abbr.',
+    meaning: '整数',
     level: 'medium',
-    example: 'Please submit your homework.',
-    exampleTranslation: '请提交你的作业。',
-    note: 'submit 提交',
+    example: 'Enter an integer.',
+    exampleTranslation: '输入一个整数。',
     source: 'ocr'
   },
   // 拓展单词
   {
-    word: 'input',
-    pronunciation: '[ɪn-pʊt]',
-    partOfSpeech: 'n./v.',
-    meaning: '输入；投入',
-    level: 'easy',
-    example: 'Enter your input here.',
-    exampleTranslation: '在这里输入。',
-    note: 'input 输入',
+    word: 'online',
+    pronunciation: '[ˈɒnlaɪn]',
+    partOfSpeech: 'adj.',
+    meaning: '在线的',
+    level: 'medium',
+    example: 'Study online.',
+    exampleTranslation: '在线学习。',
     source: 'extended'
   },
   {
-    word: 'output',
-    pronunciation: '[aʊt-pʊt]',
-    partOfSpeech: 'n./v.',
-    meaning: '输出；产出',
-    level: 'easy',
-    example: 'The output is incorrect.',
-    exampleTranslation: '输出是不正确的。',
-    note: 'output 输出',
+    word: 'judge',
+    pronunciation: '[dʒʌdʒ]',
+    partOfSpeech: 'v.',
+    meaning: '评判；判断',
+    level: 'medium',
+    example: 'The judge will decide the winner.',
+    exampleTranslation: '评委将决定获胜者。',
     source: 'extended'
   }
 ]
@@ -72,76 +66,97 @@ export const vocabData = [
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '认识OJ - 线上测评系统',
-    emoji: '💻',
-    gradeLevel: '1-2',
-    summary: '了解 Online Judge 是什么',
+    title: '认识OJ',
+    emoji: '🏆',
+    gradeLevel: '3-4',
+    summary: '线上测评系统，自动判断对错',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有一个会自动批改作业的老师！你把答案交给它，它就会告诉你对还是错。这就是OJ系统！',
-      concept: 'OJ（Online Judge）是一个线上测评系统，它会自动批改你提交的代码。',
-      syntax: 'OJ = Online Judge = 线上测评系统',
+      story: 'OJ就像一个智能老师，它可以自动检查我们的答案对不对，不需要人来批改。',
+      concept: 'OJ（Online Judge）是线上测评系统，系统会用多组测试数据检验代码，自動评分。',
+      syntax: `OJ = Online Judge = 线上测评
+自动评分，不需要人批改`,
       example: {
         title: 'OJ工作原理',
-        code: '把代码提交给OJ系统\nOJ用多组数据测试\n系统自动判断对错\n显示测评结果',
-        output: 'AC / WA / TLE 等',
-        explanation: 'AC表示答案正确，WA表示答案错误，TLE表示超时。'
+        code: `# 提交代码到OJ系统
+# OJ会用多组测试数据测试
+# 系统对比输出结果和正确答案
+# 自动显示得分`,
+        output: '',
+        explanation: 'OJ系统预先准备了测试数据，提交代码后会自动运行并评分，非常高效。'
       },
       practice: [
         {
-          question: 'OJ的全称是什么？',
-          answer: 'Online Judge（线上测评）'
+          question: 'OJ是什么意思？',
+          answer: '线上测评（Online Judge）'
         },
         {
-          question: 'OJ可以自动做什么？',
-          answer: '自动批改代码，判断对错'
+          question: 'OJ题需要人来批改吗？',
+          answer: '不需要，系统自动评分'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你的OJ知识更丰富了！现在你知道OJ不只是判断对错，还有很多功能！',
-      concept: 'OJ系统的特点：自动评分、多组测试数据、系统评判。',
-      syntax: 'OJ功能：\n1. 自动评分\n2. 多组测试\n3. 系统判断',
+      story: 'OJ题的答题流程是：读题 → 编写代码 → 测试样例 → 提交代码。每个步骤都很重要。',
+      concept: 'OJ答题流程：读题（找输入输出）→ 编写代码 → 测试样例 → 提交代码。',
+      syntax: `答题流程：
+1. 读题：理解题意，找输入输出
+2. 编写代码：获取输入，处理数据，输出结果
+3. 测试样例：用样例测试
+4. 提交代码：正式提交`,
       example: {
-        title: 'OJ测评结果',
-        code: 'AC - Accepted 正确\nWA - Wrong Answer 错误\nTLE - Time Limit Exceeded 超时\nRE - Runtime Error 运行错误',
-        output: '根据结果修改代码',
-        explanation: '不同的错误提示帮助你找到问题所在。'
+        title: 'OJ答题四步骤',
+        code: `# 1. 读题：输入长颈鹿数量，输出猴子数量
+# 2. 编写代码：
+n = int(input())
+print(n * 7)
+# 3. 测试样例
+# 4. 提交代码`,
+        output: '',
+        explanation: '按照流程答题，先理解题目要求，再编写代码，最后测试通过再提交。'
       },
       practice: [
         {
-          question: 'AC表示什么意思？',
-          answer: 'Accepted，答案正确'
+          question: 'OJ答题的第一步是什么？',
+          answer: '读题'
         },
         {
-          question: 'WA表示什么意思？',
-          answer: 'Wrong Answer，答案错误'
+          question: '提交代码前应该做什么？',
+          answer: '测试样例'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: 'OJ专家！你完全理解OJ了！',
-      concept: '深入理解OJ系统的评测原理和评分机制。',
-      syntax: '评分机制：\n按通过比例评分\n有部分分值\n有多组测试数据',
+      story: 'OJ题有输入描述和输出描述，样例有输入样例和输出样例。理解题目结构很重要。',
+      concept: 'OJ题目结构：题目描述、输入描述、输出描述、输入样例、输出样例。',
+      syntax: `题目描述：讲清楚要做什么
+输入描述：需要输入什么
+输出描述：需要输出什么
+样例：输入和对应的正确输出`,
       example: {
-        title: 'OJ评分示例',
-        code: '10组测试数据\n通过8组 = 80分\n部分得分为：\n通过5组满分数据 = 50分\n+ 通过3组部分分数据 = 30分\n= 80分',
-        output: '80',
-        explanation: 'OJ会根据通过的测试数据计算最终得分。'
+        title: '看懂OJ题目',
+        code: `# 例题：
+# 题目：计算两数之和
+# 输入描述：两个整数
+# 输出描述：两个整数之和
+# 输入样例：3 5
+# 输出样例：8`,
+        output: '',
+        explanation: '做OJ题要先读懂题目结构，知道要输入什么、输出什么，再编写代码。'
       },
       practice: [
         {
-          question: 'OJ如何计算得分？',
-          answer: '根据通过的测试数据比例'
+          question: 'OJ题目中"输入描述"告诉了我们什么？',
+          answer: '需要输入什么数据'
         },
         {
-          question: '多组测试数据是什么？',
-          answer: '不同的输入数据，用来测试各种情况'
+          question: '为什么要先测试样例？',
+          answer: '确保代码正确再提交'
         }
       ]
     }
@@ -149,76 +164,95 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: 'OJ流程 - 解题步骤',
+    title: 'OJ实战 - 变量',
     emoji: '📝',
-    gradeLevel: '1-2',
-    summary: '掌握OJ解题的正确流程',
+    gradeLevel: '3-4',
+    summary: '用变量和运算解决实际问题',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你在参加一场考试！OJ解题也是有步骤的！先读题，再做题，最后交卷！',
-      concept: 'OJ解题的四个步骤：读题、编码、测试、提交。',
-      syntax: 'OJ流程：\n1. 读题 - 看清输入输出\n2. 编码 - 编写代码\n3. 测试 - 用样例测试\n4. 提交 - 提交代码',
+      story: '做OJ题时，需要先读取输入的数据，存储到变量中，然后计算，最后输出结果。',
+      concept: 'OJ中变量使用流程：input() 读取 → 变量存储 → 计算 → print() 输出。',
+      syntax: `n = int(input())  # 读取整数
+print(n * 7)      # 计算并输出`,
       example: {
-        title: 'OJ解题示例',
-        code: '题目：输入数字，输出它的两倍\n\n1.读题：输入一个数，输出它的2倍\n2.编码：n = input()\nprint(int(n)*2)\n3.测试：用样例测试\n4.提交：提交代码',
-        output: '根据代码输出',
-        explanation: '按照这个流程解题就不会乱！'
+        title: '猴子与长颈鹿',
+        code: `# 题目：猴子数量是长颈鹿的7倍
+# 输入长颈鹿数量，输出猴子数量
+n = int(input())
+print(n * 7)`,
+        output: '（输入5）\n35',
+        explanation: '读取长颈鹿数量 5，乘以 7 得到猴子数量 35，输出 35。'
       },
       practice: [
         {
-          question: 'OJ解题第一步是什么？',
-          answer: '读题'
+          question: 'OJ题中用什么读取输入？',
+          answer: 'input()'
         },
         {
-          question: '测试样例通过后就能得满分吗？',
-          answer: '不一定，还要看其他测试数据'
+          question: '为什么需要 int(input())？',
+          answer: '把字符串转成数字才能计算'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你现在完全掌握OJ流程了！每一步都很重要！',
-      concept: '深入理解每个步骤：读题要仔细、编码要规范、测试要全面、提交要小心。',
-      syntax: '详细流程：\n1. 读题：输入、输出、样例\n2. 编码：处理数据、输出结果\n3. 测试：自测+样例\n4. 提交：确认后提交',
+      story: 'OJ题的计算和之前学的数学运算一样，先乘除后加减，有括号先算括号。',
+      concept: 'OJ中的计算和 Python 运算规则相同，注意运算优先级。',
+      syntax: `运算顺序：
+先算 * / %
+后算 + -
+有括号先算括号里`,
       example: {
-        title: '完整OJ示例',
-        code: '题目：判断奇偶数\n输入：一个整数\n输出：odd/even\n\n1.读题：输入整数，判断奇偶\n2.编码：\nn = int(input())\nif n % 2 == 0:\n    print("even")\nelse:\n    print("odd")\n3.测试：输入7 → odd\n4.提交',
-        output: '根据测试数据输出',
-        explanation: '完整的OJ解题流程！'
+        title: '综合计算',
+        code: `# 计算 (a + b) * c
+a = int(input())
+b = int(input())
+c = int(input())
+print((a + b) * c)`,
+        output: '（输入1 2 3）\n9',
+        explanation: 'a=1, b=2, c=3。(1+2)*3 = 3*3 = 9。注意括号内的先算。'
       },
       practice: [
         {
-          question: '读题时要关注什么？',
-          answer: '输入描述、输出描述、样例'
+          question: 'print((2+3)*4) 输出什么？',
+          answer: '20'
         },
         {
-          question: '提交前要做什么？',
-          answer: '测试样例和自测'
+          question: 'OJ题中如何处理多个输入？',
+          answer: '多次调用 input()'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      title: 'OJ流程专家！你现在可以应对复杂的OJ题目了！',
-      concept: '复杂题目的处理：分析题意、设计算法、实现代码、优化性能。',
-      syntax: '复杂题目流程：\n1. 分析题目要求\n2. 设计算法\n3. 编写代码\n4. 测试和优化',
+      story: '有些OJ题需要根据不同情况输出不同结果，这时候需要用到条件判断。',
+      concept: '根据题目要求，可能需要结合 if-else 语句。',
+      syntax: `if 条件:
+    print('合格')
+else:
+    print('不合格')`,
       example: {
-        title: '复杂题目示例',
-        code: '题目：计算1+2+...+n\n输入：n（1≤n≤1000）\n输出：1+2+...+n的和\n\n算法：等差数列求和\nsum = n * (n + 1) // 2\n\n或者用循环求和\ntotal = 0\nfor i in range(1, n+1):\n    total = total + i\nprint(total)',
-        output: '根据n的值输出',
-        explanation: '两种方法：公式法和循环法。\n\n数学知识：等差数列求和公式。'
+        title: '判断是否合格',
+        code: `# 题目：成绩>=60为合格
+score = int(input())
+if score >= 60:
+    print('合格')
+else:
+    print('不合格')`,
+        output: '（输入75）\n合格',
+        explanation: '输入 75，75>=60 成立，打印"合格"。如果输入 50，则打印"不合格"。'
       },
       practice: [
         {
-          question: '如何选择算法？',
-          answer: '选择效率高的算法'
+          question: '什么情况下需要用 if-else？',
+          answer: '需要根据条件输出不同结果时'
         },
         {
-          question: '如何优化代码？',
-          answer: '使用公式减少循环次数'
+          question: '判断合格需要什么符号？',
+          answer: '>= 表示大于等于'
         }
       ]
     }
@@ -226,76 +260,189 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: 'OJ实战 - 基础题目',
-    emoji: '⚔️',
-    gradeLevel: '1-2',
-    summary: '练习OJ基础题目',
+    title: 'OJ实战 - 字符串拼接',
+    emoji: '🔗',
+    gradeLevel: '3-4',
+    summary: '用字符串拼接生成输出',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '现在你可以开始做OJ题目了！从最简单的开始！',
-      concept: '从简单的输入输出题目开始练习。',
-      syntax: '基础题目类型：\n1. 直接输出\n2. 读取输入并输出\n3. 简单计算',
+      story: '有些OJ题需要输出包含输入内容的句子，比如打招呼"Hello xxx"。',
+      concept: '字符串拼接可以把输入的内容和固定文字组合在一起输出。',
+      syntax: `name = input()
+print('Hello ' + name)`,
       example: {
-        title: 'Hello World',
-        code: '# 题目：输出 Hello World\nprint("Hello World")',
-        output: 'Hello World',
-        explanation: '最简单的OJ题目，直接输出答案。'
+        title: '打招呼程序',
+        code: `# 题目：输入名字，输出欢迎语
+name = input()
+print('Welcome ' + name)`,
+        output: '（输入Tom）\nWelcome Tom',
+        explanation: '读取名字 "Tom"，拼接 "Welcome " 和 "Tom"，输出 "Welcome Tom"。'
       },
       practice: [
         {
-          question: '最简单的OJ题目是什么类型？',
-          answer: '直接输出'
+          question: "'Hello ' + 'Tom' 输出什么？",
+          answer: '"Hello Tom"'
         },
         {
-          question: '需要用input()吗？',
-          answer: '看题目是否需要输入'
+          question: '字符串拼接用什么符号？',
+          answer: '加号 +'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你现在可以做需要输入输出的题目了！',
-      concept: '需要读取输入、处理、输出的题目。',
-      syntax: '输入输出题：\n1. 读取input()\n2. 处理数据\n3. 输出结果',
+      story: '字符串拼接可以多次使用，把多个部分组合成完整的句子。',
+      concept: '可以多次使用 + 号拼接多个字符串。',
+      syntax: `'今天吃' + 菜 + '炒' + 肉`,
       example: {
-        title: '简单计算',
-        code: '# 题目：输出两数之和\na = int(input())\nb = int(input())\nprint(a + b)',
-        output: '根据输入输出',
-        explanation: '读取两个输入，输出它们的和。'
+        title: '组合句子',
+        code: `# 题目：输入食材，输出"今天吃XXX炒鸡蛋"
+a = input()
+b = input()
+print('今天吃' + b + '炒' + a)`,
+        output: '（输入鸡蛋，番茄）\n今天吃番茄炒鸡蛋',
+        explanation: 'a="鸡蛋"，b="番茄"。拼接结果："今天吃"+"番茄"+"炒"+"鸡蛋"="今天吃番茄炒鸡蛋"。'
       },
       practice: [
         {
-          question: 'input()返回的是什么类型？',
-          answer: '字符串，需要转换类型'
+          question: 'print("A" + "B" + "C") 输出什么？',
+          answer: '"ABC"'
         },
         {
-          question: '如何处理字符串数字？',
-          answer: '用int()转换'
+          question: '为什么需要多次拼接？',
+          answer: '因为输出包含多个部分'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '统计专家！你现在可以做需要判断的题目了！',
-      concept: '需要if判断的OJ题目。',
-      syntax: '判断题：\n1. 读取输入\n2. 判断条件\n3. 输出结果',
+      story: '有些OJ题需要把数字和文字混在一起输出，比如计算"3+5=8"。',
+      concept: '数字和字符串可以一起输出，用加号拼接。',
+      syntax: `a = 3
+b = 5
+print(str(a) + '+' + str(b) + '=' + str(a+b))`,
       example: {
-        title: '判断成绩',
-        code: '# 题目：判断是否及格\n# 输入：成绩（0-100）\n# 输出：及格/不及格\n\nscore = int(input())\nif score >= 60:\n    print("及格")\nelse:\n    print("不及格")',
-        output: '根据输入输出',
-        explanation: '根据输入的成绩判断是否及格。'
+        title: '混合输出',
+        code: `# 输出格式：3+5=8
+a = int(input())
+b = int(input())
+print(str(a) + '+' + str(b) + '=' + str(a+b))`,
+        output: '（输入3 5）\n3+5=8',
+        explanation: '先把数字转成字符串，再用加号拼接，得到 "3+5=8"。'
       },
       practice: [
         {
-          question: '判断题需要用到什么语句？',
-          answer: 'if-else语句'
+          question: 'str(3) + "+" 得到什么？',
+          answer: '"3+"'
         },
         {
-          question: '分数判断用>=还是>?',
-          answer: '>=60表示及格'
+          question: '为什么需要 str()？',
+          answer: '把数字转成字符串才能拼接'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-4',
+    title: 'OJ实战 - if-else',
+    emoji: '⚖️',
+    gradeLevel: '3-4',
+    summary: '根据条件输出不同结果',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: '有些OJ题需要根据条件选择输出，比如判断及格不及格。',
+      concept: '根据条件是否成立，选择输出不同的内容。',
+      syntax: `if 条件:
+    print('结果1')
+else:
+    print('结果2')`,
+      example: {
+        title: '判断及格',
+        code: `# 题目：成绩>=60为合格，否则不合格
+score = int(input())
+if score >= 60:
+    print('合格')
+else:
+    print('不合格')`,
+        output: '（输入85）\n合格',
+        explanation: 'score=85，85>=60 成立，输出"合格"。'
+      },
+      practice: [
+        {
+          question: 'if-else 可以输出几种结果？',
+          answer: '两种'
+        },
+        {
+          question: '什么情况下输出"不合格"？',
+          answer: 'score < 60 时'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: 'OJ题的 if-else 需要严格匹配题目要求，包括输出的文字内容。',
+      concept: 'OJ题要求精确匹配输出，内容或格式不对会扣分。',
+      syntax: `# 严格按照题目要求输出
+if 条件:
+    print('合格')
+else:
+    print('不合格')`,
+      example: {
+        title: '严格匹配',
+        code: `# 题目：载重<=20为合格，否则超重
+weight = int(input())
+if weight <= 20:
+    print('合格')
+else:
+    print('超重')`,
+        output: '（输入20）\n合格',
+        explanation: 'weight=20，20<=20 成立，输出"合格"。如果 weight=25，输出"超重"。'
+      },
+      practice: [
+        {
+          question: '输出"合格"和输出"合格 "有什么区别？',
+          answer: '多了空格可能导致不匹配'
+        },
+        {
+          question: 'OJ题需要注意什么？',
+          answer: '输出内容要完全匹配题目要求'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: '有时题目需要多组测试样例都通过才能得满分，所以要确保代码对各种情况都正确。',
+      concept: 'OJ会用多组测试数据测试代码，确保覆盖所有情况。',
+      syntax: `# 多组样例测试
+输入: 20 → 输出: 合格
+输入: 25 → 输出: 超重
+输入: 15 → 输出: 合格`,
+      example: {
+        title: '完整解答',
+        code: `# 题目：判断是否超重（标准20吨）
+weight = int(input())
+if weight <= 20:
+    print('合格')
+else:
+    print('超重')`,
+        output: '',
+        explanation: '这个代码对所有情况都正确：<=20 合格，>20 超重。多组测试样例都能通过。'
+      },
+      practice: [
+        {
+          question: '为什么需要多组测试样例？',
+          answer: '确保代码对各种情况都正确'
+        },
+        {
+          question: 'submit 之前应该做什么？',
+          answer: '用多组样例测试代码'
         }
       ]
     }
@@ -304,24 +451,24 @@ export const knowledgePoints = [
 
 // 习题数据
 export const exercises = [
-  // 🟢 基础题
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '概念',
-    question: 'OJ的全称是什么？',
+    mathConcept: '流程记忆',
+    question: '下列选项中，哪个是正确的OJ题答题顺序？',
     options: [
-      'A. Online Judge',
-      'B. Only Judge',
-      'C. Open Judge',
-      'D. Output Judge'
+      '编写代码——提交代码——测试样例',
+      '读题——编写代码——测试样例——提交代码',
+      '读题——编写代码——提交代码——测试样例',
+      '读题——测试样例——编写代码——提交代码'
     ],
-    answer: 0, // A
-    explanation: 'OJ = Online Judge，线上测评系统的意思。',
-    hint: 'OJ是英文缩写'
+    answer: 1,
+    explanation: 'OJ题的答题流程是：读题——编写代码——测试样例——提交代码。选项B正确。',
+    hint: '按顺序记住四步'
   },
   {
     id: 'ex-2',
@@ -329,37 +476,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '流程',
-    question: 'OJ解题的第一步是什么？',
+    mathConcept: '字符串拼接',
+    question: `执行下方代码，先后输入鸡蛋、番茄，程序会打印什么？\n\n\`\`\`python\na = input()\nb = input()\nprint('今天吃' + b + '炒' + a)\n\`\`\``,
     options: [
-      'A. 编写代码',
-      'B. 提交代码',
-      'C. 读题',
-      'D. 测试'
+      '今天吃番茄炒鸡蛋',
+      '今天吃 + 番茄 + 炒 + 鸡蛋',
+      '鸡蛋炒番茄',
+      '今天吃鸡蛋炒番茄'
     ],
-    answer: 2, // C
-    explanation: 'OJ解题的第一步是读题，要看清输入输出和样例。',
-    hint: '先看清题目要求'
+    answer: 0,
+    explanation: 'a="鸡蛋"，b="番茄"。拼接"今天吃"+"番茄"+"炒"+"鸡蛋"="今天吃番茄炒鸡蛋"。',
+    hint: '按顺序替换变量'
   },
 
-  // 🟡 进阶题
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '类型',
-    question: 'AC表示什么？',
+    mathConcept: '输入理解',
+    question: 'OJ题目"输入货车载重，判断是否超重"中，输入描述是什么？',
     options: [
-      'A. Answer Correct',
-      'B. Accepted',
-      'C. All Correct',
-      'D. After Code'
+      '货车编号',
+      '货车载重',
+      '超重标准',
+      '是否合格'
     ],
-    answer: 1, // B
-    explanation: 'AC = Accepted，表示答案正确，通过了测试。',
-    hint: '通过测试'
+    answer: 1,
+    explanation: '题目要求输入货车载重，然后判断是否超重，所以输入描述是货车载重。',
+    hint: '输入的是需要判断的数据'
   },
   {
     id: 'ex-4',
@@ -367,37 +514,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '编程',
-    question: '编写程序：输入两个整数，输出它们的和。以下代码正确的是？',
+    mathConcept: '条件判断',
+    question: '编写判断超重的代码（标准20吨），需要使用什么语句？',
     options: [
-      'A. print(input() + input())',
-      'B. print(int(input()) + int(input()))',
-      'C. a = int(input())\nb = int(input())\nprint(a + b)',
-      'D. input() + input()'
+      'input()',
+      'print()',
+      'if-else',
+      'for循环'
     ],
-    answer: 2, // C
-    explanation: '需要先把input()转换为int，然后求和。选项C正确。',
-    hint: 'input()返回字符串'
+    answer: 2,
+    explanation: '判断是否超重需要根据条件输出不同结果，需要使用 if-else 语句。',
+    hint: '需要根据条件选择输出'
   },
 
-  // 🔴 挑战题
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '判断',
-    question: '题目：判断一个数是正数还是负数（0输出zero）。输入3，输出什么？',
+    mathConcept: '综合判断',
+    question: `以下代码的输出是什么？\n\n\`\`\`python\nweight = 20\nif weight <= 20:\n    print('合格')\nelse:\n    print('超重')\n\`\`\``,
     options: [
-      'A. positive',
-      'B. negative',
-      'C. zero',
-      'D. 程序报错'
+      '合格',
+      '超重',
+      '合格 超重',
+      '没有输出'
     ],
-    answer: 0, // A
-    explanation: '3 > 0，条件成立，输出positive。',
-    hint: '3 > 0'
+    answer: 0,
+    explanation: 'weight=20，20<=20 成立，执行 if 分支打印"合格"。',
+    hint: '20 是否小于等于 20？'
   },
   {
     id: 'ex-6',
@@ -405,67 +552,66 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '算法',
-    question: '计算1+2+3+...+10的和，用哪种方法最快？',
+    mathConcept: '完整理解',
+    question: '关于OJ题答题，下列说法正确的是？',
     options: [
-      'A. 一个个加',
-      'B. for循环',
-      'C. 等差数列求和公式',
-      'D. while循环'
+      '只需要测试一组样例通过就可以提交',
+      '编写代码前不需要读题',
+      '输入输出描述要仔细看',
+      '输出多了空格没关系'
     ],
-    answer: 2, // C
-    explanation: '等差数列求和公式：sum = n*(n+1)/2 = 10*11/2 = 55，最快！\n\n数学知识：1+2+3+...+n = n(n+1)/2',
-    hint: '公式法，时间复杂度O(1)'
+    answer: 2,
+    explanation: 'OJ题需要仔细看输入输出描述，确保代码正确匹配题目要求。输出多了空格会导致不匹配。',
+    hint: '题目要求必须严格遵守'
   }
 ]
 
 // 课次元数据
 export const lessonMeta = {
   id: 'L2-4',
-  title: 'Online Judge 入门',
-  subtitle: '学会 Online Judge 线上测评',
-  difficulty: '进阶',
-  estimatedTime: '30-40分钟',
+  title: 'OJ训练营',
+  subtitle: '学会线上测评系统的答题方法',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '认识 OJ 线上测评系统',
-    '掌握 OJ 解题流程',
-    '能够完成简单的 OJ 题目',
-    '了解 OJ 评分机制'
+    '理解OJ线上测评系统的原理',
+    '掌握OJ题的答题流程',
+    '能编写变量、字符串、if-else的OJ题代码',
+    '理解多组测试样例的重要性'
   ],
   prerequisites: [
-    '掌握 print() 命令',
-    '掌握 input() 命令',
-    '了解 if-else 语句',
-    '了解 for 循环'
+    '理解变量和input()的使用',
+    '知道字符串拼接方法',
+    '掌握if-else语句'
   ]
 }
 
 // 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['online', 'judge', 'submit', 'input'],
-  medium: ['output', 'accept', 'wrong', 'error'],
-  hard: ['algorithm', 'testcase', 'score', 'complex']
+  easy: ['print', 'input', 'online', 'judge'],
+  medium: ['submit', 'output', 'sample', 'test'],
+  hard: ['integer', 'string', 'condition', 'result']
 }
 
 // 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    'print("Hello World")',
-    'a = input()\nprint(a)',
-    'print(int(input()) * 2)',
-    'x = int(input())\nprint(x)'
+    'n = int(input())',
+    "print('Hello ' + name)",
+    'a = int(input())\nb = int(input())\nprint(a + b)',
+    "print('合格')"
   ],
   medium: [
-    'a = int(input())\nb = int(input())\nprint(a + b)',
-    'x = int(input())\nif x % 2 == 0:\n    print("even")',
-    'n1 = int(input())\nn2 = int(input())\nprint(n1 * n2)',
-    'a = int(input())\nif a >= 60:\n    print("及格")\nelse:\n    print("不及格")'
+    'n = int(input())\nprint(n * 7)',
+    "name = input()\nprint('Welcome ' + name)",
+    'score = int(input())\nif score >= 60:\n    print(\'合格\')',
+    "print('今天吃' + b + '炒' + a)"
   ],
   hard: [
-    'n = int(input())\nprint(n * (n + 1) // 2)',
-    'a = int(input())\nb = int(input())\nif a > b:\n    print(a)\nelse:\n    print(b)',
-    'for i in range(int(input())):\n    print(i)',
-    'for i in range(1, int(input())+1):\n    if i % 2 == 0:\n        print(i)'
+    'weight = int(input())\nif weight <= 20:\n    print(\'合格\')\nelse:\n    print(\'超重\')',
+    'a = int(input())\nb = int(input())\nprint(str(a) + "+" + str(b) + "=" + str(a+b))',
+    'n = int(input())\nif n % 2 == 0:\n    print(\'偶数\')\nelse:\n    print(\'奇数\')',
+    'score = int(input())\nif score >= 90:\n    print(\'优秀\')\nelif score >= 80:\n    print(\'良好\')\nelif score >= 70:\n    print(\'中等\')\nelif score >= 60:\n    print(\'及格\')\nelse:\n    print(\'不及格\')'
   ]
 }
 

@@ -1,158 +1,155 @@
 /**
- * PY1 课程 L5-1: 字符串索引与拼接
+ * PY1 课程 L5-1: 循环变量
  *
  * 核心知识点:
- * 1. 字符串索引 - 通过索引访问字符串中的字符
- * 2. len() 命令 - 获取字符串长度
- * 3. 字符串拼接 - 使用 + 连接字符串
+ * 1. 循环变量 - for i in range() 中的 i
+ * 2. 循环变量应用 - 输出有规律的数字
  */
 
-// 单词卡数据 - OCR 提取 + 拓展
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // OCR 提取的单词（必须包含）
+  // OCR 提取的单词
   {
-    word: 'info',
-    pronunciation: '[ˈɪnfəʊ]',
-    partOfSpeech: 'n.',
-    meaning: '信息；消息',
+    word: 'next',
+    pronunciation: '[nekst]',
+    partOfSpeech: 'adj.',
+    meaning: '下一个的；接下来的',
     level: 'easy',
-    example: 'I need some info about the game.',
-    exampleTranslation: '我需要一些关于这个游戏的信息。',
-    note: 'info 是 information 的缩写，口语常用',
+    example: 'The next number is 5.',
+    exampleTranslation: '下一个数字是5。',
     source: 'ocr'
   },
   {
-    word: 'index',
-    pronunciation: '[ˈɪndeks]',
-    partOfSpeech: 'n.',
-    meaning: '索引；目录',
+    word: 'down',
+    pronunciation: '[daʊn]',
+    partOfSpeech: 'adv.',
+    meaning: '向下；朝下',
     level: 'easy',
-    example: 'The index of a book is on page 1.',
-    exampleTranslation: '书的目录在第一页。',
-    note: '在编程中表示位置编号',
+    example: 'Sit down please.',
+    exampleTranslation: '请坐下。',
     source: 'ocr'
   },
   {
-    word: 'length',
-    pronunciation: '[leŋθ]',
+    word: 'time',
+    pronunciation: '[taɪm]',
     partOfSpeech: 'n.',
-    meaning: '长度',
+    meaning: '时间；时刻',
     level: 'easy',
-    example: 'What is the length of this rope?',
-    exampleTranslation: '这根绳子有多长？',
-    note: '常用基础词汇',
+    example: 'What time is it?',
+    exampleTranslation: '现在几点了？',
     source: 'ocr'
   },
   {
-    word: 'idiom',
-    pronunciation: '[ˈɪdiəm]',
-    partOfSpeech: 'n.',
-    meaning: '成语；惯用语',
+    word: 'sleep',
+    pronunciation: '[sliːp]',
+    partOfSpeech: 'v.',
+    meaning: '睡觉',
     level: 'medium',
-    example: '"Break a leg" is an English idiom.',
-    exampleTranslation: '"Break a leg" 是一个英语习语。',
-    note: '有趣的英语表达方式',
+    example: 'I need to sleep now.',
+    exampleTranslation: '我现在需要睡觉。',
     source: 'ocr'
   },
-  // 拓展单词 - 更适合小朋友的常用词
+  // 拓展单词
   {
-    word: 'string',
-    pronunciation: '[strɪŋ]',
+    word: 'range',
+    pronunciation: '[reɪndʒ]',
     partOfSpeech: 'n.',
-    meaning: '字符串；线；绳',
-    level: 'easy',
-    example: 'I have a string of text.',
-    exampleTranslation: '我有一串文字。',
-    note: '在编程中表示文字数据',
-    source: 'extended'
-  },
-  {
-    word: 'word',
-    pronunciation: '[wɜːd]',
-    partOfSpeech: 'n.',
-    meaning: '单词；词',
-    level: 'easy',
-    example: 'What is your favorite English word?',
-    exampleTranslation: '你最喜欢的英语单词是什么？',
-    note: '最基础的词汇之一，孩子很早就学会',
+    meaning: '范围；区间',
+    level: 'medium',
+    example: 'Numbers from 0 to 9.',
+    exampleTranslation: '0到9的数字范围。',
     source: 'extended'
   }
 ]
 
-// 知识点数据 - 基于 OCR 提取
+// 知识点数据
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '字符串索引 - 找到字符的位置',
-    emoji: '🔍',
+    title: '认识循环变量',
+    emoji: '🔄',
     gradeLevel: '3-4',
-    summary: '通过索引访问字符串中的字符',
+    summary: '理解 for i in range() 中 i 的作用',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象字符串是一排排好队的字母小朋友，每个小朋友都有一个数字编号，从 0 开始。我们要找某个字母时，只要说出它的编号就可以了！',
-      concept: '字符串由字符组成，索引是字符的编号，从 0 开始，依次增大。通过索引就可以得到字符串中某一位字符。',
-      syntax: "字符串[索引]",
+      story: '循环变量就像一个计数器，在循环中记录当前是第几次。for i in range(4) 表示让 i 从 0 开始数，数 4 次。',
+      concept: 'for i in range(n) 中，i 是循环变量，它的值从 0 开始，每次加 1，直到 n-1。',
+      syntax: `for i in range(4):
+    print(i)  # 输出 0 1 2 3`,
       example: {
-        title: '获取字符串中的字符',
-        code: "s = '我在学习Python'\nprint(s[0])",
-        output: '我',
-        explanation: 's[0] 表示获取字符串 s 中索引为 0 的字符，即第一个字符"我"。'
+        title: '数数游戏',
+        code: `for i in range(4):
+    print(i)`,
+        output: '0\n1\n2\n3',
+        explanation: 'range(4) 让循环执行 4 次，i 的值从 0 变到 3。每次循环打印 i 的值。'
       },
       practice: [
         {
-          question: '字符串中第一个字符的索引是多少？',
-          answer: '0'
+          question: 'for i in range(3) 中，i 的值变化是？',
+          answer: '0 → 1 → 2'
         },
         {
-          question: 's[5] 表示什么？',
-          answer: '获取字符串中索引为 5 的字符'
+          question: 'range(5) 让循环执行几次？',
+          answer: '5次'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '你现在是字符侦探！每个字符都有自己的位置编号。记住：索引从 0 开始，不是从 1 开始哦！',
-      concept: '字符的索引比实际位置少 1。例如：第 1 个字符的索引是 0，第 2 个字符的索引是 1，以此类推。',
-      syntax: "变量名[索引]  # 通过索引获取字符\nlen(字符串)    # 获取字符串长度",
+      story: '循环变量可以取不同的名字，不一定要用 i。可以根据意思取有意义的名字。',
+      concept: '循环变量的名字可以改变，但使用时要前后一致。常见的有 i、n、count 等。',
+      syntax: `# 循环变量名称可以更改
+for n in range(5):
+    print(n)
+
+for count in range(3):
+    print(count)`,
       example: {
-        title: '获取指定位置的字符',
-        code: "s = '我在学习Python'\nprint(s[5])\nprint(len(s))",
-        output: 'y\n11',
-        explanation: 's[5] 获取索引为 5 的字符"y"，len(s) 获取字符串长度为 11。'
+        title: '不同的循环变量名',
+        code: `for n in range(5):
+    print('第', n, '次')`,
+        output: '第 0 次\n第 1 次\n第 2 次\n第 3 次\n第 4 次',
+        explanation: '循环变量 n 从 0 到 4，每次打印当前是第几次。'
       },
       practice: [
         {
-          question: '第 7 个字符的索引是多少？',
-          answer: '6'
+          question: '循环变量可以取哪些名字？',
+          answer: '任意名字，如 i、n、count、x 等'
         },
         {
-          question: '如何获取字符串的最后一个字符？',
-          answer: 's[len(s)-1]'
+          question: 'for x in range(4) 循环多少次？',
+          answer: '4次'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '字符串大师挑战！你可以精确访问字符串中的任何字符，理解索引和长度的关系，掌握字符串的核心操作！',
-      concept: '最大索引 = 字符串长度 - 1，即 len(字符串) - 1。索引从 0 开始到 len(字符串)-1 结束。',
-      syntax: "s[0]              # 第一个字符\ns[len(s)-1]       # 最后一个字符\nlen(s)            # 字符串长度",
+      story: '循环变量的值会随着循环变化，理解它的变化规律是解决问题的关键。',
+      concept: '循环变量在每次循环开始时自动增加 1，从 0 开始到 n-1 结束。',
+      syntax: `循环次数和循环变量的值：
+第1次循环：i = 0
+第2次循环：i = 1
+第3次循环：i = 2
+...
+第n次循环：i = n-1`,
       example: {
-        title: '获取首尾字符',
-        code: "s = '我在学习Python'\nprint(s[0])\nprint(s[len(s)-1])",
-        output: '我\nn',
-        explanation: 's[0] 获取第一个字符"我"，s[len(s)-1] 获取最后一个字符"n"。'
+        title: '理解循环变量变化',
+        code: `for i in range(5):
+    print('第', i+1, '次循环，i=', i)`,
+        output: '第 1 次循环，i= 0\n第 2 次循环，i= 1\n第 3 次循环，i= 2\n第 4 次循环，i= 3\n第 5 次循环，i= 4',
+        explanation: 'i+1 可以得到"第几次"，i 本身从 0 开始。'
       },
       practice: [
         {
-          question: '如果字符串长度是 8，最大索引是多少？',
-          answer: '7'
+          question: 'for i in range(6) 结束后，i 的值是多少？',
+          answer: '5'
         },
         {
-          question: '空字符串的长度是多少？',
-          answer: '0'
+          question: '如何让循环变量从 1 开始？',
+          answer: 'i+1 或者用其他方式'
         }
       ]
     }
@@ -160,97 +157,199 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '字符串拼接 - 连接字符串',
-    emoji: '🔗',
+    title: '循环变量应用 - 连续增加',
+    emoji: '📈',
     gradeLevel: '3-4',
-    summary: '使用 + 运算符连接多个字符串',
+    summary: '用循环变量输出连续变化的数字',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你有几串珠子，你可以把它们串在一起，变成一串更长的项链！字符串拼接就是把多个文字连接起来。',
-      concept: '使用 + 运算符可以把多个字符串连接成一个新的字符串。',
-      syntax: "字符串1 + 字符串2",
+      story: '循环变量配合运算，可以输出有规律的数字。比如 i+3，就是从 3 开始的连续数字。',
+      concept: '在循环中，使用 i+数字，可以输出连续增加的数字序列。',
+      syntax: `for i in range(5):
+    print(i + 3)  # 输出 3 4 5 6 7`,
       example: {
-        title: '连接两个字符串',
-        code: "s1 = '你好'\ns2 = '世界'\nprint(s1 + s2)",
-        output: '你好世界',
-        explanation: '使用 + 把 s1 和 s2 连接起来，结果是"你好世界"。'
+        title: '连续增加的数字',
+        code: `for i in range(5):
+    print(i + 3)`,
+        output: '3\n4\n5\n6\n7',
+        explanation: 'i 的值是 0、1、2、3、4，i+3 就是 3、4、5、6、7。'
       },
       practice: [
         {
-          question: '"Hello" + "World" 的结果是什么？',
-          answer: 'HelloWorld'
+          question: 'for i in range(4): print(i+5) 输出什么？',
+          answer: '5 6 7 8'
         },
         {
-          question: '如何把两个字符串连接起来？',
-          answer: '使用 + 运算符'
+          question: '如何输出 1 到 5？',
+          answer: 'for i in range(5): print(i+1)'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '字符串拼图游戏！你可以把不同的文字片段组合成完整的句子或诗歌，就像拼图一样！',
-      concept: '可以使用 + 和变量拼接字符串，常用于循环中逐步构建字符串。',
-      syntax: "result = ''\nresult = result + 新字符串",
+      story: '循环变量可以参与各种运算，不只是加法，减法、乘法都可以。',
+      concept: 'i*2 可以得到 2 倍的序列，i*3 可以得到 3 倍的序列。',
+      syntax: `for i in range(5):
+    print(i * 2)  # 输出 0 2 4 6 8`,
       example: {
-        title: '循环拼接字符串',
-        code: "info = ''\ninfo = info + '千'\ninfo = info + '万'\nprint(info)",
-        output: '千万',
-        explanation: '逐步把字符添加到 info 变量中，最终得到"千万"。'
+        title: '倍数关系',
+        code: `for i in range(5):
+    print(i * 2)`,
+        output: '0\n2\n4\n6\n8',
+        explanation: 'i 的值是 0、1、2、3、4，乘以 2 后变成 0、2、4、6、8。'
       },
       practice: [
         {
-          question: '如何初始化一个空字符串？',
-          answer: "s = ''"
+          question: 'for i in range(4): print(i*3) 输出什么？',
+          answer: '0 3 6 9'
         },
         {
-          question: 'info = info + s[0] 是什么意思？',
-          answer: '把 s 的第一个字符添加到 info 变量末尾'
+          question: '如何输出 2、4、6、8？',
+          answer: 'for i in range(4): print((i+1)*2)'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '字符串构建大师！在循环中使用索引和拼接，可以从多个字符串中提取特定字符并组合成新字符串。',
-      concept: '结合 input()、for 循环和字符串索引，可以实现复杂的字符串处理任务。',
-      syntax: "info = ''\nfor i in range(n):\n    s = input()\n    info = info + s[0]",
+      story: '灵活运用循环变量，可以解决各种数字规律问题。',
+      concept: '根据题目要求，构造适当的表达式来生成需要的数字序列。',
+      syntax: `# 输出 5、10、15、20
+for i in range(4):
+    print((i+1) * 5)`,
       example: {
-        title: '藏头诗提取',
-        code: "info = ''\nfor i in range(4):\n    s = input()\n    info = info + s[0]\nprint(info)",
-        output: '千万孤独（输入四句诗后）',
-        explanation: '每次循环输入一句诗，提取每句的第一个字符并拼接到 info，最后输出"千万孤独"。'
+        title: '找规律输出',
+        code: `# 输出前5个偶数：2、4、6、8、10
+for i in range(5):
+    print((i + 1) * 2)`,
+        output: '2\n4\n6\n8\n10',
+        explanation: '第 n 个偶数 = n * 2，所以用 (i+1)*2 来计算。'
       },
       practice: [
         {
-          question: '如何提取每句话的最后一个字符？',
-          answer: 'info = info + s[len(s)-1]'
+          question: '如何输出前 5 个奇数（1、3、5、7、9）？',
+          answer: 'for i in range(5): print(i*2+1)'
         },
         {
-          question: '如果输入四句诗，info 最终有几个字符？',
-          answer: '4 个字符'
+          question: '如何输出 5、10、15、20、25？',
+          answer: 'for i in range(5): print((i+1)*5)'
+        }
+      ]
+    }
+  },
+
+  {
+    id: 'kp-3',
+    title: '循环变量应用 - 连续减少',
+    emoji: '📉',
+    gradeLevel: '3-4',
+    summary: '用循环变量输出递减的数字',
+
+    // 🟢 基础版（1-2年级）
+    easy: {
+      story: '用"结束数字 - i"可以得到递减的序列。比如 5-i，就是 5、4、3、2、1。',
+      concept: '用总数减去循环变量，可以得到递减的数字序列。',
+      syntax: `for i in range(5):
+    print(5 - i)  # 输出 5 4 3 2 1`,
+      example: {
+        title: '倒数倒数',
+        code: `for i in range(5):
+    print(5 - i)`,
+        output: '5\n4\n3\n2\n1',
+        explanation: 'i=0 时 5-0=5，i=1 时 5-1=4...这样就倒着数下来了。'
+      },
+      practice: [
+        {
+          question: 'for i in range(5): print(7-i) 输出什么？',
+          answer: '7 6 5 4 3'
+        },
+        {
+          question: '如何输出 10、9、8、7、6、5？',
+          answer: 'for i in range(6): print(10-i)'
+        }
+      ]
+    },
+
+    // 🟡 进阶版（3-4年级）
+    medium: {
+      story: '连续减少的规律在很多场景都有用，比如倒计时、排队报数等。',
+      concept: '利用"起始值 - i"的规律，可以实现各种倒序输出。',
+      syntax: `# 倒计时：10 9 8 ... 1
+for i in range(10):
+    print(10 - i)`,
+      example: {
+        title: '倒计时',
+        code: `# 倒计时从5开始
+for i in range(5):
+    print(5 - i)
+print('发射！')`,
+        output: '5\n4\n3\n2\n1\n发射！',
+        explanation: '先倒数，循环结束后打印"发射！"表示倒计时结束。'
+      },
+      practice: [
+        {
+          question: '如何实现 10 秒倒计时？',
+          answer: 'for i in range(10): print(10-i)'
+        },
+        {
+          question: '倒数最后会数到哪个数？',
+          answer: '1（不是0）'
+        }
+      ]
+    },
+
+    // 🔴 挑战版（5-6年级）
+    hard: {
+      story: '结合增减规律，可以解决更复杂的数字序列问题。',
+      concept: '理解循环变量的变化规律，灵活构造表达式解决实际问题。',
+      syntax: `# 变化规律总结：
+连续增加：i + start
+连续减少：end - i
+倍数关系：i * n`,
+      example: {
+        title: '综合应用',
+        code: `# 打印 7-i 的值，观察规律
+for i in range(7):
+    print(7 - i)`,
+        output: '7\n6\n5\n4\n3\n2\n1',
+        explanation: '7-i 当 i 从 0 到 6 时，结果从 7 降到 1。'
+      },
+      practice: [
+        {
+          question: 'for i in range(6): print(8-i) 输出什么？',
+          answer: '8 7 6 5 4 3'
+        },
+        {
+          question: '如何输出 1、2、3、4、5 然后输出 5、4、3、2、1？',
+          answer: '用两次循环，第一次 print(i+1)，第二次 print(5-i)'
         }
       ]
     }
   }
 ]
 
-// 习题数据 - 6 道（2 基础 + 2 进阶 + 2 挑战）
+// 习题数据
 export const exercises = [
-  // 🟢 基础题（2道）
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数数与索引',
-    question: '字符串 "Hello" 中，字母 \'e\' 的索引是（）',
-    options: ['0', '1', '2', '3'],
+    mathConcept: '循环变量理解',
+    question: 'for i in range(4) 中，循环变量 i 的值变化是？',
+    options: [
+      '1 → 2 → 3 → 4',
+      '0 → 1 → 2 → 3',
+      '0 → 1 → 2 → 3 → 4',
+      '1 → 2 → 3'
+    ],
     answer: 1,
-    explanation: '索引从 0 开始计数：H=0, e=1, l=2, l=3, o=4。所以字母 \'e\' 的索引是 1。',
-    hint: '记得索引从 0 开始，不是从 1 开始哦！'
+    explanation: 'for i in range(n) 中，i 从 0 开始，到 n-1 结束。所以 range(4) 时 i 的值是 0、1、2、3。答案是 B。',
+    hint: 'range(n) 从 0 开始到 n-1'
   },
   {
     id: 'ex-2',
@@ -258,27 +357,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '计数',
-    question: '执行下方代码，输出结果是（）\n\n```python\ns = \'Python\'\nprint(len(s))\n```',
-    options: ['5', '6', '7', '8'],
-    answer: 1,
-    explanation: 'len() 函数返回字符串的长度（字符个数）。"Python" 有 6 个字母，所以 len(s) = 6。',
-    hint: '数一数 "Python" 有几个字母？'
+    mathConcept: '输出规律',
+    question: '以下代码的输出结果是？\n\n```python\nfor i in range(3):\n    print(i + 5)\n```',
+    options: [
+      '5 6 7',
+      '5 6 7 8',
+      '6 7 8',
+      '0 1 2'
+    ],
+    answer: 0,
+    explanation: 'i 的值是 0、1、2，i+5 就是 5、6、7。答案是 A。',
+    hint: 'i+5 会让每个数都加5'
   },
 
-  // 🟡 进阶题（2道）
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '位置与索引',
-    question: '字符串 \'Hi,I am Hemu\' 中字符 \'a\' 的索引是（）',
-    options: ['4', '5', '6', '7'],
-    answer: 1,
-    explanation: '从左往右数，不要漏了空格字符。字符\'a\'是第6个字符，因此它的索引是5。（索引 = 位置 - 1）',
-    hint: '记得空格也算一个字符哦！'
+    mathConcept: '递减规律',
+    question: '以下代码的输出结果是？\n\n```python\nfor i in range(5):\n    print(8 - i)\n```',
+    options: [
+      '8 7 6 5 4',
+      '8 7 6 5 4 3',
+      '7 6 5 4 3',
+      '8 7 6 5'
+    ],
+    answer: 0,
+    explanation: 'i 从 0 到 4，8-i 就是 8、7、6、5、4。答案是 A。',
+    hint: '8-0=8, 8-1=7, ...'
   },
   {
     id: 'ex-4',
@@ -286,27 +395,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '索引与位置',
-    question: '执行下方代码，程序会打印出（）\n\n```python\ns = \'cellphone\'\nprint(s[4])\n```',
-    options: ['l', 'p', 'h', 'e'],
+    mathConcept: '倍数关系',
+    question: 'for i in range(4): print((i+1)*3) 输出什么？',
+    options: [
+      '0 3 6 9',
+      '3 6 9 12',
+      '1 2 3 4',
+      '3 6 9'
+    ],
     answer: 1,
-    explanation: '变量 s 中存储了字符串 \'cellphone\'，索引是 4 的字符是 \'p\'（c=0, e=1, l=2, l=3, p=4）',
-    hint: '从 0 开始数索引'
+    explanation: 'i+1 是 1、2、3、4，乘以 3 就是 3、6、9、12。答案是 B。',
+    hint: '(i+1)*3 相当于 1*3, 2*3, 3*3, 4*3'
   },
 
-  // 🔴 挑战题（2道）
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '循环与计数',
-    question: '执行下方代码，输出结果是（）\n\n```python\ns = \'name\'\nnew_s = \'\'\nfor i in range(4):\n    new_s = new_s + s[1]\nprint(new_s)\n```',
-    options: ['nnnn', 'aaaa', 'name', 'nana'],
+    mathConcept: '综合应用',
+    question: '以下代码的输出结果是？\n\n```python\nfor i in range(6):\n    print(i * 2 + 1)\n```',
+    options: [
+      '1 3 5 7 9',
+      '1 3 5 7 9 11',
+      '2 4 6 8 10',
+      '0 2 4 6 8 10'
+    ],
     answer: 1,
-    explanation: 'for i in range(4) 表明循环会执行 4 次。每次循环执行 new_s = new_s + s[1]。s[1] 表示字符串 s 的第 2 个字符，即 \'a\'。最终结果是 \'aaaa\'。',
-    hint: '注意 s[1] 获取的是哪个字符？'
+    explanation: 'i 从 0 到 5，i*2+1 就是 1、3、5、7、9、11。答案是 B。',
+    hint: '0*2+1=1, 1*2+1=3, ...'
   },
   {
     id: 'ex-6',
@@ -314,108 +433,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '逆向索引计算',
-    question: '执行下方代码，依次输入 4 个字符串 "ABC", "DEF", "GHI", "JKL"，程序会打印出（）。\n\n```python\ninfo = \'\'\nfor i in range(4):\n    s = input()\n    info = info + s[len(s)-2]\nprint(info)\n```',
-    options: ['ADGJ', 'BEHK', 'CFIL', 'ABCD'],
-    answer: 0,
-    explanation: '每次循环取输入字符串的倒数第二个字符（len(s)-2）。"ABC"取\'B\'，"DEF"取\'E\'，"GHI"取\'H\'，"JKL"取\'K\'，拼接后得到"BEHK"... 等等，让我重新算：len("ABC")=3, 3-2=1, s[1]=\'B\'。所以是 B, E, H, K = "BEHK"... 答案应该是B选项',
-    hint: 'len(s)-2 表示倒数第二个字符的索引'
+    mathConcept: '规律应用',
+    question: '想要输出 10、20、30、40，下划线处应该填什么？\n\n```python\nfor i in range(4):\n    print(___)\n```',
+    options: [
+      'i + 10',
+      '(i + 1) * 10',
+      'i * 10',
+      '(i + 10)'
+    ],
+    answer: 1,
+    explanation: '要输出 10、20、30、40，需要 (i+1)*10：当 i=0 时输出 10，i=1 时输出 20，以此类推。答案是 B。',
+    hint: '第几个数就乘以几'
   }
 ]
 
+// 课次元数据
 export const lessonMeta = {
   id: 'L5-1',
-  title: '字符串索引与拼接',
-  subtitle: '学会字符串索引、len()命令和字符串拼接',
-  difficulty: '进阶',
-  estimatedTime: '35-45分钟',
+  title: '循环变量',
+  subtitle: '认识 for 循环中的计数器',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '理解字符串索引的概念和作用',
-    '掌握使用索引访问字符串中字符的方法',
-    '学会使用 len() 获取字符串长度',
-    '掌握字符串拼接的基本方法'
+    '理解循环变量的概念',
+    '掌握 for i in range() 的用法',
+    '能用循环变量输出有规律的数字',
+    '能解决简单的数字序列问题'
   ],
   prerequisites: [
-    'Python 基础语法',
-    '变量概念',
-    'print() 命令'
+    '理解 for 循环的基本语法',
+    '知道什么是变量'
   ]
 }
 
-// 打字练习单词
+// 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['info', 'len', 'index', 'string', 'word'],
-  medium: ['length', 'python', 'character', 'position', 'idiom'],
-  hard: ['concatenation', 'programming', 'extraction', 'algorithm']
+  easy: ['next', 'down', 'time', 'sleep'],
+  medium: ['range', 'loop', 'variable', 'count'],
+  hard: ['iterate', 'sequence', 'increment', 'index']
 }
 
-// 代码模板
+// 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    {
-      title: '打印字符',
-      template: "s = 'Hello'\nprint(s[_])",
-      hint: '输入索引 0 获取第一个字符'
-    },
-    {
-      title: '获取长度',
-      template: "s = 'Python'\nprint(len(_))",
-      hint: '输入变量名 s'
-    },
-    {
-      title: '简单拼接',
-      template: "print('Hello' + _)",
-      hint: '输入 \'World\' 完成拼接'
-    },
-    {
-      title: '索引访问',
-      template: "name = 'Hetao'\nprint(name[_])",
-      hint: '输入索引 2 获取 \'t\''
-    }
+    'for i in range(3):',
+    'for i in range(5):\n    print(i)',
+    'for n in range(4):\n    print(n + 1)',
+    'print(i + 3)'
   ],
   medium: [
-    {
-      title: '循环拼接',
-      template: "info = ''\nfor i in range(3):\n    s = input()\n    info = info + _",
-      hint: '输入 s[0] 提取首字符'
-    },
-    {
-      title: '获取末尾字符',
-      template: "s = 'Python'\nprint(s[len(s)-_])",
-      hint: '输入 1 获取最后一个字符'
-    },
-    {
-      title: '条件拼接',
-      template: "if len(s) > 5:\n    info = info + _",
-      hint: '输入 s[0] 添加首字符'
-    },
-    {
-      title: '范围索引',
-      template: "s = 'Programming'\nprint(s[_:5])",
-      hint: '输入 0 获取前 5 个字符'
-    }
+    'for i in range(5):\n    print(10 - i)',
+    'for n in range(4):\n    print((n+1) * 2)',
+    'for i in range(3):\n    print(i * 5)',
+    'for x in range(6):\n    print(x + 5)'
   ],
   hard: [
-    {
-      title: '藏头诗提取',
-      template: "info = ''\nfor i in range(4):\n    s = input()\n    info = info + s[_]\nprint(info)",
-      hint: '输入 0 提取每句首字符'
-    },
-    {
-      title: '倒数索引',
-      template: "s = 'Python'\nprint(s[len(s)-_])",
-      hint: '输入 2 获取倒数第二个字符'
-    },
-    {
-      title: '字符串处理',
-      template: "result = ''\nfor i in range(len(s)):\n    if s[i] != ' ':\n        result = _",
-      hint: '输入 result + s[i] 拼接非空格字符'
-    },
-    {
-      title: '嵌套循环',
-      template: "for i in range(3):\n    for j in range(2):\n        print(strings[i][_])",
-      hint: '输入 j 访问内层索引'
-    }
+    'for i in range(5):\n    print((i+1) * 5)',
+    'for i in range(8):\n    print(8 - i)',
+    'for i in range(7):\n    print(i * 3 + 2)',
+    'for n in range(4):\n    print((n+1) * (n+1))'
   ]
 }
 

@@ -1,159 +1,174 @@
 /**
- * PY1 课程 L5-4: 升级门铃与智慧小屋
+ * PY1 课程 L5-4: 字符串切片
  *
  * 核心知识点:
- * 1. 模式切换 - 在不同模式间切换功能
- * 2. 雨滴传感器 - getRain() 检测是否下雨
- * 3. 留言功能 - record() 和 playRecord()
- * 4. 密码开门 - 输入密码验证身份
+ * 1. 字符串切片 - s[起始:结束] 提取部分字符串
+ * 2. 切片规则 - 包含起始，不包含结束
+ * 3. 切片应用 - 提取子串
  */
 
-// 单词卡数据 - OCR 提取 + 拓展
+// 单词卡数据 - OCR 提取 + 拓展词汇
 export const vocabData = [
-  // OCR 提取的单词（必须包含）
+  // OCR 提取的单词
   {
-    word: 'rain',
-    pronunciation: '[reɪn]',
+    word: 'address',
+    pronunciation: '[əˈdres]',
     partOfSpeech: 'n.',
-    meaning: '雨',
+    meaning: '地址',
     level: 'easy',
-    example: 'It is raining outside.',
-    exampleTranslation: '外面正在下雨。',
-    note: '最基本的天气词汇',
+    example: 'This is my home address.',
+    exampleTranslation: '这是我的家庭地址。',
     source: 'ocr'
   },
   {
-    word: 'show',
-    pronunciation: '[ʃəʊ]',
-    partOfSpeech: 'v.',
-    meaning: '展示；给...看',
-    level: 'easy',
-    example: 'Show me your drawing.',
-    exampleTranslation: '给我看看你的画。',
-    note: '常用动词词汇',
-    source: 'ocr'
-  },
-  {
-    word: 'lock',
-    pronunciation: '[lɒk]',
-    partOfSpeech: 'v./n.',
-    meaning: '锁；锁上',
-    level: 'easy',
-    example: 'Please lock the door.',
-    exampleTranslation: '请锁好门。',
-    note: '家庭安全常用词',
-    source: 'ocr'
-  },
-  {
-    word: 'mode',
-    pronunciation: '[məʊd]',
+    word: 'age',
+    pronunciation: '[eɪdʒ]',
     partOfSpeech: 'n.',
-    meaning: '模式',
+    meaning: '年龄',
+    level: 'easy',
+    example: 'What is your age?',
+    exampleTranslation: '你多大了？',
+    source: 'ocr'
+  },
+  {
+    word: 'year',
+    pronunciation: '[jɪə]',
+    partOfSpeech: 'n.',
+    meaning: '年',
+    level: 'easy',
+    example: 'Happy New Year!',
+    exampleTranslation: '新年快乐！',
+    source: 'ocr'
+  },
+  {
+    word: 'gender',
+    pronunciation: '[ˈdʒendə]',
+    partOfSpeech: 'n.',
+    meaning: '性别',
     level: 'medium',
-    example: 'Game mode is fun.',
-    exampleTranslation: '游戏模式很好玩。',
-    note: '电子设备常用词',
+    example: 'Gender equality.',
+    exampleTranslation: '性别平等。',
     source: 'ocr'
   },
-  // 拓展单词 - 与智慧小屋相关的常用词
   {
-    word: 'message',
-    pronunciation: '[ˈmesɪdʒ]',
+    word: 'location',
+    pronunciation: '[ləʊˈkeɪʃən]',
     partOfSpeech: 'n.',
-    meaning: '消息；留言',
-    level: 'easy',
-    example: 'I left a message for you.',
-    exampleTranslation: '我给你留了一条消息。',
-    note: '日常生活中很常用',
-    source: 'extended'
+    meaning: '位置；地点',
+    level: 'medium',
+    example: 'The location of the store.',
+    exampleTranslation: '商店的位置。',
+    source: 'ocr'
   },
   {
-    word: 'home',
-    pronunciation: '[həʊm]',
+    word: 'month',
+    pronunciation: '[mʌnθ]',
     partOfSpeech: 'n.',
-    meaning: '家',
+    meaning: '月份',
     level: 'easy',
-    example: 'I am going home.',
-    exampleTranslation: '我要回家了。',
-    note: '最基础的词汇之一',
-    source: 'extended'
+    example: 'This month has 31 days.',
+    exampleTranslation: '这个月有31天。',
+    source: 'ocr'
+  },
+  {
+    word: 'day',
+    pronunciation: '[deɪ]',
+    partOfSpeech: 'n.',
+    meaning: '一天；白天',
+    level: 'easy',
+    example: 'What day is today?',
+    exampleTranslation: '今天是星期几？',
+    source: 'ocr'
   }
 ]
 
-// 知识点数据 - 基于 OCR 提取
+// 知识点数据
 export const knowledgePoints = [
   {
     id: 'kp-1',
-    title: '模式切换 - 智能小屋的核心',
-    emoji: '🏠',
+    title: '字符串切片基础',
+    emoji: '🔪',
     gradeLevel: '3-4',
-    summary: '使用变量和条件判断实现不同模式的功能切换',
+    summary: '用起始和结束索引提取部分字符串',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你的房子有两种"模式"：在家模式时门铃会响，不在家模式时会自动录音。就像手机的不同模式一样！',
-      concept: '使用变量存储当前模式，通过按键切换模式，在不同模式下执行不同的功能。',
-      syntax: "mode = ''  # 存储当前模式\nif key == '*':\n    mode = '在家'\nif key == '#':\n    mode = '不在家'",
+      story: '字符串切片就像切蛋糕，从面包上切下一片。s[2:4] 表示从第 2 个切到第 4 个（不包含第 4 个）。',
+      concept: 's[起始:结束] 提取从起始索引到结束索引前一个字符的子串。',
+      syntax: `s = '我爱核桃编程'
+s[2:4]  # 提取索引2和3 → '核桃'`,
       example: {
-        title: '基本模式切换',
-        code: "mode = ''\nwhile True:\n    key = getIRKey()\n    if key == '*':\n        mode = '在家'\n    if key == '#':\n        mode = '不在家'\n    print(mode)",
-        output: '按 * 显示"在家"，按 # 显示"不在家"',
-        explanation: '使用 mode 变量存储当前模式，通过红外遥控器的 * 键和 # 键切换模式。'
+        title: '切一片面包',
+        code: `s = '我爱核桃编程'
+print(s[2:4])`,
+        output: '核桃',
+        explanation: 's[2:4] 从索引2切到4（不包含4），所以得到索引2和3的字符："核桃"。'
       },
       practice: [
         {
-          question: '用什么变量存储当前模式？',
-          answer: 'mode'
+          question: 's = "hello"，s[1:3] 是什么？',
+          answer: '"el"'
         },
         {
-          question: '按 * 键会切换到什么模式？',
-          answer: '在家模式'
+          question: '切片包含起始索引吗？',
+          answer: '包含'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '智能家居设计师！为小屋设计多种模式，在不同模式下实现不同的功能组合！',
-      concept: '使用 mode 变量配合 if 语句，在不同模式下执行不同代码块。在家模式有门铃和遥控开门，不在家模式有留言和密码开门。',
-      syntax: "if mode == '在家':\n    # 在家模式功能\nif mode == '不在家':\n    # 不在家模式功能",
+      story: '切片结果包含起始索引的字符，不包含结束索引的字符。可以理解为"从 X 切到 Y（不含 Y）"。',
+      concept: '切片范围 [起始, 结束)，即包含起始，不包含结束。',
+      syntax: `# 01234
+s = 'hello'
+s[1:4]  → 'ell'（索引1,2,3）`,
       example: {
-        title: '模式功能区分',
-        code: "if mode == '在家':\n    if isTouched():\n        playSound('ring')\nif mode == '不在家':\n    if isPressed('A'):\n        record()",
-        output: '在家模式按触摸传感器响铃，不在家模式按A键录音',
-        explanation: '根据 mode 的值执行不同代码块，实现模式功能区分。'
+        title: '理解切片范围',
+        code: `s = 'hello'
+print(s[0:2])  # hel - 索引0和1
+print(s[1:4])  # ell - 索引1,2,3
+print(s[2:5])  # llo - 索引2,3,4`,
+        output: 'he\nell\nllo',
+        explanation: 's[0:2] 包含索引0、1；s[1:4] 包含索引1、2、3；s[2:5] 包含索引2、3、4。'
       },
       practice: [
         {
-          question: '如何判断当前是在家模式？',
-          answer: "if mode == '在家'"
+          question: 's = "python"，s[0:3] 是什么？',
+          answer: '"pyt"'
         },
         {
-          question: '在家模式和不在家模式有什么不同功能？',
-          answer: '在家模式：门铃、遥控开门；不在家模式：留言、密码开门'
+          question: '切片为什么不包含结束索引？',
+          answer: '这是 Python 的设计规则，方便计算长度'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '智慧小屋架构师！设计完整的智能家居系统，支持多种模式切换和功能联动！',
-      concept: '可以扩展多种模式（如睡眠模式、派对模式、节能模式等），每种模式有不同的功能组合和参数配置。',
-      syntax: "modes = ['在家', '不在家', '睡眠', '节能']\nmode_index = 0\nif key == 'OK':\n    mode_index = (mode_index + 1) % len(modes)",
+      story: '理解切片规则后，可以灵活应用。省略起始表示从头开始，省略结束表示到末尾。',
+      concept: 's[:n] 等于 s[0:n]，s[n:] 等于 s[n:len(s)]。',
+      syntax: `s = 'hello'
+s[:3]   # 'hel' - 从头到索引2
+s[2:]   # 'llo' - 从索引2到末尾
+s[:]    # 'hello' - 整个字符串`,
       example: {
-        title: '多模式切换',
-        code: "modes = ['在家', '不在家', '睡眠', '节能']\nmode = modes[0]\nwhile True:\n    key = getIRKey()\n    if key == 'OK':\n        current = modes.index(mode)\n        mode = modes[(current + 1) % len(modes)]",
-        output: '按 OK 键循环切换模式',
-        explanation: '使用列表存储多种模式，通过索引循环切换，实现多模式系统。'
+        title: '省略写法',
+        code: `s = 'hello'
+print(s[:3])   # hel
+print(s[2:])    # llo
+print(s[:-1])   # hell（去掉最后一个）`,
+        output: 'hel\nllo\nhell',
+        explanation: 's[:3] 从开始切到索引3（不含），s[2:] 从索引2切到末尾，s[:-1] 去掉最后一个字符。'
       },
       practice: [
         {
-          question: '如何添加新的模式？',
-          answer: '在 modes 列表中添加新模式名称'
+          question: 's = "python"，s[:2] 是什么？',
+          answer: '"py"'
         },
         {
-          question: '(current + 1) % len(modes) 是什么意思？',
-          answer: '切换到下一个模式，到达末尾后回到开头'
+          question: 's = "hello"，s[1:] 是什么？',
+          answer: '"ello"'
         }
       ]
     }
@@ -161,76 +176,89 @@ export const knowledgePoints = [
 
   {
     id: 'kp-2',
-    title: '雨滴传感器 - 天气感知',
-    emoji: '🌧️',
+    title: '获取两端字符',
+    emoji: '✂️',
     gradeLevel: '3-4',
-    summary: '使用雨滴传感器检测是否下雨，并根据天气状态控制设备',
+    summary: '用切片获取字符串的开头和结尾',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象有一个能感知下雨的小助手！外面下雨时它会提醒你收衣服，没下雨时告诉你可以出去玩！',
-      concept: '雨滴传感器上有许多金属导线，有水时导线连通。getRain() 返回的数值：下雨时约 700，没雨时约 0。',
-      syntax: "getRain()  # 获取雨滴传感器数值",
+      story: '获取字符串的前几个字符用 s[:n]，获取后几个字符用 s[-n:]。',
+      concept: 's[:n] 获取前 n 个字符，s[-n:] 获取后 n 个字符。',
+      syntax: `s = 'hello'
+s[:2]   # 'he' 前2个
+s[-2:]  # 'lo' 后2个`,
       example: {
-        title: '检测是否下雨',
-        code: "while True:\n    r = getRain()\n    printPos(r, '中间')\n    time.sleep(0.1)\n    clear()",
-        output: '屏幕显示雨滴传感器数值',
-        explanation: '持续检测并显示雨滴数值，可以通过数值判断是否下雨。'
+        title: '头和尾',
+        code: `s = 'hello'
+print(s[:2])   # 前2个
+print(s[-2:])   # 后2个`,
+        output: 'he\nlo',
+        explanation: 's[:2] 取前2个字符 he，s[-2:] 取后2个字符 lo。'
       },
       practice: [
         {
-          question: '下雨时 getRain() 返回大约多少？',
-          answer: '700 左右'
+          question: 's = "world"，s[:3] 是什么？',
+          answer: '"wor"'
         },
         {
-          question: '没有雨时 getRain() 返回大约多少？',
-          answer: '0 左右'
+          question: 's = "python"，s[-3:] 是什么？',
+          answer: '"hon"'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '天气预报员！根据雨滴传感器的读数，自动显示天气图片或执行相应操作！',
-      concept: '根据 getRain() 的返回值判断天气状态，通常大于 300 表示下雨，小于 300 表示没雨。',
-      syntax: "r = getRain()\nif r > 300:\n    # 下雨时的操作\nelse:\n    # 没雨时的操作",
+      story: '可以用切片去掉字符串的两端，得到中间部分。',
+      concept: 's[n:-m] 去掉前 n 个和后 m 个字符。',
+      syntax: `s = 'hello'
+s[1:-1]  # 'ell' - 去掉首尾`,
       example: {
-        title: '天气图片显示',
-        code: "while True:\n    r = getRain()\n    if r > 300:\n        showPic('雨天')\n    else:\n        showPic('晴天')",
-        output: '下雨显示雨天图片，否则显示晴天图片',
-        explanation: '根据雨滴数值判断天气状态，显示对应的图片。'
+        title: '去掉首尾',
+        code: `s = 'hello'
+print(s[1:-1])  # 去掉第一个和最后一个`,
+        output: 'ell',
+        explanation: 's[1:-1] 从索引1开始，到最后一个之前（不包含最后一个），所以得到中间部分。'
       },
       practice: [
         {
-          question: '如何判断是否在下雨？',
-          answer: 'if getRain() > 300'
+          question: 's = "python"，s[2:-2] 是什么？',
+          answer: '"thon"'
         },
         {
-          question: '下雨时应该执行什么操作？',
-          answer: '收衣服提醒、关窗户、显示雨天图片等'
+          question: '如何获取字符串中间所有字符？',
+          answer: 's[1:-1]'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '智能气象站工程师！设计一个完整的天气监测系统，记录降雨数据并提供智能建议！',
-      concept: '可以记录降雨历史数据，计算降雨持续时间，甚至预测降雨趋势。结合其他传感器实现综合气象监测。',
-      syntax: "rain_history = []\nwhile True:\n    r = getRain()\n    rain_history.append(r)\n    # 分析降雨趋势",
+      story: '切片可以组合使用，或者结合 len() 来动态计算索引。',
+      concept: '切片结果仍然是字符串，可以继续操作。',
+      syntax: `s = 'hello world'
+first = s[:5]    # 'hello'
+last = s[-5:]    # 'world'
+print(first + last)`,
       example: {
-        title: '降雨记录',
-        code: "rain_data = []\nwhile True:\n    r = getRain()\n    rain_data.append(r)\n    if len(rain_data) > 100:\n        rain_data.pop(0)\n    avg = sum(rain_data) / len(rain_data)",
-        output: '计算最近一段时间内的平均降雨量',
-        explanation: '使用列表存储历史数据，保持固定长度，计算平均值分析降雨趋势。'
+        title: '切片组合',
+        code: `s = '二月春风似剪刀'
+first = s[:2]
+last = s[-3:]
+print('前两个:', first)
+print('后三个:', last)`,
+        output: '前两个: 二月\n后三个: 似剪刀',
+        explanation: 's[:2] 取前2个字符"二月"，s[-3:] 取后3个字符"似剪刀"。'
       },
       practice: [
         {
-          question: '如何记录降雨历史？',
-          answer: '使用列表存储每次 getRain() 的值'
+          question: 's = "abcdef"，s[1:5] 是什么？',
+          answer: '"bcde"'
         },
         {
-          question: '如何计算降雨持续时间？',
-          answer: '统计连续大于阈值的次数'
+          question: '如何获取一个字符串的前一半？',
+          answer: 's[:len(s)//2]'
         }
       ]
     }
@@ -238,97 +266,120 @@ export const knowledgePoints = [
 
   {
     id: 'kp-3',
-    title: '留言功能 - 智能门禁',
-    emoji: '🔊',
+    title: '切片应用',
+    emoji: '🎯',
     gradeLevel: '3-4',
-    summary: '使用 record() 和 playRecord() 实现留言录制和播放',
+    summary: '用切片解决实际问题',
 
     // 🟢 基础版（1-2年级）
     easy: {
-      story: '想象你不在家时，访客可以给你留言，你回家后可以听留言！就像手机语音信箱一样！',
-      concept: 'record() 可以录制声音，playRecord() 可以播放录制好的声音。在不在家模式下，访客可以留言。',
-      syntax: "record()        # 录制声音\nplayRecord()    # 播放录音",
+      story: '切片可以用来提取需要的信息，比如从字符串中提取特定部分。',
+      concept: '根据需要的字符位置，用切片提取。',
+      syntax: `# 从文件名中提取扩展名
+filename = 'photo.jpg'
+ext = filename[-4:]
+print(ext)  # '.jpg'`,
       example: {
-        title: '基本留言功能',
-        code: "if mode == '不在家':\n    if isPressed('A'):\n        record()\n    if isPressed('B'):\n        playRecord()",
-        output: '按 A 键录音，按 B 键播放',
-        explanation: '在不在家模式下，A 键用于访客录制留言，B 键用于主人播放留言。'
+        title: '提取扩展名',
+        code: `filename = 'photo.jpg'
+print('文件名前4位:', filename[:4])
+print('文件名后4位:', filename[-4:])`,
+        output: '文件名前4位: phot\n文件名后4位: .jpg',
+        explanation: '前4位是 "phot"，后4位是 ".jpg"。'
       },
       practice: [
         {
-          question: '哪个命令用于录制声音？',
-          answer: 'record()'
+          question: '从 "report.pdf" 中提取 ".pdf" 用什么？',
+          answer: 's[-4:]'
         },
         {
-          question: '哪个命令用于播放录音？',
-          answer: 'playRecord()'
+          question: '如何提取 "hello" 的后3个字符？',
+          answer: 's[-3:]'
         }
       ]
     },
 
     // 🟡 进阶版（3-4年级）
     medium: {
-      story: '智能门禁设计师！设计一个完整的访客留言系统，区分主人和访客的功能！',
-      concept: '在家模式下，主人可以播放访客留言；不在家模式下，访客可以录制留言。使用触摸传感器触发门铃。',
-      syntax: "# 在家模式\nif isPressed('A'):\n    playRecord()  # 播放访客留言\n\n# 不在家模式\nif isTouched():\n    playSound('ring')  # 门铃\nif isPressed('A'):\n    record()  # 访客录音\nif isPressed('B'):\n    playRecord()  # 访客试听",
+      story: '可以用切片提取手机号、身份证号等字符串中的特定位置。',
+      concept: '根据位置提取数字串中的部分内容。',
+      syntax: `# 手机号：13812345678
+phone = '13812345678'
+print(phone[:3])   # '138' 前3位
+print(phone[7:])    # '678' 后3位`,
       example: {
-        title: '模式化留言系统',
-        code: "if mode == '在家':\n    if isPressed('A'):\n        playRecord()\nif mode == '不在家':\n    if isTouched():\n        playSound('ring')\n    if isPressed('A'):\n        record()\n    if isPressed('B'):\n        playRecord()",
-        output: '根据模式提供不同的留言功能',
-        explanation: '在家模式主人播放留言，不在家模式访客录音和试听，触摸传感器作为门铃。'
+        title: '提取号码段',
+        code: `phone = '13812345678'
+mid = phone[3:7]
+print('中间4位:', mid)`,
+        output: '中间4位: 1234',
+        explanation: 'phone[3:7] 提取索引3到6的字符，得到"1234"。'
       },
       practice: [
         {
-          question: '在家模式下按 A 键会做什么？',
-          answer: '播放访客留言'
+          question: '如何提取手机号的前3位？',
+          answer: 's[:3]'
         },
         {
-          question: '不在家模式下触摸传感器会做什么？',
-          answer: '播放门铃声'
+          question: '如何提取手机号的中间4位？',
+          answer: 's[3:7]'
         }
       ]
     },
 
     // 🔴 挑战版（5-6年级）
     hard: {
-      story: '语音系统工程师！设计支持多条留言的智能留言系统，带时间戳和留言管理！',
-      concept: '可以扩展为多条留言系统，记录每条留言的时间，支持留言编号、删除等高级功能。',
-      syntax: "messages = []  # 存储留言信息\ndef record_message():\n    messages.append({'time': now(), 'duration': record()})\ndef play_message(index):\n    playRecord(messages[index])",
+      story: '身份证号中隐藏了很多信息，通过切片可以提取出生日期等内容。',
+      concept: '利用身份证号的固定格式，通过切片提取年月日和性别信息。',
+      syntax: `id = '510603200012301234'
+birthday = id[6:14]
+gender = id[-2]
+print('生日:', birthday)
+print('性别:', '男' if int(gender) % 2 == 1 else '女')`,
       example: {
-        title: '多条留言管理',
-        code: "messages = []\nif isPressed('A'):\n    record()\n    messages.append(len(messages))\nif isPressed('B'):\n    for i in messages:\n        print('留言 ' + str(i+1))",
-        output: '记录和显示多条留言',
-        explanation: '使用列表存储留言记录，支持多条留言的记录和管理。'
+        title: '解析身份证',
+        code: `id = '510603200012301234'
+year = id[6:10]
+month = id[10:12]
+day = id[12:14]
+print('出生日期:', year + '-' + month + '-' + day)`,
+        output: '出生日期: 2000-12-30',
+        explanation: '身份证从索引6开始是年月日，按位置切片提取即可。'
       },
       practice: [
         {
-          question: '如何存储多条留言？',
-          answer: '使用列表存储每条留言的信息'
+          question: '身份证号 510603200012301234 的出生年是什么？',
+          answer: 'id[6:10] → "2000"'
         },
         {
-          question: '如何播放指定编号的留言？',
-          answer: '使用索引访问列表中的留言记录'
+          question: '如何从身份证号判断性别？',
+          answer: '看倒数第二位奇数是男，偶数是女'
         }
       ]
     }
   }
 ]
 
-// 习题数据 - 6 道（2 基础 + 2 进阶 + 2 挑战）
+// 习题数据
 export const exercises = [
-  // 🟢 基础题（2道）
+  // 🟢 基础题（1-2年级）
   {
     id: 'ex-1',
     level: 'easy',
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数数',
-    question: '下列哪个命令用于录制声音？（ ）',
-    options: ['playRecord()', 'record()', 'playSound()', 'playMusic()'],
+    mathConcept: '切片基础',
+    question: "s = 'hello'，s[1:3] 是什么？",
+    options: [
+      'hel',
+      'el',
+      'ell',
+      'lo'
+    ],
     answer: 1,
-    explanation: 'record() 用于录制声音，playRecord() 用于播放录音，playSound() 用于播放指定声音，playMusic() 用于播放音乐。',
-    hint: 're- 开头的单词通常表示"记录"'
+    explanation: "s[1:3] 从索引1切到3（不包含3），得到索引1和2的字符：'el'。答案是 B。",
+    hint: '切片包含起始不包含结束'
   },
   {
     id: 'ex-2',
@@ -336,27 +387,37 @@ export const exercises = [
     levelLabel: '基础',
     levelEmoji: '🟢',
     type: 'multiple-choice',
-    mathConcept: '数值判断',
-    question: '下雨时，getRain() 返回的数值大约是？（ ）',
-    options: ['0', '100', '300', '700'],
-    answer: 3,
-    explanation: 'getRain() 检测雨滴传感器数值，下雨时约 700，没雨时约 0。通常以 300 为界限判断是否下雨。',
-    hint: '下雨时水连通了导线，数值会变大'
+    mathConcept: '获取前N个字符',
+    question: "s = 'python'，s[:3] 是什么？",
+    options: [
+      'pyt',
+      'pyth',
+      'thon',
+      'ytho'
+    ],
+    answer: 0,
+    explanation: "s[:3] 从头开始切到索引3（不包含3），得到索引0、1、2：'pyt'。答案是 A。",
+    hint: '省略起始就是从头开始'
   },
 
-  // 🟡 进阶题（2道）
+  // 🟡 进阶题（3-4年级）
   {
     id: 'ex-3',
     level: 'medium',
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '索引与切片计算',
-    question: '运行下图代码，输出结果是？（       ）\n\n```python\ns = 5\ne = s + 3\na = \'苍穹之下，未来可期\'\nprint(a[s:e])\n```',
-    options: ['苍穹，未来', '未来', '，未来', '未来可'],
-    answer: 2,
-    explanation: '首先 s = 5，e = s + 3 = 8。然后对字符串 a 进行切片操作 a[5:8]。索引 5 对应"未"，索引 8 对应"期"，切片结果包含起始索引不包含结束索引，结果是"，未来"。',
-    hint: '先计算 s 和 e 的值，再进行切片'
+    mathConcept: '获取后N个字符',
+    question: "s = 'hello'，s[-3:] 是什么？",
+    options: [
+      'hel',
+      'ell',
+      'llo',
+      'lo'
+    ],
+    answer: 1,
+    explanation: "s[-3:] 从倒数第3个开始切到最后，得到索引2、3、4：'ell'。答案是 B。",
+    hint: '负数索引从-1开始倒数'
   },
   {
     id: 'ex-4',
@@ -364,27 +425,37 @@ export const exercises = [
     levelLabel: '进阶',
     levelEmoji: '🟡',
     type: 'multiple-choice',
-    mathConcept: '传感器应用',
-    question: "若要实现下雨时显示 '雨天' 图片，不下雨时显示 '晴天' 图片，横线处应填什么？（      ）\n\n```python\nr = ________\nif r > 300:\n    showPic('雨天')\nelse:\n    showPic('晴天')\n```",
-    options: ['getVolume()', 'getRain()', 'isPressed()', 'playRecord()'],
+    mathConcept: '去掉首尾',
+    question: "s = 'hello'，s[1:-1] 是什么？",
+    options: [
+      'ello',
+      'ell',
+      'hel',
+      'll'
+    ],
     answer: 1,
-    explanation: 'getVolume() 获取音量，isPressed() 检测按键，playRecord() 播放录音。要检测下雨需要使用 getRain() 获取雨滴传感器数据。',
-    hint: '哪个命令用于获取雨滴传感器数据？'
+    explanation: "s[1:-1] 从索引1开始，到倒数第1个之前（不包含最后一个），得到索引1、2、3：'ell'。答案是 B。",
+    hint: '-1表示最后一个'
   },
 
-  // 🔴 挑战题（2道）
+  // 🔴 挑战题（5-6年级）
   {
     id: 'ex-5',
     level: 'hard',
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '录音播放',
-    question: "如果要实现按下 A 按钮录制录音，按下 B 按钮播放录音，横线处应该添加什么代码？（   ）\n\n```python\nwhile True:\n    if isPressed('A'):\n        record()\n    if isPressed('B'):\n        ________\n```",
-    options: ['record()', 'playRecord()', 'playSound()', 'playMusic()'],
+    mathConcept: '综合应用',
+    question: "s = '二月春风似剪刀'，s[2:4] 是什么？",
+    options: [
+      '二月',
+      '春风',
+      '春',
+      '春风似'
+    ],
     answer: 1,
-    explanation: 'record() 用于录制录音，playSound() 用于播放指定声音，playMusic() 用于播放音乐。要播放录制好的录音需要使用 playRecord()。',
-    hint: '哪个命令用于播放录制好的录音？'
+    explanation: "s[2:4] 从索引2切到4（不包含4），索引2和3是'春风'。答案是 B。",
+    hint: '数一数字符串的索引'
   },
   {
     id: 'ex-6',
@@ -392,109 +463,65 @@ export const exercises = [
     levelLabel: '挑战',
     levelEmoji: '🔴',
     type: 'multiple-choice',
-    mathConcept: '模式切换',
-    question: "执行下方代码，当用户依次按红外遥控器的 * 键、# 键、* 键后，mode 的值是？（   ）\n\n```python\nmode = ''\nwhile True:\n    key = getIRKey()\n    if key == '*':\n        mode = '在家'\n    if key == '#':\n        mode = '不在家'\n```",
-    options: ['\'在家\'', '\'不在家\'', '\'\'', 'None'],
-    answer: 0,
-    explanation: '* 键设置 mode = \'在家\'，# 键设置 mode = \'不在家\'。按键顺序：* → 在家，# → 不在家，* → 在家。最终结果是 \'在家\'。',
-    hint: '后面的按键会覆盖前面的设置'
+    mathConcept: '身份证解析',
+    question: "身份证号 '510603200012301234' 的出生年是什么？",
+    options: [
+      '510603',
+      '2000',
+      '1230',
+      '123'
+    ],
+    answer: 1,
+    explanation: "身份证号从索引6开始是8位年月日，s[6:10] 得到 '2000'。答案是 B。",
+    hint: '出生年月日从第7位开始'
   }
 ]
 
+// 课次元数据
 export const lessonMeta = {
   id: 'L5-4',
-  title: '升级门铃与智慧小屋',
-  subtitle: '学会模式切换、雨滴传感器和留言功能',
-  difficulty: '进阶',
-  estimatedTime: '45-55分钟',
+  title: '字符串切片',
+  subtitle: '提取字符串中的片段',
+  difficulty: '入门',
+  estimatedTime: '30-45分钟',
   learningGoals: [
-    '理解模式切换的概念和实现方法',
-    '学会使用雨滴传感器检测天气状态',
-    '掌握录音和播放功能的实现',
-    '了解智慧小屋的系统架构和功能组合'
+    '理解字符串切片的概念',
+    '掌握 s[起始:结束] 的语法',
+    '能用切片提取子串',
+    '能解决实际的字符串提取问题'
   ],
   prerequisites: [
-    'Python 基础语法',
-    '条件判断',
-    '传感器基础',
-    'L5-2, L5-3'
+    '理解字符串索引',
+    '知道 len() 的用法'
   ]
 }
 
-// 打字练习单词
+// 打字练习单词（按难度分组）
 export const typingWords = {
-  easy: ['rain', 'mode', 'lock', 'home', 'show'],
-  medium: ['sensor', 'record', 'switch', 'message'],
-  hard: ['intelligent', 'automation', 'threshold', 'interaction']
+  easy: ['address', 'age', 'year', 'day'],
+  medium: ['gender', 'location', 'slice', 'range'],
+  hard: ['substring', 'extract', 'index', 'boundary']
 }
 
-// 代码模板
+// 代码模板练习（按难度分组）
 export const typingTemplates = {
   easy: [
-    {
-      title: '模式变量',
-      template: "_ = ''",
-      hint: '输入 mode'
-    },
-    {
-      title: '切换到在家模式',
-      template: "if key == '*':\n    mode = _",
-      hint: '输入 \'在家\''
-    },
-    {
-      title: '检测雨滴',
-      template: "r = _()",
-      hint: '输入 getRain'
-    },
-    {
-      title: '录制声音',
-      template: "_()",
-      hint: '输入 record'
-    }
+    "s = 'hello'\ns[1:3]",
+    "s = 'python'\ns[:3]",
+    "s = 'hello'\ns[-3:]",
+    "s = 'world'\ns[:]"
   ],
   medium: [
-    {
-      title: '模式判断',
-      template: "if _ == '在家':",
-      hint: '输入 mode'
-    },
-    {
-      title: '雨滴判断',
-      template: "if r > 300:\n    showPic('雨天')\n_:\n    showPic('晴天')",
-      hint: '输入 else'
-    },
-    {
-      title: '在家模式功能',
-      template: "if mode == '在家':\n    if isTouched():\n        _",
-      hint: '输入 playSound(\'ring\')'
-    },
-    {
-      title: '不在家模式功能',
-      template: "if isPressed('A'):\n    _\nif isPressed('B'):\n    playRecord()",
-      hint: '输入 record()'
-    }
+    "s = 'hello'\ns[1:-1]",
+    "s = 'python'\ns[2:5]",
+    "s = 'abcdef'\ns[:3]",
+    "s = '123456'\ns[2:-2]"
   ],
   hard: [
-    {
-      title: '完整模式切换',
-      template: "while True:\n    key = getIRKey()\n    if key == '*':\n        mode = _\n    if key == '#':\n        mode = '不在家'",
-      hint: '输入 \'在家\''
-    },
-    {
-      title: '天气感知系统',
-      template: "while True:\n    r = getRain()\n    if r > _:\n        # 下雨操作\n    else:\n        # 没雨操作",
-      hint: '输入 300'
-    },
-    {
-      title: '留言系统',
-      template: "if mode == '不在家':\n    if isTouched():\n        playSound('ring')\n    if isPressed('A'):\n        _\n    if isPressed('B'):\n        playRecord()",
-      hint: '输入 record()'
-    },
-    {
-      title: '综合控制',
-      template: "while True:\n    if mode == '在家':\n        # 在家功能\n    _ mode == '不在家':\n        # 不在家功能",
-      hint: '输入 elif 或 if'
-    }
+    "s = '二月春风似剪刀'\ns[:2]",
+    "s = 'abcdefgh'\ns[2:-2]",
+    "phone = '13812345678'\nphone[3:7]",
+    "id = '510603200012301234'\nid[6:14]"
   ]
 }
 

@@ -28,12 +28,12 @@ export const stageConfig = {
 // 单元配置
 export const unitConfig = {
   // PY1 单元
-  L1: { id: 'L1', name: 'Level 1', description: 'print命令与变量' },
-  L2: { id: 'L2', name: 'Level 2', description: 'input与if-else语句' },
-  L3: { id: 'L3', name: 'Level 3', description: 'for循环与嵌套' },
-  L4: { id: 'L4', name: 'Level 4', description: '硬件编程基础' },
-  L5: { id: 'L5', name: 'Level 5', description: '字符串操作与智能家居' },
-  L6: { id: 'L6', name: 'Level 6', description: '列表操作' },
+  L1: { id: 'L1', name: 'Level 1', description: 'print与变量' },
+  L2: { id: 'L2', name: 'Level 2', description: 'if-else与数据类型' },
+  L3: { id: 'L3', name: 'Level 3', description: 'for循环与条件' },
+  L4: { id: 'L4', name: 'Level 4', description: '条件与循环' },
+  L5: { id: 'L5', name: 'Level 5', description: '循环变量与字符串' },
+  L6: { id: 'L6', name: 'Level 6', description: '列表' },
 
   // PY2 单元
   L7: { id: 'L7', name: 'Level 7', description: '字符串与列表操作' },
@@ -65,40 +65,40 @@ export function getUnitInfo(unitId) {
 // 课次配置（元数据，用于 UnitView 卡片即时渲染，无需动态 import）
 export const lessonConfig = {
   // PY1 L1 单元
-  'L1-1': { id: 'L1-1', title: '编程启程', subtitle: '学会 print() 命令和变量' },
-  'L1-2': { id: 'L1-2', title: '互动魔法屋', subtitle: '学会 input()、int() 和 float() 命令' },
-  'L1-3': { id: 'L1-3', title: '智能判断门', subtitle: '学会 if 条件判断、比较运算符和 else 分支' },
-  'L1-4': { id: 'L1-4', title: '智能门铃和语音留言', subtitle: '硬件编程：声音、按钮检测、屏幕显示' },
+  'L1-1': { id: 'L1-1', title: 'print与变量', subtitle: '学会输出和存储数据' },
+  'L1-2': { id: 'L1-2', title: 'input输入', subtitle: '学会接收用户输入的信息' },
+  'L1-3': { id: 'L1-3', title: '条件判断', subtitle: '学会用if做判断' },
+  'L1-4': { id: 'L1-4', title: '智能门铃', subtitle: '学会使用按键、声音和屏幕' },
 
   // PY1 L2 单元
-  'L2-1': { id: 'L2-1', title: 'if-else 分支判断', subtitle: '学会 if-else 分支判断' },
-  'L2-2': { id: 'L2-2', title: 'for 循环', subtitle: '学会用 for 循环重复执行代码' },
-  'L2-3': { id: 'L2-3', title: 'for-if 嵌套', subtitle: '学会 for-if 嵌套使用' },
-  'L2-4': { id: 'L2-4', title: 'Online Judge 入门', subtitle: '学会 Online Judge 线上测评' },
+  'L2-1': { id: 'L2-1', title: 'if-else判断', subtitle: '学会两种情况的判断' },
+  'L2-2': { id: 'L2-2', title: '数据类型', subtitle: '认识字符串和数字' },
+  'L2-3': { id: 'L2-3', title: '智能门与密码锁', subtitle: '用红外遥控和舵机做门禁' },
+  'L2-4': { id: 'L2-4', title: 'OJ训练营', subtitle: '学会线上测评系统的答题方法' },
 
   // PY1 L3 单元
-  'L3-1': { id: 'L3-1', title: '变量修改和计数', subtitle: '学会修改变量值和在循环中计数' },
-  'L3-2': { id: 'L3-2', title: '循环变量和应用', subtitle: '学会使用循环变量生成有规律的数字' },
-  'L3-3': { id: 'L3-3', title: '多条件判断', subtitle: '学会使用if-elif-else处理多种情况' },
-  'L3-4': { id: 'L3-4', title: '组合条件', subtitle: '学会使用and和or连接条件' },
+  'L3-1': { id: 'L3-1', title: 'for循环', subtitle: '用循环简化重复代码' },
+  'L3-2': { id: 'L3-2', title: 'for-if嵌套', subtitle: '循环里加入条件判断' },
+  'L3-3': { id: 'L3-3', title: '变量修改与计数', subtitle: '学会在循环中修改变量和统计' },
+  'L3-4': { id: 'L3-4', title: 'if-elif-else分支', subtitle: '学会多种情况的判断' },
 
   // PY1 L4 单元
-  'L4-1': { id: 'L4-1', title: '布尔值和while循环', subtitle: '学会True/False判断和while循环' },
-  'L4-2': { id: 'L4-2', title: '智能门铃和语音留言', subtitle: '学会音效播放、输入检测和录音功能' },
-  'L4-3': { id: 'L4-3', title: 'break语句与while循环条件', subtitle: '学会用break和条件灵活控制循环' },
-  'L4-4': { id: 'L4-4', title: '智能门和密码锁', subtitle: '学会舵机控制、红外遥控和密码验证' },
+  'L4-1': { id: 'L4-1', title: 'and与or', subtitle: '学会组合多个条件' },
+  'L4-2': { id: 'L4-2', title: '布尔值与while循环', subtitle: '认识True和False' },
+  'L4-3': { id: 'L4-3', title: 'break与循环条件', subtitle: '学会控制循环的退出' },
+  'L4-4': { id: 'L4-4', title: '智能感应灯', subtitle: '用传感器控制灯光' },
 
   // PY1 L5 单元
-  'L5-1': { id: 'L5-1', title: '字符串索引与拼接', subtitle: '学会字符串索引、len()命令和字符串拼接' },
-  'L5-2': { id: 'L5-2', title: '智能感应灯与氛围灯', subtitle: '学会光线传感器、音量传感器和灯光控制' },
-  'L5-3': { id: 'L5-3', title: '字符串切片', subtitle: '学会字符串切片操作提取字符' },
-  'L5-4': { id: 'L5-4', title: '升级门铃与智慧小屋', subtitle: '学会模式切换、雨滴传感器和留言功能' },
+  'L5-1': { id: 'L5-1', title: '循环变量', subtitle: '认识 for 循环中的计数器' },
+  'L5-2': { id: 'L5-2', title: '字符串索引', subtitle: '通过编号获取字符' },
+  'L5-3': { id: 'L5-3', title: '智慧小屋', subtitle: '模式切换与智能控制' },
+  'L5-4': { id: 'L5-4', title: '字符串切片', subtitle: '提取字符串中的片段' },
 
   // PY1 L6 单元
-  'L6-1': { id: 'L6-1', title: '列表入门', subtitle: '学会列表的创建、添加和删除' },
-  'L6-2': { id: 'L6-2', title: '列表操作', subtitle: '学会列表索引和遍历' },
-  'L6-3': { id: 'L6-3', title: '列表进阶', subtitle: '学会列表的插入和删除操作' },
-  'L6-4': { id: 'L6-4', title: '随机模块', subtitle: '学会使用随机模块' },
+  'L6-1': { id: 'L6-1', title: '列表', subtitle: '存储多个数据的方式' },
+  'L6-2': { id: 'L6-2', title: '列表索引', subtitle: '用索引访问和修改列表' },
+  'L6-3': { id: 'L6-3', title: '列表切片', subtitle: '提取、插入、移除列表元素' },
+  'L6-4': { id: 'L6-4', title: '今天吃什么', subtitle: '随机选择与项目实践' },
 
   // PY2 L7 单元
   'L7-1': { id: 'L7-1', title: '疯狂原始人', subtitle: '学会遍历和分割字符串' },

@@ -426,12 +426,17 @@ function getQuestionTypeText(type) {
 }
 
 // 跳转套卷详情页
-function goToSetDetail(item) {
+function goToSetDetail(itemOrKey, group) {
+  // 教师视图的 groupedScores key 格式为 "level__setId"，需解析
+  const setId = typeof itemOrKey === 'string' && itemOrKey.includes('__')
+    ? itemOrKey.split('__')[1]
+    : itemOrKey
+  const info = group || {}
   router.push({
-    path: `/ycl-scores/set/${item.setId}`,
+    path: `/ycl-scores/set/${setId}`,
     query: {
-      setName: item.setName,
-      level: item.level,
+      setName: info.setName || itemOrKey,
+      level: info.level,
       teacherId: selectedTeacher.value?.id,
       from: '/ycl-scores'
     }

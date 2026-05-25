@@ -1,5 +1,12 @@
 # 变更记录
 
+## 2026-05-26
+
+- **fix: 管理员后台 YCL 点击试卷无法查询成绩**
+  - 问题：教师点击成绩列表中的套卷卡片的，查询不到数据
+  - 原因：`groupedScores` 使用复合 key `"level__setId"`，但 `goToSetDetail` 函数未正确解析，直接将整个 key 当作 setId 传给详情页
+  - 修复：`goToSetDetail` 函数增加解析逻辑，从复合 key 中提取真正的 setId
+
 ## 2026-05-17
 
 - **feat: 悄悄话回复功能**

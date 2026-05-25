@@ -7,6 +7,16 @@
   - 原因：`groupedScores` 使用复合 key `"level__setId"`，但 `goToSetDetail` 函数未正确解析，直接将整个 key 当作 setId 传给详情页
   - 修复：`goToSetDetail` 函数增加解析逻辑，从复合 key 中提取真正的 setId
 
+- **fix: 管理员点击套卷显示 [object Object]**
+  - 问题：管理员（admin）视角点击 teacherSets 中的套卷时，传入 setId 为 `[object Object]`
+  - 原因：未区分对象类型和字符串类型的参数
+  - 修复：分别处理三种情况：groupedScores key（字符串）、studentSubmissions 对象、teacherSets 对象
+
+- **fix: 管理员查看 YCL 成绩详情页数据串门**
+  - 问题：管理员选择老师后点击套卷，看到的是其他老师学生的成绩
+  - 原因：YCLSetDetailView 未传递 teacherId 参数给 API，导致查到所有人的数据
+  - 修复：从 route.query 读取 teacherId 并传递给 API
+
 ## 2026-05-17
 
 - **feat: 悄悄话回复功能**

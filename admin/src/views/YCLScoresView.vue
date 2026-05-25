@@ -427,15 +427,25 @@ function getQuestionTypeText(type) {
 
 // 跳转套卷详情页
 function goToSetDetail(itemOrKey, group) {
-  // 教师视图的 groupedScores key 格式为 "level__setId"，需解析
-  const setId = typeof itemOrKey === 'string' && itemOrKey.includes('__')
-    ? itemOrKey.split('__')[1]
-    : itemOrKey
-  const info = group || {}
+  let setId, info
+  // 情况1：教师视图 groupedScores key 格式为 "level__setId"
+  if (typeof itemOrKey === 'string' && itemOrKey.includes('__')) {
+    setId = itemOrKey.split('__')[1]
+    info = group || {}
+  } else if (typeof itemOrKey === 'object' && itemOrKey !== null) {
+    // 情况2&3：studentSubmissions 或 teacherSets 数组元素是对象
+    setId = itemOrKey.setId
+    info = itemOrKey
+  } else {
+    // 其他情况直接使用
+    setId = itemOrKey
+    info = group || {}
+  }
+  if (!setId || setId === '[object Object]') return  // 防护
   router.push({
     path: `/ycl-scores/set/${setId}`,
     query: {
-      setName: info.setName || itemOrKey,
+      setName: info.setName || (typeof itemOrKey === 'string' ? itemOrKey : ''),
       level: info.level,
       teacherId: selectedTeacher.value?.id,
       from: '/ycl-scores'

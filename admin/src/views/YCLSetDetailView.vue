@@ -228,6 +228,8 @@ async function loadSetRecords() {
       level: route.query.level,
       setId: route.params.setId
     }
+    // 管理员查看时限定老师
+    if (route.query.teacherId) params.teacherId = route.query.teacherId
     if (filters.value.studentName) params.studentName = filters.value.studentName
     if (filters.value.startDate) params.startDate = filters.value.startDate
     if (filters.value.endDate) params.endDate = filters.value.endDate
